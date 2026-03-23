@@ -166,7 +166,7 @@ def transcribe_to_csv(model, tracks, csv_path, trim=None):
 # ── step 2: merge CSV into markdown ──────────────────────────────────────────
 
 def merge_csv_to_markdown(csv_path, md_path, meta, speakers, model_size):
-    """Read CSV, merge per-speaker blocks, dedup, write markdown."""
+    """Read CSV, dedup, sort by time, group consecutive same-speaker rows."""
     # Read all rows
     rows = []
     with open(csv_path) as f:
@@ -179,57 +179,69 @@ def merge_csv_to_markdown(csv_path, md_path, meta, speakers, model_size):
                 "text": row["text"],
             })
 
-    rows.sort(key=lambda r: r["start"])
-
-    # Merge per-speaker: group consecutive segments from the same speaker,
-    # allowing other speakers to interleave (since tracks are recorded separately).
-    from collections import defaultdict
-    by_speaker = defaultdict(list)
-    for row in rows:
-        by_speaker[row["speaker"]].append(row)
-
-    blocks = []
-    for speaker, segs in by_speaker.items():
-        segs.sort(key=lambda s: s["start"])
-        current = None
-        for seg in segs:
-            if current and (seg["start"] - current["end"]) < 30.0:
-                current["text"] += " " + seg["text"]
-                current["end"] = seg["end"]
-            else:
-                if current:
-                    blocks.append(current)
-                current = dict(seg)
-        if current:
-            blocks.append(current)
-
-    blocks.sort(key=lambda b: b["start"])
-
-    # Dedup: remove blocks where the same speaker says the exact same text
-    # within 60 seconds (whisper hallucination)
+    # 1. Dedup: remove rows where the same speaker says the exact same text
+    #    within 60 seconds (whisper hallucination artifact)
     deduped = []
-    for block in blocks:
+    for row in rows:
         is_dup = False
         for prev in reversed(deduped[-10:]):
-            if (prev["speaker"] == block["speaker"]
-                    and prev["text"] == block["text"]
-                    and (block["start"] - prev["start"]) < 60.0):
+            if (prev["speaker"] == row["speaker"]
+                    and prev["text"] == row["text"]
+                    and abs(row["start"] - prev["start"]) < 60.0):
                 is_dup = True
                 break
         if not is_dup:
-            deduped.append(block)
+            deduped.append(row)
 
-    removed = len(blocks) - len(deduped)
+    removed = len(rows) - len(deduped)
     if removed:
-        print(f"[merge] Removed {removed} duplicate blocks (hallucinations).")
+        print(f"[merge] Removed {removed} duplicate segments (hallucinations).")
+
+    # 2. Compute each speaker's "block end" — the last end time of their
+    #    consecutive run starting from each segment. Used to sort ties:
+    #    short interjections before long monologues at the same start time.
+    deduped.sort(key=lambda r: (r["speaker"], r["start"]))
+    block_end = {}
+    for speaker in {r["speaker"] for r in deduped}:
+        segs = [r for r in deduped if r["speaker"] == speaker]
+        cur_start = None
+        cur_end = None
+        for s in segs:
+            if cur_end is not None and (s["start"] - cur_end) < 30.0:
+                cur_end = s["end"]
+            else:
+                if cur_start is not None:
+                    for s2 in segs:
+                        if s2["start"] >= cur_start and s2["start"] <= cur_end:
+                            block_end[(speaker, s2["start"])] = cur_end
+                cur_start = s["start"]
+                cur_end = s["end"]
+        if cur_start is not None:
+            for s2 in segs:
+                if s2["start"] >= cur_start and s2["start"] <= cur_end:
+                    block_end[(speaker, s2["start"])] = cur_end
+
+    # 3. Sort by start time, breaking ties by block end (shortest first).
+    #    This puts short interjections before long monologues so the monologue's
+    #    continuation segments group with its start.
+    deduped.sort(key=lambda r: (r["start"], block_end.get((r["speaker"], r["start"]), r["end"])))
+
+    # 4. Group consecutive rows from the same speaker
+    blocks = []
+    for row in deduped:
+        if blocks and blocks[-1]["speaker"] == row["speaker"]:
+            blocks[-1]["text"] += " " + row["text"]
+            blocks[-1]["end"] = row["end"]
+        else:
+            blocks.append(dict(row))
 
     # Write markdown
     with open(md_path, "w") as f:
         f.write(format_header(meta, speakers, model_size))
-        for block in deduped:
+        for block in blocks:
             f.write(f"**[{format_ts(block['start'])}] {block['speaker']}:** {block['text']}\n\n")
 
-    print(f"[merge] {len(deduped)} blocks -> {md_path}")
+    print(f"[merge] {len(blocks)} blocks -> {md_path}")
 
 
 def format_header(meta, speakers, model_size=None):
@@ -240,22 +252,22 @@ def format_header(meta, speakers, model_size=None):
             dt = datetime.fromisoformat(meta["start_time"].replace("Z", "+00:00"))
             lines.append(f"# D&D Session — {dt.strftime('%B %d, %Y')}")
             lines.append("")
-            lines.append(f"**Start time:** {dt.strftime('%I:%M %p %Z')}")
+            lines.append(f"- **Start time:** {dt.strftime('%I:%M %p %Z')}")
         except ValueError:
             lines.append("# D&D Session")
             lines.append("")
-            lines.append(f"**Start time:** {meta['start_time']}")
+            lines.append(f"- **Start time:** {meta['start_time']}")
     else:
         lines.append("# D&D Session")
         lines.append("")
 
     if "channel" in meta:
         channel = re.sub(r"\s*\(\d+\)$", "", meta["channel"])
-        lines.append(f"**Channel:** {channel}")
+        lines.append(f"- **Channel:** {channel}")
 
-    lines.append(f"**Speakers:** {', '.join(speakers)}")
+    lines.append(f"- **Speakers:** {', '.join(speakers)}")
     if model_size:
-        lines.append(f"**Model:** whisper-{model_size}")
+        lines.append(f"- **Model:** whisper-{model_size}")
     lines.append("")
     lines.append("")
     return "\n".join(lines)
