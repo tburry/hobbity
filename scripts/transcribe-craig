@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+if [ ! -d "$SCRIPT_DIR/.venv" ]; then
+    echo "[setup] Creating virtual environment..."
+    python3 -m venv "$SCRIPT_DIR/.venv"
+fi
+
+if ! "$SCRIPT_DIR/.venv/bin/python" -c "import whisper" 2>/dev/null; then
+    echo "[setup] Installing openai-whisper..."
+    "$SCRIPT_DIR/.venv/bin/pip" install openai-whisper
+fi
+
+# Show help if no arguments provided
+if [ $# -eq 0 ]; then
+    exec "$SCRIPT_DIR/.venv/bin/python" "$SCRIPT_DIR/transcribe-craig.py" --help
+fi
+
+exec "$SCRIPT_DIR/.venv/bin/python" "$SCRIPT_DIR/transcribe-craig.py" "$@"
