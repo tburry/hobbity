@@ -1,0 +1,7 @@
+.venv/
+*.flac
+*.m4a
+*.dat
+*.csv
+transcript*.md
+transcript*.json
