@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 /Users/todd/git/hobbity/scripts/unwrap-paragraphs.py /Users/todd/git/hobbity/scripts/transcripts/tanscript_20260322.md)"
+    ]
+  }
+}
