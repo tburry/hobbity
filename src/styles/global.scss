@@ -568,6 +568,22 @@ details[open] > summary {
 // Alpha headings (letter dividers with fleurons)
 // ============================================================================
 
+.alpha-headings > p:first-of-type {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+
+  a {
+    color: var(--text);
+  }
+
+  @media (max-width: 720px) {
+    font-size: 1.4rem;
+    line-height: 2.2;
+  }
+}
+
 .alpha-headings h2 {
   display: flex;
   align-items: center;
