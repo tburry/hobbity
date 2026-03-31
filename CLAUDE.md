@@ -130,4 +130,4 @@ When a PC drops to 0 HP and is healed, they lose one random ability point. Recor
 
 ## Lessons Learned
 
-See `.claude/LESSONS.md` for corrections and preferences accumulated over time. Always consult it and apply its guidance.
+See [LESSONS.md](.claude/LESSONS.md) for corrections and preferences accumulated over time. Always consult it and apply its guidance.
