@@ -6,9 +6,9 @@ An area almost entirely populated by hobbits. Mountains to the north (home of go
 
 ### Locations
 
-- **The Heart Road** :Main road connecting [Thistledown](#thistledown), [The Right Way Inn](#the-right-way-inn), and [Gomwick](#gomwick).
-- **The Old Road** :Forest road between [Thistledown](#thistledown) and [Gomwick](#gomwick). [Farmer Fallow](/hobbity/appendix/npcs/#farmer-fallow)'s stall, strange mist, [Tobias Chubb](/hobbity/appendix/npcs/#tobias-chubb).
-- **Sunnyside Crossroads** :Where the main road turns south. [Huddle Farm](#huddle-farm) is just north. The farthest the party has ever been from home.
+- **The Heart Road:** Main road connecting [Thistledown](#thistledown), [The Right Way Inn](#the-right-way-inn), and [Gomwick](#gomwick).
+- **The Old Road:** Forest road between [Thistledown](#thistledown) and [Gomwick](#gomwick). [Farmer Fallow](/hobbity/appendix/npcs/#farmer-fallow)'s stall, strange mist, [Tobias Chubb](/hobbity/appendix/npcs/#tobias-chubb).
+- **Sunnyside Crossroads:** Where the main road turns south. [Huddle Farm](#huddle-farm) is just north. The farthest the party has ever been from home.
 
 ### Happenings
 
@@ -49,7 +49,7 @@ A hobbit farmstead near the [Sunnyside crossroads](#the-five-shires), en route t
 
 ### Locations
 
-- **Fortfield Tower** :Crumbling ancient wizard's tower. Five basement levels explored (paint evidence, workshop, library, summoning room with "The Eye," treasure room). Nailer the dog found dead in a camouflaged well, dissolved by Green Slime.
+- **Fortfield Tower:** Crumbling ancient wizard's tower. Five basement levels explored (paint evidence, workshop, library, summoning room with "The Eye," treasure room). Nailer the dog found dead in a camouflaged well, dissolved by Green Slime.
 
 ### Happenings
 
@@ -65,11 +65,11 @@ A hobbit village on a flat agricultural plain in one of the richest and most fer
 
 ### Locations
 
-- **The Slumbering Serpent Inn** :Party's base of operations. Run by [Belba](/hobbity/appendix/npcs/#belba) and [Olwyn](/hobbity/appendix/npcs/#olwyn).
-- **The Foaming Mug Inn** :Abandoned inn with signs of violent struggle. Troglodyte nest in the basement.
-- **The Golden Grain Inn** :Owned by [Bertram](/hobbity/appendix/npcs/#bertram). [Derek Desleigh](/hobbity/appendix/npcs/#derek-desleigh) first seen here. Connection to cult suspected.
-- **The Temple of Merikka** :New temple behind three-meter walls. Dedicated to a goddess of farming, fertility, and light. Hides something much older beneath it.
-- **The Dungeon Beneath the Temple** :Ancient ruins predating the temple. Troglodyte lair, prison cells, underground stream. The party's current location.
+- **The Slumbering Serpent Inn:** Party's base of operations. Run by [Belba](/hobbity/appendix/npcs/#belba) and [Olwyn](/hobbity/appendix/npcs/#olwyn).
+- **The Foaming Mug Inn:** Abandoned inn with signs of violent struggle. Troglodyte nest in the basement.
+- **The Golden Grain Inn:** Owned by [Bertram](/hobbity/appendix/npcs/#bertram). [Derek Desleigh](/hobbity/appendix/npcs/#derek-desleigh) first seen here. Connection to cult suspected.
+- **The Temple of Merikka:** New temple behind three-meter walls. Dedicated to a goddess of farming, fertility, and light. Hides something much older beneath it.
+- **The Dungeon Beneath the Temple:** Ancient ruins predating the temple. Troglodyte lair, prison cells, underground stream. The party's current location.
 
 ### Happenings
 

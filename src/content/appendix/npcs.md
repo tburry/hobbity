@@ -250,7 +250,7 @@ Axe shop owner in [Gomwick](/hobbity/appendix/places/#gomwick). Sold Wedge his s
 
 ### Misha
 
-Priestess of the [Temple of Merikka](/hobbity/appendix/places/#orlane). Not hobbit-proportioned — appears human or aquatic/mermaid-like. The party took her armor, shield, and mace (Boffo now uses them). A body found in a crawlspace beneath the temple may be the real priestess, suggesting Misha is an imposter who murdered and replaced her. Fled with [Kaylin Snowvale](#kaylin-snowvale). Whereabouts unknown.
+Priestess of the [Temple of Merikka](/hobbity/appendix/places/#orlane). The party took her armor, shield, and mace (Boffo now uses them). A body found in a crawlspace beneath the temple may be the real priestess, suggesting Misha is an imposter who murdered and replaced her. Fled with [Kaylin Snowvale](#kaylin-snowvale). Whereabouts unknown.
 
 - **Location:** [The Temple of Merikka](/hobbity/appendix/places/#orlane)
 

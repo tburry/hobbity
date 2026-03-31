@@ -70,9 +70,9 @@ He offered the Brooch of Shielding to Wedge. Wedge shook his head. "You're still
 
 Back on the ground floor, the torches had gone out. Everything else was as they'd left it — Misha's bedroom, the offering hallway with its alcoves of golden food, the worship hall beyond. But as Wedge walked through the door, he heard voices from the sanctuary.
 
-## The Snowvale Family
+## The Snowvale Cult
 
-Three hobbits stood in the sanctuary. Griff, broad and furious. His son Timba beside him, fists up. And Kaylin, daughter of Maddie Snowvale, the blacksmith's wife who had filed that complaint with the constable. Behind them stood Misha, the false priestess, murmuring: "Remember. Don't harm them."
+Four hobbits stood in the sanctuary. Griff, broad and furious. His son Timba beside him, fists up. And Kaylin, daughter of Maddie Snowvale, the blacksmith's wife who had filed that complaint with the constable. Behind them stood Misha, the false priestess, murmuring: "Remember. Don't harm them."
 
 "Say it ain't so, Misha," Boffo said. He wanted to believe it wasn't what it looked like. He always wanted to believe.
 
