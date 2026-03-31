@@ -41,7 +41,7 @@ const summaryContent = summary ? await render(summary) : null;
   <footer class="chapter-nav" slot="footer">
     {firstChapter && (
       <a href={`/hobbity/stories/${firstChapter.id}/`} class="next">
-        Begin: {getTitle(firstChapter)} &rarr;
+        {getTitle(firstChapter)} &rarr;
       </a>
     )}
   </footer>

@@ -351,20 +351,16 @@ ul, ol {
 }
 
 ul {
-  list-style: none;
+  // list-style: none;
 
-  > li::before {
-    content: '❖';
-    display: inline-block;
-    margin-inline-start: -1.5em;
-    width: 1.5em;
+  > li::marker {
+    content: '❖  ';
     color: var(--subheading-color);
     font-size: 0.7em;
-    vertical-align: 0.1em;
   }
 
-  ul > li::before {
-    content: '✧';
+  ul > li::marker {
+    content: '✧  ';
     font-size: 0.8em;
   }
 }
@@ -530,11 +526,17 @@ details[open] > summary {
   margin-inline: auto;
   padding: var(--space);
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: var(--space);
+  gap: var(--space-sm) var(--space);
+
+  a {
+    display: inline-block;
+  }
 
   .next {
     margin-inline-start: auto;
+    text-align: right;
   }
 }
 

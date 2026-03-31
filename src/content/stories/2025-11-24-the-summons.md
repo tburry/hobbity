@@ -1,5 +1,5 @@
 ---
-story: A Hobbity Thanksgiving
+story: The Huddle Job
 ---
 
 # The Summons
@@ -12,7 +12,7 @@ Between Sessions — 24 <dfn title="May">Thrimidge</dfn>, S.R. 1426
   - Turnip Bramblebrook - Level 1 Hobbit Adventurer
 - **Location:** Thistledown, The Right Way Inn, Gomwick
 
-## The Road to Gomwick
+## Back to Gomwick
 
 Early, but not too early as to have missed breakfast, on the morning of the 24th of May, the three hobbits met up at Turnip's front door, packed and ready to travel to Gomwick in answer to Buford's letter. The meeting was reminiscent of the previous journey the three of them took, with the fine and pleasant mid-spring weather a comfort as they struck out onto the road.
 
@@ -82,8 +82,6 @@ Almost to emphasize the point, Buford began another hacking coughing fit. He wip
 
 "Here," he said as he took a sip of brandy to soothe his throat, "Read this aloud, please." And he handed a piece of paper to Turnip.
 
-![A letter from Zacharias Ormond to Buford Niss](/hobbity/images/zacharias-letter.webp)
-
 > Much has happened in my life since we fought side by side in the troll war. I hope, sometime, to have a chance to talk with you about the many pleasant things.
 >
 > My purpose now, sadly, is to ask — nay, beg — my courageous comrades to aid my people in a time of dire need. I cannot even describe to you the danger that threatens Orlane, for I know not its true nature. I do know that, unless it can somehow be stopped, this evil will consume my little village and its families. We will vanish without trace into the dust of history.
@@ -91,7 +89,7 @@ Almost to emphasize the point, Buford began another hacking coughing fit. He wip
 > A sinister force is at work here, and it is made all the more frightening by the fact that its true nature is concealed in a web of fear and suspicion. I plead with you come to Orlane, lend your skills to revealing this menace, that it may finally be destroyed!
 >
 > Your comrade,\
-> *Zacharias Ormond*
+> _Zacharias Ormond_
 
 Once Turnip had finished reading, Buford spoke:
 

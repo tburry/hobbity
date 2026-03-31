@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Content from '../../layouts/Content.astro';
+import { storySlug } from '../../lib/stories';
 
 function getTitle(entry: { body?: string; id: string }) {
   const h1 = entry.body?.split('\n').find((l) => l.startsWith('# '));
@@ -27,6 +28,7 @@ export async function getStaticPaths() {
 }
 
 const { story, prev, next } = Astro.props;
+const storyGroupSlug = storySlug(story.data.story);
 const { Content: StoryContent } = await render(story);
 const title = getTitle(story);
 ---
@@ -35,14 +37,22 @@ const title = getTitle(story);
   <StoryContent />
 
   <footer class="chapter-nav" slot="footer">
-    {prev && (
+    {prev ? (
       <a href={`/hobbity/stories/${prev.id}/`} class="prev">
         &larr; {getTitle(prev)}
       </a>
+    ) : (
+      <a href={`/hobbity/stories/${storyGroupSlug}/`} class="prev">
+        &larr; {story.data.story}
+      </a>
     )}
-    {next && (
+    {next ? (
       <a href={`/hobbity/stories/${next.id}/`} class="next">
         {getTitle(next)} &rarr;
+      </a>
+    ) : (
+      <a href="/hobbity/" class="next">
+        Table of Contents &rarr;
       </a>
     )}
   </footer>

@@ -2,7 +2,7 @@
 story: A Hobbity Thanksgiving
 ---
 
-# A Hobbity Thanksgiving
+# The Gomwick Harvest Festival
 
 Session Recap — 6 <dfn title="November">Blotmath</dfn>, S.R. 1425
 
@@ -20,7 +20,7 @@ Along the Old Road they stopped at Farmer Fallow's Knick-Knack and Produce Road-
 
 Deeper in the woods, a strange mist descended. Something watched them — a feeling of being _Seen_, not just observed but known, straight to the marrow. They pressed on and encountered Tobias Chubb, a ne'er-do-well who muttered about the trees "looking at him funny." The mist lifted as suddenly as it had come, and the hobbits carried on toward Gomwick.
 
-## The Gomwick Harvest Festival
+## The Festival
 
 The festival was everything three young hobbits could want: eating, drinking, games, and more eating. Wedge scored two bullseyes in the axe-throwing with a shiny new axe from Lotho Longbuck’s shop. Turnip entered the storytelling competition but missed his quarter-final slot. The party foiled an attempted poisoning of the pie competition by Adelard Potts and Hanna Boggs, who had been using Tobias Chubb as their agent.
 
