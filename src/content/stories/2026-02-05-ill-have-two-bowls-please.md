@@ -30,4 +30,4 @@ The party reached Orlane intact and settled in, but the village already feels wr
 
 ### Enemies Defeated
 
-- Dire wolves (fled, not fought)
+- Dire wolves (evaded)
