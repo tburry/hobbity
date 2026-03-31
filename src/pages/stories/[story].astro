@@ -1,0 +1,48 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { storyOrder, storySlug, getTitle } from '../../lib/stories';
+
+export async function getStaticPaths() {
+  const allStories = await getCollection('stories');
+  allStories.sort((a, b) => a.id.localeCompare(b.id));
+
+  const allSummaries = await getCollection('summaries');
+
+  return storyOrder.map((name) => {
+    const chapters = allStories.filter((s) => s.data.story === name);
+    const slug = storySlug(name);
+    const summary = allSummaries.find((s) => s.id === slug);
+    return {
+      params: { story: slug },
+      props: { name, chapters, summary },
+    };
+  });
+}
+
+const { name, chapters, summary } = Astro.props;
+const firstChapter = chapters[0];
+const summaryContent = summary ? await render(summary) : null;
+---
+
+<Base title={name} showHome={true}>
+  <h1>{name}</h1>
+  {summaryContent && (
+    <div class="story-summary">
+      <summaryContent.Content />
+    </div>
+  )}
+  <ol>
+    {chapters.map((ch) => (
+      <li><a href={`/hobbity/stories/${ch.id}/`}>{getTitle(ch)}</a></li>
+    ))}
+  </ol>
+
+  <footer class="chapter-nav" slot="footer">
+    {firstChapter && (
+      <a href={`/hobbity/stories/${firstChapter.id}/`} class="next">
+        Begin: {getTitle(firstChapter)} &rarr;
+      </a>
+    )}
+  </footer>
+</Base>

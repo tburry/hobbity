@@ -1,0 +1,23 @@
+---
+import { getCollection, render } from 'astro:content';
+import Content from '../../layouts/Content.astro';
+import { appendixLabels } from '../../lib/appendix';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('appendix');
+  return pages.map((page) => ({
+    params: { id: page.id },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+const { Content: PageContent } = await render(page);
+const title = appendixLabels[page.id] || page.id;
+---
+
+<Content title={title} showHome={true}>
+  <div class={page.id === 'npcs' ? 'alpha-headings' : undefined}>
+    <PageContent />
+  </div>
+</Content>

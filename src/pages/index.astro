@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { appendixLabels, appendixOrder } from '../lib/appendix';
+import { storyOrder, storySlug, getTitle } from '../lib/stories';
+
+const appendix = (await getCollection('appendix'))
+  .sort((a, b) => appendixOrder.indexOf(a.id) - appendixOrder.indexOf(b.id));
+
+const essays = await getCollection('essays');
+essays.sort((a, b) => a.id.localeCompare(b.id));
+---
+
+<Base title="Table of Contents">
+  <img src="/hobbity/images/toad-stompers.webp" alt="The Toad Stompers" class="img-logo" />
+  <h1>The Toad Stompers</h1>
+
+  <nav class="toc">
+    <h2>Stories</h2>
+    <ul>
+      {storyOrder.map((name) => (
+        <li><a href={`/hobbity/stories/${storySlug(name)}/`}>{name}</a></li>
+      ))}
+    </ul>
+
+    {essays.length > 0 && (
+      <>
+        <h2>Essays</h2>
+        <ul>
+          {essays.map((e) => (
+            <li><a href={`/hobbity/essays/${e.id}/`}>{getTitle(e)}</a></li>
+          ))}
+        </ul>
+      </>
+    )}
+
+    <h2>Appendices</h2>
+    <ul>
+      {appendix.map((p) => (
+        <li><a href={`/hobbity/appendix/${p.id}/`}>{appendixLabels[p.id] || p.id}</a></li>
+      ))}
+      <li><a href="/hobbity/appendix/gallery/">{appendixLabels['gallery']}</a></li>
+      <li><a href="/hobbity/index-page/">Index</a></li>
+    </ul>
+  </nav>
+</Base>

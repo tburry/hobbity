@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { appendixLabels, appendixOrder } from '../../lib/appendix';
+
+const contentPages = (await getCollection('appendix'))
+  .sort((a, b) => appendixOrder.indexOf(a.id) - appendixOrder.indexOf(b.id));
+---
+
+<Base title="Appendix" showHome={true}>
+  <h1>Appendices</h1>
+  <ul class="appendix-list">
+    {contentPages.map((page) => (
+      <li>
+        <a href={`/hobbity/appendix/${page.id}/`}>
+          {appendixLabels[page.id] || page.id}
+        </a>
+      </li>
+    ))}
+    <li>
+      <a href="/hobbity/appendix/gallery/">
+        {appendixLabels['gallery']}
+      </a>
+    </li>
+  </ul>
+</Base>

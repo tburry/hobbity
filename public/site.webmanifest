@@ -1,0 +1,12 @@
+{
+  "name": "The Toad Stompers",
+  "short_name": "Toad Stompers",
+  "start_url": "/hobbity/",
+  "display": "standalone",
+  "background_color": "#faf6f0",
+  "theme_color": "#2a1f14",
+  "icons": [
+    { "src": "/hobbity/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/hobbity/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

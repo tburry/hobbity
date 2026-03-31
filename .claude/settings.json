@@ -1,7 +1,37 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python3 /Users/todd/git/hobbity/scripts/unwrap-paragraphs.py /Users/todd/git/hobbity/scripts/transcripts/tanscript_20260322.md)"
+      "Bash(python3 /Users/todd/git/hobbity/scripts/unwrap-paragraphs.py /Users/todd/git/hobbity/scripts/transcripts/tanscript_20260322.md)",
+      "mcp__claude_ai_Gmail__gmail_read_thread",
+      "Bash(mv recap_20251127.md 2025-11-27-green-cows-and-blackberries.md)",
+      "Bash(mv recap_20251204.md 2025-12-04-the-midnight-stakeout.md)",
+      "Bash(mv recap_20251218.md 2025-12-18-the-eye-beneath-the-hill.md)",
+      "Bash(mv recap_20260129.md 2026-01-29-toads-toads-toads.md)",
+      "Bash(mv recap_20260205.md 2026-02-05-i-ll-have-two-bowls-please.md)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm run:*)",
+      "Bash(pnpm install:*)",
+      "Bash(mv /Users/todd/git/hobbity/recaps/*.md /Users/todd/git/hobbity/src/content/stories/)",
+      "Bash(mv /Users/todd/git/hobbity/background/*.md /Users/todd/git/hobbity/src/content/appendix/)",
+      "mcp__claude_ai_Gmail__gmail_search_messages",
+      "mcp__claude_ai_Gmail__gmail_list_labels",
+      "Bash(pnpm remove:*)",
+      "Bash(npx pagefind:*)",
+      "Bash(cwebp -q 80 -resize 480 0 /Users/todd/git/hobbity/public/images/sinister-orlane-note.webp -o /Users/todd/git/hobbity/public/images/small/sinister-orlane-note.webp)",
+      "Bash(python3 scripts/save_thread_json.py --from-mcp-dir /Users/todd/.claude/projects/-Users-todd-git-hobbity/fc689185-d60d-4aad-89b2-e75ecd106dd4/tool-results/ --pattern '*gmail_read_thread*')",
+      "Bash(python3 scripts/save_thread_json.py --from-mcp-file /Users/todd/.claude/projects/-Users-todd-git-hobbity/fc689185-d60d-4aad-89b2-e75ecd106dd4/tool-results/toolu_0176HJDe2sA3WKfgSfoHvJfL.json)",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Read(//Users/todd/git/hobbity/**)",
+      "Bash(done)"
+    ],
+    "additionalDirectories": [
+      "/Users/todd/.claude",
+      "/Users/todd/git/hobbity/transcripts",
+      "/Users/todd/git/hobbity/emails"
     ]
+  },
+  "enabledPlugins": {
+    "discord@claude-plugins-official": true
   }
 }

@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Search" showHome={true} isSearchPage={true}>
+  <h1>Search</h1>
+  <div id="search"></div>
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function () {
+      var ui = new PagefindUI({ element: '#search', showSubResults: true });
+      var params = new URLSearchParams(window.location.search);
+      var q = params.get('q');
+      if (q) {
+        ui.triggerSearch(q);
+      }
+    });
+  </script>
+</Base>

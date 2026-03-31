@@ -1,0 +1,13 @@
+---
+import Base from '../../layouts/Base.astro';
+import { storyOrder, storySlug } from '../../lib/stories';
+---
+
+<Base title="Stories" showHome={true}>
+  <h1>Stories</h1>
+  <ul>
+    {storyOrder.map((name) => (
+      <li><a href={`/hobbity/stories/${storySlug(name)}/`}>{name}</a></li>
+    ))}
+  </ul>
+</Base>

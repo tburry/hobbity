@@ -1,7 +1,12 @@
 .venv/
+node_modules/
+dist/
 *.flac
 *.m4a
 *.dat
 *.csv
-transcript*.md
-transcript*.json
+private/
+.DS_Store
+__pycache__/
+.astro/
+transcripts/

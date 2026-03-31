@@ -1,0 +1,764 @@
+// ============================================================================
+// Variables
+// ============================================================================
+
+:root {
+  // Fonts
+  --body-font: 'Lora', serif;
+  --title-font: 'Uncial Antiqua', serif;
+  --heading-font: 'Crimson Pro', serif;
+  --mono-font: Consolas, Menlo, Monaco, monospace;
+
+  // Typography
+  --base-font-size: 17px;
+  --base-font-size-desktop: 20px;
+  --line-height: 1.5;
+  --line-height-prose: 1.7;
+
+  // Colors
+  --bg: #faf6f0;
+  --accent-bg: #f3ece0;
+  --text: #3b2e1e;
+  --text-light: #8b7d6b;
+  --border: #c9a96e;
+  --accent: #6b3a2a;
+  --accent-hover: #2a1f14;
+  --accent-text: #fff;
+  --code: #2a1f14;
+  --preformatted: #3b2e1e;
+  --marked: rgba(201, 169, 110, 0.2);
+
+  // Heading colors
+  --title-color: #7f003f;
+  --heading-color: #7f003f;
+  --subheading-color: #ab5a05;
+
+  // Header
+  --header-bg: #2a1f14;
+  --header-text: #f5e6c8;
+  --header-link: #dcc9a3;
+
+  // Spacing (8px grid)
+  --space: 16px;
+  --space-sm: 8px;
+
+  // Layout
+  --content-width: 840px;
+  --border-width: 1px;
+  --border-radius: 5px;
+  --hr-width: 4px;
+}
+
+// ============================================================================
+// Reset
+// ============================================================================
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// ============================================================================
+// Base
+// ============================================================================
+
+html {
+  font-family: var(--body-font);
+  scroll-behavior: auto;
+}
+
+body {
+  color: var(--text);
+  background-color: var(--bg);
+  font-size: var(--base-font-size);
+  line-height: var(--line-height);
+  margin: 0;
+}
+
+body > header,
+body > footer {
+  padding-inline: var(--space);
+}
+
+main {
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding: 0 var(--space) var(--space);
+}
+
+@media only screen and (min-width: 721px) {
+  body {
+    font-size: var(--base-font-size-desktop);
+  }
+}
+
+// ============================================================================
+// Top bar
+// ============================================================================
+
+.topbar {
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding: var(--space-sm) var(--space);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// ============================================================================
+// Breadcrumbs
+// ============================================================================
+
+.breadcrumbs {
+  font-size: 0.9rem;
+  color: var(--text-light);
+
+  a, a:visited {
+    color: var(--text-light);
+
+    &:hover {
+      color: var(--accent);
+    }
+  }
+
+  .separator {
+    padding-inline: 0.5em;
+    color: var(--border);
+  }
+}
+
+// ============================================================================
+// Search
+// ============================================================================
+
+.search-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-light);
+  padding: var(--space-sm);
+  line-height: 1;
+
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10vh;
+
+  &.open {
+    display: flex;
+  }
+}
+
+.search-overlay-inner {
+  background: var(--bg);
+  border-radius: var(--border-radius);
+  padding: var(--space);
+  width: min(var(--content-width), 90vw);
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+
+// ============================================================================
+// Main
+// ============================================================================
+
+article {
+  line-height: var(--line-height-prose);
+}
+
+// ============================================================================
+// Footer
+// ============================================================================
+
+body > footer {
+  margin-top: calc(var(--space) * 1);
+  padding: calc(var(--space) * 2) var(--space) var(--space);
+  color: var(--text-light);
+  font-size: 0.9rem;
+  text-align: center;
+  font-style: italic;
+}
+
+// ============================================================================
+// Typography
+// ============================================================================
+
+h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+h1 {
+  font-family: var(--title-font);
+  line-height: 1.1;
+  text-align: center;
+  color: var(--title-color);
+  padding-bottom: var(--space);
+  border-bottom: var(--hr-width) solid var(--border);
+  margin-bottom: var(--space);
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font);
+  line-height: 1.2;
+  color: var(--heading-color);
+}
+
+h3, h4, h5, h6 {
+  color: var(--subheading-color);
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2.6rem; margin: var(--space) 0; }
+h3 { font-size: 2rem; margin-top: var(--space); }
+h4 { font-size: 1.44rem; }
+h5 { font-size: 1.15rem; }
+h6 { font-size: 0.96rem; }
+
+p {
+  margin-bottom: var(--space);
+  overflow-wrap: break-word;
+}
+
+@media only screen and (max-width: 720px) {
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2.1rem; }
+  h3 { font-size: 1.75rem; }
+  h4 { font-size: 1.25rem; }
+}
+
+// ============================================================================
+// Links
+// ============================================================================
+
+a, a:visited {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+article a {
+  text-decoration: underline;
+}
+
+// ============================================================================
+// Inline elements
+// ============================================================================
+
+dfn {
+  font-style: normal;
+  text-decoration: underline dotted var(--border);
+  cursor: help;
+}
+
+abbr[title] {
+  cursor: help;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+}
+
+mark {
+  padding: 2px var(--space-sm);
+  border-radius: var(--border-radius);
+  background-color: var(--marked);
+  color: black;
+}
+
+sup, sub {
+  vertical-align: baseline;
+  position: relative;
+}
+
+sup { top: -0.4em; }
+sub { top: 0.3em; }
+
+// ============================================================================
+// Blockquote
+// ============================================================================
+
+blockquote {
+  // margin-inline-start: var(--space);
+  margin-inline-end: 0;
+  margin-block: var(--space);
+  padding-left: var(--space);
+  border-inline-start: 0.35rem solid var(--accent);
+  color: var(--text-light);
+  font-style: italic;
+}
+
+cite {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  font-style: normal;
+}
+
+// ============================================================================
+// Code
+// ============================================================================
+
+code, pre, pre span, kbd, samp {
+  font-family: var(--mono-font);
+  color: var(--code);
+}
+
+kbd {
+  color: var(--preformatted);
+  border: var(--border-width) solid var(--preformatted);
+  border-bottom: 3px solid var(--preformatted);
+  border-radius: var(--border-radius);
+  padding: 2px var(--space-sm);
+}
+
+pre {
+  padding: var(--space);
+  max-width: 100%;
+  overflow: auto;
+  color: var(--preformatted);
+  background-color: var(--accent-bg);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--border-radius);
+  margin-block: var(--space);
+
+  code {
+    color: var(--preformatted);
+    background: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+// ============================================================================
+// Lists
+// ============================================================================
+
+ul, ol {
+  padding-inline-start: calc(var(--space) * 1.5);
+  margin-bottom: var(--space);
+}
+
+ul {
+  list-style: none;
+
+  > li::before {
+    content: '❖';
+    display: inline-block;
+    margin-inline-start: -1.5em;
+    width: 1.5em;
+    color: var(--subheading-color);
+    font-size: 0.7em;
+    vertical-align: 0.1em;
+  }
+
+  ul > li::before {
+    content: '✧';
+    font-size: 0.8em;
+  }
+}
+
+// ============================================================================
+// Tables
+// ============================================================================
+
+table {
+  border-collapse: collapse;
+  margin: var(--space) 0;
+}
+
+td, th {
+  border: var(--border-width) solid var(--border);
+  padding: var(--space-sm);
+
+  &[align="center"] { text-align: center; }
+  &[align="right"] { text-align: right; }
+}
+
+th {
+  background-color: var(--accent-bg);
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: var(--accent-bg);
+}
+
+table caption {
+  font-weight: bold;
+  margin-block: var(--space-sm);
+}
+
+// ============================================================================
+// Media
+// ============================================================================
+
+img, video {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+}
+
+.img-logo {
+  display: block;
+  margin-inline: auto;
+  max-width: 360px;
+}
+
+figure {
+  margin: 0;
+  display: block;
+  overflow-x: auto;
+
+  > img, > picture > img {
+    display: block;
+    margin-inline: auto;
+  }
+}
+
+figcaption {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-light);
+  // margin-block: var(--space);
+}
+
+// ============================================================================
+// Aside
+// ============================================================================
+
+aside {
+  background-color: var(--accent-bg);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  width: 30%;
+  padding: 0 var(--space);
+  margin-inline-start: var(--space);
+  margin-block: var(--space);
+  float: right;
+}
+
+@media only screen and (max-width: 720px) {
+  aside {
+    width: 100%;
+    float: none;
+    margin-inline-start: 0;
+  }
+}
+
+// ============================================================================
+// Details
+// ============================================================================
+
+details {
+  background-color: var(--accent-bg);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--border-radius);
+  padding: var(--space-sm) var(--space);
+  margin-block: var(--space);
+}
+
+summary {
+  cursor: pointer;
+  font-weight: bold;
+  padding: var(--space-sm) var(--space);
+  margin: calc(var(--space-sm) * -1) calc(var(--space) * -1);
+}
+
+details[open] > summary {
+  margin-bottom: var(--space-sm);
+}
+
+// ============================================================================
+// TOC
+// ============================================================================
+
+@media only screen and (max-width: calc(360px + 2 * var(--space))) {
+  .toc-hero {
+    width: 100%;
+  }
+}
+
+.toc {
+
+  h2 {
+    // margin-top: calc(var(--space) * 2);
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    // margin-bottom: var(--space-sm);
+  }
+}
+
+// ============================================================================
+// Story list
+// ============================================================================
+
+.story-list section {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+// ============================================================================
+// Chapter nav
+// ============================================================================
+
+.chapter-nav {
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding: var(--space);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space);
+
+  .next {
+    margin-inline-start: auto;
+  }
+}
+
+// ============================================================================
+// Appendix list
+// ============================================================================
+
+.appendix-list {
+  list-style: none;
+  padding: 0;
+
+  li {
+    margin-bottom: var(--space-sm);
+  }
+}
+
+// ============================================================================
+// Essay list
+// ============================================================================
+
+.essay-list {
+  list-style: none;
+  padding: 0;
+
+  li {
+    margin-bottom: var(--space-sm);
+  }
+}
+
+// ============================================================================
+// Alpha headings (letter dividers with fleurons)
+// ============================================================================
+
+.alpha-headings h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--space);
+
+  &::before {
+    content: '\2767';
+    transform: scaleX(-1);
+  }
+
+  &::after {
+    content: '\2767';
+  }
+
+  &::before,
+  &::after {
+    font-size: 0.8em;
+    // opacity: 0.6;
+    color: var(--subheading-color);
+    position: relative;
+    top: 0.1em;
+  }
+}
+
+// ============================================================================
+// Gallery
+// ============================================================================
+
+.gallery {
+  columns: 2;
+  column-gap: var(--space);
+
+  figure {
+    break-inside: avoid;
+    margin-bottom: var(--space);
+    text-align: center;
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--border-radius);
+    padding: var(--space-sm);
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+  }
+
+  figcaption {
+    margin-top: var(--space-sm);
+    font-style: italic;
+    color: var(--text-light);
+    font-size: 0.85rem;
+  }
+
+  .gallery-link {
+    display: block;
+    font-size: 0.8rem;
+    margin-top: calc(var(--space-sm) / 2);
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .gallery {
+    columns: 1;
+  }
+}
+
+// ============================================================================
+// Lightbox
+// ============================================================================
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  &.open {
+    display: flex;
+  }
+}
+
+.lightbox-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  will-change: transform, opacity;
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--border-radius);
+}
+
+.lightbox-caption {
+  color: #ddd;
+  font-style: italic;
+  font-size: 0.9rem;
+  text-align: center;
+  max-width: 600px;
+  margin-top: var(--space);
+  padding-inline: var(--space);
+}
+
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  background: none;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  font-size: 2.5rem;
+  line-height: 1;
+  padding: var(--space);
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.lightbox-close {
+  top: 0;
+  right: 0;
+}
+
+.lightbox-prev {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox-next {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+// ============================================================================
+// HR
+// ============================================================================
+
+hr {
+  border: none;
+  height: var(--hr-width);
+  background: var(--border);
+  margin: var(--space) auto;
+}
+
+// ============================================================================
+// Print
+// ============================================================================
+
+@media print {
+  @page {
+    margin: 1cm;
+  }
+
+  body {
+    display: block;
+  }
+
+  body > header {
+    background-color: unset;
+
+    nav {
+      display: none;
+    }
+  }
+
+  body > footer {
+    display: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  a[href^="http"]::after {
+    content: " <" attr(href) ">";
+  }
+
+  pre, table, figure, img, svg {
+    break-inside: avoid;
+  }
+
+  pre code {
+    white-space: pre-wrap;
+  }
+}

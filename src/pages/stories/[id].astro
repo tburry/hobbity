@@ -1,0 +1,49 @@
+---
+import { getCollection, render } from 'astro:content';
+import Content from '../../layouts/Content.astro';
+
+function getTitle(entry: { body?: string; id: string }) {
+  const h1 = entry.body?.split('\n').find((l) => l.startsWith('# '));
+  return h1 ? h1.replace(/^# /, '') : entry.id;
+}
+
+export async function getStaticPaths() {
+  const allStories = await getCollection('stories');
+  allStories.sort((a, b) => a.id.localeCompare(b.id));
+
+  return allStories.map((story, i) => {
+    const siblings = allStories.filter((s) => s.data.story === story.data.story);
+    const idx = siblings.findIndex((s) => s.id === story.id);
+
+    return {
+      params: { id: story.id },
+      props: {
+        story,
+        prev: idx > 0 ? siblings[idx - 1] : null,
+        next: idx < siblings.length - 1 ? siblings[idx + 1] : null,
+      },
+    };
+  });
+}
+
+const { story, prev, next } = Astro.props;
+const { Content: StoryContent } = await render(story);
+const title = getTitle(story);
+---
+
+<Content title={title} showHome={true}>
+  <StoryContent />
+
+  <footer class="chapter-nav" slot="footer">
+    {prev && (
+      <a href={`/hobbity/stories/${prev.id}/`} class="prev">
+        &larr; {getTitle(prev)}
+      </a>
+    )}
+    {next && (
+      <a href={`/hobbity/stories/${next.id}/`} class="next">
+        {getTitle(next)} &rarr;
+      </a>
+    )}
+  </footer>
+</Content>

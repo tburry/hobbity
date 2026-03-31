@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { appendixLabels, appendixOrder } from '../lib/appendix';
+import { storyOrder, storySlug, getTitle } from '../lib/stories';
+
+const allStories = await getCollection('stories');
+allStories.sort((a, b) => a.id.localeCompare(b.id));
+
+const appendix = (await getCollection('appendix'))
+  .sort((a, b) => appendixOrder.indexOf(a.id) - appendixOrder.indexOf(b.id));
+
+const essays = await getCollection('essays');
+essays.sort((a, b) => a.id.localeCompare(b.id));
+---
+
+<Base title="Index" showHome={true}>
+  <h1>Index</h1>
+
+  <h2>Stories</h2>
+  {storyOrder.map((name) => {
+    const chapters = allStories.filter((s) => s.data.story === name);
+    return (
+      <>
+        <h3><a href={`/hobbity/stories/${storySlug(name)}/`}>{name}</a></h3>
+        <ol>
+          {chapters.map((ch) => (
+            <li><a href={`/hobbity/stories/${ch.id}/`}>{getTitle(ch)}</a></li>
+          ))}
+        </ol>
+      </>
+    );
+  })}
+
+  {essays.length > 0 && (
+    <>
+      <h2>Essays</h2>
+      <ul>
+        {essays.map((e) => (
+          <li><a href={`/hobbity/essays/${e.id}/`}>{getTitle(e)}</a></li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  <h2>Appendix</h2>
+  <ul class="appendix-list">
+    {appendix.map((p) => (
+      <li><a href={`/hobbity/appendix/${p.id}/`}>{appendixLabels[p.id] || p.id}</a></li>
+    ))}
+  </ul>
+</Base>
