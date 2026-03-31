@@ -220,9 +220,9 @@ h3, h4, h5, h6 {
 }
 
 h1 { font-size: 3rem; }
-h2 { font-size: 2.2rem; margin: var(--space) 0 var(--space-sm);}
-h3 { font-size: 2rem; margin-top: var(--space); }
-h4 { font-size: 1.44rem; }
+h2 { font-size: 2.1rem; margin: var(--space) 0 var(--space-sm);}
+h3 { font-size: 1.75rem; margin-top: var(--space); }
+h4 { font-size: 1.25rem; }
 h5 { font-size: 1.15rem; }
 h6 { font-size: 0.96rem; }
 
@@ -233,9 +233,6 @@ p {
 
 @media only screen and (max-width: 720px) {
   h1 { font-size: 2.5rem; }
-  h2 { font-size: 2.1rem; }
-  h3 { font-size: 1.75rem; }
-  h4 { font-size: 1.25rem; }
 }
 
 // ============================================================================
@@ -617,9 +614,19 @@ details[open] > summary {
 // Gallery
 // ============================================================================
 
+.gallery-page {
+  width: 100vw;
+  margin-inline-start: calc(50% - 50vw);
+  padding-inline: var(--space);
+}
+
 .gallery {
-  columns: 2;
+  columns: 1;
   column-gap: var(--space);
+
+  @media (min-width: 640px) { columns: 2; }
+  @media (min-width: 1024px) { columns: 3; }
+  @media (min-width: 1400px) { columns: 4; }
 
   figure {
     break-inside: avoid;
@@ -647,12 +654,6 @@ details[open] > summary {
     display: block;
     font-size: 0.8rem;
     margin-top: calc(var(--space-sm) / 2);
-  }
-}
-
-@media only screen and (max-width: 720px) {
-  .gallery {
-    columns: 1;
   }
 }
 
@@ -697,6 +698,10 @@ details[open] > summary {
   max-width: 600px;
   margin-top: var(--space);
   padding-inline: var(--space);
+
+  a {
+    color: #aac;
+  }
 }
 
 .lightbox-close,

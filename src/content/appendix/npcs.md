@@ -12,16 +12,24 @@
 
 ### Belba
 
-Proprietress of the [Slumbering Serpent Inn](/hobbity/appendix/locations/#the-slumbering-serpent-inn). Older, knew [Constable Grover](#constable-grover) from childhood — thinks he's a self-important blowhard who was tedious as a child and is tedious as a man. She doesn't distrust Grover himself, but does not trust his out-of-town deputies at all. Became the party's confidante — they told her everything. She and [Olwyn](#olwyn) intervened with Grover on the party's behalf; Grover eventually washed his hands of them and told Belba the three hobbits are now "her problem." Genuinely shaken by evidence of violence at the [Foaming Mug](/hobbity/appendix/locations/#the-foaming-mug-inn).
+Proprietress of the [Slumbering Serpent Inn](/hobbity/appendix/locations/#the-slumbering-serpent-inn). Became the party's confidante — they told her everything they encountered in Orlane. She and [Olwyn](#olwyn) intervened with [Grover](#constable-grover) on the party's behalf and became responsible for them.
 
 - **Location:** [The Slumbering Serpent Inn](/hobbity/appendix/locations/#the-slumbering-serpent-inn)
 - **Family:** [Olwyn](#olwyn) (husband)
+- **Childhood acquaintance:** [Constable Grover](#constable-grover) (thinks he's a tedious blowhard; doesn't trust his deputies)
 
 ### Bertram
 
 Owner of the [Golden Grain Inn](/hobbity/appendix/locations/#the-golden-grain-inn) in [Orlane](/hobbity/appendix/locations/#orlane). [Buford](/hobbity/appendix/npcs/#buford-niss) told the party to mention his name for a discount. Lives on the far side of the river — whatever ails the village seems concentrated on his side. It was noted that Orlane "retains some of its hobbitishness despite whatever ills have befallen Bertram and the lot on his side of the river."
 
 - **Location:** [The Golden Grain Inn](/hobbity/appendix/locations/#the-golden-grain-inn)
+
+### Bulbar
+
+Non-local deputy serving under [Constable Grover](#constable-grover) in [Orlane](/hobbity/appendix/locations/#orlane).
+
+- **Location:** [Orlane](/hobbity/appendix/locations/#orlane)
+- **Superior:** [Constable Grover](#constable-grover)
 
 ### Daisy Boffin
 
@@ -73,12 +81,19 @@ A ne'er-do-well encountered on the [Old Road](/hobbity/appendix/locations/#the-o
 - **Location:** [Gomwick](/hobbity/appendix/locations/#gomwick)
 - **Employer:** [Buford Niss](#buford-niss)
 
+### Donovan
+
+Non-local deputy serving under [Constable Grover](#constable-grover) in [Orlane](/hobbity/appendix/locations/#orlane).
+
+- **Location:** [Orlane](/hobbity/appendix/locations/#orlane)
+- **Superior:** [Constable Grover](#constable-grover)
+
 ### Derek Desleigh
 
 A hobbit with a disfiguring scar. First seen at the [Golden Grain Inn](/hobbity/appendix/locations/#the-golden-grain-inn). Encountered inside the [Temple of Merikka](/hobbity/appendix/locations/#the-temple-of-merikka) working with goblins — wanted the party taken alive. Fled during the temple fight. Hit by Turnip's sleep dart but saved vs. poison. Still at large somewhere in the temple complex.
 
 - **Location:** [The Temple of Merikka](/hobbity/appendix/locations/#the-temple-of-merikka)
-- **Henchmen:** [Goblin Four](#goblin-four), [Goblin Two](#goblin-two)
+- **Henchmen:** Goblins
 
 ### Boris Duddle
 
@@ -115,13 +130,6 @@ Carpenter in [Orlane](/hobbity/appendix/locations/#orlane). [Zacharias](#zachari
 
 - **Location:** [Orlane](/hobbity/appendix/locations/#orlane)
 
-### Goblin Four
-
-A lost goblin found in the [dungeon beneath the Temple of Merikka](/hobbity/appendix/locations/#the-dungeon-beneath-the-temple-of-merikka). Sent by "the scarred one" ([Derek](#derek-desleigh)) to find the hobbits but got hopelessly lost. Can't count past his fingers. Manacled to a torch sconce and immediately started screaming for help.
-
-- **Location:** [The Dungeon Beneath the Temple of Merikka](/hobbity/appendix/locations/#the-dungeon-beneath-the-temple-of-merikka)
-- **Boss:** [Derek Desleigh](#derek-desleigh)
-
 ## G
 
 ### Killian Gade
@@ -132,9 +140,10 @@ Stablekeeper in [Orlane](/hobbity/appendix/locations/#orlane), looking after [Op
 
 ### Constable Grover
 
-Local constable in [Orlane](/hobbity/appendix/locations/#orlane). Armored in mail with a crossbow, two non-local deputies (Donovan and Bulbar). [Belba](#belba) knew him from childhood and never liked him. First met the party on the Constabulary porch — greeted them warmly, took the dire wolf report seriously and went searching the next day (found nothing). After the blacksmith incident, told the party to conclude their business and leave. Caught them again exiting the [Foaming Mug](/hobbity/appendix/locations/#the-foaming-mug-inn) ruins. The party initially suspected him of being compromised, but [Zacharias](#zacharias) trusts him and his reactions to troglodyte news (blanching, genuine concern) suggest he may be honest. Wedge suspects the armoured constables are "in on it."
+Local constable in [Orlane](/hobbity/appendix/locations/#orlane). Armored in mail with a crossbow. First met the party on the Constabulary porch — greeted them warmly, took the dire wolf report seriously and went searching the next day (found nothing). After the blacksmith incident, told the party to conclude their business and leave. Caught them again exiting the [Foaming Mug](/hobbity/appendix/locations/#the-foaming-mug-inn) ruins. The party initially suspected him of being compromised, but [Zacharias](#zacharias) trusts him and his reactions to troglodyte news (blanching, genuine concern) suggest he may be honest. Wedge suspects the armoured constables are "in on it."
 
 - **Location:** [Orlane](/hobbity/appendix/locations/#orlane)
+- **Deputies:** [Donovan](#donovan), [Bulbar](#bulbar)
 
 ### See Also
 
@@ -385,12 +394,6 @@ Neighbour feuding with [Tom Huddle](#tom-huddle) over a hedge blocking access to
 [Sara Huddle](#sara-huddle), [Sherry Huddle](#sherry-huddle)
 
 ## T
-
-### Goblin Two
-
-A goblin left alive and chained up in the [dungeon beneath the Temple of Merikka](/hobbity/appendix/locations/#the-dungeon-beneath-the-temple-of-merikka). If Boffo dies, he's a potential recruit — the DM offered him as a playable Goblin race option. "You should basically recruit him to walk in front of you with the lantern anyway."
-
-- **Location:** [The Dungeon Beneath the Temple of Merikka](/hobbity/appendix/locations/#the-dungeon-beneath-the-temple-of-merikka)
 
 ### See Also
 

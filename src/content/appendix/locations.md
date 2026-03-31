@@ -148,10 +148,6 @@ The skeleton fight was the critical error: the party moved 5 feet too far back f
 
 Ancient ruins predating the [Temple of Merikka](#the-temple-of-merikka) above. A mix of constructed corridors with iron spikes, natural cave, and new internal walls creating a maze. Connected to an underground stream that likely reaches the river.
 
-### Notable NPCs
-
-[Goblin Four](/hobbity/appendix/npcs/#goblin-four)
-
 ### Happenings
 
 The party explored troglodyte-clawed caves with prison cells. Killed a giant lizard. Found the body of the real priestess in a crawlspace. Discovered a document naming [Orlane](#orlane) as a target and [Gomwick](#gomwick) as next. Fought waves of troglodytes in the stream caverns. Boffo drank a Potion of Growth and became giant-sized. Found 420 gold and the Brooch of Shielding in the troglodyte lair.
