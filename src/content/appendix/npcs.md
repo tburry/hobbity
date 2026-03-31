@@ -76,7 +76,7 @@ A ne'er-do-well encountered on the [Old Road](/hobbity/appendix/places/#the-five
 
 ### Dalton Dallydown
 
-[Buford Niss](#buford-niss)'s butler and right-hand. Excellent at not being seen. Looked overtired and concerned when the party arrived for the [Orlane](/hobbity/appendix/places/#orlane) mission. Refuses to be drawn into conversation.
+[Buford Niss](#buford-niss)'s butler and right-hand. Excellent at not being seen. Refuses to be drawn into conversation.
 
 - **Location:** [Gomwick](/hobbity/appendix/places/#gomwick)
 - **Employer:** [Buford Niss](#buford-niss)
@@ -90,7 +90,7 @@ Non-local deputy serving under [Constable Grover](#constable-grover) in [Orlane]
 
 ### Derek Desleigh
 
-A hobbit with a disfiguring scar. First seen at the [Golden Grain Inn](/hobbity/appendix/places/#orlane). Encountered inside the [Temple of Merikka](/hobbity/appendix/places/#orlane) working with goblins — wanted the party taken alive. Fled during the temple fight. Hit by Turnip's sleep dart but saved vs. poison. Still at large somewhere in the temple complex.
+A hobbit with a disfiguring scar. Encountered inside the [Temple of Merikka](/hobbity/appendix/places/#orlane) working with goblins — wanted the party taken alive. Still at large somewhere in the temple complex.
 
 - **Location:** [The Temple of Merikka](/hobbity/appendix/places/#orlane)
 - **Henchmen:** Goblins
@@ -111,7 +111,7 @@ A hobbit with a disfiguring scar. First seen at the [Golden Grain Inn](/hobbity/
 
 ### Epsten
 
-A not-very-bright juvenile stone giant. The entire "workforce" rebuilding [Tom Huddle](#tom-huddle)'s barn — hidden in a temporary work hut beside the build site. On strike until [Krund Pothrower](#krund-pothrower) apologizes for his expletive-laden tirade. Told the party he spotted a blonde hobbit skulking about on a previous night.
+A not-very-bright juvenile stone giant. The entire "workforce" rebuilding [Tom Huddle](#tom-huddle)'s barn — hidden in a temporary work hut beside the build site. On strike until [Krund Pothrower](#krund-pothrower) apologizes for his expletive-laden tirade.
 
 - **Location:** [Huddle Farm](/hobbity/appendix/places/#huddle-farm)
 - **Boss:** [Krund Pothrower](#krund-pothrower)
@@ -140,7 +140,7 @@ Stablekeeper in [Orlane](/hobbity/appendix/places/#orlane), looking after [Opal]
 
 ### Constable Grover
 
-Local constable in [Orlane](/hobbity/appendix/places/#orlane). Armored in mail with a crossbow. First met the party on the Constabulary porch — greeted them warmly, took the dire wolf report seriously and went searching the next day (found nothing). After the blacksmith incident, told the party to conclude their business and leave. Caught them again exiting the [Foaming Mug](/hobbity/appendix/places/#orlane) ruins. The party initially suspected him of being compromised, but [Zacharias](#zacharias) trusts him and his reactions to troglodyte news (blanching, genuine concern) suggest he may be honest. Wedge suspects the armoured constables are "in on it."
+Local constable in [Orlane](/hobbity/appendix/places/#orlane). Armored in mail with a crossbow. Cooperative and takes reports seriously. The party initially suspected him of being compromised, but [Zacharias](#zacharias) trusts him and his reactions to troglodyte news (blanching, genuine concern) suggest he may be honest. Wedge suspects the armoured constables are "in on it."
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
 - **Deputies:** [Donovan](#donovan), [Bulbar](#bulbar)
@@ -159,7 +159,7 @@ An ancient tall-folk man living in a cabin deep in the Old Woods. Each hobbit sa
 
 ### Berry Huddle
 
-Eldest daughter, 18. Beautiful like her mother. Acts as "second mother" to the younger children while [Primula](#primula-huddle) cooks and cleans obsessively. Seems happy, often singing under her breath. Gave the party no second glance. Secret romance with [Sam Sutton](#sam-sutton). Confessed about the barn fire — she and Sam were meeting in the barn, left Sam's dad's pipe unattended while otherwise occupied.
+Eldest daughter, 18. Beautiful like her mother. Acts as "second mother" to the younger children while [Primula](#primula-huddle) cooks and cleans obsessively. Seems happy, often singing under her breath. Secret romance with [Sam Sutton](#sam-sutton).
 
 - **Location:** [Huddle Farm](/hobbity/appendix/places/#huddle-farm)
 - **Family:** [Tom Huddle](#tom-huddle) (father), [Primula Huddle](#primula-huddle) (mother)
@@ -250,7 +250,7 @@ Axe shop owner in [Gomwick](/hobbity/appendix/places/#gomwick). Sold Wedge his s
 
 ### Misha
 
-The priestess of the [Temple of Merikka](/hobbity/appendix/places/#orlane). Not hobbit-proportioned — appears human or aquatic/mermaid-like. The party critically succeeded on a request to heal Boffo, draining one of her healing spells. Then they ransacked her room, taking her armor, shield, and mace (Boffo now uses them). She lost another spell when hit between the eyes with a sling stone, failed morale, and fled — basically running around in her nightgown, completely neutralized. A body found in a crawlspace beneath the temple may be the real priestess, suggesting Misha is an imposter who murdered and replaced her. Fled with [Kaylin Snowvale](#kaylin-snowvale). Whereabouts unknown.
+Priestess of the [Temple of Merikka](/hobbity/appendix/places/#orlane). Not hobbit-proportioned — appears human or aquatic/mermaid-like. The party took her armor, shield, and mace (Boffo now uses them). A body found in a crawlspace beneath the temple may be the real priestess, suggesting Misha is an imposter who murdered and replaced her. Fled with [Kaylin Snowvale](#kaylin-snowvale). Whereabouts unknown.
 
 - **Location:** [The Temple of Merikka](/hobbity/appendix/places/#orlane)
 
@@ -417,7 +417,7 @@ Widowed, lives by the river in [Orlane](/hobbity/appendix/places/#orlane). The p
 
 ### Zacharias
 
-Retired adventurer, well-traveled, late middle age. Lives across the river in [Orlane](/hobbity/appendix/places/#orlane). Sent the original letter to [Buford](#buford-niss) requesting help — also wrote to other old adventuring companions, but none responded except Buford (who sent the party). Extremely paranoid — tore up his own letter, spoke only outdoors by the lakeshore in whispers. Has tried to talk to [Grover](#constable-grover) about the disappearances, but Grover won't act without proof. Doesn't quite know himself what's going on — has only been able to surmise what he's told the party. Convinced the [Temple of Merikka](/hobbity/appendix/places/#orlane) priests are the source of Orlane's problems. Provided the party with equipment and supplies. Not joining the party because "3 young hobbits are far more capable than an old man with a bad back."
+Retired adventurer, well-traveled, late middle age. Lives across the river in [Orlane](/hobbity/appendix/places/#orlane). Sent the original letter to [Buford](#buford-niss) requesting help — also wrote to other old adventuring companions, but none responded except Buford (who sent the party). Extremely paranoid. Has tried to talk to [Grover](#constable-grover) about the disappearances, but Grover won't act without proof. Convinced the [Temple of Merikka](/hobbity/appendix/places/#orlane) priests are the source of Orlane's problems. Not joining the party because "3 young hobbits are far more capable than an old man with a bad back."
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
 - **Ally:** [Buford Niss](#buford-niss)
