@@ -51,3 +51,4 @@ When adding new story markdown files:
 
 - No Co-Authored-By trailer in commit messages.
 - Never ask or offer to push after committing.
+- When committing large working changes, break them into logical pieces (e.g. formatting fixes, content additions, documentation updates).
