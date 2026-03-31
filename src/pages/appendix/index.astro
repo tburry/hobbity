@@ -9,7 +9,7 @@ const contentPages = (await getCollection('appendix'))
 
 <Base title="Appendix" showHome={true}>
   <h1>Appendices</h1>
-  <ul class="appendix-list">
+  <ul>
     {contentPages.map((page) => (
       <li>
         <a href={`/hobbity/appendix/${page.id}/`}>

@@ -541,15 +541,6 @@ details[open] > summary {
 // Appendix list
 // ============================================================================
 
-.appendix-list {
-  list-style: none;
-  padding: 0;
-
-  li {
-    margin-bottom: var(--space-sm);
-  }
-}
-
 // ============================================================================
 // Essay list
 // ============================================================================
@@ -632,7 +623,7 @@ details[open] > summary {
     break-inside: avoid;
     margin-bottom: var(--space);
     text-align: center;
-    border: var(--border-width) solid var(--border);
+    border: 2px solid var(--border);
     border-radius: var(--border-radius);
     padding: var(--space-sm);
   }
@@ -640,7 +631,7 @@ details[open] > summary {
   img {
     width: 100%;
     height: auto;
-    border-radius: var(--border-radius);
+    border-radius: calc(var(--border-radius) / 2);
   }
 
   figcaption {

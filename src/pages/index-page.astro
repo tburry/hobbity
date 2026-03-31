@@ -44,9 +44,10 @@ essays.sort((a, b) => a.id.localeCompare(b.id));
   )}
 
   <h2>Appendix</h2>
-  <ul class="appendix-list">
+  <ul>
     {appendix.map((p) => (
       <li><a href={`/hobbity/appendix/${p.id}/`}>{appendixLabels[p.id] || p.id}</a></li>
     ))}
+    <li><a href="/hobbity/appendix/gallery/">{appendixLabels['gallery']}</a></li>
   </ul>
 </Base>

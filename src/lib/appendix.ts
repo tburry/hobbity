@@ -1,8 +1,8 @@
 export const appendixLabels: Record<string, string> = {
-  pcs: 'Appendix A: Player Characters',
-  npcs: 'Appendix B: NPCs',
-  locations: 'Appendix C: Locations',
-  gallery: 'Appendix D: Gallery',
+  pcs: 'Player Characters',
+  npcs: 'NPCs',
+  locations: 'Locations',
+  gallery: 'Gallery',
 };
 
 export const appendixOrder = ['pcs', 'npcs', 'locations', 'gallery'];
