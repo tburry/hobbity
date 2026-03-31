@@ -500,6 +500,10 @@ details[open] > summary {
   ul {
     list-style: none;
     padding: 0;
+
+    > li::before {
+      content: none;
+    }
   }
 
   li {

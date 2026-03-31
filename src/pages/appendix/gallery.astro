@@ -45,6 +45,14 @@ import { images } from '../../lib/gallery';
   const lbCaption = document.getElementById('lightbox-caption');
   let current = 0;
 
+  function captionHtml(img) {
+    let html = img.caption;
+    if (img.storyLink && img.storyTitle) {
+      html += ` <a class="gallery-link" href="${img.storyLink}">Found in: ${img.storyTitle}</a>`;
+    }
+    return html;
+  }
+
   function show(i, direction) {
     const next = (i + images.length) % images.length;
     if (direction && next !== current) {
@@ -56,7 +64,7 @@ import { images } from '../../lib/gallery';
         current = next;
         lbImg.src = images[current].src;
         lbImg.alt = images[current].alt;
-        lbCaption.textContent = images[current].caption;
+        lbCaption.innerHTML = captionHtml(images[current]);
         content.style.transition = 'none';
         content.style.transform = `translateX(${-sign * 100}px)`;
         content.style.opacity = '0';
@@ -70,7 +78,7 @@ import { images } from '../../lib/gallery';
       current = next;
       lbImg.src = images[current].src;
       lbImg.alt = images[current].alt;
-      lbCaption.textContent = images[current].caption;
+      lbCaption.innerHTML = captionHtml(images[current]);
       content.style.transition = 'none';
       content.style.transform = 'translateX(0)';
       content.style.opacity = '1';
