@@ -485,25 +485,25 @@ details[open] > summary {
 // TOC
 // ============================================================================
 
-@media only screen and (max-width: calc(360px + 2 * var(--space))) {
-  .toc-hero {
-    width: 100%;
-  }
-}
+// @media only screen and (max-width: calc(360px + 2 * var(--space))) {
+//   .toc-hero {
+//     width: 100%;
+//   }
+// }
 
 .toc {
 
-  h2 {
-    // margin-top: calc(var(--space) * 2);
-  }
+  // h2 {
+  //   // margin-top: calc(var(--space) * 2);
+  // }
 
   ul {
-    list-style: none;
-    padding: 0;
+    // list-style: none;
+    // padding: 0;
 
-    > li::before {
-      content: none;
-    }
+    // > li::before {
+      // content: none;
+    // }
   }
 
   li {
