@@ -4,7 +4,7 @@ story: The Huddle Job
 
 # Green Cows and Blackberries
 
-Session Recap — 27 <dfn title="November">Blotmath</dfn>, S.R. 1425
+Session Recap – 27 <dfn title="November">Blotmath</dfn>, S.R. 1425
 
 - **PCs:**
   - Boffo Lunderbunk - Level 1 Hobbit Adventurer
@@ -14,17 +14,17 @@ Session Recap — 27 <dfn title="November">Blotmath</dfn>, S.R. 1425
 
 ## Arrival at Huddle Farm
 
-The three hobbits reached Huddle Farm on the road to Orlane and found themselves hired before they'd even unpacked. Tom Huddle, haggard and sleepless, offered 30 gold plus room and board to catch his neighbor Norrie Sutton red-handed. The feud was straightforward enough: Norrie had thrown up a hedge blocking Tom's right-of-way through Deadman's Gap to the blackberry bushes, and Tom was convinced the retaliation had escalated — a kidnapped dog, a trampled garden, stolen wine, a burned barn, and, most bafflingly, cows painted green. Tom's one condition: the Suttons must not see them.
+The three hobbits reached Huddle Farm on the road to Orlane and found themselves hired before they'd even unpacked. Tom Huddle, haggard and sleepless, offered 30 gold plus room and board to catch his neighbor Norrie Sutton red-handed. The feud was straightforward enough: Norrie had thrown up a hedge blocking Tom's right-of-way through Deadman's Gap to the blackberry bushes, and Tom was convinced the retaliation had escalated—a kidnapped dog, a trampled garden, stolen wine, a burned barn, and, most bafflingly, cows painted green. Tom's one condition: the Suttons must not see them.
 
 ## The Huddle Household
 
-Primula Huddle greeted the party with the strained patience of a woman managing eight children, a ninth on the way, a freeloading dwarf named Krund Pothrower, and now three more mouths at her table. The twins Motto and Otto carried the farm work. Berry sang. Sherry buried herself in books and insisted the house was haunted, a claim her siblings dismissed. Sara and Mary bickered without pause. Young Bordo swore he'd seen a frog-headed demon at the ruined tower nearby, and baby Marlo contributed nothing but noise. The party poked around the Fortfield ruins for half an hour and took a brief tour of the house — enough to get their bearings, not much more. One thing caught the eye: some of the stones Tom had repurposed from the ruins for his excavation were carved with serpent motifs. Not hobbit work, and not recent.
+Primula Huddle greeted the party with the strained patience of a woman managing eight children, a ninth on the way, a freeloading dwarf named Krund Pothrower, and now three more mouths at her table. The twins Motto and Otto carried the farm work. Berry sang. Sherry buried herself in books and insisted the house was haunted, a claim her siblings dismissed. Sara and Mary bickered without pause. Young Bordo swore he'd seen a frog-headed demon at the ruined tower nearby, and baby Marlo contributed nothing but noise. The party poked around the Fortfield ruins for half an hour and took a brief tour of the house—enough to get their bearings, not much more. One thing caught the eye: some of the stones Tom had repurposed from the ruins for his excavation were carved with serpent motifs. Not hobbit work, and not recent.
 
 ![A two-headed snake carved into stone from the Fortfield ruins](/hobbity/images/two-headed-snake-stone.webp)
 
 ## First Impressions
 
-Turnip made himself memorable early, first by frightening Bordo and then by suggesting to Tom that his wife and children might come to bodily harm from the saboteur. This did not calm the farmer. Tom, already wound tight as a bowstring, edged closer to something brittle. Wedge and Boffo took stock of the situation quietly. The job seemed simple — a neighbor dispute, some petty vandalism — but the household felt like a pot about to boil over with or without Norrie Sutton's help.
+Turnip made himself memorable early, first by frightening Bordo and then by suggesting to Tom that his wife and children might come to bodily harm from the saboteur. This did not calm the farmer. Tom, already wound tight as a bowstring, edged closer to something brittle. Wedge and Boffo took stock of the situation quietly. The job seemed simple—a neighbor dispute, some petty vandalism—but the household felt like a pot about to boil over with or without Norrie Sutton's help.
 
 ## Conclusion
 

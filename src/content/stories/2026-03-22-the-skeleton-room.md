@@ -4,7 +4,7 @@ story: Something Rotten in Orlane
 
 # The Skeleton Room
 
-Session Recap — 22 <dfn title="March">Rethe</dfn>, S.R. 1426
+Session Recap – 22 <dfn title="March">Rethe</dfn>, S.R. 1426
 
 - **PCs:**
   - Boffo Lunderbunk - Level 1 Hobbit Adventurer
@@ -16,7 +16,7 @@ Session Recap — 22 <dfn title="March">Rethe</dfn>, S.R. 1426
 
 Now it must be said that Boffo Lunderbunk was, at this particular moment, not at all hobbit-sized, and had not been for some hours. The potion he had drunk in the troglodyte tunnels had stretched him to twice his proper height, so that he filled the passageways like a cork in a bottle and had to stoop and shuffle and mind his head at every turning. It was uncomfortable, and Boffo had begun to suspect that anyone taller than a hobbit must live in a state of constant misery.
 
-The three companions picked through the caves beyond the troglodyte lair. Two rooms, mud-floored and stinking, with doors set into rough frames. One had a bar that locked from the outside. A cell. Empty, but ready. No hobbit prints in the mud — only troglodyte claws.
+The three companions picked through the caves beyond the troglodyte lair. Two rooms, mud-floored and stinking, with doors set into rough frames. One had a bar that locked from the outside. A cell. Empty, but ready. No hobbit prints in the mud—only troglodyte claws.
 
 "They wanted us alive," Boffo said, looking at the bar. "Whatever they had planned for us was worse than dying."
 
@@ -48,7 +48,7 @@ They opened the wrong door. Or the right door, depending on your perspective.
 
 "It's them. Let's do it."
 
-Four goblins in the dark, one clutching a net. The net-goblin stepped up, ready to throw, and then got his first good look at Boffo — six feet of hobbit crammed into a five-foot ceiling, chainmail glinting, mace still wet — and simply fumbled the net and scrambled backward.
+Four goblins in the dark, one clutching a net. The net-goblin stepped up, ready to throw, and then got his first good look at Boffo—six feet of hobbit crammed into a five-foot ceiling, chainmail glinting, mace still wet—and simply fumbled the net and scrambled backward.
 
 The fight was short and ugly. A goblin threw the net over Turnip, tangling him properly, and for a moment things looked grim. But Turnip had a trick. He could, by some small magic, untangle any knot or rope with a single pull, and the net fell away from him like water. Boffo brought his mace down on the net-goblin and the thing simply ceased to exist. The last one alive dropped its club and ran.
 
@@ -56,7 +56,7 @@ The fight was short and ugly. A goblin threw the net over Turnip, tangling him p
 
 ## Boffo Shrinks
 
-It happened on the ladder. Boffo was climbing up through the shaft toward the temple when the magic let go — _bloop bloop bloop_ — and he was three feet tall again, his chainmail settling around him like a blanket on a child. It was a mercy: had the potion lasted another minute he'd have been wedged in the shaft like a stopper.
+It happened on the ladder. Boffo was climbing up through the shaft toward the temple when the magic let go—_bloop bloop bloop_—and he was three feet tall again, his chainmail settling around him like a blanket on a child. It was a mercy: had the potion lasted another minute he'd have been wedged in the shaft like a stopper.
 
 "I liked giant Boffo," Wedge said, watching him shrink. "I was hoping he'd stay that size."
 
@@ -68,7 +68,7 @@ He offered the Brooch of Shielding to Wedge. Wedge shook his head. "You're still
 
 ## Return to the Temple
 
-Back on the ground floor, the torches had gone out. Everything else was as they'd left it — Misha's bedroom, the offering hallway with its alcoves of golden food, the worship hall beyond. But as Wedge walked through the door, he heard voices from the sanctuary.
+Back on the ground floor, the torches had gone out. Everything else was as they'd left it—Misha's bedroom, the offering hallway with its alcoves of golden food, the worship hall beyond. But as Wedge walked through the door, he heard voices from the sanctuary.
 
 ## The Snowvale Cult
 
@@ -78,7 +78,7 @@ Four hobbits stood in the sanctuary. Griff, broad and furious. His son Timba bes
 
 Wedge had no such hesitation. "Let's subdue them and get answers."
 
-It was ugly, fighting unarmed hobbits. The party pulled their blows as best they could. Turnip threw a net over Griff — put to good use already. Boffo waded in with the flat of his mace. But during the scuffle, Kaylin slipped through the west door. Misha vanished with her. Derek Desleigh, who was somewhere in the building, never showed his face.
+It was ugly, fighting unarmed hobbits. The party pulled their blows as best they could. Turnip threw a net over Griff—put to good use already. Boffo waded in with the flat of his mace. But during the scuffle, Kaylin slipped through the west door. Misha vanished with her. Derek Desleigh, who was somewhere in the building, never showed his face.
 
 They manacled Griff and Timba back to back on the floor. Boffo tried talking to them. "Why? Why did you let this cult into your town?"
 
@@ -88,19 +88,19 @@ Griff clenched his jaw and stared at the wall. Timba looked Boffo in the eye and
 
 ## The Mural of Merikka
 
-They searched what remained. A corridor of monks' cells — small rooms with reed mats, three of them slept in, one pristine. A dining hall with a mural of Merikka in fresh paint on the north wall: the goddess surrounded by harvest bounty — cornucopia, fish, pumpkins, grapes.
+They searched what remained. A corridor of monks' cells—small rooms with reed mats, three of them slept in, one pristine. A dining hall with a mural of Merikka in fresh paint on the north wall: the goddess surrounded by harvest bounty—cornucopia, fish, pumpkins, grapes.
 
 ![The mural of Merikka in the temple dining hall](/hobbity/images/mural-of-merikka.webp) Display cases along the walls held specimens under glass: a carrot, an ear of corn, wheat stalks, a bottle of wine. A shrine to abundance in a town where people were disappearing.
 
 ## The Golden Offerings
 
-Nine alcoves in the hallway, nine gold replicas of food. Wheat, potato, oats, corn, carrot, turnips, grapes, barley, beans. Each one rendered with precision — imperfections and flecks of dirt cast in gold.
+Nine alcoves in the hallway, nine gold replicas of food. Wheat, potato, oats, corn, carrot, turnips, grapes, barley, beans. Each one rendered with precision—imperfections and flecks of dirt cast in gold.
 
 ![Nine golden food offerings arranged in alcoves](/hobbity/images/alcove-offering-to-merikka.webp)
 
 Boffo reached for the potato.
 
-The world went away. He was underwater, in a place of beauty, and something was swimming toward him. Merikka. She took his face in her hands, green and cool, and pressed her lips to his. Something pulled at his will, tried to take root in his mind, but Boffo held, the way he always held — not out of will, but because he simply didn't know how to stop being himself.
+The world went away. He was underwater, in a place of beauty, and something was swimming toward him. Merikka. She took his face in her hands, green and cool, and pressed her lips to his. Something pulled at his will, tried to take root in his mind, but Boffo held, the way he always held—not out of will, but because he simply didn't know how to stop being himself.
 
 He was back in the hallway, soaking wet, the golden potato in his hands.
 
@@ -116,13 +116,13 @@ They were in a bare room at the south end of the temple. Wooden benches. A carpe
 
 The bones stood up.
 
-Eight of them, each with a short sword and shield, forming into two shield walls with a discipline no goblin had ever shown. They came at Turnip first — three blades finding him before anyone could react. Steel bit into him, once, twice, and he staggered.
+Eight of them, each with a short sword and shield, forming into two shield walls with a discipline no goblin had ever shown. They came at Turnip first—three blades finding him before anyone could react. Steel bit into him, once, twice, and he staggered.
 
 The party fell back to the doorway. Wedge slung stones from the rear, lobbing them past his friends' heads. Boffo's mace sang. Every time it connected, a skeleton burst apart into bone dust and silence. But there were eight, and the hobbits were tired, and luck was not with them.
 
 Turnip's brooch took blow after blow, absorbing what would have killed him twice over. Then it cracked, and shattered, and the next sword stroke put him on the floor. He lay still, blood pooling beneath him on the cold stone.
 
-Wedge scrambled to him with the last healing potion — and poured it between Turnip's teeth. Turnip gasped and opened his eyes, diminished. Something had been taken from him in the dying, something that would not come back.
+Wedge scrambled to him with the last healing potion—and poured it between Turnip's teeth. Turnip gasped and opened his eyes, diminished. Something had been taken from him in the dying, something that would not come back.
 
 Two skeletons remained. They turned from the fallen hobbit to the one still standing.
 
@@ -136,7 +136,7 @@ Then silence.
 
 Boffo lay on the floor of the skeleton room, and he was dying, and there was nothing left. No potions. No healing. No magic. The brooch was dust. The hobbit touches were spent. Wedge knelt beside him and there was nothing in his hands that could help.
 
-Somewhere in this temple — fled through a western door, vanished into the night — there was a priestess who could heal. Whether she was friend or fraud or something worse, and whether two battered hobbits could find her before Boffo bled out on the cold stone, was a question none of them could answer.
+Somewhere in this temple—fled through a western door, vanished into the night—there was a priestess who could heal. Whether she was friend or fraud or something worse, and whether two battered hobbits could find her before Boffo bled out on the cold stone, was a question none of them could answer.
 
 ## Conclusion
 

@@ -4,7 +4,7 @@ story: A Hobbity Thanksgiving
 
 # Winter in Thistledown
 
-Between Sessions — <dfn title="November">Blotmath</dfn> S.R. 1425 to <dfn title="March">Rethe</dfn> S.R. 1426
+Between Sessions – <dfn title="November">Blotmath</dfn> S.R. 1425 to <dfn title="March">Rethe</dfn> S.R. 1426
 
 - **PCs:**
   - Boffo Lunderbunk - Level 0 → Level 1 Hobbit Adventurer
@@ -12,7 +12,7 @@ Between Sessions — <dfn title="November">Blotmath</dfn> S.R. 1425 to <dfn titl
   - Turnip Bramblebrook - Level 0 → Level 1 Hobbit Adventurer
 - **Location:** Thistledown
 
-The hobbits returned home to Thistledown. Over the long winter months, something changed in each of them. They discovered they could wield magic — small tricks at first. Boffo could portion food with perfect precision. Wedge could conjure fireflies that danced around his hand for three blinks. Turnip could untangle any rope or string with a single pull. The visions visited their dreams — not every night, not always vividly, but they returned. Plague, flood, undeath. Perhaps too much cheese before bed. Perhaps something more.
+The hobbits returned home to Thistledown. Over the long winter months, something changed in each of them. They discovered they could wield magic—small tricks at first. Boffo could portion food with perfect precision. Wedge could conjure fireflies that danced around his hand for three blinks. Turnip could untangle any rope or string with a single pull. The visions visited their dreams—not every night, not always vividly, but they returned. Plague, flood, undeath. Perhaps too much cheese before bed. Perhaps something more.
 
 ## The Pies of Gomwick Fair
 
@@ -159,7 +159,7 @@ When winter froze the stream and the Miller's Pudding Hound couldn't turn the wi
 
 But winter dragged on, and the food stores thinned. No hobbit was in danger of starving, heavens no! But only five meals a day makes for a gloomy season. It just so happened that on one of Boffo's nightly walks, for he liked the crunch the snow made under his feet and didn't mind the cold, he came upon a curious patch of nettles poking through the snow. They were the tallest, thickest, and stinging-iest, yet somehow the most succulent nettles a hobbit ever met. They stung something fierce to pick, but Boffo only grunted, "Pie's pie, and this'll do." So he stepped into the patch and saved the village's stomachs, and all the hobbits enjoyed their afternoon tea with nettle pie for the rest of the winter until spring finally stirred.
 
-Snowdrops bloomed first, cheering every hobbit heart. Then came the crocuses, bright enough to wake a sleepy village and perfect for crocus-bulb scones. After that came fried fiddleheads with sugar, then blackthorn blossom tarts, then tulip-bud cake, and then at last savory allium sammiches — the true heralds of spring!
+Snowdrops bloomed first, cheering every hobbit heart. Then came the crocuses, bright enough to wake a sleepy village and perfect for crocus-bulb scones. After that came fried fiddleheads with sugar, then blackthorn blossom tarts, then tulip-bud cake, and then at last savory allium sammiches—the true heralds of spring!
 
 ## Buford's Letter
 

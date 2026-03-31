@@ -4,7 +4,7 @@ story: A Hobbity Thanksgiving
 
 # The Hermit of the Woods
 
-Session Recap — 8 <dfn title="November">Blotmath</dfn>, S.R. 1425
+Session Recap – 8 <dfn title="November">Blotmath</dfn>, S.R. 1425
 
 - **PCs:**
   - Boffo Lunderbunk - Level 0 Hobbit
@@ -14,9 +14,9 @@ Session Recap — 8 <dfn title="November">Blotmath</dfn>, S.R. 1425
 
 ## Into the Woods
 
-Buford sent the party into the Old Woods to visit "The Hermit" — an ancient tall-folk man living in a cabin. He gave them no name for the man, because he did not know one. He gave them a blowgun, sentimental to him, and asked them to bring it as a gift along with food.
+Buford sent the party into the Old Woods to visit "The Hermit"—an ancient tall-folk man living in a cabin. He gave them no name for the man, because he did not know one. He gave them a blowgun, sentimental to him, and asked them to bring it as a gift along with food.
 
-The party entered the woods and found the Hermit's dwelling — though none of them agreed on what it looked like. Turnip saw a too-tall hobbit-hole. Wedge saw an enormous skull. Boffo saw a drafty old cabin. Inside they found the body of Tobias Chubb.
+The party entered the woods and found the Hermit's dwelling—though none of them agreed on what it looked like. Turnip saw a too-tall hobbit-hole. Wedge saw an enormous skull. Boffo saw a drafty old cabin. Inside they found the body of Tobias Chubb.
 
 The Hermit's strange arcane machine showed each of them a vision:
 
@@ -32,7 +32,7 @@ Following the strange bronze coin’s direction, pushing them northwards by inst
 
 About an hour’s walk, they emerged out of the woods and back at the Old Road, and could see before them the mile or so of farmland that led down the gentle slope towards Nettle’s Pond and the small village of Gomwick on its north shore. Even from there they could hear the distant sounds of the multitudes enjoying the final day of the Harvest Festival.
 
-Their stomachs rumbled. They realized now that they had left all of their food atop the Hermit’s pumpkin table — that which they did not use to make their soup, that is — and had not eaten a single thing for what must have been getting close to three hours!
+Their stomachs rumbled. They realized now that they had left all of their food atop the Hermit’s pumpkin table—that which they did not use to make their soup, that is—and had not eaten a single thing for what must have been getting close to three hours!
 
 Seeing the fall sunshine bathe the scene before them, and the vibrant canopy of red, orange and yellow trees of the woods behind them and in the distance, they began to wonder if what they had just experienced happened at all. It seemed somewhat dreamlike, and preposterous now that they really dwelt on it. In fact, as they spoke with each other on the walk out of the woods, and realized that none of their impressions of the Hermit’s house’s exterior were even remotely similar, they considered whether all that happened was real or not.
 
@@ -64,7 +64,7 @@ At the end of the conversation, he gave each of them a stack of 5 gold coins, an
 
 The party returned to the festival for the final evening.
 
-Turnip discovered he had missed the quarter-final of the Storytelling Competition and been disqualified. He spent the evening instead telling stories by a campfire to a circle of old-timers who griped about how "Tucker Tallowfoot ate 17 pies to win the trophy back in aught-eight" — "You're wrong! It was aught-six, and it was 21 pies!" — and how the pies were full-sized in those days, not the little ones this Bucko Lunderfella ate this year. The apples these days were mealy and flavourless, and the girls not as pretty as they used to be. At the end of the night, they declared Turnip "a fine fellow, indeed" and felt the future of the Shires was in good hands.
+Turnip discovered he had missed the quarter-final of the Storytelling Competition and been disqualified. He spent the evening instead telling stories by a campfire to a circle of old-timers who griped about how "Tucker Tallowfoot ate 17 pies to win the trophy back in aught-eight"—"You're wrong! It was aught-six, and it was 21 pies!"—and how the pies were full-sized in those days, not the little ones this Bucko Lunderfella ate this year. The apples these days were mealy and flavourless, and the girls not as pretty as they used to be. At the end of the night, they declared Turnip "a fine fellow, indeed" and felt the future of the Shires was in good hands.
 
 Wedge got into at least three fights with inanimate objects he claimed were looking at him funny. The third saw him plunge his axe into the face of a wooden horse on the carousel, making several children cry and many parents upset. Nali Stonecleft took him aside, steadied his paranoid nerves with moonshine, and kept an eye on him for the rest of the evening.
 

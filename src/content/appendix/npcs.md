@@ -12,7 +12,7 @@
 
 ### Belba
 
-Proprietress of the [Slumbering Serpent Inn](/hobbity/appendix/places/#orlane). Became the party's confidante — they told her everything they encountered in Orlane. She and [Olwyn](#olwyn) intervened with [Grover](#constable-grover) on the party's behalf and became responsible for them.
+Proprietress of the [Slumbering Serpent Inn](/hobbity/appendix/places/#orlane). Became the party's confidante—they told her everything they encountered in Orlane. She and [Olwyn](#olwyn) intervened with [Grover](#constable-grover) on the party's behalf and became responsible for them.
 
 - **Location:** [The Slumbering Serpent Inn](/hobbity/appendix/places/#orlane)
 - **Family:** [Olwyn](#olwyn) (husband)
@@ -20,7 +20,7 @@ Proprietress of the [Slumbering Serpent Inn](/hobbity/appendix/places/#orlane). 
 
 ### Bertram
 
-Owner of the [Golden Grain Inn](/hobbity/appendix/places/#orlane) in [Orlane](/hobbity/appendix/places/#orlane). [Buford](/hobbity/appendix/npcs/#buford-niss) told the party to mention his name for a discount. Lives on the far side of the river — whatever ails the village seems concentrated on his side. It was noted that Orlane "retains some of its hobbitishness despite whatever ills have befallen Bertram and the lot on his side of the river."
+Owner of the [Golden Grain Inn](/hobbity/appendix/places/#orlane) in [Orlane](/hobbity/appendix/places/#orlane). [Buford](/hobbity/appendix/npcs/#buford-niss) told the party to mention his name for a discount. Lives on the far side of the river—whatever ails the village seems concentrated on his side. It was noted that Orlane "retains some of its hobbitishness despite whatever ills have befallen Bertram and the lot on his side of the river."
 
 - **Location:** [The Golden Grain Inn](/hobbity/appendix/places/#orlane)
 
@@ -90,7 +90,7 @@ Non-local deputy serving under [Constable Grover](#constable-grover) in [Orlane]
 
 ### Derek Desleigh
 
-A hobbit with a disfiguring scar. Encountered inside the [Temple of Merikka](/hobbity/appendix/places/#orlane) working with goblins — wanted the party taken alive. Still at large somewhere in the temple complex.
+A hobbit with a disfiguring scar. Encountered inside the [Temple of Merikka](/hobbity/appendix/places/#orlane) working with goblins—wanted the party taken alive. Still at large somewhere in the temple complex.
 
 - **Location:** [The Temple of Merikka](/hobbity/appendix/places/#orlane)
 - **Henchmen:** Goblins
@@ -111,7 +111,7 @@ A hobbit with a disfiguring scar. Encountered inside the [Temple of Merikka](/ho
 
 ### Epsten
 
-A not-very-bright juvenile stone giant. The entire "workforce" rebuilding [Tom Huddle](#tom-huddle)'s barn — hidden in a temporary work hut beside the build site. On strike until [Krund Pothrower](#krund-pothrower) apologizes for his expletive-laden tirade.
+A not-very-bright juvenile stone giant. The entire "workforce" rebuilding [Tom Huddle](#tom-huddle)'s barn—hidden in a temporary work hut beside the build site. On strike until [Krund Pothrower](#krund-pothrower) apologizes for his expletive-laden tirade.
 
 - **Location:** [Huddle Farm](/hobbity/appendix/places/#huddle-farm)
 - **Boss:** [Krund Pothrower](#krund-pothrower)
@@ -167,7 +167,7 @@ Eldest daughter, 18. Beautiful like her mother. Acts as "second mother" to the y
 
 ### Bordo Huddle
 
-Youngest child, 8. Largely forgotten by the family. Attached to [Sherry](#sherry-huddle), who reads to him. Claims he saw a giant frog-headed demon leap out of the ruined tower in the [Fortfield](/hobbity/appendix/places/#fortfield-tower). Only one who defended Sherry's claim the house is haunted — shot down because everyone thinks he has a wild imagination.
+Youngest child, 8. Largely forgotten by the family. Attached to [Sherry](#sherry-huddle), who reads to him. Claims he saw a giant frog-headed demon leap out of the ruined tower in the [Fortfield](/hobbity/appendix/places/#fortfield-tower). Only one who defended Sherry's claim the house is haunted—shot down because everyone thinks he has a wild imagination.
 
 - **Location:** [Huddle Farm](/hobbity/appendix/places/#huddle-farm)
 - **Family:** [Tom Huddle](#tom-huddle) (father), [Primula Huddle](#primula-huddle) (mother)
@@ -195,7 +195,7 @@ One of the 23-year-old twins (with [Otto](#otto-huddle)). Bookish and well-read 
 
 ### Otto Huddle
 
-One of the 23-year-old twins (with [Motto](#motto-huddle)). Messy, lazy, and dim. Always agrees with whatever his parents say — their favouritism towards him is noticeable.
+One of the 23-year-old twins (with [Motto](#motto-huddle)). Messy, lazy, and dim. Always agrees with whatever his parents say—their favouritism towards him is noticeable.
 
 - **Location:** [Huddle Farm](/hobbity/appendix/places/#huddle-farm)
 - **Family:** [Tom Huddle](#tom-huddle) (father), [Primula Huddle](#primula-huddle) (mother), [Motto Huddle](#motto-huddle) (twin)
@@ -216,14 +216,14 @@ One of the 10-year-old fraternal twins (with [Mary](#mary-huddle)). See [Mary Hu
 
 ### Sherry Huddle
 
-Bookish middle child, 16. Keeps to herself. Ventured that she heard things in the night and believes the hill is haunted — her siblings mocked her to near tears. Reads to [Bordo](#bordo-huddle) from her storybooks.
+Bookish middle child, 16. Keeps to herself. Ventured that she heard things in the night and believes the hill is haunted—her siblings mocked her to near tears. Reads to [Bordo](#bordo-huddle) from her storybooks.
 
 - **Location:** [Huddle Farm](/hobbity/appendix/places/#huddle-farm)
 - **Family:** [Tom Huddle](#tom-huddle) (father), [Primula Huddle](#primula-huddle) (mother)
 
 ### Tom Huddle
 
-Tolman "Tom" Huddle. Paranoid, sleep-deprived patriarch of [Huddle Farm](/hobbity/appendix/places/#huddle-farm) with 8 children and one on the way. Hired the party for 30gp (plus room and board) to catch [Norrie Sutton](#norrie-sutton) in the act of sabotage. Insists on being seen as the victim and maintaining moral high ground. Excavating his hill home, building a new stone barn (days after the wooden one burned), and planning to level the [Fortfield](/hobbity/appendix/places/#fortfield-tower) to bury the ruins and create new cropland. His wealth — affording all this construction — is unexplained. A locked full chest sits in a treasure room beneath the Fortfield Tower.
+Tolman "Tom" Huddle. Paranoid, sleep-deprived patriarch of [Huddle Farm](/hobbity/appendix/places/#huddle-farm) with 8 children and one on the way. Hired the party for 30gp (plus room and board) to catch [Norrie Sutton](#norrie-sutton) in the act of sabotage. Insists on being seen as the victim and maintaining moral high ground. Excavating his hill home, building a new stone barn (days after the wooden one burned), and planning to level the [Fortfield](/hobbity/appendix/places/#fortfield-tower) to bury the ruins and create new cropland. His wealth—affording all this construction—is unexplained. A locked full chest sits in a treasure room beneath the Fortfield Tower.
 
 - **Location:** [Huddle Farm](/hobbity/appendix/places/#huddle-farm)
 - **Family:** [Primula Huddle](#primula-huddle) (wife), [Berry](#berry-huddle), [Motto](#motto-huddle), [Otto](#otto-huddle), [Sherry](#sherry-huddle), [Mary](#mary-huddle), [Sara](#sara-huddle), [Bordo](#bordo-huddle), [Marlo](#marlo-huddle) (children), [Boris Duddle](#boris-duddle) (cousin)
@@ -262,9 +262,9 @@ Priestess of the [Temple of Merikka](/hobbity/appendix/places/#orlane). The part
 
 ### Buford Niss
 
-The Hon. Horace Buford Hockwallop Niss, Esq. Wealthy, well-traveled old hobbit living at Toppo Hill House overlooking [Gomwick](/hobbity/appendix/places/#gomwick). Seriously ill — gaunt, walks with a cane, coughing up blood. His house feels cold and empty; many of his prized nautical/exotic possessions are gone.
+The Hon. Horace Buford Hockwallop Niss, Esq. Wealthy, well-traveled old hobbit living at Toppo Hill House overlooking [Gomwick](/hobbity/appendix/places/#gomwick). Seriously ill—gaunt, walks with a cane, coughing up blood. His house feels cold and empty; many of his prized nautical/exotic possessions are gone.
 
-Received a cryptic message from [the Hermit](#the-hermit) over winter: "The crows are scared because the serpent hungers." Also discovered his prized jade snake statue is missing — an ancient piece with a coiled jade body, a removable golden head with ruby eyes, revealing the face of a beautiful woman beneath. Believes the Scarecrow incident, the Hermit's message, and the missing statue are connected.
+Received a cryptic message from [the Hermit](#the-hermit) over winter: "The crows are scared because the serpent hungers." Also discovered his prized jade snake statue is missing—an ancient piece with a coiled jade body, a removable golden head with ruby eyes, revealing the face of a beautiful woman beneath. Believes the Scarecrow incident, the Hermit's message, and the missing statue are connected.
 
 Hired the party to travel to [Orlane](/hobbity/appendix/places/#orlane) and investigate [Zacharias](#zacharias)'s letter. Provided equipment: leather armor, daggers, slings, 30gp, plus individual gifts (Potion of Growth for Boffo, Potion of Invisibility for Wedge, sleeping dart blowgun for Turnip). Told the party to seek out "[Bertram](#bertram)" at the [Golden Grain Inn](/hobbity/appendix/places/#orlane).
 
@@ -305,7 +305,7 @@ The party's pony, borrowed from Uncle. Left at [Killian Gade](#killian-gade)'s s
 
 ### Krund Pothrower
 
-Freeloading dwarf, co-owner of Duddle & Pothrower with [Boris Duddle](#boris-duddle). Sent to rebuild the barn but berated his crew ([Epsten](#epsten) the stone giant), causing a strike. Refuses to apologize. Moved into the Huddle house where he eats, drinks, and criticizes [Tom](#tom-huddle)'s excavation work. Known boozer — dwarf-sized footprints found near the wine cellar suggest he stole Tom's prized wine.
+Freeloading dwarf, co-owner of Duddle & Pothrower with [Boris Duddle](#boris-duddle). Sent to rebuild the barn but berated his crew ([Epsten](#epsten) the stone giant), causing a strike. Refuses to apologize. Moved into the Huddle house where he eats, drinks, and criticizes [Tom](#tom-huddle)'s excavation work. Known boozer—dwarf-sized footprints found near the wine cellar suggest he stole Tom's prized wine.
 
 - **Location:** [Huddle Farm](/hobbity/appendix/places/#huddle-farm)
 - **Partner:** [Boris Duddle](#boris-duddle)
@@ -417,7 +417,7 @@ Widowed, lives by the river in [Orlane](/hobbity/appendix/places/#orlane). The p
 
 ### Zacharias
 
-Retired adventurer, well-traveled, late middle age. Lives across the river in [Orlane](/hobbity/appendix/places/#orlane). Sent the original letter to [Buford](#buford-niss) requesting help — also wrote to other old adventuring companions, but none responded except Buford (who sent the party). Extremely paranoid. Has tried to talk to [Grover](#constable-grover) about the disappearances, but Grover won't act without proof. Convinced the [Temple of Merikka](/hobbity/appendix/places/#orlane) priests are the source of Orlane's problems. Not joining the party because "3 young hobbits are far more capable than an old man with a bad back."
+Retired adventurer, well-traveled, late middle age. Lives across the river in [Orlane](/hobbity/appendix/places/#orlane). Sent the original letter to [Buford](#buford-niss) requesting help—also wrote to other old adventuring companions, but none responded except Buford (who sent the party). Extremely paranoid. Has tried to talk to [Grover](#constable-grover) about the disappearances, but Grover won't act without proof. Convinced the [Temple of Merikka](/hobbity/appendix/places/#orlane) priests are the source of Orlane's problems. Not joining the party because "3 young hobbits are far more capable than an old man with a bad back."
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
 - **Ally:** [Buford Niss](#buford-niss)

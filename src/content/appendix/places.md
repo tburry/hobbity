@@ -2,7 +2,7 @@
 
 ## The Five Shires
 
-An area almost entirely populated by hobbits. Mountains to the north (home of goblins who drove out the dwarves), The Great Woods to the east (elves and fey), The Swamp to the west, The Sea to the south. Five shires in the confederation: Eastshire (wilder, elf-adjacent), Highshire (highlands, shepherds), Seashire (wealthy, industrious coast), Southshire (least prosperous, butt of jokes), and Heartshire (central, pastoral, traditional — where the campaign takes place). No real government; loose confederation of families and townships. Ancient giant ruins dot the landscape, mostly repurposed for stone. Hobbits are ~3' tall, dwarves and goblins ~4', elves up to ~5'. Humans ("tallfolk") are mythical grotesque creatures in hobbit stories. Elves are seen as dangerous alien tricksters (Terry Pratchett's take). The Stonecleft dwarves are the dwarves the party has encountered.
+An area almost entirely populated by hobbits. Mountains to the north (home of goblins who drove out the dwarves), The Great Woods to the east (elves and fey), The Swamp to the west, The Sea to the south. Five shires in the confederation: Eastshire (wilder, elf-adjacent), Highshire (highlands, shepherds), Seashire (wealthy, industrious coast), Southshire (least prosperous, butt of jokes), and Heartshire (central, pastoral, traditional—where the campaign takes place). No real government; loose confederation of families and townships. Ancient giant ruins dot the landscape, mostly repurposed for stone. Hobbits are ~3' tall, dwarves and goblins ~4', elves up to ~5'. Humans ("tallfolk") are mythical grotesque creatures in hobbit stories. Elves are seen as dangerous alien tricksters (Terry Pratchett's take). The Stonecleft dwarves are the dwarves the party has encountered.
 
 ### Locations
 
@@ -29,7 +29,7 @@ A proper hobbit town with a harvest festival, shops, and the estate of [Buford N
 
 ## The Hermit's Cabin
 
-An ancient tall-folk man's dwelling deep in the Old Woods. Each hobbit saw the house differently — a hobbit-hole, an enormous skull, a drafty cabin.
+An ancient tall-folk man's dwelling deep in the Old Woods. Each hobbit saw the house differently—a hobbit-hole, an enormous skull, a drafty cabin.
 
 ### Notable NPCs
 
@@ -41,7 +41,7 @@ An ancient tall-folk man's dwelling deep in the Old Woods. Each hobbit saw the h
 
 ## Huddle Farm
 
-A hobbit farmstead near the [Sunnyside crossroads](#the-five-shires), en route to [Orlane](#orlane). The hill home sits above ancient ruins. [Tom](/hobbity/appendix/npcs/#tom-huddle) is expanding into the hill (not unusual for prosperous hobbits) and repurposing stones from the Fortfield ruins — some decorated with serpent motifs. Adjacent to the [Sutton](/hobbity/appendix/npcs/#norrie-sutton) farm, separated by the disputed hedge along Deadman's Gap.
+A hobbit farmstead near the [Sunnyside crossroads](#the-five-shires), en route to [Orlane](#orlane). The hill home sits above ancient ruins. [Tom](/hobbity/appendix/npcs/#tom-huddle) is expanding into the hill (not unusual for prosperous hobbits) and repurposing stones from the Fortfield ruins—some decorated with serpent motifs. Adjacent to the [Sutton](/hobbity/appendix/npcs/#norrie-sutton) farm, separated by the disputed hedge along Deadman's Gap.
 
 ### Notable NPCs
 
@@ -57,7 +57,7 @@ A hobbit farmstead near the [Sunnyside crossroads](#the-five-shires), en route t
 
 ## Orlane
 
-A hobbit village on a flat agricultural plain in one of the richest and most fertile agricultural areas of the eastern shire. Most buildings are above ground (hobbit-holes are hard to build on flat land). A river divides the village — the affected side is [Bertram](/hobbity/appendix/npcs/#bertram)'s. People disappear or come back "changed" (the blacksmith became violent after his disappearance and return).
+A hobbit village on a flat agricultural plain in one of the richest and most fertile agricultural areas of the eastern shire. Most buildings are above ground (hobbit-holes are hard to build on flat land). A river divides the village—the affected side is [Bertram](/hobbity/appendix/npcs/#bertram)'s. People disappear or come back "changed" (the blacksmith became violent after his disappearance and return).
 
 ### Notable NPCs
 
@@ -77,7 +77,7 @@ A hobbit village on a flat agricultural plain in one of the richest and most fer
 
 ## The Right Way Inn
 
-An inn on the Heart Road between [Gomwick](#gomwick) and [Thistledown](#thistledown). More of a small village than an inn — lively, boisterous, with a communal Long Room and private rooms.
+An inn on the Heart Road between [Gomwick](#gomwick) and [Thistledown](#thistledown). More of a small village than an inn—lively, boisterous, with a communal Long Room and private rooms.
 
 ### Happenings
 

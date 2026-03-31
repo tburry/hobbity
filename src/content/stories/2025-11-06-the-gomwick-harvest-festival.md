@@ -4,7 +4,7 @@ story: A Hobbity Thanksgiving
 
 # The Gomwick Harvest Festival
 
-Session Recap — 6 <dfn title="November">Blotmath</dfn>, S.R. 1425
+Session Recap – 6 <dfn title="November">Blotmath</dfn>, S.R. 1425
 
 - **PCs:**
   - Boffo Lunderbunk - Level 0 Hobbit
@@ -14,11 +14,11 @@ Session Recap — 6 <dfn title="November">Blotmath</dfn>, S.R. 1425
 
 ## The Road to Gomwick
 
-Early morning in the hamlet of Thistledown. Crisp air, the smell of last night's rainstorm still lingering. Three hobbits checked the straps on Binny, their uncle's old pony, loaded with goods to sell at the Gomwick Harvest Festival. A storm had delayed their departure by a day, so the North Road and a warm bed at the Right Way Inn were out. They'd take the Old Road instead — through the forest, one night camping on hard ground, arriving in Gomwick by tomorrow evening with time for the supper feast.
+Early morning in the hamlet of Thistledown. Crisp air, the smell of last night's rainstorm still lingering. Three hobbits checked the straps on Binny, their uncle's old pony, loaded with goods to sell at the Gomwick Harvest Festival. A storm had delayed their departure by a day, so the North Road and a warm bed at the Right Way Inn were out. They'd take the Old Road instead—through the forest, one night camping on hard ground, arriving in Gomwick by tomorrow evening with time for the supper feast.
 
 Along the Old Road they stopped at Farmer Fallow's Knick-Knack and Produce Road-Side Stall and each picked up a curious item: Wedge found a whistle that seemed to call animals, Boffo chose three feathers that gave him a boost of speed when worn, and Turnip acquired a pair of strange stockings whose purpose remained unclear.
 
-Deeper in the woods, a strange mist descended. Something watched them — a feeling of being _Seen_, not just observed but known, straight to the marrow. They pressed on and encountered Tobias Chubb, a ne'er-do-well who muttered about the trees "looking at him funny." The mist lifted as suddenly as it had come, and the hobbits carried on toward Gomwick.
+Deeper in the woods, a strange mist descended. Something watched them—a feeling of being _Seen_, not just observed but known, straight to the marrow. They pressed on and encountered Tobias Chubb, a ne'er-do-well who muttered about the trees "looking at him funny." The mist lifted as suddenly as it had come, and the hobbits carried on toward Gomwick.
 
 ## The Festival
 
@@ -38,7 +38,7 @@ Daisy gave a humph, and said, “Well, he’ll have to go without. I’m making 
 
 Then the scarecrow came alive.
 
-"Hungry Hank," the harvest effigy, ripped free from his pole and rampaged through the fairgrounds. Boffo threw himself off the stage to shield children in Hank's path and brought the scarecrow low with a torch. Wedge and Turnip froze — or at least, that's how the crowd remembered it.
+"Hungry Hank," the harvest effigy, ripped free from his pole and rampaged through the fairgrounds. Boffo threw himself off the stage to shield children in Hank's path and brought the scarecrow low with a torch. Wedge and Turnip froze—or at least, that's how the crowd remembered it.
 
 Once the dust had settled a bit, a few narratives began to take hold amongst the crowd. Gammy went up on stage imploring everyone to calm down, trying to convince people that Hungry Hank had simply caught fire early, and then that fire had caused it to come loose from the pole to which he was tied. He pointed out that it didn’t move far at all, and what was being claimed to have been ‘Hank’s Rampage’ in reality was just Hank falling over very slowly.
 
@@ -52,7 +52,7 @@ About an hour afterwards, the whole incident had been dismissed as having been j
 
 ## Buford Niss
 
-Watching from the edge of the commotion was Buford Niss — the Hon. Horace Buford Hockwallop Niss, Esq. — a wealthy, well-traveled old hobbit who lived at Toppo Hill House, the enormous burrow crowning the hill above Gomwick. His jovial mood had dimmed.
+Watching from the edge of the commotion was Buford Niss—the Hon. Horace Buford Hockwallop Niss, Esq.—a wealthy, well-traveled old hobbit who lived at Toppo Hill House, the enormous burrow crowning the hill above Gomwick. His jovial mood had dimmed.
 
 Within that aftermath, the three hobbits sought out Buford Niss, finding him in a bit of contemplative thought, his jovial mood somewhat diminished. They asked him if he had ever seen anything like this, and he insisted that this was not the place to be talking of such things, and invited them all to come stay at his house that evening, where they could talk in private.
 
