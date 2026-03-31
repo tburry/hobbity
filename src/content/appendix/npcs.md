@@ -1,6 +1,12 @@
 # NPCs
 
-A · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · I · J · K · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · W · X · Y · [Z](#z)
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · I · J · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · [Q](#q) · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · [Z](#z)
+
+## A
+
+### See Also
+
+[Adelard Potts](#adelard-potts)
 
 ## B
 
@@ -45,6 +51,10 @@ The defeated favorite in the pie-eating contest. Attracted ire toward Boffo afte
 
 - **Location:** [Gomwick](/hobbity/appendix/locations/#gomwick)
 
+### See Also
+
+[Berry Huddle](#berry-huddle), [Bordo Huddle](#bordo-huddle), [Boris Duddle](#boris-duddle), [Buford Niss](#buford-niss)
+
 ## C
 
 ### Tobias Chubb
@@ -77,6 +87,10 @@ A hobbit with a disfiguring scar. First seen at the [Golden Grain Inn](/hobbity/
 - **Location:** [Gomwick](/hobbity/appendix/locations/#gomwick) area
 - **Family:** [Tom Huddle](#tom-huddle) (cousin)
 - **Partner:** [Krund Pothrower](#krund-pothrower)
+
+### See Also
+
+[Daisy Boffin](#daisy-boffin)
 
 ## E
 
@@ -121,6 +135,10 @@ Stablekeeper in [Orlane](/hobbity/appendix/locations/#orlane), looking after [Op
 Local constable in [Orlane](/hobbity/appendix/locations/#orlane). Armored in mail with a crossbow, two non-local deputies (Donovan and Bulbar). [Belba](#belba) knew him from childhood and never liked him. First met the party on the Constabulary porch — greeted them warmly, took the dire wolf report seriously and went searching the next day (found nothing). After the blacksmith incident, told the party to conclude their business and leave. Caught them again exiting the [Foaming Mug](/hobbity/appendix/locations/#the-foaming-mug-inn) ruins. The party initially suspected him of being compromised, but [Zacharias](#zacharias) trusts him and his reactions to troglodyte news (blanching, genuine concern) suggest he may be honest. Wedge suspects the armoured constables are "in on it."
 
 - **Location:** [Orlane](/hobbity/appendix/locations/#orlane)
+
+### See Also
+
+[Gammy Boffin](#gammy-boffin), [Griff Snowvale](#griff-snowvale-gardner), [Grunela Bunce](#grunela-bunce)
 
 ## H
 
@@ -201,6 +219,16 @@ Tolman "Tom" Huddle. Paranoid, sleep-deprived patriarch of [Huddle Farm](/hobbit
 - **Location:** [Huddle Farm](/hobbity/appendix/locations/#huddle-farm)
 - **Family:** [Primula Huddle](#primula-huddle) (wife), [Berry](#berry-huddle), [Motto](#motto-huddle), [Otto](#otto-huddle), [Sherry](#sherry-huddle), [Mary](#mary-huddle), [Sara](#sara-huddle), [Bordo](#bordo-huddle), [Marlo](#marlo-huddle) (children), [Boris Duddle](#boris-duddle) (cousin)
 
+### See Also
+
+[Hanna Boggs](#hanna-boggs)
+
+## K
+
+### See Also
+
+[Kaylin Snowvale](#kaylin-snowvale), [Killian Gade](#killian-gade), [Krund Pothrower](#krund-pothrower)
+
 ## L
 
 ### Lotho Longbuck
@@ -217,6 +245,10 @@ The priestess of the [Temple of Merikka](/hobbity/appendix/locations/#the-temple
 
 - **Location:** [The Temple of Merikka](/hobbity/appendix/locations/#the-temple-of-merikka)
 
+### See Also
+
+[Maddie Snowvale](#maddie-snowvale), [Marlo Huddle](#marlo-huddle), [Mary Huddle](#mary-huddle), [Motto Huddle](#motto-huddle)
+
 ## N
 
 ### Buford Niss
@@ -230,6 +262,10 @@ Hired the party to travel to [Orlane](/hobbity/appendix/locations/#orlane) and i
 - **Location:** [Gomwick](/hobbity/appendix/locations/#gomwick)
 - **Servant:** [Dalton Dallydown](#dalton-dallydown) (butler)
 - **Ally:** [Zacharias](#zacharias)
+
+### See Also
+
+[Norrie Sutton](#norrie-sutton)
 
 ## O
 
@@ -252,6 +288,10 @@ The party's pony, borrowed from Uncle. Left at [Killian Gade](#killian-gade)'s s
 
 - **Location:** [Orlane](/hobbity/appendix/locations/#orlane)
 
+### See Also
+
+[Otto Huddle](#otto-huddle)
+
 ## P
 
 ### Krund Pothrower
@@ -269,6 +309,16 @@ Conspirator in the pie-poisoning plot at the [Gomwick](/hobbity/appendix/locatio
 - **Location:** [Gomwick](/hobbity/appendix/locations/#gomwick)
 - **Conspirator:** [Hanna Boggs](#hanna-boggs)
 - **Agent:** [Tobias Chubb](#tobias-chubb)
+
+### See Also
+
+[Primula Huddle](#primula-huddle)
+
+## Q
+
+### See Also
+
+[Quinn Finla](#quinn-finla)
 
 ## R
 
@@ -330,6 +380,10 @@ Neighbour feuding with [Tom Huddle](#tom-huddle) over a hedge blocking access to
 - **Family:** [Norrie Sutton](#norrie-sutton) (father)
 - **Romance:** [Berry Huddle](#berry-huddle)
 
+### See Also
+
+[Sara Huddle](#sara-huddle), [Sherry Huddle](#sherry-huddle)
+
 ## T
 
 ### Goblin Two
@@ -338,6 +392,10 @@ A goblin left alive and chained up in the [dungeon beneath the Temple of Merikka
 
 - **Location:** [The Dungeon Beneath the Temple of Merikka](/hobbity/appendix/locations/#the-dungeon-beneath-the-temple-of-merikka)
 
+### See Also
+
+[Timba Snowvale](#timba-snowvale-gardner), [Tobias Chubb](#tobias-chubb), [Tom Huddle](#tom-huddle), [Traver Stokehart](#traver-stokehart)
+
 ## V
 
 ### Vilma
@@ -345,6 +403,12 @@ A goblin left alive and chained up in the [dungeon beneath the Temple of Merikka
 Widowed, lives by the river in [Orlane](/hobbity/appendix/locations/#orlane). The party spent a pleasant afternoon with her.
 
 - **Location:** [Orlane](/hobbity/appendix/locations/#orlane)
+
+## W
+
+### See Also
+
+[Wilbur Oldbuck](#wilbur-oldbuck)
 
 ## Z
 
