@@ -1,0 +1,1 @@
+Buford sent the party to Orlane to investigate a letter from an old adventurer. They found a village where people vanish and come back wrong, a new temple hiding something ancient, and a cult spreading toward Gomwick. Now they're deep beneath the temple, running low on torches and healing, with enemies above and below.
