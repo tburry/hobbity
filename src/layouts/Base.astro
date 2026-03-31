@@ -101,6 +101,7 @@ const pageTitle = title || 'A Hobbity Adventure';
 
         overlay.addEventListener('click', function (e) {
           if (e.target === overlay) shut();
+          if (e.target.closest('a')) shut();
         });
 
         document.addEventListener('keydown', function (e) {
