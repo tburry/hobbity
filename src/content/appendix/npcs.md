@@ -256,7 +256,7 @@ Priestess of the [Temple of Merikka](/hobbity/appendix/places/#orlane). The part
 
 ### See Also
 
-[Maddie Snowvale](#maddie-snowvale), [Marlo Huddle](#marlo-huddle), [Mary Huddle](#mary-huddle), [Motto Huddle](#motto-huddle)
+[Maddie Snowvale](#maddie-snowvale), [Mattie Snowvale](#mattie-snowvale), [Marlo Huddle](#marlo-huddle), [Mary Huddle](#mary-huddle), [Motto Huddle](#motto-huddle)
 
 ## N
 
@@ -358,7 +358,14 @@ Young girl, daughter of [Maddie Snowvale](#maddie-snowvale) the blacksmith's wif
 Blacksmith's wife in [Orlane](/hobbity/appendix/places/#orlane). Filed a complaint with [Constable Grover](#constable-grover) against the party after they put down her husband with a sleep dart when he attacked unprovoked.
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
-- **Family:** [Kaylin Snowvale](#kaylin-snowvale) (daughter)
+- **Family:** [Mattie Snowvale](#mattie-snowvale) (husband), [Kaylin Snowvale](#kaylin-snowvale) (daughter)
+
+### Mattie Snowvale
+
+Blacksmith in [Orlane](/hobbity/appendix/places/#orlane). Attacked Wedge unprovoked with a hammer, dealing a grievous blow that permanently diminished Wedge's charm. Put down by Turnip's sleep dart. Likely compromised by the cult.
+
+- **Location:** [Orlane](/hobbity/appendix/places/#orlane)
+- **Family:** [Maddie Snowvale](#maddie-snowvale) (wife), [Kaylin Snowvale](#kaylin-snowvale) (daughter)
 
 ### Timba Snowvale (Gardner)
 
