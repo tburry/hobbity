@@ -193,13 +193,13 @@ The party arrived in Orlane, a hobbit village on a flat agricultural plain (mode
 
 **Key NPCs in Orlane:**
 
-- **Constable Grover:** Local constable, armored in mail with a crossbow. One surviving deputy (Bulbar; Donovan was killed by Zacharias's gargoyles). Investigated the troglodyte evidence, traced a missing person (Myron Tweed) to the Golden Grain. Now the closest thing to law in Orlane. Believes Zacharias is involved in the cult.
+- **Constable Grover:** Local constable, armored in mail with a crossbow. One surviving deputy (Bulbar; Donovan was killed by Zacharias's stone statues). Investigated the troglodyte evidence, traced a missing person (Myron Tweed) to the Golden Grain. Now the closest thing to law in Orlane. Believes Zacharias is involved in the cult.
 
 - **Belba:** Proprietress of the Slumbering Serpent Inn. Older, knew Grover from childhood, never liked him. Became a confidante — the party told her everything. She was genuinely shaken by the evidence of violence at the Foaming Mug.
 
 - **Olwyn:** Belba's husband. Serves as messenger.
 
-- **Zacharias:** Retired adventurer, well-traveled, late middle age. Lives across the river. Sent the original letter to Buford requesting help. His stone gargoyles killed Deputy Donovan when Grover came looking for the party. Fled with Derek Desleigh to the Golden Grain before it burned. His secret chest is gone. Whether charmed, coerced, or playing a deeper game is unknown.
+- **Zacharias:** Retired adventurer, well-traveled, late middle age. Lives across the river. Sent the original letter to Buford requesting help. His stone statues killed Deputy Donovan when Grover came looking for the party. Fled with Derek Desleigh to the Golden Grain before it burned. His secret chest is gone. Whether charmed, coerced, or playing a deeper game is unknown.
 
 - **Traver Stokehart:** Zacharias's servant. Quiet, efficient.
 
@@ -228,7 +228,7 @@ The party arrived in Orlane, a hobbit village on a flat agricultural plain (mode
 - **Matty Snowvale's Smithy:** The blacksmith attacked unprovoked, nearly killed Wedge. Turnip put him down with a sleep dart. His wife filed a complaint with Grover.
 - **The Temple of Merikka:** On a hill behind 3m walls. The goddess is of farming, fertility, hearth, knowledge, and light (similar to Chauntea + Amaunator). Two priests from the coast, plus followers/acolytes. Used to come into village, now rarely do. The party was rebuffed when they tried to enter.
 - **Ramne's Cottage (#27) / The Elm Grove:** Half-buried stone cottage west of the Slumbering Serpent. Home of Ramne and his weasel Twitch. Previously visited by the party (saw the weasel, Wedge befriended a raven).
-- **Zacharias's House:** Stone gargoyle security system (non-differentiating between friend and foe). Gargoyles killed Deputy Donovan. Back and front doors smashed. Zacharias's secret chest is gone. House abandoned.
+- **Zacharias's House:** Animated stone statue security system (non-differentiating between friend and foe). The statues killed Deputy Donovan. Back and front doors smashed. Zacharias's secret chest is gone. House abandoned.
 
 **Zacharias's equipment (original provision — largely expended):**
 
@@ -347,9 +347,9 @@ The party is still underground in the troglodyte lair. No XP awarded yet (not in
 
 **Ramne departed** with Cirilli and Twitch to hide at his cottage.
 
-**Outside the temple:** The Golden Grain was on fire. At Zacharias's house, Deputy Donovan was dead (gargoyle), doors smashed, secret chest gone. The party crossed the lake in Vilma's rowboat.
+**Outside the temple:** The Golden Grain was on fire. At Zacharias's house, Deputy Donovan was dead (statue), doors smashed, secret chest gone. The party crossed the lake in Vilma's rowboat.
 
-**Grover's account:** He investigated the troglodyte evidence, found Myron Tweed missing (trail to Golden Grain), went to Zacharias's house for reinforcement. Zacharias's gargoyles attacked — killed Donovan. Derek arrived, both fled to Golden Grain. Siege, brawl, then someone inside set the inn on fire.
+**Grover's account:** He investigated the troglodyte evidence, found Myron Tweed missing (trail to Golden Grain), went to Zacharias's house for reinforcement. Zacharias's stone statues attacked — killed Donovan. Derek arrived, both fled to Golden Grain. Siege, brawl, then someone inside set the inn on fire.
 
 **Current Party State:**
 

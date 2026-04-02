@@ -141,6 +141,7 @@ Never use these in story prose (Conclusion, Enemies Defeated, and Treasure secti
 - initiative, morale check, saving throw/save
 - level up, XP, experience points
 - DM, GM, player, character sheet
+- non-lethal, lethal damage
 
 Describe what happened in the world, not at the table. "Boffo's mace caved in the goblin's skull" not "Boffo dealt 6 damage." "Luck abandoned them" not "they rolled badly."
 

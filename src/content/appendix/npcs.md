@@ -90,7 +90,7 @@ A ne'er-do-well encountered on the [Old Road](/hobbity/appendix/places/#the-five
 
 ### Donovan
 
-Non-local deputy serving under [Constable Grover](#constable-grover) in [Orlane](/hobbity/appendix/places/#orlane). Killed by [Zacharias](#zacharias)'s stone gargoyles at Zacharias's house.
+Non-local deputy serving under [Constable Grover](#constable-grover) in [Orlane](/hobbity/appendix/places/#orlane). Killed by [Zacharias](#zacharias)'s stone statues at Zacharias's house.
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
 - **Superior:** [Constable Grover](#constable-grover)
