@@ -56,9 +56,7 @@ The lizard was AC 6—not especially tough on paper, but hard to hit consistentl
 
 ## Underground Exploration
 
-In the mud the party found troglodyte prints, confirming the creatures were using these passages regularly. A document was found referencing Orlane as a current target and Gomwick as the next target—confirming an organized operation expanding outward.
-
-![A stone fragment found in the tunnels](/hobbity/images/sinister-orlane-note.webp)
+In the mud the party found troglodyte prints, confirming the creatures were using these passages regularly.
 
 ## The Troglodyte Pie Deduction
 

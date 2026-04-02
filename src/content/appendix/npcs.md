@@ -55,7 +55,7 @@ Conspirator in the pie-poisoning plot at the [Gomwick](/hobbity/appendix/places/
 
 ### Grunela Bunce
 
-The defeated favorite in the pie-eating contest. Attracted ire toward Boffo after his victory.
+Three-time pie-eating champion at the Gomwick Harvest Festival. Lost to Boffo in the second round after throwing up on the first pie. Threw an apple at his head later that evening. Bears a grudge.
 
 - **Location:** [Gomwick](/hobbity/appendix/places/#gomwick)
 

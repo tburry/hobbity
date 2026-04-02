@@ -52,12 +52,12 @@ export const images: GalleryImage[] = [
   {
     src: '/hobbity/images/sinister-orlane-note.webp',
     srcSmall: '/hobbity/images/small/sinister-orlane-note.webp',
-    alt: 'A fragment of stone tablet with sinister text',
+    alt: 'A sinister note found on a slain goblin',
     caption:
-      'A stone fragment found in the troglodyte lair beneath the Temple of Merikka, confirming Orlane as a target and Gomwick as the next.',
+      'A note found on a slain goblin at the bridge on the road to Orlane, confirming Orlane as a target and Gomwick as the next.',
     storyLink:
-      '/hobbity/stories/2026-03-19-a-pilgrimage-to-the-temple-of-merikka/#underground-exploration',
-    storyTitle: 'A Pilgrimage to the Temple of Merikka',
+      '/hobbity/stories/2026-01-29-toads-toads-toads/#the-bridge',
+    storyTitle: 'Toads, Toads, Toads',
   },
   {
     src: '/hobbity/images/brooch-of-shielding.webp',
@@ -99,6 +99,98 @@ export const images: GalleryImage[] = [
     storyLink:
       '/hobbity/stories/2026-02-26-a-stroll-around-orlane/#the-elm-grove-and-zacharias',
     storyTitle: 'A Stroll Around Orlane',
+  },
+  // 2025-11-08 — The Hermit of the Woods
+  {
+    src: '/hobbity/images/the-hermit.webp',
+    srcSmall: '/hobbity/images/small/the-hermit.webp',
+    alt: 'The Hermit of the Old Woods',
+    caption:
+      'The Hermit—an ancient tall-folk man living deep in the Old Woods. Each hobbit saw his dwelling differently. Inside, his strange arcane machine delivered visions none of them could unsee.',
+    storyLink:
+      '/hobbity/stories/2025-11-08-the-hermit-of-the-woods/#into-the-woods',
+    storyTitle: 'The Hermit of the Woods',
+  },
+  // 2025-11-06 — The Gomwick Harvest Festival
+  {
+    src: '/hobbity/images/road-to-gomwick.webp',
+    srcSmall: '/hobbity/images/small/road-to-gomwick.webp',
+    alt: 'The Old Road to Gomwick',
+    caption:
+      'The Old Road through the forest to Gomwick. A storm delayed the hobbits, so they took the long way—through woods where the trees watched back.',
+    storyLink:
+      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-road-to-gomwick',
+    storyTitle: 'The Gomwick Harvest Festival',
+  },
+  {
+    src: '/hobbity/images/sinister-tree.webp',
+    srcSmall: '/hobbity/images/small/sinister-tree.webp',
+    alt: 'A sinister tree in the Old Woods',
+    caption:
+      'The trees on the Old Road seemed to watch the hobbits—a face in the bark that vanished the moment you looked straight at it.',
+    storyLink:
+      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-road-to-gomwick',
+    storyTitle: 'The Gomwick Harvest Festival',
+  },
+  {
+    src: '/hobbity/images/tobias-chubb.webp',
+    srcSmall: '/hobbity/images/small/tobias-chubb.webp',
+    alt: 'Tobias Chubb',
+    caption:
+      'Tobias Chubb, a ne\'er-do-well encountered on the Old Road, muttering about the trees "looking at him funny." Later found dead in the Hermit\'s cabin.',
+    storyLink:
+      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-road-to-gomwick',
+    storyTitle: 'The Gomwick Harvest Festival',
+  },
+  {
+    src: '/hobbity/images/grunela.webp',
+    srcSmall: '/hobbity/images/small/grunela.webp',
+    alt: 'Grunela Bunce',
+    caption:
+      'Grunela Bunce, three-time pie-eating champion, defeated by Boffo in the second round. She threw up after the first pie. She threw an apple at his head later.',
+    storyLink:
+      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-festival',
+    storyTitle: 'The Gomwick Harvest Festival',
+  },
+  {
+    src: '/hobbity/images/pie-eating-trophy.webp',
+    srcSmall: '/hobbity/images/small/pie-eating-trophy.webp',
+    alt: 'The pie-eating trophy',
+    caption:
+      'The pie-eating trophy at the Gomwick Harvest Festival. Boffo cleaned three plates of rhubarb pie and asked for more.',
+    storyLink:
+      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-festival',
+    storyTitle: 'The Gomwick Harvest Festival',
+  },
+  {
+    src: '/hobbity/images/spottle-toad.webp',
+    srcSmall: '/hobbity/images/small/spottle-toad.webp',
+    alt: 'A spottle toad',
+    caption:
+      'The spottle toad at the gambling table. Any die it swallowed counted as zero. Turnip swore it was cheating.',
+    storyLink:
+      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-spottle-table',
+    storyTitle: 'The Gomwick Harvest Festival',
+  },
+  {
+    src: '/hobbity/images/hungry-hank.webp',
+    srcSmall: '/hobbity/images/small/hungry-hank.webp',
+    alt: 'Hungry Hank the scarecrow',
+    caption:
+      'Hungry Hank, the harvest effigy that ripped free from his pole and rampaged through the fairgrounds. Boffo brought it low with a torch.',
+    storyLink:
+      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#hungry-hank',
+    storyTitle: 'The Gomwick Harvest Festival',
+  },
+  {
+    src: '/hobbity/images/buford.webp',
+    srcSmall: '/hobbity/images/small/buford.webp',
+    alt: 'Buford Niss',
+    caption:
+      'The Hon. Horace Buford Hockwallop Niss, Esq. Wealthy, well-traveled, and watching from the edge of the commotion with a dimmed jovial mood.',
+    storyLink:
+      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#buford-niss',
+    storyTitle: 'The Gomwick Harvest Festival',
   },
   // 2025-11-27 — Green Cows and Blackberries
   {

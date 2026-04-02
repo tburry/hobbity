@@ -16,7 +16,11 @@ Session Recap – 8 <dfn title="November">Blotmath</dfn>, S.R. 1425
 
 Buford sent the party into the Old Woods to visit "The Hermit"—an ancient tall-folk man living in a cabin. He gave them no name for the man, because he did not know one. He gave them a blowgun, sentimental to him, and asked them to bring it as a gift along with food.
 
-The party entered the woods and found the Hermit's dwelling—though none of them agreed on what it looked like. Turnip saw a too-tall hobbit-hole. Wedge saw an enormous skull. Boffo saw a drafty old cabin. Inside they found the body of Tobias Chubb.
+The party entered the woods and found the Hermit's dwelling—though none of them agreed on what it looked like. Turnip saw a too-tall hobbit-hole. Wedge saw an enormous skull. Boffo saw a drafty old cabin. The Hermit didn't answer the door, and the front room was filled with strange noises and the clatter of odd devices. They climbed a tree and entered through a window on the second floor.
+
+![The Hermit](/hobbity/images/the-hermit.webp)
+
+Inside they found the body of Tobias Chubb.
 
 The Hermit's strange arcane machine showed each of them a vision:
 

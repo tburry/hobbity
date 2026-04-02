@@ -285,7 +285,7 @@ The party descended through the trapdoor into underground passages:
 
 3. **Underground stream** — Natural caverns with running water and muddy floors. Bare hobbit footprints and booted prints in the mud. Likely connects to the river system — explains how troglodytes move in and out of town.
 
-4. **A document was found** referencing Orlane as a current target and **Gomwick as the next target** — confirming an organized operation expanding outward. The goblins encountered at a bridge on the road to Orlane are likely connected.
+4. **A note found on a slain goblin** at the bridge on the road to Orlane referenced Orlane as a current target and **Gomwick as the next target** — confirming an organized operation expanding outward.
 
 5. **Shrieker mushroom** — Fungal alarm creature. The party attacked it but it likely alerted nearby enemies.
 
