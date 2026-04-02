@@ -128,6 +128,8 @@ Two skeletons remained. They turned from the fallen hobbit to the one still stan
 
 "Is this where Boffo perishes?" Boffo said, and he said it lightly, the way you say a thing to keep it from being true.
 
+![Boffo felled by a skeleton](/hobbity/images/boffo-felled-by-skeleton.webp)
+
 The skeleton's sword drove through the gap between his shield and chainmail, burying itself to the hilt. Boffo went down. His mace clattered on the stone beside him. The mace that had broken every skull and shattered every bone they'd put in front of him. It lay there, useless, while Boffo's blood ran into the cracks between the flagstones.
 
 Turnip, barely standing and running on sheer hobbit spite, put a sling stone through the last skeleton's ribcage.

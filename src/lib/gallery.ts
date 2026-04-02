@@ -10,6 +10,16 @@ export interface GalleryImage {
 export const images: GalleryImage[] = [
   // 2026-03-22 — The Skeleton Room
   {
+    src: '/hobbity/images/boffo-felled-by-skeleton.webp',
+    srcSmall: '/hobbity/images/small/boffo-felled-by-skeleton.webp',
+    alt: 'Boffo felled by a skeleton',
+    caption:
+      'A skeleton\'s sword drove through the gap between shield and chainmail. Boffo went down. His mace clattered on the stone beside him.',
+    storyLink:
+      '/hobbity/stories/2026-03-22-the-skeleton-room/#the-bones-stand-up',
+    storyTitle: 'The Skeleton Room',
+  },
+  {
     src: '/hobbity/images/mural-of-merikka.webp',
     srcSmall: '/hobbity/images/small/mural-of-merikka.webp',
     alt: 'A mural of the goddess Merikka surrounded by harvest bounty',
