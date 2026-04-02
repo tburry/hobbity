@@ -94,11 +94,13 @@ Boffo's mace connected with Abramo's chest through a gap in his chainmail. The p
 
 A sling stone from Wedge caught Kaylin in the belly and she folded. He hadn't meant to hurt her that badly, but a stone doesn't know mercy. She slumped into the hay.
 
-## Cirilli
+## Prisoner of the Snake Goddess
+
+In the room beyond Abramo's last stand, torchlight fell on something that made the hobbits' stomachs turn. A polished jade statue of a snake with a woman's head—four-armed, enormous, exquisitely carved.
 
 ![The jade statue of Explictica](/hobbity/images/explictica.webp)
 
-In the room beyond Abramo's last stand, torchlight fell on something that made the hobbits' stomachs turn. A polished jade statue of a snake with a woman's head—four-armed, enormous, exquisitely carved. Around it, granite statues of Merikka had been smashed and crudely re-carved into reptilian shapes by someone who clearly had more devotion than talent. And against the east wall, in a small iron cage, a young hobbit woman in tattered rags.
+Around it, granite statues of Merikka had been smashed and crudely re-carved into reptilian shapes by someone who clearly had more devotion than talent. And against the east wall, in a small iron cage, a young hobbit woman in tattered rags.
 
 Her name was Cirilli Finla. Daughter of Quinn Finla, the carpenter. The whole family had been abducted one night—taken to the Golden Grain Inn, marched blindfolded through tunnels and wilderness for days, brought to some place where Abramo performed a ceremony that charmed everyone into obedience. Everyone except Cirilli. Whatever he'd done to scramble their minds hadn't worked on her, and so she'd been brought back and caged in the dark, fed on scraps, listening to a madman chip away at granite statues and mutter about his goddess.
 
@@ -150,8 +152,8 @@ The Toad Stompers broke the serpent cult's hold on the Temple of Merikka, killed
 
 #### Treasure
 
-- Cobra-headed mace (Abramo's weapon)
-- Chainmail +1 / scale mail (snake-skin pattern, enchanted—given to Turnip)
+- Cobra-headed mace (given to Boffo)
+- Snake scale mail +1 (given to Turnip)
 - Ring of Protection +1 (given to Wedge)
 - Gold snake head amulet with ruby eyes (holy symbol of Explictica)
 - Abramo's sketchbook of insane ramblings

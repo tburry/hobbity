@@ -68,6 +68,8 @@ Session Recap — <date>
 
 The episode title should be evocative and short — name the session's central event or theme (e.g. "Toads, Toads, Toads" or "The Skeleton Room"). Omit Enemies Defeated or Treasure sections entirely if there are none.
 
+Section headings (h2s within the story) should summarize what the section is about. Don't name a heading after a minor character the reader hasn't met — it spoils the reveal and can mislead if the section contains an image of something else. Use character names only for established or significant characters (e.g. "## Buford Niss" works, "## Cirilli" doesn't). Prefer headings that capture the scene or event: "The Torture Chamber," "Prisoner of the Snake Goddess," "Orlane Burns."
+
 Omit Season/Date if not referenced in the session.
 
 After the header, produce:
