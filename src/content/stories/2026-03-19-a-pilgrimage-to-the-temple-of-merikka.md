@@ -14,7 +14,9 @@ Session Recap – 19 <dfn title="March">Rethe</dfn>, S.R. 1426
 
 ## Entering the Temple
 
-The party entered the Temple of Merikka posing as pilgrims seeking healing, bringing Zacharias's bag of gold. Misha, the priestess, healed Boffo with divine magic—a novelty for the hobbits. During the visit they spotted Derek Desleigh, a scarred hobbit previously seen at the Golden Grain Inn, involved with goblins inside the temple.
+The party entered the Temple of Merikka posing as pilgrims seeking healing, bringing Zacharias's bag of gold. Misha, the priestess, healed Boffo with divine magic—a novelty for the hobbits.
+
+![Misha](/hobbity/images/misha.webp) During the visit they spotted Derek Desleigh, a scarred hobbit previously seen at the Golden Grain Inn, involved with goblins inside the temple.
 
 ## The Temple Fight
 

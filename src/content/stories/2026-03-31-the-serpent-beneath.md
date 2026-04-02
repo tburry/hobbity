@@ -88,8 +88,6 @@ Wedge leapt down from the hay bales onto Kaylin Snowvale, who had fallen prone. 
 
 Abramo cast Blight—a withering curse that settled over the party like a fog. Wedge and Turnip felt their limbs go heavy, their aim worse, their reactions dulled.
 
-![Misha](/hobbity/images/misha.webp)
-
 Turnip reloaded his blowgun, steadied his breath, and found his mark. The dart caught Misha in the neck. She slumped unconscious, the sleep poison taking her mid-step as she tried to open a secret door in the corner.
 
 Boffo's mace connected with Abramo's chest through a gap in his chainmail. The priest staggered, his darkness spell fizzling. Abramo tried to withdraw, backing toward a room full of statues, but Boffo followed. One more swing. The mace caught Abramo square in the skull and that was the end of the serpent's priest.

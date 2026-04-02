@@ -36,8 +36,8 @@ export const images: GalleryImage[] = [
     caption:
       'Misha, the priestess of the Temple of Merikka. Whether imposter or charmed follower, Turnip\'s sleep dart settled the question for now.',
     storyLink:
-      '/hobbity/stories/2026-03-31-the-serpent-beneath/#the-serpents-lair',
-    storyTitle: 'The Serpent Beneath',
+      '/hobbity/stories/2026-03-19-a-pilgrimage-to-the-temple-of-merikka/#entering-the-temple',
+    storyTitle: 'A Pilgrimage to the Temple of Merikka',
   },
   {
     src: '/hobbity/images/explictica.webp',
