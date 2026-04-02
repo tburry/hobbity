@@ -30,23 +30,13 @@ export const images: GalleryImage[] = [
     storyTitle: 'The Serpent Beneath',
   },
   {
-    src: '/hobbity/images/misha.webp',
-    srcSmall: '/hobbity/images/small/misha.webp',
-    alt: 'Misha',
-    caption:
-      'Misha, the priestess of the Temple of Merikka. Whether imposter or charmed follower, Turnip\'s sleep dart settled the question for now.',
-    storyLink:
-      '/hobbity/stories/2026-03-19-a-pilgrimage-to-the-temple-of-merikka/#entering-the-temple',
-    storyTitle: 'A Pilgrimage to the Temple of Merikka',
-  },
-  {
     src: '/hobbity/images/explictica.webp',
     srcSmall: '/hobbity/images/small/explictica.webp',
     alt: 'The jade statue of Explictica',
     caption:
       'A polished jade statue of Explictica—a snake with a woman\'s head, four-armed, exquisitely carved. Light from torches caused the colours to swirl in an almost hypnotic pattern.',
     storyLink:
-      '/hobbity/stories/2026-03-31-the-serpent-beneath/#cirilli',
+      '/hobbity/stories/2026-03-31-the-serpent-beneath/#prisoner-of-the-snake-goddess',
     storyTitle: 'The Serpent Beneath',
   },
   // 2026-03-22 — The Skeleton Room
@@ -80,6 +70,16 @@ export const images: GalleryImage[] = [
     storyTitle: 'The Skeleton Room',
   },
   // 2026-03-19 — A Pilgrimage to the Temple of Merikka
+  {
+    src: '/hobbity/images/misha.webp',
+    srcSmall: '/hobbity/images/small/misha.webp',
+    alt: 'Misha',
+    caption:
+      'Misha, the priestess of the Temple of Merikka. Whether imposter or charmed follower, Turnip\'s sleep dart settled the question for now.',
+    storyLink:
+      '/hobbity/stories/2026-03-19-a-pilgrimage-to-the-temple-of-merikka/#entering-the-temple',
+    storyTitle: 'A Pilgrimage to the Temple of Merikka',
+  },
   {
     src: '/hobbity/images/merikka-vision.webp',
     srcSmall: '/hobbity/images/small/merikka-vision.webp',
