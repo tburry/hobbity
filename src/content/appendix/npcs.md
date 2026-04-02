@@ -4,6 +4,13 @@
 
 ## A
 
+### Abramo
+
+Serpent cult priest beneath the [Temple of Merikka](/hobbity/appendix/places/#orlane). Wore enchanted scale mail, carried a cobra-headed mace, and worshipped a snake goddess called Explictica. Completely insane—covered every surface of his lair in reptilian scrawlings and tried to re-carve Merikka's granite statues into serpent forms. Killed by Boffo.
+
+- **Location:** [The Temple of Merikka](/hobbity/appendix/places/#orlane)
+- **Status:** Dead
+
 ### See Also
 
 [Adelard Potts](#adelard-potts)
@@ -83,16 +90,17 @@ A ne'er-do-well encountered on the [Old Road](/hobbity/appendix/places/#the-five
 
 ### Donovan
 
-Non-local deputy serving under [Constable Grover](#constable-grover) in [Orlane](/hobbity/appendix/places/#orlane).
+Non-local deputy serving under [Constable Grover](#constable-grover) in [Orlane](/hobbity/appendix/places/#orlane). Killed by [Zacharias](#zacharias)'s stone gargoyles at Zacharias's house.
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
 - **Superior:** [Constable Grover](#constable-grover)
+- **Status:** Dead
 
 ### Derek Desleigh
 
-A hobbit with a disfiguring scar. Encountered inside the [Temple of Merikka](/hobbity/appendix/places/#orlane) working with goblins—wanted the party taken alive. Still at large somewhere in the temple complex.
+A hobbit with a disfiguring scar. Encountered inside the [Temple of Merikka](/hobbity/appendix/places/#orlane) working with goblins—wanted the party taken alive. Fled when the goblins broke. Later appeared at [Zacharias](#zacharias)'s house, after which both fled to the [Golden Grain Inn](/hobbity/appendix/places/#orlane). At large—likely escaped through tunnels before the inn burned.
 
-- **Location:** [The Temple of Merikka](/hobbity/appendix/places/#orlane)
+- **Location:** Unknown
 - **Henchmen:** Goblins
 
 ### Boris Duddle
@@ -124,11 +132,19 @@ Roadside stall seller on the [Old Road](/hobbity/appendix/places/#the-five-shire
 
 - **Location:** [The Old Road](/hobbity/appendix/places/#the-five-shires)
 
-### Quinn Finla
+### Cirilli Finla
 
-Carpenter in [Orlane](/hobbity/appendix/places/#orlane). [Zacharias](#zacharias) believes he is compromised. The party has not met him.
+Youngest daughter of [Quinn Finla](#quinn-finla), the carpenter. Abducted with her whole family—taken to the [Golden Grain Inn](/hobbity/appendix/places/#orlane), then marched blindfolded through tunnels to a wilderness location where [Abramo](#abramo) performed a charming ceremony. The charm didn't work on her. Imprisoned in Abramo's lair for weeks or months. Freed by the party. Now in [Ramne](#ramne)'s care.
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
+- **Family:** [Quinn Finla](#quinn-finla) (father), Elena (mother), Milo (brother)
+
+### Quinn Finla
+
+Carpenter in [Orlane](/hobbity/appendix/places/#orlane). [Zacharias](#zacharias) believes he is compromised. Confirmed—his whole family was abducted and charmed by the cult. Daughter [Cirilli](#cirilli-finla) was the only one who resisted.
+
+- **Location:** [Orlane](/hobbity/appendix/places/#orlane)
+- **Family:** [Cirilli Finla](#cirilli-finla) (daughter)
 
 ## G
 
@@ -250,9 +266,10 @@ Axe shop owner in [Gomwick](/hobbity/appendix/places/#gomwick). Sold Wedge his s
 
 ### Misha
 
-Priestess of the [Temple of Merikka](/hobbity/appendix/places/#orlane). The party took her armor, shield, and mace (Boffo now uses them). A body found in a crawlspace beneath the temple may be the real priestess, suggesting Misha is an imposter who murdered and replaced her. Fled with [Kaylin Snowvale](#kaylin-snowvale). Whereabouts unknown.
+Priestess of the [Temple of Merikka](/hobbity/appendix/places/#orlane). The party took her armor, shield, and mace (Boffo now uses them). A body found in a crawlspace beneath the temple may be the real priestess, suggesting Misha is an imposter who murdered and replaced her. [Ramne](#ramne) suspects she may actually be a genuine follower of Merikka who was charmed. Put to sleep by Turnip's blowgun and locked in the temple.
 
 - **Location:** [The Temple of Merikka](/hobbity/appendix/places/#orlane)
+- **Status:** Prisoner
 
 ### See Also
 
@@ -331,6 +348,13 @@ Conspirator in the pie-poisoning plot at the [Gomwick](/hobbity/appendix/places/
 
 ## R
 
+### Ramne
+
+Very old hobbit druid living in a half-buried stone cottage (#27) west of the Slumbering Serpent in [Orlane](/hobbity/appendix/places/#orlane). Has been independently investigating the cult. Carries a book, a wooden spoon, and a walking stick. His weasel companion Twitch rides on his head. Moves at a glacial pace. Healed the party when they met in the temple dungeon. Now sheltering [Cirilli Finla](#cirilli-finla).
+
+- **Location:** [Orlane](/hobbity/appendix/places/#orlane)
+- **Companion:** Twitch (weasel)
+
 ### Rolo
 
 Son of Atticus. Came out with a crossbow, fired at the party's feet, told them to keep moving. Then went and knocked at the [Temple of Merikka](/hobbity/appendix/places/#orlane) door.
@@ -348,10 +372,11 @@ Middle-aged hobbit, broad, furious. Cultist, likely a villager from [Orlane](/ho
 
 ### Kaylin Snowvale
 
-Young girl, daughter of [Maddie Snowvale](#maddie-snowvale) the blacksmith's wife. Found in the [Temple of Merikka](/hobbity/appendix/places/#orlane) sanctuary with [Griff](#griff-snowvale-gardner) and [Timba](#timba-snowvale-gardner). Escaped through the west door with [Misha](#misha).
+Young girl, daughter of [Maddie Snowvale](#maddie-snowvale) the blacksmith's wife. Found in the [Temple of Merikka](/hobbity/appendix/places/#orlane) sanctuary with [Griff](#griff-snowvale-gardner) and [Timba](#timba-snowvale-gardner). Subdued by Wedge and locked in the temple. Nothing behind her eyes—charmed beyond reason.
 
 - **Location:** [The Temple of Merikka](/hobbity/appendix/places/#orlane)
 - **Family:** [Maddie Snowvale](#maddie-snowvale) (mother)
+- **Status:** Prisoner
 
 ### Maddie Snowvale
 
@@ -424,8 +449,8 @@ Widowed, lives by the river in [Orlane](/hobbity/appendix/places/#orlane). The p
 
 ### Zacharias
 
-Retired adventurer, well-traveled, late middle age. Lives across the river in [Orlane](/hobbity/appendix/places/#orlane). Sent the original letter to [Buford](#buford-niss) requesting help—also wrote to other old adventuring companions, but none responded except Buford (who sent the party). Extremely paranoid. Has tried to talk to [Grover](#constable-grover) about the disappearances, but Grover won't act without proof. Convinced the [Temple of Merikka](/hobbity/appendix/places/#orlane) priests are the source of Orlane's problems. Not joining the party because "3 young hobbits are far more capable than an old man with a bad back."
+Retired adventurer, well-traveled, late middle age. Lives across the river in [Orlane](/hobbity/appendix/places/#orlane). Sent the original letter to [Buford](#buford-niss) requesting help. Extremely paranoid. His stone gargoyle defences killed [Deputy Donovan](#donovan) when [Grover](#constable-grover) came looking for the party. Fled with [Derek Desleigh](#derek-desleigh) to the [Golden Grain Inn](/hobbity/appendix/places/#orlane) before it burned. His secret chest is gone. Whether he's been charmed, coerced, or is playing a deeper game is unknown.
 
-- **Location:** [Orlane](/hobbity/appendix/places/#orlane)
+- **Location:** Unknown, last seen at [Orlane](/hobbity/appendix/places/#orlane)
 - **Ally:** [Buford Niss](#buford-niss)
 - **Servant:** [Traver Stokehart](#traver-stokehart)

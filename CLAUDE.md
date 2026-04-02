@@ -108,12 +108,41 @@ New questions raised this session. Cross-reference against existing threads in c
 
 Suggested edits/additions to `HOBBIT_CAMPAIGN_CONTEXT.md` based on this session.
 
+## Post-Recap Checklist
+
+After writing the story file, process these updates before committing:
+
+1. Update PC levels in `src/content/appendix/pcs.mdx` if the party leveled up. Use `Level N → Level N+1` notation in the story header.
+2. Check the story group's TOC/summary to see if it needs updating with the new chapter in mind.
+3. Add new NPCs to `src/content/appendix/npcs.md`. Update existing NPC entries with new information from the session.
+4. Add or update locations in `src/content/appendix/locations.md` with new places or events.
+5. Record any grievous injuries in `src/content/appendix/pcs.mdx` (confirm with user first).
+6. Add new notable items to `src/content/appendix/pcs.mdx` (permanent/magical only, no consumables).
+7. Update `HOBBIT_CAMPAIGN_CONTEXT.md` with the Context Doc Updates from the session notes.
+
+## Writing Style
+
+Write recaps in the style of Tolkien's *The Hobbit* mixed with a bit of Pratchett—warm, wry narration with an omniscient voice that finds hobbits endearing and slightly absurd. Combat should be gory and visceral in the OSR tradition: bones break, blood pools, maces connect with wet crunches. The contrast between cozy hobbit sensibilities and brutal violence is the point.
+
 ## Formatting
 
 - Use headings, not bold paragraphs, for section labels.
 - Stay in-world. Never mention the DM, dice rolls, natural twenties, hit points, or other game mechanics. Describe outcomes, not the table. Dice luck can be referred to as luck, fate, fortune, etc.
 - Cut unnecessary adjectives. Trust nouns and verbs to carry the weight.
 - No main character. Give all PCs roughly equal weight in recaps.
+
+### Banned Game Terms in Narrative
+
+Never use these in story prose (Conclusion, Enemies Defeated, and Treasure sections are exceptions):
+
+- rolls, dice, natural 20, critical hit
+- session, round, turn (as game units)
+- hit points, HP, damage (as numbers), AC
+- initiative, morale check, saving throw/save
+- level up, XP, experience points
+- DM, GM, player, character sheet
+
+Describe what happened in the world, not at the table. "Boffo's mace caved in the goblin's skull" not "Boffo dealt 6 damage." "Luck abandoned them" not "they rolled badly."
 
 ## Grievous Injuries
 
@@ -124,8 +153,8 @@ When a PC drops to 0 HP and is healed, they lose one random ability point. Recor
 - **System:** OSE / D&D Basic/Expert. "Adventurer" class (Fighter/Mage/Thief generalist).
 - **Setting:** Five Shires, Mystara (loosely). Hobbit-only party.
 - **DM:** Gus Miranda. Uses classic TSR modules adapted for hobbit play.
-- **Current arc:** Orlane — cult of a false goddess, troglodytes underground, cult expanding toward Gomwick.
-- **Current state:** Party in troglodyte lair beneath Temple of Merikka. Boffo giant-sized (Potion of Growth, carries over). Torches low. Derek Desleigh + goblin at large above. Misha whereabouts unknown.
+- **Current arc:** Orlane — cult of the serpent goddess Explictica, led by the now-dead priest Abramo. Cult expanding toward Gomwick.
+- **Current state:** Party resting at Slumbering Serpent, dawn. Level 2. Temple cleared, prisoners secured, Golden Grain burned. Zacharias and Derek at large. Ramne sheltering Cirilli Finla.
 - **Full details:** See `HOBBIT_CAMPAIGN_CONTEXT.md`
 
 ## Lessons Learned

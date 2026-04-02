@@ -61,15 +61,16 @@ A hobbit village on a flat agricultural plain in one of the richest and most fer
 
 ### Notable NPCs
 
-[Constable Grover](/hobbity/appendix/npcs/#constable-grover), [Belba](/hobbity/appendix/npcs/#belba), [Olwyn](/hobbity/appendix/npcs/#olwyn), [Zacharias](/hobbity/appendix/npcs/#zacharias), [Killian Gade](/hobbity/appendix/npcs/#killian-gade), [Vilma](/hobbity/appendix/npcs/#vilma), [Rolo](/hobbity/appendix/npcs/#rolo), [Maddie Snowvale](/hobbity/appendix/npcs/#maddie-snowvale), [Bertram](/hobbity/appendix/npcs/#bertram), [Quinn Finla](/hobbity/appendix/npcs/#quinn-finla), [Wilbur Oldbuck](/hobbity/appendix/npcs/#wilbur-oldbuck), [Traver Stokehart](/hobbity/appendix/npcs/#traver-stokehart)
+[Constable Grover](/hobbity/appendix/npcs/#constable-grover), [Belba](/hobbity/appendix/npcs/#belba), [Olwyn](/hobbity/appendix/npcs/#olwyn), [Zacharias](/hobbity/appendix/npcs/#zacharias), [Killian Gade](/hobbity/appendix/npcs/#killian-gade), [Vilma](/hobbity/appendix/npcs/#vilma), [Rolo](/hobbity/appendix/npcs/#rolo), [Maddie Snowvale](/hobbity/appendix/npcs/#maddie-snowvale), [Bertram](/hobbity/appendix/npcs/#bertram), [Quinn Finla](/hobbity/appendix/npcs/#quinn-finla), [Cirilli Finla](/hobbity/appendix/npcs/#cirilli-finla), [Wilbur Oldbuck](/hobbity/appendix/npcs/#wilbur-oldbuck), [Traver Stokehart](/hobbity/appendix/npcs/#traver-stokehart), [Ramne](/hobbity/appendix/npcs/#ramne), [Abramo](/hobbity/appendix/npcs/#abramo)
 
 ### Locations
 
 - **The Slumbering Serpent Inn:** Party's base of operations. Run by [Belba](/hobbity/appendix/npcs/#belba) and [Olwyn](/hobbity/appendix/npcs/#olwyn).
 - **The Foaming Mug Inn:** Abandoned inn with signs of violent struggle. Troglodyte nest in the basement.
-- **The Golden Grain Inn:** Owned by [Bertram](/hobbity/appendix/npcs/#bertram). [Derek Desleigh](/hobbity/appendix/npcs/#derek-desleigh) first seen here. Connection to cult suspected.
+- **The Golden Grain Inn:** Burned down. Owned by [Bertram](/hobbity/appendix/npcs/#bertram). The cult used its tunnels to move abducted families out of town for charming ceremonies. Set on fire from inside after [Zacharias](/hobbity/appendix/npcs/#zacharias) and [Derek](/hobbity/appendix/npcs/#derek-desleigh) fled there.
 - **The Temple of Merikka:** New temple behind three-meter walls. Dedicated to a goddess of farming, fertility, and light. Hides something much older beneath it.
-- **The Dungeon Beneath the Temple:** Ancient ruins predating the temple. Troglodyte lair, prison cells, underground stream. The party's current location.
+- **The Dungeon Beneath the Temple:** Ancient ruins predating the temple. Two levels: upper with troglodyte lair and underground stream; lower with [Abramo](/hobbity/appendix/npcs/#abramo)'s serpent cult lair, torture chamber, goblin barracks, and a jade naga statue of the goddess Explictica.
+- **Ramne's Cottage (#27):** Half-buried stone cottage west of the Slumbering Serpent. Home of [Ramne](/hobbity/appendix/npcs/#ramne).
 
 ### Happenings
 

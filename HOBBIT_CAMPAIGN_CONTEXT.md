@@ -193,21 +193,27 @@ The party arrived in Orlane, a hobbit village on a flat agricultural plain (mode
 
 **Key NPCs in Orlane:**
 
-- **Constable Grover:** Local constable, armored in mail with a crossbow. Two non-local deputies (Donovan and Bulbar). The party initially suspected him of being compromised, but Zacharias trusts him, and his reactions to the troglodyte news (blanching, genuine concern) suggest he may be honest. He's been patient with the party despite their repeated troublemaking.
+- **Constable Grover:** Local constable, armored in mail with a crossbow. One surviving deputy (Bulbar; Donovan was killed by Zacharias's gargoyles). Investigated the troglodyte evidence, traced a missing person (Myron Tweed) to the Golden Grain. Now the closest thing to law in Orlane. Believes Zacharias is involved in the cult.
 
 - **Belba:** Proprietress of the Slumbering Serpent Inn. Older, knew Grover from childhood, never liked him. Became a confidante — the party told her everything. She was genuinely shaken by the evidence of violence at the Foaming Mug.
 
 - **Olwyn:** Belba's husband. Serves as messenger.
 
-- **Zacharias:** Retired adventurer, well-traveled, late middle age. Lives across the river. Was fishing when the party arrived. Sent the original letter to Buford requesting help. Extremely paranoid — tore up his own letter, spoke only outdoors by the lakeshore in whispers. Trusts Grover. Convinced the temple priests are the source of the problems.
+- **Zacharias:** Retired adventurer, well-traveled, late middle age. Lives across the river. Sent the original letter to Buford requesting help. His stone gargoyles killed Deputy Donovan when Grover came looking for the party. Fled with Derek Desleigh to the Golden Grain before it burned. His secret chest is gone. Whether charmed, coerced, or playing a deeper game is unknown.
 
 - **Traver Stokehart:** Zacharias's servant. Quiet, efficient.
 
 - **Zacharias's intelligence:** Four individuals he believes are compromised: the storekeeper **Wilbur Oldbuck**, the blacksmith **Maddie Snowvale** and family, and the carpenter **Quinn Finla** (unmet). Plus the temple priests. Problems started roughly a year to 18 months ago, correlating with the priests' arrival.
 
-- **Derek Desleigh:** A hobbit with a disfiguring scar. Previously seen at the Golden Grain Inn. Encountered inside the temple working with goblins. Wanted the party taken alive. Fled during the temple fight and is still at large somewhere in the temple complex.
+- **Derek Desleigh:** A hobbit with a disfiguring scar. Previously seen at the Golden Grain Inn. Encountered inside the temple working with goblins. Wanted the party taken alive. Fled when the goblins broke. Later appeared at Zacharias's house, then fled with Zacharias to the Golden Grain before it burned. At large — likely escaped through tunnels.
 
-- **Misha:** The priestess of the Temple of Merikka. Not hobbit-proportioned — appears human or aquatic/mermaid-like. Healed Boffo with divine magic (a novel experience for the hobbits). Her quarters were found in the temple (bedroom with desk, bed, chest). A body found hidden in a crawlspace beneath the temple may be the real priestess, suggesting Misha is an imposter who murdered and replaced her.
+- **Misha:** The priestess of the Temple of Merikka. Not hobbit-proportioned — appears human or aquatic/mermaid-like. Healed Boffo with divine magic (a novel experience for the hobbits). A body found in a crawlspace may be the real priestess she replaced. However, Ramne suspects she may actually be a genuine follower of Merikka who was charmed by the cult. Put to sleep by Turnip's blowgun and locked in the temple.
+
+- **Ramne:** Very old hobbit druid living in the half-buried stone cottage (#27) west of the Slumbering Serpent (the Elm Grove cottage where the party saw the weasel). Independently investigating the cult. Carries a book, a wooden spoon, and a walking stick. His weasel companion Twitch rides on his head. Can cast Cure Light Wounds and Dispel Magic, but his other spells are nature-focused (animal friendship, speak with animals, locate plant). Healed all three party members. Suspects Zacharias. Now sheltering Cirilli Finla.
+
+- **Abramo (dead):** The serpent cult's priest, found in the lower temple. Wore enchanted scale mail (+1), carried a cobra-headed mace, worshipped a snake goddess called Explictica. Completely insane — covered every surface of his lair in reptilian scrawlings. Killed by Boffo.
+
+- **Cirilli Finla:** Youngest daughter of Quinn Finla (the carpenter). Abducted with her whole family, taken to the Golden Grain, marched blindfolded through tunnels to a wilderness location where Abramo performed a charming ceremony. The charm didn't work on her, so she was caged in Abramo's lair. Freed by the party. Now in Ramne's care.
 
 - **Killian Gade:** Looking after Opal the pony at his stable. Friendly.
 
@@ -217,12 +223,12 @@ The party arrived in Orlane, a hobbit village on a flat agricultural plain (mode
 
 **Key locations:**
 
-- **The Golden Grain Inn:** The third inn in Orlane. Where Derek Desleigh was seen. The party has not stayed here.
+- **The Golden Grain Inn (burned):** Burned down from inside. The cult used its tunnels to move abducted families out of town for charming ceremonies. Zacharias and Derek fled there before it was set alight. Tunnel access to underground passages confirmed by Cirilli's account and Ramne's intelligence.
 - **The Foaming Mug Inn (ruined):** Supposedly abandoned due to economic downturn. Actually shows signs of violent struggle. Troglodytes nesting in the basement (3 pallets, 2 troglodytes present — party killed both).
 - **Matty Snowvale's Smithy:** The blacksmith attacked unprovoked, nearly killed Wedge. Turnip put him down with a sleep dart. His wife filed a complaint with Grover.
 - **The Temple of Merikka:** On a hill behind 3m walls. The goddess is of farming, fertility, hearth, knowledge, and light (similar to Chauntea + Amaunator). Two priests from the coast, plus followers/acolytes. Used to come into village, now rarely do. The party was rebuffed when they tried to enter.
-- **The Elm Grove:** Old stone cottage, half-dug into the ground, clearly inhabited but unoccupied. A weasel seen. Wedge summoned a raven with his whistle and befriended it with food.
-- **Zacharias's House:** Stone gargoyle security system (non-differentiating between friend and foe). The party broke in, lit fires, and started cooking before Zacharias returned.
+- **Ramne's Cottage (#27) / The Elm Grove:** Half-buried stone cottage west of the Slumbering Serpent. Home of Ramne and his weasel Twitch. Previously visited by the party (saw the weasel, Wedge befriended a raven).
+- **Zacharias's House:** Stone gargoyle security system (non-differentiating between friend and foe). Gargoyles killed Deputy Donovan. Back and front doors smashed. Zacharias's secret chest is gone. House abandoned.
 
 **Zacharias's equipment (original provision — largely expended):**
 
@@ -307,7 +313,51 @@ The party is still underground in the troglodyte lair. No XP awarded yet (not in
 
 **Resources remaining:** Torches running low (one burnt out, lantern now in use). Most special ammunition expended — all +1 sling bullets used, both special effect bullets lost. Sleep darts mostly used. Turnip has Protection from Evil still available. Wedge has Light still available. Healing potions used during the session. Each character has a healing touch ability (1 HP, once per day) — used during the session.
 
-**Still at large:** Derek Desleigh and the surviving goblin, somewhere in the temple above. Misha's whereabouts unknown.
+### Session: The Serpent Beneath
+
+**Boffo's injury:** Survived the skeleton wound but lost a point of DEX — shoulder healed crooked.
+
+**Meeting Ramne:** The party encountered Ramne, an old hobbit druid, in the temple stairwell. He healed all three of them and joined the party. He'd been independently investigating the cult from his cottage (#27, the Elm Grove). He suspects Zacharias and has intelligence about the Golden Grain being used to move abducted families.
+
+**The charming process (from Cirilli and Ramne):** Families are taken at night to the Golden Grain, moved through underground tunnels, marched blindfolded to a wilderness location where a ceremony is performed. They return 1–2 weeks later, charmed. It's whole families, never partial.
+
+**Exploring the lower temple:** The party explored rooms beyond the skeleton room:
+
+- Trapdoor under carpet in the skeleton room (goblin access between levels)
+- Wine room with comfortable chairs
+- Brand-new torture chamber: rack, Iron Maiden, hobbit-sized coffins — unused, recently assembled
+- Goblin barracks: 8 pallets (matching the 8 goblins encountered total), smashed furniture, spy hole into skeleton room
+- Bell-trap alarm on locked door
+- Corridor covered in insane reptilian writings about Explictica, the serpent goddess
+
+**The serpent cult's inner sanctum:** The party fought and killed Abramo, the cult's priest, along with a goblin and a snake (killed by Twitch the weasel). Subdued Kaylin Snowvale (non-lethal) and put Misha to sleep with a blowgun dart.
+
+**Cirilli Finla freed:** Found caged in Abramo's lair. Her account confirmed the charming process. The cult's goddess is named **Explictica** — her jade statue depicts a snake with a female human head, four-armed. Abramo was completely insane.
+
+**Loot from the temple:**
+
+- Cobra-headed mace (Abramo's weapon)
+- Scale mail +1 (snake-skin pattern — given to Turnip)
+- Ring of Protection +1 (from Misha — given to Wedge)
+- Gold snake head amulet with ruby eyes (holy symbol of Explictica)
+- Abramo's sketchbook, 12 gold coins, keys
+- Herpetology book, defaced illuminated manuscript of Merikka
+
+**Prisoners secured:** Misha, Kaylin Snowvale, Griff and Timba Snowvale — locked in temple rooms. All four murmured serpent mantras in eerie unison.
+
+**Ramne departed** with Cirilli and Twitch to hide at his cottage.
+
+**Outside the temple:** The Golden Grain was on fire. At Zacharias's house, Deputy Donovan was dead (gargoyle), doors smashed, secret chest gone. The party crossed the lake in Vilma's rowboat.
+
+**Grover's account:** He investigated the troglodyte evidence, found Myron Tweed missing (trail to Golden Grain), went to Zacharias's house for reinforcement. Zacharias's gargoyles attacked — killed Donovan. Derek arrived, both fled to Golden Grain. Siege, brawl, then someone inside set the inn on fire.
+
+**Current Party State:**
+
+The party is resting at the Slumbering Serpent, dawn. All three leveled up to Level 2.
+
+**Resources:** Turnip now wears scale mail +1. Wedge has Ring of Protection +1. Boffo has chainmail, shield, mace, Brooch of Shielding. Party has significant gold. Wedge still holds Scroll of ESP (unused), Scroll of Wizard Lock, Scroll of Dispel Magic.
+
+**Still at large:** Derek Desleigh and Zacharias — fled through Golden Grain tunnels. One goblin chained in temple basement. Myron Tweed missing.
 
 ---
 
@@ -333,15 +383,16 @@ The same group of players also runs a separate Daggerdale campaign (DM'd by Les 
 
 1. The prophetic visions from the Hermit (plague, tidal wave, undeath)
 2. The bronze coins from the Hermit — what are they?
-3. Who is behind the cult operation in Orlane — and what is their endgame? Gomwick is confirmed as the next target.
-4. Who is Misha really? Is the body in the crawlspace the real priestess she replaced?
-5. Derek Desleigh — what is his role, and where is he now?
-6. The Golden Grain Inn — Derek was seen there; is it a cult stronghold?
-7. What lies deeper in the temple dungeon?
+3. Who or what is Explictica? The jade naga statue suggests something more than a metaphor. Gomwick is confirmed as the next target.
+4. Who is Misha really? Ramne suspects she may be a genuine follower of Merikka who was charmed. The body in the crawlspace remains unexplained.
+5. Derek Desleigh — fled with Zacharias through the Golden Grain tunnels. At large.
+6. What is Zacharias's role? He summoned the party and equipped them — why help them if he's compromised? Charmed, coerced, or playing a deeper game?
+7. Where does the Golden Grain tunnel network lead? The wilderness ceremony location is unknown.
 8. The third troglodyte pallet in the Foaming Mug (only two troglodytes present)
 9. The serpent motifs on stones at Huddle Farm's excavation — not native to the farm's own history; possibly connected to a larger pattern (snakes/serpents have recurred throughout the campaign)
 10. Buford Niss's own vision from the Hermit (he won't say what he saw)
 11. Tobias Chubb's death at the Hermit's cabin
-12. Buford's illness — is it natural?
-13. The relationship between goblins, troglodytes, and whoever is running the cult — the goblins seem to be hired muscle, the troglodytes are guards/enforcers underground
-14. The connection between the bridge goblins encountered on the road and the temple operation
+12. Buford's illness — is it connected to the cult's expansion toward Gomwick?
+13. Can Ramne's Dispel Magic break the charm on converted townsfolk? Not yet tested.
+14. Myron Tweed (the tailor) is missing — trail led to the Golden Grain before it burned.
+15. One goblin remains chained in the temple basement.

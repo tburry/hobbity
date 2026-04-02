@@ -1,0 +1,151 @@
+---
+story: Something Rotten in Orlane
+---
+
+# The Serpent Beneath
+
+Session Recap – 31 <dfn title="March">Rethe</dfn>, S.R. 1426
+
+- **PCs:**
+  - Boffo Lunderbunk - Level 1 → Level 2 Hobbit Adventurer
+  - Wedge Wedgerton - Level 1 → Level 2 Hobbit Adventurer
+  - Turnip Bramblebrook - Level 1 → Level 2 Hobbit Adventurer
+- **Location:** Dungeon beneath the Temple of Merikka and Orlane
+
+## Not Dead Yet
+
+Boffo Lunderbunk was not dead. This came as a surprise to everyone, Boffo included. The skeleton's sword had gone through the gap in his chainmail like a letter through a slot, and by all rights he should have stayed down on the cold stone floor of that terrible room. But hobbits are stubborn creatures, and Boffo's companions were stubborner still—they dragged him back from the edge by sheer will and hobbit touches and whatever thin thread of luck the three of them had left. He'd lost something in the dying, though. His hands trembled where they hadn't before, and his fingers wouldn't quite close around his mace the way they used to.
+
+The party was about to flee the dungeon—beat half to death, out of potions, running on lantern fumes—when they rounded a corner and nearly collided with an old hobbit coming down the stairs. He carried a book in one hand and a wooden spoon in the other, and a weasel named Twitch sat on his head like a furry hat. His name was Ramne, and he'd been looking for them. He healed all three of them with a touch, which was the second time in one evening that divine magic had been worked on hobbits who, until very recently, hadn't known such things existed. Ramne had intelligence of his own: people were being taken in the night to the Golden Grain Inn, vanishing for weeks, and coming back wrong. Whole families at a time. He also had doubts about Zacharias that the party wasn't ready to hear.
+
+Reinforced and unwilling to leave the job half done, the Toad Stompers pressed deeper into the temple—and found, at the end of a corridor covered in insane reptilian scrawlings, the serpent cult's inner sanctum and its deranged priest.
+
+## Ramne
+
+![Ramne](/hobbity/images/ramne.webp)
+
+The old hobbit moved at the speed of an arthritic tortoise and had the combat utility of a wooden spoon, which he also carried. But he knew things. He'd been living in that half-buried stone cottage west of the Slumbering Serpent, watching the village come apart at the seams. People taken to the Golden Grain, emerging weeks later with empty eyes and rehearsed smiles. Ramne didn't trust Zacharias. He didn't trust anyone, really, possibly including himself—"There's not a single person in this village who's telling the truth," he said. "Maybe not even myself."
+
+He was a druid of sorts, though he'd deny the word. The only religion he followed, he said, was his pipe and a bit of pipeweed. His spells were useless underground—animal friendship, speak with animals, locate plant. But he had three castings of Cure Light Wounds, and he spent all of them on the party. Twitch, for her part, would prove considerably more useful than her master.
+
+## Deeper In
+
+The party pressed on through the lower temple, past the room where the skeletons had nearly killed them all. The benches were still there, the bone dust still settling. Under the carpet they found a trapdoor—the one the goblins had used to move between levels, its edges scuffed from regular use.
+
+Two doors led south. One opened onto a small chamber with a table, two comfortable chairs, an unopened bottle of wine, and two clean glasses. A civilized room in an uncivilized place. The other opened onto something considerably less civilized.
+
+## The Torture Chamber
+
+The smell of fresh wood and oil. A rack. A table with heavy leather straps. A hobbit-sized Iron Maiden in the corner. Pine boxes stacked along the walls—some were packing crates for the equipment, some were coffins. All of it was brand new. None of it had been used. Not yet.
+
+"The same hammer that went into your skull, Wedge," Boffo said, looking at the iron work, "is the same hammer that made this."
+
+## The Goblin Barracks
+
+Beyond the torture chamber, the stink hit them. A meeting room with smashed furniture, straw pallets along the walls, and a pile of goblin excrement in the corner. A sliding panel in the north wall gave a view into the skeleton room—a spy hole. The goblins had been watching.
+
+Eight pallets. The hobbits counted on their fingers: six goblins killed, one fled with Derek, one chained in the basement crying for help. Eight for eight. No more goblins, then. Probably.
+
+## The Bell Trap
+
+The door at the south end of the barracks was locked. Wedge picked it clean. Turnip pressed his ear to the wood and heard voices. Faint, conversational. Not alarmed.
+
+They opened the door. A string of bells erupted into jangling chaos on the other side, rigged across the corridor at knee height. So much for stealth.
+
+Beyond the bells, the walls told a story. Every surface was covered in writing—scratched into stone, painted in excrement, in blood, in charcoal. Insane ramblings about great coils that would envelop the world, about scales counted into the hundreds, about plagues that would cleanse the land and bring her light back into this forsaken dark world. Love letters to something with a serpent's body. Prayers to something called Explictica.
+
+"The crows are scared because the serpent hungers," Boffo said quietly. "That's what the Hermit said."
+
+## The Serpent's Lair
+
+They came around the last corner of the winding passage and a voice shouted, "Now!"
+
+A goblin crouched at the junction, club raised. Behind it, Kaylin Snowvale—the blacksmith's daughter—hid behind hay bales with her fists up. In the far corner, Misha waited, doing something none of them could see. And behind a desk, in robes and fancy chainmail with a cobra-headed mace in his hand and a snake in a cage at his elbow, stood the architect of all of it.
+
+Abramo. The serpent's priest.
+
+![Abramo](/hobbity/images/abramo.webp)
+
+The hobbits moved first—halfling reflexes and nothing more. Wedge scrambled onto the hay bales. Boffo squared up against the goblin. Turnip fired his blowgun at Abramo and missed by a mile. Fortune, it seemed, had abandoned them: every stone from every sling sailed wide, every dart found only air.
+
+Abramo released the snake from its cage. Twitch the weasel streaked across the floor and tore it apart in a spray of blood and thrashing coils, proving definitively that weasel beats snake.
+
+Abramo touched Boffo and tried to fill him with supernatural terror. Boffo, who had died and come back not two hours ago, shrugged it off. The goblin's club found the gap in Boffo's guard and cracked against his ribs hard enough to nearly put him back on the floor. Ramne, still shuffling through the corridor at glacial speed, arrived just in time to press a healing potion into Boffo's hands.
+
+Wedge leapt down from the hay bales onto Kaylin Snowvale, who had fallen prone. He cracked her across the face with the butt of his spear—non-lethal, or so he intended. Bone crunched. Blood poured from her broken nose. She didn't stop. There was nothing behind her eyes to reason with.
+
+Abramo cast Blight—a withering curse that settled over the party like a fog. Wedge and Turnip felt their limbs go heavy, their aim worse, their reactions dulled.
+
+![Misha](/hobbity/images/misha.webp)
+
+Turnip reloaded his blowgun and used his hobbit point to steady his aim. The dart caught Misha in the neck. She slumped unconscious, the sleep poison taking her mid-step as she tried to open a secret door in the corner.
+
+Boffo's mace connected with Abramo's chest through a gap in his chainmail. The priest staggered, his darkness spell fizzling. Abramo tried to withdraw, backing toward a room full of statues, but Boffo followed. One more swing. The mace caught Abramo square in the skull and that was the end of the serpent's priest.
+
+A sling stone from Wedge finished Kaylin—he'd meant it non-lethal, but the rules of physics don't negotiate with intent. She slumped into the hay.
+
+## Cirilli
+
+![The jade statue of Explictica](/hobbity/images/explictica.webp)
+
+In the room beyond Abramo's last stand, torchlight fell on something that made the hobbits' stomachs turn. A polished jade statue of a snake with a woman's head—four-armed, enormous, exquisitely carved. Around it, granite statues of Merikka had been smashed and crudely re-carved into reptilian shapes by someone who clearly had more devotion than talent. And against the east wall, in a small iron cage, a young hobbit woman in tattered rags.
+
+Her name was Cirilli Finla. Daughter of Quinn Finla, the carpenter. The whole family had been abducted one night—taken to the Golden Grain Inn, marched blindfolded through tunnels and wilderness for days, brought to some place where Abramo performed a ceremony that charmed everyone into obedience. Everyone except Cirilli. Whatever he'd done to scramble their minds hadn't worked on her, and so she'd been brought back and caged in the dark, fed on scraps, listening to a madman chip away at granite statues and mutter about his goddess.
+
+Explictica. That was the name Abramo couldn't stop saying. The snake goddess whose jade likeness watched over everything with swirling, almost hypnotic colors.
+
+Ramne tended to Cirilli while the party searched the lair. Two brass-bound chests, mostly emptied—twelve gold coins left behind like an afterthought. Abramo's body yielded a ring of keys, his cobra-headed mace, and chainmail that, on closer inspection, was not chain at all but scale mail—snake skin rendered in steel, enchanted to turn blows better than any mundane armor. Turnip put it on without hesitation. From Misha they took a Ring of Protection and a gold amulet shaped like a snake's head with rubies for eyes—the holy symbol of whatever Explictica was.
+
+## The Library
+
+One last room. A proper library, small tables, shelves of books about crop rotations and farmer's almanacs—Merikka's domain. On one table sat an enormous illuminated manuscript, two feet tall, bound in leather and written in gold: _The Most Worshipful Guide to Benign Merikka_. Every page had been defaced with drawings of goblins doing unspeakable things and crude serpent imagery. A priceless artifact reduced to obscenity.
+
+They also found _A Guide to the Herpetology of the Shires_, which mostly concerned the benefits of garter snakes in one's garden. They took it anyway.
+
+## Prisoners and Parting
+
+The party secured their prisoners—Misha, Kaylin Snowvale, and the Griff and Timba Snowvale still manacled upstairs—locking them in the temple's own rooms. All four murmured in eerie unison, reciting mantras about the great serpent's venom being the milk from which her followers would drink and rise again. It echoed through the worship hall and followed the hobbits up the stairs and out into the night air.
+
+Ramne took Cirilli and Twitch and scuttled off into the darkness toward his cottage. "Good luck to you," he said, shaking their hands. "You know where to find me, and hopefully I know where to find you this time."
+
+## Orlane Burns
+
+They emerged from the temple to the smell of smoke. From the hilltop, looking down over the village, they could see flames in the centre of town. The Golden Grain Inn was burning.
+
+At Zacharias's house, the back door was smashed open. The front door was smashed in. One of Grover's deputies—Donovan—lay face down in the threshold, his skull caved in by something heavy and granite. The stone gargoyle sentinel stood in the hallway, fists bloodied, facing outward. Zacharias's secret chest was gone.
+
+The hobbits borrowed Vilma's rowboat and crossed the lake in the dark. The Golden Grain was a ruin of flame and smoke, figures moving around it in silhouette. Constable Grover spotted them from the shore, waving.
+
+## Grover's Account
+
+At the Slumbering Serpent, over dwarven whiskey, Grover told his side. He'd been investigating the troglodyte evidence the party had given him, following a trail that led to the Golden Grain—Myron Tweed, the tailor, had gone missing, and the tracks pointed there. He'd gone to Zacharias's house looking for the hobbits as reinforcement.
+
+Zacharias had set his stone gargoyles on them. Deputy Donovan was killed. Then Derek Desleigh arrived, and he and Zacharias fled together to the Golden Grain. A siege ensued—some townsfolk defending the inn, some siding with Grover. Fists were thrown. Then someone inside the Golden Grain set it on fire and it burnt to the ground.
+
+Grover believed Zacharias was neck-deep in the cult. The hobbits weren't so sure—Zacharias had summoned them here, after all, outfitted them for this mission. But the stone gargoyles, the flight with Derek, the burning of the evidence—it was hard to argue with.
+
+"There may be answers yet in Zacharias's house," Grover said, "if we can get past his defences." Then he left to check on the prisoners at the temple, and the hobbits fell into their beds at the Slumbering Serpent as dawn crept over a village that would never be quite the same.
+
+## Conclusion
+
+The Toad Stompers broke the serpent cult's hold on the Temple of Merikka, killed its priest, freed its prisoner, and emerged into a village on fire. Orlane's secrets are burning—some literally—and the cult's network runs deeper than the tunnels beneath the temple. Zacharias, the man who summoned them here, has fled with the enemy. The Golden Grain is ash. Somewhere in the tunnels beneath, Derek Desleigh and whoever else survived the fire are still at large. Chapter one of Orlane is closed. Chapter two will be the reckoning.
+
+#### Enemies Defeated
+
+- 1 goblin
+- 1 snake
+- Abramo (killed)
+- Kaylin Snowvale (subdued)
+- Misha (subdued, sleep dart)
+
+#### Treasure
+
+- Cobra-headed mace (Abramo's weapon)
+- Chainmail +1 / scale mail (snake-skin pattern, enchanted—given to Turnip)
+- Ring of Protection +1 (given to Wedge)
+- Gold snake head amulet with ruby eyes (holy symbol of Explictica)
+- Abramo's sketchbook of insane ramblings
+- 12 gold coins (from Abramo's chests)
+- 21 gold coins (from Deputy Donovan's body)
+- _A Guide to the Herpetology of the Shires_ (book)
+- Flask of brandy (from Donovan)

@@ -8,6 +8,47 @@ export interface GalleryImage {
 }
 
 export const images: GalleryImage[] = [
+  // 2026-03-31 — The Serpent Beneath
+  {
+    src: '/hobbity/images/ramne.webp',
+    srcSmall: '/hobbity/images/small/ramne.webp',
+    alt: 'Ramne',
+    caption:
+      'Ramne, an old hobbit druid with his weasel Twitch perched on his head. He carried a book, a wooden spoon, and three healing spells—all of which he spent on the Toad Stompers.',
+    storyLink:
+      '/hobbity/stories/2026-03-31-the-serpent-beneath/#ramne',
+    storyTitle: 'The Serpent Beneath',
+  },
+  {
+    src: '/hobbity/images/abramo.webp',
+    srcSmall: '/hobbity/images/small/abramo.webp',
+    alt: 'Abramo',
+    caption:
+      'Abramo, the serpent cult\'s priest. Robed in snake-skin scale mail with a cobra-headed mace, he worshipped Explictica with the fervour of the truly insane.',
+    storyLink:
+      '/hobbity/stories/2026-03-31-the-serpent-beneath/#the-serpents-lair',
+    storyTitle: 'The Serpent Beneath',
+  },
+  {
+    src: '/hobbity/images/misha.webp',
+    srcSmall: '/hobbity/images/small/misha.webp',
+    alt: 'Misha',
+    caption:
+      'Misha, the priestess of the Temple of Merikka. Whether imposter or charmed follower, Turnip\'s sleep dart settled the question for now.',
+    storyLink:
+      '/hobbity/stories/2026-03-31-the-serpent-beneath/#the-serpents-lair',
+    storyTitle: 'The Serpent Beneath',
+  },
+  {
+    src: '/hobbity/images/explictica.webp',
+    srcSmall: '/hobbity/images/small/explictica.webp',
+    alt: 'The jade statue of Explictica',
+    caption:
+      'A polished jade statue of Explictica—a snake with a woman\'s head, four-armed, exquisitely carved. Light from torches caused the colours to swirl in an almost hypnotic pattern.',
+    storyLink:
+      '/hobbity/stories/2026-03-31-the-serpent-beneath/#cirilli',
+    storyTitle: 'The Serpent Beneath',
+  },
   // 2026-03-22 — The Skeleton Room
   {
     src: '/hobbity/images/boffo-felled-by-skeleton.webp',
