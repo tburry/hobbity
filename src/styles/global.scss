@@ -404,15 +404,17 @@ table caption {
 // ============================================================================
 
 img, video {
-  width: 100%;
+  display: block;
+  margin-inline: auto;
   height: auto;
+  width: auto;
+  max-width: 100%;
   border-radius: var(--border-radius);
 }
 
-.img-logo {
-  display: block;
-  margin-inline: auto;
-  max-width: 360px;
+article img,
+article video {
+  max-height: 420px;
 }
 
 figure {
