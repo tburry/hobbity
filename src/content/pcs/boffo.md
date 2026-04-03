@@ -5,11 +5,11 @@ level: 2
 alignment: Neutral
 pc: boffo
 order: 2
-blurb: The quiet one. Speaks least, lands every observation.
+tagline: The quiet one. Speaks least, lands every observation.
 stats: { STR: 14, INT: 5, WIS: 12, DEX: 13, CON: 18, CHA: 9 }
 ---
 
-The quiet one. Boffo speaks least but lands every observation. He understands the world through food, manual labor, and an unshakeable sense of propriety. Pie-eating champion of Gomwick. Lives with his mama, grandmama, and great-grandmama. Spent the winter grinding flour for the whole village when the stream froze. Carries a shovel as a weapon (1d6, DM-approved "hobbity weapon").
+Boffo Lunderbunk is the quiet heart of the Toad Stompers. Not bright—the last of his siblings still living at home with his mama, grandmama, and great-grandmama—but perceptive where it counts. He understands the world through food, manual labor, and an unswerving sense of what's proper. Won the Gomwick pie-eating contest on his first try and spent the winter grinding flour for his village when the stream froze. Since then he's walked into temples and dungeons and stood at the front, steady and tough, the one his companions trust to hold the line.
 
 ## Spells
 

@@ -5,11 +5,11 @@ level: 2
 alignment: Chaotic
 pc: wedge
 order: 3
-blurb: The self-appointed leader. Ten feet ahead and annoyed about it.
+tagline: The self-appointed leader. Ten feet ahead and annoyed about it.
 stats: { STR: 6, INT: 12, WIS: 10, DEX: 14, CON: 11, CHA: 4 }
 ---
 
-The leader, whether anyone asked for one or not. Third-generation nickname (Bill Wedgerton's axe was called "Thin Edge of the Wedge"). He drives decisions, handles NPC diplomacy, and frames the tactical questions. Slightly too confident in his own read on every situation, but owns it when he's wrong. Carries an ESP scroll he hasn't told the others about. Wedge has the Zacharias-to-Buford letter in his possession.
+Wedge Wedgerton is the self-appointed leader of the Toad Stompers. Third-generation nickname—his great-grandfather's axe was called "Thin Edge of the Wedge"—and he's taken that literally as his role in the party. He talks the most and the fastest, drives every decision, and is affectionately impatient with his companions for not keeping up. Slightly too confident in his own read of every situation, but honest when he's wrong. He carries secrets the others don't know about and questions that won't leave him alone.
 
 ## Spells
 

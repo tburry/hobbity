@@ -7,11 +7,11 @@ interface Props {
   level: number;
   alignment: string;
   avatar?: ImageMetadata;
-  blurb?: string;
+  tagline?: string;
   stats: { STR: number; INT: number; WIS: number; DEX: number; CON: number; CHA: number };
 }
 
-const { name, class: cls, level, alignment, avatar, blurb, stats } = Astro.props;
+const { name, class: cls, level, alignment, avatar, tagline, stats } = Astro.props;
 ---
 
 <div class="pc-detail">
@@ -57,7 +57,7 @@ const { name, class: cls, level, alignment, avatar, blurb, stats } = Astro.props
     margin: 0.75rem 0 0;
   }
 
-  .pc-detail-blurb {
+  .pc-detail-tagline {
     margin: 0.25rem 0 0.75rem;
     font-style: italic;
     opacity: 0.8;

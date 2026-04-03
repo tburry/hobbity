@@ -32,7 +32,7 @@ const pcs = defineCollection({
     alignment: z.string(),
     pc: z.string(),
     order: z.number(),
-    blurb: z.string().optional(),
+    tagline: z.string().optional(),
     stats: z.object({
       STR: z.number(),
       INT: z.number(),

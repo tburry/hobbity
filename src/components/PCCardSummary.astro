@@ -8,12 +8,12 @@ interface Props {
   avatar: ImageMetadata;
   fullImage?: ImageMetadata;
   link?: string;
-  blurb?: string;
+  tagline?: string;
   stats: { STR: number; INT: number; WIS: number; DEX: number; CON: number; CHA: number };
   sections?: Record<string, string>;
 }
 
-const { name, class: cls, level, avatar, fullImage, link, blurb, stats, sections = {} } = Astro.props;
+const { name, class: cls, level, avatar, fullImage, link, tagline, stats, sections = {} } = Astro.props;
 const fullSrc = fullImage ? (await getImage({ src: fullImage })).src : undefined;
 ---
 
@@ -30,7 +30,7 @@ const fullSrc = fullImage ? (await getImage({ src: fullImage })).src : undefined
   <div class="pc-card-info">
     <h2 id={name.toLowerCase().split(' ')[0]}>{link ? <a href={link}>{name}</a> : name}</h2>
     <p class="pc-card-meta">{cls} &middot; Level {level}</p>
-    {blurb && <p class="pc-card-blurb">{blurb}</p>}
+    {tagline && <p class="pc-card-tagline">{tagline}</p>}
     <table class="pc-card-stats">
       <thead>
         <tr>

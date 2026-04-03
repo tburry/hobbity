@@ -5,11 +5,11 @@ level: 2
 alignment: Lawful
 pc: turnip
 order: 1
-blurb: The prepper. Investigates everything, misses the obvious.
+tagline: The prepper. Investigates everything, misses the obvious.
 stats: { STR: 12, INT: 14, WIS: 9, DEX: 8, CON: 11, CHA: 9 }
 ---
 
-The prepper. Rubbish collector and sorter by trade—"reused but useful." Chose his own nickname "Stockwell" but everyone still calls him Turnip. High intelligence, low wisdom—asks the best investigative questions at the worst social moments. Carries almost-but-not-quite-the-right-thing-for-the-job. Kept a paranoid diary all winter. Salted his threshold weekly.
+Turnip Bramblebrook is the prepper and investigator. A rubbish collector and sorter by trade—"reused but useful"—he catalogs everything and forgets nothing. Chose his own nickname "Stockwell" but the world settled on Turnip instead. Sharp as a tack but oblivious to when he shouldn't be asking questions, which is most of the time. Kept a paranoid diary all winter and salted his threshold weekly, and no one laughed when it turned out he was right. Two adventures in, his body bears the cost: a goblin's arrow through his lung, a troglodyte's poison still burning in his veins.
 
 ## Spells
 
