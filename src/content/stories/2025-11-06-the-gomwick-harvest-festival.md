@@ -28,7 +28,7 @@ They came upon a party of dwarf travelers heading to the same festival, agitated
 
 Along the way they encountered [Tobias Chubb](/hobbity/appendix/npcs/#tobias-chubb), a ne'er-do-well who muttered about the trees "looking at him funny."
 
-![Tobias Chubb](../../assets/images/tobias-chubb.webp)
+![Tobias Chubb](../../assets/images/npcs/tobias-chubb.webp)
 
 ## The Festival
 
@@ -48,7 +48,7 @@ While nosing around near the baker’s tent, the hobbits spotted Tobias Chubb sk
 
 The next day, Boffo returned for the contest proper. In the second round he faced [Grunela Bunce](/hobbity/appendix/npcs/#grunela-bunce)—the heavy favorite, a hobbit woman who had won three years running and expected to win a fourth. The pies came out, the whistle blew, and Grunela threw up after the first pie. Boffo cleaned his plates without breaking stride. She did not take the loss well, and later that evening threw an apple at Boffo’s head, unprovoked.
 
-![Grunela Bunce](../../assets/images/grunela.webp)
+![Grunela Bunce](../../assets/images/npcs/grunela.webp)
 
 Boffo kept winning. In the final, a smelly fish pie was set before the remaining contestants—a test of stomach as much as appetite. Boffo kept it down. The crowd erupted.
 
@@ -56,7 +56,7 @@ Boffo kept winning. In the final, a smelly fish pie was set before the remaining
 
 ## Buford Niss
 
-![Buford Niss](../../assets/images/buford.webp)
+![Buford Niss](../../assets/images/npcs/buford.webp)
 
 After the contest, [Buford Niss](/hobbity/appendix/npcs/#buford-niss)—the Hon. Horace Buford Hockwallop Niss, Esq.—a wealthy, well-traveled old hobbit who lived at Toppo Hill House, the enormous burrow crowning the hill above Gomwick, came to congratulate the hobbits. He’d just won a tidy sum betting on Boffo.
 

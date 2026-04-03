@@ -18,7 +18,7 @@ Session Recap – 8 <dfn title="November">Blotmath</dfn>, S.R. 1425
 
 The party entered the woods and found the Hermit's dwelling—though none of them agreed on what it looked like. Turnip saw a too-tall hobbit-hole. Wedge saw an enormous skull. Boffo saw a drafty old cabin. The Hermit didn't answer the door, and the front room was filled with strange noises and the clatter of odd devices. They climbed a tree and entered through a window on the second floor.
 
-![The Hermit](../../assets/images/the-hermit.webp)
+![The Hermit](../../assets/images/npcs/the-hermit.webp)
 
 Inside they found the body of [Tobias Chubb](/hobbity/appendix/npcs/#tobias-chubb).
 

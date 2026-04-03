@@ -62,7 +62,7 @@ At the Slumbering Serpent, Boffo and Wedge told [Belba](/hobbity/appendix/npcs/#
 
 Olwyn confirmed that Zacharias had returned from fishing. The old hobbit took the party's letter—the one he himself had written to [Buford](/hobbity/appendix/npcs/#buford-niss)—tore it up, and pocketed the pieces. Paranoid about being overheard, he led them to the lakeshore to talk freely.
 
-![Zacharias fishing at the lakeshore near Orlane](../../assets/images/zacharias-fishing.webp) His intelligence was grim: people were disappearing and coming back changed. He named four he believed compromised—storekeeper Wilbur Oldbuck, blacksmith Maddie Snowvale and her family, and carpenter Quinn Finla. The temple priests were the source. Problems started about a year ago when two priests arrived from the coast. Zacharias trusted Grover but said the constable needed proof before he could act.
+![Zacharias fishing at the lakeshore near Orlane](../../assets/images/npcs/zacharias-fishing.webp) His intelligence was grim: people were disappearing and coming back changed. He named four he believed compromised—storekeeper Wilbur Oldbuck, blacksmith Maddie Snowvale and her family, and carpenter Quinn Finla. The temple priests were the source. Problems started about a year ago when two priests arrived from the coast. Zacharias trusted Grover but said the constable needed proof before he could act.
 
 ## Arming Up
 

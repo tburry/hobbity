@@ -8,13 +8,15 @@ export interface GalleryImage {
 
 // Glob import all gallery images (excludes pcs/ and generated files)
 const allImages = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/images/*.webp',
+  ['/src/assets/images/*.webp', '/src/assets/images/npcs/*.webp'],
   { eager: true }
 );
 
 function img(name: string): ImageMetadata {
+  // Try top-level first, then npcs/
   const key = `/src/assets/images/${name}`;
-  const mod = allImages[key];
+  const npcKey = `/src/assets/images/npcs/${name}`;
+  const mod = allImages[key] ?? allImages[npcKey];
   if (!mod) throw new Error(`Image not found: ${key}`);
   return mod.default;
 }
