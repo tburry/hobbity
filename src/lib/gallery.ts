@@ -24,6 +24,15 @@ function img(name: string): ImageMetadata {
 export const images: GalleryImage[] = [
   // 2026-03-31 — The Serpent Beneath
   {
+    src: img('constable-grover.webp'),
+    alt: 'Constable Grover',
+    caption:
+      'Constable Grover of Orlane. Over dwarven whiskey at the Slumbering Serpent, he told the hobbits how the Golden Grain burned—and how Zacharias fled with Derek Desleigh.',
+    storyLink:
+      '/hobbity/stories/2026-02-05-ill-have-two-bowls-please/#orlane',
+    storyTitle: "I'll Have Two Bowls Please",
+  },
+  {
     src: img('ramne.webp'),
     alt: 'Ramne',
     caption:
