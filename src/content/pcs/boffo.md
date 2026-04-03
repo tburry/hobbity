@@ -14,20 +14,21 @@ The quiet one. Boffo speaks least but lands every observation. He understands th
 ## Spells
 
 - **Cantrip:** Perfect Portioning—can portion food with perfect accuracy (e.g. cut a pie into identical slices)
-- **Level 1:** Purify Food & Water, Light
+- **Level 1:** Purify Food & Water
 
 ## Notable Items
 
 - **Three-feathered hat**—from [Farmer Fallow](/hobbity/appendix/npcs/#farmer-fallow)'s stall. Gives a boost of speed when worn.
 - **Cobra-headed mace**—taken from [Abramo](/hobbity/appendix/npcs/#abramo). The mace head is shaped like a cobra's head.
+- **Shield of Merikka**—taken from [Misha](/hobbity/appendix/npcs/#misha)'s quarters. Painted with the crest of Merikka. Non-magical.
 
 ## Grievous Injuries
 
 - Skeleton's sword through the shoulder joint in the temple beneath [Orlane](/hobbity/appendix/places/#orlane). Healed crooked; arm doesn't move the way it used to (DEX).
 
-## Voice
+## Personality
 
-Boffo is understated and sincere. He makes deadpan observations that cut through the others' theorizing. His humor comes from hobbit logic—the worst fate imaginable is eating only one meal a day. He's self-aware about his limitations ("I may not be very bright") but perceptive where it counts. Generous with his companions, never mocking. When Wedge's dramatic flourish reveals nothing under a reed mat, Boffo says: "Let's just forget you said that, and then you can reuse it."
+Understated and sincere. Boffo doesn't overthink things—not because he's decided the simple way is best, but because complexity doesn't occur to him. He sees the world through food, labor, and what's right in front of him, and that narrow focus makes his observations land harder than anyone expects. Self-aware about his limitations ("I may not be very bright") but perceptive where it counts. Generous with his companions, never mocking. The worst fate he can imagine is eating only one meal a day. In combat he's the party's anchor: tough, steady, and willing to put himself between danger and his friends.
 
 ### Sample Lines
 

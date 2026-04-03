@@ -25,9 +25,9 @@ The leader, whether anyone asked for one or not. Third-generation nickname (Bill
 
 - Hammer blow to the skull from [Mattie Snowvale](/hobbity/appendix/npcs/#mattie-snowvale) in [Orlane](/hobbity/appendix/places/#orlane) (CHA)
 
-## Voice
+## Personality
 
-Wedge talks the most and the fastest. He's affectionately impatient with his companions, always ten feet ahead and annoyed about it. His confidence bumps into reality regularly (sneaking with a lit lantern) but he pushes forward anyway. In a crisis he leads with spirit, not caution. Calls the party "the Toad Stompers." Uses "fellas" and "guys" constantly.
+The self-appointed leader, whether anyone asked for one or not. Wedge talks the most and the fastest. He's affectionately impatient with his companions, always ten feet ahead and annoyed about it. His confidence bumps into reality regularly—sneaking with a lit lantern, casting spells that bounce off the enemy—but he pushes forward anyway. Handles encounters through sheer persistence and volume; folk tend to do what he says just to get a moment's peace. In a crisis he leads with spirit, not caution. Names things, claims things, drives decisions. He coined "the Toad Stompers" and will not let anyone forget it.
 
 ### Sample Lines
 

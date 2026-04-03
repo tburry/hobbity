@@ -26,9 +26,9 @@ The prepper. Rubbish collector and sorter by trade—"reused but useful." Chose 
 - Goblin arrow through the lung at the bridge on the way to [Orlane](/hobbity/appendix/places/#orlane) (CON)
 - Troglodyte claw tore through his side; the wound festered and sapped his stamina (CON)
 
-## Voice
+## Personality
 
-Turnip examines every room like a crime scene. He asks about graffiti in troglodyte lairs and debates the philosophy of detached fingers. He misses the forest for the trees, every time—stuck behind giant Boffo in a tunnel with danger ahead, Turnip just wants to know why they stopped walking. When he does land a hit, he names it: smashing a skeleton with a cooking pot earns "We call that second breakfast." Perpetually independent, slightly aggrieved.
+A rubbish collector's mind in an adventurer's body. Turnip examines every room like a crime scene—asks about graffiti in troglodyte lairs, debates the philosophy of detached fingers, inventories everything. He never questions hobbit values; he just applies them rigorously to situations hobbits were never meant to face. Misses the forest for the trees every time—stuck behind giant Boffo in a tunnel with danger ahead, Turnip just wants to know why they stopped walking. Perpetually independent, slightly aggrieved, and prepared for the wrong emergency.
 
 ### Sample Lines
 
