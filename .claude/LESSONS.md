@@ -43,8 +43,9 @@ When adding new story markdown files:
 
 ## Images
 
-- Check [public/images/](../public/images/) for new files before asking the user.
-- Full workflow: convert to webp, create small version, insert in story, add to gallery.
+- Check [src/assets/images/](../src/assets/images/) for new files before asking the user.
+- Full workflow: convert to webp, insert in story with relative path, add to gallery.
+- Astro handles responsive image optimization automatically — no manual small versions.
 - Run [generate-icons.sh](../scripts/generate-icons.sh) when `toad-icon.webp` changes.
 
 ## Commits

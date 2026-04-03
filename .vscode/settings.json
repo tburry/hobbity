@@ -1,6 +1,20 @@
 {
+  "terminal.integrated.profiles.osx": {
+    "fish": {
+      "path": "/opt/homebrew/bin/fish",
+      "args": ["-C", "fish_add_path /Users/todd/git/hobbity/scripts"]
+    }
+  },
+  "terminal.integrated.defaultProfile.osx": "fish",
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
-  }
+  },
+  "cSpell.words": [
+    "Abramo",
+    "chainmail",
+    "defences",
+    "Explictica",
+    "Misha"
+  ]
 }
