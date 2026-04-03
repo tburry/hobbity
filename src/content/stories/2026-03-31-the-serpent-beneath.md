@@ -20,7 +20,7 @@ The party was about to flee the dungeon—beat half to death, out of potions, ru
 
 ## Ramne
 
-He carried a book in one hand and a wooden spoon in the other, and a weasel named Twitch sat on his head like a furry hat. His name was Ramne, and he'd been looking for them.
+He carried a book in one hand and a wooden spoon in the other, and a weasel sat on his head like a furry hat. His name was Ramne, and he'd been looking for them. The weasel's name was Twitch. "Well now we know why she didn't come to the whistle," Boffo said. Wedge nodded. "She's already got a friend."
 
 ![Ramne](../../assets/images/ramne.webp)
 

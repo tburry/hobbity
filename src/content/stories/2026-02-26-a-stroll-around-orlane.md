@@ -24,25 +24,35 @@ Outside, Boffo looked at the other two. "Well," he said, "do you want to continu
 
 They did.
 
-That evening the party sat on the porch of the Slumbering Serpent eating supper when Grover appeared. He said nothing about the blacksmith. Instead he told them his men found no dire wolves. The party shrugged it off. Grover told them to wrap up their business and get out of Orlane.
+The party tried the Temple of Merikka and was turned away at the door. They visited the Elm Grove—a squat stone cottage half-sunk into the earth, apparently empty. A weasel darted through the weeds outside. Wedge pulled out his whistle to call it over, but instead of the weasel, a raven dropped out of the sky and landed on his arm, which seemed a little queer. They left the place alone. Down by the river they found Vilma, a widow, but Rolo—son of Atticus—came out with a crossbow, put a bolt at their feet, and told them to move along. He then walked to the temple and knocked.
 
 ## Prowling After Dark
 
-Night fell and the hobbits went creeping through backyards. They broke into the home of Zacharias, who was out fishing, and lit every fireplace and candle in the place—announcing themselves to no one. From there they skulked behind the smithy and forced their way into the ruins of the Foaming Mug Inn. The place had been torn apart, furniture smashed, walls gouged. In the basement they found a nest: three sleeping pallets, two troglodytes. The hobbits killed both. The third pallet was empty.
+That evening the party sat on the porch of the Slumbering Serpent eating supper when Grover appeared. He said nothing about the blacksmith. Instead he told them his men found no dire wolves. Grover told them to wrap up their business and get out of Orlane. The party shrugged it off.
 
-## Daylight Investigations
+Night fell and the hobbits went creeping through backyards. Zacharias was out fishing, so they let themselves into his home—not breaking in, mind you, but simply doing the polite thing and waiting inside. Any decent hobbit would do the same. They lit every lantern and the fireplace, put a kettle on, and made themselves thoroughly comfortable.
 
-At some point during the daylight hours the party tried the Temple of Merikka and was turned away at the door. They visited the Elm Grove—a squat stone cottage half-sunk into the earth, empty, a weasel darting through the weeds outside. Wedge blew his whistle and called down a raven. They left the place alone. Down by the river they found Vilma, a widow, but Rolo—son of Atticus—came out with a crossbow, put a bolt at their feet, and told them to move along. He then walked to the temple and knocked.
+It occurred to them, after a second cup, that they ought to search the house in case Zacharias was home after all and simply hadn't heard them. This was, of course, perfectly reasonable. What was less reasonable was the collection of statues scattered about the place—stone figures that had been doing an admirable job of being furniture right up until they weren't. The statues lurched to life mid-search, and the Toad Stompers departed with a speed that would have impressed even Constable Grover. They left the lanterns burning, the fire crackling, the kettle whistling, and the front door standing wide open to the night air. Hospitality, as it turned out, had its limits.
+
+From there they skulked behind the smithy and forced their way into the ruins of the Foaming Mug Inn. The place had been torn apart, furniture smashed, walls gouged. In the basement they found a nest: three sleeping pallets, two troglodytes. The fight was brief and ugly. One of them raked its claws through Turnip's side before the hobbits put it down. The wound looked manageable at first, but the flesh around it went hot and angry by morning—troglodyte filth working its way in. Whatever healing the others could manage closed the skin but couldn't undo what the fever took. Turnip would feel that one for the rest of his life.
 
 ## Caught at the Bridge
 
-Dawn of the third day. The hobbits slipped out of the Foaming Mug ruins and walked straight into Constable Grover and his deputies, standing at the foot of the bridge outside Matty Snowvale's smithy.
+At dawn, three hobbits emerged from the shattered doorway of an abandoned inn—filthy, bloodied, and smelling faintly of troglodyte—and walked straight into Constable Grover and his deputies, standing at the foot of the bridge outside Matty Snowvale's smithy. Even a charitable observer would have found the scene suspicious.
 
 ![Constable Grover and his deputies at the bridge](../../assets/images/grover-and-deputies-at-bridge.webp)
 
+Grover was unimpressed with their explanations. He sent Deputy Donovan to investigate their claim about troglodytes in the basement, but as for the three hobbits themselves, he would be escorting them back to the Slumbering Serpent. Now.
+
+Turnip would not have it. The very idea—a hobbit constable marching fellow hobbits through the streets like common criminals—was, in his view, downright un-hobbit-like, and he said so. Grover's expression suggested he disagreed. He and his deputy raised their crossbows. Turnip kept talking. Grover told him, plainly and without affection, to stop talking or he would shoot. Turnip did not stop talking. It was simply inconceivable to him that one hobbit could loose a bolt at another. Hobbits didn't do that. It wasn't done.
+
+It was about to be done. Wedge, who possessed a keener sense of self-preservation and had already been hit by one weapon that morning, stepped forward and begged Grover not to shoot his friend. The constable lowered his crossbow—and then cracked Turnip across the skull with the butt of it. Turnip dropped like a sack of turnips, which settled the argument nicely.
+
+Boffo, for his part, had been paying very little attention to any of this. It was an uncommonly fine spring morning—the kind where the light comes in low and golden over the river—and he had been enjoying it.
+
 ## Grover's Reckoning
 
-Turnip spent the night tied to a table leg in Constable Grover's office—hobbit jail, such as it is. He got cake for breakfast, which softened the indignity somewhat. When Deputy Donovan arrived with news of two dead troglodytes in the Foaming Mug basement, the color drained from Grover's face. He untied Turnip and told him to rest at the Slumbering Serpent. Turnip demanded an apology. Grover declined.
+Turnip spent the night tied to a table leg in Constable Grover's office—hobbit jail, such as it is. He got cake for breakfast, which softened the indignity somewhat. When Donovan returned with news of two dead troglodytes in the Foaming Mug basement, the color drained from Grover's face. He untied Turnip and told him to rest at the Slumbering Serpent. Turnip demanded an apology. Grover declined.
 
 ## Belba Takes Charge
 
