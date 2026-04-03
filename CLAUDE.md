@@ -114,13 +114,25 @@ Suggested edits/additions to `HOBBIT_CAMPAIGN_CONTEXT.md` based on this session.
 
 After writing the story file, process these updates before committing:
 
-1. Update PC levels in `src/content/appendix/pcs.mdx` if the party leveled up. Use `Level N → Level N+1` notation in the story header.
+1. Update PC levels in `src/content/pcs/` if the party leveled up. Use `Level N → Level N+1` notation in the story header.
 2. Check the story group's TOC/summary to see if it needs updating with the new chapter in mind.
 3. Add new NPCs to `src/content/appendix/npcs.md`. Update existing NPC entries with new information from the session.
 4. Add or update locations in `src/content/appendix/locations.md` with new places or events.
-5. Record any grievous injuries in `src/content/appendix/pcs.mdx` (confirm with user first).
-6. Add new notable items to `src/content/appendix/pcs.mdx` (permanent/magical only, no consumables).
+5. Record any grievous injuries in `src/content/pcs/` (confirm with user first).
+6. Add new notable items to `src/content/pcs/` (permanent/magical only, no consumables).
 7. Update `HOBBIT_CAMPAIGN_CONTEXT.md` with the Context Doc Updates from the session notes.
+
+## Content Maintenance
+
+Whenever stories are added or edited, review each PC file in `src/content/pcs/` against the totality of all stories to see if any sections need updating. Check:
+
+- **Spells** — new spells learned or used in new ways
+- **Notable Items** — items gained, lost, or changed
+- **Grievous Injuries** — new injuries from the session (confirm with user first)
+- **Blurb** (frontmatter) — still accurate one-liner, or has the character evolved?
+- **Personality/Sample Lines** — new defining moments or quotes worth capturing
+- **Stats** (frontmatter) — ability score changes from injuries or level-ups
+- **Level** (frontmatter) — update if the party leveled up
 
 ## Images
 
