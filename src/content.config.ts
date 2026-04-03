@@ -23,4 +23,25 @@ const essays = defineCollection({
   schema: z.object({}).passthrough(),
 });
 
-export const collections = { stories, appendix, summaries, essays };
+const pcs = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/pcs' }),
+  schema: z.object({
+    name: z.string(),
+    class: z.string(),
+    level: z.number(),
+    alignment: z.string(),
+    pc: z.string(),
+    order: z.number(),
+    blurb: z.string().optional(),
+    stats: z.object({
+      STR: z.number(),
+      INT: z.number(),
+      WIS: z.number(),
+      DEX: z.number(),
+      CON: z.number(),
+      CHA: z.number(),
+    }),
+  }),
+});
+
+export const collections = { stories, appendix, summaries, essays, pcs };
