@@ -7,11 +7,10 @@ import { storyOrder, storySlug, getTitle } from '../lib/stories';
 const allStories = await getCollection('stories');
 allStories.sort((a, b) => a.id.localeCompare(b.id));
 
-const appendix = (await getCollection('appendix'))
-  .sort((a, b) => appendixOrder.indexOf(a.id) - appendixOrder.indexOf(b.id));
-
 const essays = await getCollection('essays');
 essays.sort((a, b) => a.id.localeCompare(b.id));
+
+const pcs = (await getCollection('pcs')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <Base title="Index" showHome={true}>
@@ -45,9 +44,17 @@ essays.sort((a, b) => a.id.localeCompare(b.id));
 
   <h2>Appendix</h2>
   <ul>
-    {appendix.map((p) => (
-      <li><a href={`/hobbity/appendix/${p.id}/`}>{appendixLabels[p.id] || p.id}</a></li>
+    {appendixOrder.map((id) => (
+      <li>
+        <a href={`/hobbity/appendix/${id}/`}>{appendixLabels[id]}</a>
+        {id === 'pcs' && (
+          <ul>
+            {pcs.map((pc) => (
+              <li><a href={`/hobbity/appendix/pcs/${pc.id}/`}>{pc.data.name}</a></li>
+            ))}
+          </ul>
+        )}
+      </li>
     ))}
-    <li><a href="/hobbity/appendix/gallery/">{appendixLabels['gallery']}</a></li>
   </ul>
 </Base>

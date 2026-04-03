@@ -16,7 +16,7 @@ const resolved = await Promise.all(
   <div class="gallery-page">
   <h1>Gallery</h1>
 
-  <div class="gallery">
+  <div class="gallery gallery-img">
     {resolved.map((img) => (
       <figure>
         <a href={img.fullSrc} data-lightbox>

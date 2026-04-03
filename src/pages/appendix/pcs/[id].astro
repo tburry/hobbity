@@ -1,0 +1,56 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image, getImage } from 'astro:assets';
+import Content from '../../../layouts/Content.astro';
+import PCCardDetail from '../../../components/PCCardDetail.astro';
+import { getAvatarImage, getAllFullImages } from '../../../lib/pc-images';
+
+export async function getStaticPaths() {
+  const pcs = await getCollection('pcs');
+  return pcs.map((pc) => ({
+    params: { id: pc.id },
+    props: { pc },
+  }));
+}
+
+const { pc } = Astro.props;
+const { Content: PCContent } = await render(pc);
+const avatar = getAvatarImage(pc.data.pc, pc.data.level);
+const galleryImages = getAllFullImages(pc.data.pc, pc.data.level);
+const resolved = await Promise.all(
+  galleryImages.map(async ({ img, level }) => ({
+    img,
+    level,
+    fullSrc: (await getImage({ src: img })).src,
+  }))
+);
+---
+
+<Content title={pc.data.name} showHome={true}>
+  <PCCardDetail
+    name={pc.data.name}
+    class={pc.data.class}
+    level={pc.data.level}
+    alignment={pc.data.alignment}
+    avatar={avatar}
+    blurb={pc.data.blurb}
+    stats={pc.data.stats}
+  />
+  <PCContent />
+
+  {resolved.length > 0 && (
+    <>
+      <h2>Gallery</h2>
+      <div class="gallery gallery-pc">
+        {resolved.map(({ img, level, fullSrc }) => (
+          <figure>
+            <a href={fullSrc} data-lightbox>
+              <Image src={img} alt={`${pc.data.name} · Level ${level}`} height={250} loading="lazy" />
+            </a>
+            <figcaption>{pc.data.name} · Level {level}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </>
+  )}
+</Content>

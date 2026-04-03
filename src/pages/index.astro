@@ -6,11 +6,10 @@ import { appendixLabels, appendixOrder } from '../lib/appendix';
 import { storyOrder, storySlug, getTitle } from '../lib/stories';
 import toadStompers from '../assets/images/toad-stompers.webp';
 
-const appendix = (await getCollection('appendix'))
-  .sort((a, b) => appendixOrder.indexOf(a.id) - appendixOrder.indexOf(b.id));
 
 const essays = await getCollection('essays');
 essays.sort((a, b) => a.id.localeCompare(b.id));
+
 ---
 
 <Base title="Table of Contents">
@@ -38,10 +37,9 @@ essays.sort((a, b) => a.id.localeCompare(b.id));
 
     <h2>Appendices</h2>
     <ul>
-      {appendix.map((p) => (
-        <li><a href={`/hobbity/appendix/${p.id}/`}>{appendixLabels[p.id] || p.id}</a></li>
+      {appendixOrder.map((id) => (
+        <li><a href={`/hobbity/appendix/${id}/`}>{appendixLabels[id]}</a></li>
       ))}
-      <li><a href="/hobbity/appendix/gallery/">{appendixLabels['gallery']}</a></li>
       <li><a href="/hobbity/index-page/">Index</a></li>
     </ul>
   </nav>

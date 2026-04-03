@@ -3,24 +3,23 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { appendixLabels, appendixOrder } from '../../lib/appendix';
 
-const contentPages = (await getCollection('appendix'))
-  .sort((a, b) => appendixOrder.indexOf(a.id) - appendixOrder.indexOf(b.id));
+const pcs = (await getCollection('pcs')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <Base title="Appendix" showHome={true}>
   <h1>Appendices</h1>
   <ul>
-    {contentPages.map((page) => (
+    {appendixOrder.map((id) => (
       <li>
-        <a href={`/hobbity/appendix/${page.id}/`}>
-          {appendixLabels[page.id] || page.id}
-        </a>
+        <a href={`/hobbity/appendix/${id}/`}>{appendixLabels[id]}</a>
+        {id === 'pcs' && (
+          <ul>
+            {pcs.map((pc) => (
+              <li><a href={`/hobbity/appendix/pcs/${pc.id}/`}>{pc.data.name}</a></li>
+            ))}
+          </ul>
+        )}
       </li>
     ))}
-    <li>
-      <a href="/hobbity/appendix/gallery/">
-        {appendixLabels['gallery']}
-      </a>
-    </li>
   </ul>
 </Base>

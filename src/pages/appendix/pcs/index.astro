@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import PCCardSummary from '../../../components/PCCardSummary.astro';
+import { getAvatarImage, getFullImage } from '../../../lib/pc-images';
+import { extractSections, mdToHtml } from '../../../lib/pc-sections';
+
+const showSections = ['Spells', 'Notable Items'];
+
+const pcs = (await getCollection('pcs')).sort((a, b) => a.data.order - b.data.order);
+
+const pcData = pcs.map((pc) => {
+  const allSections = extractSections(pc.body || '');
+  const sections: Record<string, string> = {};
+  for (const key of showSections) {
+    if (allSections[key]) sections[key] = mdToHtml(allSections[key]);
+  }
+  return { pc, sections };
+});
+---
+
+<Base title="Player Characters" showHome={true} searchable={true}>
+  <h1>Player Characters</h1>
+
+  {pcData.map(({ pc, sections }) => {
+    const avatar = getAvatarImage(pc.data.pc, pc.data.level);
+    const full = getFullImage(pc.data.pc, pc.data.level);
+    return avatar && (
+      <PCCardSummary
+        name={pc.data.name}
+        class={pc.data.class}
+        level={pc.data.level}
+        avatar={avatar}
+        fullImage={full}
+        link={`/hobbity/appendix/pcs/${pc.id}/`}
+        blurb={pc.data.blurb}
+        stats={pc.data.stats}
+        sections={sections}
+      />
+    );
+  })}
+</Base>
