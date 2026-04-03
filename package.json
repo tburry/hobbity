@@ -21,6 +21,8 @@
     "sharp": "^0.34.5"
   },
   "devDependencies": {
-    "sass": "^1.98.0"
+    "github-slugger": "^2.0.0",
+    "sass": "^1.98.0",
+    "unist-util-visit": "^5.1.0"
   }
 }

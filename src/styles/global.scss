@@ -267,6 +267,30 @@ dfn {
   font-style: normal;
   text-decoration: underline dotted var(--border);
   cursor: help;
+
+  &.icon-dfn {
+    color: transparent;
+    text-decoration: none;
+    display: inline;
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      // top: -0.1em;
+      left: 0;
+      width: 0.6em;
+      height: 1.1em;
+      background-color: var(--accent);
+      -webkit-mask-image: url('/hobbity/icons/death-dagger.svg');
+      mask-image: url('/hobbity/icons/death-dagger.svg');
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+    }
+  }
 }
 
 abbr[title] {

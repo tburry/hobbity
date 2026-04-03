@@ -24,9 +24,15 @@ importers:
         specifier: ^0.34.5
         version: 0.34.5
     devDependencies:
+      github-slugger:
+        specifier: ^2.0.0
+        version: 2.0.0
       sass:
         specifier: ^1.98.0
         version: 1.98.0
+      unist-util-visit:
+        specifier: ^5.1.0
+        version: 5.1.0
 
 packages:
 
