@@ -148,6 +148,7 @@ Also review `src/content/appendix/npcs.md` against the totality of all stories. 
 - Follow the writing style guide: Tolkien/Pratchett tone, no game terms, in-world language.
 - Update existing NPC entries when new information is learned in later sessions, not just when the NPC first appears.
 - Include a **Status** line for NPCs who are dead, captured, missing, in hiding, at large, etc. Omit status for NPCs in normal circumstances. Always pair the status with a brief context sentence (e.g. "Dead—killed by Boffo beneath the Temple of Merikka").
+- Add a death dagger to dead NPC/PC headings: `### Name **†**`. A rehype plugin converts this to `<dfn title="Dead">†</dfn>` and pre-assigns a clean heading ID so the `†` doesn't pollute the anchor.
 
 ## Images
 

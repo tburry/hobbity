@@ -4,7 +4,7 @@
 
 ## A
 
-### Abramo
+### Abramo **†**
 
 Serpent cult priest beneath the [Temple of Merikka](/hobbity/appendix/places/#orlane). Wore enchanted scale mail, carried a cobra-headed mace, and worshipped a snake goddess called Explictica. Completely insane—covered every surface of his lair in reptilian scrawlings and tried to re-carve Merikka's granite statues into serpent forms.
 
@@ -72,12 +72,13 @@ Three-time pie-eating champion at the Gomwick Harvest Festival. Lost to Boffo in
 
 ## C
 
-### Tobias Chubb
+### Tobias Chubb **†**
 
-A ne'er-do-well encountered on the [Old Road](/hobbity/appendix/places/#the-five-shires), muttering about trees "looking at him funny." Used as an agent in the pie-poisoning plot by [Adelard Potts](#adelard-potts) and [Hanna Boggs](#hanna-boggs). Found dead in the [Hermit's cabin](/hobbity/appendix/places/#the-hermits-cabin).
+A ne'er-do-well encountered on the [Old Road](/hobbity/appendix/places/#the-five-shires), muttering about trees "looking at him funny." Used as an agent in the pie-poisoning plot by [Adelard Potts](#adelard-potts) and [Hanna Boggs](#hanna-boggs).
 
-- **Location:** [The Hermit's Cabin](/hobbity/appendix/places/#the-hermits-cabin) (deceased)
+- **Location:** [The Hermit's Cabin](/hobbity/appendix/places/#the-hermits-cabin)
 - **Handlers:** [Hanna Boggs](#hanna-boggs), [Adelard Potts](#adelard-potts)
+- **Status:** Dead—found in the Hermit's cabin
 
 ## D
 
@@ -88,7 +89,7 @@ A ne'er-do-well encountered on the [Old Road](/hobbity/appendix/places/#the-five
 - **Location:** [Gomwick](/hobbity/appendix/places/#gomwick)
 - **Employer:** [Buford Niss](#buford-niss)
 
-### Donovan
+### Donovan **†**
 
 Non-local deputy serving under [Constable Grover](#constable-grover) in [Orlane](/hobbity/appendix/places/#orlane). Killed by [Zacharias](#zacharias)'s stone statues at Zacharias's house.
 
