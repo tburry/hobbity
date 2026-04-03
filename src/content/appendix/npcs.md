@@ -6,10 +6,10 @@
 
 ### Abramo
 
-Serpent cult priest beneath the [Temple of Merikka](/hobbity/appendix/places/#orlane). Wore enchanted scale mail, carried a cobra-headed mace, and worshipped a snake goddess called Explictica. Completely insane—covered every surface of his lair in reptilian scrawlings and tried to re-carve Merikka's granite statues into serpent forms. Killed by Boffo.
+Serpent cult priest beneath the [Temple of Merikka](/hobbity/appendix/places/#orlane). Wore enchanted scale mail, carried a cobra-headed mace, and worshipped a snake goddess called Explictica. Completely insane—covered every surface of his lair in reptilian scrawlings and tried to re-carve Merikka's granite statues into serpent forms.
 
 - **Location:** [The Temple of Merikka](/hobbity/appendix/places/#orlane)
-- **Status:** Dead
+- **Status:** Dead—killed by Boffo beneath the Temple of Merikka
 
 ### See Also
 
@@ -94,7 +94,7 @@ Non-local deputy serving under [Constable Grover](#constable-grover) in [Orlane]
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
 - **Superior:** [Constable Grover](#constable-grover)
-- **Status:** Dead
+- **Status:** Dead—killed by [Zacharias](#zacharias)'s stone statues at Zacharias's house
 
 ### Derek Desleigh
 
@@ -266,10 +266,10 @@ Axe shop owner in [Gomwick](/hobbity/appendix/places/#gomwick). Sold Wedge his s
 
 ### Misha
 
-Priestess of the [Temple of Merikka](/hobbity/appendix/places/#orlane). The party took her armor, shield, and mace (Boffo now uses them). A body found in a crawlspace beneath the temple may be the real priestess, suggesting Misha is an imposter who murdered and replaced her. [Ramne](#ramne) suspects she may actually be a genuine follower of Merikka who was charmed. Put to sleep by Turnip's blowgun and locked in the temple.
+Priestess of the [Temple of Merikka](/hobbity/appendix/places/#orlane). The party took her armor, shield, and mace (Boffo now uses them). A body found in a crawlspace beneath the temple may be the real priestess, suggesting Misha is an imposter who murdered and replaced her. [Ramne](#ramne) suspects she may actually be a genuine follower of Merikka who was charmed.
 
 - **Location:** [The Temple of Merikka](/hobbity/appendix/places/#orlane)
-- **Status:** Prisoner
+- **Status:** Prisoner—put to sleep by Turnip's blowgun and locked in the temple
 
 ### See Also
 
@@ -376,7 +376,7 @@ Young girl, daughter of [Maddie Snowvale](#maddie-snowvale) the blacksmith's wif
 
 - **Location:** [The Temple of Merikka](/hobbity/appendix/places/#orlane)
 - **Family:** [Maddie Snowvale](#maddie-snowvale) (mother)
-- **Status:** Prisoner
+- **Status:** Prisoner—subdued by Wedge and locked in the Temple of Merikka
 
 ### Maddie Snowvale
 
