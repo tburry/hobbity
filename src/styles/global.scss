@@ -219,6 +219,7 @@ h3, h4, h5, h6 {
   color: var(--subheading-color);
 }
 
+
 h1 { font-size: 3rem; }
 h2 {
   font-size: 2.1rem;
@@ -250,6 +251,9 @@ a, a:visited {
 a:hover {
   text-decoration: underline;
 }
+
+h1 a, h1 a:visited, h2 a, h2 a:visited { color: var(--heading-color); }
+h3 a, h3 a:visited, h4 a, h4 a:visited, h5 a, h5 a:visited, h6 a, h6 a:visited { color: var(--subheading-color); }
 
 article a {
   text-decoration: underline;

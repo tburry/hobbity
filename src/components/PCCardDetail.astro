@@ -22,7 +22,6 @@ const { name, class: cls, level, alignment, avatar, blurb, stats } = Astro.props
   )}
   <h1>{name}</h1>
   <p class="pc-detail-meta">{cls} &middot; Level {level} &middot; {alignment}</p>
-  {blurb && <p class="pc-detail-blurb">{blurb}</p>}
   <table class="pc-detail-stats">
     <thead>
       <tr>
