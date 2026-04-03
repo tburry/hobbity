@@ -42,7 +42,7 @@ During this brief moment as they stood in the entryway of Toppo Hill, they notic
 
 Dalton led them to the same parlour where they had talked with Buford in the aftermath of the Scarecrow business and from whence they set off to find [the Hermit](/hobbity/appendix/npcs/#the-hermit). The room looked as if no one had been in here in months, and Dalton took pains to open curtains to bring in some light.
 
-Once he saw them comfortable, he left for a few moments and returned with a tray of refreshments—much meagrer than what they remembered—and excused himself again to inform them that his master would be along shortly.
+Once he saw them comfortable, he left for a few moments and returned with a tray of refreshments—much more meager than what they remembered—and excused himself again to inform them that his master would be along shortly.
 
 As he did so, a figure entered the parlour from the other side.
 
