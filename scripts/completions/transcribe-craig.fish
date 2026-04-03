@@ -1,0 +1,5 @@
+complete -c transcribe-craig -s m -l model -xa "tiny base small medium large" -d "Whisper model size"
+complete -c transcribe-craig -s o -l out -rF -d "Output transcript file"
+complete -c transcribe-craig -s t -l trim -x -d "Only process first N minutes"
+complete -c transcribe-craig -l merge-only -d "Skip transcription, re-merge CSVs"
+complete -c transcribe-craig -l no-update -d "Skip whisper update check"

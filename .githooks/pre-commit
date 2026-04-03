@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# Pre-commit hook: generate avatars for staged PC artwork
+
+pc_staged=$(git diff --cached --name-only --diff-filter=ACM -- 'src/assets/images/pcs/*.webp' | grep -v '_avatar\.\|_debug\.')
+
+if [ -z "$pc_staged" ]; then
+  exit 0
+fi
+
+for file in $pc_staged; do
+  scripts/make-avatar "$file"
+  base="${file%.*}"
+  git add "${base}_avatar.webp"
+done
