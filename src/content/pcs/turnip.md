@@ -18,8 +18,8 @@ Turnip Bramblebrook is the prepper and investigator. A rubbish collector and sor
 
 ## Notable Items
 
-- **Mysterious stockings**—from [Farmer Fallow](/hobbity/appendix/npcs/#farmer-fallow)'s stall. Later tailored into legwarmers by Orlane's paranoid tailor, [Myron Tweed](/hobbity/appendix/npcs/#myron-tweed). Grant extra stamina in exploration mode.
-- **Scale mail +1**—taken from [Abramo](/hobbity/appendix/npcs/#abramo). Snake-skin pattern rendered in steel. Counts as light armor for encumbrance.
+- **Mysterious stockings:** From [Farmer Fallow](/hobbity/appendix/npcs/#farmer-fallow)'s stall. Later tailored into legwarmers by Orlane's paranoid tailor, [Myron Tweed](/hobbity/appendix/npcs/#myron-tweed). Grant extra stamina in exploration mode.
+- **Scale mail +1:** Taken from [Abramo](/hobbity/appendix/npcs/#abramo). Snake-skin pattern rendered in steel. Counts as light armor for encumbrance.
 
 ## Grievous Injuries
 

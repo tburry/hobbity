@@ -167,6 +167,9 @@ Write recaps in the style of Tolkien's _The Hobbit_ mixed with a bit of Pratchet
 - Cut unnecessary adjectives. Trust nouns and verbs to carry the weight.
 - No main character. Give all PCs roughly equal weight in recaps.
 - Cross-link NPCs and locations in story prose to their entries in `npcs.md` and `places.md` on first mention.
+- In definition-style lists (`**Term** Description`), always use a colon to separate the term from the description. E.g. `**Cantrip:** Perfect Portioning`.
+- Use em dashes sparingly—prefer a comma or colon when either would work. Em dashes never have spaces on either side.
+- En dashes with a space on either side ( – ) are used as separators in headings.
 
 ### Banned Game Terms in Narrative
 

@@ -4,7 +4,7 @@ story: The Huddle Job
 
 # The Summons
 
-Between Sessions — 24 <dfn title="May">Thrimidge</dfn>, S.R. 1426
+Between Sessions – 24 <dfn title="May">Thrimidge</dfn>, S.R. 1426
 
 - **PCs:**
   - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Hobbit Adventurer
@@ -20,7 +20,7 @@ Unlike the previous trip to Gomwick where they were forced to camp out in the wo
 
 The day was pleasant and easy going, and they spent most of it chatting with fellow travellers and farmers they met along the way, even managing to hitch a ride on the back of a wagon a few times.
 
-The Right Way was all that was promised, being lively and boisterous, and with plenty of good food and drink. The three of them paid for beds in the communal Long Room — a step up from sleeping on the dirty floors of the Common Room, but a definite step down from the more luxurious and expensive private rooms. No matter, as it was dry and warm and comfortable enough for the one night.
+The Right Way was all that was promised, being lively and boisterous, and with plenty of good food and drink. The three of them paid for beds in the communal Long Room—a step up from sleeping on the dirty floors of the Common Room, but a definite step down from the more luxurious and expensive private rooms. No matter, as it was dry and warm and comfortable enough for the one night.
 
 ## Gomwick in Spring
 
@@ -38,11 +38,11 @@ They knocked and rang the bell, and it wasn't long before [Dalton Dallydown](/ho
 
 Dalton looked overtired and concerned, as he politely greeted them and took their cloaks and other things and hung them neatly by the door. He deferred politely and refused to answer any questions or become engaged in conversation.
 
-During this brief moment as they stood in the entryway of Toppo Hill, they noticed that much had changed in the intervening months. While the house had seemed exuberant, today it was subdued. In the fall, every candle had seemed to be lit, every hearth with a warm fire, and every room occupied with some semblance of light or use. Today, the house seemed cold and empty. In fact, many of Buford's prized possessions — which they had noticed bore a distinct nautical and exotic theme — were gone.
+During this brief moment as they stood in the entryway of Toppo Hill, they noticed that much had changed in the intervening months. While the house had seemed exuberant, today it was subdued. In the fall, every candle had seemed to be lit, every hearth with a warm fire, and every room occupied with some semblance of light or use. Today, the house seemed cold and empty. In fact, many of Buford's prized possessions—which they had noticed bore a distinct nautical and exotic theme—were gone.
 
 Dalton led them to the same parlour where they had talked with Buford in the aftermath of the Scarecrow business and from whence they set off to find [the Hermit](/hobbity/appendix/npcs/#the-hermit). The room looked as if no one had been in here in months, and Dalton took pains to open curtains to bring in some light.
 
-Once he saw them comfortable, he left for a few moments and returned with a tray of refreshments — much meagrer than what they remembered — and excused himself again to inform them that his master would be along shortly.
+Once he saw them comfortable, he left for a few moments and returned with a tray of refreshments—much meagrer than what they remembered—and excused himself again to inform them that his master would be along shortly.
 
 As he did so, a figure entered the parlour from the other side.
 
@@ -58,7 +58,7 @@ Then he turned to the three of them and, with some difficulty speaking, but evid
 
 "Thank you, my friends, for agreeing to come. It means a great deal to me that you are here and are willing to help me.
 
-First, I should tell you that over the winter I did receive word from Our Friend in the Woods — just as he promised he would — and it has only obfuscated the Scarecrow matter further.
+First, I should tell you that over the winter I did receive word from Our Friend in the Woods—just as he promised he would—and it has only obfuscated the Scarecrow matter further.
 
 I won't bore you with the cryptic details, but the message he sent was simply the following: 'The crows are scared because the serpent hungers.'
 
@@ -84,7 +84,7 @@ Almost to emphasize the point, Buford began another hacking coughing fit. He wip
 
 > Much has happened in my life since we fought side by side in the troll war. I hope, sometime, to have a chance to talk with you about the many pleasant things.
 >
-> My purpose now, sadly, is to ask — nay, beg — my courageous comrades to aid my people in a time of dire need. I cannot even describe to you the danger that threatens Orlane, for I know not its true nature. I do know that, unless it can somehow be stopped, this evil will consume my little village and its families. We will vanish without trace into the dust of history.
+> My purpose now, sadly, is to ask—nay, beg—my courageous comrades to aid my people in a time of dire need. I cannot even describe to you the danger that threatens Orlane, for I know not its true nature. I do know that, unless it can somehow be stopped, this evil will consume my little village and its families. We will vanish without trace into the dust of history.
 >
 > A sinister force is at work here, and it is made all the more frightening by the fact that its true nature is concealed in a web of fear and suspicion. I plead with you come to Orlane, lend your skills to revealing this menace, that it may finally be destroyed!
 >
