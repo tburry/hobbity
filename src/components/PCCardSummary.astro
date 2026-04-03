@@ -1,0 +1,120 @@
+---
+import { Image, getImage } from 'astro:assets';
+
+interface Props {
+  name: string;
+  class: string;
+  level: number;
+  avatar: ImageMetadata;
+  fullImage?: ImageMetadata;
+  link?: string;
+  blurb?: string;
+  stats: { STR: number; INT: number; WIS: number; DEX: number; CON: number; CHA: number };
+  sections?: Record<string, string>;
+}
+
+const { name, class: cls, level, avatar, fullImage, link, blurb, stats, sections = {} } = Astro.props;
+const fullSrc = fullImage ? (await getImage({ src: fullImage })).src : undefined;
+---
+
+<div class="pc-card">
+  <div class="pc-card-avatar">
+    {fullSrc ? (
+      <a href={fullSrc} data-lightbox>
+        <Image src={avatar} alt={name} width={240} />
+      </a>
+    ) : (
+      <Image src={avatar} alt={name} width={240} />
+    )}
+  </div>
+  <div class="pc-card-info">
+    <h2 id={name.toLowerCase().split(' ')[0]}>{link ? <a href={link}>{name}</a> : name}</h2>
+    <p class="pc-card-meta">{cls} &middot; Level {level}</p>
+    {blurb && <p class="pc-card-blurb">{blurb}</p>}
+    <table class="pc-card-stats">
+      <thead>
+        <tr>
+          {Object.keys(stats).map((s) => <th>{s}</th>)}
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {Object.values(stats).map((v) => <td>{v}</td>)}
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{Object.entries(sections).map(([heading, html]) => (
+  <div class="pc-card-section">
+    <h3>{heading}</h3>
+    <Fragment set:html={html} />
+  </div>
+))}
+
+<style>
+  .pc-card {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    margin: 2rem 0 1rem;
+  }
+
+  .pc-card-avatar {
+    flex-shrink: 0;
+  }
+
+  .pc-card-avatar img {
+    border-radius: 8px;
+    width: 240px;
+    height: 240px;
+    object-fit: cover;
+    border: 2px solid var(--border)
+  }
+
+  .pc-card-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .pc-card-info h2 {
+    margin-top: 0;
+  }
+
+  .pc-card-meta {
+    margin: -0.5rem 0 0.75rem;
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  .pc-card-stats {
+    border-collapse: collapse;
+    text-align: center;
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .pc-card-stats {
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .pc-card-stats th,
+  .pc-card-stats td {
+    padding: 0.2rem 0.6rem;
+  }
+
+  .pc-card-stats th {
+    font-family: var(--heading-font);
+    font-weight: bold;
+    color: var(--heading-color);
+  }
+
+  @media (max-width: 500px) {
+    .pc-card {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+</style>

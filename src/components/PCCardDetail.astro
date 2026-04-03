@@ -1,0 +1,92 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  name: string;
+  class: string;
+  level: number;
+  alignment: string;
+  avatar?: ImageMetadata;
+  blurb?: string;
+  stats: { STR: number; INT: number; WIS: number; DEX: number; CON: number; CHA: number };
+}
+
+const { name, class: cls, level, alignment, avatar, blurb, stats } = Astro.props;
+---
+
+<div class="pc-detail">
+  {avatar && (
+    <div class="pc-detail-avatar">
+      <Image src={avatar} alt={name} width={160} />
+    </div>
+  )}
+  <h1>{name}</h1>
+  <p class="pc-detail-meta">{cls} &middot; Level {level} &middot; {alignment}</p>
+  {blurb && <p class="pc-detail-blurb">{blurb}</p>}
+  <table class="pc-detail-stats">
+    <thead>
+      <tr>
+        {Object.keys(stats).map((s) => <th>{s}</th>)}
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {Object.values(stats).map((v) => <td>{v}</td>)}
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .pc-detail {
+    text-align: center;
+    margin: 0 0 1rem;
+  }
+
+  .pc-detail-avatar {
+    margin-bottom: var(--space);
+  }
+
+  .pc-detail-avatar img {
+    border-radius: 50%;
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+  }
+
+  .pc-detail h1 {
+    margin: 0.75rem 0 0;
+  }
+
+  .pc-detail-blurb {
+    margin: 0.25rem 0 0.75rem;
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  .pc-detail-meta {
+    margin: 0.25rem 0 0.75rem;
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  .pc-detail-stats {
+    border-collapse: collapse;
+    text-align: center;
+    table-layout: fixed;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .pc-detail-stats th,
+  .pc-detail-stats td {
+    padding: 0.2rem 0.6rem;
+  }
+
+  .pc-detail-stats th {
+    font-family: var(--heading-font);
+    font-weight: bold;
+    color: var(--heading-color);
+  }</style>
