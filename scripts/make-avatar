@@ -9,8 +9,13 @@ if [ ! -d "$SCRIPT_DIR/.venv" ]; then
 fi
 
 if ! "$SCRIPT_DIR/.venv/bin/python" -c "import cv2" 2>/dev/null; then
-    echo "[setup] Installing opencv-python-headless..."
-    "$SCRIPT_DIR/.venv/bin/pip" install opencv-python-headless
+    echo "[setup] Installing opencv..."
+    "$SCRIPT_DIR/.venv/bin/pip" install opencv-python-headless opencv-contrib-python
+fi
+
+if ! "$SCRIPT_DIR/.venv/bin/python" -c "import insightface" 2>/dev/null; then
+    echo "[setup] Installing insightface..."
+    "$SCRIPT_DIR/.venv/bin/pip" install insightface onnxruntime
 fi
 
 PYTHON="$SCRIPT_DIR/.venv/bin/python"
@@ -19,8 +24,15 @@ SCRIPT="$SCRIPT_DIR/make-avatar.py"
 # Separate flags from file paths
 flags=()
 files=()
+expect_value=false
 for arg in "$@"; do
-    if [[ "$arg" == -* ]]; then
+    if $expect_value; then
+        flags+=("$arg")
+        expect_value=false
+    elif [[ "$arg" == "--model" ]]; then
+        flags+=("$arg")
+        expect_value=true
+    elif [[ "$arg" == --model=* || "$arg" == -* ]]; then
         flags+=("$arg")
     else
         files+=("$arg")

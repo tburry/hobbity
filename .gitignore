@@ -9,3 +9,5 @@ private/
 .DS_Store
 __pycache__/
 .astro/
+_debug/
+*_debug.webp
