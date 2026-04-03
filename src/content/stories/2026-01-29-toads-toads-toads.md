@@ -7,16 +7,16 @@ story: Something Rotten in Orlane
 Session Recap – 29 <dfn title="January">Afteryule</dfn>, S.R. 1426
 
 - **PCs:**
-  - Boffo Lunderbunk - Level 1 Hobbit Adventurer
-  - Wedge Wedgerton - Level 1 Hobbit Adventurer
-  - Turnip Bramblebrook - Level 1 Hobbit Adventurer
-- **Location:** Bridge on the road to Orlane
+  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Hobbit Adventurer
+  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 1 Hobbit Adventurer
+  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 1 Hobbit Adventurer
+- **Location:** Bridge on the road to [Orlane](/hobbity/appendix/places/#orlane)
 
 ## The Bridge
 
 After a long winter's rest, the three hobbits set out again on the road to Orlane. They hadn't gone far before trouble found them—a band of goblins had claimed a bridge ahead and weren't inclined to share it. The fight was sharp and quick, but a goblin arrow caught Turnip square in the chest and put him down. Boffo and Wedge drove the goblins back and got Turnip breathing again, though the wound ran deep. The arrow had pierced his lung, and no amount of rest would fully mend it.
 
-On one of the slain goblins the party found a note referencing Orlane as a current target and Gomwick as the next—confirming an organized operation expanding outward.
+On one of the slain goblins the party found a note referencing Orlane as a current target and [Gomwick](/hobbity/appendix/places/#gomwick) as the next—confirming an organized operation expanding outward.
 
 ![A note found on a slain goblin](../../assets/images/sinister-orlane-note.webp)
 

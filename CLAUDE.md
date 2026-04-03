@@ -60,9 +60,9 @@ Recaps go in `src/content/stories/` as `YYYY-MM-DD-episode-title-slug.md`. Slug 
 Session Recap — <date>
 
 - **PCs:**
-  - <PC Name> - Level <N> <Race> <Class>
+  - [<PC Name>](/hobbity/appendix/pcs/<pc-slug>) - Level <N> <Race> <Class>
   - ...
-- **Location:** <in-world location(s)>
+- **Location:** [<in-world location(s)>](/hobbity/appendix/places/#<anchor>)
 - **Season/Date:** <in-world season or date, if known>
 ```
 
@@ -160,6 +160,7 @@ Write recaps in the style of Tolkien's *The Hobbit* mixed with a bit of Pratchet
 - Stay in-world. Never mention the DM, dice rolls, natural twenties, hit points, or other game mechanics. Describe outcomes, not the table. Dice luck can be referred to as luck, fate, fortune, etc.
 - Cut unnecessary adjectives. Trust nouns and verbs to carry the weight.
 - No main character. Give all PCs roughly equal weight in recaps.
+- Cross-link NPCs and locations in story prose to their entries in `npcs.md` and `places.md` on first mention.
 
 ### Banned Game Terms in Narrative
 

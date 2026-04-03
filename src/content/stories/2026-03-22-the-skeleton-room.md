@@ -7,10 +7,10 @@ story: Something Rotten in Orlane
 Session Recap – 22 <dfn title="March">Rethe</dfn>, S.R. 1426
 
 - **PCs:**
-  - Boffo Lunderbunk - Level 1 Hobbit Adventurer
-  - Wedge Wedgerton - Level 1 Hobbit Adventurer
-  - Turnip Bramblebrook - Level 1 Hobbit Adventurer
-- **Location:** Dungeon beneath the Temple of Merikka and temple ground floor, Orlane
+  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Hobbit Adventurer
+  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 1 Hobbit Adventurer
+  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 1 Hobbit Adventurer
+- **Location:** Dungeon beneath the Temple of Merikka and temple ground floor, [Orlane](/hobbity/appendix/places/#orlane)
 
 ## Cleaning Up the Lair
 
@@ -68,17 +68,17 @@ He offered the Brooch of Shielding to Wedge. Wedge shook his head. "You're still
 
 ## Return to the Temple
 
-Back on the ground floor, the torches had gone out. Everything else was as they'd left it—Misha's bedroom, the offering hallway with its alcoves of golden food, the worship hall beyond. But as Wedge walked through the door, he heard voices from the sanctuary.
+Back on the ground floor, the torches had gone out. Everything else was as they'd left it—[Misha](/hobbity/appendix/npcs/#misha)'s bedroom, the offering hallway with its alcoves of golden food, the worship hall beyond. But as Wedge walked through the door, he heard voices from the sanctuary.
 
 ## The Snowvale Cult
 
-Four hobbits stood in the sanctuary. Griff, broad and furious. His son Timba beside him, fists up. And Kaylin, daughter of Maddie Snowvale, the blacksmith's wife who had filed that complaint with the constable. Behind them stood Misha, the false priestess, murmuring: "Remember. Don't harm them."
+Four hobbits stood in the sanctuary. Griff, broad and furious. His son Timba beside him, fists up. And [Kaylin](/hobbity/appendix/npcs/#kaylin-snowvale), daughter of [Maddie Snowvale](/hobbity/appendix/npcs/#maddie-snowvale), the blacksmith's wife who had filed that complaint with the constable. Behind them stood Misha, the false priestess, murmuring: "Remember. Don't harm them."
 
 "Say it ain't so, Misha," Boffo said. He wanted to believe it wasn't what it looked like. He always wanted to believe.
 
 Wedge had no such hesitation. "Let's subdue them and get answers."
 
-It was ugly, fighting unarmed hobbits. The party pulled their blows as best they could. Turnip threw a net over Griff—put to good use already. Boffo waded in with the flat of his mace. But during the scuffle, Kaylin slipped through the west door. Misha vanished with her. Derek Desleigh, who was somewhere in the building, never showed his face.
+It was ugly, fighting unarmed hobbits. The party pulled their blows as best they could. Turnip threw a net over Griff—put to good use already. Boffo waded in with the flat of his mace. But during the scuffle, Kaylin slipped through the west door. Misha vanished with her. [Derek Desleigh](/hobbity/appendix/npcs/#derek-desleigh), who was somewhere in the building, never showed his face.
 
 They manacled Griff and Timba back to back on the floor. Boffo tried talking to them. "Why? Why did you let this cult into your town?"
 
@@ -148,8 +148,8 @@ The party cleared the troglodyte lair, fought through goblins and undead, and co
 
 - 6 goblins (4 killed, 1 subdued, 1 fled)
 - 8 skeletons
-- Griff Snowvale (subdued)
-- Timba Snowvale (subdued)
+- [Griff Snowvale](/hobbity/appendix/npcs/#griff-snowvale-gardner) (subdued)
+- [Timba Snowvale](/hobbity/appendix/npcs/#timba-snowvale-gardner) (subdued)
 
 ### Treasure
 

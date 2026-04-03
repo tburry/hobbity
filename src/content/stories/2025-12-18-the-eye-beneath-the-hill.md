@@ -7,10 +7,10 @@ story: The Huddle Job
 Session Recap – 18 <dfn title="December">Foreyule</dfn>, S.R. 1425
 
 - **PCs:**
-  - Boffo Lunderbunk - Level 1 Hobbit Adventurer
-  - Wedge Wedgerton - Level 1 Hobbit Adventurer
-  - Turnip Bramblebrook - Level 1 Hobbit Adventurer
-- **Location:** Fortfield Tower, Huddle Farm
+  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Hobbit Adventurer
+  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 1 Hobbit Adventurer
+  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 1 Hobbit Adventurer
+- **Location:** Fortfield Tower, [Huddle Farm](/hobbity/appendix/places/#huddle-farm)
 
 ## Into the Tower
 

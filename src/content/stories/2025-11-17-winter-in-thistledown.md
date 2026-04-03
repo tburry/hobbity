@@ -7,10 +7,10 @@ story: A Hobbity Thanksgiving
 Between Sessions – <dfn title="November">Blotmath</dfn> S.R. 1425 to <dfn title="March">Rethe</dfn> S.R. 1426
 
 - **PCs:**
-  - Boffo Lunderbunk - Level 0 → Level 1 Hobbit Adventurer
-  - Wedge Wedgerton - Level 0 → Level 1 Hobbit Adventurer
-  - Turnip Bramblebrook - Level 0 → Level 1 Hobbit Adventurer
-- **Location:** Thistledown
+  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 0 → Level 1 Hobbit Adventurer
+  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 0 → Level 1 Hobbit Adventurer
+  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 0 → Level 1 Hobbit Adventurer
+- **Location:** [Thistledown](/hobbity/appendix/places/#thistledown)
 
 The hobbits returned home to Thistledown. Over the long winter months, something changed in each of them. They discovered they could wield magic—small tricks at first. Boffo could portion food with perfect precision. Wedge could conjure fireflies that danced around his hand for three blinks. Turnip could untangle any rope or string with a single pull. The visions visited their dreams—not every night, not always vividly, but they returned. Plague, flood, undeath. Perhaps too much cheese before bed. Perhaps something more.
 
@@ -19,7 +19,7 @@ The hobbits returned home to Thistledown. Over the long winter months, something
 or _How a Timely Tumble Turned the Tables on a Trickster_\
 as told by Turnip Bramblebrook
 
-The ballad that Turnip spent the whole trip to and from the Hermit's house working out for the storytelling quarter-final. For nothing. He will preface the tale with the disclaimer that any similarities between the characters in his tale and real hobbits should be ignored on account of he doesn't want the Shirriff coming after him for slander.
+The ballad that Turnip spent the whole trip to and from [the Hermit](/hobbity/appendix/npcs/#the-hermit)'s house working out for the storytelling quarter-final. For nothing. He will preface the tale with the disclaimer that any similarities between the characters in his tale and real hobbits should be ignored on account of he doesn't want the Shirriff coming after him for slander.
 
 > O hark, good folk of field and dell,\
 > and gather near to me,\
@@ -163,7 +163,7 @@ Snowdrops bloomed first, cheering every hobbit heart. Then came the crocuses, br
 
 ## Buford's Letter
 
-In the early weeks of spring, each received a letter from Buford. Boffo squinted at his, tongue out in deep concentration, before handing it to his great-grandmama. She read it, then passed it to his grandmama, who passed it to his mama, who finally read it aloud so Boffo could hear what the letter had to say.
+In the early weeks of spring, each received a letter from [Buford](/hobbity/appendix/npcs/#buford-niss). Boffo squinted at his, tongue out in deep concentration, before handing it to his great-grandmama. She read it, then passed it to his grandmama, who passed it to his mama, who finally read it aloud so Boffo could hear what the letter had to say.
 
 > To the Esteemed Master Lunderbunk,
 >
