@@ -1,8 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { appendixLabels, appendixOrder } from '../lib/appendix';
 import { storyOrder, storySlug, getTitle } from '../lib/stories';
+import toadStompers from '../assets/images/toad-stompers.webp';
 
 const appendix = (await getCollection('appendix'))
   .sort((a, b) => appendixOrder.indexOf(a.id) - appendixOrder.indexOf(b.id));
@@ -12,7 +14,7 @@ essays.sort((a, b) => a.id.localeCompare(b.id));
 ---
 
 <Base title="Table of Contents">
-  <img src="/hobbity/images/toad-stompers.webp" alt="The Toad Stompers" class="img-logo" />
+  <Image src={toadStompers} alt="The Toad Stompers" class="img-logo" />
   <h1>The Toad Stompers</h1>
 
   <nav class="toc">

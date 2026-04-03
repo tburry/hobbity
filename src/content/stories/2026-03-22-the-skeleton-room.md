@@ -90,13 +90,13 @@ Griff clenched his jaw and stared at the wall. Timba looked Boffo in the eye and
 
 They searched what remained. A corridor of monks' cells—small rooms with reed mats, three of them slept in, one pristine. A dining hall with a mural of Merikka in fresh paint on the north wall: the goddess surrounded by harvest bounty—cornucopia, fish, pumpkins, grapes.
 
-![The mural of Merikka in the temple dining hall](/hobbity/images/mural-of-merikka.webp) Display cases along the walls held specimens under glass: a carrot, an ear of corn, wheat stalks, a bottle of wine. A shrine to abundance in a town where people were disappearing.
+![The mural of Merikka in the temple dining hall](../../assets/images/mural-of-merikka.webp) Display cases along the walls held specimens under glass: a carrot, an ear of corn, wheat stalks, a bottle of wine. A shrine to abundance in a town where people were disappearing.
 
 ## The Golden Offerings
 
 Nine alcoves in the hallway, nine gold replicas of food. Wheat, potato, oats, corn, carrot, turnips, grapes, barley, beans. Each one rendered with precision—imperfections and flecks of dirt cast in gold.
 
-![Nine golden food offerings arranged in alcoves](/hobbity/images/alcove-offering-to-merikka.webp)
+![Nine golden food offerings arranged in alcoves](../../assets/images/alcove-offering-to-merikka.webp)
 
 Boffo reached for the potato.
 
@@ -128,7 +128,7 @@ Two skeletons remained. They turned from the fallen hobbit to the one still stan
 
 "Is this where Boffo perishes?" Boffo said, and he said it lightly, the way you say a thing to keep it from being true.
 
-![Boffo felled by a skeleton](/hobbity/images/boffo-felled-by-skeleton.webp)
+![Boffo felled by a skeleton](../../assets/images/boffo-felled-by-skeleton.webp)
 
 The skeleton's sword drove through the gap between his shield and chainmail, burying itself to the hilt. Boffo went down. His mace clattered on the stone beside him. The mace that had broken every skull and shattered every bone they'd put in front of him. It lay there, useless, while Boffo's blood ran into the cracks between the flagstones.
 

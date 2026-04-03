@@ -20,7 +20,7 @@ The three hobbits reached Huddle Farm on the road to Orlane and found themselves
 
 Primula Huddle greeted the party with the strained patience of a woman managing eight children, a ninth on the way, a freeloading dwarf named Krund Pothrower, and now three more mouths at her table. The twins Motto and Otto carried the farm work. Berry sang. Sherry buried herself in books and insisted the house was haunted, a claim her siblings dismissed. Sara and Mary bickered without pause. Young Bordo swore he'd seen a frog-headed demon at the ruined tower nearby, and baby Marlo contributed nothing but noise. The party poked around the Fortfield ruins for half an hour and took a brief tour of the house—enough to get their bearings, not much more. One thing caught the eye: some of the stones Tom had repurposed from the ruins for his excavation were carved with serpent motifs. Not hobbit work, and not recent.
 
-![A two-headed snake carved into stone from the Fortfield ruins](/hobbity/images/two-headed-snake-stone.webp)
+![A two-headed snake carved into stone from the Fortfield ruins](../../assets/images/two-headed-snake-stone.webp)
 
 ## First Impressions
 

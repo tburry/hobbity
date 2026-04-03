@@ -16,19 +16,19 @@ Session Recap – 6 <dfn title="November">Blotmath</dfn>, S.R. 1425
 
 Early morning in the hamlet of Thistledown. Crisp air, the smell of last night's rainstorm still lingering. Three hobbits checked the straps on Binny, their uncle's old pony, loaded with goods to sell at the Gomwick Harvest Festival. A storm had delayed their departure by a day, so the North Road and a warm bed at the Right Way Inn were out. They'd take the Old Road instead—through the forest, one night camping on hard ground, arriving in Gomwick by tomorrow evening with time for the supper feast.
 
-![The Old Road to Gomwick](/hobbity/images/road-to-gomwick.webp)
+![The Old Road to Gomwick](../../assets/images/road-to-gomwick.webp)
 
 Along the Old Road they stopped at Farmer Fallow's Knick-Knack and Produce Road-Side Stall and each picked up a curious item: Wedge found a whistle that seemed to call animals, Boffo chose three feathers that gave him a boost of speed when worn, and Turnip acquired a pair of strange stockings whose purpose remained unclear.
 
 Deeper in the woods, something felt wrong. The trees seemed to watch them—not all at once, but one at a time, a face in the bark that vanished the moment you looked straight at it. The feeling of being _Seen_, not just observed but known, straight to the marrow. Off in the distance, a tall, long-legged figure crossed the road and vanished into the undergrowth without a sound.
 
-![A sinister tree in the Old Woods](/hobbity/images/sinister-tree.webp)
+![A sinister tree in the Old Woods](../../assets/images/sinister-tree.webp)
 
 They came upon a party of dwarf travelers heading to the same festival, agitated because they'd lost a companion in the woods. The hobbits helped search, pushing deeper into a strange mist that turned the forest into a maze of identical trees and muffled sounds. They nearly got lost themselves before the mist broke and they found the missing dwarf, shaken but unharmed. The dwarves were grateful, and the two groups traveled together the rest of the way to Gomwick as fast friends.
 
 Along the way they encountered Tobias Chubb, a ne'er-do-well who muttered about the trees "looking at him funny."
 
-![Tobias Chubb](/hobbity/images/tobias-chubb.webp)
+![Tobias Chubb](../../assets/images/tobias-chubb.webp)
 
 ## The Festival
 
@@ -48,15 +48,15 @@ While nosing around near the baker’s tent, the hobbits spotted Tobias Chubb sk
 
 The next day, Boffo returned for the contest proper. In the second round he faced Grunela Bunce—the heavy favorite, a hobbit woman who had won three years running and expected to win a fourth. The pies came out, the whistle blew, and Grunela threw up after the first pie. Boffo cleaned his plates without breaking stride. She did not take the loss well, and later that evening threw an apple at Boffo’s head, unprovoked.
 
-![Grunela Bunce](/hobbity/images/grunela.webp)
+![Grunela Bunce](../../assets/images/grunela.webp)
 
 Boffo kept winning. In the final, a smelly fish pie was set before the remaining contestants—a test of stomach as much as appetite. Boffo kept it down. The crowd erupted.
 
-![The pie-eating trophy](/hobbity/images/pie-eating-trophy.webp)
+![The pie-eating trophy](../../assets/images/pie-eating-trophy.webp)
 
 ## Buford Niss
 
-![Buford Niss](/hobbity/images/buford.webp)
+![Buford Niss](../../assets/images/buford.webp)
 
 After the contest, Buford Niss—the Hon. Horace Buford Hockwallop Niss, Esq.—a wealthy, well-traveled old hobbit who lived at Toppo Hill House, the enormous burrow crowning the hill above Gomwick, came to congratulate the hobbits. He’d just won a tidy sum betting on Boffo.
 
@@ -64,7 +64,7 @@ After the contest, Buford Niss—the Hon. Horace Buford Hockwallop Niss, Esq.—
 
 Buford took the hobbits to a gambling table in a lantern-lit tent where a fat, warty toad sat on a velvet cushion at the centre of the action. He fronted them each some gold to play with. The game was Spottle—part dice, part luck, part toad. Players rolled dice across the table, but any die the spottle toad swallowed counted as zero. The toad had preferences. It lunged for certain rolls and ignored others, and half the strategy was reading the creature’s mood.
 
-![A spottle toad](/hobbity/images/spottle-toad.webp)
+![A spottle toad](../../assets/images/spottle-toad.webp)
 
 All three hobbits wound up ahead by the end of the night. Turnip swore the toad was cheating. Wedge tried to intimidate it into compliance, which only made it eat more of his dice. Boffo fed it a crumb of pie and it left his rolls alone for three rounds straight.
 
@@ -84,7 +84,7 @@ Over dinner, Buford asked the hobbits to do him a favour: visit an old man livin
 
 The hobbits made the journey into the woods and back, returning in time for the final evening of the festival.
 
-![Hungry Hank](/hobbity/images/hungry-hank.webp)
+![Hungry Hank](../../assets/images/hungry-hank.webp)
 
 Then the scarecrow came alive.
 

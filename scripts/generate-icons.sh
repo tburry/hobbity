@@ -1,9 +1,9 @@
 #!/bin/bash
-# Generate favicon and PWA icons from public/images/toad-icon.webp
+# Generate favicon and PWA icons from src/assets/images/toad-icon.webp
 
 set -e
 
-SRC="public/images/toad-icon.webp"
+SRC="src/assets/images/toad-icon.webp"
 TMP="/tmp/toad-icon-512.png"
 
 dwebp "$SRC" -o "$TMP"

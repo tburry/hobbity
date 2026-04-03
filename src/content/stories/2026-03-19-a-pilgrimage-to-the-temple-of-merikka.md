@@ -16,7 +16,7 @@ Session Recap – 19 <dfn title="March">Rethe</dfn>, S.R. 1426
 
 The party entered the Temple of Merikka posing as pilgrims seeking healing, bringing Zacharias's bag of gold. Misha, the priestess, healed Boffo with divine magic—a novelty for the hobbits.
 
-![Misha](/hobbity/images/misha.webp) During the visit they spotted Derek Desleigh, a scarred hobbit previously seen at the Golden Grain Inn, involved with goblins inside the temple.
+![Misha](../../assets/images/misha.webp) During the visit they spotted Derek Desleigh, a scarred hobbit previously seen at the Golden Grain Inn, involved with goblins inside the temple.
 
 ## The Temple Fight
 
@@ -36,13 +36,13 @@ Boffo pondered that Zacharias should know about this goddess, reasoning that she
 
 Moving through the temple, the party found a hallway lined with golden food items—a carrot, beans, wheat—exceptionally well-crafted golden replicas, rendered with hyper-realistic detail including imperfections and bits of dirt. Turnip grabbed the golden carrot. No one stopped him. The world fell away—he was underwater, somewhere beautiful, and Merikka swam toward him. She kissed him. Something tugged at his mind, but Turnip held, and then he was back in the hallway, soaking wet, clutching a golden carrot.
 
-![A vision of Merikka reaching out](/hobbity/images/merikka-vision.webp)
+![A vision of Merikka reaching out](../../assets/images/merikka-vision.webp)
 
 ## The Dungeon Beneath
 
 In Misha's quarters the party found her arms and armour—chainmail, a painted shield bearing the crest of Merikka, and a mace. Boffo put them on. The chainmail was tight in the wrong places and loose in others, but it was better than nothing.
 
-![The shield of Merikka, taken from Misha's quarters](/hobbity/images/shield-of-merikka.webp)
+![The shield of Merikka, taken from Misha's quarters](../../assets/images/shield-of-merikka.webp)
 
 A secret passage lay under the bed, opened by a torch mechanism. The stonework below is clearly much older than the temple above.
 
@@ -68,7 +68,7 @@ Wedge wondered about the inn that served troglodyte pie—were they in on it, or
 
 The party fought multiple waves of troglodytes in the underground stream and cave area, bottlenecking them in narrow passages. Boffo drank a Potion of Growth and became giant-sized, dramatically increasing his combat effectiveness. They found a locked chest containing 420 gold pieces (140 each) and a Brooch of Shielding—another piece of Merikkan equipment that absorbs up to 30 HP of damage before breaking. The brooch was given to Boffo.
 
-![The Brooch of Shielding found in the troglodyte lair](/hobbity/images/brooch-of-shielding.webp)
+![The Brooch of Shielding found in the troglodyte lair](../../assets/images/brooch-of-shielding.webp)
 
 ## Conclusion
 

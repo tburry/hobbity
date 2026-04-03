@@ -22,7 +22,7 @@ The party was about to flee the dungeon—beat half to death, out of potions, ru
 
 He carried a book in one hand and a wooden spoon in the other, and a weasel named Twitch sat on his head like a furry hat. His name was Ramne, and he'd been looking for them.
 
-![Ramne](/hobbity/images/ramne.webp)
+![Ramne](../../assets/images/ramne.webp)
 
 He healed all three of them with a touch, which was the second time in one evening that divine magic had been worked on hobbits who, until very recently, hadn't known such things existed. The old hobbit moved at the speed of an arthritic tortoise and had the combat utility of a wooden spoon, which he also carried. But he knew things. He'd been living in that half-buried stone cottage west of the Slumbering Serpent, watching the village come apart at the seams. People taken to the Golden Grain, emerging weeks later with empty eyes and rehearsed smiles. Ramne didn't trust Zacharias. He didn't trust anyone, really, possibly including himself—"There's not a single person in this village who's telling the truth," he said. "Maybe not even myself."
 
@@ -76,7 +76,7 @@ A goblin crouched at the junction, club raised. Behind it, Kaylin Snowvale—the
 
 Abramo. The serpent's priest.
 
-![Abramo](/hobbity/images/abramo.webp)
+![Abramo](../../assets/images/abramo.webp)
 
 Wedge scrambled onto the hay bales. Boffo squared up against the goblin and whiffed. Turnip fired his blowgun at Abramo and the dart pinged off stone. Fortune, it seemed, had abandoned them.
 
@@ -100,7 +100,7 @@ A sling stone from Wedge caught Kaylin in the belly and she folded. He hadn't me
 
 In the room beyond Abramo's last stand, torchlight fell on something that made the hobbits' stomachs turn. A polished jade statue of a snake with a woman's head—four-armed, enormous, exquisitely carved.
 
-![The jade statue of Explictica](/hobbity/images/explictica.webp)
+![The jade statue of Explictica](../../assets/images/explictica.webp)
 
 Around it, granite statues of Merikka had been smashed and crudely re-carved into reptilian shapes by someone who clearly had more devotion than talent. And against the east wall, in a small iron cage, a young hobbit woman in tattered rags.
 

@@ -16,7 +16,7 @@ Session Recap – 26 <dfn title="February">Solmath</dfn>, S.R. 1426
 
 With Constable Grover out searching for the dire wolves the party had reported, the three hobbits paid a visit to Mattie Snowvale, the blacksmith. He swung on them without a word, catching Wedge across the skull with a hammer and put him on the floor. The blow left a dent that no amount of healing would fill—something in Wedge's bearing, his way with folk, was knocked loose and would not settle back.
 
-![Mattie Snowvale swings a hammer at Wedge in the smithy](/hobbity/images/wedge-getting-hammered.webp)
+![Mattie Snowvale swings a hammer at Wedge in the smithy](../../assets/images/wedge-getting-hammered.webp)
 
 Turnip dropped the smith with a sleep dart before he could do worse. Maddie, Mattie's wife, furious, stormed off to lodge a complaint. The whole affair left Wedge hurt and angry.
 
@@ -38,7 +38,7 @@ At some point during the daylight hours the party tried the Temple of Merikka an
 
 Dawn of the third day. The hobbits slipped out of the Foaming Mug ruins and walked straight into Constable Grover and his deputies, standing at the foot of the bridge outside Matty Snowvale's smithy.
 
-![Constable Grover and his deputies at the bridge](/hobbity/images/grover-and-deputies-at-bridge.webp)
+![Constable Grover and his deputies at the bridge](../../assets/images/grover-and-deputies-at-bridge.webp)
 
 ## Grover's Reckoning
 
@@ -54,7 +54,7 @@ The party visited the Elm Grove—an old stone cottage, half-dug into the ground
 
 Olwyn confirmed that Zacharias had returned from fishing. The old hobbit took the party's letter—the one he himself had written to Buford—tore it up, and pocketed the pieces. Paranoid about being overheard, he led them to the lakeshore to talk freely.
 
-![Zacharias fishing at the lakeshore near Orlane](/hobbity/images/zacharias-fishing.webp) His intelligence was grim: people were disappearing and coming back changed. He named four he believed compromised—storekeeper Wilbur Oldbuck, blacksmith Maddie Snowvale and her family, and carpenter Quinn Finla. The temple priests were the source. Problems started about a year ago when two priests arrived from the coast. Zacharias trusted Grover but said the constable needed proof before he could act.
+![Zacharias fishing at the lakeshore near Orlane](../../assets/images/zacharias-fishing.webp) His intelligence was grim: people were disappearing and coming back changed. He named four he believed compromised—storekeeper Wilbur Oldbuck, blacksmith Maddie Snowvale and her family, and carpenter Quinn Finla. The temple priests were the source. Problems started about a year ago when two priests arrived from the coast. Zacharias trusted Grover but said the constable needed proof before he could act.
 
 ## Arming Up
 
