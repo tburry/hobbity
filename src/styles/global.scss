@@ -381,7 +381,7 @@ table {
 }
 
 td, th {
-  border: var(--border-width) solid var(--border);
+  border: 2px solid var(--border);
   padding: var(--space-sm);
 
   &[align="center"] { text-align: center; }
@@ -627,16 +627,8 @@ details[open] > summary {
 }
 
 .gallery {
-  columns: 1;
-  column-gap: var(--space);
-
-  @media (min-width: 640px) { columns: 2; }
-  @media (min-width: 1024px) { columns: 3; }
-  @media (min-width: 1400px) { columns: 4; }
-
   figure {
-    break-inside: avoid;
-    margin-bottom: var(--space);
+    margin: 0 0 var(--space);
     text-align: center;
     border: 2px solid var(--border);
     border-radius: var(--border-radius);
@@ -644,8 +636,6 @@ details[open] > summary {
   }
 
   img {
-    width: 100%;
-    height: auto;
     border-radius: calc(var(--border-radius) / 2);
   }
 
@@ -660,6 +650,55 @@ details[open] > summary {
     display: block;
     font-size: 0.8rem;
     margin-top: calc(var(--space-sm) / 2);
+  }
+}
+
+.gallery-img {
+  columns: 1;
+  column-gap: var(--space);
+
+  @media (min-width: 640px) { columns: 2; }
+  @media (min-width: 1024px) { columns: 3; }
+  @media (min-width: 1400px) { columns: 4; }
+
+  figure {
+    break-inside: avoid;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.gallery-pc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space);
+
+  figure {
+    display: inline-block;
+  }
+
+  figcaption {
+    display: none;
+  }
+
+  img {
+    height: 250px;
+    width: auto;
+  }
+
+  @media (max-width: 639px) {
+    gap: var(--space-sm);
+
+    figure {
+      padding: calc(var(--space-sm) / 2);
+    }
+
+    img {
+      height: 125px;
+    }
   }
 }
 

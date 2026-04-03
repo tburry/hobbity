@@ -165,7 +165,14 @@ Describe what happened in the world, not at the table. "Boffo's mace caved in th
 
 ## Grievous Injuries
 
-When a PC drops to 0 HP and is healed, they lose one random ability point. Record these in `src/content/appendix/pcs.md` under a "Grievous Injuries" heading for the affected PC, noting the ability score, cause, and location. Always confirm with the user before recording an injury.
+When a PC drops to 0 HP and is healed, they lose one random ability point. Record these in the PC's file in `src/content/pcs/` under the "Grievous Injuries" heading. Always confirm with the user before recording an injury.
+
+Format each injury as a narrative description of the wound and its lasting physical consequence, with the affected ability in parentheses. Describe how the injury maps to the ability loss—don't just name the ability. Examples:
+
+- Skeleton's sword through the shoulder joint. Healed crooked; arm doesn't move the way it used to (DEX).
+- Goblin arrow through the lung at the bridge on the way to Orlane (CON)
+- Troglodyte claw tore through his side; the wound festered and sapped his stamina (CON)
+- Hammer blow to the skull from Mattie Snowvale (CHA)
 
 ## Campaign Context (Summary)
 
