@@ -9,7 +9,12 @@ if [ -z "$staged" ]; then
 fi
 
 for file in $staged; do
-  scripts/make-avatar "$file"
   base="${file%.*}"
-  git add "${base}_avatar.webp"
+  avatar="${base}_avatar.webp"
+  # Skip if the avatar is already staged (manually updated)
+  if git diff --cached --name-only -- "$avatar" | grep -q .; then
+    continue
+  fi
+  scripts/make-avatar "$file"
+  git add "$avatar"
 done
