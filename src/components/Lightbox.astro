@@ -60,7 +60,7 @@ for (const img of galleryImages) {
     });
   } else {
     document.querySelectorAll<HTMLImageElement>('main img').forEach((img) => {
-      if (img.classList.contains('img-logo')) return;
+      if (img.classList.contains('img-logo') || img.closest('.no-lightbox')) return;
       const alt = img.alt || '';
       items.push({
         src: gallerySrcs[alt] || img.currentSrc || img.src,
@@ -128,7 +128,7 @@ for (const img of galleryImages) {
   } else {
     let idx = 0;
     document.querySelectorAll<HTMLImageElement>('main img').forEach((img) => {
-      if (img.classList.contains('img-logo')) return;
+      if (img.classList.contains('img-logo') || img.closest('.no-lightbox')) return;
       const thisIdx = idx++;
       img.style.cursor = 'pointer';
       img.addEventListener('click', () => show(thisIdx));
