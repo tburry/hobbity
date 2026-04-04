@@ -645,6 +645,37 @@ details[open] > summary {
 }
 
 // ============================================================================
+// NPC directory avatars
+// ============================================================================
+
+.npc-directory {
+  h3 {
+    clear: right;
+  }
+
+  > p:has(> img) {
+    margin: 0;
+    line-height: 0;
+  }
+
+  img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid var(--border);
+    float: right;
+    margin: 0 0 var(--space) var(--space);
+
+    @media (max-width: 720px) {
+      float: none;
+      display: block;
+      margin: 0 auto var(--space);
+    }
+  }
+}
+
+// ============================================================================
 // Gallery
 // ============================================================================
 

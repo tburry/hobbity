@@ -6,6 +6,8 @@
 
 ### Abramo **†**
 
+![Abramo](../../assets/images/npcs/abramo_avatar.webp)
+
 Serpent cult priest beneath the [Temple of Merikka](/hobbity/appendix/places/#orlane). Wore enchanted scale mail, carried a cobra-headed mace, and worshipped a snake goddess called Explictica. Completely insane—covered every surface of his lair in reptilian scrawlings and tried to re-carve Merikka's granite statues into serpent forms.
 
 - **Location:** [The Temple of Merikka](/hobbity/appendix/places/#orlane)
@@ -62,6 +64,8 @@ Conspirator in the pie-poisoning plot at the [Gomwick](/hobbity/appendix/places/
 
 ### Grunela Bunce
 
+![Grunela Bunce](../../assets/images/npcs/grunela_avatar.webp)
+
 Three-time pie-eating champion at the Gomwick Harvest Festival. Lost to Boffo in the second round after throwing up on the first pie. Threw an apple at his head later that evening. Bears a grudge.
 
 - **Location:** [Gomwick](/hobbity/appendix/places/#gomwick)
@@ -73,6 +77,8 @@ Three-time pie-eating champion at the Gomwick Harvest Festival. Lost to Boffo in
 ## C
 
 ### Tobias Chubb **†**
+
+![Tobias Chubb](../../assets/images/npcs/tobias-chubb_avatar.webp)
 
 A ne'er-do-well encountered on the [Old Road](/hobbity/appendix/places/#the-five-shires), muttering about trees "looking at him funny." Used as an agent in the pie-poisoning plot by [Adelard Potts](#adelard-potts) and [Hanna Boggs](#hanna-boggs).
 
@@ -157,6 +163,8 @@ Stablekeeper in [Orlane](/hobbity/appendix/places/#orlane), looking after [Opal]
 
 ### Constable Grover
 
+![Constable Grover](../../assets/images/npcs/constable-grover_avatar.webp)
+
 Local constable in [Orlane](/hobbity/appendix/places/#orlane). Armored in mail with a crossbow. Cooperative and takes reports seriously. The party initially suspected him of being compromised, but [Zacharias](#zacharias) trusts him and his reactions to troglodyte news (blanching, genuine concern) suggest he may be honest. Wedge suspects the armoured constables are "in on it."
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
@@ -169,6 +177,8 @@ Local constable in [Orlane](/hobbity/appendix/places/#orlane). Armored in mail w
 ## H
 
 ### The Hermit
+
+![The Hermit](../../assets/images/npcs/the-hermit_avatar.webp)
 
 An ancient tall-folk man living in a cabin deep in the Old Woods. Each hobbit saw his house differently (a hobbit-hole, an enormous skull, a drafty cabin). Keeper of a strange arcane machine that delivered prophetic visions (plague, tidal wave, undeath). Possibly dead or skeletal. Sent [Buford](#buford-niss) a message over winter as promised: "The crows are scared because the serpent hungers." Buford dismissed the party's concerns about the Hermit being dangerous.
 
@@ -267,6 +277,8 @@ Axe shop owner in [Gomwick](/hobbity/appendix/places/#gomwick). Sold Wedge his s
 
 ### Misha
 
+![Misha](../../assets/images/npcs/misha_avatar.webp)
+
 Priestess of the [Temple of Merikka](/hobbity/appendix/places/#orlane). The party took her armor, shield, and mace (Boffo now uses them). A body found in a crawlspace beneath the temple may be the real priestess, suggesting Misha is an imposter who murdered and replaced her. [Ramne](#ramne) suspects she may actually be a genuine follower of Merikka who was charmed.
 
 - **Location:** [The Temple of Merikka](/hobbity/appendix/places/#orlane)
@@ -279,6 +291,8 @@ Priestess of the [Temple of Merikka](/hobbity/appendix/places/#orlane). The part
 ## N
 
 ### Buford Niss
+
+![Buford Niss](../../assets/images/npcs/buford_avatar.webp)
 
 The Hon. Horace Buford Hockwallop Niss, Esq. Wealthy, well-traveled old hobbit living at Toppo Hill House overlooking [Gomwick](/hobbity/appendix/places/#gomwick). Seriously ill—gaunt, walks with a cane, coughing up blood. His house feels cold and empty; many of his prized nautical/exotic possessions are gone.
 
@@ -350,6 +364,8 @@ Conspirator in the pie-poisoning plot at the [Gomwick](/hobbity/appendix/places/
 ## R
 
 ### Ramne
+
+![Ramne](../../assets/images/npcs/ramne_avatar.webp)
 
 Very old hobbit druid living in a half-buried stone cottage (#27) west of the Slumbering Serpent in [Orlane](/hobbity/appendix/places/#orlane). Has been independently investigating the cult. Carries a book, a wooden spoon, and a walking stick. His weasel companion Twitch rides on his head. Moves at a glacial pace. Healed the party when they met in the temple dungeon. Now sheltering [Cirilli Finla](#cirilli-finla).
 
@@ -449,6 +465,8 @@ Widowed, lives by the river in [Orlane](/hobbity/appendix/places/#orlane). The p
 ## Z
 
 ### Zacharias
+
+![Zacharias](../../assets/images/npcs/zacharias-fishing_avatar.webp)
 
 Retired adventurer, well-traveled, late middle age. Lives across the river in [Orlane](/hobbity/appendix/places/#orlane). Sent the original letter to [Buford](#buford-niss) requesting help. Extremely paranoid. His stone gargoyle defences killed [Deputy Donovan](#donovan) when [Grover](#constable-grover) came looking for the party. Fled with [Derek Desleigh](#derek-desleigh) to the [Golden Grain Inn](/hobbity/appendix/places/#orlane) before it burned. His secret chest is gone. Whether he's been charmed, coerced, or is playing a deeper game is unknown.
 

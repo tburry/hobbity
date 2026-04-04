@@ -7,14 +7,16 @@
  */
 import { images as galleryImages } from '../lib/gallery';
 
-// Map alt text → gallery caption for cross-referencing in story lightboxes
+// Map alt text → gallery caption and full-size src for cross-referencing
 const galleryCaptions: Record<string, string> = {};
+const gallerySrcs: Record<string, string> = {};
 for (const img of galleryImages) {
   galleryCaptions[img.alt] = img.caption;
+  gallerySrcs[img.alt] = img.src.src;
 }
 ---
 
-<div class="lightbox" id="lightbox" data-captions={JSON.stringify(galleryCaptions)}>
+<div class="lightbox" id="lightbox" data-captions={JSON.stringify(galleryCaptions)} data-srcs={JSON.stringify(gallerySrcs)}>
   <button class="lightbox-close" aria-label="Close">&times;</button>
   <button class="lightbox-prev" aria-label="Previous">&lsaquo;</button>
   <button class="lightbox-next" aria-label="Next">&rsaquo;</button>
@@ -30,6 +32,7 @@ for (const img of galleryImages) {
   const lbImg = document.getElementById('lightbox-img') as HTMLImageElement;
   const lbCaption = document.getElementById('lightbox-caption')!;
   const galleryCaptions: Record<string, string> = JSON.parse(lightbox.dataset.captions || '{}');
+  const gallerySrcs: Record<string, string> = JSON.parse(lightbox.dataset.srcs || '{}');
 
   interface LightboxItem {
     src: string;
@@ -60,7 +63,7 @@ for (const img of galleryImages) {
       if (img.classList.contains('img-logo')) return;
       const alt = img.alt || '';
       items.push({
-        src: img.currentSrc || img.src,
+        src: gallerySrcs[alt] || img.currentSrc || img.src,
         alt,
         caption: galleryCaptions[alt] || alt,
       });
