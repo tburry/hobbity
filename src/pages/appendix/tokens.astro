@@ -3,7 +3,7 @@ import { Image, getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 
-// --- PC tokens: current level only ---
+// --- PC tokens: all levels, grouped by level ---
 const pcImages = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/images/pcs/*_token.webp',
   { eager: true },
@@ -11,15 +11,30 @@ const pcImages = import.meta.glob<{ default: ImageMetadata }>(
 
 const pcs = (await getCollection('pcs')).sort((a, b) => a.data.order - b.data.order);
 
-const pcTokens = await Promise.all(
-  pcs.map(async (pc) => {
-    const key = `/src/assets/images/pcs/${pc.data.pc}-lvl${pc.data.level}_token.webp`;
-    const src = pcImages[key]?.default;
-    if (!src) return null;
-    const full = await getImage({ src });
-    return { name: pc.data.name, src, fullSrc: full.src };
+// Collect all levels that have at least one token
+const allLevels = new Set<number>();
+for (const key of Object.keys(pcImages)) {
+  const m = key.match(/-lvl(\d+)_token\.webp$/);
+  if (m) allLevels.add(Number(m[1]));
+}
+const levels = [...allLevels].sort((a, b) => b - a);
+
+// Build tokens per level
+const pcTokensByLevel = await Promise.all(
+  levels.map(async (level) => {
+    const tokens = await Promise.all(
+      pcs.map(async (pc) => {
+        const key = `/src/assets/images/pcs/${pc.data.pc}-lvl${level}_token.webp`;
+        const src = pcImages[key]?.default;
+        if (!src) return null;
+        const full = await getImage({ src });
+        return { name: pc.data.name, src, fullSrc: full.src };
+      }),
+    );
+    return { level, tokens: tokens.filter(Boolean) as { name: string; src: ImageMetadata; fullSrc: string }[] };
   }),
 );
+const pcLevels = pcTokensByLevel.filter((g) => g.tokens.length > 0);
 
 // --- NPC tokens ---
 const npcImages = import.meta.glob<{ default: ImageMetadata }>(
@@ -58,19 +73,24 @@ npcTokens.sort((a, b) => sortKey(a.name).localeCompare(sortKey(b.name)));
   <h1>Tokens</h1>
 
   <h2>PCs</h2>
-  <div class="token-grid no-lightbox">
-    {pcTokens.filter(Boolean).map((t) => (
-      <figure class="token-figure">
-        <button class="token-wrap" data-url={t!.fullSrc} title="Copy image URL">
-          <Image src={t!.src} alt={t!.name} width={128} loading="lazy" />
-          <span class="token-copy-icon">
-            <svg width="20" height="20"><use href="#icon-copy" /></svg>
-          </span>
-        </button>
-        <figcaption>{t!.name}</figcaption>
-      </figure>
-    ))}
-  </div>
+  {pcLevels.map((group) => (
+    <Fragment>
+      <h3>Level {group.level}</h3>
+      <div class="token-grid no-lightbox">
+        {group.tokens.map((t) => (
+          <figure class="token-figure">
+            <button class="token-wrap" data-url={t.fullSrc} title="Copy image URL">
+              <Image src={t.src} alt={t.name} width={128} loading="lazy" />
+              <span class="token-copy-icon">
+                <svg width="20" height="20"><use href="#icon-copy" /></svg>
+              </span>
+            </button>
+            <figcaption>{t.name}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </Fragment>
+  ))}
 
   <h2>NPCs</h2>
   <div class="token-grid no-lightbox">
