@@ -28,7 +28,7 @@ He healed all three of them with a touch, which was the second time in one eveni
 
 He was a druid of sorts, though he'd deny the word. The only religion he followed, he said, was his pipe and a bit of pipeweed. His spells were useless underground—animal friendship, speak with animals, locate plant. But he had three castings of Cure Light Wounds, and he spent all of them on the party. Twitch, for her part, would prove considerably more useful than her master.
 
-Reinforced and unwilling to leave the job half done, the Toad Stompers pressed deeper into the temple—and found, at the end of a corridor covered in insane reptilian scrawlings, the serpent cult's inner sanctum and its deranged priest.
+Reinforced and unwilling to leave the job half done, the Toad Stompers pressed deeper into the temple.
 
 ## The Lower Temple
 
