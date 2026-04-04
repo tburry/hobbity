@@ -685,6 +685,50 @@ details[open] > summary {
   padding-inline: var(--space);
 }
 
+// ============================================================================
+// Back to top
+// ============================================================================
+
+.back-to-top-footer {
+  position: static;
+  height: 0;
+  overflow: visible;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: var(--space);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-light);
+  font-family: var(--body-font);
+  font-size: 17px;
+  cursor: pointer;
+  padding: 0.5em 1.5em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 50;
+
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+}
+
+// ============================================================================
+// Gallery
+// ============================================================================
+
 .gallery {
   figure {
     margin: 0 0 var(--space);
