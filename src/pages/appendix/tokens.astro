@@ -1,0 +1,187 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+// --- PC tokens: current level only ---
+const pcImages = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/images/pcs/*_token.webp',
+  { eager: true },
+);
+
+const pcs = (await getCollection('pcs')).sort((a, b) => a.data.order - b.data.order);
+
+const pcTokens = await Promise.all(
+  pcs.map(async (pc) => {
+    const key = `/src/assets/images/pcs/${pc.data.pc}-lvl${pc.data.level}_token.webp`;
+    const src = pcImages[key]?.default;
+    if (!src) return null;
+    const full = await getImage({ src });
+    return { name: pc.data.name, src, fullSrc: full.src };
+  }),
+);
+
+// --- NPC tokens ---
+const npcImages = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/images/npcs/*_token.webp',
+  { eager: true },
+);
+
+// Derive NPC display names from avatar alt text in npcs.md
+const npcsEntry = (await getCollection('appendix')).find((e) => e.id === 'npcs');
+const npcAvatarNames: Record<string, string> = {};
+if (npcsEntry?.body) {
+  for (const m of npcsEntry.body.matchAll(/!\[([^\]]+)\]\([^)]*\/([^/)]+)_avatar\.webp\)/g)) {
+    npcAvatarNames[m[2]] = m[1];
+  }
+}
+
+const npcTokens = await Promise.all(
+  Object.entries(npcImages).map(async ([path, mod]) => {
+    const stem = path.replace(/.*\//, '').replace('_token.webp', '');
+    const name = npcAvatarNames[stem] || stem;
+    const full = await getImage({ src: mod.default });
+    return { name, src: mod.default, fullSrc: full.src };
+  }),
+);
+const sortKey = (name: string) => name.split(' ').pop()!;
+npcTokens.sort((a, b) => sortKey(a.name).localeCompare(sortKey(b.name)));
+---
+
+<Base title="Tokens" showHome={true}>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+    </symbol>
+  </svg>
+
+  <h1>Tokens</h1>
+
+  <h2>PCs</h2>
+  <div class="token-grid no-lightbox">
+    {pcTokens.filter(Boolean).map((t) => (
+      <figure class="token-figure">
+        <button class="token-wrap" data-url={t!.fullSrc} title="Copy image URL">
+          <Image src={t!.src} alt={t!.name} width={128} loading="lazy" />
+          <span class="token-copy-icon">
+            <svg width="20" height="20"><use href="#icon-copy" /></svg>
+          </span>
+        </button>
+        <figcaption>{t!.name}</figcaption>
+      </figure>
+    ))}
+  </div>
+
+  <h2>NPCs</h2>
+  <div class="token-grid no-lightbox">
+    {npcTokens.map((t) => (
+      <figure class="token-figure">
+        <button class="token-wrap" data-url={t.fullSrc} title="Copy image URL">
+          <Image src={t.src} alt={t.name} width={128} loading="lazy" />
+          <span class="token-copy-icon">
+            <svg width="20" height="20"><use href="#icon-copy" /></svg>
+          </span>
+        </button>
+        <figcaption>{t.name}</figcaption>
+      </figure>
+    ))}
+  </div>
+</Base>
+
+<style>
+  .token-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  .token-figure {
+    margin: 0;
+    text-align: center;
+    width: 128px;
+  }
+
+  .token-wrap {
+    position: relative;
+    display: inline-block;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .token-wrap img {
+    display: block;
+    border-radius: 50%;
+  }
+
+  .token-copy-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.15s;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .token-wrap:hover .token-copy-icon {
+    opacity: 1;
+  }
+
+  .token-wrap:active .token-copy-icon {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  figcaption {
+    margin-top: 0.4rem;
+    font-size: 0.85em;
+  }
+</style>
+
+<script>
+  const toast = document.createElement('div');
+  Object.assign(toast.style, {
+    position: 'fixed',
+    bottom: '1.5rem',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    background: 'rgba(0, 0, 0, 0.8)',
+    color: '#fff',
+    padding: '0.5rem 1rem',
+    borderRadius: '0.5rem',
+    fontSize: '0.85em',
+    pointerEvents: 'none',
+    opacity: '0',
+    transition: 'opacity 0.2s',
+    zIndex: '100',
+  });
+  document.body.appendChild(toast);
+  let toastTimer: ReturnType<typeof setTimeout>;
+
+  function showToast(msg: string) {
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => (toast.style.opacity = '0'), 1500);
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('.token-wrap').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const url = btn.dataset.url;
+      if (!url) return;
+      const fullUrl = new URL(url, window.location.origin).href;
+      await navigator.clipboard.writeText(fullUrl);
+      showToast('Token URL copied');
+    });
+  });
+</script>
