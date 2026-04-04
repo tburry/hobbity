@@ -670,7 +670,7 @@ details[open] > summary {
     @media (max-width: 720px) {
       float: none;
       display: block;
-      margin: 0 auto var(--space);
+      margin: var(--space) auto var(--space);
     }
   }
 }

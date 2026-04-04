@@ -69,7 +69,12 @@ const fullSrc = fullImage ? (await getImage({ src: fullImage })).src : undefined
     width: 240px;
     height: 240px;
     object-fit: cover;
-    border: 2px solid var(--border)
+    border: 2px solid var(--border);
+
+    @media (max-width: 680px) {
+      width: 150px;
+      height: 150px;
+    }
   }
 
   .pc-card-info {
