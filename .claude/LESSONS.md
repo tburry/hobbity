@@ -31,6 +31,12 @@ When adding new story markdown files:
 - Descriptions focus on character, relationships, and status, not minor story beats.
 - "See Also" cross-references at the end of each letter section for NPCs whose first name starts with a different letter than their filing letter. Use "See Also" not "See also."
 - Location links point to parent town anchors in [places.md](../src/content/appendix/places.md) (e.g. `#orlane`), not sub-location anchors.
+- Never include module map keys (e.g. `#27`) or other source-material reference numbers. They're meaningless to readers and leak module structure.
+- Each NPC blurb must stand on its own. Don't use vague references like "the cult" or "independently" that only make sense if the reader has other context. Name things specifically (e.g. "the cult of Explictica"). Update entries as the story reveals more detail.
+- Watch for "the" + noun assuming the reader knows which one (e.g. "the temple", "the barn"). Either name it specifically or link it.
+- Location belongs in the **Location** field, not the blurb. Don't duplicate location info in prose.
+- Relations (family, employer, etc.) belong in relation fields, not as defacto blurb text. Don't use "X's son" as the entire characterization—add a relation field and write actual characterization.
+- No temporal words like "now" that will go stale. Write entries as standing facts.
 
 ## Places ([places.md](../src/content/appendix/places.md))
 

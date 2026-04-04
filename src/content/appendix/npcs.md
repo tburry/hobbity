@@ -13,6 +13,13 @@ Serpent cult priest beneath the [Temple of Merikka](/hobbity/appendix/places/#or
 - **Location:** [The Temple of Merikka](/hobbity/appendix/places/#orlane)
 - **Status:** Dead—killed by Boffo beneath the Temple of Merikka
 
+### Atticus
+
+Villager in [Orlane](/hobbity/appendix/places/#orlane).
+
+- **Location:** [Orlane](/hobbity/appendix/places/#orlane)
+- **Family:** [Rolo](#rolo) (son)
+
 ### See Also
 
 [Adelard Potts](#adelard-potts)
@@ -21,7 +28,7 @@ Serpent cult priest beneath the [Temple of Merikka](/hobbity/appendix/places/#or
 
 ### Belba
 
-Proprietress of the [Slumbering Serpent Inn](/hobbity/appendix/places/#orlane). Became the party's confidante—they told her everything they encountered in Orlane. She and [Olwyn](#olwyn) intervened with [Grover](#constable-grover) on the party's behalf and became responsible for them.
+Proprietress of the [Slumbering Serpent Inn](/hobbity/appendix/places/#orlane) in [Orlane](/hobbity/appendix/places/#orlane). Trusted by the party and responsible for their conduct in town. She and [Olwyn](#olwyn) vouched for them with [Constable Grover](#constable-grover).
 
 - **Location:** [The Slumbering Serpent Inn](/hobbity/appendix/places/#orlane)
 - **Family:** [Olwyn](#olwyn) (husband)
@@ -29,7 +36,7 @@ Proprietress of the [Slumbering Serpent Inn](/hobbity/appendix/places/#orlane). 
 
 ### Bertram
 
-Owner of the [Golden Grain Inn](/hobbity/appendix/places/#orlane) in [Orlane](/hobbity/appendix/places/#orlane). [Buford](/hobbity/appendix/npcs/#buford-niss) told the party to mention his name for a discount. Lives on the far side of the river—whatever ails the village seems concentrated on his side. It was noted that Orlane "retains some of its hobbitishness despite whatever ills have befallen Bertram and the lot on his side of the river."
+Owner of the [Golden Grain Inn](/hobbity/appendix/places/#orlane) in [Orlane](/hobbity/appendix/places/#orlane). Lives on the far side of the river, where the cult of Explictica's influence was strongest. The inn has since burned down.
 
 - **Location:** [The Golden Grain Inn](/hobbity/appendix/places/#orlane)
 
@@ -42,7 +49,7 @@ Non-local deputy serving under [Constable Grover](#constable-grover) in [Orlane]
 
 ### Daisy Boffin
 
-[Gammy](#gammy-boffin)'s daughter, the baker at the [Gomwick](/hobbity/appendix/places/#gomwick) Harvest Festival.
+Baker at the [Gomwick](/hobbity/appendix/places/#gomwick) Harvest Festival.
 
 - **Location:** [Gomwick](/hobbity/appendix/places/#gomwick)
 - **Family:** [Gammy Boffin](#gammy-boffin) (father)
@@ -66,7 +73,7 @@ Conspirator in the pie-poisoning plot at the [Gomwick](/hobbity/appendix/places/
 
 ![Grunela Bunce](../../assets/images/npcs/grunela_avatar.webp)
 
-Three-time pie-eating champion at the Gomwick Harvest Festival. Lost to Boffo in the second round after throwing up on the first pie. Threw an apple at his head later that evening. Bears a grudge.
+Three-time pie-eating champion at the [Gomwick](/hobbity/appendix/places/#gomwick) Harvest Festival. Lost her title to Boffo. Bears a grudge.
 
 - **Location:** [Gomwick](/hobbity/appendix/places/#gomwick)
 
@@ -80,7 +87,7 @@ Three-time pie-eating champion at the Gomwick Harvest Festival. Lost to Boffo in
 
 ![Tobias Chubb](../../assets/images/npcs/tobias-chubb_avatar.webp)
 
-A ne'er-do-well encountered on the [Old Road](/hobbity/appendix/places/#the-five-shires), muttering about trees "looking at him funny." Used as an agent in the pie-poisoning plot by [Adelard Potts](#adelard-potts) and [Hanna Boggs](#hanna-boggs).
+A ne'er-do-well who muttered about trees "looking at him funny." Used as an agent in the pie-poisoning plot by [Adelard Potts](#adelard-potts) and [Hanna Boggs](#hanna-boggs).
 
 - **Location:** [The Hermit's Cabin](/hobbity/appendix/places/#the-hermits-cabin)
 - **Handlers:** [Hanna Boggs](#hanna-boggs), [Adelard Potts](#adelard-potts)
@@ -90,14 +97,14 @@ A ne'er-do-well encountered on the [Old Road](/hobbity/appendix/places/#the-five
 
 ### Dalton Dallydown
 
-[Buford Niss](#buford-niss)'s butler and right-hand. Excellent at not being seen. Refuses to be drawn into conversation.
+Butler and right-hand to [Buford Niss](#buford-niss). Excellent at not being seen. Refuses to be drawn into conversation.
 
 - **Location:** [Gomwick](/hobbity/appendix/places/#gomwick)
 - **Employer:** [Buford Niss](#buford-niss)
 
 ### Donovan **†**
 
-Non-local deputy serving under [Constable Grover](#constable-grover) in [Orlane](/hobbity/appendix/places/#orlane). Killed by [Zacharias](#zacharias)'s stone statues at Zacharias's house.
+Non-local deputy serving under [Constable Grover](#constable-grover) in [Orlane](/hobbity/appendix/places/#orlane).
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
 - **Superior:** [Constable Grover](#constable-grover)
@@ -105,14 +112,14 @@ Non-local deputy serving under [Constable Grover](#constable-grover) in [Orlane]
 
 ### Derek Desleigh
 
-A hobbit with a disfiguring scar. Encountered inside the [Temple of Merikka](/hobbity/appendix/places/#orlane) working with goblins—wanted the party taken alive. Fled when the goblins broke. Later appeared at [Zacharias](#zacharias)'s house, after which both fled to the [Golden Grain Inn](/hobbity/appendix/places/#orlane). At large—likely escaped through tunnels before the inn burned.
+A scarred hobbit who commands goblins and served the cult of Explictica beneath the [Temple of Merikka](/hobbity/appendix/places/#orlane). Allied with [Zacharias](#zacharias). At large after fleeing [Orlane](/hobbity/appendix/places/#orlane).
 
 - **Location:** Unknown
 - **Henchmen:** Goblins
 
 ### Boris Duddle
 
-[Tom Huddle](#tom-huddle)'s cousin. Co-owner of Duddle & Pothrower ("All things constructed or demolished!"). Tom hired him to rebuild the barn; Boris sent his partner [Krund](#krund-pothrower) instead.
+Co-owner of Duddle & Pothrower ("All things constructed or demolished!").
 
 - **Location:** [Gomwick](/hobbity/appendix/places/#gomwick) area
 - **Family:** [Tom Huddle](#tom-huddle) (cousin)
@@ -135,20 +142,20 @@ A not-very-bright juvenile stone giant. The entire "workforce" rebuilding [Tom H
 
 ### Farmer Fallow
 
-Roadside stall seller on the [Old Road](/hobbity/appendix/places/#the-five-shires). Sold the party their magical items (whistle, feathers, stockings).
+Roadside stall seller on the [Old Road](/hobbity/appendix/places/#the-five-shires). Deals in curious trinkets of dubious provenance.
 
 - **Location:** [The Old Road](/hobbity/appendix/places/#the-five-shires)
 
 ### Cirilli Finla
 
-Youngest daughter of [Quinn Finla](#quinn-finla), the carpenter. Abducted with her whole family—taken to the [Golden Grain Inn](/hobbity/appendix/places/#orlane), then marched blindfolded through tunnels to a wilderness location where [Abramo](#abramo) performed a charming ceremony. The charm didn't work on her. Imprisoned in Abramo's lair for weeks or months. Freed by the party. Now in [Ramne](#ramne)'s care.
+Youngest daughter of [Quinn Finla](#quinn-finla), the carpenter. Abducted with her family by the cult of Explictica and subjected to a charming ceremony—the only one it didn't work on. Imprisoned in [Abramo](#abramo)'s lair beneath the [Temple of Merikka](/hobbity/appendix/places/#orlane) for weeks. Freed by the party and sheltering with [Ramne](#ramne).
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
 - **Family:** [Quinn Finla](#quinn-finla) (father), Elena (mother), Milo (brother)
 
 ### Quinn Finla
 
-Carpenter in [Orlane](/hobbity/appendix/places/#orlane). [Zacharias](#zacharias) believes he is compromised. Confirmed—his whole family was abducted and charmed by the cult. Daughter [Cirilli](#cirilli-finla) was the only one who resisted.
+Carpenter in [Orlane](/hobbity/appendix/places/#orlane). Charmed by the cult of Explictica along with his family. His daughter [Cirilli](#cirilli-finla) was the only one who resisted.
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
 - **Family:** [Cirilli Finla](#cirilli-finla) (daughter)
@@ -157,7 +164,7 @@ Carpenter in [Orlane](/hobbity/appendix/places/#orlane). [Zacharias](#zacharias)
 
 ### Killian Gade
 
-Stablekeeper in [Orlane](/hobbity/appendix/places/#orlane), looking after [Opal](#opal) the pony. Friendly.
+Stablekeeper in [Orlane](/hobbity/appendix/places/#orlane). Friendly.
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
 
@@ -165,7 +172,7 @@ Stablekeeper in [Orlane](/hobbity/appendix/places/#orlane), looking after [Opal]
 
 ![Constable Grover](../../assets/images/npcs/constable-grover_avatar.webp)
 
-Local constable in [Orlane](/hobbity/appendix/places/#orlane). Armored in mail with a crossbow. Cooperative and takes reports seriously. The party initially suspected him of being compromised, but [Zacharias](#zacharias) trusts him and his reactions to troglodyte news (blanching, genuine concern) suggest he may be honest. Wedge suspects the armoured constables are "in on it."
+Local constable in [Orlane](/hobbity/appendix/places/#orlane). Armored in mail with a crossbow. Cooperative and takes reports seriously. Trusted by [Zacharias](#zacharias).
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
 - **Deputies:** [Donovan](#donovan), [Bulbar](#bulbar)
@@ -180,13 +187,13 @@ Local constable in [Orlane](/hobbity/appendix/places/#orlane). Armored in mail w
 
 ![The Hermit](../../assets/images/npcs/the-hermit_avatar.webp)
 
-An ancient tall-folk man living in a cabin deep in the Old Woods. Each hobbit saw his house differently (a hobbit-hole, an enormous skull, a drafty cabin). Keeper of a strange arcane machine that delivered prophetic visions (plague, tidal wave, undeath). Possibly dead or skeletal. Sent [Buford](#buford-niss) a message over winter as promised: "The crows are scared because the serpent hungers." Buford dismissed the party's concerns about the Hermit being dangerous.
+An ancient tall-folk man living in a cabin deep in the Old Woods. Each hobbit saw his house differently (a hobbit-hole, an enormous skull, a drafty cabin). Keeper of a strange arcane machine that delivered prophetic visions. Possibly dead or skeletal. Sent [Buford Niss](#buford-niss) a cryptic warning: "The crows are scared because the serpent hungers."
 
 - **Location:** [The Hermit's Cabin](/hobbity/appendix/places/#the-hermits-cabin)
 
 ### Berry Huddle
 
-Eldest daughter, 18. Beautiful like her mother. Acts as "second mother" to the younger children while [Primula](#primula-huddle) cooks and cleans obsessively. Seems happy, often singing under her breath. Secret romance with [Sam Sutton](#sam-sutton).
+Eldest daughter, 18. Beautiful like her mother. Acts as second mother to the younger children. Often singing under her breath.
 
 - **Location:** [Huddle Farm](/hobbity/appendix/places/#huddle-farm)
 - **Family:** [Tom Huddle](#tom-huddle) (father), [Primula Huddle](#primula-huddle) (mother)
@@ -229,7 +236,7 @@ One of the 23-year-old twins (with [Motto](#motto-huddle)). Messy, lazy, and dim
 
 ### Primula Huddle
 
-Matriarch of [Huddle Farm](/hobbity/appendix/places/#huddle-farm). Obsessed with cleanliness, driven mad by the filth of the excavation. Near breaking point dealing with her increasingly paranoid husband, 8 children (another on the way), a freeloading dwarf ([Krund](#krund-pothrower)), the [Sutton](#norrie-sutton) feud, and three hobbit strangers.
+Matriarch of [Huddle Farm](/hobbity/appendix/places/#huddle-farm). Obsessed with cleanliness, driven mad by the filth of her husband's excavation. Near breaking point dealing with 8 children (another on the way), a freeloading dwarf ([Krund Pothrower](#krund-pothrower)), and the feud with [Norrie Sutton](#norrie-sutton).
 
 - **Location:** [Huddle Farm](/hobbity/appendix/places/#huddle-farm)
 - **Family:** [Tom Huddle](#tom-huddle) (husband)
@@ -250,7 +257,7 @@ Bookish middle child, 16. Keeps to herself. Ventured that she heard things in th
 
 ### Tom Huddle
 
-Tolman "Tom" Huddle. Paranoid, sleep-deprived patriarch of [Huddle Farm](/hobbity/appendix/places/#huddle-farm) with 8 children and one on the way. Hired the party for 30gp (plus room and board) to catch [Norrie Sutton](#norrie-sutton) in the act of sabotage. Insists on being seen as the victim and maintaining moral high ground. Excavating his hill home, building a new stone barn (days after the wooden one burned), and planning to level the [Fortfield](/hobbity/appendix/places/#fortfield-tower) to bury the ruins and create new cropland. His wealth—affording all this construction—is unexplained. A locked full chest sits in a treasure room beneath the Fortfield Tower.
+Tolman "Tom" Huddle. Paranoid, sleep-deprived patriarch of [Huddle Farm](/hobbity/appendix/places/#huddle-farm) with 8 children and one on the way. Hired the party to catch [Norrie Sutton](#norrie-sutton) in the act of sabotage. Insists on being seen as the victim and maintaining moral high ground. Excavating his hill home, building a new stone barn, and planning to level the [Fortfield Tower](/hobbity/appendix/places/#fortfield-tower) to bury its ruins and create new cropland. His wealth—affording all this construction—is unexplained. A locked chest sits in a treasure room beneath the [Fortfield Tower](/hobbity/appendix/places/#fortfield-tower).
 
 - **Location:** [Huddle Farm](/hobbity/appendix/places/#huddle-farm)
 - **Family:** [Primula Huddle](#primula-huddle) (wife), [Berry](#berry-huddle), [Motto](#motto-huddle), [Otto](#otto-huddle), [Sherry](#sherry-huddle), [Mary](#mary-huddle), [Sara](#sara-huddle), [Bordo](#bordo-huddle), [Marlo](#marlo-huddle) (children), [Boris Duddle](#boris-duddle) (cousin)
@@ -269,7 +276,7 @@ Tolman "Tom" Huddle. Paranoid, sleep-deprived patriarch of [Huddle Farm](/hobbit
 
 ### Lotho Longbuck
 
-Axe shop owner in [Gomwick](/hobbity/appendix/places/#gomwick). Sold Wedge his shiny new axe.
+Axe shop owner in [Gomwick](/hobbity/appendix/places/#gomwick).
 
 - **Location:** [Gomwick](/hobbity/appendix/places/#gomwick)
 
@@ -279,7 +286,7 @@ Axe shop owner in [Gomwick](/hobbity/appendix/places/#gomwick). Sold Wedge his s
 
 ![Misha](../../assets/images/npcs/misha_avatar.webp)
 
-Priestess of the [Temple of Merikka](/hobbity/appendix/places/#orlane). The party took her armor, shield, and mace (Boffo now uses them). A body found in a crawlspace beneath the temple may be the real priestess, suggesting Misha is an imposter who murdered and replaced her. [Ramne](#ramne) suspects she may actually be a genuine follower of Merikka who was charmed.
+Priestess of the [Temple of Merikka](/hobbity/appendix/places/#orlane) in [Orlane](/hobbity/appendix/places/#orlane). A body found beneath the Temple of Merikka may be the real priestess, suggesting Misha is an imposter—or, as [Ramne](#ramne) suspects, a genuine follower who was charmed by the cult of Explictica.
 
 - **Location:** [The Temple of Merikka](/hobbity/appendix/places/#orlane)
 - **Status:** Prisoner—put to sleep by Turnip's blowgun and locked in the temple
@@ -298,7 +305,7 @@ The Hon. Horace Buford Hockwallop Niss, Esq. Wealthy, well-traveled old hobbit l
 
 Received a cryptic message from [the Hermit](#the-hermit) over winter: "The crows are scared because the serpent hungers." Also discovered his prized jade snake statue is missing—an ancient piece with a coiled jade body, a removable golden head with ruby eyes, revealing the face of a beautiful woman beneath. Believes the Scarecrow incident, the Hermit's message, and the missing statue are connected.
 
-Hired the party to travel to [Orlane](/hobbity/appendix/places/#orlane) and investigate [Zacharias](#zacharias)'s letter. Provided equipment: leather armor, daggers, slings, 30gp, plus individual gifts (Potion of Growth for Boffo, Potion of Invisibility for Wedge, sleeping dart blowgun for Turnip). Told the party to seek out "[Bertram](#bertram)" at the [Golden Grain Inn](/hobbity/appendix/places/#orlane).
+Patron of the party—sent them to [Orlane](/hobbity/appendix/places/#orlane) to investigate [Zacharias](#zacharias)'s letter about the cult of Explictica.
 
 - **Location:** [Gomwick](/hobbity/appendix/places/#gomwick)
 - **Servant:** [Dalton Dallydown](#dalton-dallydown) (butler)
@@ -312,22 +319,22 @@ Hired the party to travel to [Orlane](/hobbity/appendix/places/#orlane) and inve
 
 ### Wilbur Oldbuck
 
-Storekeeper in [Orlane](/hobbity/appendix/places/#orlane). [Zacharias](#zacharias) believes he is compromised.
+Storekeeper in [Orlane](/hobbity/appendix/places/#orlane). Suspected of being charmed by the cult of Explictica.
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
 
 ### Olwyn
 
-[Belba](#belba)'s husband at the [Slumbering Serpent Inn](/hobbity/appendix/places/#orlane). Serves as messenger.
+Co-proprietor of the [Slumbering Serpent Inn](/hobbity/appendix/places/#orlane). Serves as messenger.
 
 - **Location:** [The Slumbering Serpent Inn](/hobbity/appendix/places/#orlane)
 - **Family:** [Belba](#belba) (wife)
 
 ### Opal
 
-The party's pony, borrowed from Uncle. Left at [Killian Gade](#killian-gade)'s stables in [Orlane](/hobbity/appendix/places/#orlane). Has 9 equipped and 16 packed item slots (saddlebags).
+The party's pony, borrowed from their Uncle.
 
-- **Location:** [Orlane](/hobbity/appendix/places/#orlane)
+- **Location:** [Killian Gade](#killian-gade)'s stables in [Orlane](/hobbity/appendix/places/#orlane)
 
 ### See Also
 
@@ -337,7 +344,7 @@ The party's pony, borrowed from Uncle. Left at [Killian Gade](#killian-gade)'s s
 
 ### Krund Pothrower
 
-Freeloading dwarf, co-owner of Duddle & Pothrower with [Boris Duddle](#boris-duddle). Sent to rebuild the barn but berated his crew ([Epsten](#epsten) the stone giant), causing a strike. Refuses to apologize. Moved into the Huddle house where he eats, drinks, and criticizes [Tom](#tom-huddle)'s excavation work. Known boozer—dwarf-sized footprints found near the wine cellar suggest he stole Tom's prized wine.
+Freeloading dwarf, co-owner of Duddle & Pothrower with [Boris Duddle](#boris-duddle). Sent to rebuild [Tom Huddle](#tom-huddle)'s barn at [Huddle Farm](/hobbity/appendix/places/#huddle-farm) but berated his worker [Epsten](#epsten), causing a strike. Refuses to apologize. Moved into the Huddle house where he eats, drinks, and criticizes Tom's excavation work. Known boozer and suspected wine thief.
 
 - **Location:** [Huddle Farm](/hobbity/appendix/places/#huddle-farm)
 - **Partner:** [Boris Duddle](#boris-duddle)
@@ -367,29 +374,31 @@ Conspirator in the pie-poisoning plot at the [Gomwick](/hobbity/appendix/places/
 
 ![Ramne](../../assets/images/npcs/ramne_avatar.webp)
 
-Very old hobbit druid living in a half-buried stone cottage (#27) west of the Slumbering Serpent in [Orlane](/hobbity/appendix/places/#orlane). Has been independently investigating the cult. Carries a book, a wooden spoon, and a walking stick. His weasel companion Twitch rides on his head. Moves at a glacial pace. Healed the party when they met in the temple dungeon. Now sheltering [Cirilli Finla](#cirilli-finla).
+Very old hobbit druid living in a half-buried stone cottage west of the [Slumbering Serpent Inn](/hobbity/appendix/places/#orlane) in [Orlane](/hobbity/appendix/places/#orlane). Has been investigating the cult of Explictica. Carries a book, a wooden spoon, and a walking stick. His weasel companion Twitch rides on his head. Moves at a glacial pace. Sheltering [Cirilli Finla](#cirilli-finla) at his cottage.
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
 - **Companion:** Twitch (weasel)
 
 ### Rolo
 
-Son of Atticus. Came out with a crossbow, fired at the party's feet, told them to keep moving. Then went and knocked at the [Temple of Merikka](/hobbity/appendix/places/#orlane) door.
+Hostile and armed. Connected to the [Temple of Merikka](/hobbity/appendix/places/#orlane).
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
+- **Family:** [Atticus](#atticus) (father)
 
 ## S
 
 ### Griff Snowvale (Gardner)
 
-Middle-aged hobbit, broad, furious. Cultist, likely a villager from [Orlane](/hobbity/appendix/places/#orlane). Confronted the party in the [Temple of Merikka](/hobbity/appendix/places/#orlane) sanctuary alongside his son [Timba](#timba-snowvale-gardner) and [Kaylin](#kaylin-snowvale). Captured and manacled. Clenched jaw, staring at the wall, refuses to talk.
+Middle-aged hobbit, broad and furious. A charmed villager serving the cult of Explictica in the [Temple of Merikka](/hobbity/appendix/places/#orlane). Refuses to talk.
 
 - **Location:** [The Temple of Merikka](/hobbity/appendix/places/#orlane)
 - **Family:** [Timba Snowvale](#timba-snowvale-gardner) (son)
+- **Status:** Prisoner—captured and manacled in the Temple of Merikka
 
 ### Kaylin Snowvale
 
-Young girl, daughter of [Maddie Snowvale](#maddie-snowvale) the blacksmith's wife. Found in the [Temple of Merikka](/hobbity/appendix/places/#orlane) sanctuary with [Griff](#griff-snowvale-gardner) and [Timba](#timba-snowvale-gardner). Subdued by Wedge and locked in the temple. Nothing behind her eyes—charmed beyond reason.
+Young girl. Charmed beyond reason by the cult of Explictica—nothing behind her eyes.
 
 - **Location:** [The Temple of Merikka](/hobbity/appendix/places/#orlane)
 - **Family:** [Maddie Snowvale](#maddie-snowvale) (mother)
@@ -397,24 +406,25 @@ Young girl, daughter of [Maddie Snowvale](#maddie-snowvale) the blacksmith's wif
 
 ### Maddie Snowvale
 
-Blacksmith's wife in [Orlane](/hobbity/appendix/places/#orlane). Filed a complaint with [Constable Grover](#constable-grover) against the party after they put down her husband with a sleep dart when he attacked unprovoked.
+Blacksmith's wife in [Orlane](/hobbity/appendix/places/#orlane). Hostile toward the party after the confrontation with her husband [Mattie](#mattie-snowvale).
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
 - **Family:** [Mattie Snowvale](#mattie-snowvale) (husband), [Kaylin Snowvale](#kaylin-snowvale) (daughter)
 
 ### Mattie Snowvale
 
-Blacksmith in [Orlane](/hobbity/appendix/places/#orlane). Attacked Wedge unprovoked with a hammer, dealing a grievous blow that permanently diminished Wedge's charm. Put down by Turnip's sleep dart. Likely compromised by the cult.
+Blacksmith in [Orlane](/hobbity/appendix/places/#orlane). Likely charmed by the cult of Explictica—attacked Wedge unprovoked, leaving a lasting injury.
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
 - **Family:** [Maddie Snowvale](#maddie-snowvale) (wife), [Kaylin Snowvale](#kaylin-snowvale) (daughter)
 
 ### Timba Snowvale (Gardner)
 
-[Griff](#griff-snowvale-gardner)'s son. Cultist. Confronted the party in the [Temple of Merikka](/hobbity/appendix/places/#orlane) sanctuary. Captured and manacled alongside his father. Spat in Boffo's face when questioned.
+Charmed by the cult of Explictica. Defiant and uncooperative.
 
 - **Location:** [The Temple of Merikka](/hobbity/appendix/places/#orlane)
 - **Family:** [Griff Snowvale](#griff-snowvale-gardner) (father)
+- **Status:** Prisoner—captured and manacled in the Temple of Merikka
 
 ### Traver Stokehart
 
@@ -425,14 +435,14 @@ Blacksmith in [Orlane](/hobbity/appendix/places/#orlane). Attacked Wedge unprovo
 
 ### Norrie Sutton
 
-Neighbour feuding with [Tom Huddle](#tom-huddle) over a hedge blocking access to blackberry bushes along Deadman's Gap. Claims the hedge is on his own land and he can do what he pleases. Denies involvement in the sabotage acts. His son [Sam](#sam-sutton) has a secret relationship with [Berry Huddle](#berry-huddle).
+Neighbour feuding with [Tom Huddle](#tom-huddle) over a hedge blocking access to blackberry bushes along Deadman's Gap. Claims the hedge is on his own land and he can do what he pleases. Denies involvement in the sabotage acts.
 
 - **Location:** Near [Huddle Farm](/hobbity/appendix/places/#huddle-farm)
 - **Family:** [Sam Sutton](#sam-sutton) (son)
 
 ### Sam Sutton
 
-[Norrie Sutton](#norrie-sutton)'s eldest son. Secret romance with [Berry Huddle](#berry-huddle). They were meeting in the Huddle barn; the barn fire was caused by his father's pipe left unattended while they were distracted.
+Eldest son of [Norrie Sutton](#norrie-sutton). The barn fire at [Huddle Farm](/hobbity/appendix/places/#huddle-farm) was caused by his father's pipe, left unattended while Sam and [Berry Huddle](#berry-huddle) were meeting in secret.
 
 - **Location:** Near [Huddle Farm](/hobbity/appendix/places/#huddle-farm)
 - **Family:** [Norrie Sutton](#norrie-sutton) (father)
@@ -452,7 +462,7 @@ Neighbour feuding with [Tom Huddle](#tom-huddle) over a hedge blocking access to
 
 ### Vilma
 
-Widowed, lives by the river in [Orlane](/hobbity/appendix/places/#orlane). The party spent a pleasant afternoon with her.
+Widow living by the river in [Orlane](/hobbity/appendix/places/#orlane). Friendly.
 
 - **Location:** [Orlane](/hobbity/appendix/places/#orlane)
 
@@ -468,7 +478,7 @@ Widowed, lives by the river in [Orlane](/hobbity/appendix/places/#orlane). The p
 
 ![Zacharias](../../assets/images/npcs/zacharias-fishing_avatar.webp)
 
-Retired adventurer, well-traveled, late middle age. Lives across the river in [Orlane](/hobbity/appendix/places/#orlane). Sent the original letter to [Buford](#buford-niss) requesting help. Extremely paranoid. His stone gargoyle defences killed [Deputy Donovan](#donovan) when [Grover](#constable-grover) came looking for the party. Fled with [Derek Desleigh](#derek-desleigh) to the [Golden Grain Inn](/hobbity/appendix/places/#orlane) before it burned. His secret chest is gone. Whether he's been charmed, coerced, or is playing a deeper game is unknown.
+Retired adventurer, well-traveled, late middle age. Lives across the river in [Orlane](/hobbity/appendix/places/#orlane). Sent a letter to [Buford Niss](#buford-niss) requesting help investigating the cult of Explictica. Extremely paranoid—his home is guarded by stone gargoyles. Fled [Orlane](/hobbity/appendix/places/#orlane) with [Derek Desleigh](#derek-desleigh). Whether he has been charmed, coerced, or is playing a deeper game is unknown.
 
 - **Location:** Unknown, last seen at [Orlane](/hobbity/appendix/places/#orlane)
 - **Ally:** [Buford Niss](#buford-niss)

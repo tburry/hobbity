@@ -70,7 +70,7 @@ A hobbit village on a flat agricultural plain in one of the richest and most fer
 - **The Golden Grain Inn:** Burned down. Owned by [Bertram](/hobbity/appendix/npcs/#bertram). The cult used its tunnels to move abducted families out of town for charming ceremonies. Set on fire from inside after [Zacharias](/hobbity/appendix/npcs/#zacharias) and [Derek](/hobbity/appendix/npcs/#derek-desleigh) fled there.
 - **The Temple of Merikka:** New temple behind three-meter walls. Dedicated to a goddess of farming, fertility, and light. Hides something much older beneath it.
 - **The Dungeon Beneath the Temple:** Ancient ruins predating the temple. Two levels: upper with troglodyte lair and underground stream; lower with [Abramo](/hobbity/appendix/npcs/#abramo)'s serpent cult lair, torture chamber, goblin barracks, and a jade naga statue of the goddess Explictica.
-- **Ramne's Cottage (#27):** Half-buried stone cottage west of the Slumbering Serpent. Home of [Ramne](/hobbity/appendix/npcs/#ramne).
+- **Ramne's Cottage:** Half-buried stone cottage west of the Slumbering Serpent. Home of [Ramne](/hobbity/appendix/npcs/#ramne).
 
 ### Happenings
 
