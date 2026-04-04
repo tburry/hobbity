@@ -466,7 +466,7 @@ figure {
 figcaption {
   text-align: center;
   font-size: 0.9rem;
-  color: var(--text-light);
+  // color: var(--text-light);
   // margin-block: var(--space);
 }
 
@@ -745,7 +745,7 @@ details[open] > summary {
   figcaption {
     margin-top: var(--space-sm);
     font-style: italic;
-    color: var(--text-light);
+    // color: var(--text-light);
     font-size: 0.85rem;
   }
 
