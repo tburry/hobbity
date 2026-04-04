@@ -84,6 +84,10 @@ HEAD_RATIO = 0.4
 # 0.0 = head at the very top edge, 0.5 = centered, 1.0 = bottom edge.
 HEAD_VERTICAL = 0.5
 
+# Maximum avatar output size in pixels. Avatars larger than this are
+# downscaled after cropping. Set to 0 to disable.
+AVATAR_MAX_SIZE = 512
+
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 MODELS_DIR = os.path.join(SCRIPT_DIR, "models")
 
@@ -315,6 +319,9 @@ def make_avatar(image_path, model="retinaface", debug=False):
 
     crop_x, crop_y, avatar_size = compute_crop(cx, cy, radius, img_w, img_h)
     avatar = img[crop_y : crop_y + avatar_size, crop_x : crop_x + avatar_size]
+
+    if AVATAR_MAX_SIZE and avatar_size > AVATAR_MAX_SIZE:
+        avatar = cv2.resize(avatar, (AVATAR_MAX_SIZE, AVATAR_MAX_SIZE), interpolation=cv2.INTER_AREA)
 
     base, ext = os.path.splitext(image_path)
     avatar_path = f"{base}_avatar{ext}"
