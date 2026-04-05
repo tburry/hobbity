@@ -28,10 +28,10 @@ const pcTokensByLevel = await Promise.all(
         const src = pcImages[key]?.default;
         if (!src) return null;
         const full = await getImage({ src });
-        return { name: pc.data.name, src, fullSrc: full.src };
+        return { name: pc.data.name, href: `/hobbity/appendix/pcs/${pc.id}/`, src, fullSrc: full.src };
       }),
     );
-    return { level, tokens: tokens.filter(Boolean) as { name: string; src: ImageMetadata; fullSrc: string }[] };
+    return { level, tokens: tokens.filter(Boolean) as { name: string; href: string; src: ImageMetadata; fullSrc: string }[] };
   }),
 );
 const pcLevels = pcTokensByLevel.filter((g) => g.tokens.length > 0);
@@ -42,12 +42,22 @@ const npcImages = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true },
 );
 
-// Derive NPC display names from avatar alt text in npcs.md
+// Derive NPC display names and dead status from npcs.mdx
 const npcsEntry = (await getCollection('appendix')).find((e) => e.id === 'npcs');
 const npcAvatarNames: Record<string, string> = {};
+const deadNpcs = new Set<string>();
 if (npcsEntry?.body) {
-  for (const m of npcsEntry.body.matchAll(/!\[([^\]]+)\]\([^)]*\/([^/)]+)_avatar\.webp\)/g)) {
-    npcAvatarNames[m[2]] = m[1];
+  // Match <NpcAvatar src="slug" alt="Name" />
+  for (const m of npcsEntry.body.matchAll(/<NpcAvatar\s+src="([^"]+)"\s+alt="([^"]+)"/g)) {
+    npcAvatarNames[m[1]] = m[2];
+  }
+  // Match ### Name **†** headings to find dead NPCs
+  for (const m of npcsEntry.body.matchAll(/^###\s+(.+?)\s+\*\*†\*\*/gm)) {
+    const name = m[1];
+    // Find the slug for this name
+    for (const [slug, n] of Object.entries(npcAvatarNames)) {
+      if (n === name) deadNpcs.add(slug);
+    }
   }
 }
 
@@ -56,11 +66,13 @@ const npcTokens = await Promise.all(
     const stem = path.replace(/.*\//, '').replace('_token.webp', '');
     const name = npcAvatarNames[stem] || stem;
     const full = await getImage({ src: mod.default });
-    return { name, src: mod.default, fullSrc: full.src };
+    return { name, href: `/hobbity/appendix/npcs/#${stem}`, dead: deadNpcs.has(stem), src: mod.default, fullSrc: full.src };
   }),
 );
 const sortKey = (name: string) => name.split(' ').pop()!;
 npcTokens.sort((a, b) => sortKey(a.name).localeCompare(sortKey(b.name)));
+const aliveNpcs = npcTokens.filter((t) => !t.dead);
+const deadNpcTokens = npcTokens.filter((t) => t.dead);
 ---
 
 <Base title="Tokens" showHome={true}>
@@ -85,7 +97,7 @@ npcTokens.sort((a, b) => sortKey(a.name).localeCompare(sortKey(b.name)));
                 <svg width="20" height="20"><use href="#icon-copy" /></svg>
               </span>
             </button>
-            <figcaption>{t.name}</figcaption>
+            <figcaption><a href={t.href}>{t.name}</a></figcaption>
           </figure>
         ))}
       </div>
@@ -93,8 +105,9 @@ npcTokens.sort((a, b) => sortKey(a.name).localeCompare(sortKey(b.name)));
   ))}
 
   <h2>NPCs</h2>
+  <h3>Alive</h3>
   <div class="token-grid no-lightbox">
-    {npcTokens.map((t) => (
+    {aliveNpcs.map((t) => (
       <figure class="token-figure">
         <button class="token-wrap" data-url={t.fullSrc} title="Copy image URL">
           <Image src={t.src} alt={t.name} width={128} loading="lazy" />
@@ -102,29 +115,49 @@ npcTokens.sort((a, b) => sortKey(a.name).localeCompare(sortKey(b.name)));
             <svg width="20" height="20"><use href="#icon-copy" /></svg>
           </span>
         </button>
-        <figcaption>{t.name}</figcaption>
+        <figcaption><a href={t.href}>{t.name}</a></figcaption>
       </figure>
     ))}
   </div>
+  {deadNpcTokens.length > 0 && (
+    <>
+      <h3>Dead</h3>
+      <div class="token-grid no-lightbox">
+        {deadNpcTokens.map((t) => (
+          <figure class="token-figure">
+            <button class="token-wrap" data-url={t.fullSrc} title="Copy image URL">
+              <Image src={t.src} alt={t.name} width={128} loading="lazy" />
+              <span class="token-copy-icon">
+                <svg width="20" height="20"><use href="#icon-copy" /></svg>
+              </span>
+            </button>
+            <figcaption><a href={t.href}>{t.name}</a></figcaption>
+          </figure>
+        ))}
+      </div>
+    </>
+  )}
 </Base>
 
 <style>
   .token-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    @media (min-width: 600px) {
+      grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+    }
+    gap: var(--space);
   }
 
   .token-figure {
     margin: 0;
     text-align: center;
-    width: 128px;
   }
 
   .token-wrap {
     position: relative;
-    display: inline-block;
+    display: block;
+    width: 100%;
     background: none;
     border: none;
     padding: 0;
@@ -133,6 +166,8 @@ npcTokens.sort((a, b) => sortKey(a.name).localeCompare(sortKey(b.name)));
 
   .token-wrap img {
     display: block;
+    width: 100%;
+    height: auto;
     border-radius: 50%;
   }
 
@@ -163,7 +198,7 @@ npcTokens.sort((a, b) => sortKey(a.name).localeCompare(sortKey(b.name)));
   }
 
   figcaption {
-    margin-top: 0.4rem;
+    /* margin-top: 0.4rem; */
     font-size: 0.85em;
   }
 </style>
