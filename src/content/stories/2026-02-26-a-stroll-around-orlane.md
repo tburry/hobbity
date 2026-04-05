@@ -52,7 +52,33 @@ Boffo, for his part, had been paying very little attention to any of this. It wa
 
 ## Grover's Reckoning
 
-Turnip spent the night tied to a table leg in Constable Grover's office—hobbit jail, such as it is. He got cake for breakfast, which softened the indignity somewhat. When Donovan returned with news of two dead troglodytes in the Foaming Mug basement, the color drained from Grover's face. He untied Turnip and told him to rest at the Slumbering Serpent. Turnip demanded an apology. Grover declined.
+The constabulary in [Orlane](/hobbity/appendix/places/#orlane) was purpose-built in the way that hobbit constabularies are purpose-built, which is to say it had been there since anyone could remember and no one had ever taken it seriously. The constable's post was a one-year volunteer term that usually fell on some hapless young hobbit who spent twelve months listening to farmers bicker about foxes and stolen chickens. The jail was a couch. The bonds were a length of rope tied to a table leg. Turnip sat on the couch and considered his situation.
+
+Grover came back with a piece of cake. "You may as well eat some breakfast," he said. "Maybe that'll settle you."
+
+"Thank you," Turnip said, because he was not so rude as to refuse breakfast. "But I must say this has all gone terribly wrong. You're not acting like a constable. You're acting like you have a boss. Someone you answer to."
+
+Grover looked at him with utter confusion. "Someone I answer to? I answer to the townsfolk of Orlane, my friend."
+
+Turnip chewed his cake and said nothing, which was unusual for Turnip.
+
+Then Donovan returned and confirmed the story: two dead troglodytes in the basement of the Foaming Mug. The colour drained from Grover's face. He went quiet and pensive for a long moment. Then he untied the rope.
+
+"Go back to the Slumbering Serpent," Grover said. "Get yourself a proper meal and some rest. I'll be by to talk to you and your friends."
+
+Turnip stood, brushed himself off, and waited.
+
+"Well?" Grover said.
+
+"I'm waiting for the apology. It's customary for someone to apologize to the wronged party."
+
+"Off you go."
+
+"Sorry for the inconvenience, something like that."
+
+"Off you go."
+
+"Well, I never," Turnip said, and humphed his way out the door.
 
 ## Belba Takes Charge
 
