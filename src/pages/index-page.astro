@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import { appendixLabels, appendixOrder } from '../lib/appendix';
+import { appendixLabels, worldOrder, appendixOrder } from '../lib/appendix';
 import { storyOrder, storySlug, getTitle } from '../lib/stories';
 
 const allStories = await getCollection('stories');
@@ -42,9 +42,9 @@ const pcs = (await getCollection('pcs')).sort((a, b) => a.data.order - b.data.or
     </>
   )}
 
-  <h2>Appendix</h2>
+  <h2>World</h2>
   <ul>
-    {appendixOrder.map((id) => (
+    {worldOrder.map((id) => (
       <li>
         <a href={`/hobbity/appendix/${id}/`}>{appendixLabels[id]}</a>
         {id === 'pcs' && (
@@ -54,6 +54,15 @@ const pcs = (await getCollection('pcs')).sort((a, b) => a.data.order - b.data.or
             ))}
           </ul>
         )}
+      </li>
+    ))}
+  </ul>
+
+  <h2>Appendix</h2>
+  <ul>
+    {appendixOrder.map((id) => (
+      <li>
+        <a href={`/hobbity/appendix/${id}/`}>{appendixLabels[id]}</a>
       </li>
     ))}
   </ul>

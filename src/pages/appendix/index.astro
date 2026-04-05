@@ -1,15 +1,17 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import { appendixLabels, appendixOrder } from '../../lib/appendix';
+import { appendixLabels, worldOrder, appendixOrder } from '../../lib/appendix';
 
 const pcs = (await getCollection('pcs')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <Base title="Appendix" showHome={true}>
   <h1>Appendices</h1>
+
+  <h2>World</h2>
   <ul>
-    {appendixOrder.map((id) => (
+    {worldOrder.map((id) => (
       <li>
         <a href={`/hobbity/appendix/${id}/`}>{appendixLabels[id]}</a>
         {id === 'pcs' && (
@@ -19,6 +21,15 @@ const pcs = (await getCollection('pcs')).sort((a, b) => a.data.order - b.data.or
             ))}
           </ul>
         )}
+      </li>
+    ))}
+  </ul>
+
+  <h2>Appendices</h2>
+  <ul>
+    {appendixOrder.map((id) => (
+      <li>
+        <a href={`/hobbity/appendix/${id}/`}>{appendixLabels[id]}</a>
       </li>
     ))}
   </ul>

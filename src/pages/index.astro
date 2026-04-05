@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import { appendixLabels, appendixOrder } from '../lib/appendix';
+import { appendixLabels, worldOrder, appendixOrder } from '../lib/appendix';
 import { storyOrder, storySlug, getTitle } from '../lib/stories';
 import toadStompers from '../assets/images/toad-stompers.webp';
 
@@ -34,6 +34,13 @@ essays.sort((a, b) => a.id.localeCompare(b.id));
         </ul>
       </>
     )}
+
+    <h2>World</h2>
+    <ul>
+      {worldOrder.map((id) => (
+        <li><a href={`/hobbity/appendix/${id}/`}>{appendixLabels[id]}</a></li>
+      ))}
+    </ul>
 
     <h2>Appendices</h2>
     <ul>
