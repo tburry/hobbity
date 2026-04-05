@@ -4,12 +4,13 @@ interface Props {
   showHome?: boolean;
   searchable?: boolean;
   isSearchPage?: boolean;
+  lightbox?: boolean;
 }
 
 import '../styles/global.scss';
 import Lightbox from '../components/Lightbox.astro';
 
-const { title, showHome = false, searchable = false, isSearchPage = false } = Astro.props;
+const { title, showHome = false, searchable = false, isSearchPage = false, lightbox = false } = Astro.props;
 const pageTitle = title || 'A Hobbity Adventure';
 ---
 
@@ -70,7 +71,7 @@ const pageTitle = title || 'A Hobbity Adventure';
     <footer class="back-to-top-footer">
       <button class="back-to-top" type="button" aria-label="Back to top">&uarr; Back to Top</button>
     </footer>
-    <Lightbox />
+    {lightbox && <Lightbox />}
 
     <script is:inline src="/hobbity/pagefind/pagefind-ui.js"></script>
     <script is:inline>
