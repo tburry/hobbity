@@ -1,16 +1,19 @@
 ---
+title: "The Midnight Stakeout"
 story: The Huddle Job
+date: 2025-12-04
+location: "[Huddle Farm](/hobbity/appendix/places/#huddle-farm), near Sunnyside crossroads"
+pcs:
+  - name: Boffo Lunderbunk
+    slug: boffo
+    level: 1
+  - name: Wedge Wedgerton
+    slug: wedge
+    level: 1
+  - name: Turnip Bramblebrook
+    slug: turnip
+    level: 1
 ---
-
-# The Midnight Stakeout
-
-Session Recap – <dfn title="December 4, 2025">4 Foreyule, S.R. 1425</dfn>
-
-- **PCs:**
-  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Adventurer
-  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 1 Adventurer
-  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 1 Adventurer
-- **Location:** [Huddle Farm](/hobbity/appendix/places/#huddle-farm), near Sunnyside crossroads
 
 ## Lunch and the Hedge
 

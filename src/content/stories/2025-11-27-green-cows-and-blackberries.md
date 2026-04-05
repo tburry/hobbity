@@ -1,16 +1,19 @@
 ---
+title: "Green Cows and Blackberries"
 story: The Huddle Job
+date: 2025-11-27
+location: "[Huddle Farm](/hobbity/appendix/places/#huddle-farm), near Sunnyside crossroads"
+pcs:
+  - name: Boffo Lunderbunk
+    slug: boffo
+    level: 1
+  - name: Wedge Wedgerton
+    slug: wedge
+    level: 1
+  - name: Turnip Bramblebrook
+    slug: turnip
+    level: 1
 ---
-
-# Green Cows and Blackberries
-
-Session Recap – <dfn title="November 27, 2025">27 Blotmath, S.R. 1425</dfn>
-
-- **PCs:**
-  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Adventurer
-  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 1 Adventurer
-  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 1 Adventurer
-- **Location:** [Huddle Farm](/hobbity/appendix/places/#huddle-farm), near Sunnyside crossroads
 
 ## Arrival at Huddle Farm
 

@@ -1,16 +1,19 @@
 ---
+title: "A Pilgrimage to the Temple of Merikka"
 story: Something Rotten in Orlane
+date: 2026-03-19
+location: "Temple of Merikka and dungeon beneath, [Orlane](/hobbity/appendix/places/#orlane)"
+pcs:
+  - name: Boffo Lunderbunk
+    slug: boffo
+    level: 1
+  - name: Wedge Wedgerton
+    slug: wedge
+    level: 1
+  - name: Turnip Bramblebrook
+    slug: turnip
+    level: 1
 ---
-
-# A Pilgrimage to the Temple of Merikka
-
-Session Recap – <dfn title="March 19, 2026">19 Rethe, S.R. 1426</dfn>
-
-- **PCs:**
-  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Adventurer
-  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 1 Adventurer
-  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 1 Adventurer
-- **Location:** Temple of Merikka and dungeon beneath, [Orlane](/hobbity/appendix/places/#orlane)
 
 ## Entering the Temple
 

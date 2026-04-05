@@ -1,16 +1,19 @@
 ---
+title: "The Skeleton Room"
 story: Something Rotten in Orlane
+date: 2026-03-22
+location: "Dungeon beneath the Temple of Merikka and temple ground floor, [Orlane](/hobbity/appendix/places/#orlane)"
+pcs:
+  - name: Boffo Lunderbunk
+    slug: boffo
+    level: 1
+  - name: Wedge Wedgerton
+    slug: wedge
+    level: 1
+  - name: Turnip Bramblebrook
+    slug: turnip
+    level: 1
 ---
-
-# The Skeleton Room
-
-Session Recap – <dfn title="March 22, 2026">22 Rethe, S.R. 1426</dfn>
-
-- **PCs:**
-  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Adventurer
-  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 1 Adventurer
-  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 1 Adventurer
-- **Location:** Dungeon beneath the Temple of Merikka and temple ground floor, [Orlane](/hobbity/appendix/places/#orlane)
 
 ## Cleaning Up the Lair
 

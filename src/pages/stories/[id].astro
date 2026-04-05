@@ -1,12 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Content from '../../layouts/Content.astro';
-import { storySlug } from '../../lib/stories';
-
-function getTitle(entry: { body?: string; id: string }) {
-  const h1 = entry.body?.split('\n').find((l) => l.startsWith('# '));
-  return h1 ? h1.replace(/^# /, '') : entry.id;
-}
+import { storySlug, getTitle, toShireDate, mdLinks } from '../../lib/stories';
 
 export async function getStaticPaths() {
   const allStories = await getCollection('stories');
@@ -31,9 +26,32 @@ const { story, prev, next } = Astro.props;
 const storyGroupSlug = storySlug(story.data.story);
 const { Content: StoryContent } = await render(story);
 const title = getTitle(story);
+const date = story.data.date ? toShireDate(story.data.date) : null;
+const pcs = story.data.pcs || [];
+const location = story.data.location;
 ---
 
 <Content title={title}>
+  <h1>{title}</h1>
+
+  <aside data-pagefind-ignore>
+  <ul>
+    <li><strong>Told on:</strong>
+    {date && (
+      <time datetime={story.data.date.toISOString().split('T')[0]} title={date.real} data-pagefind-sort="date[datetime]">{date.shire}</time>
+    )}
+    </li>
+    <li><strong>PCs:</strong>
+      <ul>
+        {pcs.map((pc) => (
+          <li><a href={`/hobbity/appendix/pcs/${pc.slug}/`}>{pc.name}</a> – Level {pc.level} Adventurer</li>
+        ))}
+      </ul>
+    </li>
+    {location && <li><strong>Location:</strong> <Fragment set:html={mdLinks(location)} /></li>}
+  </ul>
+  </aside>
+
   <StoryContent />
 
   <footer class="chapter-nav" slot="footer">

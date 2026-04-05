@@ -1,16 +1,19 @@
 ---
+title: "The Gomwick Harvest Festival"
 story: A Hobbity Thanksgiving
+date: 2025-11-06
+location: "[Thistledown](/hobbity/appendix/places/#thistledown), the Old Road, [Gomwick](/hobbity/appendix/places/#gomwick)"
+pcs:
+  - name: Boffo Lunderbunk
+    slug: boffo
+    level: 0
+  - name: Wedge Wedgerton
+    slug: wedge
+    level: 0
+  - name: Turnip Bramblebrook
+    slug: turnip
+    level: 0
 ---
-
-# The Gomwick Harvest Festival
-
-Session Recap – <dfn title="November 6, 2025">6 Blotmath, S.R. 1425</dfn>
-
-- **PCs:**
-  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 0 Hobbit
-  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 0 Hobbit
-  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 0 Hobbit
-- **Location:** [Thistledown](/hobbity/appendix/places/#thistledown), the Old Road, [Gomwick](/hobbity/appendix/places/#gomwick)
 
 ## The Old Road to Gomwick
 

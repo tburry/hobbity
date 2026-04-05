@@ -1,16 +1,19 @@
 ---
+title: "A Stroll Around Orlane"
 story: Something Rotten in Orlane
+date: 2026-02-26
+location: "[Orlane](/hobbity/appendix/places/#orlane) village"
+pcs:
+  - name: Boffo Lunderbunk
+    slug: boffo
+    level: 1
+  - name: Wedge Wedgerton
+    slug: wedge
+    level: 1
+  - name: Turnip Bramblebrook
+    slug: turnip
+    level: 1
 ---
-
-# A Stroll Around Orlane
-
-Session Recap – <dfn title="February 26, 2026">26 Solmath, S.R. 1426</dfn>
-
-- **PCs:**
-  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Adventurer
-  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 1 Adventurer
-  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 1 Adventurer
-- **Location:** [Orlane](/hobbity/appendix/places/#orlane) village
 
 ## The Blacksmith and the Constable
 

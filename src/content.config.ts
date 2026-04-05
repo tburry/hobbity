@@ -4,7 +4,15 @@ import { glob } from 'astro/loaders';
 const stories = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/stories' }),
   schema: z.object({
+    title: z.string(),
     story: z.string(),
+    date: z.coerce.date(),
+    location: z.string().optional(),
+    pcs: z.array(z.object({
+      name: z.string(),
+      slug: z.string(),
+      level: z.union([z.number(), z.string()]),
+    })).optional(),
   }),
 });
 

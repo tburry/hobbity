@@ -1,16 +1,19 @@
 ---
+title: "The Eye Beneath the Hill"
 story: The Huddle Job
+date: 2025-12-18
+location: "Fortfield Tower, [Huddle Farm](/hobbity/appendix/places/#huddle-farm)"
+pcs:
+  - name: Boffo Lunderbunk
+    slug: boffo
+    level: 1
+  - name: Wedge Wedgerton
+    slug: wedge
+    level: 1
+  - name: Turnip Bramblebrook
+    slug: turnip
+    level: 1
 ---
-
-# The Eye Beneath the Hill
-
-Session Recap – <dfn title="December 18, 2025">18 Foreyule, S.R. 1425</dfn>
-
-- **PCs:**
-  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Adventurer
-  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 1 Adventurer
-  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 1 Adventurer
-- **Location:** Fortfield Tower, [Huddle Farm](/hobbity/appendix/places/#huddle-farm)
 
 ## Into the Tower
 
