@@ -27,7 +27,7 @@ export const images: GalleryImage[] = [
     src: img('ramne-offers-boffo-pipe.webp'),
     alt: 'Ramne offers Boffo a puff of his pipe',
     caption:
-      'Ramne packed his pipe amid the skeleton-strewn temple. "The only religion I follow is this right here," he said. Boffo asked for a bit of that religion too.',
+      'Ramne packed his pipe amid the skeleton-strewn ruins beneath the Temple of Merikka. "The only religion I follow is this right here," he said. Boffo asked for a bit of that religion too.',
     storyLink:
       '/hobbity/stories/2026-03-31-the-serpent-beneath/#ramne',
     storyTitle: 'The Serpent Beneath',
@@ -54,7 +54,7 @@ export const images: GalleryImage[] = [
     src: img('abramo.webp'),
     alt: 'Abramo',
     caption:
-      'Abramo, the serpent cult\'s priest. Robed in snake-skin scale mail with a cobra-headed mace, he worshipped Explictica with the fervour of the truly insane.',
+      'Abramo, priest of the cult of Explictica. Robed in snake-skin scale mail with a cobra-headed mace, he worshipped his snake goddess with the fervour of the truly insane.',
     storyLink:
       '/hobbity/stories/2026-03-31-the-serpent-beneath/#the-serpents-lair',
     storyTitle: 'The Serpent Beneath',
@@ -100,7 +100,7 @@ export const images: GalleryImage[] = [
     src: img('misha.webp'),
     alt: 'Misha',
     caption:
-      'Misha, the priestess of the Temple of Merikka. Whether imposter or charmed follower, Turnip\'s sleep dart settled the question for now.',
+      'Misha, the priestess of the Temple of Merikka in Orlane. Whether imposter or charmed follower, Turnip\'s sleep dart settled the question before anyone found out.',
     storyLink:
       '/hobbity/stories/2026-03-19-a-pilgrimage-to-the-temple-of-merikka/#entering-the-temple',
     storyTitle: 'A Pilgrimage to the Temple of Merikka',
@@ -109,7 +109,7 @@ export const images: GalleryImage[] = [
     src: img('merikka-vision.webp'),
     alt: 'A vision of Merikka reaching out',
     caption:
-      'Touch a golden offering, and Merikka comes swimming toward you — beautiful, green, and hungry. She kissed Turnip. She kissed Boffo. Both held.',
+      'Touch a golden offering in the Temple of Merikka, and the goddess comes swimming toward you — beautiful, green, and hungry. She kissed Turnip. She kissed Boffo. Both resisted.',
     storyLink:
       '/hobbity/stories/2026-03-19-a-pilgrimage-to-the-temple-of-merikka/#the-offering-room',
     storyTitle: 'A Pilgrimage to the Temple of Merikka',
@@ -127,7 +127,7 @@ export const images: GalleryImage[] = [
     src: img('sinister-orlane-note.webp'),
     alt: 'A sinister note found on a slain goblin',
     caption:
-      'A note found on a slain goblin at the bridge on the road to Orlane, confirming Orlane as a target and Gomwick as the next.',
+      'A note found on a slain goblin at a bridge on the road to Orlane, confirming Orlane as a target of the cult of Explictica and naming Gomwick as the next.',
     storyLink:
       '/hobbity/stories/2026-01-29-toads-toads-toads/#the-bridge',
     storyTitle: 'Toads, Toads, Toads',
@@ -155,7 +155,7 @@ export const images: GalleryImage[] = [
     src: img('grover-and-deputies-at-bridge.webp'),
     alt: 'Constable Grover and his deputies at the bridge',
     caption:
-      'Dawn of the third day. The hobbits slipped out of the Foaming Mug ruins and walked straight into Constable Grover and his deputies at the foot of the bridge.',
+      'Dawn in Orlane. The hobbits slipped out of the Foaming Mug ruins and walked straight into Constable Grover and his deputies at the foot of the bridge.',
     storyLink:
       '/hobbity/stories/2026-02-26-a-stroll-around-orlane/#caught-at-the-bridge',
     storyTitle: 'A Stroll Around Orlane',
@@ -164,7 +164,7 @@ export const images: GalleryImage[] = [
     src: img('zacharias.webp'),
     alt: 'Zacharias fishing at the lakeshore near Orlane',
     caption:
-      'Zacharias led the party to the lakeshore to talk freely, paranoid about being overheard. His intelligence was grim: people were disappearing and coming back changed.',
+      'Zacharias led the Toad Stompers to the lakeshore to talk freely, paranoid about being overheard. His intelligence was grim: people in Orlane were disappearing and coming back changed.',
     storyLink:
       '/hobbity/stories/2026-02-26-a-stroll-around-orlane/#the-elm-grove-and-zacharias',
     storyTitle: 'A Stroll Around Orlane',
@@ -229,7 +229,7 @@ export const images: GalleryImage[] = [
     src: img('spottle-toad.webp'),
     alt: 'A spottle toad',
     caption:
-      'The spottle toad at the gambling table. Any die it swallowed counted as zero. Turnip swore it was cheating.',
+      'A spottle toad at the Gomwick Harvest Festival gambling table. Any die it swallowed counted as zero. Turnip swore it was cheating.',
     storyLink:
       '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-spottle-table',
     storyTitle: 'The Gomwick Harvest Festival',

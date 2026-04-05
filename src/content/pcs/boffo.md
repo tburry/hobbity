@@ -23,7 +23,7 @@ Boffo Lunderbunk is the quiet heart of the Toad Stompers. Not bright—the last 
 
 ## Grievous Injuries
 
-- Skeleton's sword through the shoulder joint in the temple beneath [Orlane](/hobbity/appendix/places/#orlane). Healed crooked; arm doesn't move the way it used to (DEX).
+- Skeleton's sword through the shoulder joint in the dungeon beneath the Temple of Merikka in [Orlane](/hobbity/appendix/places/#orlane). Healed crooked; arm doesn't move the way it used to (DEX).
 
 ## Alignment – Neutral
 

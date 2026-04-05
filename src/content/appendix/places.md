@@ -2,13 +2,13 @@
 
 ## The Five Shires
 
-An area almost entirely populated by hobbits. Mountains to the north (home of goblins who drove out the dwarves), The Great Woods to the east (elves and fey), The Swamp to the west, The Sea to the south. Five shires in the confederation: Eastshire (wilder, elf-adjacent), Highshire (highlands, shepherds), Seashire (wealthy, industrious coast), Southshire (least prosperous, butt of jokes), and Heartshire (central, pastoral, traditional—where the campaign takes place). No real government; loose confederation of families and townships. Ancient giant ruins dot the landscape, mostly repurposed for stone. Hobbits are ~3' tall, dwarves and goblins ~4', elves up to ~5'. Humans ("tallfolk") are mythical grotesque creatures in hobbit stories. Elves are seen as dangerous alien tricksters (Terry Pratchett's take). The Stonecleft dwarves are the dwarves the party has encountered.
+An area almost entirely populated by hobbits. Mountains to the north (home of goblins who drove out the dwarves), The Great Woods to the east (elves and fey), The Swamp to the west, The Sea to the south. Five shires in the confederation: Eastshire (wilder, elf-adjacent), Highshire (highlands, shepherds), Seashire (wealthy, industrious coast), Southshire (least prosperous, butt of jokes), and Heartshire (central, pastoral, traditional—where the campaign takes place). No real government; loose confederation of families and townships. Ancient giant ruins dot the landscape, mostly repurposed for stone. Hobbits are ~3' tall, dwarves and goblins ~4', elves up to ~5'. Humans ("tallfolk") are mythical grotesque creatures in hobbit stories. Elves are seen as dangerous alien tricksters (Terry Pratchett's take). The Stonecleft dwarves are the dwarves the Toad Stompers have encountered.
 
 ### Locations
 
 - **The Heart Road:** Main road connecting [Thistledown](#thistledown), [The Right Way Inn](#the-right-way-inn), and [Gomwick](#gomwick).
 - **The Old Road:** Forest road between [Thistledown](#thistledown) and [Gomwick](#gomwick). [Farmer Fallow](/hobbity/appendix/npcs/#farmer-fallow)'s stall, strange mist, [Tobias Chubb](/hobbity/appendix/npcs/#tobias-chubb).
-- **Sunnyside Crossroads:** Where the main road turns south. [Huddle Farm](#huddle-farm) is just north. The farthest the party has ever been from home.
+- **Sunnyside Crossroads:** Where the main road turns south. [Huddle Farm](#huddle-farm) is just north. The farthest the Toad Stompers have ever been from home.
 
 ### Happenings
 
@@ -41,7 +41,7 @@ An ancient tall-folk man's dwelling deep in the Old Woods. Each hobbit saw the h
 
 ## Huddle Farm
 
-A hobbit farmstead near the [Sunnyside crossroads](#the-five-shires), en route to [Orlane](#orlane). The hill home sits above ancient ruins. [Tom](/hobbity/appendix/npcs/#tom-huddle) is expanding into the hill (not unusual for prosperous hobbits) and repurposing stones from the Fortfield ruins—some decorated with serpent motifs. Adjacent to the [Sutton](/hobbity/appendix/npcs/#norrie-sutton) farm, separated by the disputed hedge along Deadman's Gap.
+A hobbit farmstead near the [Sunnyside crossroads](#the-five-shires), en route to [Orlane](#orlane). The hill home sits above ancient ruins. [Tom](/hobbity/appendix/npcs/#tom-huddle) is expanding into the hill (not unusual for prosperous hobbits) and repurposing stones from the Fortfield ruins—some decorated with serpent motifs. Adjacent to the [Sutton](/hobbity/appendix/npcs/#norrie-sutton) farm, separated by a disputed hedge along Deadman's Gap, a strip of land between the two properties.
 
 ### Notable NPCs
 
@@ -49,7 +49,7 @@ A hobbit farmstead near the [Sunnyside crossroads](#the-five-shires), en route t
 
 ### Locations
 
-- **Fortfield Tower:** Crumbling ancient wizard's tower. Five basement levels explored (paint evidence, workshop, library, summoning room with "The Eye," treasure room). Nailer the dog found dead in a camouflaged well, dissolved by Green Slime.
+- **Fortfield Tower:** Crumbling ancient wizard's tower. Five basement levels explored (paint evidence, workshop, library, summoning room with a glowing arcane eye, treasure room). Nailer the dog found dead in a camouflaged well, dissolved by Green Slime.
 
 ### Happenings
 
@@ -57,7 +57,7 @@ A hobbit farmstead near the [Sunnyside crossroads](#the-five-shires), en route t
 
 ## Orlane
 
-A hobbit village on a flat agricultural plain in one of the richest and most fertile agricultural areas of the eastern shire. Most buildings are above ground (hobbit-holes are hard to build on flat land). A river divides the village—the affected side is [Bertram](/hobbity/appendix/npcs/#bertram)'s. People disappear or come back "changed" (the blacksmith became violent after his disappearance and return).
+A hobbit village on a flat agricultural plain in one of the richest and most fertile agricultural areas of the eastern shire. Most buildings are above ground (hobbit-holes are hard to build on flat land). A river divides the village—the affected side is [Bertram](/hobbity/appendix/npcs/#bertram)'s. People disappear or come back "changed" ([Mattie Snowvale](/hobbity/appendix/npcs/#mattie-snowvale) became violent after his disappearance and return).
 
 ### Notable NPCs
 
@@ -65,9 +65,9 @@ A hobbit village on a flat agricultural plain in one of the richest and most fer
 
 ### Locations
 
-- **The Slumbering Serpent Inn:** Party's base of operations. Run by [Belba](/hobbity/appendix/npcs/#belba) and [Olwyn](/hobbity/appendix/npcs/#olwyn).
+- **The Slumbering Serpent Inn:** The Toad Stompers' base of operations. Run by [Belba](/hobbity/appendix/npcs/#belba) and [Olwyn](/hobbity/appendix/npcs/#olwyn).
 - **The Foaming Mug Inn:** Abandoned inn with signs of violent struggle. Troglodyte nest in the basement.
-- **The Golden Grain Inn:** Burned down. Owned by [Bertram](/hobbity/appendix/npcs/#bertram). The cult used its tunnels to move abducted families out of town for charming ceremonies. Set on fire from inside after [Zacharias](/hobbity/appendix/npcs/#zacharias) and [Derek](/hobbity/appendix/npcs/#derek-desleigh) fled there.
+- **The Golden Grain Inn:** Burned down. Owned by [Bertram](/hobbity/appendix/npcs/#bertram). The cult of Explictica used its tunnels to move abducted families out of town for charming rituals. Set on fire from inside after [Zacharias](/hobbity/appendix/npcs/#zacharias) and [Derek](/hobbity/appendix/npcs/#derek-desleigh) fled there.
 - **The Temple of Merikka:** New temple behind three-meter walls. Dedicated to a goddess of farming, fertility, and light. Hides something much older beneath it.
 - **The Dungeon Beneath the Temple:** Ancient ruins predating the temple. Two levels: upper with troglodyte lair and underground stream; lower with [Abramo](/hobbity/appendix/npcs/#abramo)'s serpent cult lair, torture chamber, goblin barracks, and a jade naga statue of the goddess Explictica.
 - **Ramne's Cottage:** Half-buried stone cottage west of the Slumbering Serpent. Home of [Ramne](/hobbity/appendix/npcs/#ramne).
@@ -86,7 +86,7 @@ An inn on the Heart Road between [Gomwick](#gomwick) and [Thistledown](#thistled
 
 ## Thistledown
 
-Home hamlet of all three PCs in the [Five Shires](#the-five-shires). A small, quiet hobbit settlement southeast of [Gomwick](#gomwick), off the Heart Road. The party set out from here with Uncle's pony [Opal](/hobbity/appendix/npcs/#opal), heading to the Gomwick Harvest Festival.
+Home hamlet of all three PCs in the [Five Shires](#the-five-shires). A small, quiet hobbit settlement southeast of [Gomwick](#gomwick), off the Heart Road. The Toad Stompers set out from here with Boffo's Uncle Bungo's pony [Opal](/hobbity/appendix/npcs/#opal), heading to the [Gomwick](#gomwick) Harvest Festival.
 
 ### Happenings
 
