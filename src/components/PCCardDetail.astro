@@ -5,13 +5,12 @@ interface Props {
   name: string;
   class: string;
   level: number;
-  alignment: string;
   avatar?: ImageMetadata;
   tagline?: string;
   stats: { STR: number; INT: number; WIS: number; DEX: number; CON: number; CHA: number };
 }
 
-const { name, class: cls, level, alignment, avatar, tagline, stats } = Astro.props;
+const { name, class: cls, level, avatar, tagline, stats } = Astro.props;
 ---
 
 <div class="pc-detail">
@@ -21,7 +20,7 @@ const { name, class: cls, level, alignment, avatar, tagline, stats } = Astro.pro
     </div>
   )}
   <h1>{name}</h1>
-  <p class="pc-detail-meta">{cls} &middot; Level {level} &middot; {alignment}</p>
+  <p class="pc-detail-meta">{cls} &middot; Level {level}</p>
   <table class="pc-detail-stats">
     <thead>
       <tr>

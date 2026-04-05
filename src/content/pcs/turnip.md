@@ -2,7 +2,6 @@
 name: Turnip Bramblebrook
 class: Adventurer
 level: 2
-alignment: Lawful
 pc: turnip
 order: 1
 tagline: The prepper. Investigates everything, misses the obvious.
@@ -26,13 +25,19 @@ Turnip Bramblebrook is the prepper and investigator. A rubbish collector and sor
 - Goblin arrow through the lung at the bridge on the way to [Orlane](/hobbity/appendix/places/#orlane) (CON)
 - Troglodyte claw tore through his side; the wound festered and sapped his stamina (CON)
 
+## Alignment – Lawful
+
+Turnip is Lawful not as obedience but as conviction. He'll argue with a constable until he gets clocked in the jaw, then stand there demanding a formal apology, because the principle outweighs the bruise. His rubbish-collector's mind imposes order on everything: rooms are crime scenes, inventories are sacred, diaries are kept and thresholds salted against the dark. He carries a rigid, unexamined idea of what a hobbit is and how a hobbit behaves, and genuinely cannot fathom any hobbit choosing otherwise—which is why cultist hobbits and corrupt constables offend him on a level deeper than danger. He argued against abandoning a goblin as "a liability" because even expedient cruelty violates the code. It costs him. He talks when he should run, catalogs bark while missing the forest, insists on propriety long after propriety has left the building. But the stubbornness cuts both ways: when Merikka's golden carrot tried to take root in his mind, Turnip held, because nobody rearranges what he's already decided is true.
+
 ## Personality
 
 A rubbish collector's mind in an adventurer's body. Turnip examines every room like a crime scene—asks about graffiti in troglodyte lairs, debates the philosophy of detached fingers, inventories everything. He never questions hobbit values; he just applies them rigorously to situations hobbits were never meant to face. Misses the forest for the trees every time—stuck behind giant Boffo in a tunnel with danger ahead, Turnip just wants to know why they stopped walking. Perpetually independent, slightly aggrieved, and prepared for the wrong emergency.
 
 ### Sample Lines
 
-- "How does it smell?" / "Any graffiti?" / "Are these just bare stone walls?"
-- "Hey, why'd you stop, Boffo?"
+- "Listen to yourself, Wedge. That's not a hobbity thing to say. Nobody deserves to miss a meal."
 - "I'm not entirely on anyone's side because no one's entirely on my side."
-- "We call that second breakfast."
+- "I'm waiting for the apology. It's customary for someone to apologize to the wronged party."
+- "It's a flat pack torture chamber."
+- "Any properly socialized hobbit would just sit there and remain voluntarily arrested."
+- "Well, it's three in the morning. It's the first breakfast."

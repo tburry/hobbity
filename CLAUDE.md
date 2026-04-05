@@ -122,6 +122,7 @@ After writing the story file, process these updates before committing:
 5. Record any grievous injuries in `src/content/pcs/` (confirm with user first).
 6. Add new notable items to `src/content/pcs/` (permanent/magical only, no consumables).
 7. Update `HOBBIT_CAMPAIGN_CONTEXT.md` with the Context Doc Updates from the session notes.
+8. Review each PC file in `src/content/pcs/` against the session. Refine every section—trim bloat, add new detail, tighten prose. See Content Maintenance below.
 
 ## Content Maintenance
 
@@ -137,7 +138,9 @@ Whenever stories are added or edited, review each PC file in `src/content/pcs/` 
   - Don't duplicate grievous injuries unless the injury significantly defines the character.
   - Follow the writing style guide: Tolkien/Pratchett tone, no game terms, in-world language.
   - If referencing a name origin or lore detail, include enough context to make it meaningful (e.g. "Thin Edge of the Wedge" needs the axe explanation).
-- **Personality/Sample Lines** — new defining moments or quotes worth capturing
+- **Alignment** — refine if the session revealed new dimensions of the character's moral stance
+- **Personality** — new defining moments or observations worth capturing. Remove bloat in favor of more specific, telling detail.
+- **Sample Lines** — real quotes from transcripts that are funny, interesting, or revealing of personality. Replace weaker lines with better ones from the new session.
 - **Stats** (frontmatter) — ability score changes from injuries or level-ups
 - **Level** (frontmatter) — update if the party leveled up
 
@@ -228,7 +231,7 @@ Format each injury as a narrative description of the wound and its lasting physi
 
 - **System:** OSE / D&D Basic/Expert. "Adventurer" class (Fighter/Mage/Thief generalist).
 - **Setting:** Five Shires, Mystara (loosely). Hobbit-only party.
-- **DM:** Gus Miranda. Uses classic TSR modules adapted for hobbit play.
+- **DM:** Uses classic TSR modules adapted for hobbit play.
 - **Current arc:** Orlane — cult of the serpent goddess Explictica, led by the now-dead priest Abramo. Cult expanding toward Gomwick.
 - **Current state:** Party resting at Slumbering Serpent, dawn. Level 2. Temple cleared, prisoners secured, Golden Grain burned. Zacharias and Derek at large. Ramne sheltering Cirilli Finla.
 - **Full details:** See `HOBBIT_CAMPAIGN_CONTEXT.md`

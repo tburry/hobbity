@@ -29,7 +29,6 @@ const pcs = defineCollection({
     name: z.string(),
     class: z.string(),
     level: z.number(),
-    alignment: z.string(),
     pc: z.string(),
     order: z.number(),
     tagline: z.string().optional(),
