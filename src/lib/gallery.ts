@@ -21,33 +21,17 @@ function img(name: string): ImageMetadata {
   return mod.default;
 }
 
+// Sorted reverse chronologically by story date, then reverse story order
+// within each story (latest scene first).
 export const images: GalleryImage[] = [
   // 2026-03-31 — The Serpent Beneath
   {
-    src: img('ramne-offers-boffo-pipe.webp'),
-    alt: 'Ramne offers Boffo a puff of his pipe',
+    src: img('explictica.webp'),
+    alt: 'The jade statue of Explictica',
     caption:
-      'Ramne packed his pipe amid the skeleton-strewn ruins beneath the Temple of Merikka. "The only religion I follow is this right here," he said. Boffo asked for a bit of that religion too.',
+      'A polished jade statue of Explictica—a snake with a woman\'s head, four-armed, exquisitely carved. Light from torches caused the colours to swirl in an almost hypnotic pattern.',
     storyLink:
-      '/hobbity/stories/2026-03-31-the-serpent-beneath/#ramne',
-    storyTitle: 'The Serpent Beneath',
-  },
-  {
-    src: img('constable-grover.webp'),
-    alt: 'Constable Grover',
-    caption:
-      'Constable Grover of Orlane. Over dwarven whiskey at the Slumbering Serpent, he told the hobbits how the Golden Grain burned—and how Zacharias fled with Derek Desleigh.',
-    storyLink:
-      '/hobbity/stories/2026-02-05-ill-have-two-bowls-please/#orlane',
-    storyTitle: "I'll Have Two Bowls Please",
-  },
-  {
-    src: img('ramne.webp'),
-    alt: 'Ramne',
-    caption:
-      'Ramne, an old hobbit druid with his weasel Twitch perched on his head. He carried a book, a wooden spoon, and three healing spells—all of which he spent on the Toad Stompers.',
-    storyLink:
-      '/hobbity/stories/2026-03-31-the-serpent-beneath/#ramne',
+      '/hobbity/stories/2026-03-31-the-serpent-beneath/#prisoner-of-the-snake-goddess',
     storyTitle: 'The Serpent Beneath',
   },
   {
@@ -60,12 +44,21 @@ export const images: GalleryImage[] = [
     storyTitle: 'The Serpent Beneath',
   },
   {
-    src: img('explictica.webp'),
-    alt: 'The jade statue of Explictica',
+    src: img('ramne.webp'),
+    alt: 'Ramne',
     caption:
-      'A polished jade statue of Explictica—a snake with a woman\'s head, four-armed, exquisitely carved. Light from torches caused the colours to swirl in an almost hypnotic pattern.',
+      'Ramne, an old hobbit druid with his weasel Twitch perched on his head. He carried a book, a wooden spoon, and three healing spells—all of which he spent on the Toad Stompers.',
     storyLink:
-      '/hobbity/stories/2026-03-31-the-serpent-beneath/#prisoner-of-the-snake-goddess',
+      '/hobbity/stories/2026-03-31-the-serpent-beneath/#ramne',
+    storyTitle: 'The Serpent Beneath',
+  },
+  {
+    src: img('ramne-offers-boffo-pipe.webp'),
+    alt: 'Ramne offers Boffo a puff of his pipe',
+    caption:
+      'Ramne packed his pipe amid the skeleton-strewn ruins beneath the Temple of Merikka. "The only religion I follow is this right here," he said. Boffo asked for a bit of that religion too.',
+    storyLink:
+      '/hobbity/stories/2026-03-31-the-serpent-beneath/#ramne',
     storyTitle: 'The Serpent Beneath',
   },
   // 2026-03-22 — The Skeleton Room
@@ -79,14 +72,6 @@ export const images: GalleryImage[] = [
     storyTitle: 'The Skeleton Room',
   },
   {
-    src: img('mural-of-merikka.webp'),
-    alt: 'A mural of the goddess Merikka surrounded by harvest bounty',
-    caption:
-      'A freshly painted mural on the north wall of the temple dining hall, depicting the goddess Merikka surrounded by cornucopia, fish, pumpkins, and grapes. A shrine to abundance in a town where people were disappearing.',
-    storyLink: '/hobbity/stories/2026-03-22-the-skeleton-room/#the-mural-of-merikka',
-    storyTitle: 'The Skeleton Room',
-  },
-  {
     src: img('alcove-offering-to-merikka.webp'),
     alt: 'Nine golden food offerings arranged in alcoves',
     caption:
@@ -95,23 +80,22 @@ export const images: GalleryImage[] = [
       '/hobbity/stories/2026-03-22-the-skeleton-room/#the-golden-offerings',
     storyTitle: 'The Skeleton Room',
   },
+  {
+    src: img('mural-of-merikka.webp'),
+    alt: 'A mural of the goddess Merikka surrounded by harvest bounty',
+    caption:
+      'A freshly painted mural on the north wall of the temple dining hall, depicting the goddess Merikka surrounded by cornucopia, fish, pumpkins, and grapes. A shrine to abundance in a town where people were disappearing.',
+    storyLink: '/hobbity/stories/2026-03-22-the-skeleton-room/#the-mural-of-merikka',
+    storyTitle: 'The Skeleton Room',
+  },
   // 2026-03-19 — A Pilgrimage to the Temple of Merikka
   {
-    src: img('misha.webp'),
-    alt: 'Misha',
+    src: img('brooch-of-shielding.webp'),
+    alt: 'The Brooch of Shielding found in the troglodyte lair',
     caption:
-      'Misha, the priestess of the Temple of Merikka in Orlane. Whether imposter or charmed follower, Turnip\'s sleep dart settled the question before anyone found out.',
+      'A Brooch of Shielding, found in a locked chest in the troglodyte lair beneath the Temple of Merikka. Absorbs up to 30 HP of damage before shattering.',
     storyLink:
-      '/hobbity/stories/2026-03-19-a-pilgrimage-to-the-temple-of-merikka/#entering-the-temple',
-    storyTitle: 'A Pilgrimage to the Temple of Merikka',
-  },
-  {
-    src: img('merikka-vision.webp'),
-    alt: 'A vision of Merikka reaching out',
-    caption:
-      'Touch a golden offering in the Temple of Merikka, and the goddess comes swimming toward you — beautiful, green, and hungry. She kissed Turnip. She kissed Boffo. Both resisted.',
-    storyLink:
-      '/hobbity/stories/2026-03-19-a-pilgrimage-to-the-temple-of-merikka/#the-offering-room',
+      '/hobbity/stories/2026-03-19-a-pilgrimage-to-the-temple-of-merikka/#troglodyte-lair',
     storyTitle: 'A Pilgrimage to the Temple of Merikka',
   },
   {
@@ -124,31 +108,31 @@ export const images: GalleryImage[] = [
     storyTitle: 'A Pilgrimage to the Temple of Merikka',
   },
   {
-    src: img('sinister-orlane-note.webp'),
-    alt: 'A sinister note found on a slain goblin',
+    src: img('merikka-vision.webp'),
+    alt: 'A vision of Merikka reaching out',
     caption:
-      'A note found on a slain goblin at a bridge on the road to Orlane, confirming Orlane as a target of the cult of Explictica and naming Gomwick as the next.',
+      'Touch a golden offering in the Temple of Merikka, and the goddess comes swimming toward you — beautiful, green, and hungry. She kissed Turnip. She kissed Boffo. Both resisted.',
     storyLink:
-      '/hobbity/stories/2026-01-29-toads-toads-toads/#the-bridge',
-    storyTitle: 'Toads, Toads, Toads',
+      '/hobbity/stories/2026-03-19-a-pilgrimage-to-the-temple-of-merikka/#the-offering-room',
+    storyTitle: 'A Pilgrimage to the Temple of Merikka',
   },
   {
-    src: img('brooch-of-shielding.webp'),
-    alt: 'The Brooch of Shielding found in the troglodyte lair',
+    src: img('misha.webp'),
+    alt: 'Misha',
     caption:
-      'A Brooch of Shielding, found in a locked chest in the troglodyte lair beneath the Temple of Merikka. Absorbs up to 30 HP of damage before shattering.',
+      'Misha, the priestess of the Temple of Merikka in Orlane. Whether imposter or charmed follower, Turnip\'s sleep dart settled the question before anyone found out.',
     storyLink:
-      '/hobbity/stories/2026-03-19-a-pilgrimage-to-the-temple-of-merikka/#troglodyte-lair',
+      '/hobbity/stories/2026-03-19-a-pilgrimage-to-the-temple-of-merikka/#entering-the-temple',
     storyTitle: 'A Pilgrimage to the Temple of Merikka',
   },
   // 2026-02-26 — A Stroll Around Orlane
   {
-    src: img('wedge-getting-hammered.webp'),
-    alt: 'Mattie Snowvale swings a hammer at Wedge in the smithy',
+    src: img('zacharias.webp'),
+    alt: 'Zacharias fishing at the lakeshore near Orlane',
     caption:
-      'Mattie Snowvale caught Wedge across the skull with a hammer before anyone could react. The blow knocked something loose in Wedge that would not settle back.',
+      'Zacharias led the Toad Stompers to the lakeshore to talk freely, paranoid about being overheard. His intelligence was grim: people in Orlane were disappearing and coming back changed.',
     storyLink:
-      '/hobbity/stories/2026-02-26-a-stroll-around-orlane/#the-blacksmith-and-the-constable',
+      '/hobbity/stories/2026-02-26-a-stroll-around-orlane/#the-elm-grove-and-zacharias',
     storyTitle: 'A Stroll Around Orlane',
   },
   {
@@ -161,13 +145,60 @@ export const images: GalleryImage[] = [
     storyTitle: 'A Stroll Around Orlane',
   },
   {
-    src: img('zacharias.webp'),
-    alt: 'Zacharias fishing at the lakeshore near Orlane',
+    src: img('wedge-getting-hammered.webp'),
+    alt: 'Mattie Snowvale swings a hammer at Wedge in the smithy',
     caption:
-      'Zacharias led the Toad Stompers to the lakeshore to talk freely, paranoid about being overheard. His intelligence was grim: people in Orlane were disappearing and coming back changed.',
+      'Mattie Snowvale caught Wedge across the skull with a hammer before anyone could react. The blow knocked something loose in Wedge that would not settle back.',
     storyLink:
-      '/hobbity/stories/2026-02-26-a-stroll-around-orlane/#the-elm-grove-and-zacharias',
+      '/hobbity/stories/2026-02-26-a-stroll-around-orlane/#the-blacksmith-and-the-constable',
     storyTitle: 'A Stroll Around Orlane',
+  },
+  // 2026-02-05 — I'll Have Two Bowls Please
+  {
+    src: img('constable-grover.webp'),
+    alt: 'Constable Grover',
+    caption:
+      'Constable Grover of Orlane. Over dwarven whiskey at the Slumbering Serpent, he told the hobbits how the Golden Grain burned—and how Zacharias fled with Derek Desleigh.',
+    storyLink:
+      '/hobbity/stories/2026-02-05-ill-have-two-bowls-please/#orlane',
+    storyTitle: "I'll Have Two Bowls Please",
+  },
+  // 2026-01-29 — Toads, Toads, Toads
+  {
+    src: img('sinister-orlane-note.webp'),
+    alt: 'A sinister note found on a slain goblin',
+    caption:
+      'A note found on a slain goblin at a bridge on the road to Orlane, confirming Orlane as a target of the cult of Explictica and naming Gomwick as the next.',
+    storyLink:
+      '/hobbity/stories/2026-01-29-toads-toads-toads/#the-bridge',
+    storyTitle: 'Toads, Toads, Toads',
+  },
+  {
+    src: img('toad-stompers-logo.webp'),
+    alt: 'Toad Stompers logo',
+    caption: 'The Toad Stompers crest.',
+    storyLink: '/hobbity/stories/2026-01-29-toads-toads-toads/#the-bridge',
+    storyTitle: 'Toads, Toads, Toads',
+  },
+  // 2025-11-27 — Green Cows and Blackberries
+  {
+    src: img('two-headed-snake-stone.webp'),
+    alt: 'A two-headed snake carved into stone from the Fortfield ruins',
+    caption:
+      'A serpent motif carved into stone repurposed from the Fortfield ruins at Huddle Farm. Not hobbit work, and not recent.',
+    storyLink:
+      '/hobbity/stories/2025-11-27-green-cows-and-blackberries/#the-huddle-household',
+    storyTitle: 'Green Cows and Blackberries',
+  },
+  // 2025-11-24 — The Summons
+  {
+    src: img('buford-outfits-the-party.webp'),
+    alt: 'Buford outfits the party with gear for the road to Orlane',
+    caption:
+      'Buford Niss, gaunt and cane-bound, outfitting the three hobbits with leather armour, daggers, slings, and individual gifts before sending them to Orlane.',
+    storyLink:
+      '/hobbity/stories/2025-11-24-the-summons/#outfitting',
+    storyTitle: 'The Summons',
   },
   // 2025-11-08 — The Hermit of the Woods
   {
@@ -181,10 +212,55 @@ export const images: GalleryImage[] = [
   },
   // 2025-11-06 — The Gomwick Harvest Festival
   {
-    src: img('road-to-gomwick.webp'),
-    alt: 'The Old Road to Gomwick',
+    src: img('hungry-hank.webp'),
+    alt: 'Hungry Hank the scarecrow',
     caption:
-      'The Old Road through the forest to Gomwick. A storm delayed the hobbits, so they took the long way—through woods where the trees watched back.',
+      'Hungry Hank, the harvest effigy that ripped free from his pole and rampaged through the fairgrounds. Boffo brought it low with a torch.',
+    storyLink:
+      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#hungry-hank',
+    storyTitle: 'The Gomwick Harvest Festival',
+  },
+  {
+    src: img('spottle-toad.webp'),
+    alt: 'A spottle toad',
+    caption:
+      'A spottle toad at the Gomwick Harvest Festival gambling table. Any die it swallowed counted as zero. Turnip swore it was cheating.',
+    storyLink:
+      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-spottle-table',
+    storyTitle: 'The Gomwick Harvest Festival',
+  },
+  {
+    src: img('buford.webp'),
+    alt: 'Buford Niss',
+    caption:
+      'The Hon. Horace Buford Hockwallop Niss, Esq. Wealthy, well-traveled, and watching from the edge of the commotion with a dimmed jovial mood.',
+    storyLink:
+      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#buford-niss',
+    storyTitle: 'The Gomwick Harvest Festival',
+  },
+  {
+    src: img('pie-eating-trophy.webp'),
+    alt: 'The pie-eating trophy',
+    caption:
+      'The pie-eating trophy at the Gomwick Harvest Festival. Boffo cleaned three plates of rhubarb pie and asked for more.',
+    storyLink:
+      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-festival',
+    storyTitle: 'The Gomwick Harvest Festival',
+  },
+  {
+    src: img('grunela.webp'),
+    alt: 'Grunela Bunce',
+    caption:
+      'Grunela Bunce, three-time pie-eating champion, defeated by Boffo in the second round. She threw up after the first pie. She threw an apple at his head later.',
+    storyLink:
+      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-festival',
+    storyTitle: 'The Gomwick Harvest Festival',
+  },
+  {
+    src: img('tobias-chubb.webp'),
+    alt: 'Tobias Chubb',
+    caption:
+      'Tobias Chubb, a ne\'er-do-well encountered on the Old Road, muttering about the trees "looking at him funny." Later found dead in the Hermit\'s cabin.',
     storyLink:
       '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-road-to-gomwick',
     storyTitle: 'The Gomwick Harvest Festival',
@@ -199,90 +275,12 @@ export const images: GalleryImage[] = [
     storyTitle: 'The Gomwick Harvest Festival',
   },
   {
-    src: img('tobias-chubb.webp'),
-    alt: 'Tobias Chubb',
+    src: img('road-to-gomwick.webp'),
+    alt: 'The Old Road to Gomwick',
     caption:
-      'Tobias Chubb, a ne\'er-do-well encountered on the Old Road, muttering about the trees "looking at him funny." Later found dead in the Hermit\'s cabin.',
+      'The Old Road through the forest to Gomwick. A storm delayed the hobbits, so they took the long way—through woods where the trees watched back.',
     storyLink:
       '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-road-to-gomwick',
     storyTitle: 'The Gomwick Harvest Festival',
-  },
-  {
-    src: img('grunela.webp'),
-    alt: 'Grunela Bunce',
-    caption:
-      'Grunela Bunce, three-time pie-eating champion, defeated by Boffo in the second round. She threw up after the first pie. She threw an apple at his head later.',
-    storyLink:
-      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-festival',
-    storyTitle: 'The Gomwick Harvest Festival',
-  },
-  {
-    src: img('pie-eating-trophy.webp'),
-    alt: 'The pie-eating trophy',
-    caption:
-      'The pie-eating trophy at the Gomwick Harvest Festival. Boffo cleaned three plates of rhubarb pie and asked for more.',
-    storyLink:
-      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-festival',
-    storyTitle: 'The Gomwick Harvest Festival',
-  },
-  {
-    src: img('spottle-toad.webp'),
-    alt: 'A spottle toad',
-    caption:
-      'A spottle toad at the Gomwick Harvest Festival gambling table. Any die it swallowed counted as zero. Turnip swore it was cheating.',
-    storyLink:
-      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-spottle-table',
-    storyTitle: 'The Gomwick Harvest Festival',
-  },
-  {
-    src: img('hungry-hank.webp'),
-    alt: 'Hungry Hank the scarecrow',
-    caption:
-      'Hungry Hank, the harvest effigy that ripped free from his pole and rampaged through the fairgrounds. Boffo brought it low with a torch.',
-    storyLink:
-      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#hungry-hank',
-    storyTitle: 'The Gomwick Harvest Festival',
-  },
-  {
-    src: img('buford.webp'),
-    alt: 'Buford Niss',
-    caption:
-      'The Hon. Horace Buford Hockwallop Niss, Esq. Wealthy, well-traveled, and watching from the edge of the commotion with a dimmed jovial mood.',
-    storyLink:
-      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#buford-niss',
-    storyTitle: 'The Gomwick Harvest Festival',
-  },
-  // 2025-11-24 — The Summons
-  {
-    src: img('buford-outfits-the-party.webp'),
-    alt: 'Buford outfits the party with gear for the road to Orlane',
-    caption:
-      'Buford Niss, gaunt and cane-bound, outfitting the three hobbits with leather armour, daggers, slings, and individual gifts before sending them to Orlane.',
-    storyLink:
-      '/hobbity/stories/2025-11-24-the-summons/#outfitting',
-    storyTitle: 'The Summons',
-  },
-  // 2025-11-27 — Green Cows and Blackberries
-  {
-    src: img('two-headed-snake-stone.webp'),
-    alt: 'A two-headed snake carved into stone from the Fortfield ruins',
-    caption:
-      'A serpent motif carved into stone repurposed from the Fortfield ruins at Huddle Farm. Not hobbit work, and not recent.',
-    storyLink:
-      '/hobbity/stories/2025-11-27-green-cows-and-blackberries/#the-huddle-household',
-    storyTitle: 'Green Cows and Blackberries',
-  },
-  // Non-story
-  {
-    src: img('toad-stompers.webp'),
-    alt: 'The Toad Stompers',
-    caption: 'The Toad Stompers — Boffo, Turnip, and Wedge.',
-  },
-  {
-    src: img('toad-stompers-logo.webp'),
-    alt: 'Toad Stompers logo',
-    caption: 'The Toad Stompers crest.',
-    storyLink: '/hobbity/stories/2026-01-29-toads-toads-toads/#the-bridge',
-    storyTitle: 'Toads, Toads, Toads',
   },
 ];
