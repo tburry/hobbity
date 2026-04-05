@@ -42,6 +42,8 @@ The hobbits caught Ramne up on everything—the troglodytes, the goblins, the pr
 
 "Can I have a bit of that religion too?"
 
+![Ramne offers Boffo a puff of his pipe](../../assets/images/ramne-offers-boffo-pipe.webp)
+
 While Turnip pondered whether they could roll up the carpet and carry it out of the dungeon, he discovered the trapdoor beneath it—the one the goblins had used to move between levels, its edges scuffed from regular use.
 
 Two doors led south. One opened onto a small chamber with a table, two comfortable chairs, an unopened bottle of wine, and two clean glasses. A civilized room in an uncivilized place. The other opened onto something considerably less civilized.
