@@ -14,7 +14,7 @@ const pcs = (await getCollection('pcs')).sort((a, b) => a.data.order - b.data.or
 ---
 
 <Base title="Index">
-  <h1>Index</h1>
+  <h1 data-pagefind-body>Index</h1>
 
   <h2>Stories</h2>
   {storyOrder.map((name) => {

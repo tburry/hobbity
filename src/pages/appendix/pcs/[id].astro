@@ -39,8 +39,8 @@ const resolved = await Promise.all(
 
   {resolved.length > 0 && (
     <>
-      <h2>Gallery</h2>
-      <div class="gallery gallery-pc">
+      <h2 id="gallery">Gallery</h2>
+      <div class="gallery gallery-pc" data-pagefind-ignore>
         {resolved.map(({ img, level, fullSrc }) => (
           <figure>
             <a href={fullSrc} data-lightbox>

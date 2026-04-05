@@ -19,7 +19,7 @@ const { name, class: cls, level, avatar, tagline, stats } = Astro.props;
       <Image src={avatar} alt={name} width={160} />
     </div>
   )}
-  <h1>{name}</h1>
+  <h1 data-pagefind-weight="10">{name}</h1>
   <p class="pc-detail-meta">{cls} &middot; Level {level}</p>
   <table class="pc-detail-stats">
     <thead>
