@@ -105,7 +105,7 @@ A sling stone from Wedge caught Kaylin in the belly and she folded. He hadn't me
 
 In the room beyond Abramo's last stand, torchlight fell on something that made the hobbits' stomachs turn. A polished jade statue of a snake with a woman's head—four-armed, enormous, exquisitely carved.
 
-![The jade statue of Explictica](../../assets/images/explictica.webp)
+![The jade statue of Explictica](../../assets/images/npcs/explictica.webp)
 
 Around it, granite statues of Merikka had been smashed and crudely re-carved into reptilian shapes by someone who clearly had more devotion than talent. And against the east wall, in a small iron cage, a young hobbit woman in tattered rags.
 
