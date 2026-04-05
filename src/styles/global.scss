@@ -273,13 +273,14 @@ dfn {
     text-decoration: none;
     display: inline;
     position: relative;
+    vertical-align: baseline;
     &::after {
       content: '';
       position: absolute;
-      // top: -0.1em;
+      bottom: 0.1ex;
       left: 0;
       width: 0.6em;
-      height: 1.1em;
+      height: 1em;
       background-color: var(--accent);
       -webkit-mask-image: url('/hobbity/icons/death-dagger.svg');
       mask-image: url('/hobbity/icons/death-dagger.svg');

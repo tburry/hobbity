@@ -24,6 +24,15 @@ function img(name: string): ImageMetadata {
 export const images: GalleryImage[] = [
   // 2026-03-31 — The Serpent Beneath
   {
+    src: img('ramne-offers-boffo-pipe.webp'),
+    alt: 'Ramne offers Boffo a puff of his pipe',
+    caption:
+      'Ramne packed his pipe amid the skeleton-strewn temple. "The only religion I follow is this right here," he said. Boffo asked for a bit of that religion too.',
+    storyLink:
+      '/hobbity/stories/2026-03-31-the-serpent-beneath/#ramne',
+    storyTitle: 'The Serpent Beneath',
+  },
+  {
     src: img('constable-grover.webp'),
     alt: 'Constable Grover',
     caption:
@@ -152,7 +161,7 @@ export const images: GalleryImage[] = [
     storyTitle: 'A Stroll Around Orlane',
   },
   {
-    src: img('zacharias-fishing.webp'),
+    src: img('zacharias.webp'),
     alt: 'Zacharias fishing at the lakeshore near Orlane',
     caption:
       'Zacharias led the party to the lakeshore to talk freely, paranoid about being overheard. His intelligence was grim: people were disappearing and coming back changed.',

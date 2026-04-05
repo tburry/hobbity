@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Add relation links to NPC entries in npcs.md."""
+"""Add relation links to NPC entries in npcs.mdx."""
 
 import re
 from pathlib import Path
 
-NPC_FILE = Path("src/content/appendix/npcs.md")
+NPC_FILE = Path("src/content/appendix/npcs.mdx")
 
 # Relations keyed by NPC heading text.
 # Each value is a list of ("Label", "markdown links") tuples.

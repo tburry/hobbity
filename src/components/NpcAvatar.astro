@@ -1,0 +1,45 @@
+---
+/**
+ * NPC avatar that links to the full-size image via the lightbox.
+ *
+ * Usage: <NpcAvatar src="abramo" alt="Abramo" />
+ *
+ * Resolves src/assets/images/npcs/{src}_avatar.webp for display
+ * and src/assets/images/npcs/{src}.webp as the full-size lightbox target.
+ */
+import { Image } from 'astro:assets';
+
+interface Props {
+  src: string;
+  alt: string;
+}
+
+const { src, alt } = Astro.props;
+
+const avatars = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/images/npcs/*_avatar.webp',
+  { eager: true },
+);
+const fulls = import.meta.glob<{ default: ImageMetadata }>(
+  ['/src/assets/images/npcs/*.webp', '!/src/assets/images/npcs/*_avatar.webp', '!/src/assets/images/npcs/*_token*.webp'],
+  { eager: true },
+);
+
+const avatarKey = `/src/assets/images/npcs/${src}_avatar.webp`;
+const fullKey = `/src/assets/images/npcs/${src}.webp`;
+
+const avatarImg = avatars[avatarKey]?.default;
+const fullImg = fulls[fullKey]?.default;
+
+if (!avatarImg) {
+  throw new Error(`NPC avatar not found: ${avatarKey}`);
+}
+---
+
+{fullImg ? (
+  <a href={fullImg.src} data-lightbox>
+    <Image src={avatarImg} alt={alt} />
+  </a>
+) : (
+  <Image src={avatarImg} alt={alt} />
+)}
