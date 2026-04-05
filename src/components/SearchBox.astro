@@ -28,11 +28,19 @@ const resultsId = `${id}-results`;
   if (window.__searchInit) return;
   window.__searchInit = true;
 
+  var RANKING = {
+    termSimilarity: 2.0,  // Boost exact matches over fuzzy ones
+    pageLength: 0.5,      // De-emphasize page length (don't penalize long stories)
+    termSaturation: 1.0,  // Slightly reward repeated mentions
+    termFrequency: 2.0,   // Default: how much term count affects ranking
+  };
+
   var pagefind = null;
 
   async function loadPagefind() {
     if (!pagefind) {
       pagefind = await import('/hobbity/pagefind/pagefind.js');
+      await pagefind.options({ ranking: RANKING });
     }
     return pagefind;
   }
