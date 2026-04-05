@@ -7,9 +7,9 @@ story: The Huddle Job
 Between Sessions – <dfn title="May 24, 2026">24 Thrimidge, S.R. 1426</dfn>
 
 - **PCs:**
-  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Hobbit Adventurer
-  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 1 Hobbit Adventurer
-  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 1 Hobbit Adventurer
+  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Adventurer
+  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 1 Adventurer
+  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 1 Adventurer
 - **Location:** [Thistledown](/hobbity/appendix/places/#thistledown), [The Right Way Inn](/hobbity/appendix/places/#the-right-way-inn), [Gomwick](/hobbity/appendix/places/#gomwick)
 
 ## Back to Gomwick

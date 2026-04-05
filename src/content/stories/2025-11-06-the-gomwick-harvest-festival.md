@@ -12,7 +12,7 @@ Session Recap – <dfn title="November 6, 2025">6 Blotmath, S.R. 1425</dfn>
   - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 0 Hobbit
 - **Location:** [Thistledown](/hobbity/appendix/places/#thistledown), the Old Road, [Gomwick](/hobbity/appendix/places/#gomwick)
 
-## The Road to Gomwick
+## The Old Road to Gomwick
 
 Early morning in the hamlet of Thistledown. Crisp air, the smell of last night's rainstorm still lingering. Three hobbits checked the straps on Binny, their uncle's old pony, loaded with goods to sell at the Gomwick Harvest Festival. A storm had delayed their departure by a day, so the North Road and a warm bed at the Right Way Inn were out. They'd take the Old Road instead—through the forest, one night camping on hard ground, arriving in Gomwick by tomorrow evening with time for the supper feast.
 

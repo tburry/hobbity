@@ -1,0 +1,189 @@
+---
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+const inputId = `${id}-input`;
+const resultsId = `${id}-results`;
+---
+
+<div class="search-box">
+  <svg class="search-box-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="11" cy="11" r="8"></circle>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+  <input id={inputId} type="text" placeholder="Search…" autocomplete="off" />
+  <button class="search-box-clear" type="button" aria-label="Clear search" hidden>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+</div>
+<div id={resultsId} class="search-results"></div>
+
+<script is:inline>
+(function () {
+  if (window.__searchInit) return;
+  window.__searchInit = true;
+
+  var RANKING = {
+    termSimilarity: 2.0,  // Boost exact matches over fuzzy ones
+    pageLength: 0.5,      // De-emphasize page length (don't penalize long stories)
+    termSaturation: 1.0,  // Slightly reward repeated mentions
+    termFrequency: 2.0,   // Default: how much term count affects ranking
+  };
+
+  var pagefind = null;
+
+  async function loadPagefind() {
+    if (!pagefind) {
+      pagefind = await import('/hobbity/pagefind/pagefind.js');
+      await pagefind.options({ ranking: RANKING });
+    }
+    return pagefind;
+  }
+
+  function getParentHeading(anchors, sub) {
+    if (!sub.anchor || !sub.anchor.location) return null;
+    var el = sub.anchor.element;
+    if (el === 'h1' || el === 'h2') return null;
+    var parent = null;
+    for (var i = 0; i < anchors.length; i++) {
+      if (anchors[i].location >= sub.anchor.location) break;
+      if (anchors[i].element === 'h2') parent = anchors[i];
+    }
+    return parent;
+  }
+
+  function renderResult(data) {
+    var div = document.createElement('div');
+    div.className = 'search-result';
+
+    var titleLink = document.createElement('a');
+    titleLink.href = data.url;
+    titleLink.className = 'search-result-title';
+    titleLink.textContent = data.meta.title;
+    div.appendChild(titleLink);
+
+    var subs = data.sub_results || [];
+    if (subs.length > 0) {
+      subs.forEach(function (sub) {
+        var subDiv = document.createElement('div');
+        subDiv.className = 'search-result-sub';
+
+        var headingText = sub.title;
+        if (sub.anchor) {
+          var parent = getParentHeading(data.anchors || [], sub);
+          if (parent && parent.text.length >= 3) headingText = parent.text + ' / ' + sub.title;
+        }
+
+        // Skip sub-result heading if it matches the page title
+        if (headingText !== data.meta.title) {
+          var headingLink = document.createElement('a');
+          headingLink.href = sub.url;
+          headingLink.className = 'search-result-heading';
+          headingLink.textContent = headingText;
+          subDiv.appendChild(headingLink);
+        }
+
+        var excerpt = document.createElement('p');
+        excerpt.className = 'search-result-excerpt';
+        excerpt.innerHTML = sub.excerpt;
+        subDiv.appendChild(excerpt);
+
+        div.appendChild(subDiv);
+      });
+    } else {
+      var excerpt = document.createElement('p');
+      excerpt.className = 'search-result-excerpt';
+      excerpt.innerHTML = data.excerpt;
+      div.appendChild(excerpt);
+    }
+
+    return div;
+  }
+
+  var PAGE_SIZE = 10;
+
+  async function renderBatch(results, start, resultsEl) {
+    var end = Math.min(results.length, start + PAGE_SIZE);
+    for (var i = start; i < end; i++) {
+      var data = await results[i].data();
+      resultsEl.appendChild(renderResult(data));
+    }
+    return end;
+  }
+
+  function removeLoadMore(resultsEl) {
+    var btn = resultsEl.querySelector('.search-load-more');
+    if (btn) btn.remove();
+  }
+
+  function addLoadMore(results, offset, resultsEl) {
+    if (offset >= results.length) return;
+    var btn = document.createElement('button');
+    btn.className = 'search-load-more';
+    btn.type = 'button';
+    btn.textContent = 'Load more';
+    btn.addEventListener('click', async function () {
+      removeLoadMore(resultsEl);
+      var newOffset = await renderBatch(results, offset, resultsEl);
+      addLoadMore(results, newOffset, resultsEl);
+    });
+    resultsEl.appendChild(btn);
+  }
+
+  async function doSearch(query, resultsEl) {
+    resultsEl.innerHTML = '';
+    if (!query || query.length < 2) return;
+
+    var pf = await loadPagefind();
+    var search = await pf.search(query);
+
+    if (search.results.length === 0) {
+      resultsEl.innerHTML = '<p class="search-no-results">No results found.</p>';
+      return;
+    }
+
+    var offset = await renderBatch(search.results, 0, resultsEl);
+    addLoadMore(search.results, offset, resultsEl);
+  }
+
+  window.initCustomSearch = function (inputEl, resultsEl, opts) {
+    opts = opts || {};
+    var timer = null;
+    var clearBtn = inputEl.parentNode.querySelector('.search-box-clear');
+
+    function updateClearBtn() {
+      if (clearBtn) clearBtn.hidden = !inputEl.value;
+    }
+
+    inputEl.addEventListener('input', function () {
+      clearTimeout(timer);
+      updateClearBtn();
+      var q = inputEl.value.trim();
+      timer = setTimeout(function () {
+        doSearch(q, resultsEl);
+      }, 200);
+    });
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', function () {
+        inputEl.value = '';
+        resultsEl.innerHTML = '';
+        updateClearBtn();
+        inputEl.focus();
+      });
+    }
+
+    if (opts.initialQuery) {
+      inputEl.value = opts.initialQuery;
+      updateClearBtn();
+      doSearch(opts.initialQuery, resultsEl);
+    }
+  };
+
+})();
+</script>

@@ -12,3 +12,7 @@ lessons here as they come up, then periodically promote them into CLAUDE.md.
 - "The party" is fine to use sometimes. Mix it up with "the Toad Stompers," "the hobbits," and "the party" for variety. Don't mechanically replace every instance.
 - Only use "the hobbits" if "the party" or "the Toad Stompers" was used previously in the same section or paragraph—it needs an antecedent.
 - Pub/inn names that sound like pubs (the Golden Grain, the Slumbering Serpent, the Foaming Mug) don't need "Inn" appended—the name is self-evident. Add "Inn" occasionally for variety, not as a rule.
+
+## PRs and Commits
+
+- Never include "Generated with Claude Code" footers in PRs or commits.
