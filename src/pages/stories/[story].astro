@@ -25,7 +25,7 @@ const firstChapter = chapters[0];
 const summaryContent = summary ? await render(summary) : null;
 ---
 
-<Base title={name} showHome={true}>
+<Base title={name}>
   <h1>{name}</h1>
   {summaryContent && (
     <div class="story-summary">

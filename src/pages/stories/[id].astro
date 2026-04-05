@@ -33,7 +33,7 @@ const { Content: StoryContent } = await render(story);
 const title = getTitle(story);
 ---
 
-<Content title={title} showHome={true}>
+<Content title={title}>
   <StoryContent />
 
   <footer class="chapter-nav" slot="footer">
@@ -52,7 +52,7 @@ const title = getTitle(story);
       </a>
     ) : (
       <a href="/hobbity/" class="next">
-        Table of Contents &#10086;
+        Home &#10086;
       </a>
     )}
   </footer>

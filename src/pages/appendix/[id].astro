@@ -16,7 +16,7 @@ const { Content: PageContent } = await render(page);
 const title = appendixLabels[page.id] || page.id;
 ---
 
-<Content title={title} showHome={true}>
+<Content title={title}>
   <div class={page.id === 'npcs' ? 'alpha-headings npc-directory' : undefined}>
     <PageContent />
   </div>

@@ -81,10 +81,16 @@ body > footer {
   padding-inline: var(--space);
 }
 
-main {
+.wrap {
+  width: 100%;
   max-width: var(--content-width);
   margin-inline: auto;
-  padding: 0 var(--space) var(--space);
+  padding-inline: var(--space);
+}
+
+main {
+  @extend .wrap;
+  padding-block: 0 var(--space);
 }
 
 @media only screen and (min-width: 721px) {
@@ -98,9 +104,8 @@ main {
 // ============================================================================
 
 .topbar {
-  max-width: var(--content-width);
-  margin-inline: auto;
-  padding: var(--space-sm) var(--space);
+  @extend .wrap;
+  padding-block: var(--space-sm);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -129,6 +134,66 @@ main {
 }
 
 // ============================================================================
+// Nav overlay
+// ============================================================================
+
+.nav-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-light);
+  padding: var(--space-sm);
+  margin-inline-start: calc(var(--space-sm) * -1);
+  line-height: 1;
+
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--bg);
+  display: none;
+  overflow-y: auto;
+
+  &.open {
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.nav-overlay-panel {
+  background: var(--bg);
+
+  @media (min-width: 768px) {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+}
+
+.nav-overlay-header {
+  @extend .wrap;
+  padding-block: var(--space-sm);
+  display: flex;
+  align-items: center;
+}
+
+.nav-overlay-inner {
+  @extend .wrap;
+  padding-block: 0 var(--space-lg);
+
+  > :first-child {
+    margin-top: 0;
+  }
+}
+
+// ============================================================================
 // Search
 // ============================================================================
 
@@ -138,6 +203,7 @@ main {
   cursor: pointer;
   color: var(--text-light);
   padding: var(--space-sm);
+  margin-inline-end: calc(var(--space-sm) * -1);
   line-height: 1;
 
   &:hover {

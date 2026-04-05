@@ -18,6 +18,6 @@ const h1 = lines.find((l) => l.startsWith('# '));
 const title = h1 ? h1.replace(/^# /, '') : essay.id;
 ---
 
-<Content title={title} showHome={true}>
+<Content title={title}>
   <EssayContent />
 </Content>

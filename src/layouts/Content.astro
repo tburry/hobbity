@@ -9,7 +9,7 @@ interface Props {
 const { title, class: className } = Astro.props;
 ---
 
-<Base title={title} showHome={true} searchable={true} lightbox={true}>
+<Base title={title} searchable={true} lightbox={true}>
   <article class={className}>
     <slot />
   </article>

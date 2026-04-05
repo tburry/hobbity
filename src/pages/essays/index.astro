@@ -6,7 +6,7 @@ const essays = await getCollection('essays');
 essays.sort((a, b) => a.id.localeCompare(b.id));
 ---
 
-<Base title="Essays" showHome={true}>
+<Base title="Essays">
   <h1>Essays</h1>
   {essays.length === 0 ? (
     <p>Coming soon.</p>
