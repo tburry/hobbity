@@ -36,7 +36,6 @@ A rubbish collector's mind in an adventurer's body. Turnip examines every room l
 ### Sample Lines
 
 - "Listen to yourself, Wedge. That's not a hobbity thing to say. Nobody deserves to miss a meal."
-- "I'm not entirely on anyone's side because no one's entirely on my side."
 - "I'm waiting for the apology. It's customary for someone to apologize to the wronged party."
 - "It's a flat pack torture chamber."
 - "Any properly socialized hobbit would just sit there and remain voluntarily arrested."
