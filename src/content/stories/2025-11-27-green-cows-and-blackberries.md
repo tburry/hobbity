@@ -7,9 +7,9 @@ story: The Huddle Job
 Session Recap – <dfn title="November 27, 2025">27 Blotmath, S.R. 1425</dfn>
 
 - **PCs:**
-  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Hobbit Adventurer
-  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 1 Hobbit Adventurer
-  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 1 Hobbit Adventurer
+  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Adventurer
+  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 1 Adventurer
+  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 1 Adventurer
 - **Location:** [Huddle Farm](/hobbity/appendix/places/#huddle-farm), near Sunnyside crossroads
 
 ## Arrival at Huddle Farm

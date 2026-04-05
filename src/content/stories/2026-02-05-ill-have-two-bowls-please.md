@@ -7,9 +7,9 @@ story: Something Rotten in Orlane
 Session Recap – <dfn title="February 5, 2026">5 Solmath, S.R. 1426</dfn>
 
 - **PCs:**
-  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Hobbit Adventurer
-  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 1 Hobbit Adventurer
-  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 1 Hobbit Adventurer
+  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Adventurer
+  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 1 Adventurer
+  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 1 Adventurer
 - **Location:** Road to [Orlane](/hobbity/appendix/places/#orlane); Orlane village
 
 ## The Road to Orlane

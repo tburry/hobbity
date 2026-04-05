@@ -61,7 +61,7 @@ Recaps go in `src/content/stories/` as `YYYY-MM-DD-episode-title-slug.md`. Slug 
 Session Recap — <date>
 
 - **PCs:**
-  - [<PC Name>](/hobbity/appendix/pcs/<pc-slug>) - Level <N> <Race> <Class>
+  - [<PC Name>](/hobbity/appendix/pcs/<pc-slug>) - Level <N> <Class>
   - ...
 - **Location:** [<in-world location(s)>](/hobbity/appendix/places/#<anchor>)
 - **Season/Date:** <in-world season or date, if known>

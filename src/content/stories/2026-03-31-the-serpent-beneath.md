@@ -7,9 +7,9 @@ story: Something Rotten in Orlane
 Session Recap – <dfn title="March 31, 2026">31 Rethe, S.R. 1426</dfn>
 
 - **PCs:**
-  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 → Level 2 Hobbit Adventurer
-  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 1 → Level 2 Hobbit Adventurer
-  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 1 → Level 2 Hobbit Adventurer
+  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 → Level 2 Adventurer
+  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 1 → Level 2 Adventurer
+  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 1 → Level 2 Adventurer
 - **Location:** Dungeon beneath the Temple of Merikka and [Orlane](/hobbity/appendix/places/#orlane)
 
 ## Not Dead Yet

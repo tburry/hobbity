@@ -7,9 +7,9 @@ story: A Hobbity Thanksgiving
 Between Sessions – <dfn title="November 2025 to March 2026">Blotmath S.R. 1425 to Rethe S.R. 1426</dfn>
 
 - **PCs:**
-  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 0 → Level 1 Hobbit Adventurer
-  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 0 → Level 1 Hobbit Adventurer
-  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 0 → Level 1 Hobbit Adventurer
+  - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 0 → Level 1 Adventurer
+  - [Wedge Wedgerton](/hobbity/appendix/pcs/wedge) - Level 0 → Level 1 Adventurer
+  - [Turnip Bramblebrook](/hobbity/appendix/pcs/turnip) - Level 0 → Level 1 Adventurer
 - **Location:** [Thistledown](/hobbity/appendix/places/#thistledown)
 
 The hobbits returned home to Thistledown. Over the long winter months, something changed in each of them. They discovered they could wield magic—small tricks at first. Boffo could portion food with perfect precision. Wedge could conjure fireflies that danced around his hand for three blinks. Turnip could untangle any rope or string with a single pull. The visions visited their dreams—not every night, not always vividly, but they returned. Plague, flood, undeath. Perhaps too much cheese before bed. Perhaps something more.
