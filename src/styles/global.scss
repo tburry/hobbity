@@ -43,7 +43,8 @@
   --space-sm: 8px;
 
   // Layout
-  --content-width: 840px;
+  --content-width: 900px;
+  --aside-width: 300px;
   --border-width: 2px;
   --border-width-thick: 4px;
   --border-radius: 5px;
@@ -666,11 +667,15 @@ aside {
   border: var(--border-width) solid var(--border);
   border-radius: var(--border-radius);
   font-size: 1rem;
-  width: 30%;
-  padding: 0 var(--space);
+  width: var(--aside-width);
+  padding: var(--space);
   margin-inline-start: var(--space);
   margin-block: var(--space);
   float: right;
+
+  & :last-child {
+    margin-bottom: 0;;
+  }
 }
 
 @media only screen and (max-width: 720px) {

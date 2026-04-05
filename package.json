@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "playground": "pagefind --site dist --serve",
     "astro": "astro",
     "avatar": "scripts/make-avatar",
     "prepare": "git config core.hooksPath .githooks"
