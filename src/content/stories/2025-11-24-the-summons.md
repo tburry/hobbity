@@ -4,7 +4,7 @@ story: The Huddle Job
 
 # The Summons
 
-Between Sessions – 24 <dfn title="May">Thrimidge</dfn>, S.R. 1426
+Between Sessions – <dfn title="May 24, 2026">24 Thrimidge, S.R. 1426</dfn>
 
 - **PCs:**
   - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Hobbit Adventurer
@@ -108,6 +108,8 @@ In any case, Orlane is about 2 or 3 days travel southwest-ish of here. You'll ha
 Will you do this for me?"
 
 ## Outfitting
+
+![Buford outfits the party with gear for the road to Orlane](../../assets/images/buford-outfits-the-party.webp)
 
 The three hobbits accepted. Buford offered to reward them handsomely upon their return.
 

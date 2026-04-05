@@ -252,6 +252,16 @@ export const images: GalleryImage[] = [
       '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#buford-niss',
     storyTitle: 'The Gomwick Harvest Festival',
   },
+  // 2025-11-24 — The Summons
+  {
+    src: img('buford-outfits-the-party.webp'),
+    alt: 'Buford outfits the party with gear for the road to Orlane',
+    caption:
+      'Buford Niss, gaunt and cane-bound, outfitting the three hobbits with leather armour, daggers, slings, and individual gifts before sending them to Orlane.',
+    storyLink:
+      '/hobbity/stories/2025-11-24-the-summons/#outfitting',
+    storyTitle: 'The Summons',
+  },
   // 2025-11-27 — Green Cows and Blackberries
   {
     src: img('two-headed-snake-stone.webp'),
