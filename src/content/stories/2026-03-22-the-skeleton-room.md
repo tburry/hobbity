@@ -4,7 +4,7 @@ story: Something Rotten in Orlane
 
 # The Skeleton Room
 
-Session Recap – 22 <dfn title="March">Rethe</dfn>, S.R. 1426
+Session Recap – <dfn title="March 22, 2026">22 Rethe, S.R. 1426</dfn>
 
 - **PCs:**
   - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Hobbit Adventurer

@@ -4,7 +4,7 @@ story: Something Rotten in Orlane
 
 # A Stroll Around Orlane
 
-Session Recap – 26 <dfn title="February">Solmath</dfn>, S.R. 1426
+Session Recap – <dfn title="February 26, 2026">26 Solmath, S.R. 1426</dfn>
 
 - **PCs:**
   - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Hobbit Adventurer

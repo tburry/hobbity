@@ -4,7 +4,7 @@ story: Something Rotten in Orlane
 
 # The Serpent Beneath
 
-Session Recap – 31 <dfn title="March">Rethe</dfn>, S.R. 1426
+Session Recap – <dfn title="March 31, 2026">31 Rethe, S.R. 1426</dfn>
 
 - **PCs:**
   - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 → Level 2 Hobbit Adventurer

@@ -4,7 +4,7 @@ story: Something Rotten in Orlane
 
 # I'll Have Two Bowls Please
 
-Session Recap – 5 <dfn title="February">Solmath</dfn>, S.R. 1426
+Session Recap – <dfn title="February 5, 2026">5 Solmath, S.R. 1426</dfn>
 
 - **PCs:**
   - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Hobbit Adventurer

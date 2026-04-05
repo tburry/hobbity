@@ -4,7 +4,7 @@ story: A Hobbity Thanksgiving
 
 # The Gomwick Harvest Festival
 
-Session Recap – 6 <dfn title="November">Blotmath</dfn>, S.R. 1425
+Session Recap – <dfn title="November 6, 2025">6 Blotmath, S.R. 1425</dfn>
 
 - **PCs:**
   - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 0 Hobbit

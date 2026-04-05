@@ -4,7 +4,7 @@ story: Something Rotten in Orlane
 
 # A Pilgrimage to the Temple of Merikka
 
-Session Recap – 19 <dfn title="March">Rethe</dfn>, S.R. 1426
+Session Recap – <dfn title="March 19, 2026">19 Rethe, S.R. 1426</dfn>
 
 - **PCs:**
   - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Hobbit Adventurer

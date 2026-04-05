@@ -4,7 +4,7 @@ story: Something Rotten in Orlane
 
 # Toads, Toads, Toads
 
-Session Recap – 29 <dfn title="January">Afteryule</dfn>, S.R. 1426
+Session Recap – <dfn title="January 29, 2026">29 Afteryule, S.R. 1426</dfn>
 
 - **PCs:**
   - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Hobbit Adventurer

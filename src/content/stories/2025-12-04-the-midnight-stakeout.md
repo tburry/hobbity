@@ -4,7 +4,7 @@ story: The Huddle Job
 
 # The Midnight Stakeout
 
-Session Recap – 4 <dfn title="December">Foreyule</dfn>, S.R. 1425
+Session Recap – <dfn title="December 4, 2025">4 Foreyule, S.R. 1425</dfn>
 
 - **PCs:**
   - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Hobbit Adventurer

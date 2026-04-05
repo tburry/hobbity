@@ -4,7 +4,7 @@ story: The Huddle Job
 
 # The Eye Beneath the Hill
 
-Session Recap – 18 <dfn title="December">Foreyule</dfn>, S.R. 1425
+Session Recap – <dfn title="December 18, 2025">18 Foreyule, S.R. 1425</dfn>
 
 - **PCs:**
   - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Hobbit Adventurer

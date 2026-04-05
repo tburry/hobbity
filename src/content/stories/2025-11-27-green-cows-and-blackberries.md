@@ -4,7 +4,7 @@ story: The Huddle Job
 
 # Green Cows and Blackberries
 
-Session Recap – 27 <dfn title="November">Blotmath</dfn>, S.R. 1425
+Session Recap – <dfn title="November 27, 2025">27 Blotmath, S.R. 1425</dfn>
 
 - **PCs:**
   - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 1 Hobbit Adventurer

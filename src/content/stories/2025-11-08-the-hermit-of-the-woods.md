@@ -4,7 +4,7 @@ story: A Hobbity Thanksgiving
 
 # The Hermit of the Woods
 
-Session Recap – 8 <dfn title="November">Blotmath</dfn>, S.R. 1425
+Session Recap – <dfn title="November 8, 2025">8 Blotmath, S.R. 1425</dfn>
 
 - **PCs:**
   - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 0 Hobbit

@@ -53,7 +53,7 @@ Do not change the meaning of what was said. Preserve the speaker's voice and int
 
 ## Session Notes Format
 
-Recaps go in `src/content/stories/` as `YYYY-MM-DD-episode-title-slug.md`. Slug is lowercase, words separated by dashes, punctuation removed (not converted to dashes). Dates in the recap text use Shire Reckoning: Shire month names and year = Gregorian year minus 600 (e.g. March 22, 2026 → 22 Rethe, S.R. 1426). Month mapping: Jan=Afteryule, Feb=Solmath, Mar=Rethe, Apr=Astron, May=Thrimidge, Jun=Forelithe, Jul=Afterlithe, Aug=Wedmath, Sep=Halimath, Oct=Winterfilth, Nov=Blotmath, Dec=Foreyule. Wrap the Shire month name in `<dfn title="RealMonth">ShireMonth</dfn>` for hover tooltips. Every recap starts with:
+Recaps go in `src/content/stories/` as `YYYY-MM-DD-episode-title-slug.md`. Slug is lowercase, words separated by dashes, punctuation removed (not converted to dashes). Dates in the recap text use Shire Reckoning: Shire month names and year = Gregorian year minus 600 (e.g. March 22, 2026 → 22 Rethe, S.R. 1426). Month mapping: Jan=Afteryule, Feb=Solmath, Mar=Rethe, Apr=Astron, May=Thrimidge, Jun=Forelithe, Jul=Afterlithe, Aug=Wedmath, Sep=Halimath, Oct=Winterfilth, Nov=Blotmath, Dec=Foreyule. Wrap the entire Shire date in `<dfn title="RealDate">ShireDate</dfn>` for hover tooltips (e.g. `<dfn title="March 22, 2026">22 Rethe, S.R. 1426</dfn>`). Every recap starts with:
 
 ```markdown
 # <Episode Title>

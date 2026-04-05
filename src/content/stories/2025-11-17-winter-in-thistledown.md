@@ -4,7 +4,7 @@ story: A Hobbity Thanksgiving
 
 # Winter in Thistledown
 
-Between Sessions – <dfn title="November">Blotmath</dfn> S.R. 1425 to <dfn title="March">Rethe</dfn> S.R. 1426
+Between Sessions – <dfn title="November 2025 to March 2026">Blotmath S.R. 1425 to Rethe S.R. 1426</dfn>
 
 - **PCs:**
   - [Boffo Lunderbunk](/hobbity/appendix/pcs/boffo) - Level 0 → Level 1 Hobbit Adventurer
