@@ -7,7 +7,7 @@ An area almost entirely populated by hobbits. Mountains to the north (home of go
 ### Locations
 
 - **The Heart Road:** Main road connecting [Thistledown](#thistledown), [The Right Way Inn](#the-right-way-inn), and [Gomwick](#gomwick).
-- **The Old Road:** Forest road between [Thistledown](#thistledown) and [Gomwick](#gomwick). [Farmer Fallow](/hobbity/appendix/npcs/#farmer-fallow)'s stall, strange mists and happening.
+- **The Old Road:** Forest road between [Thistledown](#thistledown) and [Gomwick](#gomwick). [Farmer Fallow](/hobbity/appendix/npcs/#farmer-fallow)'s stall, strange mists and happenings.
 - **Sunnyside Crossroads:** Where the main road turns south. [Huddle Farm](#huddle-farm) is just north.
 
 ### Happenings
@@ -86,7 +86,7 @@ An inn on the Heart Road between [Gomwick](#gomwick) and [Thistledown](#thistled
 
 ## Thistledown
 
-Home hamlet of all three PCs in the [Five Shires](#the-five-shires). A small, quiet hobbit settlement southeast of [Gomwick](#gomwick), off the Heart Road. The Toad Stompers set out from here with Boffo's Uncle Bungo's pony [Opal](/hobbity/appendix/npcs/#opal), heading to the [Gomwick](#gomwick) Harvest Festival.
+Home hamlet of all three PCs in the [Five Shires](#the-five-shires). A small, quiet hobbit settlement southeast of [Gomwick](#gomwick), off the Heart Road. The Toad Stompers set out from here with Boffo's Uncle Bungo's pony Binny, heading to the [Gomwick](#gomwick) Harvest Festival.
 
 ### Happenings
 
