@@ -165,12 +165,12 @@ const ABBREV: Record<string, string> = {
       <tr>
         <th style="text-align:left">Enemy</th>
         {activeStatuses.map((s) => (
-          <th class="num">
+          <th>
             <span class="full">{s.charAt(0).toUpperCase() + s.slice(1)}</span>
             <abbr class="abbr" title={s.charAt(0).toUpperCase() + s.slice(1)}>{ABBREV[s]}</abbr>
           </th>
         ))}
-        <th class="num">
+        <th>
           <span class="full">Total</span>
           <abbr class="abbr" title="Total">Tot</abbr>
         </th>

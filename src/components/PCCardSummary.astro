@@ -93,15 +93,9 @@ const fullSrc = fullImage ? (await getImage({ src: fullImage })).src : undefined
   }
 
   .pc-card-stats {
-    border-collapse: collapse;
     text-align: center;
     table-layout: fixed;
     width: 100%;
-  }
-
-  .pc-card-stats {
-    border-radius: 3px;
-    overflow: hidden;
   }
 
   .pc-card-stats th,
@@ -111,7 +105,6 @@ const fullSrc = fullImage ? (await getImage({ src: fullImage })).src : undefined
 
   .pc-card-stats th {
     font-family: var(--heading-font);
-    font-weight: bold;
     color: var(--heading-color);
   }
 

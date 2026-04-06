@@ -69,13 +69,10 @@ const { name, class: cls, level, avatar, tagline, stats } = Astro.props;
   }
 
   .pc-detail-stats {
-    border-collapse: collapse;
     text-align: center;
     table-layout: fixed;
     width: 100%;
     margin: 0 auto;
-    border-radius: 3px;
-    overflow: hidden;
   }
 
   .pc-detail-stats th,
@@ -85,6 +82,5 @@ const { name, class: cls, level, avatar, tagline, stats } = Astro.props;
 
   .pc-detail-stats th {
     font-family: var(--heading-font);
-    font-weight: bold;
     color: var(--heading-color);
   }</style>
