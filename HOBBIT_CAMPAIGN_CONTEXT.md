@@ -299,7 +299,7 @@ The party descended through the trapdoor into underground passages:
    - The **Sleep sling bullet** missed and was lost in the water.
    - The **Phantasmal Force sling bullet** also missed and was lost in the water. Neither special bullet activated.
    - **Boffo drank a Potion of Growth** (from a previous adventure) and became giant-sized, dramatically increasing his combat effectiveness. Duration extends into next session.
-   - Multiple troglodytes killed including a sub-leader. A second shrieker summoned reinforcements.
+   - Multiple troglodytes killed including a sub-leader. The shrieker summoned reinforcements.
 
 7. **Troglodyte lair** — Found a locked chest (key kicked up from dirt by Boffo). Contents:
    - **420 gold pieces** (140 each)
