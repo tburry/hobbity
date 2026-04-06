@@ -13,6 +13,24 @@ pcs:
   - name: Turnip Bramblebrook
     slug: turnip
     level: "1 → 2"
+
+enemiesDefeated:
+  - "1 goblin"
+  - "1 snake"
+  - "Abramo (killed)"
+  - "Kaylin Snowvale (subdued)"
+  - "Misha (subdued, sleep dart)"
+
+treasure:
+  - "Cobra-headed mace (given to Boffo)"
+  - "Snake scale mail +1 (given to Turnip)"
+  - "Ring of Protection +1 (given to Wedge)"
+  - "Gold snake head amulet with ruby eyes (holy symbol of Explictica)"
+  - "Abramo's sketchbook of insane ramblings"
+  - "12 gold coins (from Abramo's chests)"
+  - "21 gold coins (from Deputy Donovan's body)"
+  - "_A Guide to the Herpetology of the Shires_ (book)"
+  - "Flask of brandy (from Donovan)"
 ---
 
 ## Not Dead Yet
@@ -148,23 +166,3 @@ Grover believed Zacharias was neck-deep in the cult. The hobbits weren't so sure
 ## Conclusion
 
 The Toad Stompers broke the serpent cult's hold on the Temple of Merikka, killed its priest, freed its prisoner, and emerged into a village on fire. Orlane's secrets are burning—some literally—and the cult's network runs deeper than the tunnels beneath the temple. Zacharias, the man who summoned them here, has fled with the enemy. The Golden Grain is ash. Somewhere in the tunnels beneath, Derek Desleigh and whoever else survived the fire are still at large. Chapter one of Orlane is closed. Chapter two will be the reckoning.
-
-#### Enemies Defeated
-
-- 1 goblin
-- 1 snake
-- Abramo (killed)
-- Kaylin Snowvale (subdued)
-- Misha (subdued, sleep dart)
-
-#### Treasure
-
-- Cobra-headed mace (given to Boffo)
-- Snake scale mail +1 (given to Turnip)
-- Ring of Protection +1 (given to Wedge)
-- Gold snake head amulet with ruby eyes (holy symbol of Explictica)
-- Abramo's sketchbook of insane ramblings
-- 12 gold coins (from Abramo's chests)
-- 21 gold coins (from Deputy Donovan's body)
-- _A Guide to the Herpetology of the Shires_ (book)
-- Flask of brandy (from Donovan)

@@ -13,6 +13,10 @@ pcs:
   - name: Turnip Bramblebrook
     slug: turnip
     level: 1
+
+enemiesDefeated:
+  - "5 goblins"
+  - "1 giant toad"
 ---
 
 ## The Bridge
@@ -30,8 +34,3 @@ The goblins were scattering when a giant toad burst from beneath the bridge. It 
 ## Conclusion
 
 The bridge was clear and the road to Orlane open, though Turnip paid a lasting price for the crossing.
-
-### Enemies Defeated
-
-- 5 goblins
-- 1 giant toad

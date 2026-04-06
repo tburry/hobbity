@@ -13,6 +13,17 @@ pcs:
   - name: Turnip Bramblebrook
     slug: turnip
     level: 1
+
+enemiesDefeated:
+  - "1 giant lizard"
+  - "Multiple goblins (1 fled with Derek Desleigh)"
+  - "Multiple troglodytes"
+  - "Derek Desleigh (fled)"
+
+treasure:
+  - "420 gold pieces (140 each)"
+  - "Brooch of Shielding"
+  - "Golden carrot (from offering alcove)"
 ---
 
 ## Entering the Temple
@@ -76,16 +87,3 @@ A giant mushroom in the cavern let out a piercing shriek the moment the hobbits 
 ## Conclusion
 
 The party infiltrated the Temple of Merikka, fought off [Derek Desleigh](/hobbity/appendix/npcs/#derek-desleigh)'s goblins, discovered ancient tunnels beneath, and cleared a troglodyte lair. They end deep underground with torches running low and Boffo still giant-sized.
-
-### Enemies Defeated
-
-- 1 giant lizard
-- Multiple goblins (1 fled with Derek Desleigh)
-- Multiple troglodytes
-- Derek Desleigh (fled)
-
-### Treasure
-
-- 420 gold pieces (140 each)
-- Brooch of Shielding
-- Golden carrot (from offering alcove)

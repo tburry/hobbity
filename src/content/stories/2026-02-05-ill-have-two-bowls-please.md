@@ -13,6 +13,9 @@ pcs:
   - name: Turnip Bramblebrook
     slug: turnip
     level: 1
+
+enemiesDefeated:
+  - "Dire wolves (evaded)"
 ---
 
 ## The Road to Orlane
@@ -32,7 +35,3 @@ They took rooms instead at the Slumbering Serpent Inn, kept by [Belba](/hobbity/
 ## Conclusion
 
 The party reached Orlane intact and settled in, but the village already feels wrong. Whatever brought them here, it won't be as simple as dire wolves on the road.
-
-### Enemies Defeated
-
-- Dire wolves (evaded)

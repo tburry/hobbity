@@ -13,6 +13,8 @@ const stories = defineCollection({
       slug: z.string(),
       level: z.union([z.number(), z.string()]),
     })).optional(),
+    enemiesDefeated: z.array(z.string()).optional(),
+    treasure: z.array(z.string()).optional(),
   }),
 });
 

@@ -13,6 +13,14 @@ pcs:
   - name: Turnip Bramblebrook
     slug: turnip
     level: 1
+
+enemiesDefeated:
+  - "1 crab spider"
+  - "1 floating crystal"
+  - "1 floating eye (bypassed)"
+
+treasure:
+  - "None taken (locked chest left unopened)."
 ---
 
 ## Into the Tower
@@ -30,13 +38,3 @@ The fifth and lowest level opened into an unfinished room with a natural tunnel 
 ## Conclusion
 
 Five levels down and back up again, the party emerged with proof that the cow-painting culprit had used the tower as a base, and with more questions about the wizard who built the place. Nailer's fate was grim but explained, and one locked chest still waits below.
-
-### Enemies Defeated
-
-- 1 crab spider
-- 1 floating crystal
-- 1 floating eye (bypassed)
-
-### Treasure
-
-None taken (locked chest left unopened).

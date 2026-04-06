@@ -29,6 +29,8 @@ const title = getTitle(story);
 const date = story.data.date ? toShireDate(story.data.date) : null;
 const pcs = story.data.pcs || [];
 const location = story.data.location;
+const enemiesDefeated = story.data.enemiesDefeated || [];
+const treasure = story.data.treasure || [];
 ---
 
 <Content title={title}>
@@ -53,6 +55,20 @@ const location = story.data.location;
   </aside>
 
   <StoryContent />
+
+  {enemiesDefeated.length > 0 && (
+    <h3 id="enemies-defeated">Enemies Defeated</h3>
+    <ul>
+      {enemiesDefeated.map((e) => <li><Fragment set:html={mdLinks(e)} /></li>)}
+    </ul>
+  )}
+
+  {treasure.length > 0 && (
+    <h3 id="treasure">Treasure</h3>
+    <ul>
+      {treasure.map((t) => <li><Fragment set:html={mdLinks(t)} /></li>)}
+    </ul>
+  )}
 
   <footer class="chapter-nav" slot="footer">
     {prev ? (

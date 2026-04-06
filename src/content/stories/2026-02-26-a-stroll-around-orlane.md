@@ -13,6 +13,18 @@ pcs:
   - name: Turnip Bramblebrook
     slug: turnip
     level: 1
+
+enemiesDefeated:
+  - "2 troglodytes"
+
+treasure:
+  - "Potion of Healing (two doses)"
+  - "Potion of Speed"
+  - "Scroll of Sleep"
+  - "Scroll of Wizard Lock"
+  - "Scroll of Dispel Magic"
+  - "6 special sling bullets (4x +1, 1x Sleep, 1x Phantasmal Force)"
+  - "100 gold coins (for temple entry)"
 ---
 
 ## The Blacksmith and the Constable
@@ -102,17 +114,3 @@ That night, around ten, the three hobbits walked to the temple. They posed as pi
 ## Conclusion
 
 The party turned a morning in hobbit jail into an evening at the temple door, armed with Zacharias's gifts and a thin cover story. Whatever the priests are hiding, the hobbits walked straight into it.
-
-### Enemies Defeated
-
-- 2 troglodytes
-
-### Treasure
-
-- Potion of Healing (two doses)
-- Potion of Speed
-- Scroll of Sleep
-- Scroll of Wizard Lock
-- Scroll of Dispel Magic
-- 6 special sling bullets (4x +1, 1x Sleep, 1x Phantasmal Force)
-- 100 gold coins (for temple entry)

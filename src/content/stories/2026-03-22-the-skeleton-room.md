@@ -13,6 +13,15 @@ pcs:
   - name: Turnip Bramblebrook
     slug: turnip
     level: 1
+
+enemiesDefeated:
+  - "6 goblins (4 killed, 1 subdued, 1 fled)"
+  - "8 skeletons"
+  - "[Griff Snowvale](/hobbity/appendix/npcs/#griff-snowvale-gardner) (subdued)"
+  - "[Timba Snowvale](/hobbity/appendix/npcs/#timba-snowvale-gardner) (subdued)"
+
+treasure:
+  - "Golden potato (from offering alcove)"
 ---
 
 ## Cleaning Up the Lair
@@ -146,14 +155,3 @@ Somewhere in this templeâ€”fled through a western door, vanished into the nightâ
 ## Conclusion
 
 The party cleared the troglodyte lair, fought through goblins and undead, and confronted cultists in the temple above. They end battered and out of resources, with Boffo bleeding out on the floor.
-
-### Enemies Defeated
-
-- 6 goblins (4 killed, 1 subdued, 1 fled)
-- 8 skeletons
-- [Griff Snowvale](/hobbity/appendix/npcs/#griff-snowvale-gardner) (subdued)
-- [Timba Snowvale](/hobbity/appendix/npcs/#timba-snowvale-gardner) (subdued)
-
-### Treasure
-
-- Golden potato (from offering alcove)
