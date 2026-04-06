@@ -1,15 +1,9 @@
 ---
 import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import { appendixLabels, worldOrder, appendixOrder } from '../lib/appendix';
-import { storyOrder, storySlug, getTitle } from '../lib/stories';
+import TocNav from '../components/TocNav.astro';
+import { tocSections } from '../lib/toc';
 import toadStompers from '../assets/images/toad-stompers.webp';
-
-
-const essays = await getCollection('essays');
-essays.sort((a, b) => a.id.localeCompare(b.id));
-
 ---
 
 <Base title="Toad Stompers">
@@ -17,38 +11,6 @@ essays.sort((a, b) => a.id.localeCompare(b.id));
   <h1>The Toad Stompers</h1>
 
   <nav class="toc">
-    <h2>Stories</h2>
-    <ul>
-      {storyOrder.map((name) => (
-        <li><a href={`/hobbity/stories/${storySlug(name)}/`}>{name}</a></li>
-      ))}
-    </ul>
-
-    {essays.length > 0 && (
-      <>
-        <h2>Essays</h2>
-        <ul>
-          {essays.map((e) => (
-            <li><a href={`/hobbity/essays/${e.id}/`}>{getTitle(e)}</a></li>
-          ))}
-        </ul>
-      </>
-    )}
-
-    <h2>World</h2>
-    <ul>
-      {worldOrder.map((id) => (
-        <li><a href={`/hobbity/appendix/${id}/`}>{appendixLabels[id]}</a></li>
-      ))}
-    </ul>
-
-    <h2>Appendices</h2>
-    <ul>
-      {appendixOrder.map((id) => (
-        <li><a href={`/hobbity/appendix/${id}/`}>{appendixLabels[id]}</a></li>
-      ))}
-      <li><a href="/hobbity/ledger/">Ledger</a></li>
-      <li><a href="/hobbity/index-page/">Index</a></li>
-    </ul>
+    <TocNav sections={tocSections} />
   </nav>
 </Base>

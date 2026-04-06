@@ -6,16 +6,13 @@ interface Props {
 }
 
 import '../styles/global.scss';
-import { getCollection } from 'astro:content';
 import Lightbox from '../components/Lightbox.astro';
 import SearchBox from '../components/SearchBox.astro';
-import { appendixLabels, worldOrder, appendixOrder } from '../lib/appendix';
-import { storyOrder, storySlug, getTitle } from '../lib/stories';
+import TocNav from '../components/TocNav.astro';
+import { tocSections } from '../lib/toc';
 
 const { title, searchable = false, lightbox = false } = Astro.props;
 
-const essays = await getCollection('essays');
-essays.sort((a, b) => a.id.localeCompare(b.id));
 const pageTitle = title || 'A Hobbity Adventure';
 ---
 
@@ -94,40 +91,7 @@ const pageTitle = title || 'A Hobbity Adventure';
           <ul>
             <li><a href="/hobbity/">Home</a></li>
           </ul>
-
-          <h2>Stories</h2>
-          <ul>
-            {storyOrder.map((name) => (
-              <li><a href={`/hobbity/stories/${storySlug(name)}/`}>{name}</a></li>
-            ))}
-          </ul>
-
-          {essays.length > 0 && (
-            <>
-              <h2>Essays</h2>
-              <ul>
-                {essays.map((e) => (
-                  <li><a href={`/hobbity/essays/${e.id}/`}>{getTitle(e)}</a></li>
-                ))}
-              </ul>
-            </>
-          )}
-
-          <h2>World</h2>
-          <ul>
-            {worldOrder.map((id) => (
-              <li><a href={`/hobbity/appendix/${id}/`}>{appendixLabels[id]}</a></li>
-            ))}
-          </ul>
-
-          <h2>Appendices</h2>
-          <ul>
-            {appendixOrder.map((id) => (
-              <li><a href={`/hobbity/appendix/${id}/`}>{appendixLabels[id]}</a></li>
-            ))}
-            <li><a href="/hobbity/ledger/">Ledger</a></li>
-            <li><a href="/hobbity/index-page/">Index</a></li>
-          </ul>
+          <TocNav sections={tocSections} />
           </nav>
         </div>
       </div>

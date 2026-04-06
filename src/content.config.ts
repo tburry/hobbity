@@ -28,11 +28,6 @@ const summaries = defineCollection({
   schema: z.object({}).passthrough(),
 });
 
-const essays = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/essays' }),
-  schema: z.object({}).passthrough(),
-});
-
 const pcs = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/pcs' }),
   schema: z.object({
@@ -53,4 +48,4 @@ const pcs = defineCollection({
   }),
 });
 
-export const collections = { stories, appendix, summaries, essays, pcs };
+export const collections = { stories, appendix, summaries, pcs };
