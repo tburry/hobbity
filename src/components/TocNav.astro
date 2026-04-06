@@ -1,0 +1,27 @@
+---
+import type { TocSection, TocItem } from '../lib/toc';
+
+interface Props {
+  sections: TocSection[];
+}
+
+const { sections } = Astro.props;
+---
+
+{sections.map((section) => (
+  <>
+    <h2>{section.heading}</h2>
+    <ul>
+      {section.items.map((item) => (
+        <li>
+          <a href={item.href}>{item.label}</a>
+          {item.children && item.children.length > 0 && (
+            item.ordered
+              ? <ol>{item.children.map((child) => <li><a href={child.href}>{child.label}</a></li>)}</ol>
+              : <ul>{item.children.map((child) => <li><a href={child.href}>{child.label}</a></li>)}</ul>
+          )}
+        </li>
+      ))}
+    </ul>
+  </>
+))}

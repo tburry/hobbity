@@ -1,69 +1,61 @@
 ---
 import { getCollection } from 'astro:content';
+import GithubSlugger from 'github-slugger';
 import Base from '../layouts/Base.astro';
-import { appendixLabels, worldOrder, appendixOrder } from '../lib/appendix';
-import { storyOrder, storySlug, getTitle } from '../lib/stories';
+import TocNav from '../components/TocNav.astro';
+import { tocSections, type TocSection } from '../lib/toc';
+import { getTitle } from '../lib/stories';
 
 const allStories = await getCollection('stories');
 allStories.sort((a, b) => a.id.localeCompare(b.id));
 
-const essays = await getCollection('essays');
-essays.sort((a, b) => a.id.localeCompare(b.id));
-
 const pcs = (await getCollection('pcs')).sort((a, b) => a.data.order - b.data.order);
+
+const storyChildren = Object.fromEntries(
+  tocSections[0].items.map((item) => {
+    const chapters = allStories.filter((s) =>
+      item.href.endsWith(`/${s.data.story.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}/`)
+    );
+    return [item.href, chapters.map((ch) => ({
+      label: getTitle(ch),
+      href: `/hobbity/stories/${ch.id}/`,
+    }))];
+  })
+);
+
+const pcChildren = pcs.map((pc) => ({
+  label: pc.data.name,
+  href: `/hobbity/appendix/pcs/${pc.id}/`,
+}));
+
+const appendix = await getCollection('appendix');
+const places = appendix.find((e) => e.id === 'places');
+const slugger = new GithubSlugger();
+const placeChildren = (places?.body?.match(/^## .+/gm) ?? []).map((h2) => {
+  const label = h2.replace(/^## /, '');
+  return { label, href: `/hobbity/appendix/places/#${slugger.slug(label)}` };
+});
+
+const sections: TocSection[] = tocSections.map((section) => ({
+  ...section,
+  items: section.items
+    .filter((item) => item.href !== '/hobbity/index-page/')
+    .map((item) => {
+      if (storyChildren[item.href]?.length) {
+        return { ...item, children: storyChildren[item.href], ordered: true };
+      }
+      if (item.href === '/hobbity/appendix/pcs/') {
+        return { ...item, children: pcChildren };
+      }
+      if (item.href === '/hobbity/appendix/places/') {
+        return { ...item, children: placeChildren };
+      }
+      return item;
+    }),
+}));
 ---
 
 <Base title="Index">
   <h1 data-pagefind-body>Index</h1>
-
-  <h2>Stories</h2>
-  {storyOrder.map((name) => {
-    const chapters = allStories.filter((s) => s.data.story === name);
-    return (
-      <>
-        <h3><a href={`/hobbity/stories/${storySlug(name)}/`}>{name}</a></h3>
-        <ol>
-          {chapters.map((ch) => (
-            <li><a href={`/hobbity/stories/${ch.id}/`}>{getTitle(ch)}</a></li>
-          ))}
-        </ol>
-      </>
-    );
-  })}
-
-  {essays.length > 0 && (
-    <>
-      <h2>Essays</h2>
-      <ul>
-        {essays.map((e) => (
-          <li><a href={`/hobbity/essays/${e.id}/`}>{getTitle(e)}</a></li>
-        ))}
-      </ul>
-    </>
-  )}
-
-  <h2>World</h2>
-  <ul>
-    {worldOrder.map((id) => (
-      <li>
-        <a href={`/hobbity/appendix/${id}/`}>{appendixLabels[id]}</a>
-        {id === 'pcs' && (
-          <ul>
-            {pcs.map((pc) => (
-              <li><a href={`/hobbity/appendix/pcs/${pc.id}/`}>{pc.data.name}</a></li>
-            ))}
-          </ul>
-        )}
-      </li>
-    ))}
-  </ul>
-
-  <h2>Appendix</h2>
-  <ul>
-    {appendixOrder.map((id) => (
-      <li>
-        <a href={`/hobbity/appendix/${id}/`}>{appendixLabels[id]}</a>
-      </li>
-    ))}
-  </ul>
+  <TocNav sections={sections} />
 </Base>
