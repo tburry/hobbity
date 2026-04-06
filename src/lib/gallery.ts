@@ -221,6 +221,24 @@ export const images: GalleryImage[] = [
     storyTitle: 'The Gomwick Harvest Festival',
   },
   {
+    src: img('pie-eating-trophy.webp'),
+    alt: 'The pie-eating trophy',
+    caption:
+      'The pie-eating trophy at the Gomwick Harvest Festival. Boffo cleaned three plates of rhubarb pie and asked for more.',
+    storyLink:
+      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-pie-eating-contest',
+    storyTitle: 'The Gomwick Harvest Festival',
+  },
+  {
+    src: img('grunela.webp'),
+    alt: 'Grunela Bunce',
+    caption:
+      'Grunela Bunce, three-time pie-eating champion, defeated by Boffo in the second round. She threw up after the first pie. She threw an apple at his head later.',
+    storyLink:
+      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-pie-eating-contest',
+    storyTitle: 'The Gomwick Harvest Festival',
+  },
+  {
     src: img('spottle-toad.webp'),
     alt: 'A spottle toad',
     caption:
@@ -239,19 +257,10 @@ export const images: GalleryImage[] = [
     storyTitle: 'The Gomwick Harvest Festival',
   },
   {
-    src: img('pie-eating-trophy.webp'),
-    alt: 'The pie-eating trophy',
+    src: img('pie-eating-contest.webp'),
+    alt: 'Boffo at the pie-eating contest',
     caption:
-      'The pie-eating trophy at the Gomwick Harvest Festival. Boffo cleaned three plates of rhubarb pie and asked for more.',
-    storyLink:
-      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-festival',
-    storyTitle: 'The Gomwick Harvest Festival',
-  },
-  {
-    src: img('grunela.webp'),
-    alt: 'Grunela Bunce',
-    caption:
-      'Grunela Bunce, three-time pie-eating champion, defeated by Boffo in the second round. She threw up after the first pie. She threw an apple at his head later.',
+      'Boffo Lunderbunk at the Gomwick Harvest Festival pie-eating qualifiers. The crowd gasped. Some asked how he could possibly eat so much. Boffo shrugged. "I like pie."',
     storyLink:
       '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-festival',
     storyTitle: 'The Gomwick Harvest Festival',
