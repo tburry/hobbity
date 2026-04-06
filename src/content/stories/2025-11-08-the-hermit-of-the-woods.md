@@ -17,7 +17,7 @@ pcs:
 
 ## Into the Woods
 
-[Buford](/hobbity/appendix/npcs/#buford-niss) sent the party into the Old Woods to visit "[The Hermit](/hobbity/appendix/npcs/#the-hermit)"—an ancient tall-folk man living in a cabin. He gave them no name for the man, because he did not know one. He gave them a blowgun, sentimental to him, and asked them to bring it as a gift along with food.
+The next morning, the hobbits told [Buford](/hobbity/appendix/npcs/#buford-niss) about the scarecrow. He didn't know what had animated Hungry Hank, but suspected it was some kind of old magic—the sort of thing best left to someone who understood such matters. He told them about an old hermit who lived deep in the Old Woods, a friend of his who might know more. Buford gave them a bronze coin to guide their way and loaned Turnip a blowgun for the journey. He asked them to bring the old man food.
 
 The party entered the woods and found the Hermit's dwelling—though none of them agreed on what it looked like. Turnip saw a too-tall hobbit-hole. Wedge saw an enormous skull. Boffo saw a drafty old cabin. The Hermit didn't answer the door, and the front room was filled with strange noises and the clatter of odd devices. They climbed a tree and entered through a window on the second floor.
 
@@ -31,7 +31,7 @@ The Hermit's strange arcane machine showed each of them a vision:
 - **Turnip** saw an immense tidal wave washing over the land
 - **Wedge** saw his own flesh rotting away as he walked on in undeath
 
-Each received a strange bronze coin that guided them out of the woods by instinct.
+The bronze coin Buford had given them guided them out of the woods by instinct.
 
 ## Return to Gomwick
 

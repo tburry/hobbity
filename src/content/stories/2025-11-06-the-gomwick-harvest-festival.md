@@ -35,33 +35,27 @@ Along the way they encountered [Tobias Chubb](/hobbity/appendix/npcs/#tobias-chu
 
 ## The Festival
 
-The festival was everything three young hobbits could want: eating, drinking, games, and more eating. Wedge scored two bullseyes in the axe-throwing with a shiny new axe from [Lotho Longbuck](/hobbity/appendix/npcs/#lotho-longbuck)’s shop. Turnip entered the storytelling competition but missed his quarter-final slot.
+The festival was everything three young hobbits could want: eating, drinking, games, and more eating. Wedge scored two bullseyes in the axe-throwing with a shiny new axe from [Lotho Longbuck](/hobbity/appendix/npcs/#lotho-longbuck)’s shop. Turnip entered the storytelling competition. Boffo entered the pie-eating qualifiers and won handily. The crowd gasped. Some asked how he could possibly eat so much. Boffo shrugged. “I like pie.”
 
-The hobbits went to visit the baker—[Daisy Boffin](/hobbity/appendix/npcs/#daisy-boffin), daughter of [Gammy Boffin](/hobbity/appendix/npcs/#gammy-boffin), the pie-eating organizer. A middle-aged hobbit came over to Boffo and took his hand and started shaking it vigorously. “My word, good fellow! That was an impressive display. We haven’t seen the likes of that in many a year! Gammy Boffin’s the name, and I’m the organizer of this year’s pie-eating, and I must say… wow, my boy! Just wow!” He took a moment looking at Boffo with unabashed admiration. “But where is my head?! Here, my lad,” and he handed back the copper coin, a mug of ale, and pinned a little green ribbon to Boffo’s coat that had a little silver pie embroidered on it, and the words ‘Quarter-Finalist’. “This will let you in to the table for tomorrow’s event. The quarter-finals in the morning, the semi-finals in the afternoon, and the big final tomorrow night. You don’t want to miss it, the prize purse for first place is up over 10 gold crowns, last I checked, and might be more by tomorrow. And, my daughter Daisy’s in charge of baking the pies. Her blueberry pies have won first place three years running!”
+![The pie-eating contest](../../assets/images/pie-eating-contest.webp)
+
+A middle-aged hobbit came over and took his hand, shaking it vigorously. “My word, good fellow! That was an impressive display. We haven’t seen the likes of that in many a year! [Gammy Boffin](/hobbity/appendix/npcs/#gammy-boffin)’s the name, and I’m the organizer of this year’s pie-eating, and I must say… wow, my boy! Just wow!” He took a moment looking at Boffo with unabashed admiration. “But where is my head?! Here, my lad,” and he handed back the copper coin, a mug of ale, and pinned a little green ribbon to Boffo’s coat that had a little silver pie embroidered on it, and the words ‘Quarter-Finalist’. “This will let you in to the table for tomorrow’s event. The quarter-finals in the morning, the semi-finals in the afternoon, and the big final tomorrow night. You don’t want to miss it, the prize purse for first place is up over 10 gold crowns, last I checked, and might be more by tomorrow. And, my daughter Daisy’s in charge of baking the pies. Her blueberry pies have won first place three years running!”
 
 And at that, a very pretty, blonde and busty hobbit woman, about roughly 20 years old, stepped up beside Gammy, and said, “I heard my name. What are you going on about now, pa?” She shot him an adoring look, then looked over at Boffo.
 
 “Oh, my dear,” said Gammy, “I was just telling, er…pardon, but I don’t even know your name?” He said to Boffo, but carried on speaking to his daughter anyway, “I was telling the lad, that you’re in charge of baking the pies for tomorrow, so even if he loses, he’ll be plenty satisfied with your sweet treats!”
 
-Daisy gave a humph, and said, “Well, he’ll have to go without. I’m making mince-meat for the quarter-finals.” She then gave Boffo a sly wink and said, “If you make it to the finals, I may just have some cherry pie waiting for you!” And with that she gave a small giggle, and bounced off towards a group of other hobbit girls that were standing around chatting nearby.
+[Daisy](/hobbity/appendix/npcs/#daisy-boffin) gave a humph, and said, “Well, he’ll have to go without. I’m making mince-meat for the quarter-finals.” She then gave Boffo a sly wink and said, “If you make it to the finals, I may just have some cherry pie waiting for you!” And with that she gave a small giggle, and bounced off towards a group of other hobbit girls that were standing around chatting nearby.
 
-While nosing around near the baker’s tent, the hobbits spotted Tobias Chubb skulking about with his cronies. Wedge picked a small vial from Chubb’s pocket—poison, meant for the pies. A brawl ensued, and the plot—hatched by [Adelard Potts](/hobbity/appendix/npcs/#adelard-potts) and [Hanna Boggs](/hobbity/appendix/npcs/#hanna-boggs) with Chubb as their agent—was foiled before anyone’s pie was the worse for it.
+## The Pie Poisoning Caper
 
-## The Pie-Eating Contest
-
-The next day, Boffo returned for the contest proper. In the second round he faced [Grunela Bunce](/hobbity/appendix/npcs/#grunela-bunce)—the heavy favorite, a hobbit woman who had won three years running and expected to win a fourth. The pies came out, the whistle blew, and Grunela threw up after the first pie. Boffo cleaned his plates without breaking stride. She did not take the loss well, and later that evening threw an apple at Boffo’s head, unprovoked.
-
-![Grunela Bunce](../../assets/images/npcs/grunela.webp)
-
-Boffo kept winning. In the final, a smelly fish pie was set before the remaining contestants—a test of stomach as much as appetite. Boffo kept it down. The crowd erupted.
-
-![The pie-eating trophy](../../assets/images/pie-eating-trophy.webp)
+The hobbits went to thank the baker for her fine pies. While nosing around near the baker’s tent, they spotted Tobias Chubb skulking about with his cronies. Wedge picked a small vial from Chubb’s pocket—poison, meant for the pies. A brawl ensued, and the plot—hatched by [Adelard Potts](/hobbity/appendix/npcs/#adelard-potts) and [Hanna Boggs](/hobbity/appendix/npcs/#hanna-boggs) with Chubb as their agent—was foiled before anyone’s pie was the worse for it.
 
 ## Buford Niss
 
 ![Buford Niss](../../assets/images/npcs/buford.webp)
 
-After the contest, [Buford Niss](/hobbity/appendix/npcs/#buford-niss)—the Hon. Horace Buford Hockwallop Niss, Esq.—a wealthy, well-traveled old hobbit who lived at Toppo Hill House, the enormous burrow crowning the hill above Gomwick, came to congratulate the hobbits. He’d just won a tidy sum betting on Boffo.
+After the commotion, [Buford Niss](/hobbity/appendix/npcs/#buford-niss)—the Hon. Horace Buford Hockwallop Niss, Esq.—a wealthy, well-traveled old hobbit who lived at Toppo Hill House, the enormous burrow crowning the hill above Gomwick, introduced himself to the hobbits. He’d watched the whole affair with great amusement and liked the cut of their jibs.
 
 ## The Spottle Table
 
@@ -81,15 +75,21 @@ Buford invited the hobbits to dinner at Toppo Hill House, his enormous burrow cr
 
 Buford’s house was easy to spot. Toppo Hill House is a hobbit hole at the top of the hill overlooking Gomwick, and even from down below they could see it was enormous in scope and quite splendid. It crowned the top of the hill, and was at least several stories of burrows with a pleasant little garden and gazebo at the very top.
 
-Over dinner, Buford asked the hobbits to do him a favour: visit an old man living in a cabin deep in the Old Woods—[the Hermit](/hobbity/appendix/npcs/#the-hermit). He gave them a blowgun, sentimental to him, to bring as a gift along with food.
+## The Pie-Eating Contest
+
+The next day, Boffo returned for the contest proper. In the second round he faced [Grunela Bunce](/hobbity/appendix/npcs/#grunela-bunce)—the heavy favorite, a hobbit woman who had won three years running and expected to win a fourth. The pies came out, the whistle blew, and Grunela threw up after the first pie. Boffo cleaned his plates without breaking stride. She did not take the loss well, and later that evening threw an apple at Boffo’s head, unprovoked.
+
+![Grunela Bunce](../../assets/images/npcs/grunela.webp)
+
+Boffo kept winning. In the final, a smelly fish pie was set before the remaining contestants—a test of stomach as much as appetite. Boffo kept it down. The crowd erupted.
+
+![The pie-eating trophy](../../assets/images/pie-eating-trophy.webp)
 
 ## Hungry Hank
 
-The hobbits made the journey into the woods and back, returning in time for the final evening of the festival.
-
 ![Hungry Hank](../../assets/images/hungry-hank.webp)
 
-Then the scarecrow came alive.
+During the award ceremony, the scarecrow came alive.
 
 “Hungry Hank,” the harvest effigy, ripped free from his pole and rampaged through the fairgrounds. Boffo threw himself off the stage to shield children in Hank’s path and brought the scarecrow low with a torch. Wedge and Turnip froze—or at least, that’s how the crowd remembered it.
 
