@@ -1,0 +1,226 @@
+---
+import { getCollection } from 'astro:content';
+import Content from '../layouts/Content.astro';
+
+const allStories = await getCollection('stories');
+
+// --- Enemy parsing utilities ---
+
+const STATUSES = ['killed', 'subdued', 'fled', 'evaded'] as const;
+type Status = typeof STATUSES[number];
+type Tally = Record<Status, number>;
+
+/** Map synonyms to canonical status names. */
+const STATUS_ALIASES: Record<string, Status> = { bypassed: 'evaded' };
+
+function emptyTally(): Tally {
+  return { killed: 0, subdued: 0, fled: 0, evaded: 0 };
+}
+
+/** True if this entry refers to a named NPC rather than a generic monster. */
+function isNpc(entry: string): boolean {
+  if (entry.includes('/npcs/')) return true;
+  const name = entry.replace(/\s*\(.*$/, '').trim();
+  if (/^\d/.test(name) || /^multiple\b/i.test(name)) return false;
+  // Proper names have every word capitalised; monster types don't ("Dire wolves").
+  const words = name.split(/\s+/);
+  return words.every((w) => /^[A-Z]/.test(w));
+}
+
+/** Normalise a creature type to a lowercase canonical key for grouping.
+ *  We store the plural form as-is (e.g. "goblins") and merge singulars into it. */
+function normalise(type: string): string {
+  return type.toLowerCase().trim();
+}
+
+/** Find the canonical key for a type, merging singular/plural variants. */
+function canonicalKey(type: string, existing: Map<string, Tally>): string {
+  const t = normalise(type);
+  if (existing.has(t)) return t;
+  // Check if a plural or singular variant already exists
+  for (const key of existing.keys()) {
+    if (key + 's' === t || t + 's' === key) return key;
+    // wolves/wolf
+    if (key.replace(/ves$/, 'f') === t || t.replace(/ves$/, 'f') === key) return key;
+  }
+  return t;
+}
+
+/** Pluralise a lowercase type string. */
+function pluralise(s: string): string {
+  if (s.endsWith('s') || s.endsWith('x') || s.endsWith('sh') || s.endsWith('ch')) return s + 'es';
+  if (s.endsWith('y') && !/[aeiou]y$/.test(s)) return s.slice(0, -1) + 'ies';
+  if (s.endsWith('f') && !s.endsWith('ff')) return s.slice(0, -1) + 'ves';
+  return s + 's';
+}
+
+/** True if the string already looks plural (ends in s/es/ves/ies but not ss). */
+function looksPlural(s: string): boolean {
+  return /(?:[^s]s|ves|ies)$/.test(s);
+}
+
+/** Format a number for table display: 0 becomes a dash. */
+function fmt(n: number): string | number {
+  return n || '-';
+}
+
+/** Title-case a type key for display, always plural. */
+function displayName(key: string): string {
+  const plural = looksPlural(key) ? key : pluralise(key);
+  return plural.charAt(0).toUpperCase() + plural.slice(1);
+}
+
+function parseEntry(entry: string): { type: string; tally: Tally } | null {
+  const tally = emptyTally();
+
+  // Separate name from parenthetical
+  const m = entry.match(/^(.+?)(?:\s*\((.+)\))?$/);
+  if (!m) return null;
+  const raw = m[1].trim();
+  const paren = m[2]?.trim();
+
+  // Extract count and creature type
+  const cm = raw.match(/^(\d+)\s+(.+)$/);
+  const count = cm ? parseInt(cm[1]) : 0;
+  const type = normalise(cm ? cm[2] : raw.replace(/^multiple\s+/i, ''));
+
+  if (!paren) {
+    // No parenthetical → all killed
+    tally.killed = count;
+  } else {
+    // Look for "N status" patterns in the parenthetical
+    const allStatuses = [...STATUSES, ...Object.keys(STATUS_ALIASES)];
+    const statusPattern = new RegExp(`(\\d+)\\s+(${allStatuses.join('|')})`, 'gi');
+    const breakdowns: [number, Status][] = [];
+    let bm;
+    while ((bm = statusPattern.exec(paren)) !== null) {
+      const raw = bm[2].toLowerCase();
+      const status = (STATUS_ALIASES[raw] || raw) as Status;
+      breakdowns.push([parseInt(bm[1]), status]);
+    }
+
+    if (breakdowns.length > 0) {
+      for (const [n, s] of breakdowns) tally[s] += n;
+    } else {
+      // Simple status word: "(bypassed)", "(evaded)"
+      const raw = paren.replace(/,.*/, '').trim().toLowerCase();
+      const simple = (STATUS_ALIASES[raw] || raw) as Status;
+      if (STATUSES.includes(simple)) {
+        tally[simple] = count || 1;
+      } else {
+        // Unknown paren (flavour text) → default killed
+        tally.killed = count;
+      }
+    }
+  }
+
+  return { type, tally };
+}
+
+// --- Tally all enemies across stories ---
+
+const enemies = new Map<string, Tally>();
+
+for (const story of allStories) {
+  for (const entry of story.data.enemiesDefeated || []) {
+    if (isNpc(entry)) continue;
+    const parsed = parseEntry(entry);
+    if (!parsed) continue;
+
+    const key = canonicalKey(parsed.type, enemies);
+    const existing = enemies.get(key) || emptyTally();
+    for (const s of STATUSES) existing[s] += parsed.tally[s];
+    enemies.set(key, existing);
+  }
+}
+
+// Sort alphabetically by display name
+const sorted = [...enemies.entries()]
+  .map(([type, tally]) => {
+    const total = STATUSES.reduce((sum, s) => sum + tally[s], 0);
+    return { type, tally, total };
+  })
+  .sort((a, b) => displayName(a.type).localeCompare(displayName(b.type)));
+
+// Only show status columns that have at least one entry
+const activeStatuses = STATUSES.filter((s) =>
+  sorted.some((row) => row.tally[s] > 0)
+);
+
+const ABBREV: Record<string, string> = {
+  killed: 'Kil',
+  subdued: 'Sub',
+  fled: 'Fled',
+  evaded: 'Ev',
+};
+---
+
+<Content title="Ledger">
+  <h1>Ledger</h1>
+
+  <h2>Enemies Defeated</h2>
+
+  <table class="ledger-table">
+    <thead>
+      <tr>
+        <th style="text-align:left">Enemy</th>
+        {activeStatuses.map((s) => (
+          <th class="num">
+            <span class="full">{s.charAt(0).toUpperCase() + s.slice(1)}</span>
+            <abbr class="abbr" title={s.charAt(0).toUpperCase() + s.slice(1)}>{ABBREV[s]}</abbr>
+          </th>
+        ))}
+        <th class="num">
+          <span class="full">Total</span>
+          <abbr class="abbr" title="Total">Tot</abbr>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {sorted.map((row) => (
+        <tr>
+          <td>{displayName(row.type)}</td>
+          {activeStatuses.map((s) => <td class="num">{fmt(row.tally[s])}</td>)}
+          <td class="num">{row.total}</td>
+        </tr>
+      ))}
+    </tbody>
+    <tfoot>
+      <tr>
+        <th style="text-align:left">Total</th>
+        {activeStatuses.map((s) => (
+          <th class="num">{fmt(sorted.reduce((sum, row) => sum + row.tally[s], 0))}</th>
+        ))}
+        <th class="num">{sorted.reduce((sum, row) => sum + row.total, 0)}</th>
+      </tr>
+    </tfoot>
+  </table>
+
+  <style lang="scss">
+    .ledger-table {
+      width: 100%;
+
+      .num {
+        text-align: right;
+        width: 6rem;
+      }
+
+      .abbr {
+        display: none;
+      }
+
+      @media (max-width: 720px) {
+        .full {
+          display: none;
+        }
+        .abbr {
+          display: inline;
+          text-decoration: none;
+        }
+        .num {
+          width: 4em;
+        }
+      }
+    }
+  </style>
+</Content>
