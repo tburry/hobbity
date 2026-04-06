@@ -17,15 +17,17 @@ pcs:
 
 ## Into the Woods
 
-The next morning, the hobbits told [Buford](/hobbity/appendix/npcs/#buford-niss) about the scarecrow. He didn't know what had animated Hungry Hank, but suspected it was some kind of old magic—the sort of thing best left to someone who understood such matters. He told them about an old hermit who lived deep in the Old Woods, a friend of his who might know more. Buford gave them a bronze coin to guide their way and loaned Turnip a blowgun for the journey. He asked them to bring the old man food.
+The next morning, the hobbits discovered their prize pumpkin was missing. They told [Buford](/hobbity/appendix/npcs/#buford-niss) about the scarecrow. He didn't know what had animated Hungry Hank, but suspected it was some kind of old magic—the sort of thing best left to someone who understood such matters. He told them about an old hermit who lived deep in the Old Woods, a friend of his who might know more. Buford gave them a bronze coin to guide their way and loaned Turnip a blowgun for the journey. He asked them to bring the old man food.
 
 The party entered the woods and found the Hermit's dwelling—though none of them agreed on what it looked like. Turnip saw a too-tall hobbit-hole. Wedge saw an enormous skull. Boffo saw a drafty old cabin. The Hermit didn't answer the door, and the front room was filled with strange noises and the clatter of odd devices. They climbed a tree and entered through a window on the second floor.
 
 ![The Hermit](../../assets/images/npcs/the-hermit.webp)
 
-Inside they found the body of [Tobias Chubb](/hobbity/appendix/npcs/#tobias-chubb).
+Inside they found the body of [Tobias Chubb](/hobbity/appendix/npcs/#tobias-chubb)—and their missing pumpkin. The pumpkin thief had met his end in the woods.
 
-The Hermit's strange arcane machine showed each of them a vision:
+The Hermit would not answer their questions or even return their greetings. He only said he was hungry. The hobbits, who were hungry themselves, decided to cook lunch. They made a pumpkin soup from the recovered prize pumpkin, and the Hermit ate with them. Only after he'd eaten did he show them his strange arcane machine.
+
+The machine showed each of them a vision:
 
 - **Boffo** saw a terrible plague decimating the Shires
 - **Turnip** saw an immense tidal wave washing over the land

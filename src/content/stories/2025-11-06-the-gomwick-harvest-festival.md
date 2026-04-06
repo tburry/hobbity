@@ -17,7 +17,7 @@ pcs:
 
 ## The Old Road to Gomwick
 
-Early morning in the hamlet of Thistledown. Crisp air, the smell of last night's rainstorm still lingering. Three hobbits checked the straps on Binny, their uncle's old pony, loaded with goods to sell at the Gomwick Harvest Festival. A storm had delayed their departure by a day, so the North Road and a warm bed at the Right Way Inn were out. They'd take the Old Road instead—through the forest, one night camping on hard ground, arriving in Gomwick by tomorrow evening with time for the supper feast.
+Early morning in the hamlet of Thistledown. Crisp air, the smell of last night's rainstorm still lingering. Three hobbits checked the straps on Binny, their uncle's old pony, loaded with goods to sell at the Gomwick Harvest Festival—including a pumpkin they hoped would win a prize. A storm had delayed their departure by a day, so the North Road and a warm bed at the Right Way Inn were out. They'd take the Old Road instead—through the forest, one night camping on hard ground, arriving in Gomwick by tomorrow evening with time for the supper feast.
 
 ![The Old Road to Gomwick](../../assets/images/road-to-gomwick.webp)
 
