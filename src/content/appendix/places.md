@@ -7,8 +7,8 @@ An area almost entirely populated by hobbits. Mountains to the north (home of go
 ### Locations
 
 - **The Heart Road:** Main road connecting [Thistledown](#thistledown), [The Right Way Inn](#the-right-way-inn), and [Gomwick](#gomwick).
-- **The Old Road:** Forest road between [Thistledown](#thistledown) and [Gomwick](#gomwick). [Farmer Fallow](/hobbity/appendix/npcs/#farmer-fallow)'s stall, strange mist, [Tobias Chubb](/hobbity/appendix/npcs/#tobias-chubb).
-- **Sunnyside Crossroads:** Where the main road turns south. [Huddle Farm](#huddle-farm) is just north. The farthest the Toad Stompers have ever been from home.
+- **The Old Road:** Forest road between [Thistledown](#thistledown) and [Gomwick](#gomwick). [Farmer Fallow](/hobbity/appendix/npcs/#farmer-fallow)'s stall, strange mists and happening.
+- **Sunnyside Crossroads:** Where the main road turns south. [Huddle Farm](#huddle-farm) is just north.
 
 ### Happenings
 
