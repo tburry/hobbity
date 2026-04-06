@@ -20,7 +20,7 @@ export default defineConfig({
     AstroPWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'The Toad Stompers',
+        name: 'Toad Stompers',
         short_name: 'Toad Stompers',
         start_url: '/hobbity/',
         display: 'standalone',
