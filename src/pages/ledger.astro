@@ -17,31 +17,26 @@ function emptyTally(): Tally {
   return { killed: 0, subdued: 0, fled: 0, evaded: 0 };
 }
 
-/** True if this entry refers to a named NPC rather than a generic monster. */
+/** True if this entry refers to a named NPC rather than a generic monster.
+ *  Monsters start with a number (e.g. "6 Goblins"). NPCs are linked or
+ *  have no count prefix (e.g. "Abramo (killed)"). */
 function isNpc(entry: string): boolean {
   if (entry.includes('/npcs/')) return true;
   const name = entry.replace(/\s*\(.*$/, '').trim();
   if (/^\d/.test(name) || /^multiple\b/i.test(name)) return false;
-  // Proper names have every word capitalised; monster types don't ("Dire wolves").
-  const words = name.split(/\s+/);
-  return words.every((w) => /^[A-Z]/.test(w));
+  return true;
 }
 
-/** Normalise a creature type to a lowercase canonical key for grouping.
- *  We store the plural form as-is (e.g. "goblins") and merge singulars into it. */
-function normalise(type: string): string {
-  return type.toLowerCase().trim();
-}
-
-/** Find the canonical key for a type, merging singular/plural variants. */
+/** Find the canonical key for a type, merging singular/plural variants.
+ *  Keys preserve the original casing from frontmatter. */
 function canonicalKey(type: string, existing: Map<string, Tally>): string {
-  const t = normalise(type);
-  if (existing.has(t)) return t;
-  // Check if a plural or singular variant already exists
+  const t = type.trim();
+  const tLow = t.toLowerCase();
   for (const key of existing.keys()) {
-    if (key + 's' === t || t + 's' === key) return key;
-    // wolves/wolf
-    if (key.replace(/ves$/, 'f') === t || t.replace(/ves$/, 'f') === key) return key;
+    const kLow = key.toLowerCase();
+    if (kLow === tLow) return key;
+    if (kLow + 's' === tLow || tLow + 's' === kLow) return key;
+    if (kLow.replace(/ves$/, 'f') === tLow || tLow.replace(/ves$/, 'f') === kLow) return key;
   }
   return t;
 }
@@ -59,15 +54,9 @@ function looksPlural(s: string): boolean {
   return /(?:[^s]s|ves|ies)$/.test(s);
 }
 
-/** Format a number for table display: 0 becomes a dash. */
-function fmt(n: number): string | number {
-  return n || '-';
-}
-
-/** Title-case a type key for display, always plural. */
+/** Pluralise a type key for display. Casing is preserved from frontmatter. */
 function displayName(key: string): string {
-  const plural = looksPlural(key) ? key : pluralise(key);
-  return plural.charAt(0).toUpperCase() + plural.slice(1);
+  return looksPlural(key) ? key : pluralise(key);
 }
 
 function parseEntry(entry: string): { type: string; tally: Tally } | null {
@@ -82,7 +71,7 @@ function parseEntry(entry: string): { type: string; tally: Tally } | null {
   // Extract count and creature type
   const cm = raw.match(/^(\d+)\s+(.+)$/);
   const count = cm ? parseInt(cm[1]) : 0;
-  const type = normalise(cm ? cm[2] : raw.replace(/^multiple\s+/i, ''));
+  const type = (cm ? cm[2] : raw.replace(/^multiple\s+/i, '')).trim();
 
   if (!paren) {
     // No parenthetical → all killed
@@ -147,54 +136,10 @@ const activeStatuses = STATUSES.filter((s) =>
   sorted.some((row) => row.tally[s] > 0)
 );
 
-const ABBREV: Record<string, string> = {
-  killed: 'Kil',
-  subdued: 'Sub',
-  fled: 'Fled',
-  evaded: 'Ev',
-};
 ---
 
 <Content title="Ledger">
   <h1>Ledger</h1>
-
-  <h2>Enemies Defeated</h2>
-
-  <table >
-    <thead>
-      <tr>
-        <th>Enemy</th>
-        {activeStatuses.map((s) => (
-          <th class="num">
-            <span class="full">{s.charAt(0).toUpperCase() + s.slice(1)}</span>
-            <abbr class="abbr" title={s.charAt(0).toUpperCase() + s.slice(1)}>{ABBREV[s]}</abbr>
-          </th>
-        ))}
-        <th class="num">
-          <span class="full">Total</span>
-          <abbr class="abbr" title="Total">Tot</abbr>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      {sorted.map((row) => (
-        <tr>
-          <td>{displayName(row.type)}</td>
-          {activeStatuses.map((s) => <td class="num">{fmt(row.tally[s])}</td>)}
-          <td class="num">{row.total}</td>
-        </tr>
-      ))}
-    </tbody>
-    <tfoot>
-      <tr>
-        <th>Total</th>
-        {activeStatuses.map((s) => (
-          <th class="num">{fmt(sorted.reduce((sum, row) => sum + row.tally[s], 0))}</th>
-        ))}
-        <th class="num">{sorted.reduce((sum, row) => sum + row.total, 0)}</th>
-      </tr>
-    </tfoot>
-  </table>
 
   <h2>Magic Items</h2>
 
@@ -210,27 +155,27 @@ const ABBREV: Record<string, string> = {
       <tr>
         <td>Animal Whistle</td>
         <td><a href="/hobbity/appendix/pcs/wedge/">Wedge</a></td>
-        <td>Bought from <a href="/hobbity/appendix/npcs/#farmer-fallow">Farmer Fallow</a> — <a href="/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-old-road-to-gomwick">The Gomwick Harvest Festival</a></td>
+        <td>Bought from <a href="/hobbity/appendix/npcs/#farmer-fallow">Farmer Fallow</a> – <a href="/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-old-road-to-gomwick">The Gomwick Harvest Festival</a></td>
       </tr>
       <tr>
         <td>Mysterious Stockings</td>
         <td><a href="/hobbity/appendix/pcs/turnip/">Turnip</a></td>
-        <td>Bought from <a href="/hobbity/appendix/npcs/#farmer-fallow">Farmer Fallow</a> — <a href="/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-old-road-to-gomwick">The Gomwick Harvest Festival</a></td>
+        <td>Bought from <a href="/hobbity/appendix/npcs/#farmer-fallow">Farmer Fallow</a> – <a href="/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-old-road-to-gomwick">The Gomwick Harvest Festival</a></td>
       </tr>
       <tr>
         <td>Ring of Protection +1</td>
         <td><a href="/hobbity/appendix/pcs/wedge/">Wedge</a></td>
-        <td>Looted from <a href="/hobbity/appendix/npcs/#misha">Misha</a> — <a href="/hobbity/stories/2026-03-31-the-serpent-beneath/#prisoner-of-the-snake-goddess">The Serpent Beneath</a></td>
+        <td>Looted from <a href="/hobbity/appendix/npcs/#misha">Misha</a> – <a href="/hobbity/stories/2026-03-31-the-serpent-beneath/#prisoner-of-the-snake-goddess">The Serpent Beneath</a></td>
       </tr>
       <tr>
         <td>Scale Mail +1</td>
         <td><a href="/hobbity/appendix/pcs/turnip/">Turnip</a></td>
-        <td>Looted from <a href="/hobbity/appendix/npcs/#abramo">Abramo</a> — <a href="/hobbity/stories/2026-03-31-the-serpent-beneath/#prisoner-of-the-snake-goddess">The Serpent Beneath</a></td>
+        <td>Looted from <a href="/hobbity/appendix/npcs/#abramo">Abramo</a> – <a href="/hobbity/stories/2026-03-31-the-serpent-beneath/#prisoner-of-the-snake-goddess">The Serpent Beneath</a></td>
       </tr>
       <tr>
         <td>Three-Feathered Hat</td>
         <td><a href="/hobbity/appendix/pcs/boffo/">Boffo</a></td>
-        <td>Bought from <a href="/hobbity/appendix/npcs/#farmer-fallow">Farmer Fallow</a> — <a href="/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-old-road-to-gomwick">The Gomwick Harvest Festival</a></td>
+        <td>Bought from <a href="/hobbity/appendix/npcs/#farmer-fallow">Farmer Fallow</a> – <a href="/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-old-road-to-gomwick">The Gomwick Harvest Festival</a></td>
       </tr>
     </tbody>
   </table>
@@ -297,6 +242,38 @@ const ABBREV: Record<string, string> = {
         <td class="num">0</td>
       </tr>
     </tbody>
+  </table>
+
+  <h2>Enemies Defeated</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Enemy</th>
+        {activeStatuses.map((s) => (
+          <th class="num vertical">{s.charAt(0).toUpperCase() + s.slice(1)}</th>
+        ))}
+        <th class="num vertical">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {sorted.map((row) => (
+        <tr>
+          <td>{displayName(row.type)}</td>
+          {activeStatuses.map((s) => <td class="num">{row.tally[s] || <span class="muted">-</span>}</td>)}
+          <td class="num">{row.total}</td>
+        </tr>
+      ))}
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>Total</th>
+        {activeStatuses.map((s) => (
+          <th class="num">{sorted.reduce((sum, row) => sum + row.tally[s], 0) || <span class="muted">-</span>}</th>
+        ))}
+        <th class="num">{sorted.reduce((sum, row) => sum + row.total, 0)}</th>
+      </tr>
+    </tfoot>
   </table>
 
 </Content>
