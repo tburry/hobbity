@@ -54,6 +54,11 @@ const { name, class: cls, level, avatar, fullSrc, tagline, stats } = Astro.props
     &-avatar {
       margin-bottom: var(--space);
 
+      a {
+        display: inline-block;
+        line-height: 0;
+      }
+
       img {
         border-radius: 50%;
         width: 160px;
