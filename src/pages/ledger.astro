@@ -160,17 +160,17 @@ const ABBREV: Record<string, string> = {
 
   <h2>Enemies Defeated</h2>
 
-  <table class="ledger-table">
+  <table >
     <thead>
       <tr>
-        <th style="text-align:left">Enemy</th>
+        <th>Enemy</th>
         {activeStatuses.map((s) => (
-          <th>
+          <th class="num">
             <span class="full">{s.charAt(0).toUpperCase() + s.slice(1)}</span>
             <abbr class="abbr" title={s.charAt(0).toUpperCase() + s.slice(1)}>{ABBREV[s]}</abbr>
           </th>
         ))}
-        <th>
+        <th class="num">
           <span class="full">Total</span>
           <abbr class="abbr" title="Total">Tot</abbr>
         </th>
@@ -187,7 +187,7 @@ const ABBREV: Record<string, string> = {
     </tbody>
     <tfoot>
       <tr>
-        <th style="text-align:left">Total</th>
+        <th>Total</th>
         {activeStatuses.map((s) => (
           <th class="num">{fmt(sorted.reduce((sum, row) => sum + row.tally[s], 0))}</th>
         ))}
@@ -196,31 +196,107 @@ const ABBREV: Record<string, string> = {
     </tfoot>
   </table>
 
-  <style lang="scss">
-    .ledger-table {
-      width: 100%;
+  <h2>Magic Items</h2>
 
-      .num {
-        text-align: right;
-        width: 6rem;
-      }
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Holder</th>
+        <th>Source</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Animal Whistle</td>
+        <td><a href="/hobbity/appendix/pcs/wedge/">Wedge</a></td>
+        <td>Bought from <a href="/hobbity/appendix/npcs/#farmer-fallow">Farmer Fallow</a> — <a href="/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-old-road-to-gomwick">The Gomwick Harvest Festival</a></td>
+      </tr>
+      <tr>
+        <td>Mysterious Stockings</td>
+        <td><a href="/hobbity/appendix/pcs/turnip/">Turnip</a></td>
+        <td>Bought from <a href="/hobbity/appendix/npcs/#farmer-fallow">Farmer Fallow</a> — <a href="/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-old-road-to-gomwick">The Gomwick Harvest Festival</a></td>
+      </tr>
+      <tr>
+        <td>Ring of Protection +1</td>
+        <td><a href="/hobbity/appendix/pcs/wedge/">Wedge</a></td>
+        <td>Looted from <a href="/hobbity/appendix/npcs/#misha">Misha</a> — <a href="/hobbity/stories/2026-03-31-the-serpent-beneath/#prisoner-of-the-snake-goddess">The Serpent Beneath</a></td>
+      </tr>
+      <tr>
+        <td>Scale Mail +1</td>
+        <td><a href="/hobbity/appendix/pcs/turnip/">Turnip</a></td>
+        <td>Looted from <a href="/hobbity/appendix/npcs/#abramo">Abramo</a> — <a href="/hobbity/stories/2026-03-31-the-serpent-beneath/#prisoner-of-the-snake-goddess">The Serpent Beneath</a></td>
+      </tr>
+      <tr>
+        <td>Three-Feathered Hat</td>
+        <td><a href="/hobbity/appendix/pcs/boffo/">Boffo</a></td>
+        <td>Bought from <a href="/hobbity/appendix/npcs/#farmer-fallow">Farmer Fallow</a> — <a href="/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-old-road-to-gomwick">The Gomwick Harvest Festival</a></td>
+      </tr>
+    </tbody>
+  </table>
 
-      .abbr {
-        display: none;
-      }
+  <h2>Consumables</h2>
 
-      @media (max-width: 720px) {
-        .full {
-          display: none;
-        }
-        .abbr {
-          display: inline;
-          text-decoration: none;
-        }
-        .num {
-          width: 4em;
-        }
-      }
-    }
-  </style>
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th class="num">Used</th>
+        <th class="num">Left</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="spent">
+        <td>Brooch of Shielding</td>
+        <td class="num">1</td>
+        <td class="num">0</td>
+      </tr>
+      <tr class="spent">
+        <td>Potion of Growth</td>
+        <td class="num">1</td>
+        <td class="num">0</td>
+      </tr>
+      <tr class="spent">
+        <td>Potion of Healing</td>
+        <td class="num">7</td>
+        <td class="num">0</td>
+      </tr>
+      <tr class="spent">
+        <td>Potion of Speed</td>
+        <td class="num">1</td>
+        <td class="num">0</td>
+      </tr>
+      <tr class="spent">
+        <td>Scroll of Dispel Magic</td>
+        <td class="num">1</td>
+        <td class="num">0</td>
+      </tr>
+      <tr class="spent">
+        <td>Scroll of Sleep</td>
+        <td class="num">1</td>
+        <td class="num">0</td>
+      </tr>
+      <tr class="spent">
+        <td>Scroll of Wizard Lock</td>
+        <td class="num">1</td>
+        <td class="num">0</td>
+      </tr>
+      <tr class="spent">
+        <td>Sling Bullet of Phantasmal Force</td>
+        <td class="num">1</td>
+        <td class="num">0</td>
+      </tr>
+      <tr class="spent">
+        <td>Sling Bullet of Sleep</td>
+        <td class="num">1</td>
+        <td class="num">0</td>
+      </tr>
+      <tr class="spent">
+        <td>Sling Bullets +1</td>
+        <td class="num">4</td>
+        <td class="num">0</td>
+      </tr>
+    </tbody>
+  </table>
+
 </Content>
