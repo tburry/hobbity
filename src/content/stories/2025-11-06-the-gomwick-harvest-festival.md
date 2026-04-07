@@ -51,17 +51,13 @@ And at that, a very pretty, blonde and busty hobbit woman, about roughly 20 year
 
 The hobbits went to thank the baker for her fine pies. While nosing around near the baker’s tent, they spotted Tobias Chubb skulking about with his cronies. Wedge picked a small vial from Chubb’s pocket—poison, meant for the pies. A brawl ensued, and the plot—hatched by [Adelard Potts](/hobbity/world/npcs/#adelard-potts) and [Hanna Boggs](/hobbity/world/npcs/#hanna-boggs) with Chubb as their agent—was foiled before anyone’s pie was the worse for it.
 
-## Buford Niss
-
-![Buford Niss](../../assets/images/npcs/buford.webp)
+## Buford and the Spottle Table
 
 After the commotion, [Buford Niss](/hobbity/world/npcs/#buford-niss)—the Hon. Horace Buford Hockwallop Niss, Esq.—a wealthy, well-traveled old hobbit who lived at Toppo Hill House, the enormous burrow crowning the hill above Gomwick, introduced himself to the hobbits. He’d watched the whole affair with great amusement and liked the cut of their jibs.
 
-## The Spottle Table
-
 Buford took the hobbits to a gambling table in a lantern-lit tent where a fat, warty toad sat on a velvet cushion at the centre of the action. He fronted them each some gold to play with. The game was Spottle—part dice, part luck, part toad. Players rolled dice across the table, but any die the spottle toad swallowed counted as zero. The toad had preferences. It lunged for certain rolls and ignored others, and half the strategy was reading the creature’s mood.
 
-![A spottle toad](../../assets/images/spottle-toad.webp)
+![The hobbits playing Spottle](../../assets/images/hobbits-playing-spottle.webp)
 
 All three hobbits wound up ahead by the end of the night. Turnip swore the toad was cheating. Wedge tried to intimidate it into compliance, which only made it eat more of his dice. Boffo fed it a crumb of pie and it left his rolls alone for three rounds straight.
 
@@ -79,7 +75,7 @@ Buford’s house was easy to spot. Toppo Hill House is a hobbit hole at the top 
 
 The next day, Boffo returned for the contest proper. In the second round he faced [Grunela Bunce](/hobbity/world/npcs/#grunela-bunce)—the heavy favorite, a hobbit woman who had won three years running and expected to win a fourth. The pies came out, the whistle blew, and Grunela threw up after the first pie. Boffo cleaned his plates without breaking stride. She did not take the loss well, and later that evening threw an apple at Boffo’s head, unprovoked.
 
-![Grunela Bunce](../../assets/images/npcs/grunela.webp)
+![Grunela throws an apple at Boffo's head](../../assets/images/grunela-throwing-apple-at-boffo.webp)
 
 Boffo kept winning. In the final, a smelly fish pie was set before the remaining contestants—a test of stomach as much as appetite. Boffo kept it down. The crowd erupted.
 

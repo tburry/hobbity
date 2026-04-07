@@ -230,8 +230,8 @@ export const images: GalleryImage[] = [
     storyTitle: 'The Gomwick Harvest Festival',
   },
   {
-    src: img('grunela.webp'),
-    alt: 'Grunela Bunce',
+    src: img('grunela-throwing-apple-at-boffo.webp'),
+    alt: 'Grunela throws an apple at Boffo\'s head',
     caption:
       'Grunela Bunce, three-time pie-eating champion, defeated by Boffo in the second round. She threw up after the first pie. She threw an apple at his head later.',
     storyLink:
@@ -239,21 +239,12 @@ export const images: GalleryImage[] = [
     storyTitle: 'The Gomwick Harvest Festival',
   },
   {
-    src: img('spottle-toad.webp'),
-    alt: 'A spottle toad',
+    src: img('hobbits-playing-spottle.webp'),
+    alt: 'The hobbits playing Spottle',
     caption:
-      'A spottle toad at the Gomwick Harvest Festival gambling table. Any die it swallowed counted as zero. Turnip swore it was cheating.',
+      'The hobbits playing Spottle at the Gomwick Harvest Festival. Any die the toad swallowed counted as zero. Turnip swore it was cheating.',
     storyLink:
-      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-spottle-table',
-    storyTitle: 'The Gomwick Harvest Festival',
-  },
-  {
-    src: img('buford.webp'),
-    alt: 'Buford Niss',
-    caption:
-      'The Hon. Horace Buford Hockwallop Niss, Esq. Wealthy, well-traveled, and watching from the edge of the commotion with a dimmed jovial mood.',
-    storyLink:
-      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#buford-niss',
+      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#buford-and-the-spottle-table',
     storyTitle: 'The Gomwick Harvest Festival',
   },
   {
