@@ -26,6 +26,9 @@ importers:
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
+      workbox-precaching:
+        specifier: ^7.4.0
+        version: 7.4.0
     devDependencies:
       github-slugger:
         specifier: ^2.0.0

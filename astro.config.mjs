@@ -19,6 +19,9 @@ export default defineConfig({
     pagefind(),
     AstroPWA({
       registerType: 'autoUpdate',
+      strategies: 'injectManifest',
+      srcDir: 'src',
+      filename: 'sw.js',
       manifest: {
         name: 'Toad Stompers',
         short_name: 'Toad Stompers',
@@ -31,20 +34,9 @@ export default defineConfig({
           { src: '/hobbity/icon-512.png', sizes: '512x512', type: 'image/png' },
         ],
       },
-      workbox: {
-        globPatterns: ['**/*.{html,css,js,png,svg,ico,woff2}'],
-        navigateFallback: null,
-        maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
-        runtimeCaching: [
-          {
-            urlPattern: /\.webp$/,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'images',
-              expiration: { maxEntries: 100, maxAgeSeconds: 30 * 24 * 60 * 60 },
-            },
-          },
-        ],
+      injectManifest: {
+        globPatterns: ['**/*.{html,css,js,png,webp,svg,ico,woff2}'],
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
       },
     }),
   ],
