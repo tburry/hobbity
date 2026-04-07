@@ -568,23 +568,40 @@ ul, ol {
 }
 
 ul {
-  list-style-type: '❖  ';
+  list-style: none;
 
-  > li::marker {
-    content: '❖  ';
-    color: var(--subheading-color);
-    font-size: 0.7em;
-    font-family: 'Apple Symbols', 'Segoe UI Symbol', sans-serif;
+  > li {
+    text-indent: -1.2em;
+
+    &::before {
+      content: '❖\00a0\00a0';
+      display: inline-block;
+      text-indent: 0;
+      width: 1.2em;
+      color: var(--subheading-color);
+      font-size: 0.7em;
+      font-family: 'Apple Symbols', 'Segoe UI Symbol', sans-serif;
+      vertical-align: 0.15em;
+    }
   }
 
-  ul {
-    list-style-type: '✧  ';
-  }
-
-  ul > li::marker {
-    content: '✧  ';
+  ul > li::before {
+    content: '✧\00a0\00a0';
     font-size: 0.8em;
-    font-family: 'Apple Symbols', 'Segoe UI Symbol', sans-serif;
+    vertical-align: 0.1em;
+  }
+}
+
+ol {
+  list-style: decimal;
+
+  > li {
+    padding-left: 0;
+    text-indent: 0;
+
+    &::before {
+      content: none;
+    }
   }
 }
 
@@ -616,19 +633,23 @@ td, th {
       width: 4em;
     }
   }
-
-  .abbr { display: none; }
-
-  @media (max-width: 720px) {
-    .full { display: none; }
-    .abbr {
-      display: inline;
-      text-decoration: none;
-    }
-  }
 }
 
 $cell-radius: calc(var(--border-radius) - var(--border-width));
+
+thead th {
+  vertical-align: bottom;
+
+    &.vertical {
+    @media (max-width: 720px) {
+      writing-mode: vertical-lr;
+      text-orientation: mixed;
+      text-align: end;
+      white-space: nowrap;
+      padding: 0.4rem 0.2rem;
+    }
+  }
+}
 
 thead tr:first-child {
   th:first-child, td:first-child { border-top-left-radius: $cell-radius; }
@@ -649,6 +670,15 @@ tbody:last-child tr:last-child {
 
 td.num, tfoot th.num {
   text-align: right;
+  padding-right: var(--space);
+
+  @media (max-width: 720px) {
+    padding-right: var(--space-sm);
+  }
+}
+
+.muted {
+  color: var(--text-light);
 }
 
 th {
@@ -666,7 +696,7 @@ tr:nth-child(even) {
 }
 
 tr.spent td {
-  text-decoration: line-through var(--accent);
+  text-decoration: line-through var(--border);
 }
 
 table.stat {
