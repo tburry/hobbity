@@ -6,17 +6,24 @@ interface Props {
   class: string;
   level: number;
   avatar?: ImageMetadata;
+  fullSrc?: string;
   tagline?: string;
   stats: { STR: number; INT: number; WIS: number; DEX: number; CON: number; CHA: number };
 }
 
-const { name, class: cls, level, avatar, tagline, stats } = Astro.props;
+const { name, class: cls, level, avatar, fullSrc, tagline, stats } = Astro.props;
 ---
 
 <div class="pc-detail">
   {avatar && (
     <div class="pc-detail-avatar">
-      <Image src={avatar} alt={name} width={160} />
+      {fullSrc ? (
+        <a href={fullSrc} data-lightbox>
+          <Image src={avatar} alt={name} width={160} />
+        </a>
+      ) : (
+        <Image src={avatar} alt={name} width={160} />
+      )}
     </div>
   )}
   <h1 data-pagefind-weight="10">{name}</h1>
@@ -35,40 +42,41 @@ const { name, class: cls, level, avatar, tagline, stats } = Astro.props;
   </table>
 </div>
 
-<style>
+<style lang="scss">
   .pc-detail {
     text-align: center;
-    margin: 0 0 1rem;
-  }
+    margin: 0 0 var(--space);
 
-  .pc-detail-avatar {
-    margin-bottom: var(--space);
-  }
+    h1 {
+      margin: var(--space-sm) 0 0;
+    }
 
-  .pc-detail-avatar img {
-    border-radius: 50%;
-    width: 160px;
-    height: 160px;
-    object-fit: cover;
-    border: var(--border-width) solid var(--border);
-  }
+    &-avatar {
+      margin-bottom: var(--space);
 
-  .pc-detail h1 {
-    margin: 0.75rem 0 0;
-  }
+      img {
+        border-radius: 50%;
+        width: 160px;
+        height: 160px;
+        object-fit: cover;
+        border: var(--border-width) solid var(--border);
 
-  .pc-detail-tagline {
-    margin: 0.25rem 0 0.75rem;
-    font-style: italic;
-    opacity: 0.8;
-  }
+        @media (max-width: 680px) {
+          width: 88px;
+          height: 88px;
+        }
+      }
+    }
 
-  .pc-detail-meta {
-    margin: 0.25rem 0 0.75rem;
-    font-style: italic;
-    opacity: 0.8;
-  }
+    &-tagline,
+    &-meta {
+      margin: calc(var(--space-sm) / 2) 0 var(--space-sm);
+      font-style: italic;
+      opacity: 0.8;
+    }
 
-  .pc-detail-stats {
-    margin: 0 auto;
-  }</style>
+    &-stats {
+      margin: 0 auto;
+    }
+  }
+</style>

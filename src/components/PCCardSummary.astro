@@ -52,52 +52,54 @@ const fullSrc = fullImage ? (await getImage({ src: fullImage })).src : undefined
   </div>
 ))}
 
-<style>
+<style lang="scss">
   .pc-card {
     display: flex;
-    gap: 1.25rem;
+    gap: var(--space);
     align-items: flex-start;
-    margin: 2rem 0 1rem;
-  }
+    margin: calc(var(--space) * 2) 0 var(--space);
 
-  .pc-card-avatar {
-    flex-shrink: 0;
-  }
-
-  .pc-card-avatar img {
-    border-radius: 8px;
-    width: 240px;
-    height: 240px;
-    object-fit: cover;
-    border: 2px solid var(--border);
-
-    @media (max-width: 680px) {
-      width: 150px;
-      height: 150px;
-    }
-  }
-
-  .pc-card-info {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .pc-card-info h2 {
-    margin-top: 0;
-  }
-
-  .pc-card-meta {
-    margin: -0.5rem 0 0.75rem;
-    font-style: italic;
-    opacity: 0.8;
-  }
-
-
-  @media (max-width: 500px) {
-    .pc-card {
+    @media (max-width: 500px) {
       flex-direction: column;
       align-items: center;
       text-align: center;
+    }
+
+    &-avatar {
+      flex-shrink: 0;
+
+      img {
+        border-radius: var(--border-radius);
+        width: 240px;
+        height: 240px;
+        object-fit: cover;
+        border: var(--border-width) solid var(--border);
+
+        @media (max-width: 680px) {
+          width: 88px;
+          height: 88px;
+          border-radius: 50%;
+        }
+      }
+    }
+
+    &-info {
+      flex: 1;
+      min-width: 0;
+
+      h2 {
+        margin-top: 0;
+      }
+
+      & :last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &-meta {
+      margin: calc(var(--space-sm) * -1) 0 var(--space-sm);
+      font-style: italic;
+      opacity: 0.8;
     }
   }
 </style>
