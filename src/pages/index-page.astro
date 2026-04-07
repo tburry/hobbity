@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import GithubSlugger from 'github-slugger';
 import Base from '../layouts/Base.astro';
 import TocNav from '../components/TocNav.astro';
-import { tocSections, type TocSection } from '../lib/toc';
+import { tocSections, type TocSection, type TocItem } from '../lib/toc';
 import { getTitle } from '../lib/stories';
 
 const allStories = await getCollection('stories');
@@ -11,45 +11,55 @@ allStories.sort((a, b) => a.id.localeCompare(b.id));
 
 const pcs = (await getCollection('pcs')).sort((a, b) => a.data.order - b.data.order);
 
-const storyChildren = Object.fromEntries(
-  tocSections[0].items.map((item) => {
-    const chapters = allStories.filter((s) =>
-      item.href.endsWith(`/${s.data.story.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}/`)
-    );
-    return [item.href, chapters.map((ch) => ({
-      label: getTitle(ch),
-      href: `/hobbity/stories/${ch.id}/`,
-    }))];
-  })
-);
-
-const pcChildren = pcs.map((pc) => ({
-  label: pc.data.name,
-  href: `/hobbity/appendix/pcs/${pc.id}/`,
-}));
-
 const appendix = await getCollection('appendix');
 const places = appendix.find((e) => e.id === 'places');
 const slugger = new GithubSlugger();
-const placeChildren = (places?.body?.match(/^## .+/gm) ?? []).map((h2) => {
-  const label = h2.replace(/^## /, '');
-  return { label, href: `/hobbity/appendix/places/#${slugger.slug(label)}` };
-});
+
+// Children indexed by parent href. Entries with `ordered: true` render as <ol>.
+const childrenByHref: Record<string, { children: TocItem[]; ordered?: boolean }> = {
+  // Story groups → individual chapters
+  ...Object.fromEntries(
+    tocSections[0].items.map((item) => {
+      const chapters = allStories.filter((s) =>
+        item.href.endsWith(`/${s.data.story.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}/`)
+      );
+      return [item.href, {
+        children: chapters.map((ch) => ({ label: getTitle(ch), href: `/hobbity/stories/${ch.id}/` })),
+        ordered: true,
+      }];
+    })
+  ),
+
+  // PCs
+  '/hobbity/appendix/pcs/': {
+    children: pcs.map((pc) => ({ label: pc.data.name, href: `/hobbity/appendix/pcs/${pc.id}/` })),
+  },
+
+  // Places → h2 headings
+  '/hobbity/appendix/places/': {
+    children: (places?.body?.match(/^## .+/gm) ?? []).map((h2) => {
+      const label = h2.replace(/^## /, '');
+      return { label, href: `/hobbity/appendix/places/#${slugger.slug(label)}` };
+    }),
+  },
+
+  // Ledger sections
+  '/hobbity/ledger/': {
+    children: [
+      { label: 'Magic Items', href: '/hobbity/ledger/#magic-items' },
+      { label: 'Consumables', href: '/hobbity/ledger/#consumables' },
+      { label: 'Enemies Defeated', href: '/hobbity/ledger/#enemies-defeated' },
+    ],
+  },
+};
 
 const sections: TocSection[] = tocSections.map((section) => ({
   ...section,
   items: section.items
     .filter((item) => item.href !== '/hobbity/index-page/')
     .map((item) => {
-      if (storyChildren[item.href]?.length) {
-        return { ...item, children: storyChildren[item.href], ordered: true };
-      }
-      if (item.href === '/hobbity/appendix/pcs/') {
-        return { ...item, children: pcChildren };
-      }
-      if (item.href === '/hobbity/appendix/places/') {
-        return { ...item, children: placeChildren };
-      }
+      const extra = childrenByHref[item.href];
+      if (extra?.children.length) return { ...item, ...extra };
       return item;
     }),
 }));
