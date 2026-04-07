@@ -44,6 +44,6 @@ if [ ${#files[@]} -eq 0 ]; then
 fi
 
 for file in "${files[@]}"; do
-    [[ "$(basename "$file")" == *_avatar.* || "$(basename "$file")" == *_debug.* ]] && continue
+    [[ "$(basename "$file")" == *_avatar.* || "$(basename "$file")" == *_token.* || "$(basename "$file")" == *_debug.* ]] && continue
     "$PYTHON" "$SCRIPT" ${flags[@]+"${flags[@]}"} "$file"
 done

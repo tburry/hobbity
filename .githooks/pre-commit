@@ -2,7 +2,7 @@
 #
 # Pre-commit hook: generate avatars for staged PC and NPC artwork
 
-staged=$(git diff --cached --name-only --diff-filter=ACM -- 'src/assets/images/pcs/*.webp' 'src/assets/images/npcs/*.webp' | grep -v '_avatar\.\|_debug\.')
+staged=$(git diff --cached --name-only --diff-filter=ACM -- 'src/assets/images/pcs/*.webp' 'src/assets/images/npcs/*.webp' | grep -v '_avatar\.\|_token\.\|_debug\.')
 
 if [ -z "$staged" ]; then
   exit 0
@@ -11,10 +11,14 @@ fi
 for file in $staged; do
   base="${file%.*}"
   avatar="${base}_avatar.webp"
+  token="${base}_token.webp"
   # Skip if the avatar is already staged (manually updated)
   if git diff --cached --name-only -- "$avatar" | grep -q .; then
     continue
   fi
   scripts/make-avatar "$file"
   git add "$avatar"
+  # Regenerate token from the new avatar
+  scripts/.venv/bin/python scripts/make-token.py "$avatar"
+  git add "$token"
 done
