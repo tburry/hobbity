@@ -11,8 +11,8 @@ allStories.sort((a, b) => a.id.localeCompare(b.id));
 
 const pcs = (await getCollection('pcs')).sort((a, b) => a.data.order - b.data.order);
 
-const appendix = await getCollection('appendix');
-const places = appendix.find((e) => e.id === 'places');
+const worldCollection = await getCollection('world');
+const places = worldCollection.find((e) => e.id === 'places');
 const slugger = new GithubSlugger();
 
 // Children indexed by parent href. Entries with `ordered: true` render as <ol>.
@@ -31,15 +31,15 @@ const childrenByHref: Record<string, { children: TocItem[]; ordered?: boolean }>
   ),
 
   // PCs
-  '/hobbity/appendix/pcs/': {
-    children: pcs.map((pc) => ({ label: pc.data.name, href: `/hobbity/appendix/pcs/${pc.id}/` })),
+  '/hobbity/world/pcs/': {
+    children: pcs.map((pc) => ({ label: pc.data.name, href: `/hobbity/world/pcs/${pc.id}/` })),
   },
 
   // Places → h2 headings
-  '/hobbity/appendix/places/': {
+  '/hobbity/world/places/': {
     children: (places?.body?.match(/^## .+/gm) ?? []).map((h2) => {
       const label = h2.replace(/^## /, '');
-      return { label, href: `/hobbity/appendix/places/#${slugger.slug(label)}` };
+      return { label, href: `/hobbity/world/places/#${slugger.slug(label)}` };
     }),
   },
 

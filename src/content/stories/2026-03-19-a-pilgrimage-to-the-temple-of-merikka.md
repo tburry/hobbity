@@ -2,7 +2,7 @@
 title: "A Pilgrimage to the Temple of Merikka"
 story: Something Rotten in Orlane
 date: 2026-03-19
-location: "Temple of Merikka and dungeon beneath, [Orlane](/hobbity/appendix/places/#orlane)"
+location: "Temple of Merikka and dungeon beneath, [Orlane](/hobbity/world/places/#orlane)"
 pcs:
   - name: Boffo Lunderbunk
     slug: boffo
@@ -29,7 +29,7 @@ treasure:
 
 ## Entering the Temple
 
-The party entered the Temple of Merikka posing as pilgrims seeking healing, bringing [Zacharias](/hobbity/appendix/npcs/#zacharias)'s bag of gold. [Misha](/hobbity/appendix/npcs/#misha), the priestess, healed Boffo with divine magic—a novelty for the hobbits.
+The party entered the Temple of Merikka posing as pilgrims seeking healing, bringing [Zacharias](/hobbity/world/npcs/#zacharias)'s bag of gold. [Misha](/hobbity/world/npcs/#misha), the priestess, healed Boffo with divine magic—a novelty for the hobbits.
 
 ![Misha](../../assets/images/npcs/misha.webp) During the visit they spotted Derek Desleigh, a scarred hobbit previously seen at the Golden Grain Inn, involved with goblins inside the temple.
 
@@ -45,7 +45,7 @@ The party eyed the massive jade statue of Merikka speculatively—a solid piece 
 
 ## Merikka
 
-Boffo pondered that Zacharias should know about this goddess, reasoning that she is from "the coast" and that's where their adventuring party did their adventuring based on discussions with [Buford](/hobbity/appendix/npcs/#buford-niss).
+Boffo pondered that Zacharias should know about this goddess, reasoning that she is from "the coast" and that's where their adventuring party did their adventuring based on discussions with [Buford](/hobbity/world/npcs/#buford-niss).
 
 ## The Offering Room
 
@@ -61,7 +61,7 @@ In Misha's quarters the party found her arms and armour—chainmail, a painted s
 
 A secret passage lay under the bed, opened by a torch mechanism. The stonework below is clearly much older than the temple above.
 
-Boffo put it together: "Everybody kept telling us they couldn't build hobbit-holes on the side of this hill and yet here we are. Because the new temple was built over top of an old temple." Turnip corrected: "An old ruin. We don't know what it was." But the implication was clear—this hill has been dug into before, extensively. This contrasts to [Huddle Farm](/hobbity/appendix/places/#huddle-farm) where [Tom Huddle](/hobbity/appendix/npcs/#tom-huddle) was actively repurposing the stone in the Fortfield—the stone with the weird snake symbols—for his own hobbit hole.
+Boffo put it together: "Everybody kept telling us they couldn't build hobbit-holes on the side of this hill and yet here we are. Because the new temple was built over top of an old temple." Turnip corrected: "An old ruin. We don't know what it was." But the implication was clear—this hill has been dug into before, extensively. This contrasts to [Huddle Farm](/hobbity/world/places/#huddle-farm) where [Tom Huddle](/hobbity/world/npcs/#tom-huddle) was actively repurposing the stone in the Fortfield—the stone with the weird snake symbols—for his own hobbit hole.
 
 The passage below is a mix of constructed corridors and natural cave. Some corridors have iron spikes protruding from the walls. New internal walls have been built within larger original spaces, creating a maze-like layout. "This is a nonsensical structure, gentlemen."
 
@@ -87,4 +87,4 @@ A giant mushroom in the cavern let out a piercing shriek the moment the hobbits 
 
 ## Conclusion
 
-The party infiltrated the Temple of Merikka, fought off [Derek Desleigh](/hobbity/appendix/npcs/#derek-desleigh)'s goblins, discovered ancient tunnels beneath, and cleared a troglodyte lair. They end deep underground with torches running low and Boffo still giant-sized.
+The party infiltrated the Temple of Merikka, fought off [Derek Desleigh](/hobbity/world/npcs/#derek-desleigh)'s goblins, discovered ancient tunnels beneath, and cleared a troglodyte lair. They end deep underground with torches running low and Boffo still giant-sized.

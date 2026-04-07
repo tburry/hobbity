@@ -2,7 +2,7 @@
 title: "The Serpent Beneath"
 story: Something Rotten in Orlane
 date: 2026-03-31
-location: "Dungeon beneath the Temple of Merikka and [Orlane](/hobbity/appendix/places/#orlane)"
+location: "Dungeon beneath the Temple of Merikka and [Orlane](/hobbity/world/places/#orlane)"
 pcs:
   - name: Boffo Lunderbunk
     slug: boffo
@@ -41,11 +41,11 @@ The party was about to flee the dungeon—beat half to death, out of potions, ru
 
 ## Ramne
 
-He carried a book in one hand and a wooden spoon in the other, and a weasel sat on his head like a furry hat. His name was [Ramne](/hobbity/appendix/npcs/#ramne), and he'd been looking for them. The weasel's name was Twitch. "Well now we know why she didn't come to the whistle," Boffo said. Wedge nodded. "She's already got a friend."
+He carried a book in one hand and a wooden spoon in the other, and a weasel sat on his head like a furry hat. His name was [Ramne](/hobbity/world/npcs/#ramne), and he'd been looking for them. The weasel's name was Twitch. "Well now we know why she didn't come to the whistle," Boffo said. Wedge nodded. "She's already got a friend."
 
 ![Ramne](../../assets/images/npcs/ramne.webp)
 
-He healed all three of them with a touch, which was the second time in one evening that divine magic had been worked on hobbits who, until very recently, hadn't known such things existed. The old hobbit moved at the speed of an arthritic tortoise and had the combat utility of a wooden spoon, which he also carried. But he knew things. He'd been living in that half-buried stone cottage west of the Slumbering Serpent, watching the village come apart at the seams. People taken to the Golden Grain, emerging weeks later with empty eyes and rehearsed smiles. Ramne didn't trust [Zacharias](/hobbity/appendix/npcs/#zacharias). He didn't trust anyone, really, possibly including himself—"There's not a single person in this village who's telling the truth," he said. "Maybe not even myself."
+He healed all three of them with a touch, which was the second time in one evening that divine magic had been worked on hobbits who, until very recently, hadn't known such things existed. The old hobbit moved at the speed of an arthritic tortoise and had the combat utility of a wooden spoon, which he also carried. But he knew things. He'd been living in that half-buried stone cottage west of the Slumbering Serpent, watching the village come apart at the seams. People taken to the Golden Grain, emerging weeks later with empty eyes and rehearsed smiles. Ramne didn't trust [Zacharias](/hobbity/world/npcs/#zacharias). He didn't trust anyone, really, possibly including himself—"There's not a single person in this village who's telling the truth," he said. "Maybe not even myself."
 
 He was a druid of sorts, though he'd deny the word. The only religion he followed, he said, was his pipe and a bit of pipeweed. His spells were useless underground—animal friendship, speak with animals, locate plant. But he had three castings of Cure Light Wounds, and he spent all of them on the party. Twitch, for her part, would prove considerably more useful than her master.
 
@@ -89,15 +89,15 @@ They opened the door. A string of bells erupted into jangling chaos on the other
 
 Beyond the bells, the walls had gone mad. Every surface was covered in writing—scratched into stone, painted in excrement, in blood, in charcoal. Insane ramblings about great coils that would envelop the world, about scales counted into the hundreds, about plagues that would cleanse the land and bring her light back into this forsaken dark world. Love letters to something with a serpent's body. Prayers to something called Explictica.
 
-"The crows are scared because the serpent hungers," Boffo said quietly. "That's what [the Hermit](/hobbity/appendix/npcs/#the-hermit) said."
+"The crows are scared because the serpent hungers," Boffo said quietly. "That's what [the Hermit](/hobbity/world/npcs/#the-hermit) said."
 
 ## The Serpent's Lair
 
 They came around the last corner of the winding passage and a voice shouted, "Now!"
 
-A goblin crouched at the junction, club raised. Behind it, [Kaylin Snowvale](/hobbity/appendix/npcs/#kaylin-snowvale)—the blacksmith's daughter—hid behind hay bales with her fists up. In the far corner, [Misha](/hobbity/appendix/npcs/#misha) waited, doing something none of them could see. And behind a desk, in robes and fancy chainmail with a cobra-headed mace in his hand and a snake in a cage at his elbow, stood the architect of all of it.
+A goblin crouched at the junction, club raised. Behind it, [Kaylin Snowvale](/hobbity/world/npcs/#kaylin-snowvale)—the blacksmith's daughter—hid behind hay bales with her fists up. In the far corner, [Misha](/hobbity/world/npcs/#misha) waited, doing something none of them could see. And behind a desk, in robes and fancy chainmail with a cobra-headed mace in his hand and a snake in a cage at his elbow, stood the architect of all of it.
 
-[Abramo](/hobbity/appendix/npcs/#abramo). The serpent's priest.
+[Abramo](/hobbity/world/npcs/#abramo). The serpent's priest.
 
 ![Abramo](../../assets/images/npcs/abramo.webp)
 
@@ -127,7 +127,7 @@ In the room beyond Abramo's last stand, torchlight fell on something that made t
 
 Around it, granite statues of Merikka had been smashed and crudely re-carved into reptilian shapes by someone who clearly had more devotion than talent. And against the east wall, in a small iron cage, a young hobbit woman in tattered rags.
 
-Her name was [Cirilli Finla](/hobbity/appendix/npcs/#cirilli-finla). Daughter of [Quinn Finla](/hobbity/appendix/npcs/#quinn-finla), the carpenter. The whole family had been abducted one night—taken to the Golden Grain Inn, marched blindfolded through tunnels and wilderness for days, brought to some place where Abramo performed a ceremony that charmed everyone into obedience. Everyone except Cirilli. Whatever he'd done to scramble their minds hadn't worked on her, and so she'd been brought back and caged in the dark, fed on scraps, listening to a madman chip away at granite statues and mutter about his goddess.
+Her name was [Cirilli Finla](/hobbity/world/npcs/#cirilli-finla). Daughter of [Quinn Finla](/hobbity/world/npcs/#quinn-finla), the carpenter. The whole family had been abducted one night—taken to the Golden Grain Inn, marched blindfolded through tunnels and wilderness for days, brought to some place where Abramo performed a ceremony that charmed everyone into obedience. Everyone except Cirilli. Whatever he'd done to scramble their minds hadn't worked on her, and so she'd been brought back and caged in the dark, fed on scraps, listening to a madman chip away at granite statues and mutter about his goddess.
 
 Explictica. That was the name Abramo couldn't stop saying. The snake goddess whose jade likeness watched over everything with swirling, almost hypnotic colors.
 
@@ -141,7 +141,7 @@ They also found _A Guide to the Herpetology of the Shires_, which mostly concern
 
 ## Prisoners and Parting
 
-The party secured their prisoners—Misha, Kaylin Snowvale, and the Griff and [Timba Snowvale](/hobbity/appendix/npcs/#timba-snowvale-gardner) still manacled upstairs—locking them in the temple's own rooms. All four murmured in eerie unison, reciting mantras about the great serpent's venom being the milk from which her followers would drink and rise again. It echoed through the worship hall and followed the hobbits up the stairs and out into the night air.
+The party secured their prisoners—Misha, Kaylin Snowvale, and the Griff and [Timba Snowvale](/hobbity/world/npcs/#timba-snowvale-gardner) still manacled upstairs—locking them in the temple's own rooms. All four murmured in eerie unison, reciting mantras about the great serpent's venom being the milk from which her followers would drink and rise again. It echoed through the worship hall and followed the hobbits up the stairs and out into the night air.
 
 Ramne took Cirilli and Twitch and scuttled off into the darkness toward his cottage. "Good luck to you," he said, shaking their hands. "You know where to find me, and hopefully I know where to find you this time."
 
@@ -149,15 +149,15 @@ Ramne took Cirilli and Twitch and scuttled off into the darkness toward his cott
 
 They emerged from the temple to the smell of smoke. From the hilltop, looking down over the village, they could see flames in the centre of town. The Golden Grain Inn was burning.
 
-At Zacharias's house, the back door was smashed open. The front door was smashed in. One of [Grover](/hobbity/appendix/npcs/#constable-grover)'s deputies—[Donovan](/hobbity/appendix/npcs/#donovan)—lay face down in the threshold, his skull caved in by something heavy and granite. The stone statue sentinel stood in the hallway, fists bloodied, facing outward. Zacharias's secret chest was gone.
+At Zacharias's house, the back door was smashed open. The front door was smashed in. One of [Grover](/hobbity/world/npcs/#constable-grover)'s deputies—[Donovan](/hobbity/world/npcs/#donovan)—lay face down in the threshold, his skull caved in by something heavy and granite. The stone statue sentinel stood in the hallway, fists bloodied, facing outward. Zacharias's secret chest was gone.
 
-The hobbits borrowed [Vilma](/hobbity/appendix/npcs/#vilma)'s rowboat and crossed the lake in the dark. The Golden Grain was a ruin of flame and smoke, figures moving around it in silhouette. Constable Grover spotted them from the shore, waving.
+The hobbits borrowed [Vilma](/hobbity/world/npcs/#vilma)'s rowboat and crossed the lake in the dark. The Golden Grain was a ruin of flame and smoke, figures moving around it in silhouette. Constable Grover spotted them from the shore, waving.
 
 ## Grover's Account
 
 At the Slumbering Serpent, over dwarven whiskey, Grover told his side. He'd been investigating the troglodyte evidence the party had given him, following a trail that led to the Golden Grain—Myron Tweed, the tailor, had gone missing, and the tracks pointed there. He'd gone to Zacharias's house looking for the hobbits as reinforcement.
 
-Zacharias had set his stone statues on them. Deputy Donovan was killed. Then [Derek Desleigh](/hobbity/appendix/npcs/#derek-desleigh) arrived, and he and Zacharias fled together to the Golden Grain. A siege ensued—some townsfolk defending the inn, some siding with Grover. Fists were thrown. Then someone inside the Golden Grain set it on fire and it burnt to the ground.
+Zacharias had set his stone statues on them. Deputy Donovan was killed. Then [Derek Desleigh](/hobbity/world/npcs/#derek-desleigh) arrived, and he and Zacharias fled together to the Golden Grain. A siege ensued—some townsfolk defending the inn, some siding with Grover. Fists were thrown. Then someone inside the Golden Grain set it on fire and it burnt to the ground.
 
 Grover believed Zacharias was neck-deep in the cult. The hobbits weren't so sure—Zacharias had summoned them here, after all, outfitted them for this mission. But the stone statues, the flight with Derek, the burning of the evidence—it was hard to argue with.
 

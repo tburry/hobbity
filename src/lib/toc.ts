@@ -28,7 +28,7 @@ export const tocSections: TocSection[] = [
     heading: 'World',
     items: world.map((id) => ({
       label: appendixLabels[id],
-      href: `/hobbity/appendix/${id}/`,
+      href: `/hobbity/world/${id}/`,
     })),
   },
   {

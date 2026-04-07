@@ -2,7 +2,7 @@
 title: "Toads, Toads, Toads"
 story: Something Rotten in Orlane
 date: 2026-01-29
-location: "Bridge on the road to [Orlane](/hobbity/appendix/places/#orlane)"
+location: "Bridge on the road to [Orlane](/hobbity/world/places/#orlane)"
 pcs:
   - name: Boffo Lunderbunk
     slug: boffo
@@ -23,7 +23,7 @@ enemiesDefeated:
 
 After a long winter's rest, the three hobbits set out again on the road to Orlane. They hadn't gone far before trouble found them—a band of goblins had claimed a bridge ahead and weren't inclined to share it. The fight was sharp and quick, but a goblin arrow caught Turnip square in the chest and put him down. Boffo and Wedge drove the goblins back and got Turnip breathing again, though the wound ran deep. The arrow had pierced his lung, and no amount of rest would fully mend it.
 
-On one of the slain goblins the party found a note referencing Orlane as a current target and [Gomwick](/hobbity/appendix/places/#gomwick) as the next—confirming an organized operation expanding outward.
+On one of the slain goblins the party found a note referencing Orlane as a current target and [Gomwick](/hobbity/world/places/#gomwick) as the next—confirming an organized operation expanding outward.
 
 ![A note found on a slain goblin](../../assets/images/sinister-orlane-note.webp)
 

@@ -2,8 +2,8 @@
 """Cross-link characters and locations in story markdown files.
 
 Links:
-- PC names in story headers -> /hobbity/appendix/pcs/<slug>
-- Locations in story headers -> /hobbity/appendix/places/#<anchor>
+- PC names in story headers -> /hobbity/world/pcs/<slug>
+- Locations in story headers -> /hobbity/world/places/#<anchor>
 - NPC/location first mentions in prose -> appropriate appendix link
 
 Usage: python3 scripts/crosslink-stories.py [--dry-run]
@@ -21,19 +21,19 @@ DRY_RUN = '--dry-run' in sys.argv
 # --- PC header links ---
 
 PC_LINKS = {
-    'Boffo Lunderbunk': '/hobbity/appendix/pcs/boffo',
-    'Wedge Wedgerton': '/hobbity/appendix/pcs/wedge',
-    'Turnip Bramblebrook': '/hobbity/appendix/pcs/turnip',
+    'Boffo Lunderbunk': '/hobbity/world/pcs/boffo',
+    'Wedge Wedgerton': '/hobbity/world/pcs/wedge',
+    'Turnip Bramblebrook': '/hobbity/world/pcs/turnip',
 }
 
 # --- Header location links (main towns/standalone locations only) ---
 
 HEADER_LOCATIONS = [
-    ('The Right Way Inn', '/hobbity/appendix/places/#the-right-way-inn'),
-    ('Huddle Farm', '/hobbity/appendix/places/#huddle-farm'),
-    ('Thistledown', '/hobbity/appendix/places/#thistledown'),
-    ('Gomwick', '/hobbity/appendix/places/#gomwick'),
-    ('Orlane', '/hobbity/appendix/places/#orlane'),
+    ('The Right Way Inn', '/hobbity/world/places/#the-right-way-inn'),
+    ('Huddle Farm', '/hobbity/world/places/#huddle-farm'),
+    ('Thistledown', '/hobbity/world/places/#thistledown'),
+    ('Gomwick', '/hobbity/world/places/#gomwick'),
+    ('Orlane', '/hobbity/world/places/#orlane'),
 ]
 
 # --- Prose entities: (name, regex_override_or_None, target) ---
@@ -42,62 +42,62 @@ HEADER_LOCATIONS = [
 
 _RAW_ENTITIES = [
     # Full NPC names
-    ('Constable Grover', None, '/hobbity/appendix/npcs/#constable-grover'),
-    ('Buford Niss', None, '/hobbity/appendix/npcs/#buford-niss'),
-    ('Tobias Chubb', None, '/hobbity/appendix/npcs/#tobias-chubb'),
-    ('Farmer Fallow', None, '/hobbity/appendix/npcs/#farmer-fallow'),
-    ('Gammy Boffin', None, '/hobbity/appendix/npcs/#gammy-boffin'),
-    ('Daisy Boffin', None, '/hobbity/appendix/npcs/#daisy-boffin'),
-    ('Grunela Bunce', None, '/hobbity/appendix/npcs/#grunela-bunce'),
-    ('Adelard Potts', None, '/hobbity/appendix/npcs/#adelard-potts'),
-    ('Hanna Boggs', None, '/hobbity/appendix/npcs/#hanna-boggs'),
-    ('Lotho Longbuck', None, '/hobbity/appendix/npcs/#lotho-longbuck'),
-    ('Dalton Dallydown', None, '/hobbity/appendix/npcs/#dalton-dallydown'),
-    ('Wilbur Oldbuck', None, '/hobbity/appendix/npcs/#wilbur-oldbuck'),
-    ('Killian Gade', None, '/hobbity/appendix/npcs/#killian-gade'),
-    ('Derek Desleigh', None, '/hobbity/appendix/npcs/#derek-desleigh'),
-    ('Tom Huddle', None, '/hobbity/appendix/npcs/#tom-huddle'),
-    ('Primula Huddle', None, '/hobbity/appendix/npcs/#primula-huddle'),
-    ('Berry Huddle', None, '/hobbity/appendix/npcs/#berry-huddle'),
-    ('Sherry Huddle', None, '/hobbity/appendix/npcs/#sherry-huddle'),
-    ('Bordo Huddle', None, '/hobbity/appendix/npcs/#bordo-huddle'),
-    ('Krund Pothrower', None, '/hobbity/appendix/npcs/#krund-pothrower'),
-    ('Norrie Sutton', None, '/hobbity/appendix/npcs/#norrie-sutton'),
-    ('Sam Sutton', None, '/hobbity/appendix/npcs/#sam-sutton'),
-    ('Mattie Snowvale', None, '/hobbity/appendix/npcs/#mattie-snowvale'),
-    ('Maddie Snowvale', None, '/hobbity/appendix/npcs/#maddie-snowvale'),
-    ('Griff Snowvale', None, '/hobbity/appendix/npcs/#griff-snowvale-gardner'),
-    ('Timba Snowvale', None, '/hobbity/appendix/npcs/#timba-snowvale-gardner'),
-    ('Kaylin Snowvale', None, '/hobbity/appendix/npcs/#kaylin-snowvale'),
-    ('Cirilli Finla', None, '/hobbity/appendix/npcs/#cirilli-finla'),
-    ('Quinn Finla', None, '/hobbity/appendix/npcs/#quinn-finla'),
-    ('The Hermit', r'[Tt]he Hermit', '/hobbity/appendix/npcs/#the-hermit'),
+    ('Constable Grover', None, '/hobbity/world/npcs/#constable-grover'),
+    ('Buford Niss', None, '/hobbity/world/npcs/#buford-niss'),
+    ('Tobias Chubb', None, '/hobbity/world/npcs/#tobias-chubb'),
+    ('Farmer Fallow', None, '/hobbity/world/npcs/#farmer-fallow'),
+    ('Gammy Boffin', None, '/hobbity/world/npcs/#gammy-boffin'),
+    ('Daisy Boffin', None, '/hobbity/world/npcs/#daisy-boffin'),
+    ('Grunela Bunce', None, '/hobbity/world/npcs/#grunela-bunce'),
+    ('Adelard Potts', None, '/hobbity/world/npcs/#adelard-potts'),
+    ('Hanna Boggs', None, '/hobbity/world/npcs/#hanna-boggs'),
+    ('Lotho Longbuck', None, '/hobbity/world/npcs/#lotho-longbuck'),
+    ('Dalton Dallydown', None, '/hobbity/world/npcs/#dalton-dallydown'),
+    ('Wilbur Oldbuck', None, '/hobbity/world/npcs/#wilbur-oldbuck'),
+    ('Killian Gade', None, '/hobbity/world/npcs/#killian-gade'),
+    ('Derek Desleigh', None, '/hobbity/world/npcs/#derek-desleigh'),
+    ('Tom Huddle', None, '/hobbity/world/npcs/#tom-huddle'),
+    ('Primula Huddle', None, '/hobbity/world/npcs/#primula-huddle'),
+    ('Berry Huddle', None, '/hobbity/world/npcs/#berry-huddle'),
+    ('Sherry Huddle', None, '/hobbity/world/npcs/#sherry-huddle'),
+    ('Bordo Huddle', None, '/hobbity/world/npcs/#bordo-huddle'),
+    ('Krund Pothrower', None, '/hobbity/world/npcs/#krund-pothrower'),
+    ('Norrie Sutton', None, '/hobbity/world/npcs/#norrie-sutton'),
+    ('Sam Sutton', None, '/hobbity/world/npcs/#sam-sutton'),
+    ('Mattie Snowvale', None, '/hobbity/world/npcs/#mattie-snowvale'),
+    ('Maddie Snowvale', None, '/hobbity/world/npcs/#maddie-snowvale'),
+    ('Griff Snowvale', None, '/hobbity/world/npcs/#griff-snowvale-gardner'),
+    ('Timba Snowvale', None, '/hobbity/world/npcs/#timba-snowvale-gardner'),
+    ('Kaylin Snowvale', None, '/hobbity/world/npcs/#kaylin-snowvale'),
+    ('Cirilli Finla', None, '/hobbity/world/npcs/#cirilli-finla'),
+    ('Quinn Finla', None, '/hobbity/world/npcs/#quinn-finla'),
+    ('The Hermit', r'[Tt]he Hermit', '/hobbity/world/npcs/#the-hermit'),
     # Unique single-word NPC names
-    ('Abramo', None, '/hobbity/appendix/npcs/#abramo'),
-    ('Belba', None, '/hobbity/appendix/npcs/#belba'),
-    ('Bertram', None, '/hobbity/appendix/npcs/#bertram'),
-    ('Buford', None, '/hobbity/appendix/npcs/#buford-niss'),
-    ('Bulbar', None, '/hobbity/appendix/npcs/#bulbar'),
-    ('Cirilli', None, '/hobbity/appendix/npcs/#cirilli-finla'),
-    ('Dalton', None, '/hobbity/appendix/npcs/#dalton-dallydown'),
-    ('Donovan', None, '/hobbity/appendix/npcs/#donovan'),
-    ('Epsten', None, '/hobbity/appendix/npcs/#epsten'),
-    ('Grover', None, '/hobbity/appendix/npcs/#constable-grover'),
-    ('Kaylin', None, '/hobbity/appendix/npcs/#kaylin-snowvale'),
-    ('Krund', None, '/hobbity/appendix/npcs/#krund-pothrower'),
-    ('Misha', None, '/hobbity/appendix/npcs/#misha'),
-    ('Olwyn', None, '/hobbity/appendix/npcs/#olwyn'),
-    ('Ramne', None, '/hobbity/appendix/npcs/#ramne'),
-    ('Rolo', None, '/hobbity/appendix/npcs/#rolo'),
-    ('Vilma', None, '/hobbity/appendix/npcs/#vilma'),
-    ('Zacharias', None, '/hobbity/appendix/npcs/#zacharias'),
+    ('Abramo', None, '/hobbity/world/npcs/#abramo'),
+    ('Belba', None, '/hobbity/world/npcs/#belba'),
+    ('Bertram', None, '/hobbity/world/npcs/#bertram'),
+    ('Buford', None, '/hobbity/world/npcs/#buford-niss'),
+    ('Bulbar', None, '/hobbity/world/npcs/#bulbar'),
+    ('Cirilli', None, '/hobbity/world/npcs/#cirilli-finla'),
+    ('Dalton', None, '/hobbity/world/npcs/#dalton-dallydown'),
+    ('Donovan', None, '/hobbity/world/npcs/#donovan'),
+    ('Epsten', None, '/hobbity/world/npcs/#epsten'),
+    ('Grover', None, '/hobbity/world/npcs/#constable-grover'),
+    ('Kaylin', None, '/hobbity/world/npcs/#kaylin-snowvale'),
+    ('Krund', None, '/hobbity/world/npcs/#krund-pothrower'),
+    ('Misha', None, '/hobbity/world/npcs/#misha'),
+    ('Olwyn', None, '/hobbity/world/npcs/#olwyn'),
+    ('Ramne', None, '/hobbity/world/npcs/#ramne'),
+    ('Rolo', None, '/hobbity/world/npcs/#rolo'),
+    ('Vilma', None, '/hobbity/world/npcs/#vilma'),
+    ('Zacharias', None, '/hobbity/world/npcs/#zacharias'),
     # Locations (main towns only)
-    ('Huddle Farm', None, '/hobbity/appendix/places/#huddle-farm'),
-    ('The Right Way Inn', None, '/hobbity/appendix/places/#the-right-way-inn'),
-    ('The Right Way', None, '/hobbity/appendix/places/#the-right-way-inn'),
-    ('Thistledown', None, '/hobbity/appendix/places/#thistledown'),
-    ('Gomwick', None, '/hobbity/appendix/places/#gomwick'),
-    ('Orlane', None, '/hobbity/appendix/places/#orlane'),
+    ('Huddle Farm', None, '/hobbity/world/places/#huddle-farm'),
+    ('The Right Way Inn', None, '/hobbity/world/places/#the-right-way-inn'),
+    ('The Right Way', None, '/hobbity/world/places/#the-right-way-inn'),
+    ('Thistledown', None, '/hobbity/world/places/#thistledown'),
+    ('Gomwick', None, '/hobbity/world/places/#gomwick'),
+    ('Orlane', None, '/hobbity/world/places/#orlane'),
 ]
 
 # Build processed list sorted by name length descending

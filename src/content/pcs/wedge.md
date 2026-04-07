@@ -17,12 +17,12 @@ Wedge Wedgerton is the self-appointed leader of the Toad Stompers. Third-generat
 
 ## Notable Items
 
-- **Animal whistle:** From [Farmer Fallow](/hobbity/appendix/npcs/#farmer-fallow)'s stall. Calls an animal when blown.
-- **Ring of Protection +1:** Taken from [Misha](/hobbity/appendix/npcs/#misha). Bonus to armor and saves.
+- **Animal whistle:** From [Farmer Fallow](/hobbity/world/npcs/#farmer-fallow)'s stall. Calls an animal when blown.
+- **Ring of Protection +1:** Taken from [Misha](/hobbity/world/npcs/#misha). Bonus to armor and saves.
 
 ## Grievous Injuries
 
-- Hammer blow to the skull from [Mattie Snowvale](/hobbity/appendix/npcs/#mattie-snowvale) in [Orlane](/hobbity/appendix/places/#orlane) (CHA)
+- Hammer blow to the skull from [Mattie Snowvale](/hobbity/world/npcs/#mattie-snowvale) in [Orlane](/hobbity/world/places/#orlane) (CHA)
 
 ## Alignment – Chaotic
 

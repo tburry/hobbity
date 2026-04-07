@@ -18,8 +18,8 @@ const stories = defineCollection({
   }),
 });
 
-const appendix = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/appendix' }),
+const world = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/world' }),
   schema: z.object({}).passthrough(),
 });
 
@@ -48,4 +48,4 @@ const pcs = defineCollection({
   }),
 });
 
-export const collections = { stories, appendix, summaries, pcs };
+export const collections = { stories, world, summaries, pcs };

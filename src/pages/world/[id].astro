@@ -4,7 +4,7 @@ import Content from '../../layouts/Content.astro';
 import { appendixLabels } from '../../lib/appendix';
 
 export async function getStaticPaths() {
-  const pages = await getCollection('appendix');
+  const pages = await getCollection('world');
   return pages.map((page) => ({
     params: { id: page.id },
     props: { page },

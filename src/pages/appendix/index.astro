@@ -13,11 +13,11 @@ const pcs = (await getCollection('pcs')).sort((a, b) => a.data.order - b.data.or
   <ul>
     {worldOrder.map((id) => (
       <li>
-        <a href={`/hobbity/appendix/${id}/`}>{appendixLabels[id]}</a>
+        <a href={`/hobbity/world/${id}/`}>{appendixLabels[id]}</a>
         {id === 'pcs' && (
           <ul>
             {pcs.map((pc) => (
-              <li><a href={`/hobbity/appendix/pcs/${pc.id}/`}>{pc.data.name}</a></li>
+              <li><a href={`/hobbity/world/pcs/${pc.id}/`}>{pc.data.name}</a></li>
             ))}
           </ul>
         )}

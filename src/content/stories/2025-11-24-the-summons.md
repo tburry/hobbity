@@ -2,7 +2,7 @@
 title: "The Summons"
 story: The Huddle Job
 date: 2026-05-24
-location: "[Thistledown](/hobbity/appendix/places/#thistledown), [The Right Way Inn](/hobbity/appendix/places/#the-right-way-inn), [Gomwick](/hobbity/appendix/places/#gomwick)"
+location: "[Thistledown](/hobbity/world/places/#thistledown), [The Right Way Inn](/hobbity/world/places/#the-right-way-inn), [Gomwick](/hobbity/world/places/#gomwick)"
 pcs:
   - name: Boffo Lunderbunk
     slug: boffo
@@ -17,7 +17,7 @@ pcs:
 
 ## Back to Gomwick
 
-Early, but not too early as to have missed breakfast, on the morning of the 24th of May, the three hobbits met up at Turnip's front door, packed and ready to travel to Gomwick in answer to [Buford](/hobbity/appendix/npcs/#buford-niss)'s letter. The meeting was reminiscent of the previous journey the three of them took, with the fine and pleasant mid-spring weather a comfort as they struck out onto the road.
+Early, but not too early as to have missed breakfast, on the morning of the 24th of May, the three hobbits met up at Turnip's front door, packed and ready to travel to Gomwick in answer to [Buford](/hobbity/world/npcs/#buford-niss)'s letter. The meeting was reminiscent of the previous journey the three of them took, with the fine and pleasant mid-spring weather a comfort as they struck out onto the road.
 
 Unlike the previous trip to Gomwick where they were forced to camp out in the woods, this time they were headed to The Right Way Inn, where they had planned to spend the night. The Right Way sat at the crossroads of the North Road and the Heart Road, and it was a well known and frequented establishment that had more in common with a small village than an Inn.
 
@@ -37,13 +37,13 @@ Finally, they pushed past, and meandered their way up the switchbacks that led t
 
 ## Toppo Hill House
 
-They knocked and rang the bell, and it wasn't long before [Dalton Dallydown](/hobbity/appendix/npcs/#dalton-dallydown) opened the door and received them. They remembered Dalton as Buford's butler and seeming right-hand in all manner of his life. Though he was excellent at not being seen as he did his duty, it was him that greeted them today.
+They knocked and rang the bell, and it wasn't long before [Dalton Dallydown](/hobbity/world/npcs/#dalton-dallydown) opened the door and received them. They remembered Dalton as Buford's butler and seeming right-hand in all manner of his life. Though he was excellent at not being seen as he did his duty, it was him that greeted them today.
 
 Dalton looked overtired and concerned, as he politely greeted them and took their cloaks and other things and hung them neatly by the door. He deferred politely and refused to answer any questions or become engaged in conversation.
 
 During this brief moment as they stood in the entryway of Toppo Hill, they noticed that much had changed in the intervening months. While the house had seemed exuberant, today it was subdued. In the fall, every candle had seemed to be lit, every hearth with a warm fire, and every room occupied with some semblance of light or use. Today, the house seemed cold and empty. In fact, many of Buford's prized possessions—which they had noticed bore a distinct nautical and exotic theme—were gone.
 
-Dalton led them to the same parlour where they had talked with Buford in the aftermath of the Scarecrow business and from whence they set off to find [the Hermit](/hobbity/appendix/npcs/#the-hermit). The room looked as if no one had been in here in months, and Dalton took pains to open curtains to bring in some light.
+Dalton led them to the same parlour where they had talked with Buford in the aftermath of the Scarecrow business and from whence they set off to find [the Hermit](/hobbity/world/npcs/#the-hermit). The room looked as if no one had been in here in months, and Dalton took pains to open curtains to bring in some light.
 
 Once he saw them comfortable, he left for a few moments and returned with a tray of refreshments—much more meager than what they remembered—and excused himself again to inform them that his master would be along shortly.
 
@@ -96,13 +96,13 @@ Almost to emphasize the point, Buford began another hacking coughing fit. He wip
 
 Once Turnip had finished reading, Buford spoke:
 
-"Something must be truly wrong if [Zacharias](/hobbity/appendix/npcs/#zacharias) is reaching out to me like this. We haven't spoken in quite a long time, and didn't part in the best of terms. This letter is very unexpected. And concerning.
+"Something must be truly wrong if [Zacharias](/hobbity/world/npcs/#zacharias) is reaching out to me like this. We haven't spoken in quite a long time, and didn't part in the best of terms. This letter is very unexpected. And concerning.
 
-Especially now that I think back on the Festival and recall how odd it was that so few visitors from [Orlane](/hobbity/appendix/places/#orlane) came to it. And those that did come, seemed to be rather grumpy and reserved; not at all what I recall from such a prosperous and gentle little village like Orlane.
+Especially now that I think back on the Festival and recall how odd it was that so few visitors from [Orlane](/hobbity/world/places/#orlane) came to it. And those that did come, seemed to be rather grumpy and reserved; not at all what I recall from such a prosperous and gentle little village like Orlane.
 
 What I am asking of you is to travel to Orlane and seek out my friend Zacharias. Find out exactly what has him in such a bother.
 
-You'll enjoy Orlane. There's a wonderful Inn there called the Golden Grain. Some of the finest beer and bread in all the Shires! Tell the owner [Bertram](/hobbity/appendix/npcs/#bertram) that Buford sent you, and I'm sure he'll treat you right. And he'd better give you a discount!
+You'll enjoy Orlane. There's a wonderful Inn there called the Golden Grain. Some of the finest beer and bread in all the Shires! Tell the owner [Bertram](/hobbity/world/npcs/#bertram) that Buford sent you, and I'm sure he'll treat you right. And he'd better give you a discount!
 
 Come to think of it, there was another Inn in Orlane, called the Soaking Serpent…? Or the Sneaking Snake? I can't remember the name. Awful place. But we were just talking about snakes, weren't we? That's a funny thing.
 

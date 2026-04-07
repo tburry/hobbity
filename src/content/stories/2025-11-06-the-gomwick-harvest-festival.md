@@ -2,7 +2,7 @@
 title: "The Gomwick Harvest Festival"
 story: A Hobbity Thanksgiving
 date: 2025-11-06
-location: "[Thistledown](/hobbity/appendix/places/#thistledown), the Old Road, [Gomwick](/hobbity/appendix/places/#gomwick)"
+location: "[Thistledown](/hobbity/world/places/#thistledown), the Old Road, [Gomwick](/hobbity/world/places/#gomwick)"
 pcs:
   - name: Boffo Lunderbunk
     slug: boffo
@@ -21,7 +21,7 @@ Early morning in the hamlet of Thistledown. Crisp air, the smell of last night's
 
 ![The Old Road to Gomwick](../../assets/images/road-to-gomwick.webp)
 
-Along the Old Road they stopped at [Farmer Fallow](/hobbity/appendix/npcs/#farmer-fallow)'s Knick-Knack and Produce Road-Side Stall and each picked up a curious item: Wedge found a whistle that seemed to call animals, Boffo chose three feathers that gave him a boost of speed when worn, and Turnip acquired a pair of strange stockings whose purpose remained unclear.
+Along the Old Road they stopped at [Farmer Fallow](/hobbity/world/npcs/#farmer-fallow)'s Knick-Knack and Produce Road-Side Stall and each picked up a curious item: Wedge found a whistle that seemed to call animals, Boffo chose three feathers that gave him a boost of speed when worn, and Turnip acquired a pair of strange stockings whose purpose remained unclear.
 
 Deeper in the woods, something felt wrong. The trees seemed to watch them—not all at once, but one at a time, a face in the bark that vanished the moment you looked straight at it. The feeling of being _Seen_, not just observed but known, straight to the marrow. Off in the distance, a tall, long-legged figure crossed the road and vanished into the undergrowth without a sound.
 
@@ -29,33 +29,33 @@ Deeper in the woods, something felt wrong. The trees seemed to watch them—not 
 
 They came upon a party of dwarf travelers heading to the same festival, agitated because they'd lost a companion in the woods. The hobbits helped search, pushing deeper into a strange mist that turned the forest into a maze of identical trees and muffled sounds. They nearly got lost themselves before the mist broke and they found the missing dwarf, shaken but unharmed. The dwarves were grateful, and the two groups traveled together the rest of the way to Gomwick as fast friends.
 
-Along the way they encountered [Tobias Chubb](/hobbity/appendix/npcs/#tobias-chubb), a ne'er-do-well who muttered about the trees "looking at him funny."
+Along the way they encountered [Tobias Chubb](/hobbity/world/npcs/#tobias-chubb), a ne'er-do-well who muttered about the trees "looking at him funny."
 
 ![Tobias Chubb](../../assets/images/npcs/tobias-chubb.webp)
 
 ## The Festival
 
-The festival was everything three young hobbits could want: eating, drinking, games, and more eating. Wedge scored two bullseyes in the axe-throwing with a shiny new axe from [Lotho Longbuck](/hobbity/appendix/npcs/#lotho-longbuck)’s shop. Turnip entered the storytelling competition. Boffo entered the pie-eating qualifiers and won handily. The crowd gasped. Some asked how he could possibly eat so much. Boffo shrugged. “I like pie.”
+The festival was everything three young hobbits could want: eating, drinking, games, and more eating. Wedge scored two bullseyes in the axe-throwing with a shiny new axe from [Lotho Longbuck](/hobbity/world/npcs/#lotho-longbuck)’s shop. Turnip entered the storytelling competition. Boffo entered the pie-eating qualifiers and won handily. The crowd gasped. Some asked how he could possibly eat so much. Boffo shrugged. “I like pie.”
 
 ![The pie-eating contest](../../assets/images/pie-eating-contest.webp)
 
-A middle-aged hobbit came over and took his hand, shaking it vigorously. “My word, good fellow! That was an impressive display. We haven’t seen the likes of that in many a year! [Gammy Boffin](/hobbity/appendix/npcs/#gammy-boffin)’s the name, and I’m the organizer of this year’s pie-eating, and I must say… wow, my boy! Just wow!” He took a moment looking at Boffo with unabashed admiration. “But where is my head?! Here, my lad,” and he handed back the copper coin, a mug of ale, and pinned a little green ribbon to Boffo’s coat that had a little silver pie embroidered on it, and the words ‘Quarter-Finalist’. “This will let you in to the table for tomorrow’s event. The quarter-finals in the morning, the semi-finals in the afternoon, and the big final tomorrow night. You don’t want to miss it, the prize purse for first place is up over 10 gold crowns, last I checked, and might be more by tomorrow. And, my daughter Daisy’s in charge of baking the pies. Her blueberry pies have won first place three years running!”
+A middle-aged hobbit came over and took his hand, shaking it vigorously. “My word, good fellow! That was an impressive display. We haven’t seen the likes of that in many a year! [Gammy Boffin](/hobbity/world/npcs/#gammy-boffin)’s the name, and I’m the organizer of this year’s pie-eating, and I must say… wow, my boy! Just wow!” He took a moment looking at Boffo with unabashed admiration. “But where is my head?! Here, my lad,” and he handed back the copper coin, a mug of ale, and pinned a little green ribbon to Boffo’s coat that had a little silver pie embroidered on it, and the words ‘Quarter-Finalist’. “This will let you in to the table for tomorrow’s event. The quarter-finals in the morning, the semi-finals in the afternoon, and the big final tomorrow night. You don’t want to miss it, the prize purse for first place is up over 10 gold crowns, last I checked, and might be more by tomorrow. And, my daughter Daisy’s in charge of baking the pies. Her blueberry pies have won first place three years running!”
 
 And at that, a very pretty, blonde and busty hobbit woman, about roughly 20 years old, stepped up beside Gammy, and said, “I heard my name. What are you going on about now, pa?” She shot him an adoring look, then looked over at Boffo.
 
 “Oh, my dear,” said Gammy, “I was just telling, er…pardon, but I don’t even know your name?” He said to Boffo, but carried on speaking to his daughter anyway, “I was telling the lad, that you’re in charge of baking the pies for tomorrow, so even if he loses, he’ll be plenty satisfied with your sweet treats!”
 
-[Daisy](/hobbity/appendix/npcs/#daisy-boffin) gave a humph, and said, “Well, he’ll have to go without. I’m making mince-meat for the quarter-finals.” She then gave Boffo a sly wink and said, “If you make it to the finals, I may just have some cherry pie waiting for you!” And with that she gave a small giggle, and bounced off towards a group of other hobbit girls that were standing around chatting nearby.
+[Daisy](/hobbity/world/npcs/#daisy-boffin) gave a humph, and said, “Well, he’ll have to go without. I’m making mince-meat for the quarter-finals.” She then gave Boffo a sly wink and said, “If you make it to the finals, I may just have some cherry pie waiting for you!” And with that she gave a small giggle, and bounced off towards a group of other hobbit girls that were standing around chatting nearby.
 
 ## The Pie Poisoning Caper
 
-The hobbits went to thank the baker for her fine pies. While nosing around near the baker’s tent, they spotted Tobias Chubb skulking about with his cronies. Wedge picked a small vial from Chubb’s pocket—poison, meant for the pies. A brawl ensued, and the plot—hatched by [Adelard Potts](/hobbity/appendix/npcs/#adelard-potts) and [Hanna Boggs](/hobbity/appendix/npcs/#hanna-boggs) with Chubb as their agent—was foiled before anyone’s pie was the worse for it.
+The hobbits went to thank the baker for her fine pies. While nosing around near the baker’s tent, they spotted Tobias Chubb skulking about with his cronies. Wedge picked a small vial from Chubb’s pocket—poison, meant for the pies. A brawl ensued, and the plot—hatched by [Adelard Potts](/hobbity/world/npcs/#adelard-potts) and [Hanna Boggs](/hobbity/world/npcs/#hanna-boggs) with Chubb as their agent—was foiled before anyone’s pie was the worse for it.
 
 ## Buford Niss
 
 ![Buford Niss](../../assets/images/npcs/buford.webp)
 
-After the commotion, [Buford Niss](/hobbity/appendix/npcs/#buford-niss)—the Hon. Horace Buford Hockwallop Niss, Esq.—a wealthy, well-traveled old hobbit who lived at Toppo Hill House, the enormous burrow crowning the hill above Gomwick, introduced himself to the hobbits. He’d watched the whole affair with great amusement and liked the cut of their jibs.
+After the commotion, [Buford Niss](/hobbity/world/npcs/#buford-niss)—the Hon. Horace Buford Hockwallop Niss, Esq.—a wealthy, well-traveled old hobbit who lived at Toppo Hill House, the enormous burrow crowning the hill above Gomwick, introduced himself to the hobbits. He’d watched the whole affair with great amusement and liked the cut of their jibs.
 
 ## The Spottle Table
 
@@ -77,7 +77,7 @@ Buford’s house was easy to spot. Toppo Hill House is a hobbit hole at the top 
 
 ## The Pie-Eating Contest
 
-The next day, Boffo returned for the contest proper. In the second round he faced [Grunela Bunce](/hobbity/appendix/npcs/#grunela-bunce)—the heavy favorite, a hobbit woman who had won three years running and expected to win a fourth. The pies came out, the whistle blew, and Grunela threw up after the first pie. Boffo cleaned his plates without breaking stride. She did not take the loss well, and later that evening threw an apple at Boffo’s head, unprovoked.
+The next day, Boffo returned for the contest proper. In the second round he faced [Grunela Bunce](/hobbity/world/npcs/#grunela-bunce)—the heavy favorite, a hobbit woman who had won three years running and expected to win a fourth. The pies came out, the whistle blew, and Grunela threw up after the first pie. Boffo cleaned his plates without breaking stride. She did not take the loss well, and later that evening threw an apple at Boffo’s head, unprovoked.
 
 ![Grunela Bunce](../../assets/images/npcs/grunela.webp)
 

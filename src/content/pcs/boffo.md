@@ -17,13 +17,13 @@ Boffo Lunderbunk is the quiet heart of the Toad Stompers. Not bright—the last 
 
 ## Notable Items
 
-- **Three-feathered hat:** From [Farmer Fallow](/hobbity/appendix/npcs/#farmer-fallow)'s stall. Gives a boost of speed when worn.
-- **Cobra-headed mace:** Taken from [Abramo](/hobbity/appendix/npcs/#abramo). The mace head is shaped like a cobra's head.
-- **Shield of Merikka:** Taken from [Misha](/hobbity/appendix/npcs/#misha)'s quarters. Painted with the crest of Merikka. Non-magical.
+- **Three-feathered hat:** From [Farmer Fallow](/hobbity/world/npcs/#farmer-fallow)'s stall. Gives a boost of speed when worn.
+- **Cobra-headed mace:** Taken from [Abramo](/hobbity/world/npcs/#abramo). The mace head is shaped like a cobra's head.
+- **Shield of Merikka:** Taken from [Misha](/hobbity/world/npcs/#misha)'s quarters. Painted with the crest of Merikka. Non-magical.
 
 ## Grievous Injuries
 
-- Skeleton's sword through the shoulder joint in the dungeon beneath the Temple of Merikka in [Orlane](/hobbity/appendix/places/#orlane). Healed crooked; arm doesn't move the way it used to (DEX).
+- Skeleton's sword through the shoulder joint in the dungeon beneath the Temple of Merikka in [Orlane](/hobbity/world/places/#orlane). Healed crooked; arm doesn't move the way it used to (DEX).
 
 ## Alignment – Neutral
 

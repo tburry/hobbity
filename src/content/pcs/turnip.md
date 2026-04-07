@@ -17,12 +17,12 @@ Turnip Bramblebrook is the prepper and investigator. A rubbish collector and sor
 
 ## Notable Items
 
-- **Mysterious stockings:** From [Farmer Fallow](/hobbity/appendix/npcs/#farmer-fallow)'s stall. Later tailored into legwarmers by Orlane's paranoid tailor, [Myron Tweed](/hobbity/appendix/npcs/#myron-tweed). Grant extra stamina in exploration mode.
-- **Scale mail +1:** Taken from [Abramo](/hobbity/appendix/npcs/#abramo). Snake-skin pattern rendered in steel. Counts as light armor for encumbrance.
+- **Mysterious stockings:** From [Farmer Fallow](/hobbity/world/npcs/#farmer-fallow)'s stall. Later tailored into legwarmers by Orlane's paranoid tailor, [Myron Tweed](/hobbity/world/npcs/#myron-tweed). Grant extra stamina in exploration mode.
+- **Scale mail +1:** Taken from [Abramo](/hobbity/world/npcs/#abramo). Snake-skin pattern rendered in steel. Counts as light armor for encumbrance.
 
 ## Grievous Injuries
 
-- Goblin arrow through the lung at the bridge on the way to [Orlane](/hobbity/appendix/places/#orlane) (CON)
+- Goblin arrow through the lung at the bridge on the way to [Orlane](/hobbity/world/places/#orlane) (CON)
 - Troglodyte claw tore through his side; the wound festered and sapped his stamina (CON)
 
 ## Alignment – Lawful

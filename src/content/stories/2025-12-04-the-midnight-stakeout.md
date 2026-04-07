@@ -2,7 +2,7 @@
 title: "The Midnight Stakeout"
 story: The Huddle Job
 date: 2025-12-04
-location: "[Huddle Farm](/hobbity/appendix/places/#huddle-farm), near Sunnyside crossroads"
+location: "[Huddle Farm](/hobbity/world/places/#huddle-farm), near Sunnyside crossroads"
 pcs:
   - name: Boffo Lunderbunk
     slug: boffo
@@ -17,11 +17,11 @@ pcs:
 
 ## Lunch and the Hedge
 
-Wedge told the dwarf [Krund](/hobbity/appendix/npcs/#krund-pothrower), in plain terms, that he'd overstayed his welcome at Huddle Farm. Primula seemed relieved someone had finally said it. Tom and Krund carried on eating as if nothing had been spoken. After lunch the party walked the property line and found footprints crossing back and forth through the hedge between Huddle land and the Sutton farm. In the rubble of the burned barn they turned up a pipe inscribed "N.S."—[Norrie Sutton](/hobbity/appendix/npcs/#norrie-sutton)'s—and a scrap of torn wool near the wrecked vegetable garden.
+Wedge told the dwarf [Krund](/hobbity/world/npcs/#krund-pothrower), in plain terms, that he'd overstayed his welcome at Huddle Farm. Primula seemed relieved someone had finally said it. Tom and Krund carried on eating as if nothing had been spoken. After lunch the party walked the property line and found footprints crossing back and forth through the hedge between Huddle land and the Sutton farm. In the rubble of the burned barn they turned up a pipe inscribed "N.S."—[Norrie Sutton](/hobbity/world/npcs/#norrie-sutton)'s—and a scrap of torn wool near the wrecked vegetable garden.
 
 ## Epsten and Berry
 
-The work-hut held a surprise: Huddle Farm's entire workforce is a juvenile stone giant called [Epsten](/hobbity/appendix/npcs/#epsten), not especially sharp but observant enough. He'd gone on strike until Krund apologized for some slight, and he mentioned seeing a blonde hobbit skulking around the property one night. Tea was called, but before they could sit down [Berry Huddle](/hobbity/appendix/npcs/#berry-huddle) pulled them aside. She confessed that she and [Sam Sutton](/hobbity/appendix/npcs/#sam-sutton)—Norrie's eldest—had been meeting in secret at the barn. The pipe was her father-in-law-to-be's, borrowed by Sam. The fire was an accident. She'd kept quiet because telling Tom meant revealing the courtship.
+The work-hut held a surprise: Huddle Farm's entire workforce is a juvenile stone giant called [Epsten](/hobbity/world/npcs/#epsten), not especially sharp but observant enough. He'd gone on strike until Krund apologized for some slight, and he mentioned seeing a blonde hobbit skulking around the property one night. Tea was called, but before they could sit down [Berry Huddle](/hobbity/world/npcs/#berry-huddle) pulled them aside. She confessed that she and [Sam Sutton](/hobbity/world/npcs/#sam-sutton)—Norrie's eldest—had been meeting in secret at the barn. The pipe was her father-in-law-to-be's, borrowed by Sam. The fire was an accident. She'd kept quiet because telling Tom meant revealing the courtship.
 
 ## The Stakeout
 

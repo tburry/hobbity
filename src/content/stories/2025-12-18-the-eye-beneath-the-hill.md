@@ -2,7 +2,7 @@
 title: "The Eye Beneath the Hill"
 story: The Huddle Job
 date: 2025-12-18
-location: "Fortfield Tower, [Huddle Farm](/hobbity/appendix/places/#huddle-farm)"
+location: "Fortfield Tower, [Huddle Farm](/hobbity/world/places/#huddle-farm)"
 pcs:
   - name: Boffo Lunderbunk
     slug: boffo

@@ -28,7 +28,7 @@ const pcTokensByLevel = await Promise.all(
         const src = pcImages[key]?.default;
         if (!src) return null;
         const full = await getImage({ src });
-        return { name: pc.data.name, href: `/hobbity/appendix/pcs/${pc.id}/`, src, fullSrc: full.src };
+        return { name: pc.data.name, href: `/hobbity/world/pcs/${pc.id}/`, src, fullSrc: full.src };
       }),
     );
     return { level, tokens: tokens.filter(Boolean) as { name: string; href: string; src: ImageMetadata; fullSrc: string }[] };
@@ -43,7 +43,7 @@ const npcImages = import.meta.glob<{ default: ImageMetadata }>(
 );
 
 // Derive NPC display names and dead status from npcs.mdx
-const npcsEntry = (await getCollection('appendix')).find((e) => e.id === 'npcs');
+const npcsEntry = (await getCollection('world')).find((e) => e.id === 'npcs');
 const npcAvatarNames: Record<string, string> = {};
 const deadNpcs = new Set<string>();
 if (npcsEntry?.body) {
@@ -66,7 +66,7 @@ const npcTokens = await Promise.all(
     const stem = path.replace(/.*\//, '').replace('_token.webp', '');
     const name = npcAvatarNames[stem] || stem;
     const full = await getImage({ src: mod.default });
-    return { name, href: `/hobbity/appendix/npcs/#${stem}`, dead: deadNpcs.has(stem), src: mod.default, fullSrc: full.src };
+    return { name, href: `/hobbity/world/npcs/#${stem}`, dead: deadNpcs.has(stem), src: mod.default, fullSrc: full.src };
   }),
 );
 const sortKey = (name: string) => name.split(' ').pop()!;

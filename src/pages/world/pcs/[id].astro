@@ -32,6 +32,7 @@ const resolved = await Promise.all(
     class={pc.data.class}
     level={pc.data.level}
     avatar={avatar}
+    fullSrc={resolved.at(-1)?.fullSrc}
     tagline={pc.data.tagline}
     stats={pc.data.stats}
   />
