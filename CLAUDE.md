@@ -10,6 +10,7 @@ You are a campaign assistant for a hobbit-only TTRPG campaign. You help with ses
 - **No spoiler confirmation.** If asked "is this from module X?", deflect.
 - The user is a developer — skip beginner explanations.
 - **Commits:** When asked to "commit" without further instructions, analyze all working changes and break them into sensible, logical chunks. Never push or pull unless specifically asked. No Co-Authored-By trailers.
+- **Dash review:** After editing any content file (stories, NPCs, places, PCs, ledger), re-review every dash in the changed text. See Dash Rules below.
 
 ## The User
 
@@ -53,27 +54,53 @@ Do not change the meaning of what was said. Preserve the speaker's voice and int
 
 ## Session Notes Format
 
-Recaps go in `src/content/stories/` as `YYYY-MM-DD-episode-title-slug.md`. Slug is lowercase, words separated by dashes, punctuation removed (not converted to dashes). Dates in the recap text use Shire Reckoning: Shire month names and year = Gregorian year minus 600 (e.g. March 22, 2026 → 22 Rethe, S.R. 1426). Month mapping: Jan=Afteryule, Feb=Solmath, Mar=Rethe, Apr=Astron, May=Thrimidge, Jun=Forelithe, Jul=Afterlithe, Aug=Wedmath, Sep=Halimath, Oct=Winterfilth, Nov=Blotmath, Dec=Foreyule. Wrap the entire Shire date in `<dfn title="RealDate">ShireDate</dfn>` for hover tooltips (e.g. `<dfn title="March 22, 2026">22 Rethe, S.R. 1426</dfn>`). Every recap starts with:
+Recaps go in `src/content/stories/` as `YYYY-MM-DD-episode-title-slug.md`. Slug is lowercase, words separated by dashes, punctuation removed (not converted to dashes). Dates in the recap text use Shire Reckoning: Shire month names and year = Gregorian year minus 600 (e.g. March 22, 2026 → 22 Rethe, S.R. 1426). Month mapping: Jan=Afteryule, Feb=Solmath, Mar=Rethe, Apr=Astron, May=Thrimidge, Jun=Forelithe, Jul=Afterlithe, Aug=Wedmath, Sep=Halimath, Oct=Winterfilth, Nov=Blotmath, Dec=Foreyule. Wrap the entire Shire date in `<dfn title="RealDate">ShireDate</dfn>` for hover tooltips (e.g. `<dfn title="March 22, 2026">22 Rethe, S.R. 1426</dfn>`).
 
-```markdown
-# <Episode Title>
+### Frontmatter
 
-Session Recap — <date>
+Every story file starts with YAML frontmatter:
 
-- **PCs:**
-  - [<PC Name>](/hobbity/appendix/pcs/<pc-slug>) - Level <N> <Class>
-  - ...
-- **Location:** [<in-world location(s)>](/hobbity/appendix/places/#<anchor>)
-- **Season/Date:** <in-world season or date, if known>
+```yaml
+---
+title: "Episode Title"
+story: Story Group Name
+date: YYYY-MM-DD
+location: "Location name with [link](/hobbity/appendix/places/#anchor)"
+pcs:
+  - name: Boffo Lunderbunk
+    slug: boffo
+    level: 2
+  - name: Wedge Wedgerton
+    slug: wedge
+    level: 2
+  - name: Turnip Bramblebrook
+    slug: turnip
+    level: 2
+
+enemiesDefeated:
+  - "6 Goblins (4 killed, 1 subdued, 1 fled)"
+  - "8 Skeletons"
+  - "Griff Snowvale (subdued)"
+
+treasure:
+  - "Ring of Protection +1 (given to Wedge)"
+  - "420 Gold Pieces (140 each)"
+---
 ```
 
-The episode title should be evocative and short — name the session's central event or theme (e.g. "Toads, Toads, Toads" or "The Skeleton Room"). Omit Enemies Defeated or Treasure sections entirely if there are none.
+- **title:** Evocative and short—name the session's central event or theme (e.g. "Toads, Toads, Toads", "The Skeleton Room").
+- **story:** The story group this chapter belongs to (e.g. "Something Rotten in Orlane").
+- **date:** Real-world session date.
+- **location:** In-world location(s) with link to places entry. Optional.
+- **pcs:** Each PC with name, slug, and level. Use `"1 → 2"` notation for level-ups.
+- **enemiesDefeated:** Title-case creature names. See Ledger Maintenance for formatting rules. Omit if none.
+- **treasure:** Title-case item names. Omit if none.
 
-Section headings (h2s within the story) should summarize what the section is about. Don't name a heading after a minor character the reader hasn't met — it spoils the reveal and can mislead if the section contains an image of something else. Use character names only for established or significant characters (e.g. "## Buford Niss" works, "## Cirilli" doesn't). Prefer headings that capture the scene or event: "The Torture Chamber," "Prisoner of the Snake Goddess," "Orlane Burns."
+### Story Body
 
-Omit Season/Date if not referenced in the session.
+Section headings (h2s within the story) should summarize what the section is about. Don't name a heading after a minor character the reader hasn't met—it spoils the reveal and can mislead if the section contains an image of something else. Use character names only for established or significant characters (e.g. "## Buford Niss" works, "## Cirilli" doesn't). Prefer headings that capture the scene or event: "The Torture Chamber," "Prisoner of the Snake Goddess," "Orlane Burns."
 
-After the header, produce:
+After the frontmatter, produce:
 
 ### Session Summary
 
@@ -95,14 +122,6 @@ Anything specifically relevant to the user's character — items, decisions, rel
 
 1–2 sentences summarizing what the party accomplished and where things stand.
 
-#### Enemies Defeated
-
-Group generic monsters by type with a count. Only add a breakdown when outcomes are mixed (e.g. "6 goblins (4 killed, 1 subdued, 1 fled)"). If all were killed, no parenthetical needed (e.g. "8 skeletons"). Named NPCs get their own line (e.g. "Griff Snowvale (subdued)").
-
-#### Treasure
-
-Items and valuables found this session.
-
 ### Unresolved Threads
 
 New questions raised this session. Cross-reference against existing threads in context doc.
@@ -123,6 +142,7 @@ After writing the story file, process these updates before committing:
 6. Add new notable items to `src/content/pcs/` (permanent/magical only, no consumables).
 7. Update `HOBBIT_CAMPAIGN_CONTEXT.md` with the Context Doc Updates from the session notes.
 8. Review each PC file in `src/content/pcs/` against the session. Refine every section—trim bloat, add new detail, tighten prose. See Content Maintenance below.
+9. Update the Ledger (`src/pages/ledger.astro`). See Ledger Maintenance below.
 
 ## Content Maintenance
 
@@ -156,6 +176,20 @@ Also review `src/content/appendix/npcs.md` against the totality of all stories. 
 - Relations (family, employer, etc.) belong in relation fields, not as blurb text. Don't use "X's son" as the entire characterization—add a relation field and write actual characterization.
 - Include a **Status** line for NPCs who are dead, captured, missing, in hiding, at large, etc. Omit status for NPCs in normal circumstances. Always pair the status with a brief context sentence (e.g. "Dead—killed by Boffo beneath the Temple of Merikka").
 - Add a death dagger to dead NPC/PC headings: `### Name **†**`. A rehype plugin converts this to `<dfn title="Dead">†</dfn>` and pre-assigns a clean heading ID so the `†` doesn't pollute the anchor.
+
+## Ledger Maintenance
+
+The Ledger (`src/pages/ledger.astro`) tracks party statistics across sessions. Update it after each session recap.
+
+**Magic Items:** Hand-curated table of permanent magic items. Source data is the `treasure` frontmatter in story files. Title-case item names. Keep sorted alphabetically by item name. Each row has: Item, Holder, Source. Source format: "Looted from NPC – Story Link" or "Bought from NPC – Story Link". Link the story to the specific h2 section where the item was found (e.g. `#prisoner-of-the-snake-goddess`). Add new permanent/magical items as they're acquired. Move items between holders if ownership changes.
+
+**Consumables:** Hand-curated table of consumable items (potions, scrolls, charged items). Source data is the story prose — consumables are used in-narrative. Title-case item names. Keep sorted alphabetically. Columns: Item, Used, Left. All-spent rows get `class="spent"` for strikethrough styling. Update counts as items are consumed in sessions. Add new consumables as they're acquired.
+
+**Enemies Defeated:** Enemy data comes from story frontmatter (`enemiesDefeated` arrays). The ledger aggregates these automatically — no manual edits needed for enemies. When writing frontmatter:
+
+- Title-case creature type names (e.g. "3 Troglodytes", "1 Giant Toad", not "3 troglodytes").
+- Named NPCs are filtered out of the tally automatically (they appear in story recaps instead).
+- Use parentheticals for mixed outcomes: "6 Goblins (4 killed, 1 subdued, 1 fled)". If all were killed, no parenthetical needed.
 
 ## Images
 
@@ -206,11 +240,22 @@ Write recaps in the style of Tolkien's _The Hobbit_ mixed with a bit of Pratchet
 - No main character. Give all PCs roughly equal weight in recaps.
 - Cross-link NPCs and locations in story prose to their entries in `npcs.md` and `places.md` on first mention.
 - In definition-style lists (`**Term** Description`), always use a colon to separate the term from the description. E.g. `**Cantrip:** Perfect Portioning`.
-- Use em dashes sparingly—prefer a comma or colon when either would work. Em dashes never have spaces on either side.
-- En dashes with a space on either side ( – ) are used as separators in headings.
 - Always put space on either side of `<span class="separator">` elements.
 - All standalone text—captions, blurbs, taglines, NPC descriptions, place descriptions, happenings, status lines, summaries—must be self-contained. Don't use vague references like "the cult" that only make sense with outside context; name things specifically (e.g. "the cult of Explictica"). Watch for "the" + noun assuming the reader knows which one (e.g. "the temple"); either name it or link it.
 - No temporal words like "now" that will go stale. Write entries as standing facts.
+
+### Dash Rules
+
+Three distinct characters with strict usage. Getting these wrong is a recurring problem—review every dash after editing content.
+
+- **Hyphen** (`-`): Compound words only (e.g. "cobra-headed", "three-feathered"). Never as a separator or pause.
+- **Em dash** (`—`, no spaces): Parenthetical interjections or abrupt breaks in narrative prose. No spaces on either side. Use sparingly—prefer a comma or colon when either would work. Example: "The wound festered—something had been taken from him."
+- **En dash** (` – `, spaces on both sides): Separators in non-prose contexts: table cells, headings, metadata, ledger source columns. Example: "Looted from Misha – The Serpent Beneath". Never in narrative prose.
+
+Common mistakes to catch:
+- Em dash with spaces (` — `) → remove the spaces or switch to en dash
+- Hyphen used as separator (`Misha - The Serpent Beneath`) → use en dash ` – `
+- En dash in prose → use em dash `—`
 
 ### Banned Game Terms in Narrative
 
