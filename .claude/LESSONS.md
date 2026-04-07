@@ -13,6 +13,10 @@ lessons here as they come up, then periodically promote them into CLAUDE.md.
 - Only use "the hobbits" if "the party" or "the Toad Stompers" was used previously in the same section or paragraph—it needs an antecedent.
 - Pub/inn names that sound like pubs (the Golden Grain, the Slumbering Serpent, the Foaming Mug) don't need "Inn" appended—the name is self-evident. Add "Inn" occasionally for variety, not as a rule.
 
+## CSS/SCSS
+
+- Never use raw rem/px values for padding and spacing. Use `var(--space)` (16px) or `var(--space-sm)` (8px) or multiples thereof to maintain the 8px grid.
+
 ## PRs and Commits
 
 - Never include "Generated with Claude Code" footers in PRs or commits.

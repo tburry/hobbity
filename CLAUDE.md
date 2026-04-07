@@ -11,27 +11,14 @@ You are a campaign assistant for a hobbit-only TTRPG campaign. You help with ses
 - The user is a developer — skip beginner explanations.
 - **Commits:** When asked to "commit" without further instructions, analyze all working changes and break them into sensible, logical chunks. Never push or pull unless specifically asked. No Co-Authored-By trailers.
 - **Dash review:** After editing any content file (stories, NPCs, places, PCs, ledger), re-review every dash in the changed text. See Dash Rules below.
-
-## The User
-
-- Plays **Boffo Lunderbunk** (Todd Burry / toddburry)
-- Sometimes called **Garth** at the table (old D&D character nickname)
-
-## Player → Character → Craig Filename Mapping
-
-| Craig filename   | Player            | Character           | Role      |
-| ---------------- | ----------------- | ------------------- | --------- |
-| olblacky         | Les Blackwell     | Wedge Wedgerton     | PC        |
-| toddburry        | Todd Burry        | Boffo Lunderbunk    | PC (user) |
-| robertsonstephen | Stephen Robertson | Turnip Bramblebrook | PC        |
-| gussymiranda     | Gus Miranda       | —                   | DM        |
+- **Private context:** Read `private/CLAUDE.md` at the start of any session that involves transcription, player names, or Craig filename mapping.
 
 ## Campaign Files
 
 - `HOBBIT_CAMPAIGN_CONTEXT.md` — Full campaign context: setting, characters, timeline, NPCs, unresolved threads. Update this after each session.
-- `src/content/appendix/pcs.md` — PC voice and personality references. Consult when writing recaps or dialogue to match each character's tone. Use exceptionally high or low ability scores to inform how a PC acts in recaps (e.g. INT 5 means illiterate and simple, INT 14 means sharp but socially oblivious).
-- `src/content/appendix/locations.md` — Locations, notable NPCs, and what happened there. Notable NPCs should be a comma-separated list of links to their `npcs.md` entries, not a bulleted list.
-- `src/content/appendix/npcs.md` — NPC details.
+- `src/content/pcs/` — PC files (one per character). Voice, personality, stats, items, injuries. Consult when writing recaps or dialogue to match each character's tone. Use exceptionally high or low ability scores to inform how a PC acts in recaps (e.g. INT 5 means illiterate and simple, INT 14 means sharp but socially oblivious).
+- `src/content/world/places.md` — Locations, notable NPCs, and what happened there. Notable NPCs should be a comma-separated list of links to their `npcs.md` entries, not a bulleted list.
+- `src/content/world/npcs.mdx` — NPC details.
 
 ## Transcription Workflow
 
@@ -65,7 +52,7 @@ Every story file starts with YAML frontmatter:
 title: "Episode Title"
 story: Story Group Name
 date: YYYY-MM-DD
-location: "Location name with [link](/hobbity/appendix/places/#anchor)"
+location: "Location name with [link](/hobbity/world/places/#anchor)"
 pcs:
   - name: Boffo Lunderbunk
     slug: boffo
@@ -136,7 +123,7 @@ After writing the story file, process these updates before committing:
 
 1. Update PC levels in `src/content/pcs/` if the party leveled up. Use `Level N → Level N+1` notation in the story header.
 2. Check the story group's TOC/summary to see if it needs updating with the new chapter in mind.
-3. Add new NPCs to `src/content/appendix/npcs.md`. Update existing NPC entries with new information from the session.
+3. Add new NPCs to `src/content/world/npcs.mdx`. Update existing NPC entries with new information from the session.
 4. Add or update locations in `src/content/appendix/locations.md` with new places or events.
 5. Record any grievous injuries in `src/content/pcs/` (confirm with user first).
 6. Add new notable items to `src/content/pcs/` (permanent/magical only, no consumables).
@@ -164,7 +151,7 @@ Whenever stories are added or edited, review each PC file in `src/content/pcs/` 
 - **Stats** (frontmatter) — ability score changes from injuries or level-ups
 - **Level** (frontmatter) — update if the party leveled up
 
-Also review `src/content/appendix/npcs.md` against the totality of all stories. NPC summaries follow similar rules to PC summaries:
+Also review `src/content/world/npcs.mdx` against the totality of all stories. NPC summaries follow similar rules to PC summaries:
 
 - Cover who they are, their relationships, and their arc so far.
 - Don't list items unless the item is core to the character (e.g. Abramo's cobra-headed mace, Buford's jade snake statue).
