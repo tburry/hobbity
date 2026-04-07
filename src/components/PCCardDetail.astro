@@ -21,7 +21,7 @@ const { name, class: cls, level, avatar, tagline, stats } = Astro.props;
   )}
   <h1 data-pagefind-weight="10">{name}</h1>
   <p class="pc-detail-meta">{cls} &middot; Level {level}</p>
-  <table class="pc-detail-stats">
+  <table class="pc-detail-stats stat">
     <thead>
       <tr>
         {Object.keys(stats).map((s) => <th>{s}</th>)}
@@ -69,18 +69,5 @@ const { name, class: cls, level, avatar, tagline, stats } = Astro.props;
   }
 
   .pc-detail-stats {
-    text-align: center;
-    table-layout: fixed;
-    width: 100%;
     margin: 0 auto;
-  }
-
-  .pc-detail-stats th,
-  .pc-detail-stats td {
-    padding: 0.2rem 0.6rem;
-  }
-
-  .pc-detail-stats th {
-    font-family: var(--heading-font);
-    color: var(--heading-color);
   }</style>

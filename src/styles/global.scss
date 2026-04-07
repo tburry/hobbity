@@ -597,6 +597,7 @@ table {
   border: var(--border-width) solid var(--border);
   border-radius: var(--border-radius);
   margin: var(--space) 0;
+  width: 100%;
 }
 
 td, th {
@@ -607,6 +608,24 @@ td, th {
   &:last-child { border-right: none; }
   &[align="center"] { text-align: center; }
   &[align="right"] { text-align: right; }
+
+  &.num {
+    width: 6rem;
+
+    @media (max-width: 720px) {
+      width: 4em;
+    }
+  }
+
+  .abbr { display: none; }
+
+  @media (max-width: 720px) {
+    .full { display: none; }
+    .abbr {
+      display: inline;
+      text-decoration: none;
+    }
+  }
 }
 
 $cell-radius: calc(var(--border-radius) - var(--border-width));
@@ -628,13 +647,41 @@ tbody:last-child tr:last-child {
   td, th { border-bottom: none; }
 }
 
+td.num, tfoot th.num {
+  text-align: right;
+}
+
 th {
   background-color: var(--accent-bg);
   font-weight: bold;
+  text-align: left;
+
+  &.num {
+    text-align: center;
+  }
 }
 
 tr:nth-child(even) {
   background-color: var(--accent-bg);
+}
+
+tr.spent td {
+  text-decoration: line-through var(--accent);
+}
+
+table.stat {
+  table-layout: fixed;
+  width: 100%;
+
+  th, td {
+    text-align: center;
+    padding: 0.2rem 0.6rem;
+  }
+
+  th {
+    font-family: var(--heading-font);
+    color: var(--heading-color);
+  }
 }
 
 table caption {
