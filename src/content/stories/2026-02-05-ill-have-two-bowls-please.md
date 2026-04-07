@@ -15,7 +15,7 @@ pcs:
     level: 1
 
 enemiesDefeated:
-  - "Dire Wolves (evaded)"
+  - "2 Dire Wolves (evaded)"
 ---
 
 ## The Road to Orlane

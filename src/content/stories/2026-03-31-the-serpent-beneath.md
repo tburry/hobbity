@@ -22,15 +22,15 @@ enemiesDefeated:
   - "Misha (subdued, sleep dart)"
 
 treasure:
-  - "Cobra-headed mace (given to Boffo)"
-  - "Snake scale mail +1 (given to Turnip)"
+  - "Cobra-Headed Mace (given to Boffo)"
+  - "Snake Scale Mail +1 (given to Turnip)"
   - "Ring of Protection +1 (given to Wedge)"
-  - "Gold snake head amulet with ruby eyes (holy symbol of Explictica)"
-  - "Abramo's sketchbook of insane ramblings"
-  - "12 gold coins (from Abramo's chests)"
-  - "21 gold coins (from Deputy Donovan's body)"
+  - "Gold Snake Head Amulet with Ruby Eyes (holy symbol of Explictica)"
+  - "Abramo's Sketchbook of Insane Ramblings"
+  - "12 Gold Coins (from Abramo's chests)"
+  - "21 Gold Coins (from Deputy Donovan's body)"
   - "_A Guide to the Herpetology of the Shires_ (book)"
-  - "Flask of brandy (from Donovan)"
+  - "Flask of Brandy (from Donovan)"
 ---
 
 ## Not Dead Yet

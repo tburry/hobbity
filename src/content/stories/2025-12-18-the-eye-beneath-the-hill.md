@@ -20,7 +20,7 @@ enemiesDefeated:
   - "1 Floating Eye (bypassed)"
 
 treasure:
-  - "None taken (locked chest left unopened)."
+  - "None Taken (locked chest left unopened)"
 ---
 
 ## Into the Tower

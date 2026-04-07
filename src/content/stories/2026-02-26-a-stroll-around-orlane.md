@@ -23,8 +23,8 @@ treasure:
   - "Scroll of Sleep"
   - "Scroll of Wizard Lock"
   - "Scroll of Dispel Magic"
-  - "6 special sling bullets (4x +1, 1x Sleep, 1x Phantasmal Force)"
-  - "100 gold coins (for temple entry)"
+  - "6 Special Sling Bullets (4x +1, 1x Sleep, 1x Phantasmal Force)"
+  - "100 Gold Coins (for temple entry)"
 ---
 
 ## The Blacksmith and the Constable

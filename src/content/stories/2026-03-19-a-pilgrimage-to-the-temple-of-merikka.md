@@ -22,9 +22,9 @@ enemiesDefeated:
   - "Derek Desleigh (fled)"
 
 treasure:
-  - "420 gold pieces (140 each)"
+  - "420 Gold Pieces (140 each)"
   - "Brooch of Shielding"
-  - "Golden carrot (from offering alcove)"
+  - "Golden Carrot (from offering alcove)"
 ---
 
 ## Entering the Temple

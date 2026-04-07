@@ -21,7 +21,7 @@ enemiesDefeated:
   - "[Timba Snowvale](/hobbity/appendix/npcs/#timba-snowvale-gardner) (subdued)"
 
 treasure:
-  - "Golden potato (from offering alcove)"
+  - "Golden Potato (from offering alcove)"
 ---
 
 ## Cleaning Up the Lair
