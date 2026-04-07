@@ -189,7 +189,7 @@ Story images use relative markdown paths: `![alt](../../assets/images/name.webp)
 PC artwork lives in `src/assets/images/pcs/`. These images are not added to the gallery or inserted into stories. When new images appear in this folder:
 
 1. Convert to webp if needed: `cwebp -q 85 original -o src/assets/images/pcs/name.webp`
-2. Generate a square avatar: `scripts/make-avatar --crop src/assets/images/pcs/name.webp` (add `--debug` to verify head detection)
+2. Generate a square avatar: `scripts/make-avatar src/assets/images/pcs/name.webp` (add `--debug` to verify head detection)
 3. Generate a token from the avatar: `python scripts/make-token.py src/assets/images/pcs/name-lvlN_avatar.webp`
 4. Remove the original (png/jpg) if converted
 
@@ -198,7 +198,7 @@ PC artwork lives in `src/assets/images/pcs/`. These images are not added to the 
 NPC artwork lives in `src/assets/images/npcs/`. Unlike PC artwork, NPC images should be added to the gallery (via `src/lib/gallery.ts`). Avatars are not added to the gallery. When new images appear in this folder:
 
 1. Convert to webp if needed: `cwebp -q 85 original -o src/assets/images/npcs/name.webp`
-2. Generate a square avatar: `scripts/make-avatar --crop src/assets/images/npcs/name.webp` (add `--debug` to verify head detection)
+2. Generate a square avatar: `scripts/make-avatar src/assets/images/npcs/name.webp` (add `--debug` to verify head detection)
 3. Generate a token from the avatar: `python scripts/make-token.py src/assets/images/npcs/name_avatar.webp`
 4. Remove the original (png/jpg) if converted
 5. Add the image (not the avatar) to `src/lib/gallery.ts` using the `img()` helper
