@@ -85,9 +85,9 @@ const deadNpcTokens = npcTokens.filter((t) => t.dead);
   <h1 data-pagefind-body>Tokens</h1>
 
   <h2>PCs</h2>
-  {pcLevels.map((group) => (
-    <Fragment>
-      <h3>Level {group.level}</h3>
+  {pcLevels.map((group, i) => (
+    <details open={i === 0 ? true : undefined}>
+      <summary><h3>Level {group.level}</h3></summary>
       <div class="token-grid no-lightbox">
         {group.tokens.map((t) => (
           <figure class="token-figure">
@@ -101,27 +101,29 @@ const deadNpcTokens = npcTokens.filter((t) => t.dead);
           </figure>
         ))}
       </div>
-    </Fragment>
+    </details>
   ))}
 
   <h2>NPCs</h2>
-  <h3>Alive</h3>
-  <div class="token-grid no-lightbox">
-    {aliveNpcs.map((t) => (
-      <figure class="token-figure">
-        <button class="token-wrap" data-url={t.fullSrc} title="Copy image URL">
-          <Image src={t.src} alt={t.name} width={128} loading="lazy" />
-          <span class="token-copy-icon">
-            <svg width="20" height="20"><use href="#icon-copy" /></svg>
-          </span>
-        </button>
-        <figcaption><a href={t.href}>{t.name}</a></figcaption>
-      </figure>
-    ))}
-  </div>
+  <details open>
+    <summary><h3>Alive</h3></summary>
+    <div class="token-grid no-lightbox">
+      {aliveNpcs.map((t) => (
+        <figure class="token-figure">
+          <button class="token-wrap" data-url={t.fullSrc} title="Copy image URL">
+            <Image src={t.src} alt={t.name} width={128} loading="lazy" />
+            <span class="token-copy-icon">
+              <svg width="20" height="20"><use href="#icon-copy" /></svg>
+            </span>
+          </button>
+          <figcaption><a href={t.href}>{t.name}</a></figcaption>
+        </figure>
+      ))}
+    </div>
+  </details>
   {deadNpcTokens.length > 0 && (
-    <>
-      <h3>Dead</h3>
+    <details>
+      <summary><h3>Dead</h3></summary>
       <div class="token-grid no-lightbox">
         {deadNpcTokens.map((t) => (
           <figure class="token-figure">
@@ -135,7 +137,7 @@ const deadNpcTokens = npcTokens.filter((t) => t.dead);
           </figure>
         ))}
       </div>
-    </>
+    </details>
   )}
 </Base>
 

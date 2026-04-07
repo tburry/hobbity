@@ -792,22 +792,38 @@ aside {
 // ============================================================================
 
 details {
-  background-color: var(--accent-bg);
-  border: var(--border-width) solid var(--border);
-  border-radius: var(--border-radius);
-  padding: var(--space-sm) var(--space);
-  margin-block: var(--space);
+  margin: var(--space) 0;
 }
 
 summary {
   cursor: pointer;
-  font-weight: bold;
-  padding: var(--space-sm) var(--space);
-  margin: calc(var(--space-sm) * -1) calc(var(--space) * -1);
-}
+  list-style: none;
 
-details[open] > summary {
-  margin-bottom: var(--space-sm);
+  &::marker,
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  h3 {
+    display: inline;
+  }
+
+  &:hover h3 {
+    color: var(--accent-hover);
+  }
+
+  h3::after {
+    content: '›';
+    display: inline-block;
+    margin-left: var(--space-sm);
+    vertical-align: 0.05em;
+    transition: transform 0.15s;
+    transform-origin: 45% 55%;
+  }
+
+  details[open] > & h3::after {
+    transform: rotate(90deg);
+  }
 }
 
 // ============================================================================
