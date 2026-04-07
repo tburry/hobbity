@@ -15,8 +15,8 @@ pcs:
     level: "1 → 2"
 
 enemiesDefeated:
-  - "1 goblin"
-  - "1 snake"
+  - "1 Goblin"
+  - "1 Snake"
   - "Abramo (killed)"
   - "Kaylin Snowvale (subdued)"
   - "Misha (subdued, sleep dart)"

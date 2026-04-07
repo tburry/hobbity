@@ -15,9 +15,9 @@ pcs:
     level: 1
 
 enemiesDefeated:
-  - "1 crab spider"
-  - "1 floating crystal"
-  - "1 floating eye (bypassed)"
+  - "1 Crab Spider"
+  - "1 Floating Crystal"
+  - "1 Floating Eye (bypassed)"
 
 treasure:
   - "None taken (locked chest left unopened)."

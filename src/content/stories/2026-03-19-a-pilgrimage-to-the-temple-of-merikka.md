@@ -15,10 +15,10 @@ pcs:
     level: 1
 
 enemiesDefeated:
-  - "1 giant lizard"
-  - "6 goblins (1 fled with Derek Desleigh)"
-  - "3 troglodytes"
-  - "1 shrieker"
+  - "1 Giant Lizard"
+  - "6 Goblins (1 fled with Derek Desleigh)"
+  - "3 Troglodytes"
+  - "1 Shrieker"
   - "Derek Desleigh (fled)"
 
 treasure:

@@ -15,8 +15,8 @@ pcs:
     level: 1
 
 enemiesDefeated:
-  - "6 goblins (4 killed, 1 subdued, 1 fled)"
-  - "8 skeletons"
+  - "6 Goblins (4 killed, 1 subdued, 1 fled)"
+  - "8 Skeletons"
   - "[Griff Snowvale](/hobbity/appendix/npcs/#griff-snowvale-gardner) (subdued)"
   - "[Timba Snowvale](/hobbity/appendix/npcs/#timba-snowvale-gardner) (subdued)"
 

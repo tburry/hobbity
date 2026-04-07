@@ -15,7 +15,7 @@ pcs:
     level: 1
 
 enemiesDefeated:
-  - "2 troglodytes"
+  - "2 Troglodytes"
 
 treasure:
   - "Potion of Healing (two doses)"

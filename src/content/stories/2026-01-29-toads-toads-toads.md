@@ -15,8 +15,8 @@ pcs:
     level: 1
 
 enemiesDefeated:
-  - "5 goblins"
-  - "1 giant toad"
+  - "5 Goblins"
+  - "1 Giant Toad"
 ---
 
 ## The Bridge
