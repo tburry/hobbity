@@ -141,7 +141,7 @@ They also found _A Guide to the Herpetology of the Shires_, which mostly concern
 
 ## Prisoners and Parting
 
-The party secured their prisoners—Misha, Kaylin Snowvale, and the Griff and [Timba Snowvale](/hobbity/world/npcs/#timba-snowvale-gardner) still manacled upstairs—locking them in the temple's own rooms. All four murmured in eerie unison, reciting mantras about the great serpent's venom being the milk from which her followers would drink and rise again. It echoed through the worship hall and followed the hobbits up the stairs and out into the night air.
+The party secured their prisoners—Misha, Kaylin Snowvale, and the Griff and [Timba Snowvale](/hobbity/world/npcs/#timba-snowvale) still manacled upstairs—locking them in the temple's own rooms. All four murmured in eerie unison, reciting mantras about the great serpent's venom being the milk from which her followers would drink and rise again. It echoed through the worship hall and followed the hobbits up the stairs and out into the night air.
 
 Ramne took Cirilli and Twitch and scuttled off into the darkness toward his cottage. "Good luck to you," he said, shaking their hands. "You know where to find me, and hopefully I know where to find you this time."
 

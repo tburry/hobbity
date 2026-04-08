@@ -17,8 +17,8 @@ pcs:
 enemiesDefeated:
   - "6 Goblins (4 killed, 1 subdued, 1 fled)"
   - "8 Skeletons"
-  - "[Griff Snowvale](/hobbity/world/npcs/#griff-snowvale-gardner) (subdued)"
-  - "[Timba Snowvale](/hobbity/world/npcs/#timba-snowvale-gardner) (subdued)"
+  - "[Griff Snowvale](/hobbity/world/npcs/#griff-snowvale) (subdued)"
+  - "[Timba Snowvale](/hobbity/world/npcs/#timba-snowvale) (subdued)"
 
 treasure:
   - "Golden Potato (from offering alcove)"

@@ -87,8 +87,8 @@ RELATIONS = {
         ("Conspirator", "[Hanna Boggs](#hanna-boggs)"),
         ("Agent", "[Tobias Chubb](#tobias-chubb)"),
     ],
-    "Griff Snowvale (Gardner)": [
-        ("Family", "[Timba Snowvale](#timba-snowvale-gardner) (son)"),
+    "Griff Snowvale": [
+        ("Family", "[Timba Snowvale](#timba-snowvale) (son)"),
     ],
     "Kaylin Snowvale": [
         ("Family", "[Maddie Snowvale](#maddie-snowvale) (mother)"),
@@ -96,8 +96,8 @@ RELATIONS = {
     "Maddie Snowvale": [
         ("Family", "[Kaylin Snowvale](#kaylin-snowvale) (daughter)"),
     ],
-    "Timba Snowvale (Gardner)": [
-        ("Family", "[Griff Snowvale](#griff-snowvale-gardner) (father)"),
+    "Timba Snowvale": [
+        ("Family", "[Griff Snowvale](#griff-snowvale) (father)"),
     ],
     "Traver Stokehart": [
         ("Employer", "[Zacharias](#zacharias)"),
