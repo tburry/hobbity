@@ -11,3 +11,4 @@ __pycache__/
 .astro/
 _debug/
 *_debug.webp
+public/tiles/

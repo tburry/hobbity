@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Map Pin Editor</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; }
+    body { font-family: system-ui, sans-serif; background: #1e1610; color: #d4c4a8; height: 100vh; display: flex; flex-direction: column; }
+    header { padding: 0.5rem 1rem; display: flex; align-items: center; gap: 1rem; border-bottom: 1px solid #5c4a32; }
+    header h1 { font-size: 1rem; flex: 1; }
+    header p { font-style: italic; opacity: 0.6; font-size: 0.85rem; }
+    .layout { flex: 1; display: flex; overflow: hidden; }
+    #map { flex: 1; background: #1a1a1a; cursor: crosshair; }
+    .sidebar { width: 280px; display: flex; flex-direction: column; border-left: 1px solid #5c4a32; }
+    .sidebar h2 { padding: 0.5rem 0.75rem; font-size: 0.9rem; border-bottom: 1px solid #5c4a32; }
+    #pin-list { list-style: none; padding: 0; flex: 1; overflow-y: auto; }
+    #pin-list li { padding: 0.35rem 0.75rem; border-bottom: 1px solid #3a2e20; cursor: pointer; font-size: 0.85rem; }
+    #pin-list li:hover { background: rgba(255,255,255,0.05); }
+    .pin-coords { opacity: 0.5; font-size: 0.8em; }
+    .actions { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.5rem 0.75rem; border-top: 1px solid #5c4a32; }
+    button { padding: 0.35rem 0.7rem; cursor: pointer; border: 1px solid #5c4a32; background: #2a1f14; color: inherit; border-radius: 3px; font: inherit; font-size: 0.85rem; }
+    button:hover { background: #8b6914; }
+    button.active { background: #8b6914; }
+    .actions button { flex: 1; min-width: calc(50% - 0.25rem); }
+    .danger:hover { background: #8b2020; border-color: #8b2020; }
+
+    dialog { border: 2px solid #5c4a32; border-radius: 6px; background: #1e1610; color: #d4c4a8; padding: 1.5rem; min-width: 340px; }
+    dialog::backdrop { background: rgba(0,0,0,0.6); }
+    dialog h3 { margin-bottom: 0.75rem; }
+    dialog label { display: block; margin-bottom: 0.6rem; font-size: 0.85rem; }
+    dialog input, dialog textarea { display: block; width: 100%; margin-top: 0.2rem; padding: 0.4rem; border: 1px solid #5c4a32; background: #2a1f14; color: inherit; border-radius: 3px; font: inherit; }
+    .dialog-buttons { display: flex; gap: 0.5rem; margin-top: 1rem; }
+
+    /* Symbol picker */
+    .symbol-grid { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 0.25rem; }
+    .symbol-grid button { width: 36px; height: 36px; font-size: 1.2rem; padding: 0; display: flex; align-items: center; justify-content: center; border: 1px solid #5c4a32; background: #2a1f14; border-radius: 3px; cursor: pointer; }
+    .symbol-grid button:hover, .symbol-grid button.selected { background: #8b6914; border-color: #8b6914; }
+
+    /* Map marker icons */
+    .map-pin { display: flex; flex-direction: column; align-items: center; pointer-events: auto !important; }
+    .map-pin-icon { font-size: 1.4rem; line-height: 1; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.8)); cursor: grab; }
+    .map-pin-label { font: 700 11px/1.2 system-ui, sans-serif; color: #fff; background: rgba(30,22,16,0.85); padding: 1px 5px; border-radius: 3px; white-space: nowrap; margin-top: 1px; pointer-events: none; display: none; }
+    .labels-visible .map-pin-label { display: block; }
+    .map-pin:hover .map-pin-label { display: block; }
+
+    /* Leaflet tooltip override for permanent labels */
+    .pin-tooltip { background: rgba(30,22,16,0.85); color: #d4c4a8; border: none; font-size: 11px; font-weight: 700; padding: 2px 6px; box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+    .pin-tooltip::before { display: none; }
+
+    /* Drop zone overlay */
+    .drop-overlay { position: fixed; inset: 0; background: rgba(139,105,20,0.3); border: 4px dashed #8b6914; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; z-index: 10000; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Map Pin Editor</h1>
+    <p>Click to place. Drag to move. Click pin to edit.</p>
+  </header>
+
+  <div class="layout">
+    <div id="map"></div>
+    <div class="sidebar">
+      <h2>Pins</h2>
+      <ul id="pin-list"></ul>
+      <div class="actions">
+        <button id="labels-btn">Show Labels</button>
+        <button id="export-btn">Copy JSON</button>
+        <button id="clear-btn" class="danger">Clear All</button>
+      </div>
+    </div>
+  </div>
+
+  <dialog id="pin-dialog">
+    <form method="dialog">
+      <h3 id="dialog-title">New Pin</h3>
+      <label>
+        Symbol
+        <div class="symbol-grid" id="symbol-grid"></div>
+      </label>
+      <label>Name <input type="text" id="pin-name" required autocomplete="off" /></label>
+      <label>Description <textarea id="pin-desc" rows="3"></textarea></label>
+      <label>Link <input type="text" id="pin-link" placeholder="/hobbity/world/places/#anchor" autocomplete="off" /></label>
+      <div class="dialog-buttons">
+        <button type="submit" id="save-btn">Save</button>
+        <button type="button" id="delete-btn" class="danger" hidden>Delete</button>
+        <button type="button" id="cancel-btn">Cancel</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script>
+    // --- Symbols ---
+    const SYMBOLS = [
+      { icon: '\u{1f3d8}', label: 'Town' },
+      { icon: '\u{1f3e0}', label: 'House' },
+      { icon: '\u{1f3f0}', label: 'Castle' },
+      { icon: '\u26ea',    label: 'Temple' },
+      { icon: '\u{1f37a}', label: 'Tavern' },
+      { icon: '\u{1f6d2}', label: 'Shop' },
+      { icon: '\u{1f332}', label: 'Forest' },
+      { icon: '\u26f0\ufe0f',  label: 'Mountain' },
+      { icon: '\u{1f30a}', label: 'Water' },
+      { icon: '\u{1f309}', label: 'Bridge' },
+      { icon: '\u{1f6e4}\ufe0f', label: 'Road' },
+      { icon: '\u{1f573}\ufe0f', label: 'Cave' },
+      { icon: '\u2620\ufe0f',  label: 'Danger' },
+      { icon: '\u2694\ufe0f',  label: 'Battle' },
+      { icon: '\u{1f480}', label: 'Dead' },
+      { icon: '\u2b50',    label: 'Notable' },
+      { icon: '\u2753',    label: 'Unknown' },
+      { icon: '\u{1f4cd}', label: 'Pin' },
+    ];
+    const DEFAULT_SYMBOL = '\u{1f4cd}';
+    let selectedSymbol = DEFAULT_SYMBOL;
+
+    // Build symbol picker
+    const symbolGrid = document.getElementById('symbol-grid');
+    for (const s of SYMBOLS) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = s.icon;
+      btn.title = s.label;
+      btn.dataset.icon = s.icon;
+      btn.addEventListener('click', () => {
+        symbolGrid.querySelector('.selected')?.classList.remove('selected');
+        btn.classList.add('selected');
+        selectedSymbol = s.icon;
+      });
+      symbolGrid.appendChild(btn);
+    }
+
+    function selectSymbolInGrid(icon) {
+      selectedSymbol = icon || DEFAULT_SYMBOL;
+      symbolGrid.querySelectorAll('button').forEach(b => {
+        b.classList.toggle('selected', b.dataset.icon === selectedSymbol);
+      });
+    }
+
+    // --- Config ---
+    let imageLayer = null;
+    let tileLayer = null;
+    let IMG_W = 0;
+    let IMG_H = 0;
+
+    // --- State ---
+    let pins = JSON.parse(localStorage.getItem('map-pins') || '[]');
+    const markerMap = new Map();
+    let labelsVisible = false;
+
+    // --- Map setup ---
+    const map = L.map('map', {
+      crs: L.CRS.Simple,
+      minZoom: -3,
+      maxZoom: 4,
+      zoomSnap: 0.25,
+    });
+
+    function clearLayers() {
+      if (imageLayer) { imageLayer.remove(); imageLayer = null; }
+      if (tileLayer) { tileLayer.remove(); tileLayer = null; }
+    }
+
+    // Load a single image (drag & drop)
+    function loadImage(url, w, h) {
+      clearLayers();
+      IMG_W = w;
+      IMG_H = h;
+      const bounds = [[0, 0], [h, w]];
+      imageLayer = L.imageOverlay(url, bounds).addTo(map);
+      map.fitBounds(bounds);
+    }
+
+    // Load pre-generated tiles from public/tiles/
+    async function loadTiles(basePath) {
+      try {
+        const resp = await fetch(basePath + '/meta.json');
+        if (!resp.ok) return false;
+        const meta = await resp.json();
+
+        clearLayers();
+        IMG_W = meta.width;
+        IMG_H = meta.height;
+
+        // CRS.Simple has y increasing upward, but our tiles have y=0 at top.
+        // Flip y in the URL so they align.
+        const maxDim = Math.max(IMG_W, IMG_H);
+        const FlippedTileLayer = L.TileLayer.extend({
+          getTileUrl(coords) {
+            const scale = Math.pow(2, coords.z) * meta.tileSize / maxDim;
+            const rows = Math.ceil(IMG_H * scale / meta.tileSize);
+            return `${basePath}/${coords.z}/${coords.x}/${rows - 1 - coords.y}.webp`;
+          },
+        });
+
+        tileLayer = new FlippedTileLayer('', {
+          minZoom: 0,
+          maxZoom: meta.maxZoom,
+          tileSize: meta.tileSize,
+          noWrap: true,
+          bounds: [[0, 0], [IMG_H, IMG_W]],
+        }).addTo(map);
+
+        map.setMaxZoom(meta.maxZoom);
+        map.fitBounds([[0, 0], [IMG_H, IMG_W]]);
+        console.log(`Loaded tiles: ${meta.width}x${meta.height}, zoom 0\u2013${meta.maxZoom}`);
+        return true;
+      } catch {
+        return false;
+      }
+    }
+
+    // --- Drag & drop image (fallback for untiled images) ---
+    let dropOverlay = null;
+
+    document.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      if (!dropOverlay) {
+        dropOverlay = document.createElement('div');
+        dropOverlay.className = 'drop-overlay';
+        dropOverlay.textContent = 'Drop map image here';
+        document.body.appendChild(dropOverlay);
+      }
+    });
+
+    document.addEventListener('dragleave', (e) => {
+      if (e.relatedTarget === null && dropOverlay) {
+        dropOverlay.remove();
+        dropOverlay = null;
+      }
+    });
+
+    document.addEventListener('drop', (e) => {
+      e.preventDefault();
+      if (dropOverlay) { dropOverlay.remove(); dropOverlay = null; }
+
+      const file = e.dataTransfer?.files[0];
+      if (!file || !file.type.startsWith('image/')) return;
+
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        loadImage(url, img.naturalWidth, img.naturalHeight);
+        localStorage.setItem('map-image-name', file.name);
+      };
+      img.src = url;
+    });
+
+    // --- DOM refs ---
+    const dialog = document.getElementById('pin-dialog');
+    const dialogTitle = document.getElementById('dialog-title');
+    const nameInput = document.getElementById('pin-name');
+    const descInput = document.getElementById('pin-desc');
+    const linkInput = document.getElementById('pin-link');
+    const saveBtn = document.getElementById('save-btn');
+    const deleteBtn = document.getElementById('delete-btn');
+    const cancelBtn = document.getElementById('cancel-btn');
+    const pinList = document.getElementById('pin-list');
+    const exportBtn = document.getElementById('export-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const labelsBtn = document.getElementById('labels-btn');
+
+    let editingId = null;
+    let pendingLatLng = null;
+
+    // --- Persistence ---
+    function save() {
+      localStorage.setItem('map-pins', JSON.stringify(pins));
+      renderList();
+    }
+
+    // --- Sidebar ---
+    function renderList() {
+      pinList.innerHTML = '';
+      for (const pin of pins) {
+        const li = document.createElement('li');
+        li.innerHTML = `<span>${pin.symbol || DEFAULT_SYMBOL}</span> <strong>${esc(pin.name)}</strong> <span class="pin-coords">(${pin.x}, ${pin.y})</span>`;
+        li.addEventListener('click', () => {
+          map.setView([pin.y, pin.x], map.getZoom());
+          const m = markerMap.get(pin.id);
+          if (m) m.openTooltip();
+        });
+        pinList.appendChild(li);
+      }
+    }
+
+    function esc(s) {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    // --- Markers ---
+    function makeIcon(pin) {
+      return L.divIcon({
+        className: '',
+        html: `<div class="map-pin"><span class="map-pin-icon">${pin.symbol || DEFAULT_SYMBOL}</span><span class="map-pin-label">${esc(pin.name)}</span></div>`,
+        iconSize: [40, 40],
+        iconAnchor: [20, 20],
+      });
+    }
+
+    function addMarker(pin) {
+      const marker = L.marker([pin.y, pin.x], {
+        icon: makeIcon(pin),
+        draggable: true,
+      }).addTo(map);
+
+      // Tooltip for hover (and permanent mode)
+      marker.bindTooltip(esc(pin.name), {
+        className: 'pin-tooltip',
+        direction: 'top',
+        offset: [0, -16],
+        permanent: labelsVisible,
+      });
+
+      marker.on('click', () => openDialog(pin));
+      marker.on('dragend', () => {
+        const pos = marker.getLatLng();
+        pin.x = Math.round(pos.lng);
+        pin.y = Math.round(pos.lat);
+        save();
+      });
+
+      markerMap.set(pin.id, marker);
+    }
+
+    function updateMarker(pin) {
+      const marker = markerMap.get(pin.id);
+      if (!marker) return;
+      marker.setIcon(makeIcon(pin));
+      marker.setTooltipContent(esc(pin.name));
+    }
+
+    function removeMarker(id) {
+      const m = markerMap.get(id);
+      if (m) { m.remove(); markerMap.delete(id); }
+    }
+
+    // --- Labels toggle ---
+    function toggleLabels() {
+      labelsVisible = !labelsVisible;
+      labelsBtn.classList.toggle('active', labelsVisible);
+      labelsBtn.textContent = labelsVisible ? 'Hide Labels' : 'Show Labels';
+
+      // Rebuild tooltips with new permanent setting
+      for (const [id, marker] of markerMap) {
+        const pin = pins.find(p => p.id === id);
+        if (!pin) continue;
+        marker.unbindTooltip();
+        marker.bindTooltip(esc(pin.name), {
+          className: 'pin-tooltip',
+          direction: 'top',
+          offset: [0, -16],
+          permanent: labelsVisible,
+        });
+      }
+    }
+
+    labelsBtn.addEventListener('click', toggleLabels);
+
+    // --- Dialog ---
+    function openDialog(pin) {
+      if (pin) {
+        editingId = pin.id;
+        dialogTitle.textContent = 'Edit Pin';
+        nameInput.value = pin.name;
+        descInput.value = pin.description || '';
+        linkInput.value = pin.link || '';
+        selectSymbolInGrid(pin.symbol);
+        deleteBtn.hidden = false;
+        saveBtn.textContent = 'Update';
+      } else {
+        editingId = null;
+        dialogTitle.textContent = 'New Pin';
+        nameInput.value = '';
+        descInput.value = '';
+        linkInput.value = '';
+        selectSymbolInGrid(DEFAULT_SYMBOL);
+        deleteBtn.hidden = true;
+        saveBtn.textContent = 'Save';
+      }
+      dialog.showModal();
+      nameInput.focus();
+    }
+
+    // --- Events ---
+    map.on('click', (e) => {
+      pendingLatLng = e.latlng;
+      openDialog();
+    });
+
+    dialog.querySelector('form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = nameInput.value.trim();
+      if (!name) return;
+
+      if (editingId) {
+        const pin = pins.find(p => p.id === editingId);
+        pin.name = name;
+        pin.symbol = selectedSymbol;
+        pin.description = descInput.value.trim() || undefined;
+        pin.link = linkInput.value.trim() || undefined;
+        updateMarker(pin);
+      } else if (pendingLatLng) {
+        const pin = {
+          id: crypto.randomUUID(),
+          name,
+          symbol: selectedSymbol,
+          x: Math.round(pendingLatLng.lng),
+          y: Math.round(pendingLatLng.lat),
+          description: descInput.value.trim() || undefined,
+          link: linkInput.value.trim() || undefined,
+        };
+        pins.push(pin);
+        addMarker(pin);
+        pendingLatLng = null;
+      }
+
+      save();
+      dialog.close();
+    });
+
+    cancelBtn.addEventListener('click', () => { pendingLatLng = null; dialog.close(); });
+
+    deleteBtn.addEventListener('click', () => {
+      if (editingId) {
+        pins = pins.filter(p => p.id !== editingId);
+        removeMarker(editingId);
+        editingId = null;
+        save();
+        dialog.close();
+      }
+    });
+
+    exportBtn.addEventListener('click', () => {
+      const output = pins.map(({ id, ...rest }) => rest);
+      navigator.clipboard.writeText(JSON.stringify(output, null, 2)).then(() => {
+        exportBtn.textContent = 'Copied!';
+        setTimeout(() => { exportBtn.textContent = 'Copy JSON'; }, 1500);
+      });
+    });
+
+    clearBtn.addEventListener('click', () => {
+      if (!confirm('Clear all pins?')) return;
+      for (const id of markerMap.keys()) removeMarker(id);
+      pins = [];
+      save();
+    });
+
+    // --- Init ---
+    // Try loading tiles first (from Astro dev server), fall back to drop prompt.
+    const tilePaths = ['/hobbity/tiles', '/tiles', '../public/tiles'];
+    let loaded = false;
+    for (const p of tilePaths) {
+      loaded = await loadTiles(p);
+      if (loaded) break;
+    }
+
+    if (!loaded) {
+      const center = map.getSize().divideBy(2);
+      L.popup({ closeButton: false, className: 'start-popup' })
+        .setLatLng(map.containerPointToLatLng(center))
+        .setContent('<b>Drag & drop a map image, or run pnpm tiles first</b>')
+        .openOn(map);
+    }
+
+    for (const pin of pins) addMarker(pin);
+    renderList();
+  </script>
+</body>
+</html>

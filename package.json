@@ -12,7 +12,8 @@
     "playground": "pagefind --site dist --serve",
     "astro": "astro",
     "avatar": "scripts/make-avatar",
-    "prepare": "git config core.hooksPath .githooks"
+    "prepare": "git config core.hooksPath .githooks",
+    "tiles": "node scripts/generate-map-tiles.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.3",
