@@ -125,7 +125,11 @@ In the room beyond Abramo's last stand, torchlight fell on something that made t
 
 ![The jade statue of Explictica](../../assets/images/npcs/explictica.webp)
 
-Around it, granite statues of Merikka had been smashed and crudely re-carved into reptilian shapes by someone who clearly had more devotion than talent. And against the east wall, in a small iron cage, a young hobbit woman in tattered rags.
+Around it, granite statues of Merikka had been smashed and crudely re-carved into reptilian shapes by someone who clearly had more devotion than talent.
+
+![Merikka re-carved into Explictica](../../assets/images/merikka-to-explictica.webp)
+
+And against the east wall, in a small iron cage, a young hobbit woman in tattered rags.
 
 Her name was [Cirilli Finla](/hobbity/world/npcs/#cirilli-finla). Daughter of [Quinn Finla](/hobbity/world/npcs/#quinn-finla), the carpenter. The whole family had been abducted one night—taken to the Golden Grain Inn, marched blindfolded through tunnels and wilderness for days, brought to some place where Abramo performed a ceremony that charmed everyone into obedience. Everyone except Cirilli. Whatever he'd done to scramble their minds hadn't worked on her, and so she'd been brought back and caged in the dark, fed on scraps, listening to a madman chip away at granite statues and mutter about his goddess.
 

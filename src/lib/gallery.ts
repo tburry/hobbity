@@ -88,7 +88,16 @@ export const images: GalleryImage[] = [
     storyLink: '/hobbity/stories/2026-03-22-the-skeleton-room/#the-mural-of-merikka',
     storyTitle: 'The Skeleton Room',
   },
-  // 2026-03-31 — The Serpent Beneath (NPC portraits)
+  // 2026-03-31 — The Serpent Beneath
+  {
+    src: img('merikka-to-explictica.webp'),
+    alt: 'Merikka re-carved into Explictica',
+    caption:
+      'Abramo\'s handiwork: granite statues of the harvest goddess Merikka smashed and crudely re-carved into the serpent goddess Explictica. More devotion than talent.',
+    storyLink:
+      '/hobbity/stories/2026-03-31-the-serpent-beneath/#prisoner-of-the-snake-goddess',
+    storyTitle: 'The Serpent Beneath',
+  },
   {
     src: img('cirilli-finla.webp'),
     alt: 'Cirilli Finla',
