@@ -88,6 +88,53 @@ export const images: GalleryImage[] = [
     storyLink: '/hobbity/stories/2026-03-22-the-skeleton-room/#the-mural-of-merikka',
     storyTitle: 'The Skeleton Room',
   },
+  // 2026-03-31 — The Serpent Beneath (NPC portraits)
+  {
+    src: img('cirilli-finla.webp'),
+    alt: 'Cirilli Finla',
+    caption:
+      'Cirilli Finla, youngest daughter of Quinn the carpenter. The only member of her family the charming ceremony didn\'t take. Imprisoned for weeks in Abramo\'s lair beneath the Temple of Merikka.',
+    storyLink:
+      '/hobbity/stories/2026-03-31-the-serpent-beneath/#prisoner-of-the-snake-goddess',
+    storyTitle: 'The Serpent Beneath',
+  },
+  // 2026-03-22 — The Skeleton Room
+  {
+    src: img('griff-snowvale.webp'),
+    alt: 'Griff Snowvale',
+    caption:
+      'Griff Snowvale, a gardener charmed into the cult of Explictica. Broad, furious, and refusing to talk.',
+    storyLink:
+      '/hobbity/stories/2026-03-22-the-skeleton-room/#the-bones-stand-up',
+    storyTitle: 'The Skeleton Room',
+  },
+  {
+    src: img('kaylin-snowvale.webp'),
+    alt: 'Kaylin Snowvale',
+    caption:
+      'Kaylin Snowvale, charmed beyond reason by the cult of Explictica. Nothing behind her eyes.',
+    storyLink:
+      '/hobbity/stories/2026-03-22-the-skeleton-room/#the-bones-stand-up',
+    storyTitle: 'The Skeleton Room',
+  },
+  {
+    src: img('timba-snowvale.webp'),
+    alt: 'Timba Snowvale',
+    caption:
+      'Timba Snowvale, charmed by the cult of Explictica. Defiant and uncooperative.',
+    storyLink:
+      '/hobbity/stories/2026-03-22-the-skeleton-room/#the-bones-stand-up',
+    storyTitle: 'The Skeleton Room',
+  },
+  {
+    src: img('derek-desleigh.webp'),
+    alt: 'Derek Desleigh',
+    caption:
+      'Derek Desleigh, a scarred hobbit who commands goblins and served the cult of Explictica beneath the Temple of Merikka. Allied with Zacharias. Still at large.',
+    storyLink:
+      '/hobbity/stories/2026-03-22-the-skeleton-room/#the-bones-stand-up',
+    storyTitle: 'The Skeleton Room',
+  },
   // 2026-03-19 — A Pilgrimage to the Temple of Merikka
   {
     src: img('brooch-of-shielding.webp'),
@@ -179,6 +226,16 @@ export const images: GalleryImage[] = [
     caption: 'The Toad Stompers crest.',
     storyLink: '/hobbity/stories/2026-01-29-toads-toads-toads/#the-bridge',
     storyTitle: 'Toads, Toads, Toads',
+  },
+  // 2025-11-27 — Green Cows and Blackberries (NPC portraits)
+  {
+    src: img('krund-pothrower.webp'),
+    alt: 'Krund Pothrower',
+    caption:
+      'Krund Pothrower, freeloading dwarf and co-owner of Duddle & Pothrower. Sent to rebuild Tom Huddle\'s barn, he berated his worker into a strike and moved into the Huddle house instead.',
+    storyLink:
+      '/hobbity/stories/2025-11-27-green-cows-and-blackberries/#the-huddle-household',
+    storyTitle: 'Green Cows and Blackberries',
   },
   // 2025-11-27 — Green Cows and Blackberries
   {
@@ -273,6 +330,13 @@ export const images: GalleryImage[] = [
     storyLink:
       '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-road-to-gomwick',
     storyTitle: 'The Gomwick Harvest Festival',
+  },
+  // NPC portraits (no story link)
+  {
+    src: img('opal.webp'),
+    alt: 'Opal',
+    caption:
+      'Opal, the Toad Stompers\' pony, purchased in Gomwick before heading to Orlane.',
   },
   {
     src: img('road-to-gomwick.webp'),
