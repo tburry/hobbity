@@ -17,6 +17,12 @@ lessons here as they come up, then periodically promote them into CLAUDE.md.
 
 - Never use raw rem/px values for padding and spacing. Use `var(--space)` (16px) or `var(--space-sm)` (8px) or multiples thereof to maintain the 8px grid.
 
+## NPC Relations
+
+- When adding a relation field to an NPC, always add the matching cross-reference on the other NPC's entry.
+- Relations between allies/conspirators who aren't family or employer/employee use **In cahoots with:** as the field label.
+- For families of 5+ members, create a "The Lastname Family" entry with a nested ul family tree. Individual family members then use **Family:** [The Lastname Family](#the-lastname-family) instead of listing every relation.
+
 ## PRs and Commits
 
 - Never include "Generated with Claude Code" footers in PRs or commits.

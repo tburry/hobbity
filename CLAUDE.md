@@ -162,7 +162,7 @@ Also review `src/content/world/npcs.mdx` against the totality of all stories. NP
 - Location belongs in the **Location** field, not the blurb. Don't duplicate location info in prose.
 - Relations (family, employer, etc.) belong in relation fields, not as blurb text. Don't use "X's son" as the entire characterization—add a relation field and write actual characterization.
 - Include a **Status** line for NPCs who are dead, captured, missing, in hiding, at large, etc. Omit status for NPCs in normal circumstances. Always pair the status with a brief context sentence (e.g. "Dead—killed by Boffo beneath the Temple of Merikka").
-- Add a death dagger to dead NPC/PC headings: `### Name **†**`. A rehype plugin converts this to `<dfn title="Dead">†</dfn>` and pre-assigns a clean heading ID so the `†` doesn't pollute the anchor.
+- Add a `<Dead />` component to dead NPC/PC headings: `### Name <Dead />`. A rehype plugin pre-assigns a clean heading ID so the `†` doesn't pollute the anchor.
 
 ## Ledger Maintenance
 
