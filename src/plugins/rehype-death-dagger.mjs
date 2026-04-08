@@ -1,7 +1,7 @@
 /**
- * Rehype plugin that finds headings containing a bold † and:
- * 1. Pre-assigns a clean ID (without the dagger)
- * 2. Replaces the <strong>†</strong> with <dfn title="Dead" class="icon-dfn">†</dfn>
+ * Rehype plugin that finds headings containing a <Dead /> component
+ * (rendered as <dfn class="icon-dfn icon-dead">) and pre-assigns a clean
+ * heading ID that excludes the dagger symbol.
  *
  * Runs as a user rehype plugin before Astro's rehypeHeadingIds,
  * so the pre-assigned ID prevents Astro from generating a dirty slug.
@@ -15,6 +15,12 @@ function getTextContent(node) {
   return '';
 }
 
+function isDeadDfn(node) {
+  if (node.tagName !== 'dfn') return false;
+  const classes = node.properties?.className ?? [];
+  return classes.includes('icon-dead');
+}
+
 export default function rehypeDeathDagger() {
   return (tree) => {
     const slugger = new Slugger();
@@ -22,15 +28,12 @@ export default function rehypeDeathDagger() {
     visit(tree, 'element', (node) => {
       if (!/^h[1-6]$/.test(node.tagName)) return;
 
-      // Find a <strong> child containing only †
+      // Find a <dfn class="icon-dead"> child
       const lastIdx = node.children.length - 1;
       const last = node.children[lastIdx];
-      if (!last || last.tagName !== 'strong') return;
+      if (!last || !isDeadDfn(last)) return;
 
-      const strongText = getTextContent(last).trim();
-      if (strongText !== '†') return;
-
-      // Build clean text for slug
+      // Build clean text for slug (exclude the dfn)
       const cleanText = node.children
         .slice(0, lastIdx)
         .map(getTextContent)
@@ -41,22 +44,11 @@ export default function rehypeDeathDagger() {
       node.properties ??= {};
       node.properties.id = slugger.slug(cleanText);
 
-      // Trim trailing whitespace from preceding text node
+      // Ensure a space before the dfn
       const prev = node.children[lastIdx - 1];
       if (prev?.type === 'text') {
-        prev.value = prev.value.replace(/\s+$/, '');
+        prev.value = prev.value.replace(/\s+$/, '') + ' ';
       }
-
-      // Replace <strong>†</strong> with <dfn title="Dead" class="icon-dfn">†</dfn>
-      node.children.splice(lastIdx, 1,
-        { type: 'text', value: ' ' },
-        {
-          type: 'element',
-          tagName: 'dfn',
-          properties: { title: 'Dead', className: ['icon-dfn'] },
-          children: [{ type: 'text', value: '†' }],
-        }
-      );
     });
   };
 }

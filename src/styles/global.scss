@@ -455,30 +455,58 @@ dfn {
   font-style: normal;
   text-decoration: underline dotted var(--border);
   cursor: help;
+}
 
-  &.icon-dfn {
-    color: transparent;
-    text-decoration: none;
-    display: inline;
-    position: relative;
-    vertical-align: baseline;
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0.1ex;
-      left: 0;
-      width: 0.6em;
-      height: 1em;
-      background-color: var(--accent);
-      -webkit-mask-image: url('/hobbity/icons/death-dagger.svg');
-      mask-image: url('/hobbity/icons/death-dagger.svg');
-      -webkit-mask-size: contain;
-      mask-size: contain;
-      -webkit-mask-repeat: no-repeat;
-      mask-repeat: no-repeat;
-      -webkit-mask-position: center;
-      mask-position: center;
-    }
+.icon-dfn {
+  text-decoration: none;
+  display: inline;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.icon-dead {
+  color: transparent;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0.1ex;
+    left: 0;
+    width: 0.6em;
+    height: 1em;
+    background-color: var(--accent);
+    -webkit-mask-image: url('/hobbity/icons/death-dagger.svg');
+    mask-image: url('/hobbity/icons/death-dagger.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+  }
+}
+
+.icon-married {
+  color: var(--accent);
+}
+
+.icon-twins {
+  color: transparent;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0.1ex;
+    left: 0;
+    width: 0.6em;
+    height: 1em;
+    background-color: var(--accent);
+    -webkit-mask-image: url('/hobbity/icons/gemini.svg');
+    mask-image: url('/hobbity/icons/gemini.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
   }
 }
 
@@ -565,6 +593,10 @@ pre {
 ul, ol {
   padding-inline-start: calc(var(--space) * 1.5);
   margin: 0 0 var(--space);
+
+  ul, ol {
+    margin-bottom: 0;
+  }
 }
 
 ul {
@@ -589,6 +621,12 @@ ul {
     content: '✧\00a0\00a0';
     font-size: 0.8em;
     vertical-align: 0.1em;
+  }
+
+  ul ul > li::before {
+    content: '✦\00a0\00a0';
+    font-size: 0.7em;
+    vertical-align: 0.15em;
   }
 }
 
