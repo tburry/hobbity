@@ -9,7 +9,7 @@ const pcs = (await getCollection('pcs')).sort((a, b) => a.data.order - b.data.or
 <Base title="Appendix">
   <h1>Appendices</h1>
 
-  <h2>World</h2>
+  <h2 id="world">World</h2>
   <ul>
     {worldOrder.map((id) => (
       <li>
@@ -25,7 +25,7 @@ const pcs = (await getCollection('pcs')).sort((a, b) => a.data.order - b.data.or
     ))}
   </ul>
 
-  <h2>Appendices</h2>
+  <h2 id="appendices">Appendices</h2>
   <ul>
     {appendixOrder.map((id) => (
       <li>

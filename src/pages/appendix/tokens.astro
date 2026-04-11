@@ -84,10 +84,10 @@ const deadNpcTokens = npcTokens.filter((t) => t.dead);
 
   <h1 data-pagefind-body>Tokens</h1>
 
-  <h2>PCs</h2>
+  <h2 id="pcs">PCs</h2>
   {pcLevels.map((group, i) => (
     <details open={i === 0 ? true : undefined}>
-      <summary><h3>Level {group.level}</h3></summary>
+      <summary><h3 id={`level-${group.level}`}>Level {group.level}</h3></summary>
       <div class="token-grid no-lightbox">
         {group.tokens.map((t) => (
           <figure class="token-figure">
@@ -104,9 +104,9 @@ const deadNpcTokens = npcTokens.filter((t) => t.dead);
     </details>
   ))}
 
-  <h2>NPCs</h2>
+  <h2 id="npcs">NPCs</h2>
   <details open>
-    <summary><h3>Alive</h3></summary>
+    <summary><h3 id="alive">Alive</h3></summary>
     <div class="token-grid no-lightbox">
       {aliveNpcs.map((t) => (
         <figure class="token-figure">
@@ -123,7 +123,7 @@ const deadNpcTokens = npcTokens.filter((t) => t.dead);
   </details>
   {deadNpcTokens.length > 0 && (
     <details>
-      <summary><h3>Dead</h3></summary>
+      <summary><h3 id="dead">Dead</h3></summary>
       <div class="token-grid no-lightbox">
         {deadNpcTokens.map((t) => (
           <figure class="token-figure">
