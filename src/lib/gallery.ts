@@ -24,7 +24,25 @@ function img(name: string): ImageMetadata {
 // Sorted reverse chronologically by story date, then reverse story order
 // within each story (latest scene first).
 export const images: GalleryImage[] = [
+  {
+    src: img('cirilli-finla.webp'),
+    alt: 'Cirilli Finla',
+    caption:
+      'Cirilli Finla, youngest daughter of Quinn the carpenter. The only member of her family the charming ceremony didn\'t take. Imprisoned for weeks in Abramo\'s lair beneath the Temple of Merikka.',
+    storyLink:
+      '/hobbity/stories/2026-03-31-the-serpent-beneath/#prisoner-of-the-snake-goddess',
+    storyTitle: 'The Serpent Beneath',
+  },
   // 2026-03-31 — The Serpent Beneath
+  {
+    src: img('merikka-to-explictica.webp'),
+    alt: 'Merikka re-carved into Explictica',
+    caption:
+      'Abramo\'s handiwork: granite statues of the harvest goddess Merikka smashed and crudely re-carved into the serpent goddess Explictica. More devotion than talent.',
+    storyLink:
+      '/hobbity/stories/2026-03-31-the-serpent-beneath/#prisoner-of-the-snake-goddess',
+    storyTitle: 'The Serpent Beneath',
+  },
   {
     src: img('explictica.webp'),
     alt: 'The jade statue of Explictica',
@@ -44,19 +62,19 @@ export const images: GalleryImage[] = [
     storyTitle: 'The Serpent Beneath',
   },
   {
-    src: img('ramne.webp'),
-    alt: 'Ramne',
+    src: img('ramne-offers-boffo-pipe.webp'),
+    alt: 'Ramne offers Boffo a puff of his pipe',
     caption:
-      'Ramne, an old hobbit druid with his weasel Twitch perched on his head. He carried a book, a wooden spoon, and three healing spells—all of which he spent on the Toad Stompers.',
+      'Ramne packed his pipe amid the skeleton-strewn ruins beneath the Temple of Merikka. "The only religion I follow is this right here," he said. Boffo asked for a bit of that religion too.',
     storyLink:
       '/hobbity/stories/2026-03-31-the-serpent-beneath/#ramne',
     storyTitle: 'The Serpent Beneath',
   },
   {
-    src: img('ramne-offers-boffo-pipe.webp'),
-    alt: 'Ramne offers Boffo a puff of his pipe',
+    src: img('ramne.webp'),
+    alt: 'Ramne',
     caption:
-      'Ramne packed his pipe amid the skeleton-strewn ruins beneath the Temple of Merikka. "The only religion I follow is this right here," he said. Boffo asked for a bit of that religion too.',
+      'Ramne, an old hobbit druid with his weasel Twitch perched on his head. He carried a book, a wooden spoon, and three healing spells—all of which he spent on the Toad Stompers.',
     storyLink:
       '/hobbity/stories/2026-03-31-the-serpent-beneath/#ramne',
     storyTitle: 'The Serpent Beneath',
@@ -87,25 +105,6 @@ export const images: GalleryImage[] = [
       'A freshly painted mural on the north wall of the temple dining hall, depicting the goddess Merikka surrounded by cornucopia, fish, pumpkins, and grapes. A shrine to abundance in a town where people were disappearing.',
     storyLink: '/hobbity/stories/2026-03-22-the-skeleton-room/#the-mural-of-merikka',
     storyTitle: 'The Skeleton Room',
-  },
-  // 2026-03-31 — The Serpent Beneath
-  {
-    src: img('merikka-to-explictica.webp'),
-    alt: 'Merikka re-carved into Explictica',
-    caption:
-      'Abramo\'s handiwork: granite statues of the harvest goddess Merikka smashed and crudely re-carved into the serpent goddess Explictica. More devotion than talent.',
-    storyLink:
-      '/hobbity/stories/2026-03-31-the-serpent-beneath/#prisoner-of-the-snake-goddess',
-    storyTitle: 'The Serpent Beneath',
-  },
-  {
-    src: img('cirilli-finla.webp'),
-    alt: 'Cirilli Finla',
-    caption:
-      'Cirilli Finla, youngest daughter of Quinn the carpenter. The only member of her family the charming ceremony didn\'t take. Imprisoned for weeks in Abramo\'s lair beneath the Temple of Merikka.',
-    storyLink:
-      '/hobbity/stories/2026-03-31-the-serpent-beneath/#prisoner-of-the-snake-goddess',
-    storyTitle: 'The Serpent Beneath',
   },
   // 2026-03-22 — The Skeleton Room
   {
@@ -246,6 +245,14 @@ export const images: GalleryImage[] = [
       '/hobbity/stories/2025-11-27-green-cows-and-blackberries/#the-huddle-household',
     storyTitle: 'Green Cows and Blackberries',
   },
+  {
+    src: img('opal.webp'),
+    alt: 'Opal',
+    caption:
+      'Opal, the Toad Stompers\' pony, purchased in Gomwick before heading to Orlane. Opal is a good boy.',
+    storyLink: '/hobbity/stories/2025-11-24-the-summons/#a-pony-named-opal',
+    storyTitle: 'The Summons',
+  },
   // 2025-11-27 — Green Cows and Blackberries
   {
     src: img('two-headed-snake-stone.webp'),
@@ -323,6 +330,15 @@ export const images: GalleryImage[] = [
     storyTitle: 'The Gomwick Harvest Festival',
   },
   {
+    src: img('gomwick-harvest-fair.webp'),
+    alt: 'The Gomwick Harvest Fair grounds from above',
+    caption:
+      'The Gomwick Harvest Fair sprawled across the north commons: tents and stalls clustered along winding paths, pumpkin patches at the edges, and the great arched gate at the entrance welcoming hobbits from miles around.',
+    storyLink:
+      '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-festival',
+    storyTitle: 'The Gomwick Harvest Festival',
+  },
+  {
     src: img('tobias-chubb.webp'),
     alt: 'Tobias Chubb',
     caption:
@@ -339,13 +355,6 @@ export const images: GalleryImage[] = [
     storyLink:
       '/hobbity/stories/2025-11-06-the-gomwick-harvest-festival/#the-road-to-gomwick',
     storyTitle: 'The Gomwick Harvest Festival',
-  },
-  // NPC portraits (no story link)
-  {
-    src: img('opal.webp'),
-    alt: 'Opal',
-    caption:
-      'Opal, the Toad Stompers\' pony, purchased in Gomwick before heading to Orlane.',
   },
   {
     src: img('road-to-gomwick.webp'),

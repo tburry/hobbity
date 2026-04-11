@@ -35,6 +35,8 @@ Along the way they encountered [Tobias Chubb](/hobbity/world/npcs/#tobias-chubb)
 
 ## The Festival
 
+![The Gomwick Harvest Fair grounds](../../assets/images/gomwick-harvest-fair.webp)
+
 The festival was everything three young hobbits could want: eating, drinking, games, and more eating. Wedge scored two bullseyes in the axe-throwing with a shiny new axe from [Lotho Longbuck](/hobbity/world/npcs/#lotho-longbuck)’s shop. Turnip entered the storytelling competition. Boffo entered the pie-eating qualifiers and won handily. The crowd gasped. Some asked how he could possibly eat so much. Boffo shrugged. “I like pie.”
 
 ![The pie-eating contest](../../assets/images/pie-eating-contest.webp)

@@ -129,3 +129,11 @@ For Boffo: "My boy, you're a true champion! I have this elixir to help you when 
 For Wedge: "I know you've already got a good axe from Lotho, so I didn't think you'd need another weapon. Instead I got you a quick escape, should you need it. Drink this down and you will vanish from sight long enough to get away."
 
 Sufficient food and drink for three days' travel was loaded up, and the three hobbits set about preparing for the road to Orlane.
+
+## A Pony Named Opal
+
+Before leaving Gomwick, the hobbits stopped at the stables to find a pony stout enough to carry their packs and provisions on the road. After some looking and a fair bit of haggling, they settled on a sturdy little fellow with a kind eye and a patient temperament. They named him [Opal](/hobbity/world/npcs/#opal), and Opal is a good boy.
+
+![Opal, the Toad Stompers' pony](../../assets/images/npcs/opal.webp)
+
+With Opal's panniers loaded and their bellies full, the three hobbits set out at last on the road to Orlane.
