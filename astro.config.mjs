@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import pagefind from 'astro-pagefind';
 import mdx from '@astrojs/mdx';
+import svelte from '@astrojs/svelte';
 import AstroPWA from '@vite-pwa/astro';
 import rehypeDeathDagger from './src/plugins/rehype-death-dagger.mjs';
 export default defineConfig({
@@ -15,6 +16,7 @@ export default defineConfig({
     responsiveStyles: true,
   },
   integrations: [
+    svelte(),
     mdx(),
     pagefind(),
     AstroPWA({
