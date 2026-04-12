@@ -1,0 +1,17 @@
+[
+  {
+    "number": 0,
+    "name": "Gomwick",
+    "x": 3278,
+    "y": 5039,
+    "font": "title",
+    "size": "lg",
+    "fixed": true
+  },
+  {
+    "number": 1,
+    "name": "Oak Market Square",
+    "x": 3462,
+    "y": 1919
+  }
+]
