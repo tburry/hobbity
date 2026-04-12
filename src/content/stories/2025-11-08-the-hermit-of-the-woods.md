@@ -67,13 +67,128 @@ With intensity in his eyes, Buford listened to their report of meeting with The 
 
 “I’d like my blowgun back, if you wouldn't mind. It is after all, quite sentimental for me.”
 
+Before Buford could send them on their way, Turnip insisted on performing the ballad he had worked out on the walk through the woods. He had intended it for the storytelling quarter-final, only to return to Gomwick and find the competition had come and gone without him. Undeterred, he prefaced the tale with the disclaimer that any similarities between its characters and real hobbits should be ignored on account of he doesn't want the Shirriff coming after him for slander. Buford and his household proved a captive and delighted audience.
+
+### The Pies of Gomwick Fair
+
+or _How a Timely Tumble Turned the Tables on a Trickster_\
+as told by Turnip Bramblebrook
+
+> O hark, good folk of field and dell,\
+> and gather near to me,\
+> For I shall sing of autumn days\
+> beside this old oak tree.\
+> When pies were piled like haystacks,\
+> and cider steamed the air,\
+> And fate crept softly through the tents\
+> at the Gomwick Harvest Fair.
+>
+> My friend had reached the finals\
+> in the contest of the pies,\
+> Where hobbits bold did strive with forks\
+> and a hunger in their eyes.\
+> The crowd was loud, the trumpets bright,\
+> the tables fit for kings,\
+> Yet doom lay hidden in the shade\
+> of lesser-spoken things.
+>
+> For near the cider barrels, friends,\
+> there whispered two in spite,\
+> One, A. Lardy, a grumbling wretch,\
+> whose orchards groaned with blight.\
+> Seven years the fruit-crown lost,\
+> to Odelay the Fair,\
+> And envy gnawed his weary heart\
+> like a weasel in its lair.
+>
+> Now Odelay oft declared with pride\
+> the secret of his trees:\
+> His children sang among the boughs\
+> like a gentle summer breeze.\
+> Their voices, sweet as starlight spun,\
+> he claimed would bless the fruit,\
+> And by their songs the harvest swelled\
+> from blossom unto root.
+>
+> But Lardy scoffed at tales like this\
+> with bitter curling lip.\
+> "Lies and tricks and dismal tales,\
+> a fraudulent fellowship.\
+> No magic children, no singing trees,\
+> no charms of branch and bough.\
+> A cheat he is, and by my scheme\
+> I mean to stop him now."
+>
+> With Lardy stood the Potty lass,\
+> who muttered low and sly,\
+> She listened to his wicked plan\
+> to taint the apple pie.\
+> A tincture brewed from parasols\
+> of a green and poisonous shade,\
+> A drop to sour the tasting feast\
+> and see their rival fade.
+>
+> I heard them speak in voices dark,\
+> and fled without a sound,\
+> To seek my true companions two\
+> who swiftly gathered round.\
+> We swore an oath in pumpkin light\
+> to guard the feast that day,\
+> For pies, like peace and honest hearts,\
+> must never be betrayed.
+>
+> Then through the throngs we stole apart\
+> beneath the banners high,\
+> While market folk with merry shouts\
+> sent coloured leaves awry.\
+> I tracked the rascal Chubbins T.,\
+> a scoundrel thin and sly,\
+> Who bore the fateful flask of doom\
+> with gleam of cunning eye.
+>
+> He ambled toward the bakers' tent\
+> all aloof and unperturbed,\
+> Intent to spill his venom there\
+> before the pies were served.\
+> But swift as wind on autumn fields\
+> I leapt to block his path,\
+> And tumbled hard in feigned misstep\
+> to Chubbins' pique and wrath.
+>
+> Flour burst around us both\
+> like winter's early snow,\
+> The tent was filled with startled cries,\
+> amidst the ovens' glow.\
+> And in that swirl my comrade brave\
+> with fingers quick and light,\
+> Drew out the flask from Chubbins' coat\
+> and vanished from his sight.
+>
+> The villain saw his fortune fled\
+> and into panic ran,\
+> He bolted through the scattered crowds\
+> no more to plot or plan.\
+> And Lardy's scheme was soon unveiled,\
+> his heart of envy bared,\
+> While Odelay won once again\
+> at the Gomwick Harvest Fair.
+>
+> So lift your cups and sing with me\
+> of courage in the Shire,\
+> Of pies unspoiled, of friendships true,\
+> of feasting by the fire.\
+> For though the shadows sometimes creep\
+> through tents and autumn air,\
+> The light holds fast when hobbits stand\
+> at the Gomwick Harvest Fair.
+
 At the end of the conversation, he gave each of them a stack of 5 gold coins, and said, “Thank you kindly for having done this task for me. I know it was a heavy thing of me to ask, and it cost you a morning’s enjoyment of the Festival. You are welcome here in my house tonight. In fact, I have already taken the liberty and spoken with Nali Stonecleft, and his grandsons already brought up your belongings, which you will find in your individual guest rooms where you slept last night. Your pony, as well, has been brought up and is enjoying his stay in my stable. I encourage you to go back to the festival and enjoy the final night’s festivities! Then come back and sleep comfortably here. Tomorrow morning we will say our goodbyes, and I will see you well provisioned for your journey back to your homes.”
 
 ## The Final Night
 
 The party returned to the festival for the final evening.
 
-Turnip discovered he had missed the quarter-final of the Storytelling Competition and been disqualified. He spent the evening instead telling stories by a campfire to a circle of old-timers who griped about how "Tucker Tallowfoot ate 17 pies to win the trophy back in aught-eight"—"You're wrong! It was aught-six, and it was 21 pies!"—and how the pies were full-sized in those days, not the little ones this Bucko Lunderfella ate this year. The apples these days were mealy and flavourless, and the girls not as pretty as they used to be. At the end of the night, they declared Turnip "a fine fellow, indeed" and felt the future of the Shires was in good hands.
+Turnip, his ballad already performed to Buford's great delight, spent the evening telling more stories by a campfire to a circle of old-timers who griped about how "Tucker Tallowfoot ate 17 pies to win the trophy back in aught-eight"—"You're wrong! It was aught-six, and it was 21 pies!"—and how the pies were full-sized in those days, not the little ones this Bucko Lunderfella ate this year. The apples these days were mealy and flavourless, and the girls not as pretty as they used to be. At the end of the night, they declared Turnip "a fine fellow, indeed" and felt the future of the Shires was in good hands.
 
 Wedge got into at least three fights with inanimate objects he claimed were looking at him funny. The third saw him plunge his axe into the face of a wooden horse on the carousel, making several children cry and many parents upset. Nali Stonecleft took him aside, steadied his paranoid nerves with moonshine, and kept an eye on him for the rest of the evening.
 
