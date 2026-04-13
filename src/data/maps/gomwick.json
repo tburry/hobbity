@@ -1,17 +1,218 @@
 [
   {
-    "number": 0,
-    "name": "Gomwick",
-    "x": 3278,
-    "y": 5039,
-    "font": "title",
-    "size": "lg",
-    "fixed": true
+    "kind": "pin",
+    "number": "1",
+    "name": "Oak Market Square",
+    "x": 3165,
+    "y": 2157
   },
   {
-    "number": 1,
-    "name": "Oak Market Square",
-    "x": 3462,
-    "y": 1919
+    "kind": "pin",
+    "number": "2",
+    "name": "Millie's Brewery",
+    "x": 3641,
+    "y": 1064,
+    "class": "landmark",
+    "longName": "Millie's Brewery & Ale House"
+  },
+  {
+    "kind": "pin",
+    "number": "3",
+    "name": "Gomwick General Goods",
+    "x": 3830,
+    "y": 1327
+  },
+  {
+    "kind": "pin",
+    "number": "4",
+    "name": "Longbuck's Creamery",
+    "x": 4009,
+    "y": 1617,
+    "longName": "Longbuck's Creamery & Cheesery"
+  },
+  {
+    "kind": "pin",
+    "number": "5",
+    "name": "The New Butchery",
+    "x": 4115,
+    "y": 2091
+  },
+  {
+    "kind": "pin",
+    "number": "6",
+    "name": "The Happy",
+    "x": 4689,
+    "y": 2169,
+    "longName": "The Happy Hobbit Inn & Tavern",
+    "description": "The Happy Hobbit Inn & Tavern"
+  },
+  {
+    "kind": "pin",
+    "number": "6a",
+    "name": "Happy West",
+    "x": 4481,
+    "y": 2388,
+    "longName": "The Happy West House (Guest Rooms)"
+  },
+  {
+    "kind": "pin",
+    "number": "6b",
+    "name": "Happy East",
+    "x": 4936,
+    "y": 2073,
+    "longName": "The Happy East House (Guest Rooms)"
+  },
+  {
+    "kind": "pin",
+    "number": "7",
+    "name": "The Happy Storage",
+    "x": 5139,
+    "y": 1842
+  },
+  {
+    "kind": "pin",
+    "number": "8",
+    "name": "The Happy Stables",
+    "x": 5385,
+    "y": 1610,
+    "longName": "The Happy Barn & Stables"
+  },
+  {
+    "kind": "pin",
+    "number": "10",
+    "name": "Festival Campground",
+    "x": 3743,
+    "y": 405
+  },
+  {
+    "kind": "pin",
+    "number": "11",
+    "name": "Festival Games",
+    "x": 4733,
+    "y": 1288
+  },
+  {
+    "kind": "pin",
+    "number": "13",
+    "name": "All Things Metal",
+    "x": 3932,
+    "y": 3576,
+    "class": "landmark"
+  },
+  {
+    "kind": "pin",
+    "number": "14",
+    "name": "Cousin Roland's Smithy",
+    "x": 3886,
+    "y": 3326,
+    "class": "landmark"
+  },
+  {
+    "kind": "pin",
+    "number": "15",
+    "name": "Finckle's Finery",
+    "x": 3956,
+    "y": 2815
+  },
+  {
+    "kind": "pin",
+    "number": "16",
+    "name": "Greengrocery",
+    "x": 3676,
+    "y": 2591,
+    "longName": "Gilly Greene's Greengrocery"
+  },
+  {
+    "kind": "pin",
+    "number": "17",
+    "name": "The Gomwick Granery",
+    "x": 3123,
+    "y": 2699
+  },
+  {
+    "kind": "pin",
+    "number": "18",
+    "name": "Mrs. Cratchit's Bakery",
+    "x": 2815,
+    "y": 2780
+  },
+  {
+    "kind": "pin",
+    "number": "19",
+    "name": "Longbuck's Lumber",
+    "x": 2458,
+    "y": 2415,
+    "longName": "Longbuck's Lumber & Forestry Supply",
+    "description": "Longbick's Lumber & Forestry Supply"
+  },
+  {
+    "kind": "pin",
+    "number": "21",
+    "name": "Toppo Hill House",
+    "x": 1148,
+    "y": 777
+  },
+  {
+    "kind": "text",
+    "number": "",
+    "name": "Gomwick Forrest",
+    "x": 738,
+    "y": 2392,
+    "class": "forest",
+    "width": 1289,
+    "height": 2091
+  },
+  {
+    "kind": "text",
+    "number": "",
+    "name": "Spottle Pond",
+    "x": 3545,
+    "y": 4010,
+    "class": "pond-marsh",
+    "width": 382,
+    "height": 493,
+    "minZoom": 4
+  },
+  {
+    "kind": "text",
+    "number": "",
+    "name": "Gomwick",
+    "x": 3948,
+    "y": 5054,
+    "class": "map-title",
+    "width": 6444,
+    "height": 636,
+    "valign": "bottom",
+    "minZoom": 0
+  },
+  {
+    "kind": "text",
+    "number": "",
+    "name": "The South Common",
+    "x": 4194,
+    "y": 4579,
+    "class": "civic-space",
+    "width": 1600,
+    "height": 700
+  },
+  {
+    "kind": "text",
+    "number": "",
+    "name": "The North Common",
+    "x": 4881,
+    "y": 502,
+    "class": "civic-space",
+    "width": 1090,
+    "height": 890
+  },
+  {
+    "kind": "text",
+    "number": "",
+    "name": "Nettle's Pond",
+    "x": 5830,
+    "y": 3337,
+    "class": "pond-marsh",
+    "width": 1939,
+    "height": 1610
   }
 ]
