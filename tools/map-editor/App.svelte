@@ -1,10 +1,13 @@
 <script>
   import MapViewer from '../../src/components/map/MapViewer.svelte';
+  import { TOOL_LIST, TOOLS } from '../../src/components/map/tools.js';
+  import PinProperties from './properties/PinProperties.svelte';
+  import TextProperties from './properties/TextProperties.svelte';
 
   let maps = $state([]);
   let currentMap = $state(null);
   let pins = $state([]);
-  let labelsVisible = $state(false);
+  let labelsVisible = $state(localStorage.getItem('map-editor:labels-visible') === 'true');
   let viewer = $state();
   let viewInfo = $state({ zoom: 0, x: 0, y: 0 });
   let wheelInfo = $state({ deltaX: 0, deltaY: 0, ctrlKey: false, trackpad: false });
@@ -14,17 +17,33 @@
   let editingId = $state(null);
   let previewId = $state(null);
   let dialogTitle = $state('New Pin');
-  let pinNumber = $state(1);
+  let pinNumber = $state('1');
   let pinName = $state('');
+  let pinLongName = $state('');
   let pinDesc = $state('');
   let pinLink = $state('');
-  let pinFont = $state('body');
-  let pinSize = $state('md');
-  let pinBold = $state(false);
-  let pinItalic = $state(false);
-  let pinRotate = $state(0);
-  let pinFixed = $state(false);
+  let pinKind = $state('pin');      // 'pin' | 'text' | 'path'
+  let pinClass = $state('civic-space'); // typography preset (TEXT_PRESETS or PIN_PRESETS)
+  let pinAlign = $state('center');  // 'left' | 'center' | 'right'
+  let pinValign = $state('middle'); // 'top' | 'middle' | 'bottom'
+  let pinWidth = $state(0);
+  let pinHeight = $state(0);
+  let pinMinZoom = $state(1);
   let showDelete = $state(false);
+
+  // Active toolbox mode — determines what clicking the map does
+  let toolMode = $state(localStorage.getItem('map-editor:tool') || 'select');
+
+  function setToolMode(mode) {
+    toolMode = mode;
+    localStorage.setItem('map-editor:tool', mode);
+  }
+
+  function applyPreset(presetId) {
+    // For text features, the class fully drives font/size/case/letterSpacing
+    // via TEXT_PRESETS. No need to copy fields onto the pin.
+    pinClass = presetId;
+  }
 
   // --- API ---
   async function fetchPins(slug) {
@@ -32,21 +51,41 @@
     if (!resp.ok) return [];
     const data = await resp.json();
     // Assign runtime IDs (stripped on save for clean JSON)
-    return data.map(p => ({ ...p, id: p.id || crypto.randomUUID() }));
+    return data.map(p => ({
+      ...p,
+      id: p.id || crypto.randomUUID(),
+      number: p.number ? String(p.number) : '',
+    }));
   }
+
+  const natCollator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
 
   function pinsForSave() {
     return [...pins]
-      .sort((a, b) => a.x - b.x || a.y - b.y)
+      .sort((a, b) => {
+        // Empty/no-pin entries go last
+        const aEmpty = !a.number;
+        const bEmpty = !b.number;
+        if (aEmpty && !bEmpty) return 1;
+        if (!aEmpty && bEmpty) return -1;
+        if (aEmpty && bEmpty) return a.x - b.x || a.y - b.y;
+        return natCollator.compare(a.number, b.number);
+      })
       .map(({ id, ...rest }) => {
-        const out = { number: rest.number, name: rest.name, x: rest.x, y: rest.y };
-        // Only include non-default style fields
-        if (rest.font && rest.font !== 'body') out.font = rest.font;
-        if (rest.size && rest.size !== 'md') out.size = rest.size;
-        if (rest.bold) out.bold = true;
-        if (rest.italic) out.italic = true;
-        if (rest.rotate) out.rotate = rest.rotate;
-        if (rest.fixed) out.fixed = true;
+        const kind = rest.kind || (rest.number ? 'pin' : 'text');
+        const out = { kind, number: rest.number || '', name: rest.name, x: rest.x, y: rest.y };
+        // Both kinds derive styling entirely from `class`.
+        if (rest.class) out.class = rest.class;
+        if (kind === 'text') {
+          if (rest.width) out.width = rest.width;
+          if (rest.height) out.height = rest.height;
+          if (rest.align && rest.align !== 'center') out.align = rest.align;
+          if (rest.valign && rest.valign !== 'middle') out.valign = rest.valign;
+          if (rest.minZoom != null && rest.minZoom !== 1) out.minZoom = rest.minZoom;
+        } else {
+          if (rest.minZoom != null && rest.minZoom !== 0) out.minZoom = rest.minZoom;
+        }
+        if (rest.longName) out.longName = rest.longName;
         if (rest.description) out.description = rest.description;
         if (rest.link) out.link = rest.link;
         return out;
@@ -73,94 +112,194 @@
     if (m) selectMap(m);
   }
 
-  // --- Pin actions ---
-  function onMapClick(latlng) {
-    // Create a preview pin immediately
+  // --- Pin actions (called by tools via ctx) ---
+  /** Generic "create a feature" — tool passes the kind and shape fields */
+  function createFeature(data) {
     const id = crypto.randomUUID();
+    const kind = data.kind || 'pin';
     previewId = id;
     editingId = id;
-    // Default to next available number
-    const usedNums = pins.map(p => p.number).filter(Boolean);
-    let next = 1;
-    while (usedNums.includes(next)) next++;
-    pinNumber = next;
+    pinKind = kind;
     pinName = '';
+    pinLongName = '';
     pinDesc = '';
     pinLink = '';
-    pinFont = 'body';
-    pinSize = 'md';
-    pinBold = false;
-    pinItalic = false;
-    pinRotate = 0;
-    pinFixed = false;
+    pinAlign = 'center';
+    pinValign = 'middle';
+    pinWidth = data.width || 0;
+    pinHeight = data.height || 0;
     showDelete = false;
-    dialogTitle = 'New Pin';
+
+    if (kind === 'pin') {
+      const usedNums = new Set(pins.filter(p => (p.kind || 'pin') === 'pin').map(p => p.number).filter(Boolean));
+      let next = 1;
+      while (usedNums.has(String(next))) next++;
+      pinNumber = String(next);
+      pinClass = 'landmark';
+      pinMinZoom = 0;
+      dialogTitle = 'New Pin';
+    } else if (kind === 'text') {
+      pinNumber = '';
+      pinClass = 'civic-space';
+      pinMinZoom = 1;
+      dialogTitle = 'New Text';
+    } else {
+      pinNumber = '';
+      pinClass = '';
+      pinMinZoom = 0;
+      dialogTitle = 'New';
+    }
 
     pins = [...pins, {
       id,
+      kind,
       number: pinNumber,
-      name: '(new pin)',
-      font: pinFont,
-      size: pinSize,
-      bold: pinBold,
-      italic: pinItalic,
-      rotate: pinRotate,
-      fixed: pinFixed,
-      x: Math.round(latlng.lng),
-      y: Math.round(latlng.lat),
+      name: '(new)',
+      class: pinClass,
+      align: pinAlign,
+      valign: pinValign,
+      width: pinWidth,
+      height: pinHeight,
+      minZoom: pinMinZoom,
+      x: data.x,
+      y: data.y,
     }];
     editing = true;
   }
 
-  function onPinClick(pin) {
+  const MIN_BOX_SIZE = 20; // minimum width/height for a text box (image px)
+
+  /** Clamp a text box's center+size so its bounds stay within the map. */
+  function clampBox(x, y, w, h) {
+    if (!currentMap) return { x, y, w, h };
+    const mw = currentMap.width, mh = currentMap.height;
+    // Cap box dims to map size and enforce minimum
+    w = Math.max(MIN_BOX_SIZE, Math.min(mw, w || 0));
+    h = Math.max(MIN_BOX_SIZE, Math.min(mh, h || 0));
+    // Clamp center so box edges stay within [0, mw]/[0, mh]
+    x = Math.max(w / 2, Math.min(mw - w / 2, x));
+    y = Math.max(h / 2, Math.min(mh - h / 2, y));
+    return { x: Math.round(x), y: Math.round(y), w: Math.round(w), h: Math.round(h) };
+  }
+
+  /** Clamp a point pin so it stays within the map. */
+  function clampPoint(x, y) {
+    if (!currentMap) return { x, y };
+    return {
+      x: Math.max(0, Math.min(currentMap.width, x)),
+      y: Math.max(0, Math.min(currentMap.height, y)),
+    };
+  }
+
+  /** Tool → ctx helpers */
+  const editorCtx = {
+    create: createFeature,
+    edit: (pin) => editFeature(pin),
+    updatePos: (pin, x, y) => {
+      if (pin.width && pin.height) {
+        ({ x, y } = clampBox(x, y, pin.width, pin.height));
+      } else {
+        ({ x, y } = clampPoint(x, y));
+      }
+      pin.x = x;
+      pin.y = y;
+      pins = pins;
+      viewer?.updateMarker(pin);
+      savePins();
+    },
+    resize: (pin, x, y, w, h) => {
+      ({ x, y, w, h } = clampBox(x, y, w, h));
+      pin.x = x;
+      pin.y = y;
+      pin.width = w;
+      pin.height = h;
+      // Sync editor form if this is the active pin
+      if (editingId === pin.id) {
+        pinWidth = w;
+        pinHeight = h;
+      }
+      pins = pins;
+      viewer?.updateMarker(pin);
+    },
+    commit: () => savePins(),
+    deselect: () => {
+      if (!editing) return;
+      // Cancel any new-feature preview; close the editor for existing selections
+      if (previewId) {
+        pins = pins.filter(p => p.id !== previewId);
+        previewId = null;
+      }
+      editingId = null;
+      editing = false;
+    },
+  };
+
+  function editFeature(pin) {
     editingId = pin.id;
     previewId = null;
-    dialogTitle = 'Edit Pin';
-    pinNumber = pin.number ?? 1;
+    // Determine kind from stored field or infer from number presence
+    pinKind = pin.kind || (pin.number ? 'pin' : 'text');
+    dialogTitle = pinKind === 'pin' ? 'Edit Pin' : pinKind === 'text' ? 'Edit Text' : 'Edit Path';
+    pinNumber = pin.number != null ? String(pin.number) : '';
     pinName = pin.name;
+    pinLongName = pin.longName || '';
     pinDesc = pin.description || '';
     pinLink = pin.link || '';
-    pinFont = pin.font || 'body';
-    pinSize = pin.size || 'md';
-    pinBold = pin.bold || false;
-    pinItalic = pin.italic || false;
-    pinRotate = pin.rotate || 0;
-    pinFixed = pin.fixed || false;
+    pinClass = pin.class || (pinKind === 'pin' ? 'landmark' : 'civic-space');
+    pinAlign = pin.align || 'center';
+    pinValign = pin.valign || 'middle';
+    pinWidth = pin.width || 0;
+    pinHeight = pin.height || 0;
+    pinMinZoom = pin.minZoom ?? (pinKind === 'pin' ? 0 : 1);
+    // Apply default size for text features that were created as point-labels
+    if (pinKind === 'text' && (!pinWidth || !pinHeight)) {
+      pinWidth = 300;
+      pinHeight = 80;
+    }
     showDelete = true;
     editing = true;
   }
 
-  function onPinDrag(pin, x, y) {
-    pin.x = x;
-    pin.y = y;
-    pins = pins;
-    savePins();
-  }
 
   // Update the preview/editing pin live as form fields change
   $effect(() => {
     if (!editingId) return;
     const pin = pins.find(p => p.id === editingId);
     if (!pin) return;
-    const name = pinName.trim() || '(new pin)';
+    const name = pinName.trim() || '(new)';
     const num = pinNumber;
-    const font = pinFont;
-    const size = pinSize;
-    const bold = pinBold;
-    const italic = pinItalic;
-    const rotate = pinRotate;
-    const fixed = pinFixed;
+    const kind = pinKind;
+    const cls = pinClass;
+    const align = pinAlign;
+    const valign = pinValign;
+    // Clamp the box to valid bounds (respect map edges + minimum size).
+    // Also sync clamped values back into the editor state so the inputs
+    // can't display invalid values.
+    let w = pinWidth, h = pinHeight;
+    let x = pin.x, y = pin.y;
+    if (kind === 'text' && w && h) {
+      const c = clampBox(pin.x, pin.y, w, h);
+      x = c.x; y = c.y; w = c.w; h = c.h;
+      if (pinWidth !== w) pinWidth = w;
+      if (pinHeight !== h) pinHeight = h;
+    }
+    const mz = pinMinZoom;
+    const longName = pinLongName.trim() || undefined;
     const desc = pinDesc.trim() || undefined;
     const link = pinLink.trim() || undefined;
-    if (pin.name !== name || pin.number !== num || pin.font !== font || pin.size !== size || pin.bold !== bold || pin.italic !== italic || pin.rotate !== rotate || pin.fixed !== fixed || pin.description !== desc || pin.link !== link) {
+    if (pin.name !== name || pin.longName !== longName || pin.number !== num || pin.kind !== kind || pin.class !== cls || pin.align !== align || pin.valign !== valign || pin.width !== w || pin.height !== h || pin.x !== x || pin.y !== y || pin.minZoom !== mz || pin.description !== desc || pin.link !== link) {
       pin.name = name;
+      pin.longName = longName;
       pin.number = num;
-      pin.font = font;
-      pin.size = size;
-      pin.bold = bold;
-      pin.italic = italic;
-      pin.rotate = rotate;
-      pin.fixed = fixed;
+      pin.kind = kind;
+      pin.class = cls;
+      pin.align = align;
+      pin.valign = valign;
+      pin.width = w;
+      pin.height = h;
+      pin.x = x;
+      pin.y = y;
+      pin.minZoom = mz;
       pin.description = desc;
       pin.link = link;
       viewer?.updateMarker(pin);
@@ -198,6 +337,7 @@
 
   function toggleLabels() {
     labelsVisible = !labelsVisible;
+    localStorage.setItem('map-editor:labels-visible', String(labelsVisible));
   }
 
   async function copyJson() {
@@ -234,12 +374,34 @@
       <option value={m.slug}>{m.name}</option>
     {/each}
   </select>
-  <span class="view-info">z{viewInfo.zoom.toFixed(1)} ({viewInfo.x}, {viewInfo.y}) dX={wheelInfo.deltaX.toFixed(1)} dY={wheelInfo.deltaY.toFixed(1)} ctrl={wheelInfo.ctrlKey} {wheelInfo.trackpad ? 'trackpad' : 'mouse'}</span>
-  <p>Click to place. Drag to move. Click pin to edit.</p>
+  <button class="header-toggle" class:active={labelsVisible} onclick={toggleLabels}>
+    {labelsVisible ? 'Hide Labels' : 'Show Labels'}
+  </button>
 </header>
 
 <div class="layout">
   <div class="map-wrapper" class:labels-visible={labelsVisible}>
+    <div class="toolbox">
+      {#each TOOL_LIST as t}
+        <button
+          type="button"
+          title={t.label}
+          class:active={toolMode === t.id}
+          onclick={() => setToolMode(t.id)}
+          aria-label={t.label}
+        >
+          {#if t.id === 'select'}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l7.07 17 2.51-7.39L21 11.07z"/></svg>
+          {:else if t.id === 'text'}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/></svg>
+          {:else if t.id === 'pin'}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          {:else if t.id === 'path'}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><path d="M5 17A12 12 0 0 1 17 5"/></svg>
+          {/if}
+        </button>
+      {/each}
+    </div>
     {#if currentMap}
       <MapViewer
         bind:this={viewer}
@@ -253,9 +415,9 @@
         {pins}
         {labelsVisible}
         editable={true}
-        onpinclick={onPinClick}
-        onmapclick={onMapClick}
-        onpindrag={onPinDrag}
+        tool={TOOLS[toolMode]}
+        ctx={editorCtx}
+        selectedId={editingId}
         onviewchange={(v) => viewInfo = v}
         onwheel={(w) => wheelInfo = w}
       />
@@ -269,55 +431,27 @@
     {#if editing}
       <div class="pin-editor">
         <form onsubmit={onSubmit}>
-          <label>
-            Pin
-            <div class="number-grid">
-              <button
-                type="button"
-                class="none-btn"
-                class:selected={pinNumber === 0}
-                onclick={() => pinNumber = 0}
-              >—</button>
-              {#each Array.from({length: 20}, (_, i) => i + 1) as n}
-                <button
-                  type="button"
-                  class:selected={pinNumber === n}
-                  onclick={() => pinNumber = n}
-                >{n}</button>
-              {/each}
-            </div>
-          </label>
+          {#if pinKind === 'pin'}
+            <PinProperties
+              bind:number={pinNumber}
+              bind:cls={pinClass}
+              bind:minZoom={pinMinZoom}
+            />
+          {:else if pinKind === 'text'}
+            <TextProperties
+              bind:preset={pinClass}
+              bind:align={pinAlign}
+              bind:valign={pinValign}
+              bind:width={pinWidth}
+              bind:height={pinHeight}
+              bind:minZoom={pinMinZoom}
+              onApplyPreset={applyPreset}
+            />
+          {/if}
           <label>Name <input type="text" bind:value={pinName} required autocomplete="off" /></label>
-          <div class="style-row">
-            <label class="inline">
-              Font
-              <select bind:value={pinFont}>
-                <option value="body">Lora</option>
-                <option value="heading">Crimson Pro</option>
-                <option value="title">Uncial Antiqua</option>
-              </select>
-            </label>
-            <label class="inline">
-              Size
-              <select bind:value={pinSize}>
-                <option value="sm">S</option>
-                <option value="md">M</option>
-                <option value="lg">L</option>
-              </select>
-            </label>
-          </div>
-          <div class="style-row">
-            <button type="button" class="toggle" class:active={pinBold} onclick={() => pinBold = !pinBold}><b>B</b></button>
-            <button type="button" class="toggle" class:active={pinItalic} onclick={() => pinItalic = !pinItalic}><i>I</i></button>
-            {#if pinNumber === 0}
-              <label class="inline rotate">
-                Rotate
-                <input type="number" bind:value={pinRotate} min="-180" max="180" step="5" />
-                <span>°</span>
-              </label>
-              <button type="button" class="toggle" class:active={pinFixed} onclick={() => pinFixed = !pinFixed} title="Scale with map zoom">🔍</button>
-            {/if}
-          </div>
+          {#if pinKind !== 'text'}
+            <label>Longer Name <input type="text" bind:value={pinLongName} placeholder="(shown on hover)" autocomplete="off" /></label>
+          {/if}
           <label>Description <textarea bind:value={pinDesc} rows="2"></textarea></label>
           <label>Link <input type="text" bind:value={pinLink} placeholder="/hobbity/world/places/#anchor" autocomplete="off" /></label>
           <div class="dialog-buttons">
@@ -347,14 +481,20 @@
       </ul>
     {/if}
     <div class="actions">
-      <button class:active={labelsVisible} onclick={toggleLabels}>
-        {labelsVisible ? 'Hide Labels' : 'Show Labels'}
-      </button>
       <button onclick={copyJson}>Copy JSON</button>
       <button class="danger" onclick={clearAll}>Clear All</button>
     </div>
   </div>
 </div>
+
+<footer class="status-bar">
+  <span>z{viewInfo.zoom.toFixed(1)}</span>
+  <span>({viewInfo.x}, {viewInfo.y})</span>
+  <span>dX={wheelInfo.deltaX.toFixed(1)}</span>
+  <span>dY={wheelInfo.deltaY.toFixed(1)}</span>
+  <span>ctrl={wheelInfo.ctrlKey}</span>
+  <span>{wheelInfo.trackpad ? 'trackpad' : 'mouse'}</span>
+</footer>
 
 <style>
   :global(*) { box-sizing: border-box; }
@@ -364,11 +504,13 @@
     color: #d4c4a8;
     height: 100vh;
     margin: 0;
+    overflow: hidden;
   }
   :global(#app) {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
   }
 
   header {
@@ -388,17 +530,32 @@
     font: inherit;
     font-size: 0.85rem;
   }
-  .view-info { font-size: 0.8rem; opacity: 0.5; font-variant-numeric: tabular-nums; }
-  header p { font-style: italic; opacity: 0.6; font-size: 0.85rem; margin-left: auto; }
+  .status-bar {
+    display: flex;
+    gap: 1rem;
+    padding: 0.25rem 0.75rem;
+    border-top: 1px solid #5c4a32;
+    font-size: 0.75rem;
+    opacity: 0.6;
+    font-variant-numeric: tabular-nums;
+    font-family: ui-monospace, monospace;
+  }
+  .status-bar span { white-space: nowrap; }
+  .header-toggle { font-size: 0.85rem; }
+  .header-toggle.active { background: #8b6914; }
+  .header-toggle:disabled { opacity: 0.4; cursor: not-allowed; }
+  .header-toggle:disabled:hover { background: #2a1f14; }
 
   .layout { flex: 1; display: flex; overflow: hidden; min-height: 0; }
-  .map-wrapper { flex: 1; min-width: 0; position: relative; }
+  .map-wrapper { flex: 1; min-width: 0; min-height: 0; position: relative; }
 
   .sidebar {
     width: 280px;
     display: flex;
     flex-direction: column;
     border-left: 1px solid #5c4a32;
+    min-height: 0;
+    overflow: hidden;
   }
   .tabs {
     display: flex;
@@ -491,55 +648,41 @@
     border-radius: 3px;
     font: inherit;
   }
-  .number-grid { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 0.25rem; }
-  .number-grid button {
-    width: 28px;
-    height: 28px;
-    font: 700 12px/1 'Crimson Pro', serif;
+  /* Floating toolbox below the Leaflet zoom control */
+  .toolbox {
+    position: absolute;
+    top: 90px;
+    left: 10px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: #fff;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+  }
+  .toolbox button {
+    width: 30px;
+    height: 30px;
     padding: 0;
+    background: #fff;
+    color: #333;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    font-size: 0.95rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #c9a96e;
-    border-radius: 50%;
-    background: #fff;
-    color: #3b2e1e;
     cursor: pointer;
   }
-  .number-grid button:hover { background: #f3ece0; }
-  .number-grid button.selected { background: #c9a96e; color: #fff; }
-  .number-grid .none-btn { border-radius: 3px; font-size: 14px; }
+  .toolbox button:last-child { border-bottom: none; }
+  .toolbox button:hover { background: #f4f4f4; }
+  .toolbox button.active { background: #c9a96e; color: #fff; }
+  .toolbox svg { width: 18px; height: 18px; }
 
-  .style-row {
-    display: flex;
-    gap: 0.5rem;
-    align-items: end;
-    margin-bottom: 0.6rem;
-  }
-  .style-row select {
-    display: block;
-    width: 100%;
-    margin-top: 0.2rem;
-    padding: 0.3rem;
-    border: 1px solid #5c4a32;
-    background: #2a1f14;
-    color: inherit;
-    border-radius: 3px;
-    font: inherit;
-    font-size: 0.85rem;
-  }
-  label.inline { font-size: 0.85rem; flex: 1; }
-  label.rotate { display: flex; align-items: center; gap: 0.3rem; flex: none; }
-  label.rotate input { width: 60px; margin-top: 0; padding: 0.3rem; text-align: center; }
-  .toggle {
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
-  }
   .dialog-buttons { display: flex; gap: 0.5rem; margin-top: 1rem; }
 
 </style>
