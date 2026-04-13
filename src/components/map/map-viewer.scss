@@ -1,0 +1,29 @@
+// ============================================================================
+// Utility classes used by map labels and anywhere the editor wants to echo
+// how a marker will render (e.g. the sidebar marker list). Tailwind-style
+// naming. Imported from the map editor's main.js so they're available
+// globally, and from the Astro site via global.scss.
+// ============================================================================
+
+// --- Font family ---
+.font-body    { font-family: var(--body-font, 'Lora', serif); }
+.font-heading { font-family: var(--heading-font, 'Crimson Pro', serif); }
+.font-title   { font-family: var(--title-font, 'Uncial Antiqua', serif); }
+
+// --- Font weight ---
+.font-normal   { font-weight: 400; }
+.font-medium   { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold     { font-weight: 700; }
+
+// --- Font style / transform ---
+.italic     { font-style: italic; }
+.uppercase  { text-transform: uppercase; }
+.capitalize { text-transform: capitalize; }
+
+// --- Text color ---
+// Shadows live in MapViewer's scoped block (they depend on the parchment
+// map background). These set color only.
+.text-black   { color: #3b2e1e; }
+.text-heading { color: var(--heading-color, #7f003f); }
+.text-title   { color: var(--title-color, #7f003f); }

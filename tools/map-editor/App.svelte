@@ -1,12 +1,42 @@
 <script>
   import MapViewer from '../../src/components/map/MapViewer.svelte';
-  import { TOOL_LIST, TOOLS, DEFAULT_MARKER_MIN_ZOOM } from '../../src/components/map/tools.js';
+  import { TOOL_LIST, TOOLS, DEFAULT_MARKER_MIN_ZOOM, findPreset } from '../../src/components/map/tools.js';
+
+  /** Derive Tailwind-style utility classes from a marker's preset so the
+   * sidebar row visually matches how the label renders on the map.
+   * (Typography only — layout/spacing stays the sidebar's own.) */
+  function markerClasses(pin) {
+    const d = findPreset(pin.class)?.defaults || {};
+    const out = [];
+    if (d.font === 'body') out.push('font-body');
+    else if (d.font === 'heading') out.push('font-heading');
+    else if (d.font === 'title') out.push('font-title');
+    const w = d.weight ?? (d.bold ? 700 : 400);
+    if (w >= 700) out.push('font-bold');
+    else if (w >= 600) out.push('font-semibold');
+    else if (w >= 500) out.push('font-medium');
+    else out.push('font-normal');
+    if (d.italic) out.push('italic');
+    if (d.case === 'upper') out.push('uppercase');
+    else if (d.case === 'title') out.push('capitalize');
+    out.push(d.colorClass || 'text-black');
+    return out.join(' ');
+  }
   import PinProperties from './properties/PinProperties.svelte';
   import TextProperties from './properties/TextProperties.svelte';
 
   let maps = $state([]);
   let currentMap = $state(null);
   let pins = $state([]);
+  // Edit mode = full editor (toolbox, sidebar, click-to-edit). View mode
+  // = read-only preview that mirrors what the site viewer will show.
+  let mode = $state(localStorage.getItem('map-editor:mode') || 'edit');
+  function setMode(m) {
+    mode = m;
+    localStorage.setItem('map-editor:mode', m);
+    // Leaving edit mode: close any open editor and clear selection.
+    if (m !== 'edit' && editing) closeEditor();
+  }
   let viewer = $state();
   let viewInfo = $state({ zoom: 0, x: 0, y: 0 });
   let wheelInfo = $state({ deltaX: 0, deltaY: 0, ctrlKey: false, trackpad: false });
@@ -380,6 +410,10 @@
       <option value={m.slug}>{m.name}</option>
     {/each}
   </select>
+  <div class="mode-toggle" role="radiogroup" aria-label="Mode">
+    <button type="button" role="radio" aria-checked={mode === 'edit'} class:active={mode === 'edit'} onclick={() => setMode('edit')}>Edit</button>
+    <button type="button" role="radio" aria-checked={mode === 'view'} class:active={mode === 'view'} onclick={() => setMode('view')}>View</button>
+  </div>
 </header>
 
 <!-- Force-load every font weight we reference from inline styles so the
@@ -400,6 +434,7 @@
 
 <div class="layout">
   <div class="map-wrapper">
+    {#if mode === 'edit'}
     <div class="toolbox">
       {#each TOOL_LIST as t}
         <button
@@ -421,6 +456,7 @@
         </button>
       {/each}
     </div>
+    {/if}
     {#if currentMap}
       <MapViewer
         bind:this={viewer}
@@ -432,8 +468,8 @@
         minZoom={currentMap.minZoom}
         maxZoom={currentMap.maxZoom}
         {pins}
-        editable={true}
-        tool={TOOLS[toolMode]}
+        editable={mode === 'edit'}
+        tool={mode === 'edit' ? TOOLS[toolMode] : null}
         ctx={editorCtx}
         selectedId={editingId}
         onviewchange={(v) => viewInfo = v}
@@ -441,6 +477,7 @@
       />
     {/if}
   </div>
+  {#if mode === 'edit'}
   <div class="sidebar">
     <div class="tabs">
       <button class:active={!editing} onclick={() => { if (editing) closeEditor(); }}>Markers</button>
@@ -486,7 +523,7 @@
               {:else}
                 <span class="pin-label-icon">Aa</span>
               {/if}
-              <strong>{pin.name}</strong>
+              <strong class={markerClasses(pin)}>{pin.name}</strong>
               <span class="pin-coords">({pin.x}, {pin.y})</span>
             </button>
           </li>
@@ -498,6 +535,7 @@
       <button class="danger" onclick={clearAll}>Clear All</button>
     </div>
   </div>
+  {/if}
 </div>
 
 <footer class="status-bar">
@@ -556,6 +594,27 @@
     font-family: var(--mono-font);
   }
   .status-bar span { white-space: nowrap; }
+
+  .mode-toggle {
+    display: flex;
+    gap: 0;
+    margin-left: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+  }
+  .mode-toggle button {
+    padding: 0.3rem 0.75rem;
+    font: 700 0.8rem/1 var(--heading-font);
+    border: none;
+    background: var(--bg);
+    color: var(--text);
+    border-radius: 0;
+    cursor: pointer;
+  }
+  .mode-toggle button + button { border-left: 1px solid var(--border); }
+  .mode-toggle button:hover { background: var(--accent-bg); }
+  .mode-toggle button.active { background: var(--accent); color: var(--accent-text); }
   .font-primer { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; pointer-events: none; visibility: hidden; }
 
   .layout { flex: 1; display: flex; overflow: hidden; min-height: 0; }

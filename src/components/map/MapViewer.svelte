@@ -38,6 +38,12 @@
     return typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
   }
 
+  /** Read a CSS custom property (e.g. `--border`) from the map container. */
+  function getCss(name) {
+    if (!mapEl) return '';
+    return getComputedStyle(mapEl).getPropertyValue(name).trim();
+  }
+
   /**
    * Resolve a feature's styling from its `class`. The preset defines
    * font/case/letterSpacing/italic/bold/base/min/max — those fields live on
@@ -320,22 +326,41 @@
     ctx?.resize?.(pin, Math.round(x), Math.round(y), Math.round(w), Math.round(h));
   }
 
+  /** Right-click pan — works in both edit and view modes. */
+  function setupRightPan() {
+    if (!map) return;
+    const container = map.getContainer();
+    // Suppress the browser context menu so right-drag works cleanly
+    container.addEventListener('contextmenu', (e) => e.preventDefault());
+    container.addEventListener('mousedown', (e) => {
+      if (e.button !== 2) return;
+      e.preventDefault();
+      e.stopPropagation();
+      rightPan = { startX: e.clientX, startY: e.clientY };
+      container.classList.add('right-panning');
+    }, true);
+    container.addEventListener('mousemove', (e) => {
+      if (!rightPan) return;
+      e.preventDefault();
+      const dx = e.clientX - rightPan.startX;
+      const dy = e.clientY - rightPan.startY;
+      rightPan.startX = e.clientX;
+      rightPan.startY = e.clientY;
+      map.panBy([-dx, -dy], { animate: false });
+    }, true);
+    container.addEventListener('mouseup', (e) => {
+      if (!rightPan) return;
+      e.preventDefault();
+      rightPan = null;
+      container.classList.remove('right-panning');
+    }, true);
+  }
+
   function setupToolEvents() {
     if (!map) return;
     const container = map.getContainer();
 
-    // Suppress the browser context menu so right-drag works cleanly
-    container.addEventListener('contextmenu', (e) => e.preventDefault());
-
     container.addEventListener('mousedown', (e) => {
-      // Right-click: start panning (mouse users)
-      if (e.button === 2) {
-        e.preventDefault();
-        e.stopPropagation();
-        rightPan = { startX: e.clientX, startY: e.clientY };
-        container.classList.add('right-panning');
-        return;
-      }
       // Resize handle on the selected pin takes precedence over everything
       const handle = e.target.closest('.resize-handle');
       if (handle && e.button === 0) {
@@ -368,15 +393,6 @@
     }, true);
 
     container.addEventListener('mousemove', (e) => {
-      if (rightPan) {
-        e.preventDefault();
-        const dx = e.clientX - rightPan.startX;
-        const dy = e.clientY - rightPan.startY;
-        rightPan.startX = e.clientX;
-        rightPan.startY = e.clientY;
-        map.panBy([-dx, -dy], { animate: false });
-        return;
-      }
       if (resizing) {
         e.preventDefault();
         e.stopPropagation();
@@ -388,12 +404,6 @@
     }, true);
 
     container.addEventListener('mouseup', (e) => {
-      if (rightPan) {
-        e.preventDefault();
-        rightPan = null;
-        container.classList.remove('right-panning');
-        return;
-      }
       if (resizing) {
         e.preventDefault();
         e.stopPropagation();
@@ -492,7 +502,7 @@
         scrollWheelZoom: false,
         wheelPxPerZoomLevel: 60,
         attributionControl: false,
-        dragging: false, // disable default left-drag panning
+        dragging: !editable, // edit mode handles left-drag via tools; view mode uses Leaflet's default pan
       });
 
       const CustomTileLayer = L.TileLayer.extend({
@@ -524,12 +534,24 @@
         scrollWheelZoom: false,
         wheelPxPerZoomLevel: 60,
         attributionControl: false,
-        dragging: false, // disable default left-drag panning
+        dragging: !editable, // edit mode handles left-drag via tools; view mode uses Leaflet's default pan
       });
 
       L.imageOverlay(imageUrl, bounds).addTo(map);
     }
 
+    // Gold border traced around the image's bounds so the frame hugs
+    // the tiles rather than the map container (which may be larger
+    // when zoomed out).
+    L.rectangle(bounds, {
+      color: getCss('--border') || '#c9a96e',
+      weight: parseFloat(getCss('--border-width')) || 2,
+      fill: false,
+      interactive: false,
+      className: 'map-image-border',
+    }).addTo(map);
+
+    setupRightPan();
     if (editable) {
       setupToolEvents();
     }
@@ -597,16 +619,18 @@
     mapEl.addEventListener('wheel', (e) => {
       e.preventDefault();
       if (e.ctrlKey) {
-        // Pinch gesture — always zoom
+        // Pinch gesture — zoom around the cursor
         const zoom = map.getZoom() - e.deltaY * 0.5;
-        map.setZoom(Math.max(minZoom, Math.min(maxZoom, zoom)));
+        const clamped = Math.max(minZoom, Math.min(maxZoom, zoom));
+        map.setZoomAround(map.mouseEventToContainerPoint(e), clamped, { animate: false });
       } else if (isTrackpad(e)) {
         // Trackpad scroll — pan
         map.panBy([e.deltaX, e.deltaY], { animate: false });
       } else {
-        // Mouse wheel — zoom
+        // Mouse wheel — zoom around the cursor
         const zoom = map.getZoom() - e.deltaY * 0.01;
-        map.setZoom(Math.max(minZoom, Math.min(maxZoom, zoom)));
+        const clamped = Math.max(minZoom, Math.min(maxZoom, zoom));
+        map.setZoomAround(map.mouseEventToContainerPoint(e), clamped, { animate: false });
       }
     }, { passive: false });
 
@@ -633,27 +657,35 @@
   .map-container {
     position: absolute;
     inset: 0;
-    background: var(--bg, #1a1a1a);
+    background: var(--header-bg, #1a1a1a);
+
+    // Tool-specific cursors. These have to live outside the :global { }
+    // block because tool-* classes are on the .map-container element
+    // itself (not a descendant), so we target them via `&:global(.X)`.
+    // In view mode no tool class is applied, so Leaflet's own grab /
+    // grabbing cursors carry through unchanged.
+    &:global(.tool-pin),
+    &:global(.tool-text),
+    &:global(.tool-path) { cursor: crosshair !important; }
+    &:global(.tool-select) { cursor: default !important; }
+    &:global(.right-panning) { cursor: grabbing !important; }
+
+    &:global(.tool-select) {
+      :global(.map-pin),
+      :global(.map-pin-number),
+      :global(.map-pin-glyph),
+      :global(.map-label),
+      :global(.map-label-text) { cursor: pointer !important; }
+
+      // Selected text box: the whole bounding area (including the
+      // Leaflet marker wrapper that encases it) shows the move cursor.
+      :global(.leaflet-marker-icon:has(.map-text-box.selected)),
+      :global(.map-text-box.selected),
+      :global(.map-text-box.selected .map-label),
+      :global(.map-text-box.selected .map-label-text) { cursor: move !important; }
+    }
 
     :global {
-      // --- Tool-specific cursors (override Leaflet's default grab) -----
-      .leaflet-container { cursor: default !important; }
-      .leaflet-container.tool-pin,
-      .leaflet-container.tool-text,
-      .leaflet-container.tool-path { cursor: crosshair !important; }
-      .leaflet-container.right-panning { cursor: grabbing !important; }
-
-      // Select mode: pins + label text → pointer
-      .tool-select .map-pin,
-      .tool-select .map-pin-number,
-      .tool-select .map-label,
-      .tool-select .map-label-text { cursor: pointer !important; }
-
-      // Select mode inside a selected text box → move cursor everywhere
-      // (except resize handles which keep their own cursors)
-      .tool-select .map-text-box.selected,
-      .tool-select .map-text-box.selected .map-label,
-      .tool-select .map-text-box.selected .map-label-text { cursor: move !important; }
 
       // --- Marker body (numbered circle or overworld glyph) ------------
       .map-pin {
@@ -754,13 +786,12 @@
         overflow: hidden;
       }
 
-      // Color classes + their text shadow (Tailwind-style names).
-      // Shadow is a two-step parchment halo; text-heading and
-      // text-title share the geometry but bump alpha a touch to stay
-      // crisp against the map tiles.
+      // Color itself comes from global utilities in map-viewer.scss
+      // (.text-black / .text-heading / .text-title). Here we only add
+      // the parchment halo, which is specific to text rendered over
+      // map tiles and so doesn't belong in a global utility.
       .map-label.text-black,
       .map-pin-label.text-black {
-        color: #3b2e1e;
         text-shadow:
           1px 1px 0 rgba(250, 246, 240, .8),
           -1px -1px 0 rgba(250, 246, 240, .8),
@@ -772,14 +803,14 @@
       .map-label.text-title,
       .map-pin-label.text-title {
         text-shadow:
-          0 0 2px rgba(250, 246, 240, 1),
-          0 0 5px rgba(250, 246, 240, 1),
-          0 0 12px rgba(250, 246, 240, 0.9);
+          0 0 2px rgba(250, 246, 240, .8),
+          0 0 5px rgba(250, 246, 240, .8),
+          0 0 12px rgba(250, 246, 240, 0.8);
       }
-      .map-label.text-heading,
-      .map-pin-label.text-heading { color: var(--heading-color, #7f003f); }
-      .map-label.text-title,
-      .map-pin-label.text-title { color: var(--title-color, #7f003f); }
+
+      // Raise the hovered marker's Leaflet wrapper so its revealed
+      // long label doesn't get clipped by neighbouring markers.
+      .leaflet-marker-icon:has(.map-pin:hover) { z-index: 1000 !important; }
 
       // --- Low-zoom adjustments ---------------------------------------
       .zoom-low {
