@@ -88,7 +88,8 @@
     "name": "Ye Olde Test",
     "x": 6193,
     "y": 2695,
-    "class": "town"
+    "class": "town",
+    "minZoom": 1
   },
   {
     "kind": "pin",
@@ -175,10 +176,10 @@
     "kind": "text",
     "number": "",
     "name": "Gomwick Forrest",
-    "x": 738,
+    "x": 841,
     "y": 2392,
     "class": "forest",
-    "width": 1289,
+    "width": 1681,
     "height": 2091
   },
   {
