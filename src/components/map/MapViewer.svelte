@@ -1,8 +1,8 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
-  import { TEXT_PRESETS, PIN_PRESETS } from './tools.js';
+  import { TEXT_PRESETS, PIN_PRESETS, DEFAULT_MARKER_MIN_ZOOM } from './tools.js';
 
-  let { width, height, imageUrl, tiles, initialZoom, minZoom = 0, maxZoom = 5, pins = [], labelsVisible = false, editable = false, tool = null, ctx = null, selectedId = null, onviewchange, onwheel: onwheelcb } = $props();
+  let { width, height, imageUrl, tiles, initialZoom, minZoom = 0, maxZoom = 5, pins = [], editable = false, tool = null, ctx = null, selectedId = null, onviewchange, onwheel: onwheelcb } = $props();
 
   // `tool` is the active tool module from tools.js. `ctx` is supplied by the
   // editor and exposes methods the tool can call to effect change (create,
@@ -28,6 +28,10 @@
   const MOBILE_MIN_PX = 16;
   // Fallback size for features without a style (e.g. numbered pin labels).
   const PIN_LABEL_SIZE = { base: 14, min: 11, max: 22 };
+  // Markers disappear entirely only at extreme zoom-out — otherwise they
+  // stay visible and hoverable. Their *labels* follow the per-marker
+  // `minZoom` (hidden when current zoom < minZoom).
+  const MARKER_HIDE_ZOOM = 0.25;
   const HANDLE_POSITIONS = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'];
 
   function isMobile() {
@@ -41,9 +45,11 @@
    * use PIN_PRESETS.
    */
   function resolvePreset(pin) {
-    if (!pin.class) return null;
     const list = pin.number ? PIN_PRESETS : TEXT_PRESETS;
-    return list.find(p => p.id === pin.class)?.defaults;
+    // Pins without a class fall back to 'shop'.
+    const id = pin.class || (pin.number ? 'shop' : null);
+    if (!id) return null;
+    return list.find(p => p.id === id)?.defaults;
   }
 
   function computeFontSize(pin, zoom) {
@@ -56,8 +62,13 @@
     // is always MOBILE_MIN_PX (16px).
     const spec = resolvePreset(pin) ?? PIN_LABEL_SIZE;
 
-    const scale = Math.pow(2, z - REF_ZOOM);
-    const raw = spec.base * scale;
+    // Shrink mode: pin the size to `min` at the feature's min-zoom and
+    // scale up from there (doubling per zoom level), clamped to max.
+    // Default mode: scale from `base` at REF_ZOOM, clamped to [min, max].
+    const baseSize = pin.shrink ? (spec.min ?? spec.base) : spec.base;
+    const pivot = pin.shrink ? (pin.minZoom ?? REF_ZOOM) : REF_ZOOM;
+    const scale = Math.pow(2, z - pivot);
+    const raw = baseSize * scale;
     const min = isMobileView ? Math.max(MOBILE_MIN_PX, spec.min ?? 0) : (spec.min ?? 0);
     const max = spec.max ?? Infinity;
     return Math.max(min, Math.min(max, raw));
@@ -94,7 +105,8 @@
       if (pin.rotate) transforms.push(`rotate(${pin.rotate}deg)`);
       const transformStyle = transforms.length ? `transform: ${transforms.join(' ')};` : '';
       const extra = extraStyles(s);
-      const textStyle = `font-family: ${font}; font-size: ${size.toFixed(1)}px; font-weight: ${weight}; font-style: ${style}; ${extra}`;
+      const colorStyle = s.color ? `color: ${s.color}; ` : (s.font === 'title' ? 'color: var(--title-color, #7f003f); ' : '');
+      const textStyle = `font-family: ${font}; font-size: ${size.toFixed(1)}px; font-weight: ${weight}; font-style: ${style}; ${colorStyle}${extra}`;
 
       // If the text has a bounding box, render inside a sized flex container
       if (pin.width > 0 && pin.height > 0) {
@@ -112,7 +124,7 @@
         const selClass = isSelected ? ' selected' : '';
         const handles = isSelected ? HANDLE_POSITIONS.map(h =>
           `<div class="resize-handle handle-${h}" data-handle="${h}" data-pin-id="${pin.id}"></div>`).join('') : '';
-        const html = `<div class="map-text-box${selClass}" style="${boxStyle}" data-pin-id="${pin.id}"><div class="map-label map-label-boxed" style="${textStyle}">${esc(pin.name)}</div>${handles}</div>`;
+        const html = `<div class="map-text-box${selClass}" style="${boxStyle}" data-pin-id="${pin.id}"><div class="map-label map-label-boxed" style="${textStyle}"><span class="map-label-text">${esc(pin.name)}</span></div>${handles}</div>`;
         return L.divIcon({
           className: '',
           html,
@@ -130,12 +142,13 @@
       });
     }
 
-    // Hide pin when map zoom is below its min-zoom threshold.
+    // Marker body is hidden only at extreme zoom-out. Per-marker minZoom
+    // gates the *label*, not the marker itself.
     const curZ = currentZoom ?? map?.getZoom() ?? REF_ZOOM;
-    const pinMinZ = pin.minZoom ?? 0;
-    if (curZ < pinMinZ) {
+    if (curZ <= MARKER_HIDE_ZOOM) {
       return L.divIcon({ className: '', html: '', iconSize: [0, 0], iconAnchor: [0, 0] });
     }
+    const labelHidden = curZ < (pin.minZoom ?? DEFAULT_MARKER_MIN_ZOOM);
     const shortLabel = esc(pin.name);
     const longLabel = pin.longName ? esc(pin.longName) : shortLabel;
     // Pin label styling comes from the preset (class).
@@ -145,10 +158,17 @@
     const weight = s.bold ? '700' : '400';
     const style = s.italic ? 'italic' : 'normal';
     const extra = extraStyles(s);
-    const labelStyle = `font-family: ${font}; font-size: ${size.toFixed(1)}px; font-weight: ${weight}; font-style: ${style}; ${extra}`;
+    const colorStyle = s.color ? `color: ${s.color}; ` : (s.font === 'title' ? 'color: var(--title-color, #7f003f); ' : '');
+    const labelStyle = `font-family: ${font}; font-size: ${size.toFixed(1)}px; font-weight: ${weight}; font-style: ${style}; ${colorStyle}${extra}`;
+    // Overworld pins render a glyph (✪, ◉, …) instead of a numbered circle.
+    const preset = pin.class ? PIN_PRESETS.find(p => p.id === pin.class) : null;
+    const isOverworld = preset?.category === 'overworld';
+    const markClass = isOverworld ? 'map-pin-glyph' : 'map-pin-number';
+    const markContent = isOverworld ? esc(preset.icon) : pin.number;
+    const markStyle = isOverworld ? `font-size: ${Math.max(20, size).toFixed(1)}px;` : '';
     return L.divIcon({
       className: '',
-      html: `<div class="map-pin"><span class="map-pin-label map-pin-label-short" style="${labelStyle}">${shortLabel}</span><span class="map-pin-label map-pin-label-long" style="${labelStyle}">${longLabel}</span><span class="map-pin-number">${pin.number}</span></div>`,
+      html: `<div class="map-pin${pin.id === selectedId ? ' selected' : ''}${isOverworld ? ' overworld' : ''}${labelHidden ? ' label-hidden' : ''}"><span class="map-pin-label map-pin-label-short" style="${labelStyle}">${shortLabel}</span><span class="map-pin-label map-pin-label-long" style="${labelStyle}">${longLabel}</span><span class="${markClass}" style="${markStyle}">${markContent}</span></div>`,
       iconSize: [28, 28],
       iconAnchor: [14, 14],
     });
@@ -201,14 +221,7 @@
     const isLow = z < 2;
     c.toggle('zoom-low', isLow);
     c.toggle('zoom-high', z >= 3);
-    c.toggle('labels-visible', labelsVisible && !isLow);
   }
-
-  // Re-apply classes when labelsVisible changes
-  $effect(() => {
-    void labelsVisible;
-    updateLabelClasses();
-  });
 
   function updateZoomClass() {
     updateLabelClasses();
@@ -625,10 +638,13 @@
   /* In select mode, pins and label text show pointer on hover */
   :global(.tool-select .map-pin),
   :global(.tool-select .map-pin-number),
-  :global(.tool-select .map-label) { cursor: pointer !important; }
-  /* Hovering the text inside a selected box shows the move cursor.
+  :global(.tool-select .map-label),
+  :global(.tool-select .map-label-text) { cursor: pointer !important; }
+  /* Hovering anywhere inside a selected box shows the move cursor.
      Individual .handle-* rules keep their own resize cursors. */
-  :global(.tool-select .map-text-box.selected .map-label) { cursor: move !important; }
+  :global(.tool-select .map-text-box.selected),
+  :global(.tool-select .map-text-box.selected .map-label),
+  :global(.tool-select .map-text-box.selected .map-label-text) { cursor: move !important; }
 
   :global(.map-pin) {
     width: 28px;
@@ -654,12 +670,22 @@
     cursor: grab;
     box-shadow: 0 1px 3px rgba(0,0,0,0.4);
   }
+  /* Overworld pins: bare glyph, no circle. */
+  :global(.map-pin-glyph) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    line-height: 1;
+    cursor: grab;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, .8), -1px -1px 0 rgba(255, 255, 255, .8), 0 0 4px rgba(255, 255, 255, .6);
+  }
   :global(.map-pin-label) {
     position: absolute;
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
-    margin-bottom: 2px;
+    margin-bottom: -2px;
     line-height: 1.2;
     color: #000000;
     white-space: nowrap;
@@ -667,14 +693,37 @@
     text-shadow: 1px 1px 0 rgba(255, 255, 255, .8), -1px -1px 0 rgba(255, 255, 255, .8), 0 0 6px rgba(255, 255, 255, .8), 0 0 8px rgba(255, 255, 255, .5);
     display: none;
   }
-  /* Short label: shown when labels-visible is applied AND not at low zoom */
-  :global(.labels-visible:not(.zoom-low) .map-pin-label-short) { display: block; }
+  /* Short label: shown by default — the per-marker `minZoom` (via the
+     `.label-hidden` class set in makeIcon) is what actually gates it. */
+  :global(.map-pin-label-short) { display: block; }
   /* Long label: shown on hover (all zooms) */
   :global(.map-pin:hover .map-pin-label-long) { display: block; }
   :global(.map-pin:hover .map-pin-label-short) { display: none; }
-  /* At low zoom, force all pin labels hidden unless hovering */
-  :global(.zoom-low .map-pin-label) { display: none !important; }
-  :global(.zoom-low .map-pin:hover .map-pin-label-long) { display: block !important; }
+  /* Selected pins always show their long label (falls back to short if no longName) */
+  :global(.map-pin.selected .map-pin-label-long) { display: block !important; }
+  :global(.map-pin.selected .map-pin-label-short) { display: none !important; }
+  /* Selected state: numbered circle flips bg/text; overworld glyph gets
+     a matching dark circle backdrop. */
+  :global(.map-pin.selected .map-pin-number) {
+    background: #3b2e1e;
+    color: #fff;
+    border-color: #3b2e1e;
+  }
+  :global(.map-pin.selected .map-pin-glyph) {
+    background: #3b2e1e;
+    color: #fff;
+    border-radius: 50%;
+    padding: 6px;
+    aspect-ratio: 1;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    text-shadow: none;
+  }
+  /* Per-marker label gate: when current zoom is below the marker's minZoom
+     the label is hidden by default; hovering or selecting still reveals
+     the long label so the marker stays identifiable. */
+  :global(.map-pin.label-hidden .map-pin-label) { display: none !important; }
+  :global(.map-pin.label-hidden:hover .map-pin-label-long),
+  :global(.map-pin.label-hidden.selected .map-pin-label-long) { display: block !important; }
 
   /* Low zoom: shrink pin circles, hide numbers */
   :global(.zoom-low .map-pin-number) {
@@ -683,6 +732,9 @@
     border-width: 1.5px;
     font-size: 0;
   }
+  /* Shrunken circle sits ~6px further from container top; pull labels
+     down to keep the same tight gap as at normal zoom. */
+  :global(.zoom-low .map-pin-label) { margin-bottom: -8px; }
 
   :global(.map-label) {
     color: #000000;
@@ -708,8 +760,19 @@
     position: relative;
     pointer-events: none;
   }
-  :global(.map-text-box > .map-label) { pointer-events: auto; }
+  /* Leaflet's marker wrapper is `pointer-events: auto` by default, so a
+     click on empty space inside the box would still fire the marker
+     click via the wrapper. Disable it on markers that host a text box,
+     then re-enable it on the parts we actually want clickable: the text
+     span and the resize handles. */
+  :global(.leaflet-marker-icon:has(.map-text-box)) { pointer-events: none !important; }
+  :global(.map-text-box > .map-label) { pointer-events: none; }
+  :global(.map-text-box .map-label-text) { pointer-events: auto; }
   :global(.map-text-box > .resize-handle) { pointer-events: auto; }
+  /* Once a text box is selected, the whole bounding box becomes
+     interactive so it can be dragged from anywhere inside. */
+  :global(.leaflet-marker-icon:has(.map-text-box.selected)) { pointer-events: auto !important; }
+  :global(.map-text-box.selected) { pointer-events: auto; }
   /* Show the bounding box outline for the currently selected text feature */
   :global(.map-text-box.selected) {
     outline: 1.5px dashed #6b3a2a;

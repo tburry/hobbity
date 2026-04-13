@@ -44,7 +44,7 @@ const selectTool = {
 
 const pinTool = {
   id: 'pin',
-  label: 'Pin',
+  label: 'Marker',
   cursor: 'crosshair',
   onMapClick(latlng, ctx) {
     ctx.create({
@@ -114,14 +114,17 @@ export const TOOL_LIST = [selectTool, pinTool, textTool, pathTool];
  */
 const SIZES = {
   title:   { base: 48, min: 16, max: 96 }, // map title only
-  large:   { base: 28, min: 14, max: 56 },
+  large:   { base: 24, min: 14, max: 56 },
   regular: { base: 18, min: 12, max: 32 },
-  small:   { base: 12, min: 10, max: 20 },
+  small:   { base: 16, min: 10, max: 24 },
 };
 
 export function size(name) {
   return SIZES[name] || SIZES.regular;
 }
+
+/** Default min zoom at which a marker's label first appears. */
+export const DEFAULT_MARKER_MIN_ZOOM = 3;
 
 /**
  * Typography presets for numbered Pin labels. Each `defaults` spreads a named
@@ -130,8 +133,8 @@ export function size(name) {
  */
 export const PIN_PRESETS = [
   // Overworld — each preset picks a glyph that doubles as the pin icon.
-  { id: 'capital',   category: 'overworld', icon: '✪', label: 'Capital City',      defaults: { ...size('large'),   font: 'title',   bold: true } },
-  { id: 'city',      category: 'overworld', icon: '◉', label: 'Major City',        defaults: { ...size('large'),   font: 'heading', bold: true, case: 'upper', letterSpacing: 1 } },
+  { id: 'capital',   category: 'overworld', icon: '✪', label: 'Capital',           defaults: { ...size('large'),   font: 'title',   bold: true } },
+  { id: 'city',      category: 'overworld', icon: '◉', label: 'City',              defaults: { ...size('large'),   font: 'heading', bold: true, case: 'upper', letterSpacing: 1 } },
   { id: 'fortress',  category: 'overworld', icon: '⛫', label: 'Fortress',          defaults: { ...size('large'),   font: 'heading', bold: true, case: 'upper', letterSpacing: 1 } },
   { id: 'town',      category: 'overworld', icon: '◼', label: 'Town',              defaults: { ...size('regular'), font: 'heading' } },
   { id: 'tower',     category: 'overworld', icon: '♖', label: 'Tower',             defaults: { ...size('regular'), font: 'heading' } },
@@ -144,18 +147,18 @@ export const PIN_PRESETS = [
   { id: 'bridge',    category: 'overworld', icon: '≏', label: 'Bridge',            defaults: { ...size('small'),   font: 'body' } },
   { id: 'mountain',  category: 'overworld', icon: '⛰', label: 'Mountain',          defaults: { ...size('small'),   font: 'body' } },
   // Town — picked from a grid (no icon glyph; uses numbered circle).
-  { id: 'landmark',  category: 'town',      label: 'Major Landmark',    defaults: { ...size('regular'), font: 'heading', bold: true, case: 'upper' } },
+  { id: 'landmark',  category: 'town',      label: 'Major Landmark',    defaults: { ...size('regular'), font: 'heading', bold: true, case: 'upper', color: '#7f003f' } },
   { id: 'gate',      category: 'town',      label: 'Gate',              defaults: { ...size('regular'), font: 'heading', bold: true, case: 'upper' } },
   { id: 'poi',       category: 'town',      label: 'Point of Interest', defaults: { ...size('regular'), font: 'title',   bold: true } },
-  { id: 'shop',      category: 'town',      label: 'Shop / Inn',        defaults: { ...size('regular'), font: 'heading', bold: true } },
+  { id: 'shop',      category: 'town',      label: 'Shop / Inn',        defaults: { ...size('small'), font: 'body', bold: true } },
   { id: 'residence', category: 'town',      label: 'Residence',         defaults: { ...size('small'),   font: 'body' } },
 ];
 
 export const TEXT_PRESETS = [
   { id: 'map-title',   label: 'Map Title',   defaults: { ...size('title'),   font: 'title' } },
   { id: 'civic-space', label: 'Civic Space', defaults: { ...size('regular'), font: 'heading', case: 'upper', letterSpacing: 3 } },
-  { id: 'forest',      label: 'Forest',      defaults: { ...size('regular'), font: 'heading', bold: true, case: 'upper', letterSpacing: 2 } },
-  { id: 'district',    label: 'District',    defaults: { ...size('large'),   font: 'heading', bold: true, case: 'upper', letterSpacing: 4 } },
+  { id: 'forest',      label: 'Forest',      defaults: { ...size('large'), font: 'heading', bold: true, case: 'upper', letterSpacing: 4 } },
+  { id: 'district',    label: 'District',    defaults: { ...size('large'),   font: 'heading', bold: true, case: 'upper', letterSpacing: 2 } },
   { id: 'pond-marsh',  label: 'Pond/Marsh',  defaults: { ...size('regular'), font: 'body',    italic: true, case: 'title' } },
   { id: 'lake',        label: 'Lake',        defaults: { ...size('large'),   font: 'heading', italic: true, case: 'upper' } },
 ];

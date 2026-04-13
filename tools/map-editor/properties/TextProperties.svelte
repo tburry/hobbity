@@ -8,6 +8,7 @@
     width = $bindable(0),
     height = $bindable(0),
     minZoom = $bindable(1),
+    shrink = $bindable(false),
     onApplyPreset,
   } = $props();
 </script>
@@ -58,16 +59,26 @@
 
 <label class="min-zoom-label">
   Min zoom
-  <div class="zoom-group" role="radiogroup" aria-label="Minimum zoom level">
-    {#each [0, 1, 2, 3, 4, 5, 6, 7] as z}
-      <button
-        type="button"
-        role="radio"
-        aria-checked={minZoom === z}
-        class:active={minZoom === z}
-        onclick={() => minZoom = z}
-      >{z}</button>
-    {/each}
+  <div class="zoom-row">
+    <div class="zoom-group" role="radiogroup" aria-label="Minimum zoom level">
+      {#each [0, 1, 2, 3, 4] as z}
+        <button
+          type="button"
+          role="radio"
+          aria-checked={minZoom === z}
+          class:active={minZoom === z}
+          onclick={() => minZoom = z}
+        >{z}</button>
+      {/each}
+    </div>
+    <button
+      type="button"
+      class="shrink-toggle"
+      class:active={shrink}
+      aria-pressed={shrink}
+      title="Start at min size at min zoom and grow proportionally"
+      onclick={() => shrink = !shrink}
+    >Shrink</button>
   </div>
 </label>
 
@@ -78,8 +89,8 @@
     width: 100%;
     margin-top: 0.2rem;
     padding: 0.4rem;
-    border: 1px solid #5c4a32;
-    background: #2a1f14;
+    border: 1px solid var(--panel-border, #5c4a32);
+    background: #fff;
     color: inherit;
     border-radius: 3px;
     font: inherit;
@@ -95,7 +106,21 @@
   label.inline.size { display: flex; align-items: center; gap: 0.3rem; }
   label.inline.size input { width: 70px; padding: 0.3rem; text-align: center; }
   .min-zoom-label { display: block; margin-bottom: 0.6rem; font-size: 0.85rem; }
-  .zoom-group { display: flex; gap: 2px; margin-top: 0.25rem; }
+  .zoom-row { display: flex; gap: 6px; margin-top: 0.25rem; align-items: stretch; }
+  .zoom-group { display: flex; gap: 2px; flex: 1; }
+  .shrink-toggle {
+    padding: 0 0.75rem;
+    height: 30px;
+    font: 700 11px/1 'Crimson Pro', serif;
+    white-space: nowrap;
+    border: 1px solid var(--panel-border, #5c4a32);
+    background: transparent;
+    color: inherit;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .shrink-toggle:hover { background: var(--panel-hover, rgba(0,0,0,0.06)); }
+  .shrink-toggle.active { background: var(--panel-accent, #c9a96e); color: #fff; border-color: var(--panel-accent, #c9a96e); }
   .zoom-group button {
     flex: 1;
     height: 30px;
@@ -104,14 +129,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #5c4a32;
-    background: #2a1f14;
+    border: 1px solid var(--panel-border, #5c4a32);
+    background: transparent;
     color: inherit;
     border-radius: 3px;
     cursor: pointer;
   }
-  .zoom-group button:hover { background: #3a2e20; }
-  .zoom-group button.active { background: #c9a96e; color: #fff; border-color: #c9a96e; }
+  .zoom-group button:hover { background: var(--panel-hover, rgba(0,0,0,0.06)); }
+  .zoom-group button.active { background: var(--panel-accent, #c9a96e); color: #fff; border-color: var(--panel-accent, #c9a96e); }
 
   .align-group { display: flex; gap: 2px; flex: 1; }
   .align-group button {
@@ -122,12 +147,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #5c4a32;
-    background: #2a1f14;
+    border: 1px solid var(--panel-border, #5c4a32);
+    background: transparent;
     color: inherit;
     border-radius: 3px;
     cursor: pointer;
   }
-  .align-group button.active { background: #c9a96e; color: #fff; border-color: #c9a96e; }
+  .align-group button:hover { background: var(--panel-hover, rgba(0,0,0,0.06)); }
+  .align-group button.active { background: var(--panel-accent, #c9a96e); color: #fff; border-color: var(--panel-accent, #c9a96e); }
   .align-group button svg { width: 16px; height: 16px; }
 </style>

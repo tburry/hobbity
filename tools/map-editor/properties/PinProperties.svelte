@@ -5,6 +5,7 @@
     number = $bindable(''),
     cls = $bindable('landmark'),
     minZoom = $bindable(0),
+    shrink = $bindable(false),
   } = $props();
 
   const FONTS = {
@@ -13,7 +14,13 @@
     title: "'Uncial Antiqua', serif",
   };
 
-  const townPresets = PIN_PRESETS.filter(p => p.category === 'town');
+  // POI goes first and spans full width; the rest follow in order.
+  const townPresets = (() => {
+    const list = PIN_PRESETS.filter(p => p.category === 'town');
+    const poi = list.find(p => p.id === 'poi');
+    const rest = list.filter(p => p.id !== 'poi');
+    return poi ? [poi, ...rest] : list;
+  })();
   const overworldPresets = PIN_PRESETS.filter(p => p.category === 'overworld');
 
   // Active tab follows the currently-selected class.
@@ -25,11 +32,6 @@
 
   function setTab(t) {
     tab = t;
-    const p = findPreset(cls);
-    if (p?.category !== t) {
-      const first = PIN_PRESETS.find(q => q.category === t);
-      if (first) cls = first.id;
-    }
   }
 
   /** Inline CSS matching how this preset renders the label. */
@@ -40,6 +42,8 @@
       `font-weight: ${d.bold ? 700 : 400}`,
       `font-style: ${d.italic ? 'italic' : 'normal'}`,
     ];
+    if (d.color) parts.push(`color: ${d.color}`);
+    else if (d.font === 'title') parts.push('color: var(--title-color, #7f003f)');
     if (d.case && d.case !== 'none') {
       parts.push(`text-transform: ${d.case === 'upper' ? 'uppercase' : d.case === 'lower' ? 'lowercase' : 'capitalize'}`);
     }
@@ -54,13 +58,14 @@
 </div>
 
 {#if tab === 'town'}
-  <div class="text-grid" role="radiogroup" aria-label="Pin type">
+  <div class="text-grid" role="radiogroup" aria-label="Marker type">
     {#each townPresets as p}
       <button
         type="button"
         role="radio"
         aria-checked={cls === p.id}
         class:active={cls === p.id}
+        class:full={p.id === 'poi'}
         onclick={() => cls = p.id}
         style={styleFor(p)}
       >{p.label}</button>
@@ -77,7 +82,7 @@
     />
   </label>
 {:else}
-  <div class="icon-grid" role="radiogroup" aria-label="Pin type">
+  <div class="icon-grid" role="radiogroup" aria-label="Marker type">
     {#each overworldPresets as p}
       <button
         type="button"
@@ -95,16 +100,26 @@
 
 <label class="min-zoom-label">
   Min zoom
-  <div class="zoom-group" role="radiogroup" aria-label="Minimum zoom level">
-    {#each [0, 1, 2, 3, 4, 5, 6, 7] as z}
-      <button
-        type="button"
-        role="radio"
-        aria-checked={minZoom === z}
-        class:active={minZoom === z}
-        onclick={() => minZoom = z}
-      >{z}</button>
-    {/each}
+  <div class="zoom-row">
+    <div class="zoom-group" role="radiogroup" aria-label="Minimum zoom level">
+      {#each [0, 1, 2, 3, 4] as z}
+        <button
+          type="button"
+          role="radio"
+          aria-checked={minZoom === z}
+          class:active={minZoom === z}
+          onclick={() => minZoom = z}
+        >{z}</button>
+      {/each}
+    </div>
+    <button
+      type="button"
+      class="shrink-toggle"
+      class:active={shrink}
+      aria-pressed={shrink}
+      title="Start at min size at min zoom and grow proportionally"
+      onclick={() => shrink = !shrink}
+    >Shrink</button>
   </div>
 </label>
 
@@ -115,8 +130,8 @@
     width: 100%;
     margin-top: 0.2rem;
     padding: 0.4rem;
-    border: 1px solid #5c4a32;
-    background: #2a1f14;
+    border: 1px solid var(--panel-border, #5c4a32);
+    background: #fff;
     color: inherit;
     border-radius: 3px;
     font: inherit;
@@ -126,7 +141,7 @@
     display: flex;
     gap: 2px;
     margin-bottom: 0.6rem;
-    border-bottom: 1px solid #5c4a32;
+    border-bottom: 1px solid var(--panel-border, #5c4a32);
   }
   .tabs button {
     flex: 1;
@@ -140,8 +155,8 @@
     cursor: pointer;
     border-radius: 0;
   }
-  .tabs button:hover { opacity: 0.85; background: rgba(255,255,255,0.04); }
-  .tabs button.active { opacity: 1; border-bottom-color: #c9a96e; }
+  .tabs button:hover { opacity: 0.85; background: var(--panel-hover, rgba(0,0,0,0.06)); }
+  .tabs button.active { opacity: 1; border-bottom-color: var(--panel-accent, #c9a96e); }
 
   .text-grid {
     display: grid;
@@ -156,15 +171,16 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    border: 1px solid #5c4a32;
-    background: #2a1f14;
+    border: 1px solid var(--panel-border, #5c4a32);
+    background: transparent;
     color: inherit;
     border-radius: 3px;
     cursor: pointer;
     min-height: 40px;
   }
-  .text-grid button:hover { background: #3a2e20; }
-  .text-grid button.active { background: #c9a96e; color: #3b2e1e; border-color: #c9a96e; }
+  .text-grid button:hover { background: var(--panel-hover, rgba(0,0,0,0.06)); }
+  .text-grid button.active { background: var(--panel-accent, #c9a96e); color: #fff; border-color: var(--panel-accent, #c9a96e); }
+  .text-grid button.full { grid-column: 1 / -1; }
 
   .icon-grid {
     display: grid;
@@ -179,15 +195,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #5c4a32;
-    background: #2a1f14;
+    border: 1px solid var(--panel-border, #5c4a32);
+    background: transparent;
     color: inherit;
     border-radius: 3px;
     cursor: pointer;
   }
   .icon-grid button .icon { font-size: 20px; line-height: 1; }
-  .icon-grid button:hover { background: #3a2e20; }
-  .icon-grid button.active { background: #c9a96e; color: #3b2e1e; border-color: #c9a96e; }
+  .icon-grid button:hover { background: var(--panel-hover, rgba(0,0,0,0.06)); }
+  .icon-grid button.active { background: var(--panel-accent, #c9a96e); color: #fff; border-color: var(--panel-accent, #c9a96e); }
 
   /* HTML tooltip: renders the feature label in the class's font/style */
   .tt {
@@ -211,7 +227,14 @@
   .icon-grid button:focus-visible .tt { opacity: 1; }
 
   .min-zoom-label { display: block; margin-bottom: 0.6rem; font-size: 0.85rem; }
-  .zoom-group { display: flex; gap: 2px; margin-top: 0.25rem; }
+  .zoom-row { display: flex; gap: 6px; margin-top: 0.25rem; align-items: stretch; }
+  .zoom-group { display: flex; gap: 2px; flex: 1; }
+  .shrink-toggle {
+    padding: 0 0.75rem !important;
+    height: 30px;
+    font: 700 11px/1 'Crimson Pro', serif;
+    white-space: nowrap;
+  }
   .zoom-group button {
     flex: 1;
     height: 30px;
@@ -220,12 +243,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #5c4a32;
-    background: #2a1f14;
+    border: 1px solid var(--panel-border, #5c4a32);
+    background: transparent;
     color: inherit;
     border-radius: 3px;
     cursor: pointer;
   }
-  .zoom-group button:hover { background: #3a2e20; }
-  .zoom-group button.active { background: #c9a96e; color: #fff; border-color: #c9a96e; }
+  .zoom-group button:hover { background: var(--panel-hover, rgba(0,0,0,0.06)); }
+  .zoom-group button.active { background: var(--panel-accent, #c9a96e); color: #fff; border-color: var(--panel-accent, #c9a96e); }
 </style>

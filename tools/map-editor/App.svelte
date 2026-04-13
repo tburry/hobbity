@@ -1,13 +1,12 @@
 <script>
   import MapViewer from '../../src/components/map/MapViewer.svelte';
-  import { TOOL_LIST, TOOLS } from '../../src/components/map/tools.js';
+  import { TOOL_LIST, TOOLS, DEFAULT_MARKER_MIN_ZOOM } from '../../src/components/map/tools.js';
   import PinProperties from './properties/PinProperties.svelte';
   import TextProperties from './properties/TextProperties.svelte';
 
   let maps = $state([]);
   let currentMap = $state(null);
   let pins = $state([]);
-  let labelsVisible = $state(localStorage.getItem('map-editor:labels-visible') === 'true');
   let viewer = $state();
   let viewInfo = $state({ zoom: 0, x: 0, y: 0 });
   let wheelInfo = $state({ deltaX: 0, deltaY: 0, ctrlKey: false, trackpad: false });
@@ -16,10 +15,9 @@
   let editing = $state(false);
   let editingId = $state(null);
   let previewId = $state(null);
-  let dialogTitle = $state('New Pin');
+  let dialogTitle = $state('New Marker');
   let pinNumber = $state('1');
   let pinName = $state('');
-  let pinLongName = $state('');
   let pinDesc = $state('');
   let pinLink = $state('');
   let pinKind = $state('pin');      // 'pin' | 'text' | 'path'
@@ -29,7 +27,7 @@
   let pinWidth = $state(0);
   let pinHeight = $state(0);
   let pinMinZoom = $state(1);
-  let showDelete = $state(false);
+  let pinShrink = $state(false);
 
   // Active toolbox mode — determines what clicking the map does
   let toolMode = $state(localStorage.getItem('map-editor:tool') || 'select');
@@ -38,6 +36,24 @@
     toolMode = mode;
     localStorage.setItem('map-editor:tool', mode);
   }
+
+  // Photoshop-style tool shortcuts. Ignored while the user is typing in an
+  // input / textarea / contenteditable.
+  const TOOL_KEYS = { v: 'select', m: 'pin', t: 'text', p: 'path' };
+  function onKeydown(e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const tag = e.target?.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || e.target?.isContentEditable) return;
+    const mode = TOOL_KEYS[e.key.toLowerCase()];
+    if (mode) {
+      e.preventDefault();
+      setToolMode(mode);
+    }
+  }
+  $effect(() => {
+    window.addEventListener('keydown', onKeydown);
+    return () => window.removeEventListener('keydown', onKeydown);
+  });
 
   function applyPreset(presetId) {
     // For text features, the class fully drives font/size/case/letterSpacing
@@ -83,9 +99,9 @@
           if (rest.valign && rest.valign !== 'middle') out.valign = rest.valign;
           if (rest.minZoom != null && rest.minZoom !== 1) out.minZoom = rest.minZoom;
         } else {
-          if (rest.minZoom != null && rest.minZoom !== 0) out.minZoom = rest.minZoom;
+          if (rest.minZoom != null && rest.minZoom !== DEFAULT_MARKER_MIN_ZOOM) out.minZoom = rest.minZoom;
         }
-        if (rest.longName) out.longName = rest.longName;
+        if (rest.shrink) out.shrink = true;
         if (rest.description) out.description = rest.description;
         if (rest.link) out.link = rest.link;
         return out;
@@ -121,14 +137,13 @@
     editingId = id;
     pinKind = kind;
     pinName = '';
-    pinLongName = '';
     pinDesc = '';
     pinLink = '';
     pinAlign = 'center';
     pinValign = 'middle';
     pinWidth = data.width || 0;
     pinHeight = data.height || 0;
-    showDelete = false;
+    pinShrink = false;
 
     if (kind === 'pin') {
       const usedNums = new Set(pins.filter(p => (p.kind || 'pin') === 'pin').map(p => p.number).filter(Boolean));
@@ -136,8 +151,8 @@
       while (usedNums.has(String(next))) next++;
       pinNumber = String(next);
       pinClass = 'landmark';
-      pinMinZoom = 0;
-      dialogTitle = 'New Pin';
+      pinMinZoom = DEFAULT_MARKER_MIN_ZOOM;
+      dialogTitle = 'New Marker';
     } else if (kind === 'text') {
       pinNumber = '';
       pinClass = 'civic-space';
@@ -161,6 +176,7 @@
       width: pinWidth,
       height: pinHeight,
       minZoom: pinMinZoom,
+      shrink: pinShrink,
       x: data.x,
       y: data.y,
     }];
@@ -239,24 +255,23 @@
     previewId = null;
     // Determine kind from stored field or infer from number presence
     pinKind = pin.kind || (pin.number ? 'pin' : 'text');
-    dialogTitle = pinKind === 'pin' ? 'Edit Pin' : pinKind === 'text' ? 'Edit Text' : 'Edit Path';
+    dialogTitle = pinKind === 'pin' ? 'Edit Marker' : pinKind === 'text' ? 'Edit Text' : 'Edit Path';
     pinNumber = pin.number != null ? String(pin.number) : '';
     pinName = pin.name;
-    pinLongName = pin.longName || '';
     pinDesc = pin.description || '';
     pinLink = pin.link || '';
-    pinClass = pin.class || (pinKind === 'pin' ? 'landmark' : 'civic-space');
+    pinClass = pin.class || (pinKind === 'pin' ? 'shop' : 'civic-space');
     pinAlign = pin.align || 'center';
     pinValign = pin.valign || 'middle';
     pinWidth = pin.width || 0;
     pinHeight = pin.height || 0;
-    pinMinZoom = pin.minZoom ?? (pinKind === 'pin' ? 0 : 1);
+    pinMinZoom = pin.minZoom ?? (pinKind === 'pin' ? DEFAULT_MARKER_MIN_ZOOM : 1);
+    pinShrink = !!pin.shrink;
     // Apply default size for text features that were created as point-labels
     if (pinKind === 'text' && (!pinWidth || !pinHeight)) {
       pinWidth = 300;
       pinHeight = 80;
     }
-    showDelete = true;
     editing = true;
   }
 
@@ -284,12 +299,11 @@
       if (pinHeight !== h) pinHeight = h;
     }
     const mz = pinMinZoom;
-    const longName = pinLongName.trim() || undefined;
+    const sh = pinShrink;
     const desc = pinDesc.trim() || undefined;
     const link = pinLink.trim() || undefined;
-    if (pin.name !== name || pin.longName !== longName || pin.number !== num || pin.kind !== kind || pin.class !== cls || pin.align !== align || pin.valign !== valign || pin.width !== w || pin.height !== h || pin.x !== x || pin.y !== y || pin.minZoom !== mz || pin.description !== desc || pin.link !== link) {
+    if (pin.name !== name || pin.number !== num || pin.kind !== kind || pin.class !== cls || pin.align !== align || pin.valign !== valign || pin.width !== w || pin.height !== h || pin.x !== x || pin.y !== y || pin.minZoom !== mz || pin.shrink !== sh || pin.description !== desc || pin.link !== link) {
       pin.name = name;
-      pin.longName = longName;
       pin.number = num;
       pin.kind = kind;
       pin.class = cls;
@@ -300,21 +314,14 @@
       pin.x = x;
       pin.y = y;
       pin.minZoom = mz;
+      pin.shrink = sh;
       pin.description = desc;
       pin.link = link;
       viewer?.updateMarker(pin);
       pins = pins;
+      scheduleSave();
     }
   });
-
-  function onSubmit(e) {
-    e.preventDefault();
-    if (!pinName.trim()) return;
-    previewId = null;
-    editingId = null;
-    editing = false;
-    savePins();
-  }
 
   function onDelete() {
     if (!editingId) return;
@@ -325,19 +332,18 @@
     savePins();
   }
 
-  function onCancel() {
-    // If cancelling a new pin, remove the preview
-    if (previewId) {
-      pins = pins.filter(p => p.id !== previewId);
-      previewId = null;
-    }
+  /** Close the editor without deleting the feature. Auto-saved changes stay. */
+  function closeEditor() {
+    previewId = null;
     editingId = null;
     editing = false;
   }
 
-  function toggleLabels() {
-    labelsVisible = !labelsVisible;
-    localStorage.setItem('map-editor:labels-visible', String(labelsVisible));
+  // Debounced auto-save — every edit in the $effect above triggers this.
+  let saveTimer;
+  function scheduleSave() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => savePins(), 300);
   }
 
   async function copyJson() {
@@ -368,24 +374,21 @@
 </script>
 
 <header>
-  <h1>Map Pin Editor</h1>
+  <h1>Map Marker Editor</h1>
   <select title="Select map" onchange={onMapSelect} value={currentMap?.slug}>
     {#each maps as m}
       <option value={m.slug}>{m.name}</option>
     {/each}
   </select>
-  <button class="header-toggle" class:active={labelsVisible} onclick={toggleLabels}>
-    {labelsVisible ? 'Hide Labels' : 'Show Labels'}
-  </button>
 </header>
 
 <div class="layout">
-  <div class="map-wrapper" class:labels-visible={labelsVisible}>
+  <div class="map-wrapper">
     <div class="toolbox">
       {#each TOOL_LIST as t}
         <button
           type="button"
-          title={t.label}
+          title={`${t.label} (${ {select:'V',pin:'M',text:'T',path:'P'}[t.id] || '' })`}
           class:active={toolMode === t.id}
           onclick={() => setToolMode(t.id)}
           aria-label={t.label}
@@ -413,7 +416,6 @@
         minZoom={currentMap.minZoom}
         maxZoom={currentMap.maxZoom}
         {pins}
-        {labelsVisible}
         editable={true}
         tool={TOOLS[toolMode]}
         ctx={editorCtx}
@@ -425,17 +427,18 @@
   </div>
   <div class="sidebar">
     <div class="tabs">
-      <button class:active={!editing} onclick={() => { if (editing) onCancel(); }}>Pins</button>
+      <button class:active={!editing} onclick={() => { if (editing) closeEditor(); }}>Markers</button>
       <button class:active={editing}>{editing ? dialogTitle : 'Editor'}</button>
     </div>
     {#if editing}
       <div class="pin-editor">
-        <form onsubmit={onSubmit}>
+        <form onsubmit={(e) => { e.preventDefault(); closeEditor(); }}>
           {#if pinKind === 'pin'}
             <PinProperties
               bind:number={pinNumber}
               bind:cls={pinClass}
               bind:minZoom={pinMinZoom}
+              bind:shrink={pinShrink}
             />
           {:else if pinKind === 'text'}
             <TextProperties
@@ -445,21 +448,15 @@
               bind:width={pinWidth}
               bind:height={pinHeight}
               bind:minZoom={pinMinZoom}
+              bind:shrink={pinShrink}
               onApplyPreset={applyPreset}
             />
           {/if}
-          <label>Name <input type="text" bind:value={pinName} required autocomplete="off" /></label>
-          {#if pinKind !== 'text'}
-            <label>Longer Name <input type="text" bind:value={pinLongName} placeholder="(shown on hover)" autocomplete="off" /></label>
-          {/if}
+          <label>Label <input type="text" bind:value={pinName} required autocomplete="off" /></label>
           <label>Description <textarea bind:value={pinDesc} rows="2"></textarea></label>
           <label>Link <input type="text" bind:value={pinLink} placeholder="/hobbity/world/places/#anchor" autocomplete="off" /></label>
           <div class="dialog-buttons">
-            <button type="submit">{editingId && !previewId ? 'Update' : 'Save'}</button>
-            {#if showDelete}
-              <button type="button" class="danger" onclick={onDelete}>Delete</button>
-            {/if}
-            <button type="button" onclick={onCancel}>Cancel</button>
+            <button type="button" class="danger" onclick={onDelete}>Delete</button>
           </div>
         </form>
       </div>
@@ -541,25 +538,30 @@
     font-family: ui-monospace, monospace;
   }
   .status-bar span { white-space: nowrap; }
-  .header-toggle { font-size: 0.85rem; }
-  .header-toggle.active { background: #8b6914; }
-  .header-toggle:disabled { opacity: 0.4; cursor: not-allowed; }
-  .header-toggle:disabled:hover { background: #2a1f14; }
 
   .layout { flex: 1; display: flex; overflow: hidden; min-height: 0; }
   .map-wrapper { flex: 1; min-width: 0; min-height: 0; position: relative; }
 
+  /* Sidebar uses the map's paper palette so typography previews render
+     the way they will on an actual map tile. The vars below propagate
+     into nested property-panel components. */
   .sidebar {
     width: 280px;
     display: flex;
     flex-direction: column;
-    border-left: 1px solid #5c4a32;
     min-height: 0;
     overflow: hidden;
+    background: #faf6f0;
+    color: #3b2e1e;
+    --panel-bg: #faf6f0;
+    --panel-text: #3b2e1e;
+    --panel-border: #c9a96e;
+    --panel-accent: #8b6914;
+    --panel-hover: rgba(0, 0, 0, 0.06);
   }
   .tabs {
     display: flex;
-    border-bottom: 1px solid #5c4a32;
+    border-bottom: 1px solid var(--panel-border);
   }
   .tabs button {
     flex: 1;
@@ -576,10 +578,10 @@
     border-radius: 0;
   }
   .tabs button:hover { opacity: 0.8; background: none; }
-  .tabs button.active { opacity: 1; border-bottom-color: #8b6914; }
+  .tabs button.active { opacity: 1; border-bottom-color: var(--panel-accent); }
 
   .pin-list { list-style: none; padding: 0; margin: 0; flex: 1; overflow-y: auto; }
-  .pin-list li { border-bottom: 1px solid #3a2e20; }
+  .pin-list li { border-bottom: 1px solid rgba(0, 0, 0, 0.08); }
   .pin-list-btn {
     width: 100%;
     text-align: left;
@@ -591,7 +593,7 @@
     cursor: pointer;
     border-radius: 0;
   }
-  .pin-list-btn:hover { background: rgba(255,255,255,0.05); }
+  .pin-list-btn:hover { background: var(--panel-hover); }
   .pin-num {
     display: inline-flex;
     align-items: center;
@@ -614,9 +616,25 @@
   }
   .pin-coords { opacity: 0.5; font-size: 0.8em; }
 
-  .actions { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.5rem 0.75rem; border-top: 1px solid #5c4a32; }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.5rem 0.75rem; border-top: 1px solid var(--panel-border); }
   .actions button { flex: 1; min-width: calc(50% - 0.25rem); }
 
+  /* Sidebar buttons override the dark default. */
+  .sidebar button {
+    padding: 0.35rem 0.7rem;
+    cursor: pointer;
+    border: 1px solid var(--panel-border);
+    background: transparent;
+    color: inherit;
+    border-radius: 3px;
+    font: inherit;
+    font-size: 0.85rem;
+  }
+  .sidebar button:hover { background: var(--panel-hover); }
+  .sidebar button.active { background: var(--panel-accent); color: #fff; border-color: var(--panel-accent); }
+  .sidebar .danger:hover { background: #8b2020; border-color: #8b2020; color: #fff; }
+
+  /* Preserve dark-theme defaults elsewhere (header/footer/toolbox). */
   button {
     padding: 0.35rem 0.7rem;
     cursor: pointer;
@@ -642,8 +660,8 @@
     width: 100%;
     margin-top: 0.2rem;
     padding: 0.4rem;
-    border: 1px solid #5c4a32;
-    background: #2a1f14;
+    border: 1px solid var(--panel-border);
+    background: #fff;
     color: inherit;
     border-radius: 3px;
     font: inherit;
