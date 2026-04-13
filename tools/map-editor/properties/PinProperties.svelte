@@ -39,7 +39,7 @@
     const d = preset.defaults || {};
     const parts = [
       `font-family: ${FONTS[d.font] || FONTS.body}`,
-      `font-weight: ${d.bold ? 700 : 400}`,
+      `font-weight: ${d.weight ?? (d.bold ? 700 : 400)}`,
       `font-style: ${d.italic ? 'italic' : 'normal'}`,
     ];
     if (d.color) parts.push(`color: ${d.color}`);

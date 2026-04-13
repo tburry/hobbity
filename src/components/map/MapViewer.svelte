@@ -99,14 +99,15 @@
       const s = resolvePreset(pin) || {};
       const font = FONTS[s.font] || FONTS.body;
       const size = computeFontSize(pin, currentZoom);
-      const weight = s.bold ? '700' : '400';
+      const weight = String(s.weight ?? (s.bold ? 700 : 400));
       const style = s.italic ? 'italic' : 'normal';
       const transforms = [];
       if (pin.rotate) transforms.push(`rotate(${pin.rotate}deg)`);
       const transformStyle = transforms.length ? `transform: ${transforms.join(' ')};` : '';
       const extra = extraStyles(s);
-      const colorStyle = s.color ? `color: ${s.color}; ` : (s.font === 'title' ? 'color: var(--title-color, #7f003f); ' : '');
-      const textStyle = `font-family: ${font}; font-size: ${size.toFixed(1)}px; font-weight: ${weight}; font-style: ${style}; ${colorStyle}${extra}`;
+      const textStyle = `font-family: ${font}; font-size: ${size.toFixed(1)}px; font-weight: ${weight}; font-style: ${style}; ${extra}`;
+      const sizeClass = s.sizeClass || 'text-base';
+      const colorClass = s.colorClass || 'text-black';
 
       // If the text has a bounding box, render inside a sized flex container
       if (pin.width > 0 && pin.height > 0) {
@@ -124,7 +125,7 @@
         const selClass = isSelected ? ' selected' : '';
         const handles = isSelected ? HANDLE_POSITIONS.map(h =>
           `<div class="resize-handle handle-${h}" data-handle="${h}" data-pin-id="${pin.id}"></div>`).join('') : '';
-        const html = `<div class="map-text-box${selClass}" style="${boxStyle}" data-pin-id="${pin.id}"><div class="map-label map-label-boxed" style="${textStyle}"><span class="map-label-text">${esc(pin.name)}</span></div>${handles}</div>`;
+        const html = `<div class="map-text-box${selClass}" style="${boxStyle}" data-pin-id="${pin.id}"><div class="map-label map-label-boxed ${sizeClass} ${colorClass}" style="${textStyle}"><span class="map-label-text">${esc(pin.name)}</span></div>${handles}</div>`;
         return L.divIcon({
           className: '',
           html,
@@ -133,7 +134,7 @@
         });
       }
 
-      const html = `<div class="map-label" style="${textStyle} ${transformStyle}">${esc(pin.name)}</div>`;
+      const html = `<div class="map-label ${sizeClass} ${colorClass}" style="${textStyle} ${transformStyle}">${esc(pin.name)}</div>`;
       return L.divIcon({
         className: '',
         html,
@@ -155,11 +156,12 @@
     const s = resolvePreset(pin) || {};
     const font = FONTS[s.font] || FONTS.body;
     const size = computeFontSize(pin, currentZoom);
-    const weight = s.bold ? '700' : '400';
+    const weight = String(s.weight ?? (s.bold ? 700 : 400));
     const style = s.italic ? 'italic' : 'normal';
     const extra = extraStyles(s);
-    const colorStyle = s.color ? `color: ${s.color}; ` : (s.font === 'title' ? 'color: var(--title-color, #7f003f); ' : '');
-    const labelStyle = `font-family: ${font}; font-size: ${size.toFixed(1)}px; font-weight: ${weight}; font-style: ${style}; ${colorStyle}${extra}`;
+    const labelStyle = `font-family: ${font}; font-size: ${size.toFixed(1)}px; font-weight: ${weight}; font-style: ${style}; ${extra}`;
+    const pinSizeClass = s.sizeClass || 'text-base';
+    const pinColorClass = s.colorClass || 'text-black';
     // Overworld pins render a glyph (✪, ◉, …) instead of a numbered circle.
     const preset = pin.class ? PIN_PRESETS.find(p => p.id === pin.class) : null;
     const isOverworld = preset?.category === 'overworld';
@@ -168,7 +170,7 @@
     const markStyle = isOverworld ? `font-size: ${Math.max(20, size).toFixed(1)}px;` : '';
     return L.divIcon({
       className: '',
-      html: `<div class="map-pin${pin.id === selectedId ? ' selected' : ''}${isOverworld ? ' overworld' : ''}${labelHidden ? ' label-hidden' : ''}"><span class="map-pin-label map-pin-label-short" style="${labelStyle}">${shortLabel}</span><span class="map-pin-label map-pin-label-long" style="${labelStyle}">${longLabel}</span><span class="${markClass}" style="${markStyle}">${markContent}</span></div>`,
+      html: `<div class="map-pin${pin.id === selectedId ? ' selected' : ''}${isOverworld ? ' overworld' : ''}${labelHidden ? ' label-hidden' : ''}"><span class="map-pin-label map-pin-label-short ${pinSizeClass} ${pinColorClass}" style="${labelStyle}">${shortLabel}</span><span class="map-pin-label map-pin-label-long ${pinSizeClass} ${pinColorClass}" style="${labelStyle}">${longLabel}</span><span class="${markClass}" style="${markStyle}">${markContent}</span></div>`,
       iconSize: [28, 28],
       iconAnchor: [14, 14],
     });
@@ -623,183 +625,221 @@
 
 <div class="map-container" bind:this={mapEl}></div>
 
-<style>
+<style lang="scss">
+  // All map-related rules cascade from `.map-container`. Leaflet populates
+  // its own DOM inside this container, so we wrap everything in `:global`
+  // to opt out of Svelte's scope hashing while keeping the container
+  // selector scoped by `.map-container` itself.
   .map-container {
     position: absolute;
     inset: 0;
-    background: #1a1a1a;
-  }
-  /* Tool-specific cursors (override Leaflet's default grab cursor) */
-  :global(.leaflet-container) { cursor: default !important; }
-  :global(.leaflet-container.tool-pin),
-  :global(.leaflet-container.tool-text),
-  :global(.leaflet-container.tool-path) { cursor: crosshair !important; }
-  :global(.leaflet-container.right-panning) { cursor: grabbing !important; }
-  /* In select mode, pins and label text show pointer on hover */
-  :global(.tool-select .map-pin),
-  :global(.tool-select .map-pin-number),
-  :global(.tool-select .map-label),
-  :global(.tool-select .map-label-text) { cursor: pointer !important; }
-  /* Hovering anywhere inside a selected box shows the move cursor.
-     Individual .handle-* rules keep their own resize cursors. */
-  :global(.tool-select .map-text-box.selected),
-  :global(.tool-select .map-text-box.selected .map-label),
-  :global(.tool-select .map-text-box.selected .map-label-text) { cursor: move !important; }
+    background: var(--bg, #1a1a1a);
 
-  :global(.map-pin) {
-    width: 28px;
-    height: 28px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    pointer-events: auto !important;
-    position: relative;
-  }
-  :global(.map-pin-number) {
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    color: #000000;
-    border: 2px solid #c9a96e;
-    border-radius: 50%;
-    font: 700 12px/1 'Crimson Pro', 'Lora', serif;
-    cursor: grab;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
-  }
-  /* Overworld pins: bare glyph, no circle. */
-  :global(.map-pin-glyph) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000;
-    line-height: 1;
-    cursor: grab;
-    text-shadow: 1px 1px 0 rgba(255, 255, 255, .8), -1px -1px 0 rgba(255, 255, 255, .8), 0 0 4px rgba(255, 255, 255, .6);
-  }
-  :global(.map-pin-label) {
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: -2px;
-    line-height: 1.2;
-    color: #000000;
-    white-space: nowrap;
-    pointer-events: none;
-    text-shadow: 1px 1px 0 rgba(255, 255, 255, .8), -1px -1px 0 rgba(255, 255, 255, .8), 0 0 6px rgba(255, 255, 255, .8), 0 0 8px rgba(255, 255, 255, .5);
-    display: none;
-  }
-  /* Short label: shown by default — the per-marker `minZoom` (via the
-     `.label-hidden` class set in makeIcon) is what actually gates it. */
-  :global(.map-pin-label-short) { display: block; }
-  /* Long label: shown on hover (all zooms) */
-  :global(.map-pin:hover .map-pin-label-long) { display: block; }
-  :global(.map-pin:hover .map-pin-label-short) { display: none; }
-  /* Selected pins always show their long label (falls back to short if no longName) */
-  :global(.map-pin.selected .map-pin-label-long) { display: block !important; }
-  :global(.map-pin.selected .map-pin-label-short) { display: none !important; }
-  /* Selected state: numbered circle flips bg/text; overworld glyph gets
-     a matching dark circle backdrop. */
-  :global(.map-pin.selected .map-pin-number) {
-    background: #3b2e1e;
-    color: #fff;
-    border-color: #3b2e1e;
-  }
-  :global(.map-pin.selected .map-pin-glyph) {
-    background: #3b2e1e;
-    color: #fff;
-    border-radius: 50%;
-    padding: 6px;
-    aspect-ratio: 1;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-    text-shadow: none;
-  }
-  /* Per-marker label gate: when current zoom is below the marker's minZoom
-     the label is hidden by default; hovering or selecting still reveals
-     the long label so the marker stays identifiable. */
-  :global(.map-pin.label-hidden .map-pin-label) { display: none !important; }
-  :global(.map-pin.label-hidden:hover .map-pin-label-long),
-  :global(.map-pin.label-hidden.selected .map-pin-label-long) { display: block !important; }
+    :global {
+      // --- Tool-specific cursors (override Leaflet's default grab) -----
+      .leaflet-container { cursor: default !important; }
+      .leaflet-container.tool-pin,
+      .leaflet-container.tool-text,
+      .leaflet-container.tool-path { cursor: crosshair !important; }
+      .leaflet-container.right-panning { cursor: grabbing !important; }
 
-  /* Low zoom: shrink pin circles, hide numbers */
-  :global(.zoom-low .map-pin-number) {
-    width: 12px;
-    height: 12px;
-    border-width: 1.5px;
-    font-size: 0;
-  }
-  /* Shrunken circle sits ~6px further from container top; pull labels
-     down to keep the same tight gap as at normal zoom. */
-  :global(.zoom-low .map-pin-label) { margin-bottom: -8px; }
+      // Select mode: pins + label text → pointer
+      .tool-select .map-pin,
+      .tool-select .map-pin-number,
+      .tool-select .map-label,
+      .tool-select .map-label-text { cursor: pointer !important; }
 
-  :global(.map-label) {
-    color: #000000;
-    white-space: nowrap;
-    cursor: grab;
-    text-shadow: 0 0 2px #faf6f0, 0 0 2px #faf6f0, 0 0 4px #faf6f0;
-    transform-origin: left center;
-  }
-  /* Boxed text wraps within the container and doesn't overflow */
-  :global(.map-label-boxed) {
-    white-space: normal;
-    word-break: break-word;
-    max-width: 100%;
-    max-height: 100%;
-    overflow: hidden;
-  }
+      // Select mode inside a selected text box → move cursor everywhere
+      // (except resize handles which keep their own cursors)
+      .tool-select .map-text-box.selected,
+      .tool-select .map-text-box.selected .map-label,
+      .tool-select .map-text-box.selected .map-label-text { cursor: move !important; }
 
-  /* Selection box + resize handles. The box itself is NOT clickable —
-     only the inner label text (and resize handles when selected) register
-     pointer events. Clicks on empty space inside the box fall through to
-     the map so they can deselect. */
-  :global(.map-text-box) {
-    position: relative;
-    pointer-events: none;
-  }
-  /* Leaflet's marker wrapper is `pointer-events: auto` by default, so a
-     click on empty space inside the box would still fire the marker
-     click via the wrapper. Disable it on markers that host a text box,
-     then re-enable it on the parts we actually want clickable: the text
-     span and the resize handles. */
-  :global(.leaflet-marker-icon:has(.map-text-box)) { pointer-events: none !important; }
-  :global(.map-text-box > .map-label) { pointer-events: none; }
-  :global(.map-text-box .map-label-text) { pointer-events: auto; }
-  :global(.map-text-box > .resize-handle) { pointer-events: auto; }
-  /* Once a text box is selected, the whole bounding box becomes
-     interactive so it can be dragged from anywhere inside. */
-  :global(.leaflet-marker-icon:has(.map-text-box.selected)) { pointer-events: auto !important; }
-  :global(.map-text-box.selected) { pointer-events: auto; }
-  /* Show the bounding box outline for the currently selected text feature */
-  :global(.map-text-box.selected) {
-    outline: 1.5px dashed #6b3a2a;
-    outline-offset: 0;
-  }
-  :global(.resize-handle) {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: #fff;
-    border: 2px solid #6b3a2a;
-    border-radius: 2px;
-    box-sizing: border-box;
-    z-index: 10;
-  }
-  :global(.handle-nw) { top: -5px;    left: -5px;    cursor: nwse-resize; }
-  :global(.handle-n)  { top: -5px;    left: 50%;     transform: translateX(-50%); cursor: ns-resize; }
-  :global(.handle-ne) { top: -5px;    right: -5px;   cursor: nesw-resize; }
-  :global(.handle-e)  { top: 50%;     right: -5px;   transform: translateY(-50%); cursor: ew-resize; }
-  :global(.handle-se) { bottom: -5px; right: -5px;   cursor: nwse-resize; }
-  :global(.handle-s)  { bottom: -5px; left: 50%;     transform: translateX(-50%); cursor: ns-resize; }
-  :global(.handle-sw) { bottom: -5px; left: -5px;    cursor: nesw-resize; }
-  :global(.handle-w)  { top: 50%;     left: -5px;    transform: translateY(-50%); cursor: ew-resize; }
-  /* Freeform label visibility is controlled per-feature via the minZoom
-     prop and the makeIcon render, not by a blanket zoom-level rule. */
+      // --- Marker body (numbered circle or overworld glyph) ------------
+      .map-pin {
+        width: 28px;
+        height: 28px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        pointer-events: auto !important;
+        position: relative;
 
-  /* Prevent sub-pixel gaps between tiles */
-  :global(.leaflet-tile-container) { will-change: transform; }
-  :global(.leaflet-tile) { outline: 1px solid transparent; }
+        // Hover reveals the long label
+        &:hover .map-pin-label-long { display: block; }
+        &:hover .map-pin-label-short { display: none; }
+
+        // Selected: always show long label, flip circle bg/text,
+        // give the glyph a matching dark-circle backdrop
+        &.selected {
+          .map-pin-label-long { display: block !important; }
+          .map-pin-label-short { display: none !important; }
+          .map-pin-number {
+            background: #3b2e1e;
+            color: #fff;
+            border-color: #3b2e1e;
+          }
+          .map-pin-glyph {
+            background: #3b2e1e;
+            color: #fff;
+            border-radius: 50%;
+            padding: 6px;
+            aspect-ratio: 1;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+            text-shadow: none;
+          }
+        }
+
+        // Per-marker label gate: below the marker's minZoom the label is
+        // hidden by default; hovering / selecting still reveals the long.
+        &.label-hidden .map-pin-label { display: none !important; }
+        &.label-hidden:hover .map-pin-label-long,
+        &.label-hidden.selected .map-pin-label-long { display: block !important; }
+      }
+
+      .map-pin-number {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        color: #000;
+        border: 2px solid var(--border, #c9a96e);
+        border-radius: 50%;
+        font: 700 12px/1 var(--heading-font, 'Crimson Pro'), var(--body-font, 'Lora'), serif;
+        cursor: grab;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+      }
+
+      // Overworld pins: bare glyph, no circle
+      .map-pin-glyph {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #000;
+        line-height: 1;
+        cursor: grab;
+        text-shadow: 0 0 3px rgba(250, 246, 240, 0.7), 0 0 6px rgba(250, 246, 240, 0.4);
+      }
+
+      // --- Labels (pin short/long + freeform map labels) ---------------
+      .map-pin-label {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: -2px;
+        line-height: 1.2;
+        white-space: nowrap;
+        pointer-events: none;
+        display: none;
+      }
+      // Short is the default-visible variant; the `.label-hidden` gate
+      // on `.map-pin` overrides this when zoom < minZoom.
+      .map-pin-label-short { display: block; }
+
+      .map-label {
+        white-space: nowrap;
+        cursor: grab;
+        transform-origin: left center;
+      }
+      // Boxed text wraps and clips to its container
+      .map-label-boxed {
+        white-space: normal;
+        word-break: break-word;
+        max-width: 100%;
+        max-height: 100%;
+        overflow: hidden;
+      }
+
+      // Color classes + their text shadow (Tailwind-style names).
+      // Shadow is a two-step parchment halo; text-heading and
+      // text-title share the geometry but bump alpha a touch to stay
+      // crisp against the map tiles.
+      .map-label.text-black,
+      .map-pin-label.text-black {
+        color: #3b2e1e;
+        text-shadow:
+          1px 1px 0 rgba(250, 246, 240, .8),
+          -1px -1px 0 rgba(250, 246, 240, .8),
+          0 0 4px rgba(250, 246, 240, 0.95),
+          0 0 10px rgba(250, 246, 240, 0.75);
+      }
+      .map-label.text-heading,
+      .map-pin-label.text-heading,
+      .map-label.text-title,
+      .map-pin-label.text-title {
+        text-shadow:
+          0 0 2px rgba(250, 246, 240, 1),
+          0 0 5px rgba(250, 246, 240, 1),
+          0 0 12px rgba(250, 246, 240, 0.9);
+      }
+      .map-label.text-heading,
+      .map-pin-label.text-heading { color: var(--heading-color, #7f003f); }
+      .map-label.text-title,
+      .map-pin-label.text-title { color: var(--title-color, #7f003f); }
+
+      // --- Low-zoom adjustments ---------------------------------------
+      .zoom-low {
+        .map-pin-number {
+          width: 12px;
+          height: 12px;
+          border-width: 1.5px;
+          font-size: 0;
+        }
+        // Shrunken circle sits ~6px further from container top; pull
+        // labels down to keep the same tight gap as at normal zoom.
+        .map-pin-label { margin-bottom: -8px; }
+      }
+
+      // --- Text-feature bounding box + resize handles -----------------
+      // The wrapper itself is transparent to events; only the text span
+      // and resize handles catch clicks, so empty box space passes
+      // through to the map (for deselect).
+      .map-text-box {
+        position: relative;
+        pointer-events: none;
+
+        > .map-label { pointer-events: none; }
+        .map-label-text { pointer-events: auto; }
+        > .resize-handle { pointer-events: auto; }
+
+        &.selected {
+          pointer-events: auto; // whole box is draggable once selected
+          outline: 1.5px dashed var(--accent, #6b3a2a);
+          outline-offset: 0;
+        }
+      }
+      // Leaflet's marker wrapper is `pointer-events: auto` by default.
+      // Turn it off for text-box markers, then re-enable it for the
+      // wrapper of a selected box so drag works anywhere inside.
+      .leaflet-marker-icon:has(.map-text-box) { pointer-events: none !important; }
+      .leaflet-marker-icon:has(.map-text-box.selected) { pointer-events: auto !important; }
+
+      .resize-handle {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: #fff;
+        border: 2px solid var(--accent, #6b3a2a);
+        border-radius: 2px;
+        box-sizing: border-box;
+        z-index: 10;
+      }
+      .handle-nw { top: -5px;    left: -5px;    cursor: nwse-resize; }
+      .handle-n  { top: -5px;    left: 50%;     transform: translateX(-50%); cursor: ns-resize; }
+      .handle-ne { top: -5px;    right: -5px;   cursor: nesw-resize; }
+      .handle-e  { top: 50%;     right: -5px;   transform: translateY(-50%); cursor: ew-resize; }
+      .handle-se { bottom: -5px; right: -5px;   cursor: nwse-resize; }
+      .handle-s  { bottom: -5px; left: 50%;     transform: translateX(-50%); cursor: ns-resize; }
+      .handle-sw { bottom: -5px; left: -5px;    cursor: nesw-resize; }
+      .handle-w  { top: 50%;     left: -5px;    transform: translateY(-50%); cursor: ew-resize; }
+
+      // --- Tile rendering --------------------------------------------
+      .leaflet-tile-container { will-change: transform; }
+      .leaflet-tile { outline: 1px solid transparent; }
+    }
+  }
 </style>
