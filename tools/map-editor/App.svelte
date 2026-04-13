@@ -382,6 +382,22 @@
   </select>
 </header>
 
+<!-- Force-load every font weight we reference from inline styles so the
+     browser fetches them on page load instead of lazily per-marker. -->
+<div class="font-primer" aria-hidden="true">
+  <span style="font-family: 'Lora'; font-weight: 400">.</span>
+  <span style="font-family: 'Lora'; font-weight: 500">.</span>
+  <span style="font-family: 'Lora'; font-weight: 600">.</span>
+  <span style="font-family: 'Lora'; font-weight: 700">.</span>
+  <span style="font-family: 'Lora'; font-style: italic; font-weight: 400">.</span>
+  <span style="font-family: 'Lora'; font-style: italic; font-weight: 600">.</span>
+  <span style="font-family: 'Crimson Pro'; font-weight: 400">.</span>
+  <span style="font-family: 'Crimson Pro'; font-weight: 600">.</span>
+  <span style="font-family: 'Crimson Pro'; font-weight: 700">.</span>
+  <span style="font-family: 'Crimson Pro'; font-style: italic; font-weight: 400">.</span>
+  <span style="font-family: 'Uncial Antiqua'">.</span>
+</div>
+
 <div class="layout">
   <div class="map-wrapper">
     <div class="toolbox">
@@ -496,9 +512,9 @@
 <style>
   :global(*) { box-sizing: border-box; }
   :global(body) {
-    font-family: 'Lora', serif;
-    background: #1e1610;
-    color: #d4c4a8;
+    font-family: var(--body-font);
+    background: var(--bg);
+    color: var(--text);
     height: 100vh;
     margin: 0;
     overflow: hidden;
@@ -515,15 +531,17 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    border-bottom: 1px solid #5c4a32;
+    border-bottom: var(--border-width) solid var(--border);
+    background: var(--bg);
+    color: var(--text);
   }
-  header h1 { font-family: 'Crimson Pro', serif; font-size: 1rem; margin: 0; }
+  header h1 { font-family: var(--heading-font); font-size: 1rem; margin: 0; }
   header select {
     padding: 0.3rem 0.5rem;
-    border: 1px solid #5c4a32;
-    background: #2a1f14;
+    border: 1px solid var(--border);
+    background: var(--accent-bg);
     color: inherit;
-    border-radius: 3px;
+    border-radius: var(--border-radius);
     font: inherit;
     font-size: 0.85rem;
   }
@@ -531,13 +549,14 @@
     display: flex;
     gap: 1rem;
     padding: 0.25rem 0.75rem;
-    border-top: 1px solid #5c4a32;
+    border-top: var(--border-width) solid var(--border);
     font-size: 0.75rem;
     opacity: 0.6;
     font-variant-numeric: tabular-nums;
-    font-family: ui-monospace, monospace;
+    font-family: var(--mono-font);
   }
   .status-bar span { white-space: nowrap; }
+  .font-primer { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; pointer-events: none; visibility: hidden; }
 
   .layout { flex: 1; display: flex; overflow: hidden; min-height: 0; }
   .map-wrapper { flex: 1; min-width: 0; min-height: 0; position: relative; }
@@ -545,18 +564,23 @@
   /* Sidebar uses the map's paper palette so typography previews render
      the way they will on an actual map tile. The vars below propagate
      into nested property-panel components. */
+  /* Sidebar uses the shared site tokens directly — `--border`, `--accent`,
+     etc. cascade into any nested property-panel components. The local
+     `--panel-*` aliases are kept for backward compat with components that
+     already read them. */
   .sidebar {
     width: 280px;
     display: flex;
     flex-direction: column;
     min-height: 0;
     overflow: hidden;
-    background: #faf6f0;
-    color: #3b2e1e;
-    --panel-bg: #faf6f0;
-    --panel-text: #3b2e1e;
-    --panel-border: #c9a96e;
-    --panel-accent: #8b6914;
+    background: var(--bg);
+    color: var(--text);
+    border-left: var(--border-width) solid var(--border);
+    --panel-bg: var(--bg);
+    --panel-text: var(--text);
+    --panel-border: var(--border);
+    --panel-accent: var(--accent);
     --panel-hover: rgba(0, 0, 0, 0.06);
   }
   .tabs {
@@ -675,21 +699,22 @@
     display: flex;
     flex-direction: column;
     gap: 0;
-    background: #fff;
-    border: 2px solid rgba(0,0,0,0.2);
-    border-radius: 4px;
+    background: var(--bg);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--border-radius);
     overflow: hidden;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
   }
   .toolbox button {
     width: 30px;
     height: 30px;
     padding: 0;
-    background: #fff;
-    color: #333;
+    background: var(--bg);
+    color: var(--text);
     border: none;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--border);
     border-radius: 0;
+    font-family: var(--body-font);
     font-size: 0.95rem;
     display: flex;
     align-items: center;
@@ -697,9 +722,28 @@
     cursor: pointer;
   }
   .toolbox button:last-child { border-bottom: none; }
-  .toolbox button:hover { background: #f4f4f4; }
-  .toolbox button.active { background: #c9a96e; color: #fff; }
+  .toolbox button:hover { background: var(--accent-bg); }
+  .toolbox button.active { background: var(--accent); color: var(--accent-text); }
   .toolbox svg { width: 18px; height: 18px; }
+
+  /* Leaflet zoom control — match site style (parchment bg, gold border,
+     dark text, Lora). Leaflet ships its own defaults; override them. */
+  :global(.leaflet-bar) {
+    border: var(--border-width) solid var(--border) !important;
+    border-radius: var(--border-radius) !important;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3) !important;
+    background-clip: padding-box;
+  }
+  :global(.leaflet-bar a),
+  :global(.leaflet-bar a:hover) {
+    background: var(--bg);
+    color: var(--text);
+    border-bottom: 1px solid var(--border) !important;
+    font-family: var(--body-font);
+  }
+  :global(.leaflet-bar a:last-child) { border-bottom: none !important; }
+  :global(.leaflet-bar a:hover) { background: var(--accent-bg); }
+  :global(.leaflet-bar a.leaflet-disabled) { opacity: 0.4; }
 
   .dialog-buttons { display: flex; gap: 0.5rem; margin-top: 1rem; }
 

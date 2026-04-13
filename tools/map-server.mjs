@@ -19,7 +19,7 @@ import { existsSync } from 'node:fs';
 import { resolve, extname, join } from 'node:path';
 import sharp from 'sharp';
 import { createServer as createViteServer } from 'vite';
-import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { svelte, vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const MAPS_DIR = resolve(ROOT, 'src/assets/images/maps');
@@ -91,7 +91,7 @@ if (!existsSync(PINS_DIR)) await mkdir(PINS_DIR, { recursive: true });
 const vite = await createViteServer({
   root: EDITOR_DIR,
   server: { middlewareMode: true },
-  plugins: [svelte()],
+  plugins: [svelte({ preprocess: vitePreprocess() })],
   resolve: {
     alias: {
       '$components': resolve(ROOT, 'src/components'),
