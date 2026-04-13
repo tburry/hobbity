@@ -3,8 +3,9 @@
     "kind": "pin",
     "number": "1",
     "name": "Oak Market Square",
-    "x": 3165,
-    "y": 2157
+    "x": 3179,
+    "y": 2150,
+    "class": "landmark"
   },
   {
     "kind": "pin",
@@ -12,15 +13,15 @@
     "name": "Millie's Brewery",
     "x": 3641,
     "y": 1064,
-    "class": "landmark",
-    "longName": "Millie's Brewery & Ale House"
+    "class": "shop"
   },
   {
     "kind": "pin",
     "number": "3",
     "name": "Gomwick General Goods",
     "x": 3830,
-    "y": 1327
+    "y": 1327,
+    "class": "shop"
   },
   {
     "kind": "pin",
@@ -28,68 +29,82 @@
     "name": "Longbuck's Creamery",
     "x": 4009,
     "y": 1617,
-    "longName": "Longbuck's Creamery & Cheesery"
+    "class": "shop"
   },
   {
     "kind": "pin",
     "number": "5",
     "name": "The New Butchery",
-    "x": 4115,
-    "y": 2091
+    "x": 4138,
+    "y": 2034,
+    "class": "shop"
   },
   {
     "kind": "pin",
     "number": "6",
-    "name": "The Happy",
-    "x": 4689,
-    "y": 2169,
-    "longName": "The Happy Hobbit Inn & Tavern",
+    "name": "The Happy Hobbit Inn & Tavern",
+    "x": 4740,
+    "y": 2213,
+    "class": "shop",
     "description": "The Happy Hobbit Inn & Tavern"
   },
   {
     "kind": "pin",
     "number": "6a",
-    "name": "Happy West",
-    "x": 4481,
-    "y": 2388,
-    "longName": "The Happy West House (Guest Rooms)"
+    "name": "The Happy West House",
+    "x": 4513,
+    "y": 2374,
+    "class": "residence",
+    "minZoom": 4
   },
   {
     "kind": "pin",
     "number": "6b",
-    "name": "Happy East",
-    "x": 4936,
-    "y": 2073,
-    "longName": "The Happy East House (Guest Rooms)"
+    "name": "The Happy East House",
+    "x": 4954,
+    "y": 2059,
+    "class": "residence",
+    "minZoom": 4
   },
   {
     "kind": "pin",
     "number": "7",
     "name": "The Happy Storage",
     "x": 5139,
-    "y": 1842
+    "y": 1842,
+    "class": "residence"
   },
   {
     "kind": "pin",
     "number": "8",
-    "name": "The Happy Stables",
+    "name": "The Happy Barn & Stables",
     "x": 5385,
     "y": 1610,
-    "longName": "The Happy Barn & Stables"
+    "class": "shop"
+  },
+  {
+    "kind": "pin",
+    "number": "9",
+    "name": "Test",
+    "x": 6193,
+    "y": 2695,
+    "class": "town"
   },
   {
     "kind": "pin",
     "number": "10",
     "name": "Festival Campground",
     "x": 3743,
-    "y": 405
+    "y": 405,
+    "class": "residence"
   },
   {
     "kind": "pin",
     "number": "11",
     "name": "Festival Games",
-    "x": 4733,
-    "y": 1288
+    "x": 4761,
+    "y": 1225,
+    "class": "residence"
   },
   {
     "kind": "pin",
@@ -97,7 +112,7 @@
     "name": "All Things Metal",
     "x": 3932,
     "y": 3576,
-    "class": "landmark"
+    "class": "shop"
   },
   {
     "kind": "pin",
@@ -105,44 +120,47 @@
     "name": "Cousin Roland's Smithy",
     "x": 3886,
     "y": 3326,
-    "class": "landmark"
+    "class": "shop"
   },
   {
     "kind": "pin",
     "number": "15",
     "name": "Finckle's Finery",
-    "x": 3956,
-    "y": 2815
+    "x": 3970,
+    "y": 2787,
+    "class": "shop"
   },
   {
     "kind": "pin",
     "number": "16",
-    "name": "Greengrocery",
-    "x": 3676,
-    "y": 2591,
-    "longName": "Gilly Greene's Greengrocery"
+    "name": "Gilly Greene's Greengrocery",
+    "x": 3662,
+    "y": 2549,
+    "class": "shop"
   },
   {
     "kind": "pin",
     "number": "17",
     "name": "The Gomwick Granery",
     "x": 3123,
-    "y": 2699
+    "y": 2647,
+    "class": "shop"
   },
   {
     "kind": "pin",
     "number": "18",
     "name": "Mrs. Cratchit's Bakery",
-    "x": 2815,
-    "y": 2780
+    "x": 2808,
+    "y": 2801,
+    "class": "shop"
   },
   {
     "kind": "pin",
     "number": "19",
-    "name": "Longbuck's Lumber",
+    "name": "Longbick's Lumber & Forestry Supply",
     "x": 2458,
     "y": 2415,
-    "longName": "Longbuck's Lumber & Forestry Supply",
+    "class": "shop",
     "description": "Longbick's Lumber & Forestry Supply"
   },
   {
@@ -150,7 +168,8 @@
     "number": "21",
     "name": "Toppo Hill House",
     "x": 1148,
-    "y": 777
+    "y": 777,
+    "class": "landmark"
   },
   {
     "kind": "text",
@@ -171,7 +190,8 @@
     "class": "pond-marsh",
     "width": 382,
     "height": 493,
-    "minZoom": 4
+    "minZoom": 3,
+    "shrink": true
   },
   {
     "kind": "text",
@@ -209,8 +229,8 @@
     "kind": "text",
     "number": "",
     "name": "Nettle's Pond",
-    "x": 5830,
-    "y": 3337,
+    "x": 5742,
+    "y": 3319,
     "class": "pond-marsh",
     "width": 1939,
     "height": 1610
