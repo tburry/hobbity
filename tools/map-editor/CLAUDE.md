@@ -1,6 +1,6 @@
 # CLAUDE.md — Map Editor
 
-Standalone Svelte app for placing pins and labels on campaign maps. Runs via `pnpm map-editor` on port 8321.
+Standalone Svelte app for placing markers and labels on campaign maps. Runs via `pnpm map-editor` on port 8321.
 
 ## Architecture
 
@@ -12,17 +12,17 @@ Standalone Svelte app for placing pins and labels on campaign maps. Runs via `pn
 ## Data
 
 - **Map images** live in `src/assets/images/maps/<slug>.webp`. The server auto-discovers them.
-- **Pin data** saved to `src/data/maps/<slug>.json`, sorted naturally by pin `number` (using `Intl.Collator` with `numeric: true`), with empty-pin entries at the end sorted by position. Pretty-printed, defaults omitted, no runtime `id` field — clean for source control.
+- **Marker data** saved to `src/data/maps/<slug>.json`, sorted naturally by marker `number` (using `Intl.Collator` with `numeric: true`), with unnumbered entries at the end sorted by position. Pretty-printed, defaults omitted, no runtime `id` field — clean for source control.
 - **Tiles** in `public/tiles/<slug>/` (gitignored). Regenerate with `pnpm tiles --all` when maps change.
 
 ## Toolbox
 
 Four tools live in a floating control below the Leaflet zoom buttons:
 
-- **Select** — click existing features to edit them; drag to move pins. No-op on empty map.
-- **Text** — click-and-drag to draw a bounding rectangle. Text renders inside the box with configurable horizontal/vertical alignment. A tiny drag (< 5 px) falls back to a single-point label.
-- **Pin** — click to drop a numbered circle.
-- **Path** — (planned) two-point bezier curve for rivers and roads.
+- **Select** (V) — click existing features to edit them; drag to move markers. No-op on empty map.
+- **Marker** (M) — click to drop a marker. Town markers render as a numbered circle; overworld markers render as a glyph from `PIN_PRESETS`.
+- **Text** (T) — click-and-drag to draw a bounding rectangle. Text renders inside the box with configurable horizontal/vertical alignment.
+- **Path** (P) — (planned) two-point bezier curve for rivers and roads.
 
 The active tool is stored in `localStorage['map-editor:tool']`.
 
@@ -47,9 +47,9 @@ Text features accept a typography preset that auto-fills font/size/case/letter-s
 
 After picking a preset the user can still tweak individual style fields — the preset is just a shortcut. Presets serialize as `preset: "<id>"` in the saved JSON (omitted for `custom`), so future rule tweaks can re-apply defaults.
 
-## Pin model
+## Marker model
 
-Every pin has `name`, `x`, `y`. Optional:
+Every marker has `name`, `x`, `y`. Optional:
 
 - `number` — string shown in a circle; empty/missing means "freeform label" (text-only, no circle)
 - `longName` — shown on hover instead of `name`
@@ -62,9 +62,9 @@ Every pin has `name`, `x`, `y`. Optional:
 
 ## Rendering rules
 
-- **Numbered pins**: white circle with text-colored border (`#3b2e1e` text on `#faf6f0` bg). Short label above the circle. Hover swaps to `longName` if set.
+- **Numbered markers**: white circle with text-colored border (`#3b2e1e` text on `#faf6f0` bg). Short label above the circle. Hover swaps to `longName` if set.
 - **Freeform labels (`map-label`)**: text directly on the map with a subtle bg-colored text shadow.
-- **Zoom < 2**: pin circles shrink to 12px dots (no number text), ALL labels hidden except on hover. This is enforced with `!important` because Leaflet CSS can otherwise override our `display: none`.
+- **Zoom < 2**: marker circles shrink to 12px dots (no number text), ALL labels hidden except on hover. This is enforced with `!important` because Leaflet CSS can otherwise override our `display: none`.
 - **Zoom >= 2 with Show Labels on**: short labels always visible.
 - **Zoom >= 2 without toggle**: labels hover-only.
 - **Size bumping**: each whole zoom level above 2 bumps the size table index by 1, capped at `xl`. So `md` at z=3 renders as `lg`; at z=4 as `xl`.
@@ -74,7 +74,7 @@ Every pin has `name`, `x`, `y`. Optional:
 
 ## Coordinate system
 
-`MapViewer` uses a custom CRS extending `L.CRS.Simple` so that pin `x`/`y` are in image pixels regardless of whether tiles or image overlay is used. The CRS overrides `scale(z)` to match the tile generator's scale (`2^z * tileSize / maxDim`) and uses `L.Transformation(1, 0, 1, 0)` (no y-flip) to align with tile y=0 being at the top.
+`MapViewer` uses a custom CRS extending `L.CRS.Simple` so that marker `x`/`y` are in image pixels regardless of whether tiles or image overlay is used. The CRS overrides `scale(z)` to match the tile generator's scale (`2^z * tileSize / maxDim`) and uses `L.Transformation(1, 0, 1, 0)` (no y-flip) to align with tile y=0 being at the top.
 
 ## Manifest
 
@@ -91,7 +91,7 @@ When adding a new tool or form action:
 3. Paste it inline in the template, with `viewBox="0 0 24 24"` and `currentColor` stroke
 4. Size via CSS (`.toolbox svg { width: 18px; height: 18px }` etc.)
 
-Current toolbox icons map to Lucide names: `select` = `mouse-pointer-2`, `text` = `type`, `pin` = `map-pin`, `path` = `spline`.
+Current toolbox icons map to Lucide names: `select` = `mouse-pointer-2`, `text` = `type`, `marker` = `map-pin`, `path` = `spline`.
 
 ## Adding a map
 
@@ -105,7 +105,7 @@ Current toolbox icons map to Lucide names: `select` = `mouse-pointer-2`, `text` 
 
 | Tool | Feature | Pin | Font | Style | Class |
 | :-- | :-- | :-- | :-- | :-- | :-- |
-| **Pin (Overworld)** | Capital City | ✪ | title | Large | `capital` |
+| **Marker (Overworld)** | Capital City | ✪ | title | Large | `capital` |
 |  | Major City | ◉ | heading | UPPERCASE, Bold, LS: 0.05em | `city` |
 |  | Fortress | ⛫ | heading | UPPERCASE, Bold, LS: 0.05em | `fortress` |
 |  | Town | ◼ | heading | - | `town` |
@@ -118,7 +118,7 @@ Current toolbox icons map to Lucide names: `select` = `mouse-pointer-2`, `text` 
 |  | Village | • | body | Small | `village` |
 |  | Bridge | ≏ | body | Small | `bridge` |
 |  | Mountain | ⛰ | body | Small | `mountain` |
-| **Pin (Town)** | Major Landmark |  | heading | UPPERCASE, Bold | `landmark` |
+| **Marker (Town)** | Major Landmark |  | heading | UPPERCASE, Bold | `landmark` |
 |  | Gate |  | heading | UPPERCASE, Bold | `gate` |
 |  | Point of Interest |  | title | Bold | `poi` |
 |  | Shop / Inn |  | heading | Bold | `shop` |
