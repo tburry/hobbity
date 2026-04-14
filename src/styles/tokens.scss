@@ -19,14 +19,14 @@
   // Colors
   --bg: #faf6f0;
   --accent-bg: #f3ece0;
-  --text: #3b2e1e;
+  --text: #3a332a;
   --text-light: #8b7d6b;
   --border: #c9a96e;
-  --accent: #6b3a2a;
-  --accent-hover: #2a1f14;
+  --accent: #5f4638;
+  --accent-hover: #29241e;
   --accent-text: #fff;
-  --code: #2a1f14;
-  --preformatted: #3b2e1e;
+  --code: #29241e;
+  --preformatted: #3a332a;
   --marked: rgba(201, 169, 110, 0.2);
 
   // Heading colors
@@ -35,7 +35,7 @@
   --subheading-color: #ab5a05;
 
   // Header
-  --header-bg: #2a1f14;
+  --header-bg: #29241e;
   --header-text: #f5e6c8;
   --header-link: #dcc9a3;
 
@@ -49,4 +49,10 @@
   --border-width: 2px;
   --border-width-thick: 4px;
   --border-radius: 5px;
+
+  // Map editor
+  // Keep in sync with MAP_PADDING in src/components/map/MapViewer.svelte —
+  // this is the max distance the viewport may pan past the edge of the
+  // map image, and also drives the floating sidebar's width.
+  --map-padding: 320px;
 }
