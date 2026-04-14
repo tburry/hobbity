@@ -178,6 +178,10 @@ The Ledger (`src/pages/ledger.astro`) tracks party statistics across sessions. U
 - Named NPCs are filtered out of the tally automatically (they appear in story recaps instead).
 - Use parentheticals for mixed outcomes: "6 Goblins (4 killed, 1 subdued, 1 fled)". If all were killed, no parenthetical needed.
 
+## Map Editor
+
+The standalone map pin editor (`pnpm map-editor`) is a Svelte app sharing components with the Astro site. See [tools/map-editor/CLAUDE.md](tools/map-editor/CLAUDE.md) for architecture, data model, rendering rules, and the coordinate system used by `MapViewer.svelte`.
+
 ## Images
 
 All images live in `src/assets/images/`. Astro automatically optimizes them and generates responsive `srcset` attributes at build time. No manual small/thumbnail versions needed.

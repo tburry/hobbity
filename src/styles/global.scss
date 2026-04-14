@@ -1,54 +1,9 @@
 // ============================================================================
-// Variables
+// Variables — defined in tokens.scss so they can be shared with the map editor.
 // ============================================================================
 
-:root {
-  // Fonts
-  --body-font: 'Lora', serif;
-  --title-font: 'Uncial Antiqua', serif;
-  --heading-font: 'Crimson Pro', serif;
-  --mono-font: Consolas, Menlo, Monaco, monospace;
-
-  // Typography
-  --base-font-size: 17px;
-  --base-font-size-desktop: 20px;
-  --line-height: 1.5;
-  --line-height-prose: 1.7;
-
-  // Colors
-  --bg: #faf6f0;
-  --accent-bg: #f3ece0;
-  --text: #3b2e1e;
-  --text-light: #8b7d6b;
-  --border: #c9a96e;
-  --accent: #6b3a2a;
-  --accent-hover: #2a1f14;
-  --accent-text: #fff;
-  --code: #2a1f14;
-  --preformatted: #3b2e1e;
-  --marked: rgba(201, 169, 110, 0.2);
-
-  // Heading colors
-  --title-color: #7f003f;
-  --heading-color: #7f003f;
-  --subheading-color: #ab5a05;
-
-  // Header
-  --header-bg: #2a1f14;
-  --header-text: #f5e6c8;
-  --header-link: #dcc9a3;
-
-  // Spacing (8px grid)
-  --space: 16px;
-  --space-sm: 8px;
-
-  // Layout
-  --content-width: 900px;
-  --aside-width: 300px;
-  --border-width: 2px;
-  --border-width-thick: 4px;
-  --border-radius: 5px;
-}
+@use "tokens";
+@use "../components/map/map-viewer";
 
 // ============================================================================
 // Reset

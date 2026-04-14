@@ -1,0 +1,45 @@
+// ============================================================================
+// Utility classes used by map labels and anywhere the editor wants to echo
+// how a marker will render (e.g. the sidebar marker list). Tailwind-style
+// naming. Imported from the map editor's main.js so they're available
+// globally, and from the Astro site via global.scss.
+// ============================================================================
+
+// --- Font family ---
+.font-body    { font-family: var(--body-font, 'Lora', serif); }
+.font-heading { font-family: var(--heading-font, 'Crimson Pro', serif); }
+.font-title   { font-family: var(--title-font, 'Uncial Antiqua', serif); }
+
+// --- Font weight ---
+.font-normal   { font-weight: 400; }
+.font-medium   { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold     { font-weight: 700; }
+
+// --- Font style / transform ---
+.italic     { font-style: italic; }
+.uppercase  { text-transform: uppercase; }
+.capitalize { text-transform: capitalize; }
+
+// --- Text color + parchment halo ---
+// The halo is a light "cream" text-shadow that lifts dark label text off
+// the parchment map background. Also shows up nicely when the same
+// classes are used on darker UI backgrounds (e.g. active picker buttons
+// in the editor's style grid).
+.text-black {
+  color: #3b2e1e;
+  text-shadow:
+    1px 1px 0 rgba(250, 246, 240, .8),
+    -1px -1px 0 rgba(250, 246, 240, .8),
+    0 0 4px rgba(250, 246, 240, 0.95),
+    0 0 10px rgba(250, 246, 240, 0.75);
+}
+.text-heading,
+.text-title {
+  text-shadow:
+    0 0 2px rgba(250, 246, 240, .8),
+    0 0 5px rgba(250, 246, 240, .8),
+    0 0 12px rgba(250, 246, 240, 0.8);
+}
+.text-heading { color: var(--heading-color, #7f003f); }
+.text-title   { color: var(--title-color, #7f003f); }
