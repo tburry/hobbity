@@ -3,16 +3,16 @@
     "kind": "pin",
     "number": "1",
     "name": "Oak Market Square",
-    "x": 3179,
-    "y": 2150,
+    "x": 3151,
+    "y": 1940,
     "class": "landmark"
   },
   {
     "kind": "pin",
     "number": "2",
     "name": "Millie's Brewery",
-    "x": 3641,
-    "y": 1064,
+    "x": 3676,
+    "y": 1022,
     "class": "shop"
   },
   {
@@ -35,15 +35,15 @@
     "kind": "pin",
     "number": "5",
     "name": "The New Butchery",
-    "x": 4138,
-    "y": 2034,
+    "x": 4124,
+    "y": 2066,
     "class": "shop"
   },
   {
     "kind": "pin",
     "number": "6",
     "name": "The Happy Hobbit Inn & Tavern",
-    "x": 4740,
+    "x": 4712,
     "y": 2213,
     "class": "shop",
     "description": "The Happy Hobbit Inn & Tavern"
@@ -53,33 +53,31 @@
     "number": "6a",
     "name": "The Happy West House",
     "x": 4513,
-    "y": 2374,
-    "class": "residence",
-    "minZoom": 4
+    "y": 2402,
+    "class": "residence"
   },
   {
     "kind": "pin",
     "number": "6b",
     "name": "The Happy East House",
-    "x": 4954,
-    "y": 2059,
-    "class": "residence",
-    "minZoom": 4
+    "x": 4985,
+    "y": 2143,
+    "class": "residence"
   },
   {
     "kind": "pin",
     "number": "7",
     "name": "The Happy Storage",
-    "x": 5139,
-    "y": 1842,
+    "x": 5132,
+    "y": 1806,
     "class": "residence"
   },
   {
     "kind": "pin",
     "number": "8",
     "name": "The Happy Barn & Stables",
-    "x": 5385,
-    "y": 1610,
+    "x": 5378,
+    "y": 1708,
     "class": "shop"
   },
   {
@@ -93,71 +91,7 @@
   },
   {
     "kind": "pin",
-    "number": "10",
-    "name": "Festival Campground",
-    "x": 3743,
-    "y": 405,
-    "class": "residence"
-  },
-  {
-    "kind": "pin",
-    "number": "11",
-    "name": "Festival Games",
-    "x": 4761,
-    "y": 1225,
-    "class": "residence"
-  },
-  {
-    "kind": "pin",
-    "number": "13",
-    "name": "All Things Metal",
-    "x": 3932,
-    "y": 3576,
-    "class": "shop"
-  },
-  {
-    "kind": "pin",
-    "number": "14",
-    "name": "Cousin Roland's Smithy",
-    "x": 3886,
-    "y": 3326,
-    "class": "shop"
-  },
-  {
-    "kind": "pin",
-    "number": "15",
-    "name": "Finckle's Finery",
-    "x": 3970,
-    "y": 2787,
-    "class": "shop"
-  },
-  {
-    "kind": "pin",
-    "number": "16",
-    "name": "Gilly Greene's Greengrocery",
-    "x": 3662,
-    "y": 2549,
-    "class": "shop"
-  },
-  {
-    "kind": "pin",
-    "number": "17",
-    "name": "The Gomwick Granery",
-    "x": 3123,
-    "y": 2647,
-    "class": "shop"
-  },
-  {
-    "kind": "pin",
-    "number": "18",
-    "name": "Mrs. Cratchit's Bakery",
-    "x": 2808,
-    "y": 2801,
-    "class": "shop"
-  },
-  {
-    "kind": "pin",
-    "number": "19",
+    "number": "9",
     "name": "Longbick's Lumber & Forestry Supply",
     "x": 2458,
     "y": 2415,
@@ -166,16 +100,80 @@
   },
   {
     "kind": "pin",
-    "number": "21",
+    "number": "10",
+    "name": "Mrs. Cratchit's Bakery",
+    "x": 2780,
+    "y": 2787,
+    "class": "shop"
+  },
+  {
+    "kind": "pin",
+    "number": "11",
+    "name": "The Gomwick Granery",
+    "x": 3123,
+    "y": 2647,
+    "class": "shop"
+  },
+  {
+    "kind": "pin",
+    "number": "12",
+    "name": "Gilly Greene's Greengrocery",
+    "x": 3662,
+    "y": 2549,
+    "class": "shop"
+  },
+  {
+    "kind": "pin",
+    "number": "13",
+    "name": "Finckle's Finery",
+    "x": 4005,
+    "y": 2766,
+    "class": "shop"
+  },
+  {
+    "kind": "pin",
+    "number": "14",
+    "name": "Cousin Roland's Smithy",
+    "x": 3925,
+    "y": 3298,
+    "class": "shop"
+  },
+  {
+    "kind": "pin",
+    "number": "15",
+    "name": "All Things Metal",
+    "x": 3977,
+    "y": 3543,
+    "class": "shop"
+  },
+  {
+    "kind": "pin",
+    "number": "16",
     "name": "Toppo Hill House",
-    "x": 1148,
-    "y": 777,
+    "x": 1117,
+    "y": 753,
     "class": "landmark"
+  },
+  {
+    "kind": "pin",
+    "number": "A",
+    "name": "Festival Campground",
+    "x": 3743,
+    "y": 405,
+    "class": "residence"
+  },
+  {
+    "kind": "pin",
+    "number": "B",
+    "name": "Festival Games",
+    "x": 4761,
+    "y": 1225,
+    "class": "residence"
   },
   {
     "kind": "text",
     "number": "",
-    "name": "Gomwick Forrest",
+    "name": "Gomwick Woods",
     "x": 841,
     "y": 2392,
     "class": "forest",
@@ -185,14 +183,24 @@
   {
     "kind": "text",
     "number": "",
+    "name": "The Mountain",
+    "x": 951,
+    "y": 249,
+    "class": "hills",
+    "width": 836,
+    "height": 181,
+    "minZoom": 4
+  },
+  {
+    "kind": "text",
+    "number": "",
     "name": "Spottle Pond",
-    "x": 3545,
-    "y": 4010,
+    "x": 3557,
+    "y": 3998,
     "class": "pond-marsh",
-    "width": 382,
+    "width": 455,
     "height": 493,
-    "minZoom": 3,
-    "shrink": true
+    "minZoom": 4
   },
   {
     "kind": "text",

@@ -150,26 +150,34 @@ export const PIN_PRESETS = [
   { id: 'temple',    category: 'overworld', icon: '⛪', label: 'Temple',            defaults: { ...size('regular'), font: 'heading' } },
   { id: 'mine',      category: 'overworld', icon: '⚒', label: 'Mine',              defaults: { ...size('regular'), font: 'heading' } },
   { id: 'cave',      category: 'overworld', icon: '⍢', label: 'Cave',              defaults: { ...size('regular'), font: 'heading' } },
-  { id: 'ruin',      category: 'overworld', icon: '⛬', label: 'Ruin',              defaults: { ...size('regular'), font: 'title' } },
+  { id: 'ruin',      category: 'overworld', icon: '⛬', label: 'Ruin',              defaults: { ...size('regular'), font: 'heading' } },
   { id: 'camp',      category: 'overworld', icon: '⛺', label: 'Camp',              defaults: { ...size('regular'), font: 'body' } },
   { id: 'village',   category: 'overworld', icon: '•', label: 'Village',           defaults: { ...size('small'),   font: 'body' } },
   { id: 'bridge',    category: 'overworld', icon: '≏', label: 'Bridge',            defaults: { ...size('small'),   font: 'body' } },
   { id: 'mountain',  category: 'overworld', icon: '⛰', label: 'Mountain',          defaults: { ...size('small'),   font: 'body' } },
   // Town — picked from a grid (no icon glyph; uses numbered circle).
-  { id: 'landmark',  category: 'town',      label: 'Major Landmark',    defaults: { ...size('regular'), font: 'heading', weight: 700, case: 'upper', colorClass: 'text-heading' } },
+  { id: 'landmark',  category: 'town',      label: 'Landmark',    defaults: { ...size('regular'), font: 'heading', weight: 700, case: 'upper', colorClass: 'text-heading' } },
   { id: 'gate',      category: 'town',      label: 'Gate',              defaults: { ...size('regular'), font: 'heading', weight: 700, case: 'upper' } },
   { id: 'poi',       category: 'town',      label: 'Point of Interest', defaults: { ...size('regular'), font: 'title',   weight: 700 } },
   { id: 'shop',      category: 'town',      label: 'Shop / Inn',        defaults: { ...size('small'), font: 'body', weight: 600 } },
-  { id: 'residence', category: 'town',      label: 'Residence',         defaults: { ...size('small'),   font: 'body' } },
+  { id: 'residence', category: 'town',      label: 'Minor Structure',         defaults: { ...size('small'),   font: 'body' } },
 ];
 
 export const TEXT_PRESETS = [
-  { id: 'map-title',   label: 'Map Title',   defaults: { ...size('title'),   font: 'title', colorClass: 'text-title' } },
-  { id: 'civic-space', label: 'Civic Space', defaults: { ...size('regular'), font: 'heading', case: 'upper', letterSpacing: 3 } },
-  { id: 'forest',      label: 'Forest',      defaults: { ...size('large'), font: 'heading', weight: 700, case: 'upper', letterSpacing: 4 } },
-  { id: 'district',    label: 'District',    defaults: { ...size('large'),   font: 'heading', weight: 700, case: 'upper', letterSpacing: 2 } },
-  { id: 'pond-marsh',  label: 'Pond/Marsh',  defaults: { ...size('regular'), font: 'body',    italic: true, case: 'title' } },
-  { id: 'lake',        label: 'Lake',        defaults: { ...size('large'),   font: 'heading', italic: true, case: 'upper' } },
+  { id: 'map-title',   label: 'Map Title',         defaults: { ...size('title'),   font: 'title',   colorClass: 'text-title' } },
+  { id: 'continent',   label: 'Country', defaults: { ...size('large'),   font: 'title',   case: 'upper', letterSpacing: 4 } },
+  { id: 'ocean',       label: 'Ocean, Sea',       defaults: { ...size('large'),  font: 'heading', italic: true, case: 'upper', letterSpacing: 6 } },
+  { id: 'lake',        label: 'Lake, Bay',        defaults: { ...size('large'),   font: 'heading', italic: true, case: 'upper', letterSpacing: 4 } },
+  { id: 'range',       label: 'Mountain Range',    defaults: { ...size('regular'),   font: 'heading', weight: 700, case: 'upper', letterSpacing: 3 } },
+  { id: 'forest',      label: 'Forest',            defaults: { ...size('large'),   font: 'heading', weight: 700, case: 'upper', letterSpacing: 4 } },
+  { id: 'region',      label: 'Region', defaults: { ...size('large'),   font: 'heading', weight: 700, case: 'upper', letterSpacing: 3 } },
+  { id: 'district',    label: 'District',          defaults: { ...size('large'),   font: 'heading', weight: 700, case: 'upper', letterSpacing: 2 } },
+  { id: 'civic-space', label: 'Civic Space',       defaults: { ...size('regular'), font: 'heading', case: 'upper', letterSpacing: 3 } },
+  { id: 'desert',      label: 'Desert, Plain',    defaults: { ...size('regular'), font: 'body',    case: 'upper', letterSpacing: 4 } },
+  { id: 'hills',       label: 'Hills, Valley',    defaults: { ...size('regular'), font: 'heading', case: 'title', letterSpacing: 1 } },
+  { id: 'island',      label: 'Island, Archipelago', defaults: { ...size('small'), font: 'body',   case: 'upper', letterSpacing: 2 } },
+  { id: 'pond-marsh',  label: 'Pond, Swamp, Marsh', defaults: { ...size('regular'), font: 'body', italic: true, case: 'title' } },
+  // { id: 'legend',      label: 'Legend, Scale',    defaults: { ...size('small'),   font: 'body',    case: 'title' } },
 ];
 
 export function findPreset(id) {
