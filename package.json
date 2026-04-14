@@ -13,7 +13,7 @@
     "astro": "astro",
     "avatar": "scripts/make-avatar",
     "prepare": "git config core.hooksPath .githooks",
-    "tiles": "node scripts/generate-map-tiles.mjs",
+    "tiles": "node scripts/generate-map-tiles.mjs --all",
     "maps": "node scripts/generate-map-manifest.mjs",
     "map-editor": "node tools/map-server.mjs"
   },
