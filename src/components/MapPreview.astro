@@ -1,0 +1,101 @@
+---
+/**
+ * Preview thumbnail for a campaign map. Click to open a fullscreen
+ * read-only MapViewer. Drop `<MapPreview slug="..." />` into any MDX
+ * content page; the slug drives data + tile loading.
+ *
+ * Prerequisites at build time:
+ *   - src/assets/images/maps/<slug>.webp
+ *   - src/data/maps/<slug>.json   (produced by the map editor)
+ *   - public/tiles/<slug>/meta.json + pyramid (produced by `pnpm tiles`)
+ */
+import { Image } from 'astro:assets';
+import MapOverlay from './MapOverlay.svelte';
+
+interface Props {
+  slug: string;
+  /** Show the map's meta.description below the thumbnail. Off by default. */
+  caption?: boolean;
+}
+
+const { slug, caption = false } = Astro.props;
+
+// Dynamic imports resolved at build time by Vite. Slugs are static in
+// authored content, so each usage bundles only the map it references.
+const mapImage = (await import(`../assets/images/maps/${slug}.webp`)).default;
+const mapDoc   = (await import(`../data/maps/${slug}.json`)).default;
+const tileMeta = (await import(`../../public/tiles/${slug}/meta.json`)).default;
+
+const title = mapDoc.meta?.title ?? slug;
+const description = mapDoc.meta?.description;
+
+// Honour Astro's configured `base` (e.g. `/hobbity/`) so tile requests
+// resolve correctly when the site isn't served from the root.
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+const tileBasePath = `${baseUrl}/tiles/${slug}`;
+
+// Saved JSON strips runtime IDs. MapViewer needs each feature to have
+// a unique id — for marker bookkeeping and, critically, for paths
+// whose text references the curve via `<textPath href="#path-{id}">`.
+// Without stable ids, every path collapses onto the first one.
+const pins = mapDoc.pins.map((p, i) => ({ ...p, id: p.id ?? `${slug}-${i}` }));
+---
+
+<figure class="map-preview no-lightbox">
+  <button class="map-preview-trigger" data-map-preview={slug} aria-label={`Open the ${title} map`}>
+    <Image src={mapImage} alt={`Map of ${title}`} widths={[480, 960, 1440]} sizes="(max-width: 900px) 100vw, 900px" />
+  </button>
+  {caption && description && <figcaption>{description}</figcaption>}
+</figure>
+
+<MapOverlay
+  client:idle
+  slug={slug}
+  title={title}
+  pins={pins}
+  tileBasePath={tileBasePath}
+  tileMaxZoom={tileMeta.maxZoom}
+  tileSize={tileMeta.tileSize}
+  imgWidth={tileMeta.width}
+  imgHeight={tileMeta.height}
+/>
+
+<script>
+  // Bridge the Astro-rendered trigger to the Svelte overlay via a custom
+  // event. Multiple previews can coexist on one page — each overlay
+  // filters by its own slug.
+  for (const el of document.querySelectorAll<HTMLElement>('[data-map-preview]')) {
+    el.addEventListener('click', () => {
+      window.dispatchEvent(new CustomEvent('map-preview-open', {
+        detail: { slug: el.dataset.mapPreview },
+      }));
+    });
+  }
+</script>
+
+<style>
+  .map-preview {
+    margin: var(--space, 16px) 0;
+  }
+  .map-preview-trigger {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 1px solid var(--border, #c9a96e);
+    background: transparent;
+    cursor: zoom-in;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .map-preview-trigger img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .map-preview figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-light, #8b7d6b);
+    font-style: italic;
+  }
+</style>
