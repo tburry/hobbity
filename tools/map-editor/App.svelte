@@ -2,6 +2,27 @@
   import MapViewer from '../../src/components/map/MapViewer.svelte';
   import { TOOL_LIST, TOOLS, DEFAULT_MARKER_MIN_ZOOM, findPreset } from '../../src/components/map/tools.js';
 
+  /** Bucket a pin for the sidebar list:
+   *   0 = numbered marker, 1 = overworld glyph marker, 2 = text / freeform.
+   * Numbered markers lead, overworld follow, text features last. Within
+   * each bucket the natural-sort key is `number` for bucket 0 and
+   * `name` for the others. */
+  function markerBucket(pin) {
+    // Class first: overworld markers belong in their own bucket even
+    // if someone set a number on them.
+    const preset = findPreset(pin.class);
+    if (preset?.category === 'overworld') return 1;
+    if (pin.number) return 0;
+    return 2;
+  }
+  const listMarkers = $derived([...pins].sort((a, b) => {
+    const ba = markerBucket(a);
+    const bb = markerBucket(b);
+    if (ba !== bb) return ba - bb;
+    const key = ba === 0 ? 'number' : 'name';
+    return natCollator.compare(String(a[key] || ''), String(b[key] || ''));
+  }));
+
   /** Derive Tailwind-style utility classes from a marker's preset so the
    * sidebar row visually matches how the label renders on the map.
    * (Typography only — layout/spacing stays the sidebar's own.) */
@@ -35,14 +56,18 @@
     mode = m;
     localStorage.setItem('map-editor:mode', m);
     // Leaving edit mode: close any open editor and clear selection.
-    if (m !== 'edit' && editing) closeEditor();
+    if (m !== 'edit' && editingId) closeEditor();
   }
   let viewer = $state();
   let viewInfo = $state({ zoom: 0, x: 0, y: 0 });
   let wheelInfo = $state({ deltaX: 0, deltaY: 0, ctrlKey: false, trackpad: false });
 
-  // Editor state
-  let editing = $state(false);
+  // Editor state. `editingId` is the source of truth for which feature
+  // is currently selected/being edited (drives the map's selection).
+  // `activeTab` controls which sidebar pane is visible — they're
+  // independent, so the user can flip back to the Markers list and
+  // then return to the Editor tab without losing their selection.
+  let activeTab = $state('markers');
   let editingId = $state(null);
   let previewId = $state(null);
   let dialogTitle = $state('New Marker');
@@ -57,6 +82,7 @@
   let pinWidth = $state(0);
   let pinHeight = $state(0);
   let pinMinZoom = $state(1);
+  let pinLabelPos = $state('n'); // marker label position: n/ne/e/se/s/sw/w/nw
   let pinShrink = $state(false);
 
   // Active toolbox mode — determines what clicking the map does
@@ -174,6 +200,7 @@
     pinWidth = data.width || 0;
     pinHeight = data.height || 0;
     pinShrink = false;
+    pinLabelPos = 'n';
 
     if (kind === 'pin') {
       const usedNums = new Set(pins.filter(p => (p.kind || 'pin') === 'pin').map(p => p.number).filter(Boolean));
@@ -207,10 +234,11 @@
       height: pinHeight,
       minZoom: pinMinZoom,
       shrink: pinShrink,
+      labelPos: kind === 'pin' ? pinLabelPos : undefined,
       x: data.x,
       y: data.y,
     }];
-    editing = true;
+    activeTab = 'editor';
   }
 
   const MIN_BOX_SIZE = 20; // minimum width/height for a text box (image px)
@@ -269,14 +297,14 @@
     },
     commit: () => savePins(),
     deselect: () => {
-      if (!editing) return;
+      if (!editingId) return;
       // Cancel any new-feature preview; close the editor for existing selections
       if (previewId) {
         pins = pins.filter(p => p.id !== previewId);
         previewId = null;
       }
       editingId = null;
-      editing = false;
+      activeTab = 'markers';
     },
   };
 
@@ -297,12 +325,13 @@
     pinHeight = pin.height || 0;
     pinMinZoom = pin.minZoom ?? (pinKind === 'pin' ? DEFAULT_MARKER_MIN_ZOOM : 1);
     pinShrink = !!pin.shrink;
+    pinLabelPos = pin.labelPos || 'n';
     // Apply default size for text features that were created as point-labels
     if (pinKind === 'text' && (!pinWidth || !pinHeight)) {
       pinWidth = 300;
       pinHeight = 80;
     }
-    editing = true;
+    activeTab = 'editor';
   }
 
 
@@ -330,9 +359,10 @@
     }
     const mz = pinMinZoom;
     const sh = pinShrink;
+    const lp = kind === 'pin' ? pinLabelPos : undefined;
     const desc = pinDesc.trim() || undefined;
     const link = pinLink.trim() || undefined;
-    if (pin.name !== name || pin.number !== num || pin.kind !== kind || pin.class !== cls || pin.align !== align || pin.valign !== valign || pin.width !== w || pin.height !== h || pin.x !== x || pin.y !== y || pin.minZoom !== mz || pin.shrink !== sh || pin.description !== desc || pin.link !== link) {
+    if (pin.name !== name || pin.number !== num || pin.kind !== kind || pin.class !== cls || pin.align !== align || pin.valign !== valign || pin.width !== w || pin.height !== h || pin.x !== x || pin.y !== y || pin.minZoom !== mz || pin.shrink !== sh || pin.labelPos !== lp || pin.description !== desc || pin.link !== link) {
       pin.name = name;
       pin.number = num;
       pin.kind = kind;
@@ -345,6 +375,7 @@
       pin.y = y;
       pin.minZoom = mz;
       pin.shrink = sh;
+      pin.labelPos = lp;
       pin.description = desc;
       pin.link = link;
       viewer?.updateMarker(pin);
@@ -358,7 +389,7 @@
     pins = pins.filter(p => p.id !== editingId);
     previewId = null;
     editingId = null;
-    editing = false;
+    activeTab = 'markers';
     savePins();
   }
 
@@ -366,7 +397,7 @@
   function closeEditor() {
     previewId = null;
     editingId = null;
-    editing = false;
+    activeTab = 'markers';
   }
 
   // Debounced auto-save — every edit in the $effect above triggers this.
@@ -480,10 +511,14 @@
   {#if mode === 'edit'}
   <div class="sidebar">
     <div class="tabs">
-      <button class:active={!editing} onclick={() => { if (editing) closeEditor(); }}>Markers</button>
-      <button class:active={editing}>{editing ? dialogTitle : 'Editor'}</button>
+      <button class:active={activeTab === 'markers'} onclick={() => activeTab = 'markers'}>Markers</button>
+      <button
+        class:active={activeTab === 'editor'}
+        disabled={!editingId}
+        onclick={() => { if (editingId) activeTab = 'editor'; }}
+      >{editingId ? dialogTitle : 'Editor'}</button>
     </div>
-    {#if editing}
+    {#if activeTab === 'editor' && editingId}
       <div class="pin-editor">
         <form onsubmit={(e) => { e.preventDefault(); closeEditor(); }}>
           {#if pinKind === 'pin'}
@@ -492,6 +527,7 @@
               bind:cls={pinClass}
               bind:minZoom={pinMinZoom}
               bind:shrink={pinShrink}
+              bind:labelPos={pinLabelPos}
             />
           {:else if pinKind === 'text'}
             <TextProperties
@@ -507,7 +543,7 @@
           {/if}
           <label>Label <input type="text" bind:value={pinName} required autocomplete="off" /></label>
           <label>Description <textarea bind:value={pinDesc} rows="2"></textarea></label>
-          <label>Link <input type="text" bind:value={pinLink} placeholder="/hobbity/world/places/#anchor" autocomplete="off" /></label>
+          <label>Link <input type="text" bind:value={pinLink} placeholder="/world/places/#anchor" autocomplete="off" /></label>
           <div class="dialog-buttons">
             <button type="button" class="danger" onclick={onDelete}>Delete</button>
           </div>
@@ -515,17 +551,25 @@
       </div>
     {:else}
       <ul class="pin-list">
-        {#each pins as pin}
+        {#each listMarkers as pin}
+          {@const preset = findPreset(pin.class)}
           <li>
-            <button class="pin-list-btn" onclick={() => clickPin(pin)}>
-              {#if pin.number}
-                <span class="pin-num">{pin.number}</span>
-              {:else}
-                <span class="pin-label-icon">Aa</span>
-              {/if}
-              <strong class={markerClasses(pin)}>{pin.name}</strong>
-              <span class="pin-coords">({pin.x}, {pin.y})</span>
-            </button>
+            <div class="pin-row">
+              <button class="pin-list-btn" onclick={() => clickPin(pin)}>
+                {#if preset?.category === 'overworld'}
+                  <span class="pin-glyph">{preset.icon}</span>
+                {:else if pin.number}
+                  <span class="pin-num">{pin.number}</span>
+                {:else}
+                  <span class="pin-label-icon">Aa</span>
+                {/if}
+                <strong class={markerClasses(pin)}>{pin.name}</strong>
+                <span class="pin-coords">({pin.x}, {pin.y})</span>
+              </button>
+              <button class="pin-list-edit" onclick={() => editFeature(pin)} aria-label="Edit {pin.name}" title="Edit">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
           </li>
         {/each}
       </ul>
@@ -617,7 +661,7 @@
   .mode-toggle button.active { background: var(--accent); color: var(--accent-text); }
   .font-primer { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; pointer-events: none; visibility: hidden; }
 
-  .layout { flex: 1; display: flex; overflow: hidden; min-height: 0; }
+  .layout { flex: 1; display: flex; overflow: hidden; min-height: 0; position: relative; }
   .map-wrapper { flex: 1; min-width: 0; min-height: 0; position: relative; }
 
   /* Sidebar uses the map's paper palette so typography previews render
@@ -628,14 +672,24 @@
      `--panel-*` aliases are kept for backward compat with components that
      already read them. */
   .sidebar {
-    width: 280px;
+    /* Floats over the map: absolutely positioned inside the .layout with
+       --space margins on every side. Width derives from --map-padding so
+       the panel sits within the map's pan-out area. */
+    position: absolute;
+    top: var(--space);
+    right: var(--space);
+    bottom: var(--space);
+    width: calc(var(--map-padding) - 2 * var(--space));
     display: flex;
     flex-direction: column;
     min-height: 0;
     overflow: hidden;
     background: var(--bg);
     color: var(--text);
-    border-left: var(--border-width) solid var(--border);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 500;
     --panel-bg: var(--bg);
     --panel-text: var(--text);
     --panel-border: var(--border);
@@ -644,31 +698,53 @@
   }
   .tabs {
     display: flex;
+    padding: var(--space-sm);
     border-bottom: 1px solid var(--panel-border);
   }
-  .tabs button {
+  /* Use `.sidebar .tabs button` so these override the later
+     `.sidebar button` block. Adjacent corners (right side of the first
+     tab, left side of the last) stay square so the pair reads as one
+     segmented control. */
+  .sidebar .tabs button {
     flex: 1;
     padding: 0.5rem 0.75rem;
-    font-family: 'Crimson Pro', serif;
+    font-family: var(--heading-font);
     font-size: 0.9rem;
     font-weight: 700;
-    border: none;
-    border-bottom: 2px solid transparent;
     background: none;
     color: inherit;
-    opacity: 0.5;
+    opacity: 0.6;
     cursor: pointer;
-    border-radius: 0;
+    border: 1px solid var(--panel-border);
   }
-  .tabs button:hover { opacity: 0.8; background: none; }
-  .tabs button.active { opacity: 1; border-bottom-color: var(--panel-accent); }
+  .sidebar .tabs button:first-child {
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    border-right-width: 0;
+  }
+  .sidebar .tabs button:last-child {
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  }
+  .sidebar .tabs button:only-child {
+    border-radius: var(--border-radius);
+    border-right-width: 1px;
+  }
+  .sidebar .tabs button:hover:not(:disabled) { opacity: 0.85; background: var(--panel-hover); }
+  .sidebar .tabs button.active { opacity: 1; background: var(--panel-accent); color: var(--accent-text); border-color: var(--panel-accent); }
+  .sidebar .tabs button:disabled { opacity: 0.3; cursor: not-allowed; }
 
   .pin-list { list-style: none; padding: 0; margin: 0; flex: 1; overflow-y: auto; }
-  .pin-list li { border-bottom: 1px solid rgba(0, 0, 0, 0.08); }
-  .pin-list-btn {
-    width: 100%;
+  .pin-row {
+    display: flex;
+    align-items: stretch;
+    margin: 0 0.375rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  .pin-list li:last-child .pin-row { border-bottom: none; }
+  .sidebar .pin-list-btn {
+    flex: 1;
+    min-width: 0;
     text-align: left;
-    padding: 0.35rem 0.75rem;
+    padding: 0.35rem 0;
     font-size: 0.85rem;
     border: none;
     background: none;
@@ -676,7 +752,25 @@
     cursor: pointer;
     border-radius: 0;
   }
-  .pin-list-btn:hover { background: var(--panel-hover); }
+  .sidebar .pin-row:hover { background: var(--panel-hover); }
+  .sidebar .pin-list-edit {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.1s;
+  }
+  .sidebar .pin-row:hover .pin-list-edit,
+  .sidebar .pin-list-edit:focus-visible { opacity: 0.7; }
+  .sidebar .pin-list-edit:hover { opacity: 1; }
+  .sidebar .pin-list-edit svg { width: 18px; height: 18px; }
   .pin-num {
     display: inline-flex;
     align-items: center;
@@ -696,6 +790,13 @@
     flex-shrink: 0;
     width: 20px;
     text-align: center;
+  }
+  .pin-glyph {
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1;
   }
   .pin-coords { opacity: 0.5; font-size: 0.8em; }
 

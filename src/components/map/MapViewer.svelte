@@ -32,11 +32,48 @@
   // stay visible and hoverable. Their *labels* follow the per-marker
   // `minZoom` (hidden when current zoom < minZoom).
   const MARKER_HIDE_ZOOM = 0.25;
+  // Maximum distance (in CSS pixels) the viewport may pan past the edge
+  // of the map image. Kept in sync with --map-padding in tokens.scss
+  // (which the floating sidebar uses to size itself).
+  const MAP_PADDING = 320;
+  // View mode uses a uniform half-MAP_PADDING border.
+  const VIEW_PAD = MAP_PADDING / 2;
+  // Edit mode UI overlays — these widths drive the asymmetric padding so
+  // the user can pan the map past the toolbox / sidebar.
+  const SPACE_PX = 16;          // matches --space
+  const TOOLBOX_WIDTH = 34;     // 30px button + 2px border × 2
+  const SIDEBAR_WIDTH = MAP_PADDING - 2 * SPACE_PX;
   const HANDLE_POSITIONS = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'];
 
   function isMobile() {
     return typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
   }
+
+  /** Recompute the map's max-bounds based on the current zoom and the
+   * active mode. View mode = uniform half-MAP_PADDING. Edit mode =
+   * asymmetric so the floating UI overlays don't block panning. */
+  function updateMaxBounds() {
+    if (!map) return;
+    const s = map.options.crs.scale(map.getZoom()) || 1;
+    let topPx, bottomPx, leftPx, rightPx;
+    if (editable) {
+      topPx = bottomPx = SPACE_PX;
+      leftPx = TOOLBOX_WIDTH + 2 * SPACE_PX;
+      rightPx = SIDEBAR_WIDTH + 2 * SPACE_PX;
+    } else {
+      topPx = bottomPx = leftPx = rightPx = VIEW_PAD;
+    }
+    map.setMaxBounds([
+      [-topPx / s, -leftPx / s],
+      [height + bottomPx / s, width + rightPx / s],
+    ]);
+  }
+
+  // Re-clamp whenever the user toggles edit/view mode.
+  $effect(() => {
+    void editable;
+    if (map) updateMaxBounds();
+  });
 
   /** Read a CSS custom property (e.g. `--border`) from the map container. */
   function getCss(name) {
@@ -176,7 +213,7 @@
     const markStyle = isOverworld ? `font-size: ${Math.max(20, size).toFixed(1)}px;` : '';
     return L.divIcon({
       className: '',
-      html: `<div class="map-pin${pin.id === selectedId ? ' selected' : ''}${isOverworld ? ' overworld' : ''}${labelHidden ? ' label-hidden' : ''}"><span class="map-pin-label map-pin-label-short ${pinSizeClass} ${pinColorClass}" style="${labelStyle}">${shortLabel}</span><span class="map-pin-label map-pin-label-long ${pinSizeClass} ${pinColorClass}" style="${labelStyle}">${longLabel}</span><span class="${markClass}" style="${markStyle}">${markContent}</span></div>`,
+      html: `<div class="map-pin label-pos-${pin.labelPos || 'n'}${pin.id === selectedId ? ' selected' : ''}${isOverworld ? ' overworld' : ''}${labelHidden ? ' label-hidden' : ''}"><span class="map-pin-label map-pin-label-short ${pinSizeClass} ${pinColorClass}" style="${labelStyle}">${shortLabel}</span><span class="map-pin-label map-pin-label-long ${pinSizeClass} ${pinColorClass}" style="${labelStyle}">${longLabel}</span><span class="${markClass}" style="${markStyle}">${markContent}</span></div>`,
       iconSize: [28, 28],
       iconAnchor: [14, 14],
     });
@@ -540,6 +577,14 @@
       L.imageOverlay(imageUrl, bounds).addTo(map);
     }
 
+    // Constrain panning to the image plus MAP_PADDING (CSS px) on every
+    // side. Since our CRS's lat/lng units are image pixels, convert the
+    // CSS-px pad through the current scale, and keep it in sync as the
+    // user zooms (where 1 image-px covers a different amount of screen).
+    map.options.maxBoundsViscosity = 1.0;
+    updateMaxBounds();
+    map.on('zoomend', updateMaxBounds);
+
     // Gold border traced around the image's bounds so the frame hugs
     // the tiles rather than the map container (which may be larger
     // when zoomed out).
@@ -757,6 +802,8 @@
       }
 
       // --- Labels (pin short/long + freeform map labels) ---------------
+      // Default label position is N (above the pin). .label-pos-*
+      // classes on the enclosing .map-pin flip the anchor point.
       .map-pin-label {
         position: absolute;
         bottom: 100%;
@@ -768,6 +815,16 @@
         pointer-events: none;
         display: none;
       }
+      // Position overrides: the label is pinned to the corresponding
+      // side of the 28×28 pin container. Gap of ~2px on cardinals.
+      .map-pin.label-pos-n  > .map-pin-label { bottom: 100%; top: auto; left: 50%;  right: auto; transform: translateX(-50%);     margin: 0 0 -2px 0; }
+      .map-pin.label-pos-s  > .map-pin-label { top: 100%;    bottom: auto; left: 50%;  right: auto; transform: translateX(-50%);  margin: -2px 0 0 0; }
+      .map-pin.label-pos-e  > .map-pin-label { top: 50%;     bottom: auto; left: 100%; right: auto; transform: translateY(-50%);  margin: 0 0 0 2px; }
+      .map-pin.label-pos-w  > .map-pin-label { top: 50%;     bottom: auto; right: 100%; left: auto; transform: translateY(-50%);  margin: 0 2px 0 0; }
+      .map-pin.label-pos-ne > .map-pin-label { bottom: 100%; top: auto; left: 100%; right: auto; transform: none; margin: 0 0 0 2px; }
+      .map-pin.label-pos-nw > .map-pin-label { bottom: 100%; top: auto; right: 100%; left: auto; transform: none; margin: 0 2px 0 0; }
+      .map-pin.label-pos-se > .map-pin-label { top: 100%;    bottom: auto; left: 100%; right: auto; transform: none; margin: 2px 0 0 0; }
+      .map-pin.label-pos-sw > .map-pin-label { top: 100%;    bottom: auto; right: 100%; left: auto; transform: none; margin: 2px 0 0 0; }
       // Short is the default-visible variant; the `.label-hidden` gate
       // on `.map-pin` overrides this when zoom < minZoom.
       .map-pin-label-short { display: block; }
@@ -786,28 +843,6 @@
         overflow: hidden;
       }
 
-      // Color itself comes from global utilities in map-viewer.scss
-      // (.text-black / .text-heading / .text-title). Here we only add
-      // the parchment halo, which is specific to text rendered over
-      // map tiles and so doesn't belong in a global utility.
-      .map-label.text-black,
-      .map-pin-label.text-black {
-        text-shadow:
-          1px 1px 0 rgba(250, 246, 240, .8),
-          -1px -1px 0 rgba(250, 246, 240, .8),
-          0 0 4px rgba(250, 246, 240, 0.95),
-          0 0 10px rgba(250, 246, 240, 0.75);
-      }
-      .map-label.text-heading,
-      .map-pin-label.text-heading,
-      .map-label.text-title,
-      .map-pin-label.text-title {
-        text-shadow:
-          0 0 2px rgba(250, 246, 240, .8),
-          0 0 5px rgba(250, 246, 240, .8),
-          0 0 12px rgba(250, 246, 240, 0.8);
-      }
-
       // Raise the hovered marker's Leaflet wrapper so its revealed
       // long label doesn't get clipped by neighbouring markers.
       .leaflet-marker-icon:has(.map-pin:hover) { z-index: 1000 !important; }
@@ -820,9 +855,16 @@
           border-width: 1.5px;
           font-size: 0;
         }
-        // Shrunken circle sits ~6px further from container top; pull
-        // labels down to keep the same tight gap as at normal zoom.
-        .map-pin-label { margin-bottom: -8px; }
+        // Shrunken circle sits ~6px smaller on every side; tighten the
+        // label-to-pin gap in whichever direction the label is anchored.
+        .map-pin.label-pos-n  > .map-pin-label,
+        .map-pin.label-pos-ne > .map-pin-label,
+        .map-pin.label-pos-nw > .map-pin-label { margin-bottom: -8px; }
+        .map-pin.label-pos-s  > .map-pin-label,
+        .map-pin.label-pos-se > .map-pin-label,
+        .map-pin.label-pos-sw > .map-pin-label { margin-top: -8px; }
+        .map-pin.label-pos-e  > .map-pin-label { margin-left: -8px; }
+        .map-pin.label-pos-w  > .map-pin-label { margin-right: -8px; }
       }
 
       // --- Text-feature bounding box + resize handles -----------------

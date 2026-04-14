@@ -11,16 +11,75 @@
     shrink = $bindable(false),
     onApplyPreset,
   } = $props();
+
+  const FONTS = {
+    body: "'Lora', serif",
+    heading: "'Crimson Pro', serif",
+    title: "'Uncial Antiqua', serif",
+  };
+
+  // Display order for the style grid. Presets not listed fall to the end
+  // in their original TEXT_PRESETS order.
+  const STYLE_ORDER = [
+    'map-title',
+    'continent', 'region',
+    'district', 'civic-space',
+    'forest', 'range',
+    'hills', 'desert',
+    'ocean', 'island',
+    'lake', 'pond-marsh',
+  ];
+  const orderedPresets = (() => {
+    const rank = new Map(STYLE_ORDER.map((id, i) => [id, i]));
+    return [...TEXT_PRESETS].sort((a, b) => {
+      const ai = rank.has(a.id) ? rank.get(a.id) : STYLE_ORDER.length;
+      const bi = rank.has(b.id) ? rank.get(b.id) : STYLE_ORDER.length;
+      return ai - bi;
+    });
+  })();
+
+  // Subtle size scale so the picker hints at each preset's actual text
+  // size without blowing up the button layout.
+  const SIZE_PX = { 'text-sm': '0.65rem', 'text-base': '.85rem', 'text-lg': '1.1rem', 'text-xl': '1.1rem' };
+
+  /** Inline style matching how the preset will render the label, so the
+   * picker shows a true-to-life preview of each style. */
+  function styleFor(p) {
+    const d = p.defaults || {};
+    const parts = [
+      `font-family: ${FONTS[d.font] || FONTS.body}`,
+      `font-weight: ${d.weight ?? (d.bold ? 700 : 400)}`,
+      `font-style: ${d.italic ? 'italic' : 'normal'}`,
+    ];
+    if (SIZE_PX[d.sizeClass]) parts.push(`font-size: ${SIZE_PX[d.sizeClass]}`);
+    if (d.case && d.case !== 'none') {
+      parts.push(`text-transform: ${d.case === 'upper' ? 'uppercase' : d.case === 'lower' ? 'lowercase' : 'capitalize'}`);
+    }
+    if (d.letterSpacing) parts.push(`letter-spacing: ${d.letterSpacing}px`);
+    return parts.join('; ');
+  }
+
+  /** Color class so the global parchment-halo utilities apply, giving
+   * the button text a readable glow against the accent background. */
+  function classFor(p) {
+    return p.defaults?.colorClass || 'text-black';
+  }
 </script>
 
-<label>
-  Style
-  <select value={preset} onchange={(e) => onApplyPreset?.(e.target.value)}>
-    {#each TEXT_PRESETS as p}
-      <option value={p.id}>{p.label}</option>
-    {/each}
-  </select>
-</label>
+<div class="style-grid" role="radiogroup" aria-label="Text style">
+  {#each orderedPresets as p}
+    <button
+      type="button"
+      role="radio"
+      aria-checked={preset === p.id}
+      class={classFor(p)}
+      class:full={p.id === 'map-title'}
+      class:active={preset === p.id}
+      onclick={() => onApplyPreset?.(p.id)}
+      style={styleFor(p)}
+    >{p.label}</button>
+  {/each}
+</div>
 
 <div class="style-row">
   <div class="align-group" aria-label="Horizontal alignment">
@@ -84,7 +143,7 @@
 
 <style>
   label { display: block; margin-bottom: 0.6rem; font-size: 0.85rem; }
-  label select, label input {
+  label input {
     display: block;
     width: 100%;
     margin-top: 0.2rem;
@@ -95,6 +154,32 @@
     border-radius: 3px;
     font: inherit;
   }
+
+  /* 2-column preset picker styled like PinProperties' Town grid. */
+  .style-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+    margin-bottom: 0.6rem;
+  }
+  .style-grid button {
+    padding: var(--space-sm) 4px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid var(--panel-border, #5c4a32);
+    background: transparent;
+    border-radius: 3px;
+    cursor: pointer;
+    min-height: 40px;
+  }
+  .style-grid button:hover { background: var(--panel-hover, rgba(0,0,0,0.06)); }
+  /* Lighter tan than the default accent so the parchment halo on the
+     preset-colored text reads without the swatch going too dark. */
+  .style-grid button.active { background: #d4b87a; border-color: #d4b87a; }
+  .style-grid button.full { grid-column: 1 / -1; }
 
   .style-row {
     display: flex;

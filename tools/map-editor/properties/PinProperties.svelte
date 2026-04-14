@@ -6,7 +6,20 @@
     cls = $bindable('landmark'),
     minZoom = $bindable(0),
     shrink = $bindable(false),
+    labelPos = $bindable('n'),
   } = $props();
+
+  // 8 compass positions arranged in a 3x3 grid (center is the marker).
+  const LABEL_POSITIONS = [
+    { id: 'nw', row: 1, col: 1, title: 'Label NW' },
+    { id: 'n',  row: 1, col: 2, title: 'Label N'  },
+    { id: 'ne', row: 1, col: 3, title: 'Label NE' },
+    { id: 'w',  row: 2, col: 1, title: 'Label W'  },
+    { id: 'e',  row: 2, col: 3, title: 'Label E'  },
+    { id: 'sw', row: 3, col: 1, title: 'Label SW' },
+    { id: 's',  row: 3, col: 2, title: 'Label S'  },
+    { id: 'se', row: 3, col: 3, title: 'Label SE' },
+  ];
 
   const FONTS = {
     body: "'Lora', serif",
@@ -35,6 +48,8 @@
   }
 
   /** Inline CSS matching how this preset renders the label. */
+  const SIZE_PX = { 'text-sm': '0.85rem', 'text-base': '1rem', 'text-lg': '1.15rem', 'text-xl': '1.3rem' };
+
   function styleFor(preset) {
     const d = preset.defaults || {};
     const parts = [
@@ -42,13 +57,22 @@
       `font-weight: ${d.weight ?? (d.bold ? 700 : 400)}`,
       `font-style: ${d.italic ? 'italic' : 'normal'}`,
     ];
+    if (SIZE_PX[d.sizeClass]) parts.push(`font-size: ${SIZE_PX[d.sizeClass]}`);
     if (d.color) parts.push(`color: ${d.color}`);
-    else if (d.font === 'title') parts.push('color: var(--title-color, #7f003f)');
     if (d.case && d.case !== 'none') {
       parts.push(`text-transform: ${d.case === 'upper' ? 'uppercase' : d.case === 'lower' ? 'lowercase' : 'capitalize'}`);
     }
     if (d.letterSpacing) parts.push(`letter-spacing: ${d.letterSpacing}px`);
     return parts.join('; ');
+  }
+
+  /** Color class so the global parchment-halo utilities apply, giving
+   * the button text a readable glow against the accent background. */
+  function classFor(p) {
+    const d = p.defaults || {};
+    if (d.colorClass) return d.colorClass;
+    if (d.font === 'title') return 'text-title';
+    return 'text-black';
   }
 </script>
 
@@ -64,6 +88,7 @@
         type="button"
         role="radio"
         aria-checked={cls === p.id}
+        class={classFor(p)}
         class:active={cls === p.id}
         class:full={p.id === 'poi'}
         onclick={() => cls = p.id}
@@ -97,6 +122,25 @@
     {/each}
   </div>
 {/if}
+
+<fieldset class="label-pos-field">
+  <legend>Label position</legend>
+  <div class="label-pos-grid" role="radiogroup" aria-label="Label position">
+    {#each LABEL_POSITIONS as p}
+      <button
+        type="button"
+        role="radio"
+        aria-checked={labelPos === p.id}
+        class="pos-dot pos-{p.id}"
+        class:active={labelPos === p.id}
+        title={p.title}
+        aria-label={p.title}
+        onclick={() => labelPos = p.id}
+      ></button>
+    {/each}
+    <span class="pos-center" aria-hidden="true"></span>
+  </div>
+</fieldset>
 
 <label class="min-zoom-label">
   Min zoom
@@ -140,6 +184,7 @@
   .tabs {
     display: flex;
     gap: 2px;
+    margin-top: var(--space, 16px);
     margin-bottom: 0.6rem;
     border-bottom: 1px solid var(--panel-border, #5c4a32);
   }
@@ -173,13 +218,14 @@
     text-align: center;
     border: 1px solid var(--panel-border, #5c4a32);
     background: transparent;
-    color: inherit;
     border-radius: 3px;
     cursor: pointer;
     min-height: 40px;
   }
   .text-grid button:hover { background: var(--panel-hover, rgba(0,0,0,0.06)); }
-  .text-grid button.active { background: var(--panel-accent, #c9a96e); color: #fff; border-color: var(--panel-accent, #c9a96e); }
+  /* Lighter tan than the default accent so the parchment halo on the
+     preset-colored text reads without the swatch going too dark. */
+  .text-grid button.active { background: #d4b87a; border-color: #d4b87a; }
   .text-grid button.full { grid-column: 1 / -1; }
 
   .icon-grid {
@@ -225,6 +271,67 @@
   }
   .icon-grid button:hover .tt,
   .icon-grid button:focus-visible .tt { opacity: 1; }
+
+  /* Compass picker: 8 dots in a 3x3 grid around a central marker dot.
+     Each button uses explicit grid placement so the cardinal/diagonal
+     positions map naturally. */
+  .label-pos-field {
+    border: none;
+    padding: 0;
+    margin: 0 0 0.6rem;
+    font-size: 0.85rem;
+  }
+  .label-pos-field legend {
+    padding: 0;
+    margin-bottom: 0.35rem;
+  }
+  .label-pos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 22px);
+    grid-template-rows: repeat(3, 22px);
+    gap: 4px;
+    justify-content: center;
+    align-content: center;
+    padding: 6px;
+    border: 1px solid var(--panel-border, #5c4a32);
+    border-radius: 999px;
+    width: fit-content;
+    margin: 0 auto;
+    position: relative;
+  }
+  .label-pos-grid .pos-dot {
+    width: 18px;
+    height: 18px;
+    margin: 2px;
+    padding: 0;
+    border: 1px solid var(--panel-border, #5c4a32);
+    background: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .label-pos-grid .pos-dot:hover { background: var(--panel-hover, rgba(0,0,0,0.06)); }
+  .label-pos-grid .pos-dot.active {
+    background: var(--panel-accent, #c9a96e);
+    border-color: var(--panel-accent, #c9a96e);
+  }
+  .label-pos-grid .pos-nw { grid-column: 1; grid-row: 1; }
+  .label-pos-grid .pos-n  { grid-column: 2; grid-row: 1; }
+  .label-pos-grid .pos-ne { grid-column: 3; grid-row: 1; }
+  .label-pos-grid .pos-w  { grid-column: 1; grid-row: 2; }
+  .label-pos-grid .pos-e  { grid-column: 3; grid-row: 2; }
+  .label-pos-grid .pos-sw { grid-column: 1; grid-row: 3; }
+  .label-pos-grid .pos-s  { grid-column: 2; grid-row: 3; }
+  .label-pos-grid .pos-se { grid-column: 3; grid-row: 3; }
+  .label-pos-grid .pos-center {
+    grid-column: 2;
+    grid-row: 2;
+    width: 10px;
+    height: 10px;
+    margin: auto;
+    background: var(--text, #3a332a);
+    border-radius: 50%;
+    pointer-events: none;
+  }
 
   .min-zoom-label { display: block; margin-bottom: 0.6rem; font-size: 0.85rem; }
   .zoom-row { display: flex; gap: 6px; margin-top: 0.25rem; align-items: stretch; }
