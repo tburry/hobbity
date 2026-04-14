@@ -1,247 +1,293 @@
-[
-  {
-    "kind": "pin",
-    "number": "1",
-    "name": "Oak Market Square",
-    "x": 3151,
-    "y": 1940,
-    "class": "landmark"
+{
+  "meta": {
+    "title": "Gomwick",
+    "description": "A working hobbit town on the banks of the Bounty River, gathered around an oak-shaded market square worn smooth by generations of laden carts. It is home to the Gomwick Harvest Fair, the biggest gathering of its kind in the Five Shires."
   },
-  {
-    "kind": "pin",
-    "number": "2",
-    "name": "Millie's Brewery",
-    "x": 3676,
-    "y": 1022,
-    "class": "shop"
-  },
-  {
-    "kind": "pin",
-    "number": "3",
-    "name": "Gomwick General Goods",
-    "x": 3830,
-    "y": 1327,
-    "class": "shop"
-  },
-  {
-    "kind": "pin",
-    "number": "4",
-    "name": "Longbuck's Creamery",
-    "x": 4009,
-    "y": 1617,
-    "class": "shop"
-  },
-  {
-    "kind": "pin",
-    "number": "5",
-    "name": "The New Butchery",
-    "x": 4124,
-    "y": 2066,
-    "class": "shop"
-  },
-  {
-    "kind": "pin",
-    "number": "6",
-    "name": "The Happy Hobbit Inn & Tavern",
-    "x": 4712,
-    "y": 2213,
-    "class": "shop",
-    "description": "The Happy Hobbit Inn & Tavern"
-  },
-  {
-    "kind": "pin",
-    "number": "6a",
-    "name": "The Happy West House",
-    "x": 4513,
-    "y": 2402,
-    "class": "residence"
-  },
-  {
-    "kind": "pin",
-    "number": "6b",
-    "name": "The Happy East House",
-    "x": 4985,
-    "y": 2143,
-    "class": "residence"
-  },
-  {
-    "kind": "pin",
-    "number": "7",
-    "name": "The Happy Storage",
-    "x": 5132,
-    "y": 1806,
-    "class": "residence"
-  },
-  {
-    "kind": "pin",
-    "number": "8",
-    "name": "The Happy Barn & Stables",
-    "x": 5378,
-    "y": 1708,
-    "class": "shop"
-  },
-  {
-    "kind": "pin",
-    "number": "9",
-    "name": "Ye Olde Test",
-    "x": 6193,
-    "y": 2695,
-    "class": "town",
-    "minZoom": 1
-  },
-  {
-    "kind": "pin",
-    "number": "9",
-    "name": "Longbick's Lumber & Forestry Supply",
-    "x": 2458,
-    "y": 2415,
-    "class": "shop",
-    "description": "Longbick's Lumber & Forestry Supply"
-  },
-  {
-    "kind": "pin",
-    "number": "10",
-    "name": "Mrs. Cratchit's Bakery",
-    "x": 2780,
-    "y": 2787,
-    "class": "shop"
-  },
-  {
-    "kind": "pin",
-    "number": "11",
-    "name": "The Gomwick Granery",
-    "x": 3123,
-    "y": 2647,
-    "class": "shop"
-  },
-  {
-    "kind": "pin",
-    "number": "12",
-    "name": "Gilly Greene's Greengrocery",
-    "x": 3662,
-    "y": 2549,
-    "class": "shop"
-  },
-  {
-    "kind": "pin",
-    "number": "13",
-    "name": "Finckle's Finery",
-    "x": 4005,
-    "y": 2766,
-    "class": "shop"
-  },
-  {
-    "kind": "pin",
-    "number": "14",
-    "name": "Cousin Roland's Smithy",
-    "x": 3925,
-    "y": 3298,
-    "class": "shop"
-  },
-  {
-    "kind": "pin",
-    "number": "15",
-    "name": "All Things Metal",
-    "x": 3977,
-    "y": 3543,
-    "class": "shop"
-  },
-  {
-    "kind": "pin",
-    "number": "16",
-    "name": "Toppo Hill House",
-    "x": 1117,
-    "y": 753,
-    "class": "landmark"
-  },
-  {
-    "kind": "pin",
-    "number": "A",
-    "name": "Festival Campground",
-    "x": 3743,
-    "y": 405,
-    "class": "residence"
-  },
-  {
-    "kind": "pin",
-    "number": "B",
-    "name": "Festival Games",
-    "x": 4761,
-    "y": 1225,
-    "class": "residence"
-  },
-  {
-    "kind": "text",
-    "number": "",
-    "name": "Gomwick Woods",
-    "x": 841,
-    "y": 2392,
-    "class": "forest",
-    "width": 1681,
-    "height": 2091
-  },
-  {
-    "kind": "text",
-    "number": "",
-    "name": "The Mountain",
-    "x": 951,
-    "y": 249,
-    "class": "hills",
-    "width": 836,
-    "height": 181,
-    "minZoom": 4
-  },
-  {
-    "kind": "text",
-    "number": "",
-    "name": "Spottle Pond",
-    "x": 3557,
-    "y": 3998,
-    "class": "pond-marsh",
-    "width": 455,
-    "height": 493,
-    "minZoom": 4
-  },
-  {
-    "kind": "text",
-    "number": "",
-    "name": "Gomwick",
-    "x": 3948,
-    "y": 5054,
-    "class": "map-title",
-    "width": 6444,
-    "height": 636,
-    "valign": "bottom",
-    "minZoom": 0
-  },
-  {
-    "kind": "text",
-    "number": "",
-    "name": "The South Common",
-    "x": 4194,
-    "y": 4579,
-    "class": "civic-space",
-    "width": 1600,
-    "height": 700
-  },
-  {
-    "kind": "text",
-    "number": "",
-    "name": "The North Common",
-    "x": 4881,
-    "y": 502,
-    "class": "civic-space",
-    "width": 1090,
-    "height": 890
-  },
-  {
-    "kind": "text",
-    "number": "",
-    "name": "Nettle's Pond",
-    "x": 5742,
-    "y": 3319,
-    "class": "pond-marsh",
-    "width": 1939,
-    "height": 1610
-  }
-]
+  "pins": [
+    {
+      "kind": "text",
+      "class": "map-title",
+      "name": "Gomwick",
+      "x": 4382,
+      "y": 5020,
+      "width": 2807,
+      "height": 713,
+      "valign": "bottom",
+      "minZoom": 0
+    },
+    {
+      "kind": "pin",
+      "class": "landmark",
+      "number": "1",
+      "name": "Oak Market Square",
+      "x": 3151,
+      "y": 1940,
+      "labelPos": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "2",
+      "name": "Millie's Brewery",
+      "x": 3676,
+      "y": 1022
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "3",
+      "name": "Gomwick General Goods",
+      "x": 3830,
+      "y": 1327
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "4",
+      "name": "Longbuck's Creamery",
+      "x": 4009,
+      "y": 1617
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "5",
+      "name": "The New Butchery",
+      "x": 4124,
+      "y": 2066
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "6",
+      "name": "The Happy Hobbit Inn & Tavern",
+      "x": 4712,
+      "y": 2213,
+      "labelPos": "se",
+      "description": "The Happy Hobbit Inn & Tavern"
+    },
+    {
+      "kind": "pin",
+      "class": "residence",
+      "number": "6a",
+      "name": "The Happy West House",
+      "x": 4513,
+      "y": 2402,
+      "labelPos": "se"
+    },
+    {
+      "kind": "pin",
+      "class": "residence",
+      "number": "6b",
+      "name": "The Happy East House",
+      "x": 4985,
+      "y": 2143,
+      "labelPos": "e"
+    },
+    {
+      "kind": "pin",
+      "class": "residence",
+      "number": "7",
+      "name": "The Happy Storage",
+      "x": 5132,
+      "y": 1806,
+      "labelPos": "se"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "8",
+      "name": "The Happy Barn & Stables",
+      "x": 5378,
+      "y": 1708,
+      "labelPos": "e"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "9",
+      "name": "Longbuck's Lumber & Forestry Supply",
+      "x": 2458,
+      "y": 2415,
+      "description": "Longbick's Lumber & Forestry Supply"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "10",
+      "name": "Mrs. Cratchit's Bakery",
+      "x": 2780,
+      "y": 2787
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "11",
+      "name": "The Gomwick Granery",
+      "x": 3123,
+      "y": 2647
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "12",
+      "name": "Gilly Greene's Greengrocery",
+      "x": 3662,
+      "y": 2549
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "13",
+      "name": "Finckle's Finery",
+      "x": 4005,
+      "y": 2766,
+      "labelPos": "e"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "14",
+      "name": "Cousin Roland's Smithy",
+      "x": 3925,
+      "y": 3298,
+      "labelPos": "ne"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "15",
+      "name": "All Things Metal",
+      "x": 3988,
+      "y": 3535,
+      "labelPos": "se"
+    },
+    {
+      "kind": "pin",
+      "class": "landmark",
+      "number": "16",
+      "name": "Toppo Hill House",
+      "x": 1141,
+      "y": 714,
+      "labelPos": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "residence",
+      "number": "A",
+      "name": "Festival Campground",
+      "x": 3743,
+      "y": 405
+    },
+    {
+      "kind": "pin",
+      "class": "residence",
+      "number": "B",
+      "name": "Festival Games",
+      "x": 4761,
+      "y": 1225
+    },
+    {
+      "kind": "path",
+      "class": "river",
+      "name": "Bounty River",
+      "a": [
+        6408,
+        4666
+      ],
+      "b": [
+        6939,
+        5362
+      ],
+      "mode": "bezier",
+      "cpA": [
+        6428,
+        4934
+      ],
+      "cpB": [
+        6577,
+        5143
+      ]
+    },
+    {
+      "kind": "text",
+      "class": "forest",
+      "name": "Gomwick Woods",
+      "x": 841,
+      "y": 2392,
+      "width": 1681,
+      "height": 2091
+    },
+    {
+      "kind": "path",
+      "class": "road",
+      "name": "The Heart Road",
+      "a": [
+        6249,
+        1717
+      ],
+      "b": [
+        7141,
+        1668
+      ],
+      "mode": "bezier",
+      "cpA": [
+        6395,
+        1688
+      ],
+      "cpB": [
+        6956,
+        1643
+      ],
+      "description": "The Heart Road stretches eastward toward The Right Way Inn and Thistledown."
+    },
+    {
+      "kind": "text",
+      "class": "hills",
+      "name": "The Mountain",
+      "x": 951,
+      "y": 249,
+      "width": 836,
+      "height": 181,
+      "minZoom": 4
+    },
+    {
+      "kind": "text",
+      "class": "pond-marsh",
+      "name": "Nettle's Pond",
+      "x": 5742,
+      "y": 3319,
+      "width": 1939,
+      "height": 1610
+    },
+    {
+      "kind": "text",
+      "class": "civic-space",
+      "name": "The North Common",
+      "x": 4881,
+      "y": 502,
+      "width": 1090,
+      "height": 890
+    },
+    {
+      "kind": "text",
+      "class": "civic-space",
+      "name": "The South Common",
+      "x": 4194,
+      "y": 4579,
+      "width": 1600,
+      "height": 700
+    },
+    {
+      "kind": "text",
+      "class": "pond-marsh",
+      "name": "Spottle Pond",
+      "x": 3567,
+      "y": 3995,
+      "width": 455,
+      "height": 493,
+      "minZoom": 3,
+      "shrink": true
+    }
+  ]
+}
