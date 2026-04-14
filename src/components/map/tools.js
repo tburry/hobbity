@@ -92,8 +92,33 @@ const pathTool = {
   id: 'path',
   label: 'Path',
   cursor: 'crosshair',
-  onMapClick(latlng, ctx) {
-    ctx.alert('Path tool coming soon.');
+  state: null,
+  onMapDown(e, latlng, ctx) {
+    this.state = { start: latlng };
+    ctx.showLine(latlng, latlng);
+  },
+  onMapMove(e, latlng, ctx) {
+    if (!this.state) return;
+    ctx.showLine(this.state.start, latlng);
+  },
+  onMapUp(e, latlng, ctx) {
+    if (!this.state) return;
+    const { start } = this.state;
+    this.state = null;
+    ctx.hideLine();
+    const dx = latlng.lng - start.lng;
+    const dy = latlng.lat - start.lat;
+    // Require a meaningful drag — click-without-drag does nothing.
+    if (Math.hypot(dx, dy) < 10) return;
+    ctx.create({
+      kind: 'path',
+      a: [Math.round(start.lng), Math.round(start.lat)],
+      b: [Math.round(latlng.lng), Math.round(latlng.lat)],
+    });
+  },
+  onDeactivate(map, ctx) {
+    this.state = null;
+    ctx.hideLine();
   },
 };
 
@@ -136,6 +161,33 @@ export function size(name) {
 export const DEFAULT_MARKER_MIN_ZOOM = 3;
 
 /**
+ * Per-kind feature defaults — single source of truth shared by the
+ * editor (create/load/save) and the MapViewer (render). Omitting a
+ * field from saved JSON means "use the default"; adding a new field
+ * here makes it automatically apply to existing data.
+ */
+export const KIND_DEFAULTS = {
+  pin: {
+    minZoom: DEFAULT_MARKER_MIN_ZOOM,
+    class: 'shop',
+    labelPos: 'n',
+  },
+  text: {
+    minZoom: 1,
+    class: 'civic-space',
+    align: 'center',
+    valign: 'middle',
+  },
+  path: {
+    minZoom: 2,
+    class: 'river',
+    mode: 'straight',
+    textAlign: 'center',
+    flip: false,
+  },
+};
+
+/**
  * Typography presets for numbered Pin labels. Each `defaults` spreads a named
  * size spec plus style fields. font/case/letterSpacing/italic/bold come from
  * the preset, not the pin.
@@ -165,7 +217,7 @@ export const PIN_PRESETS = [
 
 export const TEXT_PRESETS = [
   { id: 'map-title',   label: 'Map Title',         defaults: { ...size('title'),   font: 'title',   colorClass: 'text-title' } },
-  { id: 'continent',   label: 'Country', defaults: { ...size('large'),   font: 'title',   case: 'upper', letterSpacing: 4 } },
+  { id: 'continent',   label: 'Country', defaults: { ...size('large'),   font: 'title',   case: 'upper', letterSpacing: 4, colorClass: 'text-heading' } },
   { id: 'ocean',       label: 'Ocean, Sea',       defaults: { ...size('large'),  font: 'heading', italic: true, case: 'upper', letterSpacing: 6 } },
   { id: 'lake',        label: 'Lake, Bay',        defaults: { ...size('large'),   font: 'heading', italic: true, case: 'upper', letterSpacing: 4 } },
   { id: 'range',       label: 'Mountain Range',    defaults: { ...size('regular'),   font: 'heading', weight: 700, case: 'upper', letterSpacing: 3 } },
@@ -180,8 +232,26 @@ export const TEXT_PRESETS = [
   // { id: 'legend',      label: 'Legend, Scale',    defaults: { ...size('small'),   font: 'body',    case: 'title' } },
 ];
 
+// Path features render as text flowing along an invisible curve. The
+// preset controls typography only — there is no stroke style since the
+// line isn't drawn.
+// Grouped by kind (Borders, Roads, Water), then by prominence inside
+// each group so the picker reads top-to-bottom as strongest → weakest.
+export const PATH_PRESETS = [
+  { id: 'major-border', label: 'National Border', defaults: { ...size('regular'), font: 'heading', weight: 700, case: 'upper', letterSpacing: 2 } },
+  { id: 'minor-border', label: 'Regional Border', defaults: { ...size('small'),   font: 'body',    case: 'upper', letterSpacing: 2 } },
+  { id: 'highway',      label: 'Highway',         defaults: { ...size('regular'), font: 'heading', weight: 700, case: 'upper', letterSpacing: 2 } },
+  { id: 'road',         label: 'Road',            defaults: { ...size('regular'), font: 'heading', case: 'title' } },
+  { id: 'trail',        label: 'Trail, Pass',     defaults: { ...size('small'),   font: 'body',    case: 'title' } },
+  { id: 'wall',         label: 'Wall',            defaults: { ...size('regular'), font: 'heading', case: 'upper', letterSpacing: 2 } },
+  { id: 'river',        label: 'River',           defaults: { ...size('regular'), font: 'heading', italic: true, case: 'title' } },
+  { id: 'stream',       label: 'Stream',          defaults: { ...size('small'),   font: 'body',    italic: true, case: 'title' } },
+];
+
 export function findPreset(id) {
-  return TEXT_PRESETS.find(p => p.id === id) || PIN_PRESETS.find(p => p.id === id);
+  return TEXT_PRESETS.find(p => p.id === id)
+    || PIN_PRESETS.find(p => p.id === id)
+    || PATH_PRESETS.find(p => p.id === id);
 }
 
 export function defaultsForPreset(id) {

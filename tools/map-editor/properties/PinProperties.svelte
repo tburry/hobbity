@@ -3,7 +3,7 @@
 
   let {
     number = $bindable(''),
-    cls = $bindable('landmark'),
+    cls = $bindable('shop'),
     minZoom = $bindable(0),
     shrink = $bindable(false),
     labelPos = $bindable('n'),
@@ -66,6 +66,39 @@
     return parts.join('; ');
   }
 
+  // Single tooltip shared across icon-grid buttons. Rendered as a sibling
+  // (not inside the scrolling panel tree via position: fixed) and moved
+  // to document.body on mount so clipping ancestors don't hide it.
+  let tooltip = $state(null); // { preset, x, y, align }
+  let ttEl = $state(null);
+
+  function showTooltip(e, preset) {
+    const btn = e.currentTarget;
+    const r = btn.getBoundingClientRect();
+    // Measure after mount with reported label; reposition after paint.
+    tooltip = { preset, x: r.left + r.width / 2, y: r.top - 6, btnBottom: r.bottom };
+    queueMicrotask(() => {
+      if (!ttEl || !tooltip) return;
+      const tw = ttEl.offsetWidth;
+      const th = ttEl.offsetHeight;
+      const margin = 4;
+      let left = r.left + r.width / 2 - tw / 2;
+      left = Math.max(margin, Math.min(left, window.innerWidth - tw - margin));
+      let top = r.top - th - 6;
+      if (top < margin) top = r.bottom + 6;
+      tooltip = { ...tooltip, x: left, y: top, measured: true };
+    });
+  }
+
+  function hideTooltip() { tooltip = null; }
+
+  /** Portal action: move node to document.body so fixed-position escapes any
+   * transformed/filtered ancestor and sits above all other UI layers. */
+  function portal(node) {
+    document.body.appendChild(node);
+    return { destroy() { node.remove(); } };
+  }
+
   /** Color class so the global parchment-halo utilities apply, giving
    * the button text a readable glow against the accent background. */
   function classFor(p) {
@@ -96,16 +129,6 @@
       >{p.label}</button>
     {/each}
   </div>
-  <label>
-    Pin #
-    <input
-      type="text"
-      bind:value={number}
-      placeholder="(no number)"
-      autocomplete="off"
-      maxlength="3"
-    />
-  </label>
 {:else}
   <div class="icon-grid" role="radiogroup" aria-label="Marker type">
     {#each overworldPresets as p}
@@ -115,32 +138,50 @@
         aria-checked={cls === p.id}
         class:active={cls === p.id}
         onclick={() => cls = p.id}
+        aria-label={p.label}
+        onmouseenter={(e) => showTooltip(e, p)}
+        onmouseleave={hideTooltip}
+        onfocus={(e) => showTooltip(e, p)}
+        onblur={hideTooltip}
       >
         <span class="icon">{p.icon}</span>
-        <span class="tt" style={styleFor(p)}>{p.label}</span>
       </button>
     {/each}
   </div>
 {/if}
 
-<fieldset class="label-pos-field">
-  <legend>Label position</legend>
-  <div class="label-pos-grid" role="radiogroup" aria-label="Label position">
-    {#each LABEL_POSITIONS as p}
-      <button
-        type="button"
-        role="radio"
-        aria-checked={labelPos === p.id}
-        class="pos-dot pos-{p.id}"
-        class:active={labelPos === p.id}
-        title={p.title}
-        aria-label={p.title}
-        onclick={() => labelPos = p.id}
-      ></button>
-    {/each}
-    <span class="pos-center" aria-hidden="true"></span>
-  </div>
-</fieldset>
+<div class="pin-row">
+  {#if tab === 'town'}
+    <label class="pin-num">
+      Pin #
+      <input
+        type="text"
+        bind:value={number}
+        placeholder="(no number)"
+        autocomplete="off"
+        maxlength="3"
+      />
+    </label>
+  {/if}
+  <fieldset class="label-pos-field">
+    <legend>Label Align</legend>
+    <div class="label-pos-grid" role="radiogroup" aria-label="Label position">
+      {#each LABEL_POSITIONS as p}
+        <button
+          type="button"
+          role="radio"
+          aria-checked={labelPos === p.id}
+          class="pos-cell pos-{p.id}"
+          class:active={labelPos === p.id}
+          title={p.title}
+          aria-label={p.title}
+          onclick={() => labelPos = p.id}
+        ></button>
+      {/each}
+      <span class="pos-center" aria-hidden="true"></span>
+    </div>
+  </fieldset>
+</div>
 
 <label class="min-zoom-label">
   Min zoom
@@ -161,13 +202,42 @@
       class="shrink-toggle"
       class:active={shrink}
       aria-pressed={shrink}
-      title="Start at min size at min zoom and grow proportionally"
+      title="Start at base size at min zoom and grow proportionally"
       onclick={() => shrink = !shrink}
     >Shrink</button>
   </div>
 </label>
 
+{#if tooltip}
+  <div
+    use:portal
+    bind:this={ttEl}
+    class="preset-tt"
+    class:measured={tooltip.measured}
+    style="left: {tooltip.x}px; top: {tooltip.y}px;"
+  >
+    <span style={styleFor(tooltip.preset)}>{tooltip.preset.label}</span>
+  </div>
+{/if}
+
 <style>
+  /* Portaled to document.body, so scoped class names can't reach it. */
+  :global(.preset-tt) {
+    position: fixed;
+    padding: 0.3rem 0.6rem;
+    background: #faf6f0;
+    color: #3b2e1e;
+    border: 1px solid #5c4a32;
+    border-radius: 3px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 9999;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    opacity: 0;
+    transition: opacity 0.1s;
+  }
+  :global(.preset-tt.measured) { opacity: 1; }
+
   label { display: block; margin-bottom: 0.6rem; font-size: 0.85rem; }
   label input {
     display: block;
@@ -251,68 +321,54 @@
   .icon-grid button:hover { background: var(--panel-hover, rgba(0,0,0,0.06)); }
   .icon-grid button.active { background: var(--panel-accent, #c9a96e); color: #fff; border-color: var(--panel-accent, #c9a96e); }
 
-  /* HTML tooltip: renders the feature label in the class's font/style */
-  .tt {
-    position: absolute;
-    bottom: calc(100% + 6px);
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 0.3rem 0.6rem;
-    background: #faf6f0;
-    color: #3b2e1e;
-    border: 1px solid #5c4a32;
-    border-radius: 3px;
-    white-space: nowrap;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.1s;
-    z-index: 50;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-  }
-  .icon-grid button:hover .tt,
-  .icon-grid button:focus-visible .tt { opacity: 1; }
-
   /* Compass picker: 8 dots in a 3x3 grid around a central marker dot.
      Each button uses explicit grid placement so the cardinal/diagonal
      positions map naturally. */
+  .pin-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+  }
+  .pin-row .pin-num { margin-bottom: 0; width: 5.5rem; flex: 0 0 auto; }
+  .pin-row .pin-num input { width: 100%; }
+
   .label-pos-field {
     border: none;
     padding: 0;
-    margin: 0 0 0.6rem;
+    margin: 0;
     font-size: 0.85rem;
   }
   .label-pos-field legend {
     padding: 0;
-    margin-bottom: 0.35rem;
+    font: inherit;
+    margin-bottom: 0.2rem;
   }
   .label-pos-grid {
     display: grid;
     grid-template-columns: repeat(3, 22px);
     grid-template-rows: repeat(3, 22px);
-    gap: 4px;
-    justify-content: center;
-    align-content: center;
-    padding: 6px;
+    gap: 1px;
+    background: var(--panel-border, #5c4a32);
     border: 1px solid var(--panel-border, #5c4a32);
-    border-radius: 999px;
+    border-radius: 3px;
     width: fit-content;
-    margin: 0 auto;
     position: relative;
+    overflow: hidden;
   }
-  .label-pos-grid .pos-dot {
-    width: 18px;
-    height: 18px;
-    margin: 2px;
+  .label-pos-grid .pos-cell {
+    width: 22px;
+    height: 22px;
+    margin: 0;
     padding: 0;
-    border: 1px solid var(--panel-border, #5c4a32);
-    background: transparent;
-    border-radius: 50%;
+    border: none;
+    background: var(--panel-bg, #fff);
+    border-radius: 0;
     cursor: pointer;
   }
-  .label-pos-grid .pos-dot:hover { background: var(--panel-hover, rgba(0,0,0,0.06)); }
-  .label-pos-grid .pos-dot.active {
-    background: var(--panel-accent, #c9a96e);
-    border-color: var(--panel-accent, #c9a96e);
+  .label-pos-grid .pos-cell:hover { background: var(--panel-hover, rgba(0,0,0,0.06)); }
+  .label-pos-grid .pos-cell.active {
+    background: var(--panel-accent, #5c4a32);
   }
   .label-pos-grid .pos-nw { grid-column: 1; grid-row: 1; }
   .label-pos-grid .pos-n  { grid-column: 2; grid-row: 1; }
@@ -325,11 +381,11 @@
   .label-pos-grid .pos-center {
     grid-column: 2;
     grid-row: 2;
-    width: 10px;
-    height: 10px;
-    margin: auto;
-    background: var(--text, #3a332a);
-    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    background:
+      radial-gradient(circle, var(--text, #3a332a) 0 3px, transparent 3.5px) center / 100% 100% no-repeat,
+      var(--panel-bg, #fff);
     pointer-events: none;
   }
 

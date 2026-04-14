@@ -12,7 +12,7 @@ Standalone Svelte app for placing markers and labels on campaign maps. Runs via 
 ## Data
 
 - **Map images** live in `src/assets/images/maps/<slug>.webp`. The server auto-discovers them.
-- **Marker data** saved to `src/data/maps/<slug>.json`, sorted naturally by marker `number` (using `Intl.Collator` with `numeric: true`), with unnumbered entries at the end sorted by position. Pretty-printed, defaults omitted, no runtime `id` field — clean for source control.
+- **Map doc** saved to `src/data/maps/<slug>.json` as `{ meta, pins }`. `meta` holds map-level info (title, description, …). `pins` is sorted naturally by marker `number` (using `Intl.Collator` with `numeric: true`), with unnumbered entries at the end sorted by position. Pretty-printed, defaults omitted, no runtime `id` field — clean for source control. Consumed by both the editor and the Astro site's map viewer.
 - **Tiles** in `public/tiles/<slug>/` (gitignored). Regenerate with `pnpm tiles --all` when maps change.
 
 ## Toolbox

@@ -1,8 +1,8 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
-  import { TEXT_PRESETS, PIN_PRESETS, DEFAULT_MARKER_MIN_ZOOM } from './tools.js';
+  import { TEXT_PRESETS, PIN_PRESETS, PATH_PRESETS, DEFAULT_MARKER_MIN_ZOOM, KIND_DEFAULTS } from './tools.js';
 
-  let { width, height, imageUrl, tiles, initialZoom, minZoom = 0, maxZoom = 5, pins = [], editable = false, tool = null, ctx = null, selectedId = null, onviewchange, onwheel: onwheelcb } = $props();
+  let { width, height, imageUrl, tiles, initialZoom, fit = 'bounds', minZoom = 0, maxZoom = 5, pins = [], editable = false, tool = null, ctx = null, selectedId = null, onviewchange, onwheel: onwheelcb } = $props();
 
   // `tool` is the active tool module from tools.js. `ctx` is supplied by the
   // editor and exposes methods the tool can call to effect change (create,
@@ -32,6 +32,9 @@
   // stay visible and hoverable. Their *labels* follow the per-marker
   // `minZoom` (hidden when current zoom < minZoom).
   const MARKER_HIDE_ZOOM = 0.25;
+  // Below this zoom, numbered pins shrink to a 12px empty circle (no
+  // number) and labels collapse to sit closer to the smaller dot.
+  const PIN_SHRINK_ZOOM = 1.5;
   // Maximum distance (in CSS pixels) the viewport may pan past the edge
   // of the map image. Kept in sync with --map-padding in tokens.scss
   // (which the floating sidebar uses to size itself).
@@ -88,9 +91,13 @@
    * use PIN_PRESETS.
    */
   function resolvePreset(pin) {
-    const list = pin.number ? PIN_PRESETS : TEXT_PRESETS;
-    // Pins without a class fall back to 'shop'.
-    const id = pin.class || (pin.number ? 'shop' : null);
+    let list;
+    if (pin.kind === 'path') list = PATH_PRESETS;
+    else if (pin.number) list = PIN_PRESETS;
+    else list = TEXT_PRESETS;
+    // Sensible fallbacks per kind.
+    const fallback = pin.kind === 'path' ? 'river' : (pin.number ? 'shop' : null);
+    const id = pin.class || fallback;
     if (!id) return null;
     return list.find(p => p.id === id)?.defaults;
   }
@@ -105,11 +112,11 @@
     // is always MOBILE_MIN_PX (16px).
     const spec = resolvePreset(pin) ?? PIN_LABEL_SIZE;
 
-    // Shrink mode: pin the size to `min` at the feature's min-zoom and
+    // Shrink mode: pin the size to `base` at the feature's min-zoom and
     // scale up from there (doubling per zoom level), clamped to max.
     // Default mode: scale from `base` at REF_ZOOM, clamped to [min, max].
-    const baseSize = pin.shrink ? (spec.min ?? spec.base) : spec.base;
     const pivot = pin.shrink ? (pin.minZoom ?? REF_ZOOM) : REF_ZOOM;
+    const baseSize = spec.base;
     const scale = Math.pow(2, z - pivot);
     const raw = baseSize * scale;
     const min = isMobileView ? Math.max(MOBILE_MIN_PX, spec.min ?? 0) : (spec.min ?? 0);
@@ -118,18 +125,126 @@
   }
 
 
-  function makeIcon(pin, currentZoom) {
-    const isLabel = !pin.number;
-
-    function extraStyles(s) {
-      const parts = [];
-      if (s.case && s.case !== 'none') {
-        const tx = s.case === 'upper' ? 'uppercase' : s.case === 'lower' ? 'lowercase' : 'capitalize';
-        parts.push(`text-transform: ${tx}`);
-      }
-      if (s.letterSpacing) parts.push(`letter-spacing: ${s.letterSpacing}px`);
-      return parts.join('; ');
+  function extraStyles(s) {
+    const parts = [];
+    if (s.case && s.case !== 'none') {
+      const tx = s.case === 'upper' ? 'uppercase' : s.case === 'lower' ? 'lowercase' : 'capitalize';
+      parts.push(`text-transform: ${tx}`);
     }
+    if (s.letterSpacing) parts.push(`letter-spacing: ${s.letterSpacing}px`);
+    return parts.join('; ');
+  }
+
+  /** Path feature: text flowing along an invisible curve from A to B.
+   * `mode: 'bezier'` adds a cubic curve via two tangent control points. */
+  function makePathIcon(pin, currentZoom) {
+    const z = currentZoom ?? map?.getZoom() ?? REF_ZOOM;
+    const zoomScale = map?.options?.crs?.scale ? map.options.crs.scale(z) : Math.pow(2, z);
+
+    const s = resolvePreset(pin) || {};
+    const font = FONTS[s.font] || FONTS.body;
+    const fontSize = computeFontSize(pin, currentZoom);
+    const weight = String(s.weight ?? (s.bold ? 700 : 400));
+    const style = s.italic ? 'italic' : 'normal';
+    const extra = extraStyles(s);
+    const sizeClass = s.sizeClass || 'text-base';
+    const colorClass = s.colorClass || 'text-black';
+
+    const a = pin.a || [pin.x, pin.y];
+    const b = pin.b || [pin.x, pin.y];
+    const useBezier = pin.mode === 'bezier';
+    const cpA = pin.cpA || a;
+    const cpB = pin.cpB || b;
+
+    // Image-pixel bbox covering endpoints + (when bezier) tangent points.
+    // Pad by ~1.5 × font cap-height in image px so descenders/ascenders
+    // don't clip when text sits above/below the curve.
+    const pts = useBezier ? [a, b, cpA, cpB] : [a, b];
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    for (const p of pts) {
+      if (p[0] < minX) minX = p[0];
+      if (p[0] > maxX) maxX = p[0];
+      if (p[1] < minY) minY = p[1];
+      if (p[1] > maxY) maxY = p[1];
+    }
+    const padImg = (fontSize * 1.5) / zoomScale;
+    minX -= padImg; maxX += padImg;
+    minY -= padImg; maxY += padImg;
+
+    const cssW = (maxX - minX) * zoomScale;
+    const cssH = (maxY - minY) * zoomScale;
+    const px = (p) => [(p[0] - minX) * zoomScale, (p[1] - minY) * zoomScale];
+    const [Ax, Ay] = px(a);
+    const [Bx, By] = px(b);
+    // Build the path d. When `flip` is true we reverse the curve's
+    // direction so the text renders on the opposite side (SVG 2's
+    // `textPath side="right"` would be simpler but has patchy browser
+    // support — reversing the path works everywhere).
+    const flip = !!pin.flip;
+    const fmt = (n) => n.toFixed(1);
+    const d = useBezier
+      ? (() => {
+          const [cax, cay] = px(cpA);
+          const [cbx, cby] = px(cpB);
+          return flip
+            ? `M ${fmt(Bx)} ${fmt(By)} C ${fmt(cbx)} ${fmt(cby)} ${fmt(cax)} ${fmt(cay)} ${fmt(Ax)} ${fmt(Ay)}`
+            : `M ${fmt(Ax)} ${fmt(Ay)} C ${fmt(cax)} ${fmt(cay)} ${fmt(cbx)} ${fmt(cby)} ${fmt(Bx)} ${fmt(By)}`;
+        })()
+      : flip
+        ? `M ${fmt(Bx)} ${fmt(By)} L ${fmt(Ax)} ${fmt(Ay)}`
+        : `M ${fmt(Ax)} ${fmt(Ay)} L ${fmt(Bx)} ${fmt(By)}`;
+
+    // Text alignment stays visually consistent across flip by swapping
+    // left/right when the path direction is reversed.
+    const rawAlign = pin.textAlign || 'center';
+    const align = flip && rawAlign === 'left' ? 'right' : flip && rawAlign === 'right' ? 'left' : rawAlign;
+    const startOffset = align === 'left' ? '0%' : align === 'right' ? '100%' : '50%';
+    const textAnchor = align === 'left' ? 'start' : align === 'right' ? 'end' : 'middle';
+    const pathId = `path-${pin.id}`;
+
+    const isSelected = pin.id === selectedId;
+    // Selected paths always render (so the user can see what they're
+    // editing); non-selected ones hide below their minZoom threshold.
+    const labelHidden = !isSelected && z < (pin.minZoom ?? KIND_DEFAULTS.path?.minZoom ?? 0);
+    const textStyle = `font-family: ${font}; font-size: ${fontSize.toFixed(1)}px; font-weight: ${weight}; font-style: ${style}; ${extra}`;
+
+    let handles = '';
+    if (isSelected) {
+      handles += `<div class="path-handle path-endpoint" data-path-handle="a" data-pin-id="${pin.id}" style="left:${Ax.toFixed(1)}px;top:${Ay.toFixed(1)}px"></div>`;
+      handles += `<div class="path-handle path-endpoint" data-path-handle="b" data-pin-id="${pin.id}" style="left:${Bx.toFixed(1)}px;top:${By.toFixed(1)}px"></div>`;
+      if (useBezier) {
+        const [cax, cay] = px(cpA);
+        const [cbx, cby] = px(cpB);
+        handles += `<svg class="path-guides" width="${cssW}" height="${cssH}" viewBox="0 0 ${cssW} ${cssH}"><line x1="${Ax.toFixed(1)}" y1="${Ay.toFixed(1)}" x2="${cax.toFixed(1)}" y2="${cay.toFixed(1)}"/><line x1="${Bx.toFixed(1)}" y1="${By.toFixed(1)}" x2="${cbx.toFixed(1)}" y2="${cby.toFixed(1)}"/></svg>`;
+        handles += `<div class="path-handle path-control" data-path-handle="cpA" data-pin-id="${pin.id}" style="left:${cax.toFixed(1)}px;top:${cay.toFixed(1)}px"></div>`;
+        handles += `<div class="path-handle path-control" data-path-handle="cpB" data-pin-id="${pin.id}" style="left:${cbx.toFixed(1)}px;top:${cby.toFixed(1)}px"></div>`;
+      }
+    }
+
+    const selClass = isSelected ? ' selected' : '';
+    const hiddenClass = labelHidden ? ' label-hidden' : '';
+    // When selected, draw the curve itself (in addition to the invisible
+    // copy in <defs> that the text flows along) so the user can see the
+    // geometry they're editing. Non-selected paths render text only.
+    const visibleStroke = isSelected
+      ? `<path class="path-stroke" d="${d}" fill="none"/>`
+      : '';
+    const html = `<div class="map-path${selClass}${hiddenClass}" data-pin-id="${pin.id}"><svg class="path-text" width="${cssW}" height="${cssH}" viewBox="0 0 ${cssW} ${cssH}"><defs><path id="${pathId}" d="${d}" fill="none"/></defs>${visibleStroke}<text class="${sizeClass} ${colorClass}" text-anchor="${textAnchor}" style="${textStyle}"><textPath href="#${pathId}" startOffset="${startOffset}">${esc(pin.name)}</textPath></text></svg>${handles}</div>`;
+
+    // Marker sits at A; iconAnchor positions A within the CSS-pixel bbox.
+    const anchorX = (a[0] - minX) * zoomScale;
+    const anchorY = (a[1] - minY) * zoomScale;
+    return L.divIcon({
+      className: '',
+      html,
+      iconSize: [cssW, cssH],
+      iconAnchor: [anchorX, anchorY],
+    });
+  }
+
+  function makeIcon(pin, currentZoom) {
+    if (pin.kind === 'path') return makePathIcon(pin, currentZoom);
+    const isLabel = !pin.number;
 
     if (isLabel) {
       // Hide text feature when map zoom is below its min-zoom threshold.
@@ -221,9 +336,16 @@
 
   function addMarker(pin) {
     if (!map) return;
-    const marker = L.marker([pin.y, pin.x], {
+    // Paths are manipulated via their endpoint handles, not by dragging
+    // the whole marker — otherwise the two gestures would conflict.
+    const isPath = pin.kind === 'path';
+    // Paths anchor at endpoint A. The editor mirrors a→x,y on load for
+    // its own bookkeeping, but the Astro site passes raw JSON, so
+    // derive the latlng here so both callers work.
+    const [lng, lat] = isPath && Array.isArray(pin.a) ? pin.a : [pin.x, pin.y];
+    const marker = L.marker([lat, lng], {
       icon: makeIcon(pin, map?.getZoom()),
-      draggable: editable && selectable,
+      draggable: editable && selectable && !isPath,
       interactive: editable,
     }).addTo(map);
 
@@ -251,19 +373,26 @@
     const marker = markerMap.get(pin.id);
     if (!marker) return;
     marker.setIcon(makeIcon(pin, map?.getZoom()));
-    marker.setLatLng([pin.y, pin.x]);
+    const [lng, lat] = pin.kind === 'path' && Array.isArray(pin.a) ? pin.a : [pin.x, pin.y];
+    marker.setLatLng([lat, lng]);
   }
 
   export function panTo(pin) {
     if (!map) return;
-    map.setView([pin.y, pin.x], map.getZoom());
+    // Fall back to KIND_DEFAULTS when a pin hasn't stored its own
+    // minZoom (the editor omits defaults from saved JSON, so most pins
+    // arrive without a literal minZoom field).
+    const minZ = pin.minZoom ?? KIND_DEFAULTS[pin.kind]?.minZoom ?? 0;
+    const cur = map.getZoom();
+    const [lng, lat] = pin.kind === 'path' && Array.isArray(pin.a) ? pin.a : [pin.x, pin.y];
+    map.setView([lat, lng], Math.max(cur, minZ));
   }
 
   function updateLabelClasses() {
     if (!map) return;
     const z = map.getZoom();
     const c = map.getContainer().classList;
-    const isLow = z < 2;
+    const isLow = z < PIN_SHRINK_ZOOM;
     c.toggle('zoom-low', isLow);
     c.toggle('zoom-high', z >= 3);
   }
@@ -274,6 +403,7 @@
 
   // --- Rect preview (for Text tool drag) ---
   let rectPreview = null;
+  let linePreview = null;
 
   // Re-render the previously-selected and newly-selected pin icons so
   // the resize handles appear/disappear correctly. Also bump the selected
@@ -314,12 +444,35 @@
     if (rectPreview) { rectPreview.remove(); rectPreview = null; }
   }
 
+  /** Path-tool line preview: a thin polyline shown while the user is
+   * dragging from start to end. Replaced by the real path feature on
+   * mouseup via `ctx.create`. */
+  function showLinePreview(a, b) {
+    if (!map) return;
+    const latlngs = [a, b];
+    if (linePreview) linePreview.setLatLngs(latlngs);
+    else {
+      linePreview = L.polyline(latlngs, {
+        color: '#c9a96e',
+        weight: 2,
+        dashArray: '4 4',
+        interactive: false,
+      }).addTo(map);
+    }
+  }
+
+  function hideLinePreview() {
+    if (linePreview) { linePreview.remove(); linePreview = null; }
+  }
+
   /** Merge editor-supplied ctx with MapViewer's map helpers. */
   function toolCtx() {
     return {
       ...(ctx || {}),
       showRect: showRectPreview,
       hideRect: hideRectPreview,
+      showLine: showLinePreview,
+      hideLine: hideLinePreview,
       alert: (msg) => window.alert(msg),
     };
   }
@@ -338,6 +491,7 @@
    */
   let draggingFromMap = false;
   let resizing = null; // { pinId, handle, startX, startY, origX, origY, origW, origH }
+  let pathDragging = null; // { pinId, which, startX, startY, origX, origY }
   let rightPan = null; // { startX, startY }
 
   function applyResize(e) {
@@ -361,6 +515,20 @@
     if (w < MIN) w = MIN;
     if (h < MIN) h = MIN;
     ctx?.resize?.(pin, Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+  }
+
+  /** Translate mouse delta into image pixels and push the new position
+   * of a path endpoint or bezier control point to the editor. */
+  function applyPathDrag(e) {
+    if (!pathDragging || !map) return;
+    const pin = pins.find(p => p.id === pathDragging.pinId);
+    if (!pin) return;
+    const scale = map.options.crs.scale(map.getZoom());
+    const dx = (e.clientX - pathDragging.startX) / scale;
+    const dy = (e.clientY - pathDragging.startY) / scale;
+    const x = Math.round(pathDragging.origX + dx);
+    const y = Math.round(pathDragging.origY + dy);
+    ctx?.updatePathPoint?.(pin, pathDragging.which, x, y);
   }
 
   /** Right-click pan — works in both edit and view modes. */
@@ -419,6 +587,30 @@
           return;
         }
       }
+      // Path endpoint / bezier control-point drag
+      const pathHandle = e.target.closest('.path-handle');
+      if (pathHandle && e.button === 0) {
+        const pinId = pathHandle.dataset.pinId;
+        const pin = pins.find(p => p.id === pinId);
+        const which = pathHandle.dataset.pathHandle;
+        if (pin && which) {
+          const orig = pin[which] || [pin.x, pin.y];
+          e.preventDefault();
+          e.stopPropagation();
+          pathDragging = {
+            pinId,
+            which,
+            startX: e.clientX,
+            startY: e.clientY,
+            origX: orig[0],
+            origY: orig[1],
+          };
+          // Hide the cursor while the drag is in flight — the handle is
+          // pinned to the mouse so the cursor glyph just adds clutter.
+          container.classList.add('path-dragging');
+          return;
+        }
+      }
       if (!tool?.onMapDown) return;
       if (e.button !== 0) return;
       // Don't intercept clicks on markers (they have their own handlers)
@@ -436,6 +628,12 @@
         applyResize(e);
         return;
       }
+      if (pathDragging) {
+        e.preventDefault();
+        e.stopPropagation();
+        applyPathDrag(e);
+        return;
+      }
       if (!draggingFromMap || !tool?.onMapMove) return;
       dispatch('onMapMove', e, map.mouseEventToLatLng(e));
     }, true);
@@ -446,6 +644,16 @@
         e.stopPropagation();
         ctx?.commit?.();
         resizing = null;
+        suppressNextClick = true;
+        setTimeout(() => { suppressNextClick = false; }, 300);
+        return;
+      }
+      if (pathDragging) {
+        e.preventDefault();
+        e.stopPropagation();
+        ctx?.commit?.();
+        pathDragging = null;
+        container.classList.remove('path-dragging');
         suppressNextClick = true;
         setTimeout(() => { suppressNextClick = false; }, 300);
         return;
@@ -550,7 +758,12 @@
           const rows = Math.ceil(height * scale / ts);
           const x = coords.x;
           const y = coords.y;
-          if (x < 0 || x >= cols || y < 0 || y >= rows) return '';
+          // Empty `src` produces a broken-image placeholder in some
+          // browsers (visible as little dark marks against a dark
+          // backdrop). Return a 1×1 transparent PNG instead.
+          if (x < 0 || x >= cols || y < 0 || y >= rows) {
+            return 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+          }
           return `${tiles.basePath}/${z}/${x}/${y}.webp`;
         },
       });
@@ -578,12 +791,27 @@
     }
 
     // Constrain panning to the image plus MAP_PADDING (CSS px) on every
-    // side. Since our CRS's lat/lng units are image pixels, convert the
-    // CSS-px pad through the current scale, and keep it in sync as the
-    // user zooms (where 1 image-px covers a different amount of screen).
-    map.options.maxBoundsViscosity = 1.0;
+    // side. Viscosity 0 lets the user pan past the bounds freely; we
+    // animate back once the gesture stops (iOS-style rubber band).
+    map.options.maxBoundsViscosity = 0;
     updateMaxBounds();
     map.on('zoomend', updateMaxBounds);
+
+    // Snap back to bounds after the user stops panning (drag end or
+    // a quiet period after the last trackpad/wheel event).
+    let snapBackTimer = null;
+    function scheduleSnapBack(delay = 180) {
+      if (snapBackTimer) clearTimeout(snapBackTimer);
+      snapBackTimer = setTimeout(() => {
+        snapBackTimer = null;
+        const b = map.options.maxBounds;
+        if (!b) return;
+        const c = map.getCenter();
+        const target = L.latLngBounds(b).contains(c) ? null : map._limitCenter(c, map.getZoom(), b);
+        if (target && !target.equals(c)) map.panTo(target, { animate: true, duration: 0.25 });
+      }, delay);
+    }
+    map.on('dragend', () => scheduleSnapBack(0));
 
     // Gold border traced around the image's bounds so the frame hugs
     // the tiles rather than the map container (which may be larger
@@ -608,6 +836,14 @@
     map.zoomOut = function() {
       this.setZoom(Math.ceil(this.getZoom() - 1e-9) - 1);
     };
+
+    // Leaflet's zoom controls are <a href="#"> elements, which flash
+    // "#" in the browser status bar on hover. Drop the href so the
+    // anchors still behave as buttons but the URL tooltip goes away.
+    for (const a of mapEl.querySelectorAll('.leaflet-control-zoom a')) {
+      a.removeAttribute('href');
+      a.setAttribute('role', 'button');
+    }
 
     function emitView() {
       const c = map.getCenter();
@@ -664,13 +900,21 @@
     mapEl.addEventListener('wheel', (e) => {
       e.preventDefault();
       if (e.ctrlKey) {
-        // Pinch gesture — zoom around the cursor
-        const zoom = map.getZoom() - e.deltaY * 0.5;
+        // Pinch gesture — zoom around the cursor. Browsers sometimes deliver
+        // a large initial deltaY at the start of a pinch; cap the per-event
+        // delta so the first event can't produce a huge zoom jump.
+        const raw = -e.deltaY * 0.05;
+        const delta = Math.max(-0.25, Math.min(0.25, raw));
+        const zoom = map.getZoom() + delta;
         const clamped = Math.max(minZoom, Math.min(maxZoom, zoom));
         map.setZoomAround(map.mouseEventToContainerPoint(e), clamped, { animate: false });
       } else if (isTrackpad(e)) {
-        // Trackpad scroll — pan
-        map.panBy([e.deltaX, e.deltaY], { animate: false });
+        // Trackpad scroll — pan. Amplify deltas as the user zooms out
+        // so the visible map keeps moving at a comfortable rate instead
+        // of crawling when the whole image fits the viewport.
+        const mult = Math.pow(2, Math.max(0, maxZoom - map.getZoom()));
+        map.panBy([e.deltaX * mult, e.deltaY * mult], { animate: false });
+        scheduleSnapBack();
       } else {
         // Mouse wheel — zoom around the cursor
         const zoom = map.getZoom() - e.deltaY * 0.01;
@@ -681,6 +925,18 @@
 
     if (initialZoom != null) {
       map.setView([height / 2, width / 2], initialZoom);
+    } else if (fit === 'height') {
+      // Fit the map's full height to the viewport; horizontal overflow
+      // is fine (user pans to see the sides). Used on mobile so the
+      // map reads as a tall portrait strip rather than squeezed to fit.
+      const size = map.getSize();
+      const ts = tiles ? tiles.tileSize : 1;
+      const maxDim = Math.max(width, height);
+      const z = tiles
+        ? Math.log2((size.y * maxDim) / (height * ts))
+        : Math.log2(size.y / height);
+      const clamped = Math.max(minZoom, Math.min(maxZoom, z));
+      map.setView([height / 2, width / 2], clamped);
     } else {
       map.fitBounds(bounds);
     }
@@ -714,6 +970,10 @@
     &:global(.tool-path) { cursor: crosshair !important; }
     &:global(.tool-select) { cursor: default !important; }
     &:global(.right-panning) { cursor: grabbing !important; }
+    // Cursor is hidden while dragging a path handle — the handle glyph
+    // tracks the mouse so the arrow would just add visual noise.
+    &:global(.path-dragging),
+    &:global(.path-dragging *) { cursor: none !important; }
 
     &:global(.tool-select) {
       :global(.map-pin),
@@ -821,10 +1081,10 @@
       .map-pin.label-pos-s  > .map-pin-label { top: 100%;    bottom: auto; left: 50%;  right: auto; transform: translateX(-50%);  margin: -2px 0 0 0; }
       .map-pin.label-pos-e  > .map-pin-label { top: 50%;     bottom: auto; left: 100%; right: auto; transform: translateY(-50%);  margin: 0 0 0 2px; }
       .map-pin.label-pos-w  > .map-pin-label { top: 50%;     bottom: auto; right: 100%; left: auto; transform: translateY(-50%);  margin: 0 2px 0 0; }
-      .map-pin.label-pos-ne > .map-pin-label { bottom: 100%; top: auto; left: 100%; right: auto; transform: none; margin: 0 0 0 2px; }
-      .map-pin.label-pos-nw > .map-pin-label { bottom: 100%; top: auto; right: 100%; left: auto; transform: none; margin: 0 2px 0 0; }
-      .map-pin.label-pos-se > .map-pin-label { top: 100%;    bottom: auto; left: 100%; right: auto; transform: none; margin: 2px 0 0 0; }
-      .map-pin.label-pos-sw > .map-pin-label { top: 100%;    bottom: auto; right: 100%; left: auto; transform: none; margin: 2px 0 0 0; }
+      .map-pin.label-pos-ne > .map-pin-label { bottom: 100%; top: auto; left: 100%; right: auto; transform: none; margin: -4px 0 0 -6px; }
+      .map-pin.label-pos-nw > .map-pin-label { bottom: 100%; top: auto; right: 100%; left: auto; transform: none; margin: -4px -6px 0 0; }
+      .map-pin.label-pos-se > .map-pin-label { top: 100%;    bottom: auto; left: 100%; right: auto; transform: none; margin: -4px 0 0 -6px; }
+      .map-pin.label-pos-sw > .map-pin-label { top: 100%;    bottom: auto; right: 100%; left: auto; transform: none; margin: -4px -6px 0 0; }
       // Short is the default-visible variant; the `.label-hidden` gate
       // on `.map-pin` overrides this when zoom < minZoom.
       .map-pin-label-short { display: block; }
@@ -847,25 +1107,6 @@
       // long label doesn't get clipped by neighbouring markers.
       .leaflet-marker-icon:has(.map-pin:hover) { z-index: 1000 !important; }
 
-      // --- Low-zoom adjustments ---------------------------------------
-      .zoom-low {
-        .map-pin-number {
-          width: 12px;
-          height: 12px;
-          border-width: 1.5px;
-          font-size: 0;
-        }
-        // Shrunken circle sits ~6px smaller on every side; tighten the
-        // label-to-pin gap in whichever direction the label is anchored.
-        .map-pin.label-pos-n  > .map-pin-label,
-        .map-pin.label-pos-ne > .map-pin-label,
-        .map-pin.label-pos-nw > .map-pin-label { margin-bottom: -8px; }
-        .map-pin.label-pos-s  > .map-pin-label,
-        .map-pin.label-pos-se > .map-pin-label,
-        .map-pin.label-pos-sw > .map-pin-label { margin-top: -8px; }
-        .map-pin.label-pos-e  > .map-pin-label { margin-left: -8px; }
-        .map-pin.label-pos-w  > .map-pin-label { margin-right: -8px; }
-      }
 
       // --- Text-feature bounding box + resize handles -----------------
       // The wrapper itself is transparent to events; only the text span
@@ -910,9 +1151,129 @@
       .handle-sw { bottom: -5px; left: -5px;    cursor: nesw-resize; }
       .handle-w  { top: 50%;     left: -5px;    transform: translateY(-50%); cursor: ew-resize; }
 
+      // --- Path features ---------------------------------------------
+      // The wrapper lets text escape its bbox via `overflow: visible` so
+      // ascenders/descenders aren't clipped. Clicks pass through except
+      // on the text and the edit handles.
+      .leaflet-marker-icon:has(.map-path) { pointer-events: none !important; }
+      .leaflet-marker-icon:has(.map-path.selected) { pointer-events: auto !important; }
+      .map-path {
+        position: relative;
+        pointer-events: none;
+        width: 100%;
+        height: 100%;
+      }
+      .map-path.label-hidden .path-text { display: none; }
+      .map-path .path-text {
+        position: absolute;
+        inset: 0;
+        overflow: visible;
+        pointer-events: none;
+      }
+      // Unselected paths show a pointer (click-to-select); selected
+      // paths switch to the text-tool's move cursor while the user is
+      // editing the geometry via handles.
+      .map-path .path-text text { cursor: pointer; pointer-events: auto; }
+      .map-path.selected .path-text text { cursor: move; }
+      // Visible curve overlay, rendered only when the path is selected.
+      .map-path .path-text .path-stroke {
+        stroke: var(--accent, #6b3a2a);
+        stroke-width: 1;
+        stroke-dasharray: 4 3;
+        pointer-events: none;
+      }
+      .map-path .path-guides {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: visible;
+        // Sit behind the handles so lines don't paint over the
+        // endpoint squares or control-point dots.
+        z-index: 1;
+      }
+      .map-path .path-guides line {
+        stroke: var(--accent, #6b3a2a);
+        stroke-dasharray: 3 3;
+        stroke-width: 1;
+      }
+      // Raise handles above the SVG text (which lives in the same
+      // stacking context) so clicks on a handle that visually overlaps
+      // a glyph go to the handle, not the text.
+      .path-handle {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        margin-left: -6px;
+        margin-top: -6px;
+        background: #fff;
+        border: 2px solid var(--accent, #6b3a2a);
+        box-sizing: border-box;
+        z-index: 100;
+        pointer-events: auto;
+        cursor: pointer;
+      }
+      .path-handle.path-endpoint { border-radius: 2px; }
+      .path-handle.path-control {
+        border-radius: 50%;
+        background: var(--panel-accent, #c9a96e);
+      }
+
       // --- Tile rendering --------------------------------------------
       .leaflet-tile-container { will-change: transform; }
-      .leaflet-tile { outline: 1px solid transparent; }
+      // Global `img` styles round corners; that pinches every tile and
+      // shows the dark backdrop through the gaps at tile junctions.
+      .leaflet-tile { outline: 1px solid transparent; border-radius: 0 !important; }
+
+      // Zoom controls themed to the site: parchment background, gold
+      // border, Lora text. Rounded on the outer corners only so the
+      // two buttons read as one stacked control.
+      .leaflet-control-zoom {
+        border: none !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
+        border-radius: var(--border-radius, 5px);
+        overflow: hidden;
+      }
+      .leaflet-control-zoom a,
+      .leaflet-control-zoom a:hover {
+        cursor: pointer;
+        font-family: var(--body-font, 'Lora', serif);
+        background: var(--bg, #faf6f0);
+        color: var(--text, #3a332a);
+        border: var(--border-width, 2px) solid var(--border, #c9a96e);
+        border-radius: 0;
+      }
+      .leaflet-control-zoom a + a,
+      .leaflet-control-zoom a + a:hover { border-top: none; }
+      .leaflet-control-zoom a:first-child {
+        border-top-left-radius: var(--border-radius, 5px);
+        border-top-right-radius: var(--border-radius, 5px);
+      }
+      .leaflet-control-zoom a:last-child {
+        border-bottom-left-radius: var(--border-radius, 5px);
+        border-bottom-right-radius: var(--border-radius, 5px);
+      }
+      .leaflet-control-zoom a:hover { background: var(--accent-bg, #f3ece0); }
+    }
+
+    // Low-zoom adjustments. The .zoom-low class lives on .map-container
+    // itself (not a descendant), so we have to compound the selector
+    // rather than nest. Tighten the label-to-pin gap to follow the
+    // shrunken circle (~6px smaller on every side).
+    &:global(.zoom-low) {
+      :global(.map-pin-number) {
+        width: 12px;
+        height: 12px;
+        border-width: 1.5px;
+        font-size: 0;
+      }
+      :global(.map-pin.label-pos-n  > .map-pin-label),
+      :global(.map-pin.label-pos-ne > .map-pin-label),
+      :global(.map-pin.label-pos-nw > .map-pin-label) { margin-bottom: -8px; }
+      :global(.map-pin.label-pos-s  > .map-pin-label),
+      :global(.map-pin.label-pos-se > .map-pin-label),
+      :global(.map-pin.label-pos-sw > .map-pin-label) { margin-top: -8px; }
+      :global(.map-pin.label-pos-e  > .map-pin-label) { margin-left: -8px; }
+      :global(.map-pin.label-pos-w  > .map-pin-label) { margin-right: -8px; }
     }
   }
 </style>

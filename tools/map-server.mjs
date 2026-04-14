@@ -4,11 +4,11 @@
  *
  * - Vite dev server (middleware mode) for the Svelte app with HMR
  * - GET  /api/maps         → map manifest (auto-scanned from images/maps/)
- * - GET  /api/pins/:slug   → pin data for a map
- * - PUT  /api/pins/:slug   → save pin data for a map
+ * - GET  /api/map/:slug    → full map doc: { meta, pins }
+ * - PUT  /api/map/:slug    → save full map doc
  * - /maps/*                → map images from src/assets/images/maps/
  *
- * Pin files: src/data/maps/{slug}.json
+ * Map files: src/data/maps/{slug}.json — shape: { meta: {...}, pins: [...] }
  *
  * Usage: node tools/map-server.mjs [--port=8321]
  */
@@ -111,15 +111,15 @@ const server = createHttpServer(async (req, res) => {
     return;
   }
 
-  // API: pin data
-  const pinMatch = path.match(/^\/api\/pins\/([a-z0-9-]+)$/);
-  if (pinMatch) {
-    const slug = pinMatch[1];
-    const pinFile = join(PINS_DIR, `${slug}.json`);
+  // API: full map doc ({ meta, pins })
+  const mapMatch = path.match(/^\/api\/map\/([a-z0-9-]+)$/);
+  if (mapMatch) {
+    const slug = mapMatch[1];
+    const mapFile = join(PINS_DIR, `${slug}.json`);
 
     if (req.method === 'GET') {
-      let data = '[]';
-      try { data = await readFile(pinFile, 'utf8'); } catch {}
+      let data = '{"meta":{},"pins":[]}';
+      try { data = await readFile(mapFile, 'utf8'); } catch {}
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(data);
       return;
@@ -129,12 +129,15 @@ const server = createHttpServer(async (req, res) => {
       const chunks = [];
       for await (const chunk of req) chunks.push(chunk);
       const body = Buffer.concat(chunks).toString();
-      try { JSON.parse(body); } catch {
+      try {
+        const parsed = JSON.parse(body);
+        if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) throw new Error('shape');
+      } catch {
         res.writeHead(400, { 'Content-Type': 'application/json' });
-        res.end('{"error":"Invalid JSON"}');
+        res.end('{"error":"Invalid JSON — expected { meta, pins }"}');
         return;
       }
-      await writeFile(pinFile, body + '\n');
+      await writeFile(mapFile, body + '\n');
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end('{"ok":true}');
       return;

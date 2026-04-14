@@ -1,27 +1,43 @@
 <script>
   import MapViewer from '../../src/components/map/MapViewer.svelte';
-  import { TOOL_LIST, TOOLS, DEFAULT_MARKER_MIN_ZOOM, findPreset } from '../../src/components/map/tools.js';
+  import { TOOL_LIST, TOOLS, KIND_DEFAULTS, findPreset } from '../../src/components/map/tools.js';
 
-  /** Bucket a pin for the sidebar list:
-   *   0 = numbered marker, 1 = overworld glyph marker, 2 = text / freeform.
-   * Numbered markers lead, overworld follow, text features last. Within
-   * each bucket the natural-sort key is `number` for bucket 0 and
-   * `name` for the others. */
+  /** Bucket a feature for list + save sort:
+   *   0 = map title(s) — pinned to the very top so the header lands first
+   *   1 = numbered town marker (sort by number, then name)
+   *   2 = overworld glyph marker (sort by name)
+   *   3 = text / path / anything else (sort by name)
+   * Class first so an overworld marker with a stray number still bucks
+   * into the overworld group. */
   function markerBucket(pin) {
-    // Class first: overworld markers belong in their own bucket even
-    // if someone set a number on them.
+    if (pin.class === 'map-title') return 0;
     const preset = findPreset(pin.class);
-    if (preset?.category === 'overworld') return 1;
-    if (pin.number) return 0;
-    return 2;
+    if (preset?.category === 'overworld') return 2;
+    if (pin.number) return 1;
+    return 3;
   }
-  const listMarkers = $derived([...pins].sort((a, b) => {
+
+  /** Sort key for name-based comparisons. Ignores leading "The " /
+   * "A " so "The Old Gate" files next to "Old Gate". Case-insensitive. */
+  function nameSortKey(name) {
+    return String(name || '').replace(/^\s*(the|a)\s+/i, '').toLowerCase();
+  }
+
+  /** Total order over features used by both the sidebar list and the
+   * saved JSON. Same rules everywhere so source control stays clean. */
+  function compareFeatures(a, b) {
     const ba = markerBucket(a);
     const bb = markerBucket(b);
     if (ba !== bb) return ba - bb;
-    const key = ba === 0 ? 'number' : 'name';
-    return natCollator.compare(String(a[key] || ''), String(b[key] || ''));
-  }));
+    // Numbered-town bucket sorts by number first, then name.
+    if (ba === 1) {
+      const byNumber = natCollator.compare(String(a.number || ''), String(b.number || ''));
+      if (byNumber !== 0) return byNumber;
+    }
+    return natCollator.compare(nameSortKey(a.name), nameSortKey(b.name));
+  }
+
+  const listMarkers = $derived([...pins].sort(compareFeatures));
 
   /** Derive Tailwind-style utility classes from a marker's preset so the
    * sidebar row visually matches how the label renders on the map.
@@ -45,10 +61,15 @@
   }
   import PinProperties from './properties/PinProperties.svelte';
   import TextProperties from './properties/TextProperties.svelte';
+  import PathProperties from './properties/PathProperties.svelte';
+  import MapProperties from './properties/MapProperties.svelte';
 
   let maps = $state([]);
   let currentMap = $state(null);
   let pins = $state([]);
+  /** Per-map document metadata (title, description, etc.). Persisted at
+   * `src/data/maps/<slug>.json` alongside pins under the `meta` key. */
+  let mapMeta = $state({});
   // Edit mode = full editor (toolbox, sidebar, click-to-edit). View mode
   // = read-only preview that mirrors what the site viewer will show.
   let mode = $state(localStorage.getItem('map-editor:mode') || 'edit');
@@ -84,6 +105,12 @@
   let pinMinZoom = $state(1);
   let pinLabelPos = $state('n'); // marker label position: n/ne/e/se/s/sw/w/nw
   let pinShrink = $state(false);
+  // Path feature — the geometry (a, b, cpA, cpB) lives on the pin itself
+  // and is mutated via dragging handles. Only the non-geometry fields
+  // live in editor state.
+  let pathMode = $state('straight');      // 'straight' | 'bezier'
+  let pathTextAlign = $state('center');   // 'left' | 'center' | 'right'
+  let pathFlip = $state(false);
 
   // Active toolbox mode — determines what clicking the map does
   let toolMode = $state(localStorage.getItem('map-editor:tool') || 'select');
@@ -111,6 +138,26 @@
     return () => window.removeEventListener('keydown', onKeydown);
   });
 
+  /** Seed / clear bezier control points when the user flips between
+   * straight and bezier modes. On first entry to bezier, cpA and cpB
+   * are placed one-third of the way along A→B so the curve starts
+   * visually coincident with the straight line. */
+  function onPathModeChange(_prev, next) {
+    if (!editingId) return;
+    const pin = pins.find(p => p.id === editingId);
+    if (!pin || pin.kind !== 'path') return;
+    if (next === 'bezier' && (!pin.cpA || !pin.cpB)) {
+      const [ax, ay] = pin.a;
+      const [bx, by] = pin.b;
+      const dx = bx - ax, dy = by - ay;
+      pin.cpA = [Math.round(ax + dx / 3), Math.round(ay + dy / 3)];
+      pin.cpB = [Math.round(ax + 2 * dx / 3), Math.round(ay + 2 * dy / 3)];
+    }
+    // The $effect below will sync `pin.mode` from pathMode; we just
+    // nudge pins so the viewer re-renders now.
+    pins = pins;
+  }
+
   function applyPreset(presetId) {
     // For text features, the class fully drives font/size/case/letterSpacing
     // via TEXT_PRESETS. No need to copy fields onto the pin.
@@ -118,66 +165,143 @@
   }
 
   // --- API ---
-  async function fetchPins(slug) {
-    const resp = await fetch(`/api/pins/${slug}`);
-    if (!resp.ok) return [];
-    const data = await resp.json();
-    // Assign runtime IDs (stripped on save for clean JSON)
-    return data.map(p => ({
-      ...p,
-      id: p.id || crypto.randomUUID(),
-      number: p.number ? String(p.number) : '',
-    }));
+  async function fetchMapDoc(slug) {
+    const resp = await fetch(`/api/map/${slug}`);
+    if (!resp.ok) return { meta: {}, pins: [] };
+    const doc = await resp.json();
+    const meta = doc.meta || {};
+    const rawPins = Array.isArray(doc.pins) ? doc.pins : [];
+    // Assign runtime IDs (stripped on save for clean JSON). Paths
+    // serialize with a/b only; mirror endpoint A back onto x/y so the
+    // shared marker infra (addMarker/updateMarker) can place them.
+    const pinsOut = rawPins.map(p => {
+      const out = {
+        ...p,
+        id: p.id || crypto.randomUUID(),
+        number: p.number ? String(p.number) : '',
+      };
+      if (out.kind === 'path' && Array.isArray(out.a)) {
+        out.x = out.a[0];
+        out.y = out.a[1];
+      }
+      return out;
+    });
+    return { meta, pins: pinsOut };
   }
 
   const natCollator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
 
+  // Per-kind key order for saved JSON. Edit here to change serialization
+  // order — any key not listed falls through as alphabetical after
+  // the listed ones. Identifying fields come first (kind, class,
+  // number/name), then geometry, then style toggles, then metadata.
+  const FEATURE_KEY_ORDER = {
+    pin:  ['kind', 'class', 'number', 'name', 'x', 'y', 'labelPos', 'minZoom', 'shrink', 'description', 'link'],
+    text: ['kind', 'class', 'name', 'x', 'y', 'width', 'height', 'align', 'valign', 'minZoom', 'shrink', 'description', 'link'],
+    path: ['kind', 'class', 'name', 'a', 'b', 'mode', 'cpA', 'cpB', 'textAlign', 'flip', 'minZoom', 'shrink', 'description', 'link'],
+  };
+
+  /** Reorder an object's keys per FEATURE_KEY_ORDER; unlisted keys
+   * follow in alphabetical order so future fields still serialize
+   * deterministically. */
+  function orderFeatureKeys(kind, obj) {
+    const order = FEATURE_KEY_ORDER[kind] || [];
+    const out = {};
+    for (const k of order) if (k in obj) out[k] = obj[k];
+    const extras = Object.keys(obj).filter(k => !order.includes(k)).sort();
+    for (const k of extras) out[k] = obj[k];
+    return out;
+  }
+
   function pinsForSave() {
     return [...pins]
-      .sort((a, b) => {
-        // Empty/no-pin entries go last
-        const aEmpty = !a.number;
-        const bEmpty = !b.number;
-        if (aEmpty && !bEmpty) return 1;
-        if (!aEmpty && bEmpty) return -1;
-        if (aEmpty && bEmpty) return a.x - b.x || a.y - b.y;
-        return natCollator.compare(a.number, b.number);
-      })
+      .sort(compareFeatures)
       .map(({ id, ...rest }) => {
         const kind = rest.kind || (rest.number ? 'pin' : 'text');
-        const out = { kind, number: rest.number || '', name: rest.name, x: rest.x, y: rest.y };
-        // Both kinds derive styling entirely from `class`.
+        const kd = KIND_DEFAULTS[kind] || {};
+        const out = { kind, name: rest.name };
         if (rest.class) out.class = rest.class;
-        if (kind === 'text') {
+        if (kind === 'pin') {
+          if (rest.number) out.number = rest.number;
+          out.x = rest.x;
+          out.y = rest.y;
+          if (rest.labelPos && rest.labelPos !== kd.labelPos) out.labelPos = rest.labelPos;
+          if (rest.minZoom != null && rest.minZoom !== kd.minZoom) out.minZoom = rest.minZoom;
+        } else if (kind === 'text') {
+          out.x = rest.x;
+          out.y = rest.y;
           if (rest.width) out.width = rest.width;
           if (rest.height) out.height = rest.height;
-          if (rest.align && rest.align !== 'center') out.align = rest.align;
-          if (rest.valign && rest.valign !== 'middle') out.valign = rest.valign;
-          if (rest.minZoom != null && rest.minZoom !== 1) out.minZoom = rest.minZoom;
-        } else {
-          if (rest.minZoom != null && rest.minZoom !== DEFAULT_MARKER_MIN_ZOOM) out.minZoom = rest.minZoom;
+          if (rest.align && rest.align !== kd.align) out.align = rest.align;
+          if (rest.valign && rest.valign !== kd.valign) out.valign = rest.valign;
+          if (rest.minZoom != null && rest.minZoom !== kd.minZoom) out.minZoom = rest.minZoom;
+        } else if (kind === 'path') {
+          // Paths use `a`/`b` (and `cpA`/`cpB` in bezier mode) for geometry;
+          // the top-level x/y mirror `a` and would be redundant.
+          out.a = rest.a;
+          out.b = rest.b;
+          if (rest.mode && rest.mode !== kd.mode) out.mode = rest.mode;
+          if (rest.mode === 'bezier') {
+            if (rest.cpA) out.cpA = rest.cpA;
+            if (rest.cpB) out.cpB = rest.cpB;
+          }
+          if (rest.textAlign && rest.textAlign !== kd.textAlign) out.textAlign = rest.textAlign;
+          if (rest.flip && rest.flip !== kd.flip) out.flip = true;
+          if (rest.minZoom != null && rest.minZoom !== kd.minZoom) out.minZoom = rest.minZoom;
         }
         if (rest.shrink) out.shrink = true;
         if (rest.description) out.description = rest.description;
         if (rest.link) out.link = rest.link;
-        return out;
+        return orderFeatureKeys(kind, out);
       });
   }
 
-  async function savePins() {
+  function mapDocForSave() {
+    // Drop empty-string / undefined meta fields so JSON stays tidy.
+    const meta = {};
+    for (const [k, v] of Object.entries(mapMeta)) {
+      if (v == null) continue;
+      if (typeof v === 'string' && v.trim() === '') continue;
+      meta[k] = v;
+    }
+    return { meta, pins: pinsForSave() };
+  }
+
+  async function saveMapDoc() {
     if (!currentMap) return;
-    await fetch(`/api/pins/${currentMap.slug}`, {
+    await fetch(`/api/map/${currentMap.slug}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(pinsForSave(), null, 2),
+      body: JSON.stringify(mapDocForSave(), null, 2),
     });
   }
 
+  // Kept as an alias so existing call sites continue to read clearly even
+  // though the persisted unit is now the whole doc, not just pins.
+  const savePins = saveMapDoc;
+
+  // Gate to suppress the auto-save effect during initial map load.
+  let metaLoaded = $state(false);
+
   async function selectMap(mapInfo) {
+    metaLoaded = false;
     currentMap = mapInfo;
     localStorage.setItem('map-editor:last-map', mapInfo.slug);
-    pins = await fetchPins(mapInfo.slug);
+    const doc = await fetchMapDoc(mapInfo.slug);
+    mapMeta = doc.meta;
+    pins = doc.pins;
+    // Let the reactive graph settle on the loaded values before enabling
+    // auto-save, so the load itself doesn't trigger a PUT.
+    queueMicrotask(() => { metaLoaded = true; });
   }
+
+  // Persist meta edits with the same debounce as pin edits.
+  $effect(() => {
+    // Touch all tracked meta fields so Svelte subscribes.
+    JSON.stringify(mapMeta);
+    if (!metaLoaded) return;
+    scheduleSave();
+  });
 
   function onMapSelect(e) {
     const m = maps.find(m => m.slug === e.target.value);
@@ -195,32 +319,44 @@
     pinName = '';
     pinDesc = '';
     pinLink = '';
-    pinAlign = 'center';
-    pinValign = 'middle';
+    // KIND_DEFAULTS is the single source of truth for per-kind defaults.
+    const kd = KIND_DEFAULTS[kind] || {};
+    pinAlign = kd.align || 'center';
+    pinValign = kd.valign || 'middle';
     pinWidth = data.width || 0;
     pinHeight = data.height || 0;
     pinShrink = false;
-    pinLabelPos = 'n';
+    pinLabelPos = kd.labelPos || 'n';
+    pathMode = kd.mode || 'straight';
+    pathTextAlign = kd.textAlign || 'center';
+    pathFlip = kd.flip ?? false;
+    pinClass = kd.class || '';
+    pinMinZoom = kd.minZoom ?? 0;
 
     if (kind === 'pin') {
       const usedNums = new Set(pins.filter(p => (p.kind || 'pin') === 'pin').map(p => p.number).filter(Boolean));
       let next = 1;
       while (usedNums.has(String(next))) next++;
       pinNumber = String(next);
-      pinClass = 'landmark';
-      pinMinZoom = DEFAULT_MARKER_MIN_ZOOM;
       dialogTitle = 'New Marker';
     } else if (kind === 'text') {
       pinNumber = '';
-      pinClass = 'civic-space';
-      pinMinZoom = 1;
       dialogTitle = 'New Text';
+    } else if (kind === 'path') {
+      pinNumber = '';
+      dialogTitle = 'New Path';
     } else {
       pinNumber = '';
-      pinClass = '';
-      pinMinZoom = 0;
       dialogTitle = 'New';
     }
+
+    // Paths are anchored at endpoint A; mirror onto x/y so the shared
+    // marker infra (addMarker/updateMarker) can place the SVG correctly.
+    const isPath = kind === 'path';
+    const a = isPath ? data.a : null;
+    const b = isPath ? data.b : null;
+    const x = isPath ? a[0] : data.x;
+    const y = isPath ? a[1] : data.y;
 
     pins = [...pins, {
       id,
@@ -235,8 +371,9 @@
       minZoom: pinMinZoom,
       shrink: pinShrink,
       labelPos: kind === 'pin' ? pinLabelPos : undefined,
-      x: data.x,
-      y: data.y,
+      x,
+      y,
+      ...(isPath ? { a, b, mode: pathMode, textAlign: pathTextAlign, flip: pathFlip } : {}),
     }];
     activeTab = 'editor';
   }
@@ -296,6 +433,31 @@
       viewer?.updateMarker(pin);
     },
     commit: () => savePins(),
+    /** Move a path endpoint (a/b) or bezier control point (cpA/cpB) to
+     * a new image-pixel position. Called from MapViewer while the user
+     * drags a path handle. Endpoint moves also drag the matching
+     * control point along with them so the local curve keeps its shape. */
+    updatePathPoint: (pin, which, x, y) => {
+      if (pin.kind !== 'path') return;
+      const { x: cx, y: cy } = clampPoint(x, y);
+      if (which === 'a' || which === 'b') {
+        const prev = pin[which] || [pin.x, pin.y];
+        const dx = cx - prev[0];
+        const dy = cy - prev[1];
+        pin[which] = [cx, cy];
+        if (pin.mode === 'bezier') {
+          const cpKey = which === 'a' ? 'cpA' : 'cpB';
+          const cp = pin[cpKey] || prev;
+          pin[cpKey] = [cp[0] + dx, cp[1] + dy];
+        }
+        if (which === 'a') { pin.x = cx; pin.y = cy; }
+      } else if (which === 'cpA' || which === 'cpB') {
+        pin[which] = [cx, cy];
+      }
+      pins = pins;
+      viewer?.updateMarker(pin);
+      scheduleSave();
+    },
     deselect: () => {
       if (!editingId) return;
       // Cancel any new-feature preview; close the editor for existing selections
@@ -313,19 +475,23 @@
     previewId = null;
     // Determine kind from stored field or infer from number presence
     pinKind = pin.kind || (pin.number ? 'pin' : 'text');
-    dialogTitle = pinKind === 'pin' ? 'Edit Marker' : pinKind === 'text' ? 'Edit Text' : 'Edit Path';
+    dialogTitle = pinKind === 'pin' ? 'Edit Marker' : pinKind === 'path' ? 'Edit Path' : 'Edit Text';
     pinNumber = pin.number != null ? String(pin.number) : '';
     pinName = pin.name;
     pinDesc = pin.description || '';
     pinLink = pin.link || '';
-    pinClass = pin.class || (pinKind === 'pin' ? 'shop' : 'civic-space');
-    pinAlign = pin.align || 'center';
-    pinValign = pin.valign || 'middle';
+    const kd = KIND_DEFAULTS[pinKind] || {};
+    pinClass = pin.class || kd.class || '';
+    pinAlign = pin.align || kd.align || 'center';
+    pinValign = pin.valign || kd.valign || 'middle';
     pinWidth = pin.width || 0;
     pinHeight = pin.height || 0;
-    pinMinZoom = pin.minZoom ?? (pinKind === 'pin' ? DEFAULT_MARKER_MIN_ZOOM : 1);
+    pinMinZoom = pin.minZoom ?? kd.minZoom ?? 0;
     pinShrink = !!pin.shrink;
-    pinLabelPos = pin.labelPos || 'n';
+    pinLabelPos = pin.labelPos || kd.labelPos || 'n';
+    pathMode = pin.mode || kd.mode || 'straight';
+    pathTextAlign = pin.textAlign || kd.textAlign || 'center';
+    pathFlip = pin.flip ?? kd.flip ?? false;
     // Apply default size for text features that were created as point-labels
     if (pinKind === 'text' && (!pinWidth || !pinHeight)) {
       pinWidth = 300;
@@ -360,9 +526,12 @@
     const mz = pinMinZoom;
     const sh = pinShrink;
     const lp = kind === 'pin' ? pinLabelPos : undefined;
+    const pmode = kind === 'path' ? pathMode : undefined;
+    const pta = kind === 'path' ? pathTextAlign : undefined;
+    const pflip = kind === 'path' ? pathFlip : undefined;
     const desc = pinDesc.trim() || undefined;
     const link = pinLink.trim() || undefined;
-    if (pin.name !== name || pin.number !== num || pin.kind !== kind || pin.class !== cls || pin.align !== align || pin.valign !== valign || pin.width !== w || pin.height !== h || pin.x !== x || pin.y !== y || pin.minZoom !== mz || pin.shrink !== sh || pin.labelPos !== lp || pin.description !== desc || pin.link !== link) {
+    if (pin.name !== name || pin.number !== num || pin.kind !== kind || pin.class !== cls || pin.align !== align || pin.valign !== valign || pin.width !== w || pin.height !== h || pin.x !== x || pin.y !== y || pin.minZoom !== mz || pin.shrink !== sh || pin.labelPos !== lp || pin.mode !== pmode || pin.textAlign !== pta || pin.flip !== pflip || pin.description !== desc || pin.link !== link) {
       pin.name = name;
       pin.number = num;
       pin.kind = kind;
@@ -376,6 +545,9 @@
       pin.minZoom = mz;
       pin.shrink = sh;
       pin.labelPos = lp;
+      pin.mode = pmode;
+      pin.textAlign = pta;
+      pin.flip = pflip;
       pin.description = desc;
       pin.link = link;
       viewer?.updateMarker(pin);
@@ -476,7 +648,7 @@
           aria-label={t.label}
         >
           {#if t.id === 'select'}
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l7.07 17 2.51-7.39L21 11.07z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M4 2 L4 18 L8 14 L11 21 L14 20 L11 13 L18 13 Z"/></svg>
           {:else if t.id === 'text'}
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/></svg>
           {:else if t.id === 'pin'}
@@ -514,11 +686,17 @@
       <button class:active={activeTab === 'markers'} onclick={() => activeTab = 'markers'}>Markers</button>
       <button
         class:active={activeTab === 'editor'}
-        disabled={!editingId}
-        onclick={() => { if (editingId) activeTab = 'editor'; }}
-      >{editingId ? dialogTitle : 'Editor'}</button>
+        onclick={() => activeTab = 'editor'}
+      >{editingId ? dialogTitle : 'Map'}</button>
     </div>
-    {#if activeTab === 'editor' && editingId}
+    {#if activeTab === 'editor' && !editingId}
+      <div class="pin-editor">
+        <MapProperties
+          bind:title={mapMeta.title}
+          bind:description={mapMeta.description}
+        />
+      </div>
+    {:else if activeTab === 'editor' && editingId}
       <div class="pin-editor">
         <form onsubmit={(e) => { e.preventDefault(); closeEditor(); }}>
           {#if pinKind === 'pin'}
@@ -540,6 +718,16 @@
               bind:shrink={pinShrink}
               onApplyPreset={applyPreset}
             />
+          {:else if pinKind === 'path'}
+            <PathProperties
+              bind:cls={pinClass}
+              bind:mode={pathMode}
+              bind:textAlign={pathTextAlign}
+              bind:flip={pathFlip}
+              bind:minZoom={pinMinZoom}
+              bind:shrink={pinShrink}
+              onModeChange={onPathModeChange}
+            />
           {/if}
           <label>Label <input type="text" bind:value={pinName} required autocomplete="off" /></label>
           <label>Description <textarea bind:value={pinDesc} rows="2"></textarea></label>
@@ -558,13 +746,20 @@
               <button class="pin-list-btn" onclick={() => clickPin(pin)}>
                 {#if preset?.category === 'overworld'}
                   <span class="pin-glyph">{preset.icon}</span>
+                {:else if pin.class === 'map-title'}
+                  <span class="pin-glyph">✵</span>
+                {:else if pin.kind === 'path'}
+                  <span class="pin-glyph pin-path-icon">
+                    <svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                      <path d="M2 8 C 6 2 8 14 12 8 S 18 2 22 8"/>
+                    </svg>
+                  </span>
                 {:else if pin.number}
                   <span class="pin-num">{pin.number}</span>
                 {:else}
                   <span class="pin-label-icon">Aa</span>
                 {/if}
                 <strong class={markerClasses(pin)}>{pin.name}</strong>
-                <span class="pin-coords">({pin.x}, {pin.y})</span>
               </button>
               <button class="pin-list-edit" onclick={() => editFeature(pin)} aria-label="Edit {pin.name}" title="Edit">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -713,7 +908,6 @@
     font-weight: 700;
     background: none;
     color: inherit;
-    opacity: 0.6;
     cursor: pointer;
     border: 1px solid var(--panel-border);
   }
@@ -728,15 +922,14 @@
     border-radius: var(--border-radius);
     border-right-width: 1px;
   }
-  .sidebar .tabs button:hover:not(:disabled) { opacity: 0.85; background: var(--panel-hover); }
-  .sidebar .tabs button.active { opacity: 1; background: var(--panel-accent); color: var(--accent-text); border-color: var(--panel-accent); }
+  .sidebar .tabs button:hover:not(:disabled):not(.active) { background: var(--panel-hover); }
+  .sidebar .tabs button.active { background: var(--panel-accent); color: var(--accent-text); border-color: var(--panel-accent); }
   .sidebar .tabs button:disabled { opacity: 0.3; cursor: not-allowed; }
 
   .pin-list { list-style: none; padding: 0; margin: 0; flex: 1; overflow-y: auto; }
   .pin-row {
     display: flex;
     align-items: stretch;
-    margin: 0 0.375rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
   .pin-list li:last-child .pin-row { border-bottom: none; }
@@ -744,13 +937,16 @@
     flex: 1;
     min-width: 0;
     text-align: left;
-    padding: 0.35rem 0;
+    padding: 0.35rem 0.375rem;
     font-size: 0.85rem;
     border: none;
     background: none;
     color: inherit;
     cursor: pointer;
     border-radius: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
   .sidebar .pin-row:hover { background: var(--panel-hover); }
   .sidebar .pin-list-edit {
@@ -758,7 +954,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
+    width: 36px;
     padding: 0;
     border: none;
     background: none;
@@ -798,8 +994,8 @@
     font-size: 16px;
     line-height: 1;
   }
-  .pin-coords { opacity: 0.5; font-size: 0.8em; }
-
+  .pin-path-icon { display: inline-flex; align-items: center; justify-content: center; }
+  .pin-path-icon svg { width: 22px; height: 10px; }
   .actions { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.5rem 0.75rem; border-top: 1px solid var(--panel-border); }
   .actions button { flex: 1; min-width: calc(50% - 0.25rem); }
 
