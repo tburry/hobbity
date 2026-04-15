@@ -308,8 +308,7 @@
       return L.divIcon({ className: '', html: '', iconSize: [0, 0], iconAnchor: [0, 0] });
     }
     const labelHidden = curZ < (pin.minZoom ?? DEFAULT_MARKER_MIN_ZOOM);
-    const shortLabel = esc(pin.name);
-    const longLabel = pin.longName ? esc(pin.longName) : shortLabel;
+    const label = esc(pin.name);
     // Pin label styling comes from the preset (class).
     const s = resolvePreset(pin) || {};
     const font = FONTS[s.font] || FONTS.body;
@@ -328,7 +327,7 @@
     const markStyle = isOverworld ? `font-size: ${Math.max(20, size).toFixed(1)}px;` : '';
     return L.divIcon({
       className: '',
-      html: `<div class="map-pin label-pos-${pin.labelPos || 'n'}${pin.id === selectedId ? ' selected' : ''}${isOverworld ? ' overworld' : ''}${labelHidden ? ' label-hidden' : ''}"><span class="map-pin-label map-pin-label-short ${pinSizeClass} ${pinColorClass}" style="${labelStyle}">${shortLabel}</span><span class="map-pin-label map-pin-label-long ${pinSizeClass} ${pinColorClass}" style="${labelStyle}">${longLabel}</span><span class="${markClass}" style="${markStyle}">${markContent}</span></div>`,
+      html: `<div class="map-pin label-pos-${pin.labelPos || 'n'}${pin.id === selectedId ? ' selected' : ''}${isOverworld ? ' overworld' : ''}${labelHidden ? ' label-hidden' : ''}"><span class="map-pin-label ${pinSizeClass} ${pinColorClass}" style="${labelStyle}">${label}</span><span class="${markClass}" style="${markStyle}">${markContent}</span></div>`,
       iconSize: [28, 28],
       iconAnchor: [14, 14],
     });
@@ -1003,15 +1002,9 @@
         pointer-events: auto !important;
         position: relative;
 
-        // Hover reveals the long label
-        &:hover .map-pin-label-long { display: block; }
-        &:hover .map-pin-label-short { display: none; }
-
-        // Selected: always show long label, flip circle bg/text,
-        // give the glyph a matching dark-circle backdrop
+        // Selected: flip the circle's bg/text and give the glyph a
+        // matching dark-circle backdrop so the pin reads as "active".
         &.selected {
-          .map-pin-label-long { display: block !important; }
-          .map-pin-label-short { display: none !important; }
           .map-pin-number {
             background: #3b2e1e;
             color: #fff;
@@ -1028,11 +1021,11 @@
           }
         }
 
-        // Per-marker label gate: below the marker's minZoom the label is
-        // hidden by default; hovering / selecting still reveals the long.
+        // Per-marker label gate: below the marker's minZoom the label
+        // hides. Selecting the pin reveals it again so the user can
+        // identify the feature they clicked.
         &.label-hidden .map-pin-label { display: none !important; }
-        &.label-hidden:hover .map-pin-label-long,
-        &.label-hidden.selected .map-pin-label-long { display: block !important; }
+        &.label-hidden.selected .map-pin-label { display: block !important; }
       }
 
       .map-pin-number {
@@ -1072,8 +1065,12 @@
         margin-bottom: -2px;
         line-height: 1.2;
         white-space: nowrap;
+        // Safari treats absolute children of a flex container as cross-
+        // axis-sized, which shrinks this label to the pin's 28px width
+        // and forces the text to wrap despite `white-space: nowrap`.
+        // `max-content` pins the box to the natural text width.
+        width: max-content;
         pointer-events: none;
-        display: none;
       }
       // Position overrides: the label is pinned to the corresponding
       // side of the 28×28 pin container. Gap of ~2px on cardinals.
@@ -1085,10 +1082,6 @@
       .map-pin.label-pos-nw > .map-pin-label { bottom: 100%; top: auto; right: 100%; left: auto; transform: none; margin: -4px -6px 0 0; }
       .map-pin.label-pos-se > .map-pin-label { top: 100%;    bottom: auto; left: 100%; right: auto; transform: none; margin: -4px 0 0 -6px; }
       .map-pin.label-pos-sw > .map-pin-label { top: 100%;    bottom: auto; right: 100%; left: auto; transform: none; margin: -4px -6px 0 0; }
-      // Short is the default-visible variant; the `.label-hidden` gate
-      // on `.map-pin` overrides this when zoom < minZoom.
-      .map-pin-label-short { display: block; }
-
       .map-label {
         white-space: nowrap;
         cursor: grab;
