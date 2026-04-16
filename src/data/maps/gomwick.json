@@ -213,10 +213,10 @@
       "kind": "text",
       "class": "forest",
       "name": "Gomwick Woods",
-      "x": 841,
-      "y": 2392,
-      "width": 1681,
-      "height": 2091
+      "x": 778,
+      "y": 2497,
+      "width": 1251,
+      "height": 1866
     },
     {
       "kind": "path",
@@ -232,12 +232,12 @@
       ],
       "mode": "bezier",
       "cpA": [
-        6395,
-        1688
+        6454,
+        1676
       ],
       "cpB": [
-        6956,
-        1643
+        6962,
+        1645
       ],
       "description": "The Heart Road stretches eastward toward The Right Way Inn and Thistledown."
     },
@@ -249,16 +249,17 @@
       "y": 249,
       "width": 836,
       "height": 181,
-      "minZoom": 4
+      "minZoom": 3,
+      "shrink": true
     },
     {
       "kind": "text",
       "class": "pond-marsh",
       "name": "Nettle's Pond",
       "x": 5742,
-      "y": 3319,
+      "y": 3323,
       "width": 1939,
-      "height": 1610
+      "height": 1603
     },
     {
       "kind": "text",

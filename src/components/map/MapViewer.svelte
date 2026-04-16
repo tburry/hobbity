@@ -280,9 +280,16 @@
 
       // If the text has a bounding box, render inside a sized flex container
       if (pin.width > 0 && pin.height > 0) {
-        // Convert image-pixel dimensions to CSS pixels using the CRS scale
+        // Convert image-pixel dimensions to CSS pixels. When the font
+        // hits its min/max clamp the box should stop scaling too, so
+        // we derive the effective scale from the clamped/unclamped
+        // font-size ratio rather than raw CRS zoom.
         const z = currentZoom ?? map?.getZoom() ?? REF_ZOOM;
-        const zoomScale = map?.options?.crs?.scale ? map.options.crs.scale(z) : Math.pow(2, z);
+        const rawZoomScale = map?.options?.crs?.scale ? map.options.crs.scale(z) : Math.pow(2, z);
+        const pivot = pin.shrink ? (pin.minZoom ?? REF_ZOOM) : REF_ZOOM;
+        const unclamped = (resolvePreset(pin) ?? PIN_LABEL_SIZE).base * Math.pow(2, z - pivot);
+        const clampRatio = unclamped > 0 ? size / unclamped : 1;
+        const zoomScale = rawZoomScale * clampRatio;
         const cssW = pin.width * zoomScale;
         const cssH = pin.height * zoomScale;
         const align = pin.align || 'center';
