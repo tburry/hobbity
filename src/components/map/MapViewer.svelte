@@ -2,7 +2,12 @@
   import { onMount, onDestroy } from 'svelte';
   import { TEXT_PRESETS, PIN_PRESETS, PATH_PRESETS, DEFAULT_MARKER_MIN_ZOOM, KIND_DEFAULTS } from './tools.js';
 
-  let { width, height, imageUrl, tiles, initialZoom, fit = 'bounds', minZoom = 0, maxZoom = 5, pins = [], editable = false, tool = null, ctx = null, selectedId = null, onviewchange, onwheel: onwheelcb } = $props();
+  let { width, height, imageUrl, tiles, initialZoom, fit = 'bounds', minZoom = 0, maxZoom = 5, pins = [], editable = false, tool = null, ctx = null, selectedId: selectedIdProp = null, onviewchange, onwheel: onwheelcb } = $props();
+
+  // View-mode selection is internal (no external owner); edit-mode
+  // selection is driven by the editor via the `selectedId` prop.
+  let viewSelectedId = $state(null);
+  const selectedId = $derived(editable ? selectedIdProp : viewSelectedId);
 
   // `tool` is the active tool module from tools.js. `ctx` is supplied by the
   // editor and exposes methods the tool can call to effect change (create,
@@ -28,13 +33,21 @@
   const MOBILE_MIN_PX = 16;
   // Fallback size for features without a style (e.g. numbered pin labels).
   const PIN_LABEL_SIZE = { base: 14, min: 11, max: 22 };
-  // Markers disappear entirely only at extreme zoom-out — otherwise they
-  // stay visible and hoverable. Their *labels* follow the per-marker
-  // `minZoom` (hidden when current zoom < minZoom).
-  const MARKER_HIDE_ZOOM = 0.25;
-  // Below this zoom, numbered pins shrink to a 12px empty circle (no
-  // number) and labels collapse to sit closer to the smaller dot.
-  const PIN_SHRINK_ZOOM = 1.5;
+  // Visibility thresholds expressed as zoom levels. All comparisons
+  // go through the CRS scale function (CSS-px per image-px) so the
+  // same threshold behaves consistently regardless of image size,
+  // tile pyramid, or device pixel ratio.
+  const MARKER_HIDE_ZOOM = 0.25;   // markers vanish entirely below this
+  const PIN_SHRINK_ZOOM  = 1.5;    // numbered pins → empty 12px dots
+  // Convert a zoom level to CSS-px-per-image-px using the active CRS.
+  function scaleAt(z) {
+    if (map?.options?.crs?.scale) return map.options.crs.scale(z);
+    return Math.pow(2, z);
+  }
+  // Current render scale (CSS-px per image-px).
+  function currentScale(z) {
+    return scaleAt(z ?? map?.getZoom() ?? REF_ZOOM);
+  }
   // Maximum distance (in CSS pixels) the viewport may pan past the edge
   // of the map image. Kept in sync with --map-padding in tokens.scss
   // (which the floating sidebar uses to size itself).
@@ -205,7 +218,7 @@
     const isSelected = pin.id === selectedId;
     // Selected paths always render (so the user can see what they're
     // editing); non-selected ones hide below their minZoom threshold.
-    const labelHidden = !isSelected && z < (pin.minZoom ?? KIND_DEFAULTS.path?.minZoom ?? 0);
+    const labelHidden = !isSelected && currentScale(z) < scaleAt(pin.minZoom ?? KIND_DEFAULTS.path?.minZoom ?? 0);
     const textStyle = `font-family: ${font}; font-size: ${fontSize.toFixed(1)}px; font-weight: ${weight}; font-style: ${style}; ${extra}`;
 
     let handles = '';
@@ -250,7 +263,7 @@
       // Hide text feature when map zoom is below its min-zoom threshold.
       const curZ = currentZoom ?? map?.getZoom() ?? REF_ZOOM;
       const minZ = pin.minZoom ?? 1;
-      if (curZ < minZ) {
+      if (currentScale(curZ) < scaleAt(minZ)) {
         return L.divIcon({ className: '', html: '', iconSize: [0, 0], iconAnchor: [0, 0] });
       }
       // Style comes from the preset for text features.
@@ -304,10 +317,10 @@
     // Marker body is hidden only at extreme zoom-out. Per-marker minZoom
     // gates the *label*, not the marker itself.
     const curZ = currentZoom ?? map?.getZoom() ?? REF_ZOOM;
-    if (curZ <= MARKER_HIDE_ZOOM) {
+    if (currentScale(curZ) <= scaleAt(MARKER_HIDE_ZOOM)) {
       return L.divIcon({ className: '', html: '', iconSize: [0, 0], iconAnchor: [0, 0] });
     }
-    const labelHidden = curZ < (pin.minZoom ?? DEFAULT_MARKER_MIN_ZOOM);
+    const labelHidden = currentScale(curZ) < scaleAt(pin.minZoom ?? DEFAULT_MARKER_MIN_ZOOM);
     const label = esc(pin.name);
     // Pin label styling comes from the preset (class).
     const s = resolvePreset(pin) || {};
@@ -345,7 +358,7 @@
     const marker = L.marker([lat, lng], {
       icon: makeIcon(pin, map?.getZoom()),
       draggable: editable && selectable && !isPath,
-      interactive: editable,
+      interactive: true,
     }).addTo(map);
 
     if (editable) {
@@ -357,6 +370,13 @@
       marker.on('dragend', () => {
         const pos = marker.getLatLng();
         dispatch('onPinDrag', pin, Math.round(pos.lng), Math.round(pos.lat));
+      });
+    } else {
+      // View mode: tap-to-select so mobile (no hover) can reveal the
+      // label of a pin whose label is hidden at the current zoom.
+      marker.on('click', (e) => {
+        L.DomEvent.stopPropagation(e);
+        viewSelectedId = viewSelectedId === pin.id ? null : pin.id;
       });
     }
 
@@ -391,7 +411,7 @@
     if (!map) return;
     const z = map.getZoom();
     const c = map.getContainer().classList;
-    const isLow = z < PIN_SHRINK_ZOOM;
+    const isLow = currentScale(z) < scaleAt(PIN_SHRINK_ZOOM);
     c.toggle('zoom-low', isLow);
     c.toggle('zoom-high', z >= 3);
   }
@@ -826,6 +846,10 @@
     setupRightPan();
     if (editable) {
       setupToolEvents();
+    } else {
+      // Tap on empty map clears the view-mode selection so the user
+      // can dismiss a revealed label.
+      map.on('click', () => { viewSelectedId = null; });
     }
 
     // Make +/- zoom buttons snap to whole zoom levels
@@ -911,7 +935,7 @@
         // Trackpad scroll — pan. Amplify deltas as the user zooms out
         // so the visible map keeps moving at a comfortable rate instead
         // of crawling when the whole image fits the viewport.
-        const mult = Math.pow(2, Math.max(0, maxZoom - map.getZoom()));
+        const mult = Math.max(1, maxZoom - map.getZoom() + 1);
         map.panBy([e.deltaX * mult, e.deltaY * mult], { animate: false });
         scheduleSnapBack();
       } else {
@@ -1022,9 +1046,12 @@
         }
 
         // Per-marker label gate: below the marker's minZoom the label
-        // hides. Selecting the pin reveals it again so the user can
-        // identify the feature they clicked.
+        // hides. Hovering or selecting reveals it so the user can
+        // identify the feature.
         &.label-hidden .map-pin-label { display: none !important; }
+        @media (hover: hover) {
+          &.label-hidden:hover .map-pin-label { display: block !important; }
+        }
         &.label-hidden.selected .map-pin-label { display: block !important; }
       }
 
