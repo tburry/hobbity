@@ -222,7 +222,8 @@
     const textStyle = `font-family: ${font}; font-size: ${fontSize.toFixed(1)}px; font-weight: ${weight}; font-style: ${style}; ${extra}`;
 
     let handles = '';
-    if (isSelected) {
+    const isEditing = editable && isSelected;
+    if (isEditing) {
       handles += `<div class="path-handle path-endpoint" data-path-handle="a" data-pin-id="${pin.id}" style="left:${Ax.toFixed(1)}px;top:${Ay.toFixed(1)}px"></div>`;
       handles += `<div class="path-handle path-endpoint" data-path-handle="b" data-pin-id="${pin.id}" style="left:${Bx.toFixed(1)}px;top:${By.toFixed(1)}px"></div>`;
       if (useBezier) {
@@ -236,10 +237,7 @@
 
     const selClass = isSelected ? ' selected' : '';
     const hiddenClass = labelHidden ? ' label-hidden' : '';
-    // When selected, draw the curve itself (in addition to the invisible
-    // copy in <defs> that the text flows along) so the user can see the
-    // geometry they're editing. Non-selected paths render text only.
-    const visibleStroke = isSelected
+    const visibleStroke = isEditing
       ? `<path class="path-stroke" d="${d}" fill="none"/>`
       : '';
     const html = `<div class="map-path${selClass}${hiddenClass}" data-pin-id="${pin.id}"><svg class="path-text" width="${cssW}" height="${cssH}" viewBox="0 0 ${cssW} ${cssH}"><defs><path id="${pathId}" d="${d}" fill="none"/></defs>${visibleStroke}<text class="${sizeClass} ${colorClass}" text-anchor="${textAnchor}" style="${textStyle}"><textPath href="#${pathId}" startOffset="${startOffset}">${esc(pin.name)}</textPath></text></svg>${handles}</div>`;
@@ -293,8 +291,9 @@
         const alignItems = valign === 'top' ? 'flex-start' : valign === 'bottom' ? 'flex-end' : 'center';
         const boxStyle = `width: ${cssW.toFixed(1)}px; height: ${cssH.toFixed(1)}px; display: flex; justify-content: ${justify}; align-items: ${alignItems}; text-align: ${align}; ${transformStyle}`;
         const isSelected = pin.id === selectedId;
-        const selClass = isSelected ? ' selected' : '';
-        const handles = isSelected ? HANDLE_POSITIONS.map(h =>
+        const isEditing = editable && isSelected;
+        const selClass = isEditing ? ' selected' : '';
+        const handles = isEditing ? HANDLE_POSITIONS.map(h =>
           `<div class="resize-handle handle-${h}" data-handle="${h}" data-pin-id="${pin.id}"></div>`).join('') : '';
         const html = `<div class="map-text-box${selClass}" style="${boxStyle}" data-pin-id="${pin.id}"><div class="map-label map-label-boxed ${sizeClass} ${colorClass}" style="${textStyle}"><span class="map-label-text">${esc(pin.name)}</span></div>${handles}</div>`;
         return L.divIcon({
