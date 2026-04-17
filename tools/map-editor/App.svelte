@@ -43,16 +43,12 @@
    * sidebar row visually matches how the label renders on the map.
    * (Typography only — layout/spacing stays the sidebar's own.) */
   function markerClasses(pin) {
-    const d = findPreset(pin.class)?.defaults || {};
+    const d = findPreset(pin.class) || {};
     const out = [];
     if (d.font === 'body') out.push('font-body');
     else if (d.font === 'heading') out.push('font-heading');
     else if (d.font === 'title') out.push('font-title');
-    const w = d.weight ?? (d.bold ? 700 : 400);
-    if (w >= 700) out.push('font-bold');
-    else if (w >= 600) out.push('font-semibold');
-    else if (w >= 500) out.push('font-medium');
-    else out.push('font-normal');
+    out.push(`font-${d.weight || 'normal'}`);
     if (d.italic) out.push('italic');
     if (d.case === 'upper') out.push('uppercase');
     else if (d.case === 'title') out.push('capitalize');
@@ -110,6 +106,7 @@
   // live in editor state.
   let pathMode = $state('straight');      // 'straight' | 'bezier'
   let pathTextAlign = $state('center');   // 'left' | 'center' | 'right'
+  let pathTextBaseline = $state('baseline'); // 'top' | 'middle' | 'baseline'
   let pathFlip = $state(false);
 
   // Active toolbox mode — determines what clicking the map does
@@ -198,7 +195,7 @@
   const FEATURE_KEY_ORDER = {
     pin:  ['kind', 'class', 'number', 'name', 'x', 'y', 'labelPos', 'minZoom', 'shrink', 'description', 'link'],
     text: ['kind', 'class', 'name', 'x', 'y', 'width', 'height', 'align', 'valign', 'minZoom', 'shrink', 'description', 'link'],
-    path: ['kind', 'class', 'name', 'a', 'b', 'mode', 'cpA', 'cpB', 'textAlign', 'flip', 'minZoom', 'shrink', 'description', 'link'],
+    path: ['kind', 'class', 'name', 'a', 'b', 'mode', 'cpA', 'cpB', 'textAlign', 'textBaseline', 'flip', 'minZoom', 'shrink', 'description', 'link'],
   };
 
   /** Reorder an object's keys per FEATURE_KEY_ORDER; unlisted keys
@@ -246,6 +243,7 @@
             if (rest.cpB) out.cpB = rest.cpB;
           }
           if (rest.textAlign && rest.textAlign !== kd.textAlign) out.textAlign = rest.textAlign;
+          if (rest.textBaseline && rest.textBaseline !== kd.textBaseline) out.textBaseline = rest.textBaseline;
           if (rest.flip && rest.flip !== kd.flip) out.flip = true;
           if (rest.minZoom != null && rest.minZoom !== kd.minZoom) out.minZoom = rest.minZoom;
         }
@@ -329,6 +327,7 @@
     pinLabelPos = kd.labelPos || 'n';
     pathMode = kd.mode || 'straight';
     pathTextAlign = kd.textAlign || 'center';
+    pathTextBaseline = kd.textBaseline || 'baseline';
     pathFlip = kd.flip ?? false;
     pinClass = kd.class || '';
     pinMinZoom = kd.minZoom ?? 0;
@@ -373,7 +372,7 @@
       labelPos: kind === 'pin' ? pinLabelPos : undefined,
       x,
       y,
-      ...(isPath ? { a, b, mode: pathMode, textAlign: pathTextAlign, flip: pathFlip } : {}),
+      ...(isPath ? { a, b, mode: pathMode, textAlign: pathTextAlign, textBaseline: pathTextBaseline, flip: pathFlip } : {}),
     }];
     activeTab = 'editor';
   }
@@ -491,6 +490,7 @@
     pinLabelPos = pin.labelPos || kd.labelPos || 'n';
     pathMode = pin.mode || kd.mode || 'straight';
     pathTextAlign = pin.textAlign || kd.textAlign || 'center';
+    pathTextBaseline = pin.textBaseline || kd.textBaseline || 'baseline';
     pathFlip = pin.flip ?? kd.flip ?? false;
     // Apply default size for text features that were created as point-labels
     if (pinKind === 'text' && (!pinWidth || !pinHeight)) {
@@ -528,10 +528,11 @@
     const lp = kind === 'pin' ? pinLabelPos : undefined;
     const pmode = kind === 'path' ? pathMode : undefined;
     const pta = kind === 'path' ? pathTextAlign : undefined;
+    const ptb = kind === 'path' ? pathTextBaseline : undefined;
     const pflip = kind === 'path' ? pathFlip : undefined;
     const desc = pinDesc.trim() || undefined;
     const link = pinLink.trim() || undefined;
-    if (pin.name !== name || pin.number !== num || pin.kind !== kind || pin.class !== cls || pin.align !== align || pin.valign !== valign || pin.width !== w || pin.height !== h || pin.x !== x || pin.y !== y || pin.minZoom !== mz || pin.shrink !== sh || pin.labelPos !== lp || pin.mode !== pmode || pin.textAlign !== pta || pin.flip !== pflip || pin.description !== desc || pin.link !== link) {
+    if (pin.name !== name || pin.number !== num || pin.kind !== kind || pin.class !== cls || pin.align !== align || pin.valign !== valign || pin.width !== w || pin.height !== h || pin.x !== x || pin.y !== y || pin.minZoom !== mz || pin.shrink !== sh || pin.labelPos !== lp || pin.mode !== pmode || pin.textAlign !== pta || pin.textBaseline !== ptb || pin.flip !== pflip || pin.description !== desc || pin.link !== link) {
       pin.name = name;
       pin.number = num;
       pin.kind = kind;
@@ -547,6 +548,7 @@
       pin.labelPos = lp;
       pin.mode = pmode;
       pin.textAlign = pta;
+      pin.textBaseline = ptb;
       pin.flip = pflip;
       pin.description = desc;
       pin.link = link;
@@ -607,7 +609,7 @@
 </script>
 
 <header>
-  <h1>Map Marker Editor</h1>
+  <h1>Toad Mapper</h1>
   <select title="Select map" onchange={onMapSelect} value={currentMap?.slug}>
     {#each maps as m}
       <option value={m.slug}>{m.name}</option>
@@ -723,6 +725,7 @@
               bind:cls={pinClass}
               bind:mode={pathMode}
               bind:textAlign={pathTextAlign}
+              bind:textBaseline={pathTextBaseline}
               bind:flip={pathFlip}
               bind:minZoom={pinMinZoom}
               bind:shrink={pinShrink}
@@ -730,7 +733,7 @@
             />
           {/if}
           <label>Label <input type="text" bind:value={pinName} required autocomplete="off" /></label>
-          <label>Description <textarea bind:value={pinDesc} rows="2"></textarea></label>
+          <label>Description <textarea bind:value={pinDesc} rows={pinKind === 'path' ? 6 : 2}></textarea></label>
           <label>Link <input type="text" bind:value={pinLink} placeholder="/world/places/#anchor" autocomplete="off" /></label>
           <div class="dialog-buttons">
             <button type="button" class="danger" onclick={onDelete}>Delete</button>
@@ -812,7 +815,7 @@
     background: var(--bg);
     color: var(--text);
   }
-  header h1 { font-family: var(--heading-font); font-size: 1rem; margin: 0; }
+  header h1 { font-family: var(--title-font); font-size: 1rem; margin: 0; color: var(--title-color); }
   header select {
     padding: 0.3rem 0.5rem;
     border: 1px solid var(--border);
@@ -1062,8 +1065,8 @@
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
   }
   .toolbox button {
-    width: 30px;
-    height: 30px;
+    width: 26px;
+    height: 26px;
     padding: 0;
     background: var(--bg);
     color: var(--text);

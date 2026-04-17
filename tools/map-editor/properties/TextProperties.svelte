@@ -12,11 +12,7 @@
     onApplyPreset,
   } = $props();
 
-  const FONTS = {
-    body: "'Lora', serif",
-    heading: "'Crimson Pro', serif",
-    title: "'Uncial Antiqua', serif",
-  };
+
 
   // Display order for the style grid. Presets not listed fall to the end
   // in their original TEXT_PRESETS order.
@@ -29,40 +25,34 @@
     'ocean', 'island',
     'lake', 'pond-marsh',
   ];
+  const textEntries = Object.entries(TEXT_PRESETS).map(([id, p]) => ({ id, ...p }));
   const orderedPresets = (() => {
     const rank = new Map(STYLE_ORDER.map((id, i) => [id, i]));
-    return [...TEXT_PRESETS].sort((a, b) => {
+    return [...textEntries].sort((a, b) => {
       const ai = rank.has(a.id) ? rank.get(a.id) : STYLE_ORDER.length;
       const bi = rank.has(b.id) ? rank.get(b.id) : STYLE_ORDER.length;
       return ai - bi;
     });
   })();
 
-  // Subtle size scale so the picker hints at each preset's actual text
-  // size without blowing up the button layout.
-  const SIZE_PX = { 'text-sm': '0.65rem', 'text-base': '.85rem', 'text-lg': '1.1rem', 'text-xl': '1.1rem' };
-
-  /** Inline style matching how the preset will render the label, so the
-   * picker shows a true-to-life preview of each style. */
   function styleFor(p) {
-    const d = p.defaults || {};
-    const parts = [
-      `font-family: ${FONTS[d.font] || FONTS.body}`,
-      `font-weight: ${d.weight ?? (d.bold ? 700 : 400)}`,
-      `font-style: ${d.italic ? 'italic' : 'normal'}`,
-    ];
-    if (SIZE_PX[d.sizeClass]) parts.push(`font-size: ${SIZE_PX[d.sizeClass]}`);
-    if (d.case && d.case !== 'none') {
-      parts.push(`text-transform: ${d.case === 'upper' ? 'uppercase' : d.case === 'lower' ? 'lowercase' : 'capitalize'}`);
-    }
+    const d = p || {};
+    const parts = [];
     if (d.letterSpacing) parts.push(`letter-spacing: ${d.letterSpacing}px`);
     return parts.join('; ');
   }
 
-  /** Color class so the global parchment-halo utilities apply, giving
-   * the button text a readable glow against the accent background. */
   function classFor(p) {
-    return p.defaults?.colorClass || 'text-black';
+    const d = p || {};
+    const c = [
+      d.colorClass || 'text-black',
+      `font-${d.font || 'body'}`,
+      `font-${d.weight || 'normal'}`,
+    ];
+    if (d.italic) c.push('italic');
+    if (d.case === 'upper') c.push('uppercase');
+    else if (d.case === 'title' || d.case === 'capitalize') c.push('capitalize');
+    return c.join(' ');
   }
 </script>
 

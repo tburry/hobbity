@@ -21,20 +21,16 @@
     { id: 'se', row: 3, col: 3, title: 'Label SE' },
   ];
 
-  const FONTS = {
-    body: "'Lora', serif",
-    heading: "'Crimson Pro', serif",
-    title: "'Uncial Antiqua', serif",
-  };
 
+  const pinEntries = Object.entries(PIN_PRESETS).map(([id, p]) => ({ id, ...p }));
   // POI goes first and spans full width; the rest follow in order.
   const townPresets = (() => {
-    const list = PIN_PRESETS.filter(p => p.category === 'town');
+    const list = pinEntries.filter(p => p.category === 'town');
     const poi = list.find(p => p.id === 'poi');
     const rest = list.filter(p => p.id !== 'poi');
     return poi ? [poi, ...rest] : list;
   })();
-  const overworldPresets = PIN_PRESETS.filter(p => p.category === 'overworld');
+  const overworldPresets = pinEntries.filter(p => p.category === 'overworld');
 
   // Active tab follows the currently-selected class.
   let tab = $state('town');
@@ -47,21 +43,10 @@
     tab = t;
   }
 
-  /** Inline CSS matching how this preset renders the label. */
-  const SIZE_PX = { 'text-sm': '0.85rem', 'text-base': '1rem', 'text-lg': '1.15rem', 'text-xl': '1.3rem' };
-
   function styleFor(preset) {
-    const d = preset.defaults || {};
-    const parts = [
-      `font-family: ${FONTS[d.font] || FONTS.body}`,
-      `font-weight: ${d.weight ?? (d.bold ? 700 : 400)}`,
-      `font-style: ${d.italic ? 'italic' : 'normal'}`,
-    ];
-    if (SIZE_PX[d.sizeClass]) parts.push(`font-size: ${SIZE_PX[d.sizeClass]}`);
-    if (d.color) parts.push(`color: ${d.color}`);
-    if (d.case && d.case !== 'none') {
-      parts.push(`text-transform: ${d.case === 'upper' ? 'uppercase' : d.case === 'lower' ? 'lowercase' : 'capitalize'}`);
-    }
+    const d = preset || {};
+    const parts = [];
+    if (d.italic) parts.push('font-style: italic');
     if (d.letterSpacing) parts.push(`letter-spacing: ${d.letterSpacing}px`);
     return parts.join('; ');
   }
@@ -99,13 +84,17 @@
     return { destroy() { node.remove(); } };
   }
 
-  /** Color class so the global parchment-halo utilities apply, giving
-   * the button text a readable glow against the accent background. */
   function classFor(p) {
-    const d = p.defaults || {};
-    if (d.colorClass) return d.colorClass;
-    if (d.font === 'title') return 'text-title';
-    return 'text-black';
+    const d = p || {};
+    const c = [
+      d.colorClass || 'text-black',
+      `font-${d.font || 'body'}`,
+      `font-${d.weight || 'normal'}`,
+    ];
+    if (d.italic) c.push('italic');
+    if (d.case === 'upper') c.push('uppercase');
+    else if (d.case === 'title' || d.case === 'capitalize') c.push('capitalize');
+    return c.join(' ');
   }
 </script>
 
@@ -216,7 +205,7 @@
     class:measured={tooltip.measured}
     style="left: {tooltip.x}px; top: {tooltip.y}px;"
   >
-    <span style={styleFor(tooltip.preset)}>{tooltip.preset.label}</span>
+    <span class={classFor(tooltip.preset)} style={styleFor(tooltip.preset)}>{tooltip.preset.label}</span>
   </div>
 {/if}
 
@@ -254,7 +243,7 @@
   .tabs {
     display: flex;
     gap: 2px;
-    margin-top: var(--space, 16px);
+    /* margin-top: var(--space, 16px); */
     margin-bottom: 0.6rem;
     border-bottom: 1px solid var(--panel-border, #5c4a32);
   }

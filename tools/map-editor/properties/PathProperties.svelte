@@ -5,39 +5,31 @@
     cls = $bindable('river'),
     mode = $bindable('straight'),
     textAlign = $bindable('center'),
+    textBaseline = $bindable('baseline'),
     flip = $bindable(false),
     minZoom = $bindable(0),
     shrink = $bindable(false),
     onModeChange,
   } = $props();
 
-  const FONTS = {
-    body: "'Lora', serif",
-    heading: "'Crimson Pro', serif",
-    title: "'Uncial Antiqua', serif",
-  };
-
-  // Mirror TextProperties' subtle size hint so the picker previews the
-  // relative type scale without blowing up button heights.
-  const SIZE_PX = { 'text-sm': '0.65rem', 'text-base': '.85rem', 'text-lg': '1.1rem', 'text-xl': '1.1rem' };
-
   function styleFor(p) {
-    const d = p.defaults || {};
-    const parts = [
-      `font-family: ${FONTS[d.font] || FONTS.body}`,
-      `font-weight: ${d.weight ?? (d.bold ? 700 : 400)}`,
-      `font-style: ${d.italic ? 'italic' : 'normal'}`,
-    ];
-    if (SIZE_PX[d.sizeClass]) parts.push(`font-size: ${SIZE_PX[d.sizeClass]}`);
-    if (d.case && d.case !== 'none') {
-      parts.push(`text-transform: ${d.case === 'upper' ? 'uppercase' : d.case === 'lower' ? 'lowercase' : 'capitalize'}`);
-    }
+    const d = p || {};
+    const parts = [];
     if (d.letterSpacing) parts.push(`letter-spacing: ${d.letterSpacing}px`);
     return parts.join('; ');
   }
 
   function classFor(p) {
-    return p.defaults?.colorClass || 'text-black';
+    const d = p || {};
+    const c = [
+      d.colorClass || 'text-black',
+      `font-${d.font || 'body'}`,
+      `font-${d.weight || 'normal'}`,
+    ];
+    if (d.italic) c.push('italic');
+    if (d.case === 'upper') c.push('uppercase');
+    else if (d.case === 'title' || d.case === 'capitalize') c.push('capitalize');
+    return c.join(' ');
   }
 
   function setMode(next) {
@@ -49,14 +41,14 @@
 </script>
 
 <div class="style-grid" role="radiogroup" aria-label="Path style">
-  {#each PATH_PRESETS as p}
+  {#each Object.entries(PATH_PRESETS) as [id, p]}
     <button
       type="button"
       role="radio"
-      aria-checked={cls === p.id}
+      aria-checked={cls === id}
       class={classFor(p)}
-      class:active={cls === p.id}
-      onclick={() => cls = p.id}
+      class:active={cls === id}
+      onclick={() => cls = id}
       style={styleFor(p)}
     >{p.label}</button>
   {/each}
@@ -89,6 +81,20 @@
     title="Flip text to the other side of the path"
     onclick={() => flip = !flip}
   >Flip</button>
+</div>
+
+<div class="style-row">
+  <div class="align-group" aria-label="Text vertical alignment on path">
+    <button type="button" title="Path on top of text" aria-label="Path on top" class:active={textBaseline === 'top'} onclick={() => textBaseline = 'top'}>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="7" y2="7"/><text x="12" y="20" text-anchor="middle" font-size="11" stroke="none" fill="currentColor">Ag</text></svg>
+    </button>
+    <button type="button" title="Path through middle" aria-label="Middle" class:active={textBaseline === 'middle'} onclick={() => textBaseline = 'middle'}>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="13" y2="13"/><text x="12" y="17" text-anchor="middle" font-size="11" stroke="none" fill="currentColor">Ag</text></svg>
+    </button>
+    <button type="button" title="Path at baseline" aria-label="Baseline" class:active={textBaseline === 'baseline'} onclick={() => textBaseline = 'baseline'}>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="18" y2="18"/><text x="12" y="17" text-anchor="middle" font-size="11" stroke="none" fill="currentColor">Ag</text></svg>
+    </button>
+  </div>
 </div>
 
 <label class="min-zoom-label">

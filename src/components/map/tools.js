@@ -152,9 +152,12 @@ const SIZE_CLASSES = {
   small:   'text-sm',
 };
 
-export function size(name) {
-  const spec = SIZES[name] || SIZES.regular;
-  return { ...spec, sizeClass: SIZE_CLASSES[name] || 'text-base' };
+export function sizeSpec(name) {
+  return SIZES[name] || SIZES.regular;
+}
+
+export function sizeClass(name) {
+  return SIZE_CLASSES[name] || 'text-base';
 }
 
 /** Default min zoom at which a marker's label first appears. */
@@ -183,6 +186,7 @@ export const KIND_DEFAULTS = {
     class: 'river',
     mode: 'straight',
     textAlign: 'center',
+    textBaseline: 'baseline',
     flip: false,
   },
 };
@@ -192,69 +196,61 @@ export const KIND_DEFAULTS = {
  * size spec plus style fields. font/case/letterSpacing/italic/bold come from
  * the preset, not the pin.
  */
-export const PIN_PRESETS = [
+export const PIN_PRESETS = {
   // Overworld — each preset picks a glyph that doubles as the pin icon.
-  { id: 'capital',   category: 'overworld', icon: '✪', label: 'Capital',           defaults: { ...size('large'),   font: 'title',   weight: 700 } },
-  { id: 'city',      category: 'overworld', icon: '◉', label: 'City',              defaults: { ...size('large'),   font: 'heading', weight: 700, case: 'upper', letterSpacing: 1 } },
-  { id: 'fortress',  category: 'overworld', icon: '⛫', label: 'Fortress',          defaults: { ...size('large'),   font: 'heading', weight: 700, case: 'upper', letterSpacing: 1 } },
-  { id: 'town',      category: 'overworld', icon: '◼', label: 'Town',              defaults: { ...size('regular'), font: 'heading' } },
-  { id: 'tower',     category: 'overworld', icon: '♖', label: 'Tower',             defaults: { ...size('regular'), font: 'heading' } },
-  { id: 'temple',    category: 'overworld', icon: '⛪', label: 'Temple',            defaults: { ...size('regular'), font: 'heading' } },
-  { id: 'mine',      category: 'overworld', icon: '⚒', label: 'Mine',              defaults: { ...size('regular'), font: 'heading' } },
-  { id: 'cave',      category: 'overworld', icon: '⍢', label: 'Cave',              defaults: { ...size('regular'), font: 'heading' } },
-  { id: 'ruin',      category: 'overworld', icon: '⛬', label: 'Ruin',              defaults: { ...size('regular'), font: 'heading' } },
-  { id: 'camp',      category: 'overworld', icon: '⛺', label: 'Camp',              defaults: { ...size('regular'), font: 'body' } },
-  { id: 'village',   category: 'overworld', icon: '•', label: 'Village',           defaults: { ...size('small'),   font: 'body' } },
-  { id: 'bridge',    category: 'overworld', icon: '≏', label: 'Bridge',            defaults: { ...size('small'),   font: 'body' } },
-  { id: 'mountain',  category: 'overworld', icon: '⛰', label: 'Mountain',          defaults: { ...size('small'),   font: 'body' } },
+  capital:   { category: 'overworld', icon: '✪', label: 'Capital',       size: 'large',   font: 'title',   weight: 'bold' },
+  city:      { category: 'overworld', icon: '◉', label: 'City',          size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 1 },
+  fortress:  { category: 'overworld', icon: '⛫', label: 'Fortress',      size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 1 },
+  town:      { category: 'overworld', icon: '◼', label: 'Town',          size: 'regular', font: 'heading' },
+  tower:     { category: 'overworld', icon: '♖', label: 'Tower',         size: 'regular', font: 'heading' },
+  temple:    { category: 'overworld', icon: '\u26EA\uFE0E', label: 'Temple', size: 'regular', font: 'heading' },
+  mine:      { category: 'overworld', icon: '⚒', label: 'Mine',          size: 'regular', font: 'heading' },
+  cave:      { category: 'overworld', icon: '⍢', label: 'Cave',          size: 'regular', font: 'heading' },
+  ruin:      { category: 'overworld', icon: '⛬', label: 'Ruin',          size: 'regular', font: 'heading' },
+  camp:      { category: 'overworld', icon: '⛺\uFE0E', label: 'Camp',    size: 'regular', font: 'body' },
+  village:   { category: 'overworld', icon: '•', label: 'Village',       size: 'small',   font: 'body' },
+  bridge:    { category: 'overworld', icon: '≏', label: 'Bridge',        size: 'small',   font: 'body' },
+  mountain:  { category: 'overworld', icon: '⛰', label: 'Mountain',      size: 'small',   font: 'body' },
   // Town — picked from a grid (no icon glyph; uses numbered circle).
-  { id: 'landmark',  category: 'town',      label: 'Landmark',    defaults: { ...size('regular'), font: 'heading', weight: 700, case: 'upper', colorClass: 'text-heading' } },
-  { id: 'gate',      category: 'town',      label: 'Gate',              defaults: { ...size('regular'), font: 'heading', weight: 700, case: 'upper' } },
-  { id: 'poi',       category: 'town',      label: 'Point of Interest', defaults: { ...size('regular'), font: 'title',   weight: 700 } },
-  { id: 'shop',      category: 'town',      label: 'Shop / Inn',        defaults: { ...size('small'), font: 'body', weight: 600 } },
-  { id: 'residence', category: 'town',      label: 'Minor Structure',         defaults: { ...size('small'),   font: 'body' } },
-];
+  landmark:  { category: 'town', label: 'Landmark',          size: 'regular', font: 'heading', weight: 'bold', case: 'upper', colorClass: 'text-heading' },
+  gate:      { category: 'town', label: 'Gate',              size: 'regular', font: 'heading', weight: 'bold', case: 'upper' },
+  poi:       { category: 'town', label: 'Point of Interest', size: 'regular', font: 'title',   weight: 'bold', colorClass: 'text-title' },
+  shop:      { category: 'town', label: 'Shop / Inn',        size: 'small',   font: 'body', weight: 'semibold' },
+  residence: { category: 'town', label: 'Minor Structure',   size: 'small',   font: 'body' },
+};
 
-export const TEXT_PRESETS = [
-  { id: 'map-title',   label: 'Map Title',         defaults: { ...size('title'),   font: 'title',   colorClass: 'text-title' } },
-  { id: 'continent',   label: 'Country', defaults: { ...size('large'),   font: 'title',   case: 'upper', letterSpacing: 4, colorClass: 'text-heading' } },
-  { id: 'ocean',       label: 'Ocean, Sea',       defaults: { ...size('large'),  font: 'heading', italic: true, case: 'upper', letterSpacing: 6 } },
-  { id: 'lake',        label: 'Lake, Bay',        defaults: { ...size('large'),   font: 'heading', italic: true, case: 'upper', letterSpacing: 4 } },
-  { id: 'range',       label: 'Mountain Range',    defaults: { ...size('regular'),   font: 'heading', weight: 700, case: 'upper', letterSpacing: 3 } },
-  { id: 'forest',      label: 'Forest',            defaults: { ...size('large'),   font: 'heading', weight: 700, case: 'upper', letterSpacing: 4 } },
-  { id: 'region',      label: 'Region', defaults: { ...size('large'),   font: 'heading', weight: 700, case: 'upper', letterSpacing: 3 } },
-  { id: 'district',    label: 'District',          defaults: { ...size('large'),   font: 'heading', weight: 700, case: 'upper', letterSpacing: 2 } },
-  { id: 'civic-space', label: 'Civic Space',       defaults: { ...size('regular'), font: 'heading', case: 'upper', letterSpacing: 3 } },
-  { id: 'desert',      label: 'Desert, Plain',    defaults: { ...size('regular'), font: 'body',    case: 'upper', letterSpacing: 4 } },
-  { id: 'hills',       label: 'Hills, Valley',    defaults: { ...size('regular'), font: 'heading', case: 'title', letterSpacing: 1 } },
-  { id: 'island',      label: 'Island, Archipelago', defaults: { ...size('small'), font: 'body',   case: 'upper', letterSpacing: 2 } },
-  { id: 'pond-marsh',  label: 'Pond, Swamp, Marsh', defaults: { ...size('regular'), font: 'body', italic: true, case: 'title' } },
-  // { id: 'legend',      label: 'Legend, Scale',    defaults: { ...size('small'),   font: 'body',    case: 'title' } },
-];
+export const TEXT_PRESETS = {
+  'map-title':   { label: 'Map Title',            size: 'title',   font: 'title',   colorClass: 'text-title' },
+  continent:     { label: 'Country',              size: 'large',   font: 'title',   case: 'upper', letterSpacing: 4, colorClass: 'text-heading' },
+  ocean:         { label: 'Ocean, Sea',           size: 'large',   font: 'heading', italic: true, case: 'upper', letterSpacing: 6 },
+  lake:          { label: 'Lake, Bay',            size: 'large',   font: 'heading', italic: true, case: 'upper', letterSpacing: 4 },
+  range:         { label: 'Mountain Range',       size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3 },
+  forest:        { label: 'Forest',               size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 4 },
+  region:        { label: 'Region',               size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3 },
+  district:      { label: 'District',             size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 2 },
+  'civic-space': { label: 'Civic Space',          size: 'regular', font: 'heading', case: 'upper', letterSpacing: 3 },
+  desert:        { label: 'Desert, Plain',        size: 'regular', font: 'body',    case: 'upper', letterSpacing: 4 },
+  hills:         { label: 'Hills, Valley',        size: 'regular', font: 'heading', case: 'title', letterSpacing: 1 },
+  island:        { label: 'Island, Archipelago',  size: 'small',   font: 'body',    case: 'upper', letterSpacing: 2 },
+  'pond-marsh':  { label: 'Pond, Swamp, Marsh',   size: 'regular', font: 'body', italic: true, case: 'title' },
+};
 
 // Path features render as text flowing along an invisible curve. The
 // preset controls typography only — there is no stroke style since the
 // line isn't drawn.
 // Grouped by kind (Borders, Roads, Water), then by prominence inside
 // each group so the picker reads top-to-bottom as strongest → weakest.
-export const PATH_PRESETS = [
-  { id: 'major-border', label: 'National Border', defaults: { ...size('regular'), font: 'heading', weight: 700, case: 'upper', letterSpacing: 2 } },
-  { id: 'minor-border', label: 'Regional Border', defaults: { ...size('small'),   font: 'body',    case: 'upper', letterSpacing: 2 } },
-  { id: 'highway',      label: 'Highway',         defaults: { ...size('regular'), font: 'heading', weight: 700, case: 'upper', letterSpacing: 2 } },
-  { id: 'road',         label: 'Road',            defaults: { ...size('regular'), font: 'heading', case: 'title' } },
-  { id: 'trail',        label: 'Trail, Pass',     defaults: { ...size('small'),   font: 'body',    case: 'title' } },
-  { id: 'wall',         label: 'Wall',            defaults: { ...size('regular'), font: 'heading', case: 'upper', letterSpacing: 2 } },
-  { id: 'river',        label: 'River',           defaults: { ...size('regular'), font: 'heading', italic: true, case: 'title' } },
-  { id: 'stream',       label: 'Stream',          defaults: { ...size('small'),   font: 'body',    italic: true, case: 'title' } },
-];
+export const PATH_PRESETS = {
+  'major-border': { label: 'National Border', size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 2 },
+  'minor-border': { label: 'Regional Border', size: 'small',   font: 'body',    case: 'upper', letterSpacing: 2 },
+  highway:        { label: 'Highway',         size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 2 },
+  road:           { label: 'Road',            size: 'regular', font: 'heading', case: 'title' },
+  trail:          { label: 'Trail, Pass',     size: 'small',   font: 'body',    case: 'title' },
+  wall:           { label: 'Wall',            size: 'regular', font: 'heading', case: 'upper', letterSpacing: 2 },
+  river:          { label: 'River',           size: 'regular', font: 'heading', italic: true, case: 'title' },
+  stream:         { label: 'Stream',          size: 'small',   font: 'body',    italic: true, case: 'title' },
+};
 
 export function findPreset(id) {
-  return TEXT_PRESETS.find(p => p.id === id)
-    || PIN_PRESETS.find(p => p.id === id)
-    || PATH_PRESETS.find(p => p.id === id);
-}
-
-export function defaultsForPreset(id) {
-  const p = findPreset(id);
-  return p ? { ...p.defaults } : {};
+  return TEXT_PRESETS[id] || PIN_PRESETS[id] || PATH_PRESETS[id];
 }

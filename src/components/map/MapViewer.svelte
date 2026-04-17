@@ -1,11 +1,7 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
-  import { TEXT_PRESETS, PIN_PRESETS, PATH_PRESETS, DEFAULT_MARKER_MIN_ZOOM, KIND_DEFAULTS } from './tools.js';
-  // Global map styles — kept out of the scoped <style> block below
-  // because Svelte's CSS tree-shaker would strip rules targeting the
-  // Leaflet-injected DOM (tiles, markers, controls) that never appear
-  // in the template.
-  import './map-viewer-globals.scss';
+  import { TEXT_PRESETS, PIN_PRESETS, PATH_PRESETS, DEFAULT_MARKER_MIN_ZOOM, KIND_DEFAULTS, sizeSpec, sizeClass as getSizeClass } from './tools.js';
+  import './map-viewer.scss';
 
   let { width, height, imageUrl, tiles, initialZoom, fit = 'bounds', minZoom = 0, maxZoom = 5, pins = [], editable = false, tool = null, ctx = null, selectedId: selectedIdProp = null, onviewchange, onwheel: onwheelcb } = $props();
 
@@ -56,45 +52,12 @@
   // Maximum distance (in CSS pixels) the viewport may pan past the edge
   // of the map image. Kept in sync with --map-padding in tokens.scss
   // (which the floating sidebar uses to size itself).
-  const MAP_PADDING = 320;
-  // View mode uses a uniform half-MAP_PADDING border.
-  const VIEW_PAD = MAP_PADDING / 2;
-  // Edit mode UI overlays — these widths drive the asymmetric padding so
-  // the user can pan the map past the toolbox / sidebar.
-  const SPACE_PX = 16;          // matches --space
-  const TOOLBOX_WIDTH = 34;     // 30px button + 2px border × 2
-  const SIDEBAR_WIDTH = MAP_PADDING - 2 * SPACE_PX;
   const HANDLE_POSITIONS = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'];
 
   function isMobile() {
     return typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
   }
 
-  /** Recompute the map's max-bounds based on the current zoom and the
-   * active mode. View mode = uniform half-MAP_PADDING. Edit mode =
-   * asymmetric so the floating UI overlays don't block panning. */
-  function updateMaxBounds() {
-    if (!map) return;
-    const s = map.options.crs.scale(map.getZoom()) || 1;
-    let topPx, bottomPx, leftPx, rightPx;
-    if (editable) {
-      topPx = bottomPx = SPACE_PX;
-      leftPx = TOOLBOX_WIDTH + 2 * SPACE_PX;
-      rightPx = SIDEBAR_WIDTH + 2 * SPACE_PX;
-    } else {
-      topPx = bottomPx = leftPx = rightPx = VIEW_PAD;
-    }
-    map.setMaxBounds([
-      [-topPx / s, -leftPx / s],
-      [height + bottomPx / s, width + rightPx / s],
-    ]);
-  }
-
-  // Re-clamp whenever the user toggles edit/view mode.
-  $effect(() => {
-    void editable;
-    if (map) updateMaxBounds();
-  });
 
   /** Read a CSS custom property (e.g. `--border`) from the map container. */
   function getCss(name) {
@@ -117,7 +80,7 @@
     const fallback = pin.kind === 'path' ? 'river' : (pin.number ? 'shop' : null);
     const id = pin.class || fallback;
     if (!id) return null;
-    return list.find(p => p.id === id)?.defaults;
+    return list[id];
   }
 
   function computeFontSize(pin, zoom) {
@@ -128,15 +91,15 @@
     // pin labels uses PIN_LABEL_SIZE. Size scales linearly with zoom
     // (2^(z - REF_ZOOM)), clamped to [min, max]. On mobile the floor
     // is always MOBILE_MIN_PX (16px).
-    const spec = resolvePreset(pin) ?? PIN_LABEL_SIZE;
+    const preset = resolvePreset(pin);
+    const spec = preset ? sizeSpec(preset.size) : PIN_LABEL_SIZE;
 
     // Shrink mode: pin the size to `base` at the feature's min-zoom and
     // scale up from there (doubling per zoom level), clamped to max.
     // Default mode: scale from `base` at REF_ZOOM, clamped to [min, max].
     const pivot = pin.shrink ? (pin.minZoom ?? REF_ZOOM) : REF_ZOOM;
-    const baseSize = spec.base;
     const scale = Math.pow(2, z - pivot);
-    const raw = baseSize * scale;
+    const raw = spec.base * scale;
     const min = isMobileView ? Math.max(MOBILE_MIN_PX, spec.min ?? 0) : (spec.min ?? 0);
     const max = spec.max ?? Infinity;
     return Math.max(min, Math.min(max, raw));
@@ -162,10 +125,10 @@
     const s = resolvePreset(pin) || {};
     const font = FONTS[s.font] || FONTS.body;
     const fontSize = computeFontSize(pin, currentZoom);
-    const weight = String(s.weight ?? (s.bold ? 700 : 400));
+    const weightClass = `font-${s.weight || 'normal'}`;
     const style = s.italic ? 'italic' : 'normal';
     const extra = extraStyles(s);
-    const sizeClass = s.sizeClass || 'text-base';
+    const sizeClass = getSizeClass(s.size);
     const colorClass = s.colorClass || 'text-black';
 
     const a = pin.a || [pin.x, pin.y];
@@ -218,13 +181,22 @@
     const align = flip && rawAlign === 'left' ? 'right' : flip && rawAlign === 'right' ? 'left' : rawAlign;
     const startOffset = align === 'left' ? '0%' : align === 'right' ? '100%' : '50%';
     const textAnchor = align === 'left' ? 'start' : align === 'right' ? 'end' : 'middle';
+    // Vertical placement of text relative to the path:
+    //   'top'      — path sits above the text (text hangs below)
+    //   'middle'   — path runs through the middle of the glyphs
+    //   'baseline' — default, glyphs sit on the path
+    const baselineMode = pin.textBaseline || 'baseline';
+    const dominantBaseline =
+      baselineMode === 'middle' ? 'central' :
+      baselineMode === 'top'    ? 'hanging' :
+      'alphabetic';
     const pathId = `path-${pin.id}`;
 
     const isSelected = pin.id === selectedId;
     // Selected paths always render (so the user can see what they're
     // editing); non-selected ones hide below their minZoom threshold.
     const labelHidden = !isSelected && currentScale(z) < scaleAt(pin.minZoom ?? KIND_DEFAULTS.path?.minZoom ?? 0);
-    const textStyle = `font-family: ${font}; font-size: ${fontSize.toFixed(1)}px; font-weight: ${weight}; font-style: ${style}; ${extra}`;
+    const textStyle = `font-family: ${font}; font-size: ${fontSize.toFixed(1)}px; font-style: ${style}; ${extra}`;
 
     let handles = '';
     const isEditing = editable && isSelected;
@@ -245,7 +217,7 @@
     const visibleStroke = isEditing
       ? `<path class="path-stroke" d="${d}" fill="none"/>`
       : '';
-    const html = `<div class="map-path${selClass}${hiddenClass}" data-pin-id="${pin.id}"><svg class="path-text" width="${cssW}" height="${cssH}" viewBox="0 0 ${cssW} ${cssH}"><defs><path id="${pathId}" d="${d}" fill="none"/></defs>${visibleStroke}<text class="${sizeClass} ${colorClass}" text-anchor="${textAnchor}" style="${textStyle}"><textPath href="#${pathId}" startOffset="${startOffset}">${esc(pin.name)}</textPath></text></svg>${handles}</div>`;
+    const html = `<div class="map-path${selClass}${hiddenClass}" data-pin-id="${pin.id}"><svg class="path-text" width="${cssW}" height="${cssH}" viewBox="0 0 ${cssW} ${cssH}"><defs><path id="${pathId}" d="${d}" fill="none"/></defs>${visibleStroke}<text class="${sizeClass} ${colorClass} ${weightClass}" text-anchor="${textAnchor}" dominant-baseline="${dominantBaseline}" style="${textStyle}"><textPath href="#${pathId}" startOffset="${startOffset}">${esc(pin.name)}</textPath></text></svg>${handles}</div>`;
 
     // Marker sits at A; iconAnchor positions A within the CSS-pixel bbox.
     const anchorX = (a[0] - minX) * zoomScale;
@@ -273,14 +245,14 @@
       const s = resolvePreset(pin) || {};
       const font = FONTS[s.font] || FONTS.body;
       const size = computeFontSize(pin, currentZoom);
-      const weight = String(s.weight ?? (s.bold ? 700 : 400));
+      const weightClass = `font-${s.weight || 'normal'}`;
       const style = s.italic ? 'italic' : 'normal';
       const transforms = [];
       if (pin.rotate) transforms.push(`rotate(${pin.rotate}deg)`);
       const transformStyle = transforms.length ? `transform: ${transforms.join(' ')};` : '';
       const extra = extraStyles(s);
-      const textStyle = `font-family: ${font}; font-size: ${size.toFixed(1)}px; font-weight: ${weight}; font-style: ${style}; ${extra}`;
-      const sizeClass = s.sizeClass || 'text-base';
+      const textStyle = `font-family: ${font}; font-size: ${size.toFixed(1)}px; font-style: ${style}; ${extra}`;
+      const sizeClass = getSizeClass(s.size);
       const colorClass = s.colorClass || 'text-black';
 
       // If the text has a bounding box, render inside a sized flex container
@@ -292,7 +264,8 @@
         const z = currentZoom ?? map?.getZoom() ?? REF_ZOOM;
         const rawZoomScale = map?.options?.crs?.scale ? map.options.crs.scale(z) : Math.pow(2, z);
         const pivot = pin.shrink ? (pin.minZoom ?? REF_ZOOM) : REF_ZOOM;
-        const unclamped = (resolvePreset(pin) ?? PIN_LABEL_SIZE).base * Math.pow(2, z - pivot);
+        const rp = resolvePreset(pin);
+        const unclamped = (rp ? sizeSpec(rp.size) : PIN_LABEL_SIZE).base * Math.pow(2, z - pivot);
         const clampRatio = unclamped > 0 ? size / unclamped : 1;
         const zoomScale = rawZoomScale * clampRatio;
         const cssW = pin.width * zoomScale;
@@ -307,7 +280,7 @@
         const selClass = isEditing ? ' selected' : '';
         const handles = isEditing ? HANDLE_POSITIONS.map(h =>
           `<div class="resize-handle handle-${h}" data-handle="${h}" data-pin-id="${pin.id}"></div>`).join('') : '';
-        const html = `<div class="map-text-box${selClass}" style="${boxStyle}" data-pin-id="${pin.id}"><div class="map-label map-label-boxed ${sizeClass} ${colorClass}" style="${textStyle}"><span class="map-label-text">${esc(pin.name)}</span></div>${handles}</div>`;
+        const html = `<div class="map-text-box${selClass}" style="${boxStyle}" data-pin-id="${pin.id}"><div class="map-label map-label-boxed ${sizeClass} ${colorClass} ${weightClass}" style="${textStyle}"><span class="map-label-text">${esc(pin.name)}</span></div>${handles}</div>`;
         return L.divIcon({
           className: '',
           html,
@@ -316,7 +289,7 @@
         });
       }
 
-      const html = `<div class="map-label ${sizeClass} ${colorClass}" style="${textStyle} ${transformStyle}">${esc(pin.name)}</div>`;
+      const html = `<div class="map-label ${sizeClass} ${colorClass} ${weightClass}" style="${textStyle} ${transformStyle}">${esc(pin.name)}</div>`;
       return L.divIcon({
         className: '',
         html,
@@ -337,21 +310,21 @@
     const s = resolvePreset(pin) || {};
     const font = FONTS[s.font] || FONTS.body;
     const size = computeFontSize(pin, currentZoom);
-    const weight = String(s.weight ?? (s.bold ? 700 : 400));
+    const pinWeightClass = `font-${s.weight || 'normal'}`;
     const style = s.italic ? 'italic' : 'normal';
     const extra = extraStyles(s);
-    const labelStyle = `font-family: ${font}; font-size: ${size.toFixed(1)}px; font-weight: ${weight}; font-style: ${style}; ${extra}`;
-    const pinSizeClass = s.sizeClass || 'text-base';
+    const labelStyle = `font-family: ${font}; font-size: ${size.toFixed(1)}px; font-style: ${style}; ${extra}`;
+    const pinSizeClass = getSizeClass(s.size);
     const pinColorClass = s.colorClass || 'text-black';
     // Overworld pins render a glyph (✪, ◉, …) instead of a numbered circle.
-    const preset = pin.class ? PIN_PRESETS.find(p => p.id === pin.class) : null;
+    const preset = pin.class ? PIN_PRESETS[pin.class] : null;
     const isOverworld = preset?.category === 'overworld';
     const markClass = isOverworld ? 'map-pin-glyph' : 'map-pin-number';
     const markContent = isOverworld ? esc(preset.icon) : pin.number;
     const markStyle = isOverworld ? `font-size: ${Math.max(20, size).toFixed(1)}px;` : '';
     return L.divIcon({
       className: '',
-      html: `<div class="map-pin label-pos-${pin.labelPos || 'n'}${pin.id === selectedId ? ' selected' : ''}${isOverworld ? ' overworld' : ''}${labelHidden ? ' label-hidden' : ''}"><span class="map-pin-label ${pinSizeClass} ${pinColorClass}" style="${labelStyle}">${label}</span><span class="${markClass}" style="${markStyle}">${markContent}</span></div>`,
+      html: `<div class="map-pin label-pos-${pin.labelPos || 'n'}${pin.id === selectedId ? ' selected' : ''}${isOverworld ? ' overworld' : ''}${labelHidden ? ' label-hidden' : ''}"><span class="map-pin-label ${pinSizeClass} ${pinColorClass} ${pinWeightClass}" style="${labelStyle}">${label}</span><span class="${markClass}" style="${markStyle}">${markContent}</span></div>`,
       iconSize: [28, 28],
       iconAnchor: [14, 14],
     });
@@ -820,28 +793,6 @@
       L.imageOverlay(imageUrl, bounds).addTo(map);
     }
 
-    // Constrain panning to the image plus MAP_PADDING (CSS px) on every
-    // side. Viscosity 0 lets the user pan past the bounds freely; we
-    // animate back once the gesture stops (iOS-style rubber band).
-    map.options.maxBoundsViscosity = 0;
-    updateMaxBounds();
-    map.on('zoomend', updateMaxBounds);
-
-    // Snap back to bounds after the user stops panning (drag end or
-    // a quiet period after the last trackpad/wheel event).
-    let snapBackTimer = null;
-    function scheduleSnapBack(delay = 180) {
-      if (snapBackTimer) clearTimeout(snapBackTimer);
-      snapBackTimer = setTimeout(() => {
-        snapBackTimer = null;
-        const b = map.options.maxBounds;
-        if (!b) return;
-        const c = map.getCenter();
-        const target = L.latLngBounds(b).contains(c) ? null : map._limitCenter(c, map.getZoom(), b);
-        if (target && !target.equals(c)) map.panTo(target, { animate: true, duration: 0.25 });
-      }, delay);
-    }
-    map.on('dragend', () => scheduleSnapBack(0));
 
     // Gold border traced around the image's bounds so the frame hugs
     // the tiles rather than the map container (which may be larger
@@ -943,12 +894,7 @@
         const clamped = Math.max(minZoom, Math.min(maxZoom, zoom));
         map.setZoomAround(map.mouseEventToContainerPoint(e), clamped, { animate: false });
       } else if (isTrackpad(e)) {
-        // Trackpad scroll — pan. Amplify deltas as the user zooms out
-        // so the visible map keeps moving at a comfortable rate instead
-        // of crawling when the whole image fits the viewport.
-        const mult = Math.max(1, maxZoom - map.getZoom() + 1);
-        map.panBy([e.deltaX * mult, e.deltaY * mult], { animate: false });
-        scheduleSnapBack();
+        map.panBy([e.deltaX, e.deltaY], { animate: false });
       } else {
         // Mouse wheel — zoom around the cursor
         const zoom = map.getZoom() - e.deltaY * 0.01;
