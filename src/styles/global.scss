@@ -546,7 +546,7 @@ pre {
 // ============================================================================
 
 ul, ol {
-  padding-inline-start: calc(var(--space) * 1.5);
+  padding-inline-start: var(--indent);
   margin: 0 0 var(--space);
 
   ul, ol {
@@ -558,13 +558,13 @@ ul {
   list-style: none;
 
   > li {
-    text-indent: -1.2em;
+    text-indent: calc(var(--indent) * -1);
 
     &::before {
       content: '❖\00a0\00a0';
       display: inline-block;
       text-indent: 0;
-      width: 1.2em;
+      width: var(--indent);
       color: var(--subheading-color);
       font-size: 0.7em;
       font-family: 'Apple Symbols', 'Segoe UI Symbol', sans-serif;

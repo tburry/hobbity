@@ -42,6 +42,10 @@
   // Spacing (8px grid)
   --space: 16px;
   --space-sm: 8px;
+  // Hanging-indent width for list items: padding-inline-start on the
+  // <ul>/<ol> and the bullet gutter sum to this, so wrapped lines and
+  // the first line share the same left edge.
+  --indent: 24px;
 
   // Layout
   --content-width: 900px;
