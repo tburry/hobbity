@@ -1,0 +1,4 @@
+// Map editor styles — imports the shared map viewer styles and adds
+// editor-specific overrides. Only loaded by the editor, never by the
+// Astro site.
+@use '../../src/components/map/map-viewer';
