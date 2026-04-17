@@ -332,6 +332,10 @@ $halo-color-light: color.adjust($halo-color, $lightness: 0.3%);
     border-radius: var(--border-radius, 5px);
     overflow: hidden;
   }
+  // Touch-only devices pinch-zoom, so the buttons just take up space.
+  @media (hover: none) {
+    .leaflet-control-zoom { display: none !important; }
+  }
   .leaflet-control-zoom a,
   .leaflet-control-zoom a:hover {
     cursor: pointer;
