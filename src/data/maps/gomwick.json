@@ -61,9 +61,9 @@
       "class": "shop",
       "number": "6",
       "name": "The Happy Hobbit Inn & Tavern",
-      "x": 4712,
-      "y": 2213,
-      "labelPos": "se",
+      "x": 4740,
+      "y": 2255,
+      "labelPos": "e",
       "description": "The Happy Hobbit Inn & Tavern"
     },
     {
@@ -71,9 +71,9 @@
       "class": "residence",
       "number": "6a",
       "name": "The Happy West House",
-      "x": 4513,
-      "y": 2402,
-      "labelPos": "se"
+      "x": 4530,
+      "y": 2409,
+      "labelPos": "e"
     },
     {
       "kind": "pin",
@@ -89,18 +89,17 @@
       "class": "residence",
       "number": "7",
       "name": "The Happy Storage",
-      "x": 5132,
-      "y": 1806,
-      "labelPos": "se"
+      "x": 5160,
+      "y": 1824,
+      "labelPos": "e"
     },
     {
       "kind": "pin",
       "class": "shop",
       "number": "8",
       "name": "The Happy Barn & Stables",
-      "x": 5378,
-      "y": 1708,
-      "labelPos": "e"
+      "x": 5399,
+      "y": 1708
     },
     {
       "kind": "pin",
@@ -151,7 +150,7 @@
       "name": "Cousin Roland's Smithy",
       "x": 3925,
       "y": 3298,
-      "labelPos": "ne"
+      "labelPos": "e"
     },
     {
       "kind": "pin",
@@ -160,7 +159,7 @@
       "name": "All Things Metal",
       "x": 3988,
       "y": 3535,
-      "labelPos": "se"
+      "labelPos": "e"
     },
     {
       "kind": "pin",
@@ -223,22 +222,24 @@
       "class": "road",
       "name": "The Heart Road",
       "a": [
-        6249,
-        1717
+        6020,
+        1769
       ],
       "b": [
-        7141,
-        1668
+        7110,
+        1646
       ],
       "mode": "bezier",
       "cpA": [
-        6454,
-        1676
+        6249,
+        1658
       ],
       "cpB": [
-        6962,
-        1645
+        6866,
+        1634
       ],
+      "textAlign": "right",
+      "textBaseline": "middle",
       "description": "The Heart Road stretches eastward toward The Right Way Inn and Thistledown."
     },
     {
@@ -256,10 +257,10 @@
       "kind": "text",
       "class": "pond-marsh",
       "name": "Nettle's Pond",
-      "x": 5742,
-      "y": 3323,
-      "width": 1939,
-      "height": 1603
+      "x": 5795,
+      "y": 3229,
+      "width": 2044,
+      "height": 1792
     },
     {
       "kind": "text",
