@@ -57,17 +57,56 @@
     leafletReady = !!window.L;
   }
 
-  function close() { open = false; }
+  /** Deep-link hash for this overlay: `#<slug>-map`. */
+  const hash = $derived(`#${slug}-map`);
+  // Tracks whether we pushed our own history entry. Lets close() decide
+  // between `history.back()` (pop our entry — same effect as the browser
+  // back button) and `replaceState` (drop the hash without stepping back
+  // into a previous page the user didn't come from).
+  let pushedEntry = false;
+
+  function openOverlay() {
+    fitMode = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches ? 'height' : 'bounds';
+    open = true;
+    ensureLeaflet();
+    if (location.hash !== hash) {
+      history.pushState(null, '', hash);
+      pushedEntry = true;
+    }
+  }
+
+  function close() {
+    if (pushedEntry) {
+      // Popping our pushed entry fires popstate/hashchange, which the
+      // listener uses to set `open = false`. Avoids leaving a stale
+      // hashed entry in history that forces a double-back to leave.
+      pushedEntry = false;
+      history.back();
+    } else {
+      open = false;
+      if (location.hash === hash) {
+        history.replaceState(null, '', location.pathname + location.search);
+      }
+    }
+  }
 
   $effect(() => {
-    const handler = (e) => {
+    const openHandler = (e) => {
       if (e.detail?.slug !== slug) return;
-      fitMode = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches ? 'height' : 'bounds';
-      open = true;
-      ensureLeaflet();
+      openOverlay();
     };
-    window.addEventListener('map-preview-open', handler);
-    return () => window.removeEventListener('map-preview-open', handler);
+    const hashHandler = () => {
+      if (location.hash === hash && !open) openOverlay();
+      else if (location.hash !== hash && open) open = false;
+    };
+    window.addEventListener('map-preview-open', openHandler);
+    window.addEventListener('hashchange', hashHandler);
+    // Auto-open on mount if the page loaded with this overlay's hash.
+    if (location.hash === hash) openOverlay();
+    return () => {
+      window.removeEventListener('map-preview-open', openHandler);
+      window.removeEventListener('hashchange', hashHandler);
+    };
   });
 
   // Scroll lock + Escape-to-close while the overlay is open. Capture
