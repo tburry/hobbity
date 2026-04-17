@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 // ============================================================================
 // Map viewer styles — shared between the Astro site and the map editor.
 // Imported as a side-effect so Svelte's tree-shaker doesn't strip rules
@@ -28,7 +30,7 @@ $halo-color: #faf6f0; // cream parchment tint for text halos — matches --bg
 // the parchment map background. Also shows up nicely when the same
 // classes are used on darker UI backgrounds (e.g. active picker buttons
 // in the editor's style grid).
-$halo-color-light: lighten($halo-color, .3);
+$halo-color-light: color.adjust($halo-color, $lightness: 0.3%);
 .text-black {
   color: #000;
   text-shadow:
