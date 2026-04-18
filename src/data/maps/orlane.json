@@ -44,7 +44,7 @@
     },
     {
       "kind": "pin",
-      "class": "shop",
+      "class": "residence",
       "number": "4",
       "name": "Graven Dairy Farm",
       "x": 1176,
@@ -55,7 +55,7 @@
       "kind": "pin",
       "class": "shop",
       "number": "5",
-      "name": "(new)",
+      "name": "Weaver's House & Shop",
       "x": 1687,
       "y": 4020,
       "anchor": "n",
@@ -65,15 +65,16 @@
       "kind": "pin",
       "class": "shop",
       "number": "6",
-      "name": "(new)",
+      "name": "Golden Grain Inn",
       "x": 1818,
-      "y": 3267
+      "y": 3267,
+      "description": "Owned by Bertram. The cult of Explictica used its tunnels to move abducted families out of town for charming rituals. Set on fire from inside after Zacharias and Derek fled there."
     },
     {
       "kind": "pin",
       "class": "shop",
       "number": "7",
-      "name": "(new)",
+      "name": "Jeweller & Moneychanger",
       "x": 2158,
       "y": 3595,
       "anchor": "s"
@@ -82,16 +83,15 @@
       "kind": "pin",
       "class": "shop",
       "number": "8",
-      "name": "The Golden Grain Inn",
+      "name": "Livery Stable",
       "x": 2521,
-      "y": 3276,
-      "description": "Burned down. Owned by Bertram. The cult of Explictica used its tunnels to move abducted families out of town for charming rituals. Set on fire from inside after Zacharias and Derek fled there."
+      "y": 3276
     },
     {
       "kind": "pin",
-      "class": "shop",
+      "class": "residence",
       "number": "9",
-      "name": "(new)",
+      "name": "House",
       "x": 3316,
       "y": 3447,
       "anchor": "s"
@@ -100,7 +100,7 @@
       "kind": "pin",
       "class": "residence",
       "number": "10",
-      "name": "Zacharias' House",
+      "name": "Zaccarias' House",
       "x": 3701,
       "y": 3237
     },
@@ -108,7 +108,7 @@
       "kind": "pin",
       "class": "shop",
       "number": "11",
-      "name": "(new)",
+      "name": "Tailor",
       "x": 4705,
       "y": 3667,
       "anchor": "s"
@@ -116,8 +116,18 @@
     {
       "kind": "pin",
       "class": "shop",
+      "number": "12",
+      "name": "Village Store",
+      "x": 2679,
+      "y": 3909,
+      "anchor": "n",
+      "labelPos": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "residence",
       "number": "13",
-      "name": "Foo",
+      "name": "Rundown Farmhouse",
       "x": 4560,
       "y": 4240
     },
@@ -125,7 +135,7 @@
       "kind": "pin",
       "class": "shop",
       "number": "14",
-      "name": "(new)",
+      "name": "Carpenter's Shop",
       "x": 5668,
       "y": 4183,
       "anchor": "s"
@@ -134,7 +144,7 @@
       "kind": "pin",
       "class": "shop",
       "number": "15",
-      "name": "(new)",
+      "name": "Blacksmith",
       "x": 5340,
       "y": 3751,
       "anchor": "s"
@@ -143,34 +153,34 @@
       "kind": "pin",
       "class": "shop",
       "number": "16",
-      "name": "(new)",
+      "name": "The Foaming Mug",
       "x": 5796,
       "y": 3616,
       "anchor": "s"
     },
     {
       "kind": "pin",
-      "class": "shop",
+      "class": "residence",
       "number": "17",
-      "name": "(new)",
+      "name": "Cottage",
       "x": 6267,
       "y": 4143,
       "anchor": "s"
     },
     {
       "kind": "pin",
-      "class": "shop",
+      "class": "residence",
       "number": "18",
-      "name": "(new)",
-      "x": 6155,
-      "y": 3611,
-      "anchor": "s"
+      "name": "Featherbrow Farmhouse & Barn",
+      "x": 6331,
+      "y": 3575,
+      "labelPos": "s"
     },
     {
       "kind": "pin",
-      "class": "shop",
+      "class": "residence",
       "number": "19",
-      "name": "(new)",
+      "name": "Whitefoot Farmhouse",
       "x": 5748,
       "y": 3193,
       "anchor": "s"
@@ -179,11 +189,11 @@
       "kind": "pin",
       "class": "residence",
       "number": "20",
-      "name": "Vilma's House",
+      "name": "Vilma Merridie's Cottage",
       "x": 4591,
       "y": 2530,
       "anchor": "s",
-      "description": "Home of the friendly window, Vilma."
+      "description": "Small, neatly kept cottage. Home of the friendly window, Vilma."
     },
     {
       "kind": "pin",
@@ -196,27 +206,27 @@
     },
     {
       "kind": "pin",
-      "class": "shop",
+      "class": "residence",
       "number": "22",
-      "name": "(new)",
+      "name": "Shabby Farmhouse & Barn",
       "x": 3897,
       "y": 1301,
       "anchor": "s"
     },
     {
       "kind": "pin",
-      "class": "shop",
+      "class": "residence",
       "number": "23",
-      "name": "(new)",
+      "name": "Prosperous Farmhouse & Barn",
       "x": 1684,
       "y": 1190,
       "anchor": "s"
     },
     {
       "kind": "pin",
-      "class": "shop",
+      "class": "residence",
       "number": "24",
-      "name": "(new)",
+      "name": "House",
       "x": 1277,
       "y": 645,
       "anchor": "s"
@@ -234,7 +244,7 @@
       "kind": "pin",
       "class": "shop",
       "number": "26",
-      "name": "(new)",
+      "name": "Millhouse",
       "x": 2351,
       "y": 2169,
       "anchor": "s"
@@ -243,7 +253,7 @@
       "kind": "pin",
       "class": "residence",
       "number": "27",
-      "name": "Ramne’s Cottage",
+      "name": "Grove of Stately Elms",
       "x": 720,
       "y": 1803,
       "description": "Half-buried stone cottage west of the Slumbering Serpent. Home to the druid, Ramne."
