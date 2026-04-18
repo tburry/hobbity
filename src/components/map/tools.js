@@ -25,6 +25,99 @@
  *   - hideRect()              — remove rectangle preview
  */
 
+/** CSS class emitted per size, so text-shadow rules can target by size. */
+const SIZE_CLASSES = {
+  title:   'text-xl',
+  large:   'text-lg',
+  regular: 'text-base',
+  small:   'text-sm',
+};
+
+/**
+ * Named font-size specs. Each returns { base, min, max } in CSS pixels,
+ * where `base` is the size at zoom 2 (REF_ZOOM); the renderer scales linearly
+ * with zoom (2^(z - 2)) and clamps to [min, max]. Presets reference these by
+ * name via `size(name)` so sizes stay consistent across presets.
+ */
+const SIZES = {
+  title:    { base: 48, min: 16, max: 96 }, // map title only
+  large:    { base: 24, min: 14, max: 56 },
+  regular:  { base: 18, min: 12, max: 28 },
+  small:    { base: 14, min: 10, max: 24 },
+  xsmall:   { base: 12, min: 10, max: 24 },
+};
+
+/**
+ * Typography presets for numbered Pin labels. Each `defaults` spreads a named
+ * size spec plus style fields. font/case/letterSpacing/italic/bold come from
+ * the preset, not the pin.
+ */
+export const PIN_PRESETS = {
+  // Overworld — each preset picks a glyph that doubles as the pin icon.
+  capital:   { category: 'overworld', icon: '✪', label: 'Capital',       size: 'large',   font: 'title',   weight: 'bold' },
+  city:      { category: 'overworld', icon: '◉', label: 'City',          size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 1 },
+  fortress:  { category: 'overworld', icon: '⛫', label: 'Fortress',      size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 1 },
+  town:      { category: 'overworld', icon: '◼', label: 'Town',          size: 'regular', font: 'heading' },
+  tower:     { category: 'overworld', icon: '♖', label: 'Tower',         size: 'regular', font: 'heading' },
+  temple:    { category: 'overworld', icon: '\u26EA\uFE0E', label: 'Temple', size: 'regular', font: 'heading' },
+  mine:      { category: 'overworld', icon: '⚒', label: 'Mine',          size: 'regular', font: 'heading' },
+  cave:      { category: 'overworld', icon: '⍢', label: 'Cave',          size: 'regular', font: 'heading' },
+  ruin:      { category: 'overworld', icon: '⛬', label: 'Ruin',          size: 'regular', font: 'heading' },
+  camp:      { category: 'overworld', icon: '⛺\uFE0E', label: 'Camp',    size: 'regular', font: 'body' },
+  village:   { category: 'overworld', icon: '•', label: 'Village',       size: 'small',   font: 'body' },
+  bridge:    { category: 'overworld', icon: '≏', label: 'Bridge',        size: 'small',   font: 'body' },
+  mountain:  { category: 'overworld', icon: '⛰', label: 'Mountain',      size: 'small',   font: 'body' },
+  // Town — picked from a grid (no icon glyph; uses numbered circle).
+  landmark:  { category: 'town', label: 'Landmark',          size: 'regular', font: 'heading', weight: 'bold', case: 'upper', colorClass: 'text-heading' },
+  gate:      { category: 'town', label: 'Gate',              size: 'regular', font: 'heading', weight: 'bold', case: 'upper' },
+  poi:       { category: 'town', label: 'Point of Interest', size: 'regular', font: 'title',   weight: 'bold', colorClass: 'text-title' },
+  shop: {
+    category: 'town', label: 'Shop / Inn', size: 'small', font: 'body', weight: 'semibold' },
+  residence: {
+    category: 'town', label: 'Minor Structure', size: 'small', font: 'body' },
+};
+
+export const TEXT_PRESETS = {
+  'map-title':   { label: 'Map Title',            size: 'title',   font: 'title',   colorClass: 'text-title' },
+  continent:     { label: 'Country',              size: 'large',   font: 'title',   case: 'upper', letterSpacing: 4, colorClass: 'text-heading' },
+  ocean:         { label: 'Ocean, Sea',           size: 'large',   font: 'heading', italic: true, case: 'upper', letterSpacing: 6 },
+  lake:          { label: 'Lake, Bay',            size: 'large',   font: 'heading', italic: true, case: 'upper', letterSpacing: 4 },
+  range:         { label: 'Mountain Range',       size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3 },
+  forest:        { label: 'Forest',               size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 4 },
+  region:        { label: 'Region',               size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3 },
+  district:      { label: 'District',             size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 2 },
+  'civic-space': { label: 'Civic Space',          size: 'regular', font: 'heading', case: 'upper', letterSpacing: 3 },
+  desert:        { label: 'Desert, Plain',        size: 'regular', font: 'body',    case: 'upper', letterSpacing: 4 },
+  hills:         { label: 'Hills, Valley',        size: 'regular', font: 'heading', case: 'title', letterSpacing: 1 },
+  island:        { label: 'Island, Archipelago',  size: 'small',   font: 'body',    case: 'upper', letterSpacing: 2 },
+  'pond-marsh':  { label: 'Pond, Swamp, Marsh',   size: 'regular', font: 'body', italic: true, case: 'title' },
+};
+
+// Path features render as text flowing along an invisible curve. The
+// preset controls typography only — there is no stroke style since the
+// line isn't drawn.
+// Grouped by kind (Borders, Roads, Water), then by prominence inside
+// each group so the picker reads top-to-bottom as strongest → weakest.
+export const PATH_PRESETS = {
+  'major-border': {
+    label: 'National Border', size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3 },
+  'minor-border': {
+    label: 'Regional Border', size: 'small',   font: 'body',    case: 'upper', letterSpacing: 3 },
+  highway: {
+    label: 'Highway',         size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3 },
+  road: {
+    label: 'Road', size: 'small', font: 'heading', case: 'title', letterSpacing: 1 },
+  trail: {
+    label: 'Trail, Pass', size: 'xsmall', font: 'body',    case: 'title', letterSpacing: 1 },
+  wall: {
+    label: 'Wall', size: 'small', font: 'heading', case: 'upper', letterSpacing: 3 },
+  river: {
+    label: 'River', size: 'small', font: 'heading', italic: true, case: 'title', letterSpacing: 2 },
+  stream: {
+    label: 'Stream', size: 'xsmall', font: 'body', italic: true, case: 'title', letterSpacing: 2 },
+};
+
+
 const selectTool = {
   id: 'select',
   label: 'Select',
@@ -131,27 +224,6 @@ export const TOOLS = {
 
 export const TOOL_LIST = [selectTool, pinTool, textTool, pathTool];
 
-/**
- * Named font-size specs. Each returns { base, min, max } in CSS pixels,
- * where `base` is the size at zoom 2 (REF_ZOOM); the renderer scales linearly
- * with zoom (2^(z - 2)) and clamps to [min, max]. Presets reference these by
- * name via `size(name)` so sizes stay consistent across presets.
- */
-const SIZES = {
-  title:   { base: 48, min: 16, max: 96 }, // map title only
-  large:   { base: 24, min: 14, max: 56 },
-  regular: { base: 18, min: 12, max: 32 },
-  small:   { base: 16, min: 10, max: 20 },
-};
-
-/** CSS class emitted per size, so text-shadow rules can target by size. */
-const SIZE_CLASSES = {
-  title:   'text-xl',
-  large:   'text-lg',
-  regular: 'text-base',
-  small:   'text-sm',
-};
-
 export function sizeSpec(name) {
   return SIZES[name] || SIZES.regular;
 }
@@ -174,6 +246,7 @@ export const KIND_DEFAULTS = {
     minZoom: DEFAULT_MARKER_MIN_ZOOM,
     class: 'shop',
     labelPos: 'n',
+    anchor: 'center',
   },
   text: {
     minZoom: 1,
@@ -189,66 +262,6 @@ export const KIND_DEFAULTS = {
     textBaseline: 'baseline',
     flip: false,
   },
-};
-
-/**
- * Typography presets for numbered Pin labels. Each `defaults` spreads a named
- * size spec plus style fields. font/case/letterSpacing/italic/bold come from
- * the preset, not the pin.
- */
-export const PIN_PRESETS = {
-  // Overworld — each preset picks a glyph that doubles as the pin icon.
-  capital:   { category: 'overworld', icon: '✪', label: 'Capital',       size: 'large',   font: 'title',   weight: 'bold' },
-  city:      { category: 'overworld', icon: '◉', label: 'City',          size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 1 },
-  fortress:  { category: 'overworld', icon: '⛫', label: 'Fortress',      size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 1 },
-  town:      { category: 'overworld', icon: '◼', label: 'Town',          size: 'regular', font: 'heading' },
-  tower:     { category: 'overworld', icon: '♖', label: 'Tower',         size: 'regular', font: 'heading' },
-  temple:    { category: 'overworld', icon: '\u26EA\uFE0E', label: 'Temple', size: 'regular', font: 'heading' },
-  mine:      { category: 'overworld', icon: '⚒', label: 'Mine',          size: 'regular', font: 'heading' },
-  cave:      { category: 'overworld', icon: '⍢', label: 'Cave',          size: 'regular', font: 'heading' },
-  ruin:      { category: 'overworld', icon: '⛬', label: 'Ruin',          size: 'regular', font: 'heading' },
-  camp:      { category: 'overworld', icon: '⛺\uFE0E', label: 'Camp',    size: 'regular', font: 'body' },
-  village:   { category: 'overworld', icon: '•', label: 'Village',       size: 'small',   font: 'body' },
-  bridge:    { category: 'overworld', icon: '≏', label: 'Bridge',        size: 'small',   font: 'body' },
-  mountain:  { category: 'overworld', icon: '⛰', label: 'Mountain',      size: 'small',   font: 'body' },
-  // Town — picked from a grid (no icon glyph; uses numbered circle).
-  landmark:  { category: 'town', label: 'Landmark',          size: 'regular', font: 'heading', weight: 'bold', case: 'upper', colorClass: 'text-heading' },
-  gate:      { category: 'town', label: 'Gate',              size: 'regular', font: 'heading', weight: 'bold', case: 'upper' },
-  poi:       { category: 'town', label: 'Point of Interest', size: 'regular', font: 'title',   weight: 'bold', colorClass: 'text-title' },
-  shop:      { category: 'town', label: 'Shop / Inn',        size: 'small',   font: 'body', weight: 'semibold' },
-  residence: { category: 'town', label: 'Minor Structure',   size: 'small',   font: 'body' },
-};
-
-export const TEXT_PRESETS = {
-  'map-title':   { label: 'Map Title',            size: 'title',   font: 'title',   colorClass: 'text-title' },
-  continent:     { label: 'Country',              size: 'large',   font: 'title',   case: 'upper', letterSpacing: 4, colorClass: 'text-heading' },
-  ocean:         { label: 'Ocean, Sea',           size: 'large',   font: 'heading', italic: true, case: 'upper', letterSpacing: 6 },
-  lake:          { label: 'Lake, Bay',            size: 'large',   font: 'heading', italic: true, case: 'upper', letterSpacing: 4 },
-  range:         { label: 'Mountain Range',       size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3 },
-  forest:        { label: 'Forest',               size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 4 },
-  region:        { label: 'Region',               size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3 },
-  district:      { label: 'District',             size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 2 },
-  'civic-space': { label: 'Civic Space',          size: 'regular', font: 'heading', case: 'upper', letterSpacing: 3 },
-  desert:        { label: 'Desert, Plain',        size: 'regular', font: 'body',    case: 'upper', letterSpacing: 4 },
-  hills:         { label: 'Hills, Valley',        size: 'regular', font: 'heading', case: 'title', letterSpacing: 1 },
-  island:        { label: 'Island, Archipelago',  size: 'small',   font: 'body',    case: 'upper', letterSpacing: 2 },
-  'pond-marsh':  { label: 'Pond, Swamp, Marsh',   size: 'regular', font: 'body', italic: true, case: 'title' },
-};
-
-// Path features render as text flowing along an invisible curve. The
-// preset controls typography only — there is no stroke style since the
-// line isn't drawn.
-// Grouped by kind (Borders, Roads, Water), then by prominence inside
-// each group so the picker reads top-to-bottom as strongest → weakest.
-export const PATH_PRESETS = {
-  'major-border': { label: 'National Border', size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 2 },
-  'minor-border': { label: 'Regional Border', size: 'small',   font: 'body',    case: 'upper', letterSpacing: 2 },
-  highway:        { label: 'Highway',         size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 2 },
-  road:           { label: 'Road',            size: 'regular', font: 'heading', case: 'title' },
-  trail:          { label: 'Trail, Pass',     size: 'small',   font: 'body',    case: 'title' },
-  wall:           { label: 'Wall',            size: 'regular', font: 'heading', case: 'upper', letterSpacing: 2 },
-  river:          { label: 'River',           size: 'regular', font: 'heading', italic: true, case: 'title' },
-  stream:         { label: 'Stream',          size: 'small',   font: 'body',    italic: true, case: 'title' },
 };
 
 export function findPreset(id) {
