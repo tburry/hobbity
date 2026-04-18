@@ -20,9 +20,8 @@
       "class": "residence",
       "number": "1",
       "name": "Pleasant Farm House & Barn",
-      "x": 873,
-      "y": 3517,
-      "anchor": "s"
+      "x": 616,
+      "y": 3697
     },
     {
       "kind": "pin",
@@ -34,11 +33,11 @@
     },
     {
       "kind": "pin",
-      "class": "shop",
+      "class": "residence",
       "number": "3",
-      "name": "(new)",
-      "x": 1284,
-      "y": 4064,
+      "name": "Longhouse",
+      "x": 1278,
+      "y": 4059,
       "anchor": "n",
       "labelPos": "s"
     },
@@ -56,10 +55,9 @@
       "class": "shop",
       "number": "5",
       "name": "Weaver's House & Shop",
-      "x": 1687,
-      "y": 4020,
-      "anchor": "n",
-      "labelPos": "s"
+      "x": 1677,
+      "y": 3770,
+      "anchor": "s"
     },
     {
       "kind": "pin",
