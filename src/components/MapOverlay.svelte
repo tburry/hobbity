@@ -10,6 +10,7 @@
     slug,
     title = slug,
     pins = [],
+    halo = null,
     tileBasePath,
     tileMaxZoom,
     tileSize,
@@ -147,6 +148,7 @@
         minZoom={0}
         maxZoom={tileMaxZoom}
         {pins}
+        {halo}
         editable={false}
       />
     {:else}

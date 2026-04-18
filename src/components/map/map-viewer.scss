@@ -1,5 +1,3 @@
-@use 'sass:color';
-
 // ============================================================================
 // Map viewer styles — shared between the Astro site and the map editor.
 // Imported as a side-effect so Svelte's tree-shaker doesn't strip rules
@@ -7,7 +5,12 @@
 // Astro site and by the map editor's map-editor.scss.
 // ============================================================================
 
-$halo-color: #faf6f0; // cream parchment tint for text halos — matches --bg
+:root {
+  --halo: #faf6f0; // cream parchment tint for text halos — matches --bg
+  // Fractionally lighter variant used under .text-black.font-normal so
+  // body-weight text gets a slightly brighter lift.
+  --halo-light: hsl(from var(--halo) h s calc(l + 0.3));
+}
 
 // --- Font family ---
 .font-body    { font-family: var(--body-font, 'Lora', serif); }
@@ -30,42 +33,34 @@ $halo-color: #faf6f0; // cream parchment tint for text halos — matches --bg
 // the parchment map background. Also shows up nicely when the same
 // classes are used on darker UI backgrounds (e.g. active picker buttons
 // in the editor's style grid).
-$halo-color-light: color.adjust($halo-color, $lightness: 0.3%);
 .text-black {
   color: #000;
   text-shadow:
-    1px 1px 0 rgba($halo-color, 0.7),
-    -1px -1px 0 rgba($halo-color, 0.7),
-    0 0 4px $halo-color,
-    0 0 4px $halo-color,
-    0 0 5px $halo-color,
-    // 0 0 6px $halo-color
-    ;
-    // 1px 1px 0 rgba($halo-color, 0.8),
-    // -1px -1px 0 rgba($halo-color, 0.8),
-    // 0 0 4px rgba($halo-color, 0.95),
-    // 0 0 10px rgba($halo-color, 0.75);
+    1px 1px 0 rgb(from var(--halo) r g b / 0.7),
+    -1px -1px 0 rgb(from var(--halo) r g b / 0.7),
+    0 0 4px var(--halo),
+    0 0 4px var(--halo),
+    0 0 5px var(--halo);
 
     &.font-normal {
       text-shadow:
-        1px 1px 0 rgba($halo-color-light, 1),
-        -1px -1px 0 rgba($halo-color-light, 1),
-        0 0 5px $halo-color-light,
-        0 0 5px $halo-color-light,
-        0 0 6px $halo-color-light,
-        0 0 7px $halo-color-light,
-        0 0 8px $halo-color-light;
+        1px 1px 0 var(--halo-light),
+        -1px -1px 0 var(--halo-light),
+        0 0 5px var(--halo-light),
+        0 0 5px var(--halo-light),
+        0 0 6px var(--halo-light),
+        0 0 7px var(--halo-light),
+        0 0 8px var(--halo-light);
     }
 }
 .text-heading,
 .text-title {
   color: var(--heading-color);
   text-shadow:
-    0 0 2px rgba($halo-color, 0.7),
-    0 0 4px rgba($halo-color, 0.7),
-    0 0 6px rgba($halo-color, 0.8),
-    0 0 8px rgba($halo-color, 0.8)
-    ;
+    0 0 2px rgb(from var(--halo) r g b / 0.7),
+    0 0 4px rgb(from var(--halo) r g b / 0.7),
+    0 0 6px rgb(from var(--halo) r g b / 0.8),
+    0 0 8px rgb(from var(--halo) r g b / 0.8);
 }
 
 // iOS Safari ignores CSS text-shadow on SVG <text>. For SVG labels
@@ -77,7 +72,7 @@ $halo-color-light: color.adjust($halo-color, $lightness: 0.3%);
 :where(text).text-title {
   text-shadow: none !important;
   paint-order: stroke fill;
-  stroke: rgba($halo-color, 0.9);
+  stroke: rgb(from var(--halo) r g b / 0.9);
   stroke-linejoin: round;
 }
 :where(text).text-black   { stroke-width: 3px; }
@@ -127,6 +122,21 @@ $halo-color-light: color.adjust($halo-color, $lightness: 0.3%);
     justify-content: center;
     pointer-events: auto !important;
     position: relative;
+
+    // Pin anchor: align the visible number/glyph to the same corner of
+    // the 28×28 hit-box as `iconAnchor` (computed in MapViewer.svelte).
+    // Otherwise a shrunk dot stays centered inside the box and drifts
+    // off the anchor point. flex-direction is column, so `justify-
+    // content` is vertical and `align-items` is horizontal.
+    &.anchor-nw     { align-items: flex-start; justify-content: flex-start; }
+    &.anchor-n      { align-items: center;     justify-content: flex-start; }
+    &.anchor-ne     { align-items: flex-end;   justify-content: flex-start; }
+    &.anchor-w      { align-items: flex-start; justify-content: center; }
+    &.anchor-center { align-items: center;     justify-content: center; }
+    &.anchor-e      { align-items: flex-end;   justify-content: center; }
+    &.anchor-sw     { align-items: flex-start; justify-content: flex-end; }
+    &.anchor-s      { align-items: center;     justify-content: flex-end; }
+    &.anchor-se     { align-items: flex-end;   justify-content: flex-end; }
 
     // Selected: flip the circle's bg/text and give the glyph a
     // matching dark-circle backdrop so the pin reads as "active".
@@ -179,7 +189,7 @@ $halo-color-light: color.adjust($halo-color, $lightness: 0.3%);
     color: #000;
     line-height: 1;
     cursor: grab;
-    text-shadow: 0 0 3px rgba($halo-color, 0.7), 0 0 6px rgba($halo-color, 0.4);
+    text-shadow: 0 0 3px rgb(from var(--halo) r g b / 0.7), 0 0 6px rgb(from var(--halo) r g b / 0.4);
   }
 
   // --- Labels (pin + freeform map labels) ----------------------
@@ -269,6 +279,9 @@ $halo-color-light: color.adjust($halo-color, $lightness: 0.3%);
   .leaflet-marker-icon:has(.map-path.selected) { pointer-events: auto !important; }
   .map-path {
     position: relative;
+    // Own stacking context so z-index on .path-handle is authoritative
+    // over the sibling SVG's <text> within the handle's 12×12 box.
+    isolation: isolate;
     pointer-events: none;
     width: 100%;
     height: 100%;

@@ -7,6 +7,7 @@
     minZoom = $bindable(0),
     shrink = $bindable(false),
     labelPos = $bindable('n'),
+    anchor = $bindable('center'),
   } = $props();
 
   // 8 compass positions arranged in a 3x3 grid (center is the marker).
@@ -19,6 +20,20 @@
     { id: 'sw', row: 3, col: 1, title: 'Label SW' },
     { id: 's',  row: 3, col: 2, title: 'Label S'  },
     { id: 'se', row: 3, col: 3, title: 'Label SE' },
+  ];
+
+  // Pin anchor: which point of the 28x28 pin box sits on the marker's
+  // (x, y) image coordinate. 9 cells in DOM order fill the 3x3 grid.
+  const ANCHOR_POSITIONS = [
+    { id: 'nw',     title: 'Anchor NW' },
+    { id: 'n',      title: 'Anchor N'  },
+    { id: 'ne',     title: 'Anchor NE' },
+    { id: 'w',      title: 'Anchor W'  },
+    { id: 'center', title: 'Anchor Center' },
+    { id: 'e',      title: 'Anchor E'  },
+    { id: 'sw',     title: 'Anchor SW' },
+    { id: 's',      title: 'Anchor S'  },
+    { id: 'se',     title: 'Anchor SE' },
   ];
 
 
@@ -170,6 +185,23 @@
       <span class="pos-center" aria-hidden="true"></span>
     </div>
   </fieldset>
+  <fieldset class="label-pos-field">
+    <legend>Pin Anchor</legend>
+    <div class="anchor-grid" role="radiogroup" aria-label="Pin anchor">
+      {#each ANCHOR_POSITIONS as p}
+        <button
+          type="button"
+          role="radio"
+          aria-checked={anchor === p.id}
+          class="anchor-cell"
+          class:active={anchor === p.id}
+          title={p.title}
+          aria-label={p.title}
+          onclick={() => anchor = p.id}
+        ></button>
+      {/each}
+    </div>
+  </fieldset>
 </div>
 
 <label class="min-zoom-label">
@@ -191,7 +223,7 @@
       class="shrink-toggle"
       class:active={shrink}
       aria-pressed={shrink}
-      title="Start at base size at min zoom and grow proportionally"
+      title="Start at min size at min zoom and grow proportionally"
       onclick={() => shrink = !shrink}
     >Shrink</button>
   </div>
@@ -377,6 +409,32 @@
       var(--panel-bg, #fff);
     pointer-events: none;
   }
+
+  /* Pin Anchor: all 9 cells are clickable. Same look as label-pos-grid
+     but a filled grid (no separate center marker). */
+  .anchor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 22px);
+    grid-template-rows: repeat(3, 22px);
+    gap: 1px;
+    background: var(--panel-border, #5c4a32);
+    border: 1px solid var(--panel-border, #5c4a32);
+    border-radius: 3px;
+    width: fit-content;
+    overflow: hidden;
+  }
+  .anchor-grid .anchor-cell {
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: var(--panel-bg, #fff);
+    border-radius: 0;
+    cursor: pointer;
+  }
+  .anchor-grid .anchor-cell:hover { background: var(--panel-hover, rgba(0,0,0,0.06)); }
+  .anchor-grid .anchor-cell.active { background: var(--panel-accent, #5c4a32); }
 
   .min-zoom-label { display: block; margin-bottom: 0.6rem; font-size: 0.85rem; }
   .zoom-row { display: flex; gap: 6px; margin-top: 0.25rem; align-items: stretch; }

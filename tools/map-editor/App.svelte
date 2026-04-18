@@ -86,7 +86,6 @@
   // then return to the Editor tab without losing their selection.
   let activeTab = $state('markers');
   let editingId = $state(null);
-  let previewId = $state(null);
   let dialogTitle = $state('New Marker');
   let pinNumber = $state('1');
   let pinName = $state('');
@@ -100,6 +99,7 @@
   let pinHeight = $state(0);
   let pinMinZoom = $state(1);
   let pinLabelPos = $state('n'); // marker label position: n/ne/e/se/s/sw/w/nw
+  let pinAnchor = $state('center'); // which point of the pin box sits on (x,y)
   let pinShrink = $state(false);
   // Path feature — the geometry (a, b, cpA, cpB) lives on the pin itself
   // and is mutated via dragging handles. Only the non-geometry fields
@@ -193,7 +193,7 @@
   // the listed ones. Identifying fields come first (kind, class,
   // number/name), then geometry, then style toggles, then metadata.
   const FEATURE_KEY_ORDER = {
-    pin:  ['kind', 'class', 'number', 'name', 'x', 'y', 'labelPos', 'minZoom', 'shrink', 'description', 'link'],
+    pin:  ['kind', 'class', 'number', 'name', 'x', 'y', 'anchor', 'labelPos', 'minZoom', 'shrink', 'description', 'link'],
     text: ['kind', 'class', 'name', 'x', 'y', 'width', 'height', 'align', 'valign', 'minZoom', 'shrink', 'description', 'link'],
     path: ['kind', 'class', 'name', 'a', 'b', 'mode', 'cpA', 'cpB', 'textAlign', 'textBaseline', 'flip', 'minZoom', 'shrink', 'description', 'link'],
   };
@@ -222,6 +222,7 @@
           if (rest.number) out.number = rest.number;
           out.x = rest.x;
           out.y = rest.y;
+          if (rest.anchor && rest.anchor !== kd.anchor) out.anchor = rest.anchor;
           if (rest.labelPos && rest.labelPos !== kd.labelPos) out.labelPos = rest.labelPos;
           if (rest.minZoom != null && rest.minZoom !== kd.minZoom) out.minZoom = rest.minZoom;
         } else if (kind === 'text') {
@@ -311,7 +312,6 @@
   function createFeature(data) {
     const id = crypto.randomUUID();
     const kind = data.kind || 'pin';
-    previewId = id;
     editingId = id;
     pinKind = kind;
     pinName = '';
@@ -325,6 +325,7 @@
     pinHeight = data.height || 0;
     pinShrink = false;
     pinLabelPos = kd.labelPos || 'n';
+    pinAnchor = kd.anchor || 'center';
     pathMode = kd.mode || 'straight';
     pathTextAlign = kd.textAlign || 'center';
     pathTextBaseline = kd.textBaseline || 'baseline';
@@ -370,6 +371,7 @@
       minZoom: pinMinZoom,
       shrink: pinShrink,
       labelPos: kind === 'pin' ? pinLabelPos : undefined,
+      anchor: kind === 'pin' ? pinAnchor : undefined,
       x,
       y,
       ...(isPath ? { a, b, mode: pathMode, textAlign: pathTextAlign, textBaseline: pathTextBaseline, flip: pathFlip } : {}),
@@ -406,6 +408,26 @@
     create: createFeature,
     edit: (pin) => editFeature(pin),
     updatePos: (pin, x, y) => {
+      if (pin.kind === 'path') {
+        // Whole-path drag: translate endpoints + control points by the
+        // delta between the old and new anchor (endpoint A). Clamped
+        // so the drag can't push any point off-map.
+        const dx = x - pin.a[0];
+        const dy = y - pin.a[1];
+        const shift = (p) => clampPoint(p[0] + dx, p[1] + dy);
+        const na = shift(pin.a);
+        const nb = shift(pin.b);
+        pin.a = [na.x, na.y];
+        pin.b = [nb.x, nb.y];
+        if (pin.cpA) { const n = shift(pin.cpA); pin.cpA = [n.x, n.y]; }
+        if (pin.cpB) { const n = shift(pin.cpB); pin.cpB = [n.x, n.y]; }
+        pin.x = pin.a[0];
+        pin.y = pin.a[1];
+        pins = pins;
+        viewer?.updateMarker(pin);
+        savePins();
+        return;
+      }
       if (pin.width && pin.height) {
         ({ x, y } = clampBox(x, y, pin.width, pin.height));
       } else {
@@ -459,19 +481,16 @@
     },
     deselect: () => {
       if (!editingId) return;
-      // Cancel any new-feature preview; close the editor for existing selections
-      if (previewId) {
-        pins = pins.filter(p => p.id !== previewId);
-        previewId = null;
-      }
+      // Flush any pending debounced edits before closing — otherwise a
+      // quick deselect after a preset change can lose the last change.
       editingId = null;
       activeTab = 'markers';
+      savePins();
     },
   };
 
   function editFeature(pin) {
     editingId = pin.id;
-    previewId = null;
     // Determine kind from stored field or infer from number presence
     pinKind = pin.kind || (pin.number ? 'pin' : 'text');
     dialogTitle = pinKind === 'pin' ? 'Edit Marker' : pinKind === 'path' ? 'Edit Path' : 'Edit Text';
@@ -488,6 +507,7 @@
     pinMinZoom = pin.minZoom ?? kd.minZoom ?? 0;
     pinShrink = !!pin.shrink;
     pinLabelPos = pin.labelPos || kd.labelPos || 'n';
+    pinAnchor = pin.anchor || kd.anchor || 'center';
     pathMode = pin.mode || kd.mode || 'straight';
     pathTextAlign = pin.textAlign || kd.textAlign || 'center';
     pathTextBaseline = pin.textBaseline || kd.textBaseline || 'baseline';
@@ -526,13 +546,14 @@
     const mz = pinMinZoom;
     const sh = pinShrink;
     const lp = kind === 'pin' ? pinLabelPos : undefined;
+    const an = kind === 'pin' ? pinAnchor : undefined;
     const pmode = kind === 'path' ? pathMode : undefined;
     const pta = kind === 'path' ? pathTextAlign : undefined;
     const ptb = kind === 'path' ? pathTextBaseline : undefined;
     const pflip = kind === 'path' ? pathFlip : undefined;
     const desc = pinDesc.trim() || undefined;
     const link = pinLink.trim() || undefined;
-    if (pin.name !== name || pin.number !== num || pin.kind !== kind || pin.class !== cls || pin.align !== align || pin.valign !== valign || pin.width !== w || pin.height !== h || pin.x !== x || pin.y !== y || pin.minZoom !== mz || pin.shrink !== sh || pin.labelPos !== lp || pin.mode !== pmode || pin.textAlign !== pta || pin.textBaseline !== ptb || pin.flip !== pflip || pin.description !== desc || pin.link !== link) {
+    if (pin.name !== name || pin.number !== num || pin.kind !== kind || pin.class !== cls || pin.align !== align || pin.valign !== valign || pin.width !== w || pin.height !== h || pin.x !== x || pin.y !== y || pin.minZoom !== mz || pin.shrink !== sh || pin.labelPos !== lp || pin.anchor !== an || pin.mode !== pmode || pin.textAlign !== pta || pin.textBaseline !== ptb || pin.flip !== pflip || pin.description !== desc || pin.link !== link) {
       pin.name = name;
       pin.number = num;
       pin.kind = kind;
@@ -546,6 +567,7 @@
       pin.minZoom = mz;
       pin.shrink = sh;
       pin.labelPos = lp;
+      pin.anchor = an;
       pin.mode = pmode;
       pin.textAlign = pta;
       pin.textBaseline = ptb;
@@ -561,7 +583,6 @@
   function onDelete() {
     if (!editingId) return;
     pins = pins.filter(p => p.id !== editingId);
-    previewId = null;
     editingId = null;
     activeTab = 'markers';
     savePins();
@@ -569,7 +590,6 @@
 
   /** Close the editor without deleting the feature. Auto-saved changes stay. */
   function closeEditor() {
-    previewId = null;
     editingId = null;
     activeTab = 'markers';
   }
@@ -663,23 +683,26 @@
     </div>
     {/if}
     {#if currentMap}
-      <MapViewer
-        bind:this={viewer}
-        width={currentMap.width}
-        height={currentMap.height}
-        imageUrl={`/maps/${currentMap.file}`}
-        tiles={currentMap.tiles}
-        initialZoom={currentMap.initialZoom}
-        minZoom={currentMap.minZoom}
-        maxZoom={currentMap.maxZoom}
-        {pins}
-        editable={mode === 'edit'}
-        tool={mode === 'edit' ? TOOLS[toolMode] : null}
-        ctx={editorCtx}
-        selectedId={editingId}
-        onviewchange={(v) => viewInfo = v}
-        onwheel={(w) => wheelInfo = w}
-      />
+      {#key currentMap.slug}
+        <MapViewer
+          bind:this={viewer}
+          width={currentMap.width}
+          height={currentMap.height}
+          imageUrl={`/maps/${currentMap.file}`}
+          tiles={currentMap.tiles}
+          initialZoom={currentMap.initialZoom}
+          minZoom={currentMap.minZoom}
+          maxZoom={currentMap.maxZoom}
+          {pins}
+          halo={mapMeta.halo}
+          editable={mode === 'edit'}
+          tool={mode === 'edit' ? TOOLS[toolMode] : null}
+          ctx={editorCtx}
+          selectedId={editingId}
+          onviewchange={(v) => viewInfo = v}
+          onwheel={(w) => wheelInfo = w}
+        />
+      {/key}
     {/if}
   </div>
   {#if mode === 'edit'}
@@ -696,6 +719,7 @@
         <MapProperties
           bind:title={mapMeta.title}
           bind:description={mapMeta.description}
+          bind:halo={mapMeta.halo}
         />
       </div>
     {:else if activeTab === 'editor' && editingId}
@@ -708,6 +732,7 @@
               bind:minZoom={pinMinZoom}
               bind:shrink={pinShrink}
               bind:labelPos={pinLabelPos}
+              bind:anchor={pinAnchor}
             />
           {:else if pinKind === 'text'}
             <TextProperties
@@ -733,7 +758,7 @@
             />
           {/if}
           <label>Label <input type="text" bind:value={pinName} required autocomplete="off" /></label>
-          <label>Description <textarea bind:value={pinDesc} rows={pinKind === 'path' ? 6 : 2}></textarea></label>
+          <label>Description <textarea bind:value={pinDesc} rows="8"></textarea></label>
           <label>Link <input type="text" bind:value={pinLink} placeholder="/world/places/#anchor" autocomplete="off" /></label>
           <div class="dialog-buttons">
             <button type="button" class="danger" onclick={onDelete}>Delete</button>

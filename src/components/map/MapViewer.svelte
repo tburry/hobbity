@@ -3,7 +3,15 @@
   import { TEXT_PRESETS, PIN_PRESETS, PATH_PRESETS, DEFAULT_MARKER_MIN_ZOOM, KIND_DEFAULTS, sizeSpec, sizeClass as getSizeClass } from './tools.js';
   import './map-viewer.scss';
 
-  let { width, height, imageUrl, tiles, initialZoom, fit = 'bounds', minZoom = 0, maxZoom = 5, pins = [], editable = false, tool = null, ctx = null, selectedId: selectedIdProp = null, onviewchange, onwheel: onwheelcb } = $props();
+  let { width, height, imageUrl, tiles, initialZoom, fit = 'bounds', minZoom = 0, maxZoom = 5, pins = [], halo = null, editable = false, tool = null, ctx = null, selectedId: selectedIdProp = null, onviewchange, onwheel: onwheelcb } = $props();
+
+  // Override --halo (and re-derive --halo-light) on the container when
+  // the map's meta supplies a custom halo color. `var(--halo)` in the
+  // --halo-light declaration resolves on this element, so both share
+  // the override.
+  const haloStyle = $derived(halo
+    ? `--halo: ${halo}; --halo-light: hsl(from var(--halo) h s calc(l + 0.3));`
+    : '');
 
   // View-mode selection is internal (no external owner); edit-mode
   // selection is driven by the editor via the `selectedId` prop.
@@ -94,12 +102,12 @@
     const preset = resolvePreset(pin);
     const spec = preset ? sizeSpec(preset.size) : PIN_LABEL_SIZE;
 
-    // Shrink mode: pin the size to `base` at the feature's min-zoom and
+    // Shrink mode: pin the size to `min` at the feature's min-zoom and
     // scale up from there (doubling per zoom level), clamped to max.
     // Default mode: scale from `base` at REF_ZOOM, clamped to [min, max].
     const pivot = pin.shrink ? (pin.minZoom ?? REF_ZOOM) : REF_ZOOM;
     const scale = Math.pow(2, z - pivot);
-    const raw = spec.base * scale;
+    const raw = (pin.shrink ? (spec.min ?? spec.base) : spec.base) * scale;
     const min = isMobileView ? Math.max(MOBILE_MIN_PX, spec.min ?? 0) : (spec.min ?? 0);
     const max = spec.max ?? Infinity;
     return Math.max(min, Math.min(max, raw));
@@ -265,7 +273,9 @@
         const rawZoomScale = map?.options?.crs?.scale ? map.options.crs.scale(z) : Math.pow(2, z);
         const pivot = pin.shrink ? (pin.minZoom ?? REF_ZOOM) : REF_ZOOM;
         const rp = resolvePreset(pin);
-        const unclamped = (rp ? sizeSpec(rp.size) : PIN_LABEL_SIZE).base * Math.pow(2, z - pivot);
+        const specForScale = rp ? sizeSpec(rp.size) : PIN_LABEL_SIZE;
+        const startSize = pin.shrink ? (specForScale.min ?? specForScale.base) : specForScale.base;
+        const unclamped = startSize * Math.pow(2, z - pivot);
         const clampRatio = unclamped > 0 ? size / unclamped : 1;
         const zoomScale = rawZoomScale * clampRatio;
         const cssW = pin.width * zoomScale;
@@ -324,16 +334,32 @@
     const markStyle = isOverworld ? `font-size: ${Math.max(20, size).toFixed(1)}px;` : '';
     return L.divIcon({
       className: '',
-      html: `<div class="map-pin label-pos-${pin.labelPos || 'n'}${pin.id === selectedId ? ' selected' : ''}${isOverworld ? ' overworld' : ''}${labelHidden ? ' label-hidden' : ''}"><span class="map-pin-label ${pinSizeClass} ${pinColorClass} ${pinWeightClass}" style="${labelStyle}">${label}</span><span class="${markClass}" style="${markStyle}">${markContent}</span></div>`,
+      html: `<div class="map-pin label-pos-${pin.labelPos || 'n'} anchor-${pin.anchor || 'center'}${pin.id === selectedId ? ' selected' : ''}${isOverworld ? ' overworld' : ''}${labelHidden ? ' label-hidden' : ''}"><span class="map-pin-label ${pinSizeClass} ${pinColorClass} ${pinWeightClass}" style="${labelStyle}">${label}</span><span class="${markClass}" style="${markStyle}">${markContent}</span></div>`,
       iconSize: [28, 28],
-      iconAnchor: [14, 14],
+      iconAnchor: pinIconAnchor(pin.anchor),
     });
+  }
+
+  // Map `pin.anchor` (center + 8 compass points) to Leaflet's iconAnchor
+  // (pixel offset of the anchor point within the 28×28 icon box). E.g.
+  // 'nw' puts the pin's top-left corner on (x, y); 's' puts the bottom
+  // midpoint on (x, y) — classic dropped-pin feel.
+  function pinIconAnchor(anchor) {
+    switch (anchor) {
+      case 'nw': return [0, 0];
+      case 'n':  return [14, 0];
+      case 'ne': return [28, 0];
+      case 'w':  return [0, 14];
+      case 'e':  return [28, 14];
+      case 'sw': return [0, 28];
+      case 's':  return [14, 28];
+      case 'se': return [28, 28];
+      default:   return [14, 14];
+    }
   }
 
   function addMarker(pin) {
     if (!map) return;
-    // Paths are manipulated via their endpoint handles, not by dragging
-    // the whole marker — otherwise the two gestures would conflict.
     const isPath = pin.kind === 'path';
     // Paths anchor at endpoint A. The editor mirrors a→x,y on load for
     // its own bookkeeping, but the Astro site passes raw JSON, so
@@ -341,7 +367,10 @@
     const [lng, lat] = isPath && Array.isArray(pin.a) ? pin.a : [pin.x, pin.y];
     const marker = L.marker([lat, lng], {
       icon: makeIcon(pin, map?.getZoom()),
-      draggable: editable && selectable && !isPath,
+      // Paths are draggable as a whole; mousedown on an endpoint/control-
+      // point handle is intercepted (with stopPropagation) by our capture
+      // handler before Leaflet sees it, so the two gestures don't conflict.
+      draggable: editable && selectable,
       interactive: true,
     }).addTo(map);
 
@@ -928,7 +957,7 @@
   });
 </script>
 
-<div class="map-container" bind:this={mapEl}></div>
+<div class="map-container" bind:this={mapEl} style={haloStyle}></div>
 
 <style lang="scss">
   /* Only the container's own layout lives here. All rules that touch

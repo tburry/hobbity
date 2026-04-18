@@ -116,7 +116,7 @@
       class="shrink-toggle"
       class:active={shrink}
       aria-pressed={shrink}
-      title="Start at base size at min zoom and grow proportionally"
+      title="Start at min size at min zoom and grow proportionally"
       onclick={() => shrink = !shrink}
     >Shrink</button>
   </div>

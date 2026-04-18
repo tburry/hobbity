@@ -28,6 +28,7 @@ const tileMeta = (await import(`../../public/tiles/${slug}/meta.json`)).default;
 
 const title = mapDoc.meta?.title ?? slug;
 const description = mapDoc.meta?.description;
+const halo = mapDoc.meta?.halo;
 
 // Honour Astro's configured `base` (e.g. `/hobbity/`) so tile requests
 // resolve correctly when the site isn't served from the root.
@@ -53,6 +54,7 @@ const pins = mapDoc.pins.map((p, i) => ({ ...p, id: p.id ?? `${slug}-${i}` }));
   slug={slug}
   title={title}
   pins={pins}
+  halo={halo}
   tileBasePath={tileBasePath}
   tileMaxZoom={tileMeta.maxZoom}
   tileSize={tileMeta.tileSize}
