@@ -1,4 +1,394 @@
 {
-  "meta": {},
-  "pins": []
+  "meta": {
+    "halo": "#ece0cb",
+    "title": "Orlane",
+    "description": "A hobbit village on a flat agricultural plain in one of the richest and most fertile agricultural areas of the eastern shire. Most buildings are above ground (hobbit-holes are hard to build on flat land)."
+  },
+  "pins": [
+    {
+      "kind": "text",
+      "class": "map-title",
+      "name": "Orlane",
+      "x": 3708,
+      "y": 4725,
+      "width": 7416,
+      "height": 726,
+      "valign": "bottom"
+    },
+    {
+      "kind": "pin",
+      "class": "residence",
+      "number": "1",
+      "name": "Pleasant Farm House & Barn",
+      "x": 873,
+      "y": 3517,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "2",
+      "name": "Constabulary",
+      "x": 1283,
+      "y": 3481
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "3",
+      "name": "(new)",
+      "x": 1284,
+      "y": 4064,
+      "anchor": "n",
+      "labelPos": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "4",
+      "name": "Dairy Farm",
+      "x": 1176,
+      "y": 3086,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "5",
+      "name": "(new)",
+      "x": 1687,
+      "y": 4020,
+      "anchor": "n",
+      "labelPos": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "6",
+      "name": "(new)",
+      "x": 1818,
+      "y": 3267
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "7",
+      "name": "(new)",
+      "x": 2158,
+      "y": 3595,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "8",
+      "name": "The Golden Grain Inn",
+      "x": 2521,
+      "y": 3276,
+      "description": "Burned down. Owned by Bertram. The cult of Explictica used its tunnels to move abducted families out of town for charming rituals. Set on fire from inside after Zacharias and Derek fled there."
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "9",
+      "name": "(new)",
+      "x": 3316,
+      "y": 3447,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "residence",
+      "number": "10",
+      "name": "Zacharias' House",
+      "x": 3701,
+      "y": 3237
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "11",
+      "name": "(new)",
+      "x": 4705,
+      "y": 3667,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "13",
+      "name": "Foo",
+      "x": 4560,
+      "y": 4240
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "14",
+      "name": "(new)",
+      "x": 5668,
+      "y": 4183,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "15",
+      "name": "(new)",
+      "x": 5340,
+      "y": 3751,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "16",
+      "name": "(new)",
+      "x": 5796,
+      "y": 3616,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "17",
+      "name": "(new)",
+      "x": 6267,
+      "y": 4143,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "18",
+      "name": "(new)",
+      "x": 6155,
+      "y": 3611,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "19",
+      "name": "(new)",
+      "x": 5748,
+      "y": 3193,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "residence",
+      "number": "20",
+      "name": "Vilma's House",
+      "x": 4591,
+      "y": 2530,
+      "anchor": "s",
+      "description": "Home of the friendly window, Vilma."
+    },
+    {
+      "kind": "pin",
+      "class": "landmark",
+      "number": "21",
+      "name": "Temple of Merikka",
+      "x": 5825,
+      "y": 1129,
+      "description": "New temple behind three-meter walls. Dedicated to a goddess of farming, fertility, and light. Hides something much older beneath it."
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "22",
+      "name": "(new)",
+      "x": 3897,
+      "y": 1301,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "23",
+      "name": "(new)",
+      "x": 1684,
+      "y": 1190,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "24",
+      "name": "(new)",
+      "x": 1277,
+      "y": 645,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "25",
+      "name": "The Slumbering Serpent",
+      "x": 1827,
+      "y": 2021,
+      "description": "The Toad Stompers’ base of operations. Run by Belba and Olwyn."
+    },
+    {
+      "kind": "pin",
+      "class": "shop",
+      "number": "26",
+      "name": "(new)",
+      "x": 2351,
+      "y": 2169,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "residence",
+      "number": "27",
+      "name": "Ramne’s Cottage",
+      "x": 720,
+      "y": 1803,
+      "description": "Half-buried stone cottage west of the Slumbering Serpent. Home to the druid, Ramne."
+    },
+    {
+      "kind": "path",
+      "class": "river",
+      "name": "Bounty River",
+      "a": [
+        8,
+        2317
+      ],
+      "b": [
+        1018,
+        2528
+      ],
+      "mode": "bezier",
+      "cpA": [
+        413,
+        2300
+      ],
+      "cpB": [
+        698,
+        2485
+      ],
+      "textBaseline": "middle"
+    },
+    {
+      "kind": "path",
+      "class": "road",
+      "name": "To Farms",
+      "a": [
+        1501,
+        679
+      ],
+      "b": [
+        1462,
+        29
+      ],
+      "mode": "bezier",
+      "cpA": [
+        1546,
+        471
+      ],
+      "cpB": [
+        1485,
+        105
+      ],
+      "textAlign": "right",
+      "flip": true
+    },
+    {
+      "kind": "path",
+      "class": "road",
+      "name": "To Farms",
+      "a": [
+        5889,
+        4505
+      ],
+      "b": [
+        5889,
+        5065
+      ],
+      "mode": "bezier",
+      "cpA": [
+        5835,
+        4779
+      ],
+      "cpB": [
+        5919,
+        4857
+      ],
+      "textAlign": "right",
+      "flip": true
+    },
+    {
+      "kind": "path",
+      "class": "road",
+      "name": "To Farms",
+      "a": [
+        2701,
+        4521
+      ],
+      "b": [
+        2408,
+        5031
+      ],
+      "mode": "bezier",
+      "cpA": [
+        2610,
+        4632
+      ],
+      "cpB": [
+        2480,
+        4815
+      ],
+      "textAlign": "right",
+      "flip": true
+    },
+    {
+      "kind": "path",
+      "class": "road",
+      "name": "To Hochhoch",
+      "a": [
+        694,
+        3360
+      ],
+      "b": [
+        23,
+        3092
+      ],
+      "mode": "bezier",
+      "cpA": [
+        483,
+        3239
+      ],
+      "cpB": [
+        156,
+        3118
+      ],
+      "textAlign": "right",
+      "flip": true
+    },
+    {
+      "kind": "path",
+      "class": "road",
+      "name": "To Hookhill",
+      "a": [
+        6564,
+        3878
+      ],
+      "b": [
+        7380,
+        3367
+      ],
+      "mode": "bezier",
+      "cpA": [
+        6836,
+        3778
+      ],
+      "cpB": [
+        7164,
+        3573
+      ],
+      "textAlign": "right"
+    }
+  ]
 }
