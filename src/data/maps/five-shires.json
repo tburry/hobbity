@@ -1,0 +1,740 @@
+{
+  "meta": {
+    "halo": "#e5d5b3",
+    "grid": {
+      "shape": "hex-flat",
+      "size": 111,
+      "originX": 61,
+      "originY": 3,
+      "color": "rgba(0, 0, 0, 0.20)",
+      "weight": 1
+    }
+  },
+  "pins": [
+    {
+      "kind": "text",
+      "class": "map-title",
+      "name": "The Five Shires",
+      "x": 2601,
+      "y": 4773,
+      "width": 5201,
+      "height": 702,
+      "valign": "bottom"
+    },
+    {
+      "kind": "pin",
+      "class": "town",
+      "number": "30",
+      "name": "Aergruth",
+      "x": 4891,
+      "y": 654
+    },
+    {
+      "kind": "pin",
+      "class": "city",
+      "number": "4",
+      "name": "Athenos",
+      "x": 516,
+      "y": 2806,
+      "labelPos": "s",
+      "minZoom": 2
+    },
+    {
+      "kind": "pin",
+      "class": "camp",
+      "number": "34",
+      "name": "Blackflame",
+      "x": 4723,
+      "y": 396
+    },
+    {
+      "kind": "pin",
+      "class": "village",
+      "number": "6",
+      "name": "Bramblerose",
+      "x": 1422,
+      "y": 3554,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "town",
+      "number": "17",
+      "name": "Bridle",
+      "x": 4396,
+      "y": 1632
+    },
+    {
+      "kind": "pin",
+      "class": "village",
+      "number": "11",
+      "name": "Brookbank",
+      "x": 2453,
+      "y": 2367,
+      "anchor": "s",
+      "description": "A very small, rustic hamlet in the sparsely populated hills of Heartshire."
+    },
+    {
+      "kind": "pin",
+      "class": "village",
+      "number": "2",
+      "name": "Burny",
+      "x": 2884,
+      "y": 3280,
+      "anchor": "s",
+      "labelPos": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "town",
+      "number": "21",
+      "name": "Calatupos",
+      "x": 5020,
+      "y": 4889,
+      "anchor": "sw",
+      "minZoom": 2
+    },
+    {
+      "kind": "pin",
+      "class": "village",
+      "number": "16",
+      "name": "Deepmoss",
+      "x": 3883,
+      "y": 2399,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "mountain",
+      "number": "22",
+      "name": "Earth Rumble",
+      "x": 1557,
+      "y": 4150,
+      "labelPos": "s",
+      "labelOnly": true
+    },
+    {
+      "kind": "pin",
+      "class": "camp",
+      "number": "35",
+      "name": "Fire Rock",
+      "x": 5233,
+      "y": 1042,
+      "anchor": "sw"
+    },
+    {
+      "kind": "pin",
+      "class": "town",
+      "number": "12",
+      "name": "Fishtickle Bridge",
+      "x": 2784,
+      "y": 2455,
+      "anchor": "n",
+      "labelPos": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "village",
+      "number": "7",
+      "name": "Flagonford",
+      "x": 1907,
+      "y": 3013,
+      "anchor": "n",
+      "labelPos": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "village",
+      "number": "14",
+      "name": "Leafkindle",
+      "x": 3391,
+      "y": 2103,
+      "anchor": "ne",
+      "labelPos": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "village",
+      "number": "18",
+      "name": "Longflask",
+      "x": 4308,
+      "y": 815
+    },
+    {
+      "kind": "pin",
+      "class": "village",
+      "number": "31",
+      "name": "Mallowfern",
+      "x": 4900,
+      "y": 1650,
+      "anchor": "w"
+    },
+    {
+      "kind": "pin",
+      "class": "town",
+      "number": "28",
+      "name": "Mar",
+      "x": 1535,
+      "y": 2020,
+      "anchor": "sw"
+    },
+    {
+      "kind": "pin",
+      "class": "village",
+      "number": "37",
+      "name": "Moonhill",
+      "x": 3390,
+      "y": 2672,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "mountain",
+      "number": "20",
+      "name": "Mount Boanga",
+      "x": 4757,
+      "y": 5118,
+      "anchor": "s",
+      "minZoom": 2
+    },
+    {
+      "kind": "pin",
+      "class": "village",
+      "number": "33",
+      "name": "Nob's Boots",
+      "x": 4962,
+      "y": 2167,
+      "anchor": "se"
+    },
+    {
+      "kind": "pin",
+      "class": "fortress",
+      "number": "19",
+      "name": "North Keep",
+      "x": 5029,
+      "y": 4420,
+      "minZoom": 2
+    },
+    {
+      "kind": "pin",
+      "class": "town",
+      "number": "15",
+      "name": "Ober's Mimbur",
+      "x": 3959,
+      "y": 1398,
+      "anchor": "n",
+      "minZoom": 2
+    },
+    {
+      "kind": "pin",
+      "class": "village",
+      "number": "5",
+      "name": "Rattlecart",
+      "x": 1334,
+      "y": 2919,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "ruin",
+      "number": "10",
+      "name": "Ringrise",
+      "x": 3385,
+      "y": 1541,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "fortress",
+      "number": "25",
+      "name": "Riverfork Keep",
+      "x": 5819,
+      "y": 1316,
+      "anchor": "sw"
+    },
+    {
+      "kind": "pin",
+      "class": "fortress",
+      "number": "26",
+      "name": "Rollstone Keep",
+      "x": 5239,
+      "y": 2124,
+      "anchor": "s",
+      "labelPos": "s",
+      "description": "Though a military fortress, it functions as a town; over half its population is composed of the standing army known as the Eastshire Fangs."
+    },
+    {
+      "kind": "pin",
+      "class": "village",
+      "number": "9",
+      "name": "Rundegos",
+      "x": 2474,
+      "y": 3536,
+      "anchor": "se"
+    },
+    {
+      "kind": "pin",
+      "class": "village",
+      "number": "8",
+      "name": "Sateeka",
+      "x": 2221,
+      "y": 2584,
+      "anchor": "ne",
+      "labelPos": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "village",
+      "number": "13",
+      "name": "Shadowgate",
+      "x": 3010,
+      "y": 2126,
+      "anchor": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "capital",
+      "number": "1",
+      "name": "Shireton",
+      "x": 3292,
+      "y": 2971,
+      "labelPos": "s",
+      "minZoom": 2,
+      "description": "The only true city in the shires and serves as the capital. It is a major trade hub with diverse architecture and a bustling port."
+    },
+    {
+      "kind": "pin",
+      "class": "village",
+      "number": "29",
+      "name": "Stillpool",
+      "x": 2716,
+      "y": 2888,
+      "anchor": "w"
+    },
+    {
+      "kind": "pin",
+      "class": "city",
+      "number": "23",
+      "name": "Thantabbar",
+      "x": 4201,
+      "y": 2904,
+      "anchor": "sw",
+      "labelPos": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "city",
+      "number": "3",
+      "name": "Tothmeer",
+      "x": 881,
+      "y": 3415,
+      "labelPos": "s",
+      "minZoom": 2
+    },
+    {
+      "kind": "pin",
+      "class": "village",
+      "number": "32",
+      "name": "Wardlystone",
+      "x": 4637,
+      "y": 1796,
+      "anchor": "n",
+      "labelPos": "s"
+    },
+    {
+      "kind": "pin",
+      "class": "village",
+      "number": "36",
+      "name": "Waymeet",
+      "x": 4216,
+      "y": 1062,
+      "anchor": "e",
+      "description": "Waymeet is not a settlement but merely the meeting-place of the roads from Longflask and Aercruth which join here for the long run south to Bridle and the rest of the Shires. The Waymeet Inn rests at the junction."
+    },
+    {
+      "kind": "pin",
+      "class": "village",
+      "number": "27",
+      "name": "Wereskalot",
+      "x": 5055,
+      "y": 1294,
+      "anchor": "se",
+      "description": "Historically, a \"dark-hearted\" village on the border, it grew into a notable town that serves as a regional base for sheriffs."
+    },
+    {
+      "kind": "text",
+      "class": "forest",
+      "name": "Archelos Woods",
+      "x": 5569,
+      "y": 1325,
+      "width": 367,
+      "height": 315,
+      "minZoom": 3,
+      "shrink": true
+    },
+    {
+      "kind": "text",
+      "class": "lake",
+      "name": "Arwin",
+      "x": 2567,
+      "y": 1904,
+      "width": 337,
+      "height": 185,
+      "minZoom": 3,
+      "shrink": true
+    },
+    {
+      "kind": "text",
+      "class": "pond-marsh",
+      "name": "Blight Swamp",
+      "x": 5509,
+      "y": 1949,
+      "width": 455,
+      "height": 410,
+      "minZoom": 2
+    },
+    {
+      "kind": "path",
+      "class": "road",
+      "name": "Coastfollow Road",
+      "a": [
+        4350,
+        2864
+      ],
+      "b": [
+        4907,
+        2380
+      ],
+      "mode": "bezier",
+      "cpA": [
+        4791,
+        2804
+      ],
+      "cpB": [
+        4661,
+        2584
+      ],
+      "textBaseline": "top",
+      "minZoom": 3
+    },
+    {
+      "kind": "text",
+      "class": "hills",
+      "name": "Cruth Lowlands",
+      "x": 5136,
+      "y": 862,
+      "width": 526,
+      "height": 282,
+      "minZoom": 3
+    },
+    {
+      "kind": "path",
+      "class": "wall",
+      "name": "Cruth Mountains",
+      "a": [
+        2644,
+        1925
+      ],
+      "b": [
+        3901,
+        481
+      ],
+      "mode": "bezier",
+      "cpA": [
+        2561,
+        1467
+      ],
+      "cpB": [
+        3963,
+        751
+      ]
+    },
+    {
+      "kind": "path",
+      "class": "river",
+      "name": "Cruth River",
+      "a": [
+        5200,
+        347
+      ],
+      "b": [
+        5486,
+        633
+      ],
+      "mode": "bezier",
+      "cpA": [
+        5280,
+        525
+      ],
+      "cpB": [
+        5449,
+        445
+      ],
+      "shrink": true
+    },
+    {
+      "kind": "text",
+      "class": "region",
+      "name": "Eastshire",
+      "x": 5297,
+      "y": 1777,
+      "width": 877,
+      "height": 307,
+      "minZoom": 2
+    },
+    {
+      "kind": "text",
+      "class": "island",
+      "name": "Fletcher Reef",
+      "x": 1739,
+      "y": 4321,
+      "width": 928,
+      "height": 259,
+      "minZoom": 2,
+      "shrink": true
+    },
+    {
+      "kind": "path",
+      "class": "river",
+      "name": "Flur",
+      "a": [
+        1768,
+        2551
+      ],
+      "b": [
+        1993,
+        2690
+      ],
+      "mode": "bezier",
+      "cpA": [
+        1808,
+        2623
+      ],
+      "cpB": [
+        1919,
+        2646
+      ],
+      "shrink": true
+    },
+    {
+      "kind": "text",
+      "class": "island",
+      "name": "Gettlebest Rock",
+      "x": 4221,
+      "y": 3384,
+      "width": 574,
+      "height": 271,
+      "valign": "top",
+      "minZoom": 2,
+      "shrink": true
+    },
+    {
+      "kind": "text",
+      "class": "island",
+      "name": "Harbourlee Rock",
+      "x": 5425,
+      "y": 2518,
+      "width": 650,
+      "height": 241,
+      "valign": "top",
+      "minZoom": 2,
+      "shrink": true
+    },
+    {
+      "kind": "text",
+      "class": "region",
+      "name": "Heartshire",
+      "x": 2411,
+      "y": 2718,
+      "width": 1205,
+      "height": 221,
+      "minZoom": 2
+    },
+    {
+      "kind": "text",
+      "class": "region",
+      "name": "Highshire",
+      "x": 4066,
+      "y": 1175,
+      "width": 1062,
+      "height": 391,
+      "minZoom": 2
+    },
+    {
+      "kind": "path",
+      "class": "river",
+      "name": "Ithypool River",
+      "a": [
+        2831,
+        2609
+      ],
+      "b": [
+        3000,
+        2896
+      ],
+      "mode": "bezier",
+      "cpA": [
+        3037,
+        2635
+      ],
+      "cpB": [
+        3118,
+        2777
+      ],
+      "shrink": true
+    },
+    {
+      "kind": "text",
+      "class": "lake",
+      "name": "Lake Hiadim",
+      "x": 4150,
+      "y": 1525,
+      "width": 225,
+      "height": 250,
+      "minZoom": 3,
+      "shrink": true
+    },
+    {
+      "kind": "text",
+      "class": "pond-marsh",
+      "name": "Malpheggi Swamp",
+      "x": 763,
+      "y": 1968,
+      "width": 642,
+      "height": 685,
+      "minZoom": 2
+    },
+    {
+      "kind": "text",
+      "class": "lake",
+      "name": "Muimzir",
+      "x": 2611,
+      "y": 2381,
+      "width": 653,
+      "height": 261,
+      "minZoom": 3,
+      "shrink": true
+    },
+    {
+      "kind": "text",
+      "class": "island",
+      "name": "Muldair's Rock",
+      "x": 4847,
+      "y": 3637,
+      "width": 500,
+      "height": 214,
+      "valign": "bottom",
+      "minZoom": 2,
+      "shrink": true
+    },
+    {
+      "kind": "text",
+      "class": "lake",
+      "name": "Nethlond",
+      "x": 2603,
+      "y": 2204,
+      "width": 437,
+      "height": 128,
+      "minZoom": 3,
+      "shrink": true
+    },
+    {
+      "kind": "text",
+      "class": "island",
+      "name": "Orlin Isle",
+      "x": 4060,
+      "y": 3794,
+      "width": 548,
+      "height": 115,
+      "valign": "top",
+      "minZoom": 2,
+      "shrink": true
+    },
+    {
+      "kind": "text",
+      "class": "forest",
+      "name": "Pupami",
+      "x": 5513,
+      "y": 4955,
+      "width": 756,
+      "height": 302,
+      "minZoom": 2
+    },
+    {
+      "kind": "text",
+      "class": "ocean",
+      "name": "Sea of Dread",
+      "x": 2796,
+      "y": 3922,
+      "width": 1857,
+      "height": 664,
+      "minZoom": 2
+    },
+    {
+      "kind": "text",
+      "class": "region",
+      "name": "Seashire",
+      "x": 4087,
+      "y": 2592,
+      "width": 1392,
+      "height": 464,
+      "minZoom": 2
+    },
+    {
+      "kind": "text",
+      "class": "island",
+      "name": "Shirefang Rocks",
+      "x": 5390,
+      "y": 2828,
+      "width": 790,
+      "height": 118,
+      "valign": "bottom",
+      "minZoom": 2,
+      "shrink": true
+    },
+    {
+      "kind": "text",
+      "class": "region",
+      "name": "Southshire",
+      "x": 1772,
+      "y": 3369,
+      "width": 1076,
+      "height": 222,
+      "minZoom": 2
+    },
+    {
+      "kind": "text",
+      "class": "island",
+      "name": "Toth Isle",
+      "x": 1031,
+      "y": 3641,
+      "width": 563,
+      "height": 240,
+      "minZoom": 2,
+      "shrink": true
+    },
+    {
+      "kind": "path",
+      "class": "river",
+      "name": "Wardle River",
+      "a": [
+        4633,
+        1723
+      ],
+      "b": [
+        4981,
+        1885
+      ],
+      "mode": "bezier",
+      "cpA": [
+        4846,
+        1794
+      ],
+      "cpB": [
+        4789,
+        1921
+      ],
+      "shrink": true
+    }
+  ]
+}
