@@ -1,13 +1,16 @@
 <script>
   import { PIN_PRESETS, findPreset } from '../../../src/components/map/tools.js';
+  import { MARKER_SPRITE, MARKER_SIZES } from '../../../src/components/map/markers.generated.js';
 
   let {
     number = $bindable(''),
     cls = $bindable('shop'),
     minZoom = $bindable(0),
     shrink = $bindable(false),
+    labelOnly = $bindable(false),
     labelPos = $bindable('n'),
     anchor = $bindable('center'),
+    tab = $bindable('town'),
   } = $props();
 
   // 8 compass positions arranged in a 3x3 grid (center is the marker).
@@ -47,8 +50,29 @@
   })();
   const overworldPresets = pinEntries.filter(p => p.category === 'overworld');
 
-  // Active tab follows the currently-selected class.
-  let tab = $state('town');
+  // Largest authored viewBox dimension across the overworld set —
+  // used to scale picker icons so each one reflects its on-map
+  // proportions (capital reads bigger than village, etc.).
+  const MAX_PICKER_PX = 20;
+  const MAX_MARKER_DIM = Math.max(
+    1,
+    ...overworldPresets.map((p) => {
+      const dims = MARKER_SIZES[p.id];
+      return dims ? Math.max(dims[0], dims[1]) : 0;
+    }),
+  );
+  function iconBoxStyle(id) {
+    const dims = MARKER_SIZES[id];
+    if (!dims) return '';
+    const scale = MAX_PICKER_PX / MAX_MARKER_DIM;
+    const w = (dims[0] * scale).toFixed(1);
+    const h = (dims[1] * scale).toFixed(1);
+    return `width: ${w}px; height: ${h}px;`;
+  }
+
+  // Active tab follows the currently-selected class. The tab is bound
+  // to the parent so it survives this component's lifecycle and a new
+  // marker opens on whichever tab the user worked from last.
   $effect(() => {
     const p = findPreset(cls);
     if (p?.category) tab = p.category;
@@ -113,6 +137,8 @@
   }
 </script>
 
+{@html MARKER_SPRITE}
+
 <div class="tabs" role="tablist">
   <button type="button" role="tab" aria-selected={tab === 'town'} class:active={tab === 'town'} onclick={() => setTab('town')}>Town</button>
   <button type="button" role="tab" aria-selected={tab === 'overworld'} class:active={tab === 'overworld'} onclick={() => setTab('overworld')}>Overworld</button>
@@ -148,7 +174,9 @@
         onfocus={(e) => showTooltip(e, p)}
         onblur={hideTooltip}
       >
-        <span class="icon">{p.icon}</span>
+        <span class="icon" style={iconBoxStyle(p.id)}>
+          <svg viewBox="0 0 {MARKER_SIZES[p.id]?.[0] ?? 1} {MARKER_SIZES[p.id]?.[1] ?? 1}"><use href="#marker-{p.id}"/></svg>
+        </span>
       </button>
     {/each}
   </div>
@@ -202,6 +230,14 @@
       {/each}
     </div>
   </fieldset>
+  <button
+    type="button"
+    class="label-only-toggle"
+    class:active={labelOnly}
+    aria-pressed={labelOnly}
+    title="Hide the marker body and show only the label. Marker stays visible at 50% while selected in edit mode."
+    onclick={() => labelOnly = !labelOnly}
+  >Label only</button>
 </div>
 
 <label class="min-zoom-label">
@@ -321,8 +357,8 @@
 
   .icon-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 4px;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
     margin-bottom: 0.6rem;
   }
   .icon-grid button {
@@ -338,9 +374,18 @@
     border-radius: 3px;
     cursor: pointer;
   }
-  .icon-grid button .icon { font-size: 20px; line-height: 1; }
+  /* Icon size comes from inline style (set per-marker by iconBoxStyle)
+     so the picker reflects on-map proportions. */
+  .icon-grid button .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon-grid button .icon svg { width: 100%; height: 100%; display: block; }
   .icon-grid button:hover { background: var(--panel-hover, rgba(0,0,0,0.06)); }
   .icon-grid button.active { background: var(--panel-accent, #c9a96e); color: #fff; border-color: var(--panel-accent, #c9a96e); }
+  /* Active button is dark; flip the icon so it reads white on the accent. */
+  .icon-grid button.active .icon { filter: invert(1); }
 
   /* Compass picker: 8 dots in a 3x3 grid around a central marker dot.
      Each button uses explicit grid placement so the cardinal/diagonal
@@ -435,6 +480,21 @@
   }
   .anchor-grid .anchor-cell:hover { background: var(--panel-hover, rgba(0,0,0,0.06)); }
   .anchor-grid .anchor-cell.active { background: var(--panel-accent, #5c4a32); }
+
+  .label-only-toggle {
+    align-self: flex-end;
+    padding: 0 0.6rem;
+    height: 24px;
+    font: 700 11px/1 'Crimson Pro', serif;
+    white-space: nowrap;
+    border: 1px solid var(--panel-border, #5c4a32);
+    background: transparent;
+    color: inherit;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .label-only-toggle:hover { background: var(--panel-hover, rgba(0,0,0,0.06)); }
+  .label-only-toggle.active { background: var(--panel-accent, #c9a96e); color: #fff; border-color: var(--panel-accent, #c9a96e); }
 
   .min-zoom-label { display: block; margin-bottom: 0.6rem; font-size: 0.85rem; }
   .zoom-row { display: flex; gap: 6px; margin-top: 0.25rem; align-items: stretch; }

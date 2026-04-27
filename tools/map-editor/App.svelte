@@ -1,6 +1,7 @@
 <script>
   import MapViewer from '../../src/components/map/MapViewer.svelte';
   import { TOOL_LIST, TOOLS, KIND_DEFAULTS, findPreset } from '../../src/components/map/tools.js';
+  import { MARKER_SPRITE, MARKER_SIZES } from '../../src/components/map/markers.generated.js';
 
   /** Bucket a feature for list + save sort:
    *   0 = map title(s) — pinned to the very top so the header lands first
@@ -59,6 +60,7 @@
   import TextProperties from './properties/TextProperties.svelte';
   import PathProperties from './properties/PathProperties.svelte';
   import MapProperties from './properties/MapProperties.svelte';
+  import GridProperties from './properties/GridProperties.svelte';
 
   let maps = $state([]);
   let currentMap = $state(null);
@@ -101,6 +103,15 @@
   let pinLabelPos = $state('n'); // marker label position: n/ne/e/se/s/sw/w/nw
   let pinAnchor = $state('center'); // which point of the pin box sits on (x,y)
   let pinShrink = $state(false);
+  let pinLabelOnly = $state(false);
+  // Last-used Pin tab (Town vs Overworld). Lives in App so it survives
+  // PinProperties remounts and so a new marker opens on whichever tab
+  // the user worked from last. PinProperties keeps it in sync with the
+  // selected pin's category when editing existing pins.
+  let pinTab = $state('town');
+  // Default class for a brand-new pin, picked to match the active tab
+  // so the picker isn't visually empty on the Overworld tab.
+  const PIN_TAB_DEFAULTS = { town: 'shop', overworld: 'town' };
   // Path feature — the geometry (a, b, cpA, cpB) lives on the pin itself
   // and is mutated via dragging handles. Only the non-geometry fields
   // live in editor state.
@@ -115,11 +126,38 @@
   function setToolMode(mode) {
     toolMode = mode;
     localStorage.setItem('map-editor:tool', mode);
+    // The grid tool's panel lives in the editor tab; surface it
+    // automatically so the user sees the controls when they pick the
+    // tool from the toolbox or restore it from localStorage.
+    if (mode === 'grid' && !editingId) {
+      activeTab = 'editor';
+    }
+  }
+
+  // Per-map toggle for the optional grid overlay. Restored from
+  // localStorage on map switch; defaults ON when a grid is configured.
+  let gridVisible = $state(true);
+  function gridStorageKey(slug) {
+    return slug ? `map-editor:grid:${slug}` : null;
+  }
+  function loadGridVisible(slug) {
+    const key = gridStorageKey(slug);
+    if (!key) return true;
+    const v = localStorage.getItem(key);
+    return v === null ? true : v === '1';
+  }
+  function setGridVisible(v) {
+    gridVisible = v;
+    const key = gridStorageKey(currentMap?.slug);
+    if (key) localStorage.setItem(key, v ? '1' : '0');
   }
 
   // Photoshop-style tool shortcuts. Ignored while the user is typing in an
   // input / textarea / contenteditable.
   const TOOL_KEYS = { v: 'select', m: 'pin', t: 'text', p: 'path' };
+  // Last non-grid tool, so the `g` shortcut can flip back to where
+  // the user was when they're done editing the grid.
+  let prevToolBeforeGrid = 'select';
   function onKeydown(e) {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     const tag = e.target?.tagName;
@@ -128,6 +166,16 @@
     if (mode) {
       e.preventDefault();
       setToolMode(mode);
+      return;
+    }
+    if (e.key.toLowerCase() === 'g') {
+      e.preventDefault();
+      if (toolMode === 'grid') {
+        setToolMode(prevToolBeforeGrid || 'select');
+      } else {
+        prevToolBeforeGrid = toolMode;
+        setToolMode('grid');
+      }
     }
   }
   $effect(() => {
@@ -193,7 +241,7 @@
   // the listed ones. Identifying fields come first (kind, class,
   // number/name), then geometry, then style toggles, then metadata.
   const FEATURE_KEY_ORDER = {
-    pin:  ['kind', 'class', 'number', 'name', 'x', 'y', 'anchor', 'labelPos', 'minZoom', 'shrink', 'description', 'link'],
+    pin:  ['kind', 'class', 'number', 'name', 'x', 'y', 'anchor', 'labelPos', 'labelOnly', 'minZoom', 'shrink', 'description', 'link'],
     text: ['kind', 'class', 'name', 'x', 'y', 'width', 'height', 'align', 'valign', 'minZoom', 'shrink', 'description', 'link'],
     path: ['kind', 'class', 'name', 'a', 'b', 'mode', 'cpA', 'cpB', 'textAlign', 'textBaseline', 'flip', 'minZoom', 'shrink', 'description', 'link'],
   };
@@ -224,6 +272,7 @@
           out.y = rest.y;
           if (rest.anchor && rest.anchor !== kd.anchor) out.anchor = rest.anchor;
           if (rest.labelPos && rest.labelPos !== kd.labelPos) out.labelPos = rest.labelPos;
+          if (rest.labelOnly) out.labelOnly = true;
           if (rest.minZoom != null && rest.minZoom !== kd.minZoom) out.minZoom = rest.minZoom;
         } else if (kind === 'text') {
           out.x = rest.x;
@@ -289,6 +338,7 @@
     const doc = await fetchMapDoc(mapInfo.slug);
     mapMeta = doc.meta;
     pins = doc.pins;
+    gridVisible = loadGridVisible(mapInfo.slug);
     // Let the reactive graph settle on the loaded values before enabling
     // auto-save, so the load itself doesn't trigger a PUT.
     queueMicrotask(() => { metaLoaded = true; });
@@ -324,13 +374,14 @@
     pinWidth = data.width || 0;
     pinHeight = data.height || 0;
     pinShrink = false;
+    pinLabelOnly = false;
     pinLabelPos = kd.labelPos || 'n';
     pinAnchor = kd.anchor || 'center';
     pathMode = kd.mode || 'straight';
     pathTextAlign = kd.textAlign || 'center';
     pathTextBaseline = kd.textBaseline || 'baseline';
     pathFlip = kd.flip ?? false;
-    pinClass = kd.class || '';
+    pinClass = (kind === 'pin' && PIN_TAB_DEFAULTS[pinTab]) || kd.class || '';
     pinMinZoom = kd.minZoom ?? 0;
 
     if (kind === 'pin') {
@@ -370,6 +421,7 @@
       height: pinHeight,
       minZoom: pinMinZoom,
       shrink: pinShrink,
+      labelOnly: kind === 'pin' ? pinLabelOnly : undefined,
       labelPos: kind === 'pin' ? pinLabelPos : undefined,
       anchor: kind === 'pin' ? pinAnchor : undefined,
       x,
@@ -407,6 +459,13 @@
   const editorCtx = {
     create: createFeature,
     edit: (pin) => editFeature(pin),
+    /** Grid tool: read the live grid + push origin updates back into
+     * mapMeta. The reactive auto-save effect picks up the change. */
+    getGrid: () => mapMeta.grid,
+    setGridOrigin: (x, y) => {
+      if (!mapMeta.grid?.shape) return;
+      mapMeta.grid = { ...mapMeta.grid, originX: x, originY: y };
+    },
     updatePos: (pin, x, y) => {
       if (pin.kind === 'path') {
         // Whole-path drag: translate endpoints + control points by the
@@ -506,6 +565,7 @@
     pinHeight = pin.height || 0;
     pinMinZoom = pin.minZoom ?? kd.minZoom ?? 0;
     pinShrink = !!pin.shrink;
+    pinLabelOnly = !!pin.labelOnly;
     pinLabelPos = pin.labelPos || kd.labelPos || 'n';
     pinAnchor = pin.anchor || kd.anchor || 'center';
     pathMode = pin.mode || kd.mode || 'straight';
@@ -545,6 +605,7 @@
     }
     const mz = pinMinZoom;
     const sh = pinShrink;
+    const lo = kind === 'pin' ? pinLabelOnly : undefined;
     const lp = kind === 'pin' ? pinLabelPos : undefined;
     const an = kind === 'pin' ? pinAnchor : undefined;
     const pmode = kind === 'path' ? pathMode : undefined;
@@ -553,7 +614,7 @@
     const pflip = kind === 'path' ? pathFlip : undefined;
     const desc = pinDesc.trim() || undefined;
     const link = pinLink.trim() || undefined;
-    if (pin.name !== name || pin.number !== num || pin.kind !== kind || pin.class !== cls || pin.align !== align || pin.valign !== valign || pin.width !== w || pin.height !== h || pin.x !== x || pin.y !== y || pin.minZoom !== mz || pin.shrink !== sh || pin.labelPos !== lp || pin.anchor !== an || pin.mode !== pmode || pin.textAlign !== pta || pin.textBaseline !== ptb || pin.flip !== pflip || pin.description !== desc || pin.link !== link) {
+    if (pin.name !== name || pin.number !== num || pin.kind !== kind || pin.class !== cls || pin.align !== align || pin.valign !== valign || pin.width !== w || pin.height !== h || pin.x !== x || pin.y !== y || pin.minZoom !== mz || pin.shrink !== sh || pin.labelOnly !== lo || pin.labelPos !== lp || pin.anchor !== an || pin.mode !== pmode || pin.textAlign !== pta || pin.textBaseline !== ptb || pin.flip !== pflip || pin.description !== desc || pin.link !== link) {
       pin.name = name;
       pin.number = num;
       pin.kind = kind;
@@ -566,6 +627,7 @@
       pin.y = y;
       pin.minZoom = mz;
       pin.shrink = sh;
+      pin.labelOnly = lo;
       pin.labelPos = lp;
       pin.anchor = an;
       pin.mode = pmode;
@@ -628,6 +690,8 @@
   });
 </script>
 
+{@html MARKER_SPRITE}
+
 <header>
   <h1>Toad Mapper</h1>
   <select title="Select map" onchange={onMapSelect} value={currentMap?.slug}>
@@ -664,7 +728,7 @@
       {#each TOOL_LIST as t}
         <button
           type="button"
-          title={`${t.label} (${ {select:'V',pin:'M',text:'T',path:'P'}[t.id] || '' })`}
+          title={(() => { const k = {select:'V',pin:'M',text:'T',path:'P',grid:'G'}[t.id]; return k ? `${t.label} (${k})` : t.label; })()}
           class:active={toolMode === t.id}
           onclick={() => setToolMode(t.id)}
           aria-label={t.label}
@@ -677,6 +741,8 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
           {:else if t.id === 'path'}
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><path d="M5 17A12 12 0 0 1 17 5"/></svg>
+          {:else if t.id === 'grid'}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
           {/if}
         </button>
       {/each}
@@ -695,6 +761,9 @@
           maxZoom={currentMap.maxZoom}
           {pins}
           halo={mapMeta.halo}
+          grid={mapMeta.grid}
+          {gridVisible}
+          ongridtoggle={() => setGridVisible(!gridVisible)}
           editable={mode === 'edit'}
           tool={mode === 'edit' ? TOOLS[toolMode] : null}
           ctx={editorCtx}
@@ -712,9 +781,13 @@
       <button
         class:active={activeTab === 'editor'}
         onclick={() => activeTab = 'editor'}
-      >{editingId ? dialogTitle : 'Map'}</button>
+      >{editingId ? dialogTitle : (toolMode === 'grid' ? 'Grid' : 'Map')}</button>
     </div>
-    {#if activeTab === 'editor' && !editingId}
+    {#if activeTab === 'editor' && !editingId && toolMode === 'grid'}
+      <div class="pin-editor">
+        <GridProperties bind:grid={mapMeta.grid} />
+      </div>
+    {:else if activeTab === 'editor' && !editingId}
       <div class="pin-editor">
         <MapProperties
           bind:title={mapMeta.title}
@@ -731,8 +804,10 @@
               bind:cls={pinClass}
               bind:minZoom={pinMinZoom}
               bind:shrink={pinShrink}
+              bind:labelOnly={pinLabelOnly}
               bind:labelPos={pinLabelPos}
               bind:anchor={pinAnchor}
+              bind:tab={pinTab}
             />
           {:else if pinKind === 'text'}
             <TextProperties
@@ -773,7 +848,9 @@
             <div class="pin-row">
               <button class="pin-list-btn" onclick={() => clickPin(pin)}>
                 {#if preset?.category === 'overworld'}
-                  <span class="pin-glyph">{preset.icon}</span>
+                  <span class="pin-glyph">
+                    <svg viewBox="0 0 {MARKER_SIZES[pin.class]?.[0] ?? 1} {MARKER_SIZES[pin.class]?.[1] ?? 1}"><use href="#marker-{pin.class}"/></svg>
+                  </span>
                 {:else if pin.class === 'map-title'}
                   <span class="pin-glyph">✵</span>
                 {:else if pin.kind === 'path'}
@@ -1018,10 +1095,15 @@
   .pin-glyph {
     flex-shrink: 0;
     width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     font-size: 16px;
     line-height: 1;
   }
+  .pin-glyph > svg { width: 100%; height: 100%; display: block; }
   .pin-path-icon { display: inline-flex; align-items: center; justify-content: center; }
   .pin-path-icon svg { width: 22px; height: 10px; }
   .actions { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.5rem 0.75rem; border-top: 1px solid var(--panel-border); }
@@ -1077,7 +1159,9 @@
   /* Floating toolbox below the Leaflet zoom control */
   .toolbox {
     position: absolute;
-    top: 90px;
+    /* Clears the leaflet-top stack: zoom (~62 px) + optional grid
+       visibility toggle (~36 px) + breathing room. */
+    top: 134px;
     left: 10px;
     z-index: 1000;
     display: flex;

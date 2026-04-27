@@ -1,0 +1,148 @@
+#!/usr/bin/env node
+/**
+ * Build the overworld marker sprite from src/assets/images/markers/*.svg.
+ *
+ * Each source SVG is run through SVGO to strip editor cruft (Inkscape/Serif
+ * groups, ids, DOCTYPE, namespace pollution) and collapse nested transforms,
+ * then wrapped as a <symbol> in a single sprite SVG. The SVG and a JS
+ * manifest of viewBox dimensions are committed to the repo so consumers
+ * (MapViewer, PinProperties, App) don't need a build step at runtime.
+ *
+ * Usage: pnpm markers
+ */
+
+import { readdir, readFile, writeFile } from 'node:fs/promises';
+import { resolve, basename, extname } from 'node:path';
+import { optimize } from 'svgo';
+
+const SRC_DIR = resolve('src/assets/images/markers');
+const OUT_DIR = resolve('src/components/map');
+const SPRITE_PATH = resolve(OUT_DIR, 'markers.generated.svg');
+const MANIFEST_PATH = resolve(OUT_DIR, 'markers.generated.js');
+
+const SVGO_CONFIG = {
+  multipass: true,
+  plugins: [
+    {
+      name: 'preset-default',
+      params: {
+        overrides: {
+          // Keep numeric precision tight but not lossy enough to warp shapes.
+          cleanupNumericValues: { floatPrecision: 3 },
+          convertPathData: { floatPrecision: 3, applyTransforms: true },
+          convertTransform: { floatPrecision: 3 },
+          // White-fill accents are intentional — defaultAttrs false keeps
+          // explicit fills around even if they happen to match a default.
+          removeUnknownsAndDefaults: { defaultAttrs: false },
+        },
+      },
+    },
+    // Convert primitives (ellipse/rect/circle) to <path> so applyTransforms
+    // in convertPathData can bake their transforms into the geometry,
+    // letting collapseGroups fold the wrapping <g transform=…> chains.
+    // `convertArcs: true` extends the conversion to circles/ellipses.
+    { name: 'convertShapeToPath', params: { convertArcs: true } },
+    'collapseGroups',
+    'removeDimensions',           // strip width/height; viewBox alone is enough
+    'removeXMLNS',                // we wrap in <symbol> later, no namespace needed
+    {
+      name: 'removeAttrs',
+      params: {
+        // serif:* / sodipodi:* / inkscape:* attributes, plus xml:space.
+        attrs: ['(serif|sodipodi|inkscape):.*', 'xml:space'],
+      },
+    },
+  ],
+};
+
+/**
+ * Strip Inkscape/Serif editor scaffolding before SVGO sees it:
+ *   - The empty <path d="…" style="fill:none"/> bounding rectangles each
+ *     symbol carries (an editor "frame" indicator with no visual output).
+ *   - <clipPath> definitions and `clip-path="url(#…)"` references that
+ *     just clip content to the same rect — redundant once we use viewBox
+ *     for clipping at the <symbol> level.
+ *   - <defs> blocks that are emptied by the above.
+ */
+function preStrip(svg) {
+  return svg
+    // Bounding-rect "frame" elements the editor leaves behind. They have
+    // no visual output but persist as fill:none shapes — strip rect, path,
+    // circle, or ellipse variants regardless of attribute order.
+    .replace(/<(rect|path|circle|ellipse)\b[^>]*\bfill:\s*none[^>]*\/>/g, '')
+    .replace(/<(rect|path|circle|ellipse)\b[^>]*\bfill="none"[^>]*\/>/g, '')
+    .replace(/<clipPath\b[^>]*>[\s\S]*?<\/clipPath>/g, '')
+    .replace(/\sclip-path="[^"]*"/g, '')
+    .replace(/<defs\b[^>]*>\s*<\/defs>/g, '');
+}
+
+const VIEWBOX_RE = /viewBox="([\d.\s-]+)"/;
+const SVG_OPEN_RE = /<svg\b[^>]*>/;
+const SVG_CLOSE_RE = /<\/svg>\s*$/;
+
+function parseViewBox(svg) {
+  const m = svg.match(VIEWBOX_RE);
+  if (!m) throw new Error('no viewBox found');
+  const parts = m[1].trim().split(/\s+/).map(Number);
+  if (parts.length !== 4 || parts.some(Number.isNaN)) {
+    throw new Error(`bad viewBox: ${m[1]}`);
+  }
+  const [, , w, h] = parts;
+  // Normalize to a "0 0 w h" frame so every <symbol> can share the same
+  // origin convention regardless of where the source happened to draw.
+  return { vb: `0 0 ${w} ${h}`, w, h };
+}
+
+function extractInner(svg) {
+  const open = svg.match(SVG_OPEN_RE);
+  const close = svg.match(SVG_CLOSE_RE);
+  if (!open || !close) throw new Error('malformed SVG');
+  return svg.slice(open.index + open[0].length, close.index).trim();
+}
+
+const files = (await readdir(SRC_DIR))
+  .filter((f) => extname(f).toLowerCase() === '.svg')
+  .sort();
+
+if (files.length === 0) {
+  console.error(`No SVGs found in ${SRC_DIR}`);
+  process.exit(1);
+}
+
+const symbols = [];
+const sizes = {};
+
+for (const file of files) {
+  const slug = basename(file, '.svg');
+  const raw = await readFile(resolve(SRC_DIR, file), 'utf8');
+  const { data } = optimize(preStrip(raw), { ...SVGO_CONFIG, path: file });
+  const { vb, w, h } = parseViewBox(data);
+  const inner = extractInner(data);
+  symbols.push(`  <symbol id="marker-${slug}" viewBox="${vb}">${inner}</symbol>`);
+  sizes[slug] = [w, h];
+  console.log(`  ${slug.padEnd(10)} ${w}×${h}`);
+}
+
+const sprite = `<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+${symbols.join('\n')}
+</svg>
+`;
+
+const manifest = `// Auto-generated by scripts/build-markers.mjs. Do not edit by hand.
+// Run \`pnpm markers\` to regenerate after changing src/assets/images/markers/*.svg.
+
+import sprite from './markers.generated.svg?raw';
+
+export const MARKER_SPRITE = sprite;
+
+export const MARKER_SIZES = ${JSON.stringify(sizes, null, 2)};
+
+export const MARKER_IDS = Object.keys(MARKER_SIZES);
+`;
+
+await writeFile(SPRITE_PATH, sprite, 'utf8');
+await writeFile(MANIFEST_PATH, manifest, 'utf8');
+
+console.log(`\nWrote ${SPRITE_PATH}`);
+console.log(`Wrote ${MANIFEST_PATH}`);
+console.log(`${files.length} symbols.`);

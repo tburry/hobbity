@@ -1,9 +1,10 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
   import { TEXT_PRESETS, PIN_PRESETS, PATH_PRESETS, DEFAULT_MARKER_MIN_ZOOM, KIND_DEFAULTS, sizeSpec, sizeClass as getSizeClass } from './tools.js';
+  import { MARKER_SPRITE, MARKER_SIZES } from './markers.generated.js';
   import './map-viewer.scss';
 
-  let { width, height, imageUrl, tiles, initialZoom, fit = 'bounds', minZoom = 0, maxZoom = 5, pins = [], halo = null, editable = false, tool = null, ctx = null, selectedId: selectedIdProp = null, onviewchange, onwheel: onwheelcb } = $props();
+  let { width, height, imageUrl, tiles, initialZoom, fit = 'bounds', minZoom = 0, maxZoom = 5, pins = [], halo = null, grid = null, gridVisible = true, editable = false, tool = null, ctx = null, selectedId: selectedIdProp = null, onviewchange, onwheel: onwheelcb, ongridtoggle = null } = $props();
 
   // Override --halo (and re-derive --halo-light) on the container when
   // the map's meta supplies a custom halo color. `var(--halo)` in the
@@ -33,12 +34,130 @@
     return d.innerHTML;
   }
 
+  /**
+   * Build the SVG content for a grid overlay. Returns an SVGSVGElement
+   * sized to the image's natural pixel dimensions. The single root <path>
+   * keeps the DOM trivial regardless of how many lines/cells we render.
+   *
+   * Square: aligned line lattice; `originX/Y` is the top-left corner of
+   * the (0,0) cell.
+   * Hex (pointy/flat): `size` is the cell circumradius (centre-to-vertex);
+   * `originX/Y` is the centre of the (0,0) cell. Cells whose bbox falls
+   * outside [0,w]×[0,h] are skipped.
+   */
+  function buildGridSVG(g, w, h) {
+    const ns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('xmlns', ns);
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    svg.setAttribute('preserveAspectRatio', 'none');
+    svg.setAttribute('width', String(w));
+    svg.setAttribute('height', String(h));
+
+    const path = document.createElementNS(ns, 'path');
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', g.color || 'rgba(60, 40, 20, 0.35)');
+    // Stroke width tracks the current zoom (min 1) so lines stay
+    // legible as the user zooms in. Updated live via gridLayer.zoom.
+    const z = map?.getZoom() ?? 1;
+    path.setAttribute('stroke-width', String(Math.max(1, z)));
+    path.setAttribute('vector-effect', 'non-scaling-stroke');
+    path.setAttribute('d', buildGridPath(g, w, h));
+    svg.appendChild(path);
+    return svg;
+  }
+
+  function buildGridPath(g, w, h) {
+    const size = Math.max(1, Number(g.size) || 100);
+    const ox = Number(g.originX) || 0;
+    const oy = Number(g.originY) || 0;
+    const fmt = (n) => Number(n).toFixed(2);
+
+    if (g.shape === 'square') {
+      const parts = [];
+      // First vertical line at originX, stepping by size in both directions
+      // until we leave [0, w]. The modulo math keeps it stable across origins.
+      const startX = ox - Math.floor(ox / size) * size;
+      for (let x = startX; x <= w; x += size) {
+        parts.push(`M${fmt(x)} 0L${fmt(x)} ${fmt(h)}`);
+      }
+      const startY = oy - Math.floor(oy / size) * size;
+      for (let y = startY; y <= h; y += size) {
+        parts.push(`M0 ${fmt(y)}L${fmt(w)} ${fmt(y)}`);
+      }
+      return parts.join('');
+    }
+
+    if (g.shape === 'hex-pointy' || g.shape === 'hex-flat') {
+      const r = size; // circumradius
+      const sqrt3 = Math.sqrt(3);
+      const parts = [];
+      // Pointy-top: width = sqrt(3) * r, height = 2r; horizontal step = sqrt(3)*r,
+      // vertical step = 1.5r, even/odd rows offset horizontally by sqrt(3)*r/2.
+      // Flat-top is the 90° rotation: vertical step = sqrt(3)*r, horizontal step = 1.5r.
+      const pointy = g.shape === 'hex-pointy';
+      const colStep = pointy ? sqrt3 * r : 1.5 * r;
+      const rowStep = pointy ? 1.5 * r : sqrt3 * r;
+      const colOffset = pointy ? sqrt3 * r / 2 : 0;
+      const rowOffset = pointy ? 0 : sqrt3 * r / 2;
+      // Vertex offsets relative to a cell centre, going clockwise.
+      const verts = pointy
+        ? [
+            [0, -r],
+            [sqrt3 * r / 2, -r / 2],
+            [sqrt3 * r / 2,  r / 2],
+            [0,  r],
+            [-sqrt3 * r / 2,  r / 2],
+            [-sqrt3 * r / 2, -r / 2],
+          ]
+        : [
+            [-r, 0],
+            [-r / 2, -sqrt3 * r / 2],
+            [ r / 2, -sqrt3 * r / 2],
+            [ r, 0],
+            [ r / 2,  sqrt3 * r / 2],
+            [-r / 2,  sqrt3 * r / 2],
+          ];
+      // Range of cells whose bbox could touch [0,w]×[0,h]. Centre offsets
+      // from (ox, oy); pad one extra cell on every side so partials draw.
+      const cellW = pointy ? sqrt3 * r : 2 * r;
+      const cellH = pointy ? 2 * r : sqrt3 * r;
+      const minCol = Math.floor((-cellW / 2 - ox) / colStep) - 1;
+      const maxCol = Math.ceil((w + cellW / 2 - ox) / colStep) + 1;
+      const minRow = Math.floor((-cellH / 2 - oy) / rowStep) - 1;
+      const maxRow = Math.ceil((h + cellH / 2 - oy) / rowStep) + 1;
+      for (let row = minRow; row <= maxRow; row++) {
+        for (let col = minCol; col <= maxCol; col++) {
+          const cx = ox + col * colStep + (row % 2 !== 0 ? colOffset : 0);
+          const cy = oy + row * rowStep + (col % 2 !== 0 ? rowOffset : 0);
+          // Cheap bbox cull: skip cells fully outside the image.
+          if (cx + cellW / 2 < 0 || cx - cellW / 2 > w) continue;
+          if (cy + cellH / 2 < 0 || cy - cellH / 2 > h) continue;
+          let d = '';
+          for (let i = 0; i < 6; i++) {
+            const [vx, vy] = verts[i];
+            d += `${i === 0 ? 'M' : 'L'}${fmt(cx + vx)} ${fmt(cy + vy)}`;
+          }
+          d += 'Z';
+          parts.push(d);
+        }
+      }
+      return parts.join('');
+    }
+
+    return '';
+  }
+
   const FONTS = {
     body: "'Lora', serif",
     heading: "'Crimson Pro', serif",
     title: "'Uncial Antiqua', serif",
   };
   const REF_ZOOM = 2;
+  // Markers (numbered pins + overworld glyph pins) scale from their
+  // preset's `min` size at this zoom — one level tighter than text
+  // so they stay readable when the map is zoomed out a bit.
+  const MARKER_REF_ZOOM = 3;
   const MOBILE_MIN_PX = 16;
   // Fallback size for features without a style (e.g. numbered pin labels).
   const PIN_LABEL_SIZE = { base: 14, min: 11, max: 22 };
@@ -111,6 +230,32 @@
     const min = isMobileView ? Math.max(MOBILE_MIN_PX, spec.min ?? 0) : (spec.min ?? 0);
     const max = spec.max ?? Infinity;
     return Math.max(min, Math.min(max, raw));
+  }
+
+  // Marker labels scale slower than the map — a plain `2 ^ (z - pivot)`
+  // curve makes them balloon quickly when zooming in. This fudge factor
+  // multiplies the exponent so each zoom level grows the label by
+  // `2 ^ factor` (≈ 1.41× at 0.5) instead of 2×.
+  const MARKER_LABEL_SCALE = 0.5;
+
+  /** Font size for the text label next to a marker. Sits at the
+   * preset's `base` size for all zooms ≤ MARKER_REF_ZOOM (3), then
+   * grows slowly above that per MARKER_LABEL_SCALE, clamped to `max`.
+   * Never smaller than `base`. On mobile we swap the preset's size
+   * for the shared `mobile` spec so every marker label lands in the
+   * same readable range regardless of preset. Marker bodies (numbered
+   * circle / overworld glyph) use `computeFontSize`. */
+  function computeMarkerLabelSize(pin, zoom) {
+    const z = zoom ?? MARKER_REF_ZOOM;
+    const isMobileView = isMobile();
+    const preset = resolvePreset(pin);
+    const spec = isMobileView
+      ? sizeSpec('mobile')
+      : (preset ? sizeSpec(preset.size) : PIN_LABEL_SIZE);
+    const raw = spec.base * Math.pow(2, (z - MARKER_REF_ZOOM) * MARKER_LABEL_SCALE);
+    const floor = spec.base;
+    const max = spec.max ?? Infinity;
+    return Math.max(floor, Math.min(max, raw));
   }
 
 
@@ -319,22 +464,61 @@
     // Pin label styling comes from the preset (class).
     const s = resolvePreset(pin) || {};
     const font = FONTS[s.font] || FONTS.body;
-    const size = computeFontSize(pin, currentZoom);
+    // Glyph and label both follow the slower marker-label curve so a
+    // 'large'-sized preset (capital, city) doesn't blow the glyph up
+    // to label-typography proportions.
+    const size = computeMarkerLabelSize(pin, currentZoom);
+    const labelSize = size;
     const pinWeightClass = `font-${s.weight || 'normal'}`;
     const style = s.italic ? 'italic' : 'normal';
     const extra = extraStyles(s);
-    const labelStyle = `font-family: ${font}; font-size: ${size.toFixed(1)}px; font-style: ${style}; ${extra}`;
+    const labelStyle = `font-family: ${font}; font-size: ${labelSize.toFixed(1)}px; font-style: ${style}; ${extra}`;
     const pinSizeClass = getSizeClass(s.size);
     const pinColorClass = s.colorClass || 'text-black';
-    // Overworld pins render a glyph (✪, ◉, …) instead of a numbered circle.
+    // Overworld pins render an SVG sprite symbol; town pins render a
+    // numbered circle. The sprite preserves the authored size of each
+    // symbol — capital is bigger than village by design.
     const preset = pin.class ? PIN_PRESETS[pin.class] : null;
     const isOverworld = preset?.category === 'overworld';
     const markClass = isOverworld ? 'map-pin-glyph' : 'map-pin-number';
-    const markContent = isOverworld ? esc(preset.icon) : pin.number;
-    const markStyle = isOverworld ? `font-size: ${Math.max(20, size).toFixed(1)}px;` : '';
+    // Label-only pins hide the marker body. In edit mode, a selected
+    // label-only pin still renders the body at 50% opacity so the user
+    // can see what they're editing and can drag it.
+    const isSelected = pin.id === selectedId;
+    const showMark = !pin.labelOnly || (editable && isSelected);
+    let markBaseStyle = '';
+    let markContent;
+    let iconW = 24, iconH = 24;
+    if (isOverworld) {
+      const [vbW, vbH] = MARKER_SIZES[pin.class] ?? [1, 1];
+      // Scale uniformly: viewBox units × pxPerUnit. The reference is
+      // chosen so a "12 unit" marker renders at the preset's size in px,
+      // letting authored size variation come through (capital 15 reads
+      // larger than village 8, in proportion to the source files).
+      const pxPerUnit = size / 12;
+      iconW = vbW * pxPerUnit;
+      iconH = vbH * pxPerUnit;
+      markBaseStyle = `width: ${iconW.toFixed(1)}px; height: ${iconH.toFixed(1)}px;`;
+      markContent = `<svg viewBox="0 0 ${vbW} ${vbH}" width="100%" height="100%"><use href="#marker-${pin.class}"/></svg>`;
+    } else {
+      markContent = pin.number;
+    }
+    const markStyle = pin.labelOnly && showMark ? `${markBaseStyle} opacity: 0.5;` : markBaseStyle;
+    const markHtml = showMark ? `<span class="${markClass}" style="${markStyle}">${markContent}</span>` : '';
+    // Per-marker sizing for label-pos rules in map-viewer.scss. The
+    // icon's top/left within the 28×28 hit-box depends on `pin.anchor`
+    // because flex layout pushes the visible icon to a corner; labels
+    // need the actual icon-edge coordinates, not the box edges.
+    const BOX = 28;
+    const anchor = pin.anchor || 'center';
+    const xAxis = anchor.includes('w') ? 'start' : anchor.includes('e') ? 'end' : 'center';
+    const yAxis = anchor.includes('n') ? 'start' : anchor.includes('s') ? 'end' : 'center';
+    const iconLeft = xAxis === 'start' ? 0 : xAxis === 'end' ? BOX - iconW : (BOX - iconW) / 2;
+    const iconTop  = yAxis === 'start' ? 0 : yAxis === 'end' ? BOX - iconH : (BOX - iconH) / 2;
+    const pinVarStyle = `--icon-w: ${iconW.toFixed(1)}px; --icon-h: ${iconH.toFixed(1)}px; --icon-left: ${iconLeft.toFixed(1)}px; --icon-top: ${iconTop.toFixed(1)}px;`;
     return L.divIcon({
       className: '',
-      html: `<div class="map-pin label-pos-${pin.labelPos || 'n'} anchor-${pin.anchor || 'center'}${pin.id === selectedId ? ' selected' : ''}${isOverworld ? ' overworld' : ''}${labelHidden ? ' label-hidden' : ''}"><span class="map-pin-label ${pinSizeClass} ${pinColorClass} ${pinWeightClass}" style="${labelStyle}">${label}</span><span class="${markClass}" style="${markStyle}">${markContent}</span></div>`,
+      html: `<div class="map-pin label-pos-${pin.labelPos || 'n'} anchor-${pin.anchor || 'center'}${isSelected ? ' selected' : ''}${isOverworld ? ' overworld' : ''}${labelHidden ? ' label-hidden' : ''}${pin.labelOnly ? ' label-only' : ''}" style="${pinVarStyle}"><span class="map-pin-label ${pinSizeClass} ${pinColorClass} ${pinWeightClass}" style="${labelStyle}">${label}</span>${markHtml}</div>`,
       iconSize: [28, 28],
       iconAnchor: pinIconAnchor(pin.anchor),
     });
@@ -370,7 +554,10 @@
       // Paths are draggable as a whole; mousedown on an endpoint/control-
       // point handle is intercepted (with stopPropagation) by our capture
       // handler before Leaflet sees it, so the two gestures don't conflict.
-      draggable: editable && selectable,
+      // We always create the dragging handler in edit mode and toggle it
+      // on/off via the effect below — the selected marker stays draggable
+      // even when the active tool isn't `selectable` (e.g. marker tool).
+      draggable: editable,
       interactive: true,
     }).addTo(map);
 
@@ -383,6 +570,10 @@
       marker.on('dragend', () => {
         const pos = marker.getLatLng();
         dispatch('onPinDrag', pin, Math.round(pos.lng), Math.round(pos.lat));
+        // Leaflet suppresses the click event on drags, so a drag never
+        // fires the normal click → select flow. Trigger it explicitly
+        // so the pin shows as selected in the editor after being moved.
+        dispatch('onPinClick', pin);
       });
     } else {
       // View mode: tap-to-select so mobile (no hover) can reveal the
@@ -432,6 +623,82 @@
   function updateZoomClass() {
     updateLabelClasses();
   }
+
+  // --- Grid overlay ---
+  let gridLayer = null;
+  function rebuildGrid() {
+    if (!map) return;
+    if (gridLayer) { gridLayer.remove(); gridLayer = null; }
+    if (!grid || grid.shape === 'none' || !grid.shape) return;
+    // The grid tool implies the user is editing it — force-show the
+    // grid in that case so dragging works even if the visibility
+    // toggle is off.
+    const isGridTool = tool?.id === 'grid';
+    if (!gridVisible && !isGridTool) return;
+    const svg = buildGridSVG(grid, width, height);
+    gridLayer = L.svgOverlay(svg, [[0, 0], [height, width]], {
+      interactive: false,
+      opacity: 1,
+    }).addTo(map);
+  }
+  // Live updates: rebuild whenever grid config, visibility, active
+  // tool, or zoom changes. Reading `grid.shape` etc. ensures Svelte's
+  // deep proxy tracks edits to individual fields, not just whole-
+  // object replacement.
+  $effect(() => {
+    if (!map) return;
+    void grid?.shape;
+    void grid?.size;
+    void grid?.originX;
+    void grid?.originY;
+    void grid?.color;
+    void gridVisible;
+    void tool?.id;
+    rebuildGrid();
+  });
+
+  // Grid visibility toggle button — sits as a Leaflet control in the
+  // top-left, immediately below the zoom buttons. Only visible when a
+  // grid is configured. Both the editor and the read-only viewer get
+  // it via this single MapViewer-owned control.
+  let gridToggleControl = null;
+  let gridToggleBtn = null;
+  function setupGridToggleControl() {
+    if (!map || gridToggleControl) return;
+    const Ctl = L.Control.extend({
+      options: { position: 'topleft' },
+      onAdd: () => {
+        const wrap = L.DomUtil.create('div', 'leaflet-bar leaflet-control map-grid-toggle');
+        const a = L.DomUtil.create('a', '', wrap);
+        a.setAttribute('role', 'button');
+        a.setAttribute('aria-label', 'Toggle grid');
+        a.title = 'Toggle grid';
+        a.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>';
+        L.DomEvent.on(a, 'click', (e) => {
+          L.DomEvent.preventDefault(e);
+          L.DomEvent.stopPropagation(e);
+          ongridtoggle?.();
+        });
+        L.DomEvent.disableClickPropagation(wrap);
+        gridToggleBtn = a;
+        return wrap;
+      },
+    });
+    gridToggleControl = new Ctl();
+  }
+  // Add/remove the control as the configured grid comes and goes; sync
+  // the active state when visibility flips.
+  $effect(() => {
+    if (!map || !gridToggleControl) return;
+    const hasGrid = !!grid?.shape;
+    const attached = !!gridToggleControl._map;
+    if (hasGrid && !attached) gridToggleControl.addTo(map);
+    else if (!hasGrid && attached) gridToggleControl.remove();
+    if (gridToggleBtn) {
+      gridToggleBtn.classList.toggle('active', !!gridVisible);
+      gridToggleBtn.setAttribute('aria-pressed', gridVisible ? 'true' : 'false');
+    }
+  });
 
   // --- Rect preview (for Text tool drag) ---
   let rectPreview = null;
@@ -727,15 +994,18 @@
     prevTool = tool;
   });
 
-  // Toggle marker drag/interact when `selectable` changes
+  // Toggle marker drag/interact when `selectable` or selection changes.
+  // Non-selectable tools (e.g. marker tool) still let the user nudge the
+  // currently-selected marker — handy right after dropping a pin.
   $effect(() => {
     const canSelect = selectable && editable;
-    for (const marker of markerMap.values()) {
-      if (canSelect) marker.dragging?.enable();
+    const sel = selectedId;
+    for (const [id, marker] of markerMap) {
+      const live = canSelect || (editable && id === sel);
+      if (live) marker.dragging?.enable();
       else marker.dragging?.disable();
-      // Toggle Leaflet's pointer-events via class (added in L.DivIcon)
       const el = marker.getElement();
-      if (el) el.style.pointerEvents = canSelect ? '' : 'none';
+      if (el) el.style.pointerEvents = live ? '' : 'none';
     }
   });
 
@@ -834,6 +1104,8 @@
       className: 'map-image-border',
     }).addTo(map);
 
+    rebuildGrid();
+    setupGridToggleControl();
     setupRightPan();
     if (editable) {
       setupToolEvents();
@@ -875,6 +1147,10 @@
         const pin = pins.find(p => p.id === id);
         if (pin) marker.setIcon(makeIcon(pin, z));
       }
+      // Grid stroke width is keyed to the current zoom (min 1) — refresh
+      // the path on zoom changes without rebuilding the geometry.
+      const path = gridLayer?.getElement()?.querySelector('path');
+      if (path) path.setAttribute('stroke-width', String(Math.max(1, z)));
     });
     updateZoomClass();
 
@@ -957,6 +1233,7 @@
   });
 </script>
 
+{@html MARKER_SPRITE}
 <div class="map-container" bind:this={mapEl} style={haloStyle}></div>
 
 <style lang="scss">

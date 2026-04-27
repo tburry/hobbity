@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-18,0)">
+        <g id="city" transform="matrix(0.875,0,0,1.55556,3.125,-48.2222)">
+            <rect x="17" y="31" width="16" height="9" style="fill:none;"/>
+            <clipPath id="_clip1">
+                <rect x="17" y="31" width="16" height="9"/>
+            </clipPath>
+            <g clip-path="url(#_clip1)">
+                <g transform="matrix(1.23077,0,0,0.75,-3.92308,7)">
+                    <ellipse cx="23.5" cy="38" rx="6.5" ry="6" style="fill:white;"/>
+                </g>
+                <g transform="matrix(1.05495,0,0,0.642857,0.208791,11.0714)">
+                    <path d="M23.5,32C27.087,32 30,34.689 30,38C30,41.311 27.087,44 23.5,44C19.913,44 17,41.311 17,38C17,34.689 19.913,32 23.5,32ZM23.5,33C20.51,33 18.083,35.24 18.083,38C18.083,40.76 20.51,43 23.5,43C26.49,43 28.917,40.76 28.917,38C28.917,35.24 26.49,33 23.5,33ZM23.5,34C25.892,34 27.833,35.792 27.833,38C27.833,40.208 25.892,42 23.5,42C21.108,42 19.167,40.208 19.167,38C19.167,35.792 21.108,34 23.5,34Z"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

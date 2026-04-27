@@ -11,6 +11,7 @@
     title = slug,
     pins = [],
     halo = null,
+    grid = null,
     tileBasePath,
     tileMaxZoom,
     tileSize,
@@ -21,6 +22,22 @@
   let open = $state(false);
   let leafletReady = $state(false);
   let fitMode = $state('bounds');
+
+  // Per-map grid toggle, shared with the editor via the same
+  // localStorage key so a preference set in one carries to the other.
+  const gridKey = $derived(`map-editor:grid:${slug}`);
+  let gridVisible = $state(true);
+  function loadGridVisible() {
+    if (typeof localStorage === 'undefined') return;
+    const v = localStorage.getItem(gridKey);
+    gridVisible = v === null ? true : v === '1';
+  }
+  function setGridVisible(v) {
+    gridVisible = v;
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(gridKey, v ? '1' : '0');
+    }
+  }
 
   const MOBILE_BREAKPOINT = 768;
 
@@ -68,6 +85,7 @@
 
   function openOverlay() {
     fitMode = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches ? 'height' : 'bounds';
+    loadGridVisible();
     open = true;
     ensureLeaflet();
     if (location.hash !== hash) {
@@ -121,6 +139,13 @@
       if (e.key === 'Escape') {
         e.stopPropagation();
         close();
+        return;
+      }
+      if (e.key.toLowerCase() === 'g' && grid?.shape) {
+        const tag = e.target?.tagName;
+        if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || e.target?.isContentEditable) return;
+        e.stopPropagation();
+        setGridVisible(!gridVisible);
       }
     };
     window.addEventListener('keydown', onKey, true);
@@ -149,6 +174,9 @@
         maxZoom={tileMaxZoom}
         {pins}
         {halo}
+        {grid}
+        {gridVisible}
+        ongridtoggle={() => setGridVisible(!gridVisible)}
         editable={false}
       />
     {:else}

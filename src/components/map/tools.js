@@ -40,81 +40,157 @@ const SIZE_CLASSES = {
  * name via `size(name)` so sizes stay consistent across presets.
  */
 const SIZES = {
-  title:    { base: 48, min: 16, max: 96 }, // map title only
-  large:    { base: 24, min: 14, max: 56 },
-  regular:  { base: 18, min: 12, max: 28 },
-  small:    { base: 14, min: 10, max: 24 },
+  title:    { base: 48, min: 12, max: 96 }, // map title only
+  large:    { base: 24, min: 12, max: 56 },
+  regular:  { base: 16, min: 10, max: 28 },
+  small:    { base: 14, min: 10, max: 26 },
   xsmall:   { base: 12, min: 10, max: 24 },
+
+  mobile:   { base: 16, min: 14, max: 20 },
 };
 
 /**
- * Typography presets for numbered Pin labels. Each `defaults` spreads a named
- * size spec plus style fields. font/case/letterSpacing/italic/bold come from
- * the preset, not the pin.
+ * Typography presets for Pin labels. font/case/letterSpacing/italic/
+ * weight come from the preset, not the pin. Order matches the editor's
+ * picker: Overworld tab (glyph markers) first, then Town tab (numbered
+ * circles) with POI first.
  */
 export const PIN_PRESETS = {
-  // Overworld — each preset picks a glyph that doubles as the pin icon.
-  capital:   { category: 'overworld', icon: '✪', label: 'Capital',       size: 'large',   font: 'title',   weight: 'bold' },
-  city:      { category: 'overworld', icon: '◉', label: 'City',          size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 1 },
-  fortress:  { category: 'overworld', icon: '⛫', label: 'Fortress',      size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 1 },
-  town:      { category: 'overworld', icon: '◼', label: 'Town',          size: 'regular', font: 'heading' },
-  tower:     { category: 'overworld', icon: '♖', label: 'Tower',         size: 'regular', font: 'heading' },
-  temple:    { category: 'overworld', icon: '\u26EA\uFE0E', label: 'Temple', size: 'regular', font: 'heading' },
-  mine:      { category: 'overworld', icon: '⚒', label: 'Mine',          size: 'regular', font: 'heading' },
-  cave:      { category: 'overworld', icon: '⍢', label: 'Cave',          size: 'regular', font: 'heading' },
-  ruin:      { category: 'overworld', icon: '⛬', label: 'Ruin',          size: 'regular', font: 'heading' },
-  camp:      { category: 'overworld', icon: '⛺\uFE0E', label: 'Camp',    size: 'regular', font: 'body' },
-  village:   { category: 'overworld', icon: '•', label: 'Village',       size: 'small',   font: 'body' },
-  bridge:    { category: 'overworld', icon: '≏', label: 'Bridge',        size: 'small',   font: 'body' },
-  mountain:  { category: 'overworld', icon: '⛰', label: 'Mountain',      size: 'small',   font: 'body' },
+  // Overworld — the marker body comes from the SVG sprite keyed by
+  // preset id (see src/components/map/markers.generated.{svg,js}).
+  capital: {
+    category: 'overworld', label: 'Capital', size: 'regular', font: 'title', weight: 'bold', colorClass: 'text-title',
+  },
+  city: {
+    category: 'overworld', label: 'City', size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 1,
+  },
+  town: {
+    category: 'overworld', label: 'Town', size: 'regular', font: 'heading',
+  },
+  village: {
+    category: 'overworld', label: 'Village', size: 'regular', font: 'body',
+  },
+  bridge: {
+    category: 'overworld', label: 'Bridge', size: 'regular', font: 'body',
+  },
+  ruin: {
+    category: 'overworld', label: 'Ruin', size: 'regular', font: 'heading',
+  },
+
+  fortress: {
+    category: 'overworld', label: 'Fortress', size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 1,
+  },
+  tower: {
+    category: 'overworld', label: 'Tower', size: 'regular', font: 'heading',
+  },
+  temple: {
+    category: 'overworld', label: 'Temple', size: 'regular', font: 'heading',
+  },
+
+
+  mountain: {
+    category: 'overworld', label: 'Mountain', size: 'regular', font: 'body',
+  },
+  mine: {
+    category: 'overworld', label: 'Mine', size: 'regular', font: 'heading',
+  },
+  cave: {
+    category: 'overworld', label: 'Cave', size: 'regular', font: 'heading',
+  },
+  camp: {
+    category: 'overworld', label: 'Camp', size: 'regular', font: 'body',
+  },
   // Town — picked from a grid (no icon glyph; uses numbered circle).
-  landmark:  { category: 'town', label: 'Landmark',          size: 'regular', font: 'heading', weight: 'bold', case: 'upper', colorClass: 'text-heading' },
-  gate:      { category: 'town', label: 'Gate',              size: 'regular', font: 'heading', weight: 'bold', case: 'upper' },
-  poi:       { category: 'town', label: 'Point of Interest', size: 'regular', font: 'title',   weight: 'bold', colorClass: 'text-title' },
+  poi: {
+    category: 'town', label: 'Point of Interest', size: 'regular', font: 'title', weight: 'bold', colorClass: 'text-title',
+  },
+  landmark: {
+    category: 'town', label: 'Landmark', size: 'regular', font: 'heading', weight: 'bold', case: 'upper', colorClass: 'text-heading',
+  },
+  gate: {
+    category: 'town', label: 'Gate', size: 'regular', font: 'heading', weight: 'bold', case: 'upper',
+  },
   shop: {
-    category: 'town', label: 'Shop / Inn', size: 'small', font: 'body', weight: 'semibold' },
+    category: 'town', label: 'Shop / Inn', size: 'regular', font: 'body', weight: 'semibold',
+  },
   residence: {
-    category: 'town', label: 'Minor Structure', size: 'small', font: 'body' },
+    category: 'town', label: 'Minor Structure', size: 'regular', font: 'body',
+  },
 };
 
+// Order matches TextProperties' STYLE_ORDER so source + picker read the
+// same top-to-bottom.
 export const TEXT_PRESETS = {
-  'map-title':   { label: 'Map Title',            size: 'title',   font: 'title',   colorClass: 'text-title' },
-  continent:     { label: 'Country',              size: 'large',   font: 'title',   case: 'upper', letterSpacing: 4, colorClass: 'text-heading' },
-  ocean:         { label: 'Ocean, Sea',           size: 'large',   font: 'heading', italic: true, case: 'upper', letterSpacing: 6 },
-  lake:          { label: 'Lake, Bay',            size: 'large',   font: 'heading', italic: true, case: 'upper', letterSpacing: 4 },
-  range:         { label: 'Mountain Range',       size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3 },
-  forest:        { label: 'Forest',               size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 4 },
-  region:        { label: 'Region',               size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3 },
-  district:      { label: 'District',             size: 'large',   font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 2 },
-  'civic-space': { label: 'Civic Space',          size: 'regular', font: 'heading', case: 'upper', letterSpacing: 3 },
-  desert:        { label: 'Desert, Plain',        size: 'regular', font: 'body',    case: 'upper', letterSpacing: 4 },
-  hills:         { label: 'Hills, Valley',        size: 'regular', font: 'heading', case: 'title', letterSpacing: 1 },
-  island:        { label: 'Island, Archipelago',  size: 'small',   font: 'body',    case: 'upper', letterSpacing: 2 },
-  'pond-marsh':  { label: 'Pond, Swamp, Marsh',   size: 'regular', font: 'body', italic: true, case: 'title' },
+  'map-title': {
+    label: 'Map Title', size: 'title', font: 'title', colorClass: 'text-title',
+  },
+  continent: {
+    label: 'Country', size: 'large', font: 'title', case: 'upper', letterSpacing: 4, colorClass: 'text-heading',
+  },
+  region: {
+    label: 'Region', size: 'large', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3,
+  },
+  district: {
+    label: 'District', size: 'large', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 2,
+  },
+  'civic-space': {
+    label: 'Civic Space', size: 'regular', font: 'heading', case: 'upper', letterSpacing: 3,
+  },
+  forest: {
+    label: 'Forest', size: 'large', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 4,
+  },
+  range: {
+    label: 'Mountain Range', size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3,
+  },
+  hills: {
+    label: 'Hills, Valley', size: 'regular', font: 'heading', case: 'title', letterSpacing: 1,
+  },
+  desert: {
+    label: 'Desert, Plain', size: 'regular', font: 'body', case: 'upper', letterSpacing: 4,
+  },
+  ocean: {
+    label: 'Ocean, Sea', size: 'large', font: 'heading', italic: true, case: 'upper', letterSpacing: 6,
+  },
+  island: {
+    label: 'Island, Archipelago', size: 'small', font: 'body', case: 'upper', letterSpacing: 2,
+  },
+  lake: {
+    label: 'Lake, Bay', size: 'large', font: 'heading', italic: true, case: 'upper', letterSpacing: 4,
+  },
+  'pond-marsh': {
+    label: 'Pond, Swamp, Marsh', size: 'small', font: 'body', italic: true, case: 'title',
+  },
 };
 
 // Path features render as text flowing along an invisible curve. The
 // preset controls typography only — there is no stroke style since the
-// line isn't drawn.
-// Grouped by kind (Borders, Roads, Water), then by prominence inside
-// each group so the picker reads top-to-bottom as strongest → weakest.
+// line isn't drawn. Order drives the picker: grouped by kind (Borders,
+// Roads, Water) with strongest first in each group.
 export const PATH_PRESETS = {
   'major-border': {
-    label: 'National Border', size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3 },
+    label: 'National Border', size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3,
+  },
   'minor-border': {
-    label: 'Regional Border', size: 'small',   font: 'body',    case: 'upper', letterSpacing: 3 },
+    label: 'Regional Border', size: 'small', font: 'body', case: 'upper', letterSpacing: 3,
+  },
   highway: {
-    label: 'Highway',         size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3 },
+    label: 'Highway', size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3,
+  },
   road: {
-    label: 'Road', size: 'small', font: 'heading', case: 'title', letterSpacing: 1 },
+    label: 'Road', size: 'small', font: 'heading', case: 'title', letterSpacing: 1,
+  },
   trail: {
-    label: 'Trail, Pass', size: 'xsmall', font: 'body',    case: 'title', letterSpacing: 1 },
+    label: 'Trail, Pass', size: 'xsmall', font: 'body', case: 'title', letterSpacing: 1,
+  },
   wall: {
-    label: 'Wall', size: 'small', font: 'heading', case: 'upper', letterSpacing: 3 },
+    label: 'Wall', size: 'small', font: 'heading', case: 'upper', letterSpacing: 3,
+  },
   river: {
-    label: 'River', size: 'small', font: 'heading', italic: true, case: 'title', letterSpacing: 2 },
+    label: 'River', size: 'small', font: 'heading', italic: true, case: 'title', letterSpacing: 2,
+  },
   stream: {
-    label: 'Stream', size: 'xsmall', font: 'body', italic: true, case: 'title', letterSpacing: 2 },
+    label: 'Stream', size: 'xsmall', font: 'body', italic: true, case: 'title', letterSpacing: 2,
+  },
 };
 
 
@@ -146,6 +222,12 @@ const pinTool = {
       y: Math.round(latlng.lat),
     });
   },
+  // Allow nudging the just-placed (selected) marker without leaving
+  // the tool. MapViewer's drag effect keeps the selected marker
+  // draggable; we just need to persist the new position.
+  onPinDrag(pin, x, y, ctx) {
+    ctx.updatePos(pin, x, y);
+  },
 };
 
 const textTool = {
@@ -174,6 +256,12 @@ const textTool = {
     const cx = Math.round((start.lng + latlng.lng) / 2);
     const cy = Math.round((start.lat + latlng.lat) / 2);
     ctx.create({ kind: 'text', x: cx, y: cy, width: w, height: h });
+  },
+  // Allow nudging the just-placed (selected) text without leaving the
+  // tool. Without this, dragging the box visually moves it but the data
+  // never updates, so any subsequent render snaps it back.
+  onPinDrag(pin, x, y, ctx) {
+    ctx.updatePos(pin, x, y);
   },
   onDeactivate(map, ctx) {
     this.state = null;
@@ -209,9 +297,49 @@ const pathTool = {
       b: [Math.round(latlng.lng), Math.round(latlng.lat)],
     });
   },
+  onPinDrag(pin, x, y, ctx) {
+    ctx.updatePos(pin, x, y);
+  },
   onDeactivate(map, ctx) {
     this.state = null;
     ctx.hideLine();
+  },
+};
+
+/** Grid tool — drag the map to translate the grid origin. The tool
+ * doesn't create or select features; its only job is to capture the
+ * map drag and pipe it into ctx.shiftGridOrigin so the grid layer can
+ * follow the cursor. Activation also surfaces the GridProperties
+ * panel in the editor sidebar. */
+const gridTool = {
+  id: 'grid',
+  label: 'Grid',
+  cursor: 'move',
+  state: null,
+  onMapDown(e, latlng, ctx) {
+    const grid = ctx.getGrid?.();
+    if (!grid?.shape) return;
+    this.state = {
+      startX: latlng.lng,
+      startY: latlng.lat,
+      originX: Number(grid.originX) || 0,
+      originY: Number(grid.originY) || 0,
+    };
+  },
+  onMapMove(e, latlng, ctx) {
+    if (!this.state) return;
+    const dx = latlng.lng - this.state.startX;
+    const dy = latlng.lat - this.state.startY;
+    ctx.setGridOrigin?.(
+      Math.round(this.state.originX + dx),
+      Math.round(this.state.originY + dy),
+    );
+  },
+  onMapUp() {
+    this.state = null;
+  },
+  onDeactivate() {
+    this.state = null;
   },
 };
 
@@ -220,9 +348,10 @@ export const TOOLS = {
   pin: pinTool,
   text: textTool,
   path: pathTool,
+  grid: gridTool,
 };
 
-export const TOOL_LIST = [selectTool, pinTool, textTool, pathTool];
+export const TOOL_LIST = [selectTool, pinTool, textTool, pathTool, gridTool];
 
 export function sizeSpec(name) {
   return SIZES[name] || SIZES.regular;

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 12 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <rect id="cave" x="0" y="0" width="12" height="10" style="fill:none;"/>
+    <clipPath id="_clip1">
+        <rect x="0" y="0" width="12" height="10"/>
+    </clipPath>
+    <g clip-path="url(#_clip1)">
+        <path d="M11.049,5.772L12,8.753L12,9.495C12,9.629 11.947,9.758 11.852,9.852C11.758,9.947 11.629,10 11.495,10C9.535,10 2.437,10 0.495,10C0.363,10 0.238,9.948 0.145,9.855C0.052,9.762 -0,9.637 0,9.505C0,9.157 0,8.753 0,8.753L1.488,5.456L2.196,4.914L3.123,2.773L4.625,1.771C4.625,1.771 5.337,0.753 5.681,0.26C5.729,0.192 5.803,0.146 5.885,0.132C5.968,0.118 6.052,0.139 6.12,0.188C6.867,0.736 8.991,2.295 8.991,2.295L9.915,4.561L11.049,5.772Z" style="fill:white;"/>
+        <path d="M10.312,6.347L11,9L7.51,9L7,7L5.748,6.011L5,7L4.742,9L1,9L2.162,6.245L2.863,5.673L3.784,3.373L5.315,2.367L6,1L8.218,2.78L9.137,5L10.312,6.347Z"/>
+    </g>
+</svg>
