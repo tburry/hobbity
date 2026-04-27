@@ -21,8 +21,8 @@
       "class": "landmark",
       "number": "1",
       "name": "Oak Market Square",
-      "x": 3162,
-      "y": 1937,
+      "x": 3144,
+      "y": 1989,
       "anchor": "n",
       "labelPos": "s"
     },
@@ -31,8 +31,8 @@
       "class": "shop",
       "number": "2",
       "name": "Millie's Brewery",
-      "x": 3727,
-      "y": 915,
+      "x": 3729,
+      "y": 912,
       "anchor": "s"
     },
     {
@@ -40,8 +40,8 @@
       "class": "shop",
       "number": "3",
       "name": "Gomwick General Goods",
-      "x": 3893,
-      "y": 1249,
+      "x": 3900,
+      "y": 1229,
       "anchor": "s"
     },
     {
@@ -49,8 +49,8 @@
       "class": "shop",
       "number": "4",
       "name": "Longbuck's Creamery",
-      "x": 4044,
-      "y": 1565,
+      "x": 4070,
+      "y": 1542,
       "anchor": "sw"
     },
     {
@@ -58,8 +58,8 @@
       "class": "shop",
       "number": "5",
       "name": "The New Butchery",
-      "x": 4109,
-      "y": 2074,
+      "x": 4149,
+      "y": 2010,
       "anchor": "sw"
     },
     {
@@ -96,8 +96,8 @@
       "class": "residence",
       "number": "7",
       "name": "The Happy Storage",
-      "x": 5101,
-      "y": 1682,
+      "x": 5012,
+      "y": 1684,
       "anchor": "se"
     },
     {
@@ -132,8 +132,8 @@
       "class": "shop",
       "number": "11",
       "name": "The Gomwick Granery",
-      "x": 3126,
-      "y": 2626,
+      "x": 3140,
+      "y": 2606,
       "anchor": "s"
     },
     {
@@ -141,8 +141,8 @@
       "class": "shop",
       "number": "12",
       "name": "Gilly Greene's Greengrocery",
-      "x": 3687,
-      "y": 2538,
+      "x": 3688,
+      "y": 2515,
       "anchor": "sw"
     },
     {
@@ -297,9 +297,9 @@
       "kind": "text",
       "class": "pond-marsh",
       "name": "Spottle Pond",
-      "x": 3546,
-      "y": 4009,
-      "width": 455,
+      "x": 3563,
+      "y": 4029,
+      "width": 370,
       "height": 493,
       "minZoom": 2,
       "shrink": true
