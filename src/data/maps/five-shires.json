@@ -25,6 +25,14 @@
     },
     {
       "kind": "pin",
+      "class": "mountain",
+      "number": "24",
+      "name": "Adrian Peak",
+      "x": 4586,
+      "y": 279
+    },
+    {
+      "kind": "pin",
       "class": "town",
       "number": "30",
       "name": "Aergruth",
@@ -621,6 +629,17 @@
       "y": 2178,
       "width": 415,
       "height": 685,
+      "minZoom": 2
+    },
+    {
+      "kind": "text",
+      "class": "pond",
+      "name": "Mistmyr Falls",
+      "x": 5112,
+      "y": 291,
+      "width": 244,
+      "height": 174,
+      "valign": "bottom",
       "minZoom": 2
     },
     {
