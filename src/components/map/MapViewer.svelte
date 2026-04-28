@@ -862,16 +862,32 @@
     // edges by the cursor delta, then re-derive (x, y, w, h) from the
     // new bounds. Edges that aren't part of the dragged handle stay
     // fixed in image coords, so the opposite corner / side never moves.
-    const ax = align === 'left' ? 0 : align === 'right' ? origW : origW / 2;
-    const ay = valign === 'top' ? 0 : valign === 'bottom' ? origH : origH / 2;
-    let left = origX - ax;
-    let top = origY - ay;
+    const axFrac = align === 'left' ? 0 : align === 'right' ? 1 : 0.5;
+    const ayFrac = valign === 'top' ? 0 : valign === 'bottom' ? 1 : 0.5;
+    let left = origX - axFrac * origW;
+    let top = origY - ayFrac * origH;
     let right = left + origW;
     let bottom = top + origH;
     if (handle.includes('w')) left += dx;
     if (handle.includes('e')) right += dx;
     if (handle.includes('n')) top += dy;
     if (handle.includes('s')) bottom += dy;
+    // Cmd / Ctrl held: pivot resize around the anchor. Mirror the
+    // un-dragged edge so the anchor stays put in image coords —
+    // symmetric for centre alignment, no-op for the edge already at
+    // the anchor.
+    if (e.metaKey || e.ctrlKey) {
+      if (handle.includes('e') && axFrac < 1) {
+        left = (origX - axFrac * right) / (1 - axFrac);
+      } else if (handle.includes('w') && axFrac > 0) {
+        right = (origX - (1 - axFrac) * left) / axFrac;
+      }
+      if (handle.includes('s') && ayFrac < 1) {
+        top = (origY - ayFrac * bottom) / (1 - ayFrac);
+      } else if (handle.includes('n') && ayFrac > 0) {
+        bottom = (origY - (1 - ayFrac) * top) / ayFrac;
+      }
+    }
     // Min-size clamp: collapse the moving edge into the fixed one
     // rather than letting it pass through.
     const MIN = 20;
@@ -885,10 +901,8 @@
     }
     const w = right - left;
     const h = bottom - top;
-    const newAx = align === 'left' ? 0 : align === 'right' ? w : w / 2;
-    const newAy = valign === 'top' ? 0 : valign === 'bottom' ? h : h / 2;
-    const x = left + newAx;
-    const y = top + newAy;
+    const x = left + axFrac * w;
+    const y = top + ayFrac * h;
     ctx?.resize?.(pin, Math.round(x), Math.round(y), Math.round(w), Math.round(h));
   }
 
