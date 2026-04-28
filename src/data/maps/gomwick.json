@@ -268,7 +268,7 @@
     },
     {
       "kind": "text",
-      "class": "pond-marsh",
+      "class": "pond",
       "name": "Nettle's Pond",
       "x": 5795,
       "y": 3229,
@@ -295,7 +295,7 @@
     },
     {
       "kind": "text",
-      "class": "pond-marsh",
+      "class": "pond",
       "name": "Spottle Pond",
       "x": 3563,
       "y": 4029,

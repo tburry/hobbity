@@ -8,14 +8,16 @@
       "originY": 3,
       "color": "rgba(0, 0, 0, 0.20)",
       "weight": 1
-    }
+    },
+    "labelScale": 0.5,
+    "markerLabelScale": 0.8
   },
   "pins": [
     {
       "kind": "text",
       "class": "map-title",
       "name": "The Five Shires",
-      "x": 2601,
+      "x": 2602,
       "y": 4773,
       "width": 5201,
       "height": 702,
@@ -41,7 +43,7 @@
     },
     {
       "kind": "pin",
-      "class": "camp",
+      "class": "battle",
       "number": "34",
       "name": "Blackflame",
       "x": 4723,
@@ -62,7 +64,8 @@
       "number": "17",
       "name": "Bridle",
       "x": 4396,
-      "y": 1632
+      "y": 1632,
+      "minZoom": 2
     },
     {
       "kind": "pin",
@@ -81,8 +84,7 @@
       "name": "Burny",
       "x": 2884,
       "y": 3280,
-      "anchor": "s",
-      "labelPos": "s"
+      "anchor": "s"
     },
     {
       "kind": "pin",
@@ -107,14 +109,15 @@
       "class": "mountain",
       "number": "22",
       "name": "Earth Rumble",
-      "x": 1557,
-      "y": 4150,
+      "x": 1558,
+      "y": 4143,
+      "anchor": "n",
       "labelPos": "s",
       "labelOnly": true
     },
     {
       "kind": "pin",
-      "class": "camp",
+      "class": "battle",
       "number": "35",
       "name": "Fire Rock",
       "x": 5233,
@@ -129,7 +132,7 @@
       "x": 2784,
       "y": 2455,
       "anchor": "n",
-      "labelPos": "s"
+      "minZoom": 2
     },
     {
       "kind": "pin",
@@ -200,17 +203,20 @@
       "class": "village",
       "number": "33",
       "name": "Nob's Boots",
-      "x": 4962,
-      "y": 2167,
-      "anchor": "se"
+      "x": 4975,
+      "y": 2189,
+      "anchor": "n",
+      "labelPos": "s"
     },
     {
       "kind": "pin",
       "class": "fortress",
       "number": "19",
       "name": "North Keep",
-      "x": 5029,
-      "y": 4420
+      "x": 5023,
+      "y": 4414,
+      "anchor": "nw",
+      "minZoom": 2
     },
     {
       "kind": "pin",
@@ -233,21 +239,21 @@
     },
     {
       "kind": "pin",
-      "class": "ruin",
+      "class": "town",
       "number": "10",
       "name": "Ringrise",
       "x": 3385,
       "y": 1541,
-      "anchor": "s"
+      "anchor": "s",
+      "minZoom": 2
     },
     {
       "kind": "pin",
       "class": "fortress",
       "number": "25",
       "name": "Riverfork Keep",
-      "x": 5819,
-      "y": 1316,
-      "anchor": "sw"
+      "x": 5831,
+      "y": 1303
     },
     {
       "kind": "pin",
@@ -276,8 +282,7 @@
       "name": "Sateeka",
       "x": 2221,
       "y": 2584,
-      "anchor": "ne",
-      "labelPos": "s"
+      "anchor": "ne"
     },
     {
       "kind": "pin",
@@ -293,8 +298,8 @@
       "class": "capital",
       "number": "1",
       "name": "Shireton",
-      "x": 3292,
-      "y": 2971,
+      "x": 3296,
+      "y": 2970,
       "labelPos": "s",
       "minZoom": 2,
       "description": "The only true city in the shires and serves as the capital. It is a major trade hub with diverse architecture and a bustling port."
@@ -316,15 +321,17 @@
       "x": 4201,
       "y": 2904,
       "anchor": "sw",
-      "labelPos": "s"
+      "labelPos": "s",
+      "minZoom": 2
     },
     {
       "kind": "pin",
       "class": "city",
       "number": "3",
       "name": "Tothmeer",
-      "x": 881,
-      "y": 3415,
+      "x": 884,
+      "y": 3421,
+      "anchor": "se",
       "labelPos": "s",
       "minZoom": 2
     },
@@ -362,12 +369,11 @@
       "kind": "text",
       "class": "forest",
       "name": "Archelos Woods",
-      "x": 5569,
-      "y": 1325,
-      "width": 367,
-      "height": 315,
-      "minZoom": 3,
-      "shrink": true
+      "x": 5555,
+      "y": 1437,
+      "width": 499,
+      "height": 559,
+      "minZoom": 3
     },
     {
       "kind": "text",
@@ -377,17 +383,40 @@
       "y": 1904,
       "width": 337,
       "height": 185,
-      "minZoom": 3,
-      "shrink": true
+      "minZoom": 3
+    },
+    {
+      "kind": "path",
+      "class": "stream",
+      "name": "Athenos Canal",
+      "a": [
+        408,
+        2804
+      ],
+      "b": [
+        932,
+        2468
+      ]
     },
     {
       "kind": "text",
-      "class": "pond-marsh",
+      "class": "marsh",
       "name": "Blight Swamp",
       "x": 5509,
       "y": 1949,
       "width": 455,
       "height": 410,
+      "minZoom": 2
+    },
+    {
+      "kind": "text",
+      "class": "hills",
+      "name": "Burny Cliffs",
+      "x": 3153,
+      "y": 3346,
+      "width": 572,
+      "height": 115,
+      "valign": "bottom",
       "minZoom": 2
     },
     {
@@ -399,8 +428,8 @@
         2864
       ],
       "b": [
-        4907,
-        2380
+        4883,
+        2376
       ],
       "mode": "bezier",
       "cpA": [
@@ -408,8 +437,8 @@
         2804
       ],
       "cpB": [
-        4661,
-        2584
+        4637,
+        2580
       ],
       "textBaseline": "top",
       "minZoom": 3
@@ -426,24 +455,24 @@
     },
     {
       "kind": "path",
-      "class": "wall",
+      "class": "range",
       "name": "Cruth Mountains",
       "a": [
-        2644,
-        1925
+        2515,
+        1786
       ],
       "b": [
-        3901,
-        481
+        3849,
+        464
       ],
       "mode": "bezier",
       "cpA": [
-        2561,
-        1467
+        3083,
+        1500
       ],
       "cpB": [
-        3963,
-        751
+        3746,
+        884
       ]
     },
     {
@@ -466,16 +495,15 @@
       "cpB": [
         5449,
         445
-      ],
-      "shrink": true
+      ]
     },
     {
       "kind": "text",
       "class": "region",
       "name": "Eastshire",
-      "x": 5297,
-      "y": 1777,
-      "width": 877,
+      "x": 5371,
+      "y": 1754,
+      "width": 1149,
       "height": 307,
       "minZoom": 2
     },
@@ -487,55 +515,51 @@
       "y": 4321,
       "width": 928,
       "height": 259,
-      "minZoom": 2,
-      "shrink": true
+      "minZoom": 2
     },
     {
       "kind": "path",
       "class": "river",
-      "name": "Flur",
+      "name": "Flur River",
       "a": [
         1768,
         2551
       ],
       "b": [
-        1993,
-        2690
+        2018,
+        2853
       ],
       "mode": "bezier",
       "cpA": [
-        1808,
-        2623
+        1857,
+        2672
       ],
       "cpB": [
-        1919,
-        2646
-      ],
-      "shrink": true
+        2094,
+        2633
+      ]
     },
     {
       "kind": "text",
       "class": "island",
       "name": "Gettlebest Rock",
       "x": 4221,
-      "y": 3384,
+      "y": 3273,
       "width": 574,
-      "height": 271,
+      "height": 259,
       "valign": "top",
-      "minZoom": 2,
-      "shrink": true
+      "minZoom": 2
     },
     {
       "kind": "text",
       "class": "island",
       "name": "Harbourlee Rock",
-      "x": 5425,
-      "y": 2518,
+      "x": 5432,
+      "y": 2420,
       "width": 650,
-      "height": 241,
+      "height": 121,
       "valign": "top",
-      "minZoom": 2,
-      "shrink": true
+      "minZoom": 2
     },
     {
       "kind": "text",
@@ -546,6 +570,16 @@
       "width": 1205,
       "height": 221,
       "minZoom": 2
+    },
+    {
+      "kind": "text",
+      "class": "lake",
+      "name": "Hiadim",
+      "x": 4145,
+      "y": 1531,
+      "width": 503,
+      "height": 388,
+      "minZoom": 3
     },
     {
       "kind": "text",
@@ -560,44 +594,32 @@
     {
       "kind": "path",
       "class": "river",
-      "name": "Ithypool River",
+      "name": "Ithypool R.",
       "a": [
-        2831,
-        2609
+        2814,
+        2605
       ],
       "b": [
-        3000,
-        2896
+        3072,
+        2931
       ],
       "mode": "bezier",
       "cpA": [
-        3037,
-        2635
+        3280,
+        2729
       ],
       "cpB": [
-        3118,
-        2777
-      ],
-      "shrink": true
+        2890,
+        2890
+      ]
     },
     {
       "kind": "text",
-      "class": "lake",
-      "name": "Lake Hiadim",
-      "x": 4150,
-      "y": 1525,
-      "width": 225,
-      "height": 250,
-      "minZoom": 3,
-      "shrink": true
-    },
-    {
-      "kind": "text",
-      "class": "pond-marsh",
+      "class": "marsh",
       "name": "Malpheggi Swamp",
-      "x": 763,
-      "y": 1968,
-      "width": 642,
+      "x": 770,
+      "y": 2178,
+      "width": 415,
       "height": 685,
       "minZoom": 2
     },
@@ -605,24 +627,22 @@
       "kind": "text",
       "class": "lake",
       "name": "Muimzir",
-      "x": 2611,
-      "y": 2381,
+      "x": 2634,
+      "y": 2379,
       "width": 653,
       "height": 261,
-      "minZoom": 3,
-      "shrink": true
+      "minZoom": 3
     },
     {
       "kind": "text",
       "class": "island",
       "name": "Muldair's Rock",
-      "x": 4847,
-      "y": 3637,
+      "x": 4846,
+      "y": 3729,
       "width": 500,
       "height": 214,
       "valign": "bottom",
-      "minZoom": 2,
-      "shrink": true
+      "minZoom": 2
     },
     {
       "kind": "text",
@@ -632,29 +652,17 @@
       "y": 2204,
       "width": 437,
       "height": 128,
-      "minZoom": 3,
-      "shrink": true
+      "minZoom": 3
     },
     {
       "kind": "text",
       "class": "island",
       "name": "Orlin Isle",
       "x": 4060,
-      "y": 3794,
+      "y": 3774,
       "width": 548,
       "height": 115,
       "valign": "top",
-      "minZoom": 2,
-      "shrink": true
-    },
-    {
-      "kind": "text",
-      "class": "forest",
-      "name": "Pupami",
-      "x": 5513,
-      "y": 4955,
-      "width": 756,
-      "height": 302,
       "minZoom": 2
     },
     {
@@ -681,42 +689,63 @@
       "kind": "text",
       "class": "island",
       "name": "Shirefang Rocks",
-      "x": 5390,
-      "y": 2828,
+      "x": 5397,
+      "y": 2861,
       "width": 790,
       "height": 118,
       "valign": "bottom",
-      "minZoom": 2,
-      "shrink": true
+      "minZoom": 2
     },
     {
       "kind": "text",
       "class": "region",
       "name": "Southshire",
-      "x": 1772,
-      "y": 3369,
-      "width": 1076,
+      "x": 1922,
+      "y": 3303,
+      "width": 1111,
       "height": 222,
       "minZoom": 2
+    },
+    {
+      "kind": "path",
+      "class": "river",
+      "name": "Streel River",
+      "a": [
+        965,
+        2149
+      ],
+      "b": [
+        1234,
+        1695
+      ],
+      "mode": "bezier",
+      "cpA": [
+        1112,
+        2109
+      ],
+      "cpB": [
+        1319,
+        1936
+      ]
     },
     {
       "kind": "text",
       "class": "island",
       "name": "Toth Isle",
-      "x": 1031,
-      "y": 3641,
+      "x": 973,
+      "y": 3619,
       "width": 563,
-      "height": 240,
-      "minZoom": 2,
-      "shrink": true
+      "height": 168,
+      "valign": "top",
+      "minZoom": 2
     },
     {
       "kind": "path",
       "class": "river",
       "name": "Wardle River",
       "a": [
-        4633,
-        1723
+        4542,
+        1666
       ],
       "b": [
         4981,
@@ -724,14 +753,13 @@
       ],
       "mode": "bezier",
       "cpA": [
-        4846,
-        1794
+        4784,
+        1737
       ],
       "cpB": [
         4789,
         1921
-      ],
-      "shrink": true
+      ]
     }
   ]
 }
