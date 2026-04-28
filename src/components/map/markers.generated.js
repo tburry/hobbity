@@ -6,6 +6,10 @@ import sprite from './markers.generated.svg?raw';
 export const MARKER_SPRITE = sprite;
 
 export const MARKER_SIZES = {
+  "battle": [
+    12,
+    11
+  ],
   "bridge": [
     10,
     7

@@ -34,18 +34,32 @@ const SIZE_CLASSES = {
 };
 
 /**
- * Named font-size specs. Each returns { base, min, max } in CSS pixels,
- * where `base` is the size at zoom 2 (REF_ZOOM); the renderer scales linearly
- * with zoom (2^(z - 2)) and clamps to [min, max]. Presets reference these by
- * name via `size(name)` so sizes stay consistent across presets.
+ * Global minimum / maximum font size (CSS px) for any rendered map
+ * label. The renderer floors every displayed size at MIN_FONT_PX and
+ * caps it at MAX_FONT_PX — including after the per-map labelScale /
+ * markerLabelScale multipliers — so labels never drop below something
+ * readable nor balloon past a sane upper bound, regardless of zoom or
+ * scale. The mobile spec keeps its own tighter bracket (`min`/`max`)
+ * for touch readability.
+ */
+export const MIN_FONT_PX = 11;
+export const MAX_FONT_PX = 56;
+
+/**
+ * Named font-size specs. Each returns { base } in CSS pixels, where
+ * `base` is the size at zoom 2 (REF_ZOOM); the renderer scales
+ * linearly with zoom (2^(z - 2)) and clamps to [MIN_FONT_PX,
+ * MAX_FONT_PX]. The mobile spec keeps its own min/max so touch labels
+ * stay inside a tighter bracket than the desktop floor and ceiling.
  */
 const SIZES = {
-  title:    { base: 48, min: 12, max: 96 }, // map title only
-  large:    { base: 24, min: 12, max: 56 },
-  regular:  { base: 16, min: 10, max: 28 },
-  small:    { base: 14, min: 10, max: 26 },
-  xsmall:   { base: 12, min: 10, max: 24 },
+  title:    { base: 48 }, // map title only
+  large:    { base: 24 },
+  regular:  { base: 16 },
+  small:    { base: 14 },
+  xsmall:   { base: 12 },
 
+  capital:  { base: 22 },
   mobile:   { base: 16, min: 14, max: 20 },
 };
 
@@ -59,7 +73,7 @@ export const PIN_PRESETS = {
   // Overworld — the marker body comes from the SVG sprite keyed by
   // preset id (see src/components/map/markers.generated.{svg,js}).
   capital: {
-    category: 'overworld', label: 'Capital', size: 'regular', font: 'title', weight: 'bold', colorClass: 'text-title',
+    category: 'overworld', label: 'Capital', size: 'capital', font: 'title', weight: 'bold', colorClass: 'text-title',
   },
   city: {
     category: 'overworld', label: 'City', size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 1,
@@ -100,6 +114,9 @@ export const PIN_PRESETS = {
   camp: {
     category: 'overworld', label: 'Camp', size: 'regular', font: 'body',
   },
+  battle: {
+    category: 'overworld', label: 'Battle', size: 'regular', font: 'body',
+  },
   // Town — picked from a grid (no icon glyph; uses numbered circle).
   poi: {
     category: 'town', label: 'Point of Interest', size: 'regular', font: 'title', weight: 'bold', colorClass: 'text-title',
@@ -118,8 +135,8 @@ export const PIN_PRESETS = {
   },
 };
 
-// Order matches TextProperties' STYLE_ORDER so source + picker read the
-// same top-to-bottom.
+// Insertion order drives the picker — keep the source top-to-bottom in
+// the order you want the buttons to appear.
 export const TEXT_PRESETS = {
   'map-title': {
     label: 'Map Title', size: 'title', font: 'title', colorClass: 'text-title',
@@ -137,7 +154,7 @@ export const TEXT_PRESETS = {
     label: 'Civic Space', size: 'regular', font: 'heading', case: 'upper', letterSpacing: 3,
   },
   forest: {
-    label: 'Forest', size: 'large', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 4,
+    label: 'Forest', size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 4,
   },
   range: {
     label: 'Mountain Range', size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3,
@@ -148,30 +165,33 @@ export const TEXT_PRESETS = {
   desert: {
     label: 'Desert, Plain', size: 'regular', font: 'body', case: 'upper', letterSpacing: 4,
   },
-  ocean: {
-    label: 'Ocean, Sea', size: 'large', font: 'heading', italic: true, case: 'upper', letterSpacing: 6,
-  },
   island: {
     label: 'Island, Archipelago', size: 'small', font: 'body', case: 'upper', letterSpacing: 2,
   },
-  lake: {
-    label: 'Lake, Bay', size: 'large', font: 'heading', italic: true, case: 'upper', letterSpacing: 4,
+  ocean: {
+    label: 'Ocean, Sea', size: 'large', font: 'heading', italic: true, case: 'upper', letterSpacing: 6,
   },
-  'pond-marsh': {
-    label: 'Pond, Swamp, Marsh', size: 'small', font: 'body', italic: true, case: 'title',
+  lake: {
+    label: 'Lake, Bay', size: 'regular', font: 'heading', italic: true, case: 'upper', letterSpacing: 4,
+  },
+  marsh: {
+    label: 'Marsh, Swamp', size: 'regular', font: 'body', italic: true, case: 'title', letterSpacing: 1,
+  },
+  pond: {
+    label: 'Pond', size: 'small', font: 'body', italic: true, case: 'title',
   },
 };
 
 // Path features render as text flowing along an invisible curve. The
 // preset controls typography only — there is no stroke style since the
 // line isn't drawn. Order drives the picker: grouped by kind (Borders,
-// Roads, Water) with strongest first in each group.
+// Roads, Water, Terrain) with strongest first in each group.
 export const PATH_PRESETS = {
   'major-border': {
-    label: 'National Border', size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3,
+    label: 'National Border', size: 'large', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3,
   },
   'minor-border': {
-    label: 'Regional Border', size: 'small', font: 'body', case: 'upper', letterSpacing: 3,
+    label: 'Regional Border', size: 'regular', font: 'body', case: 'upper', letterSpacing: 3,
   },
   highway: {
     label: 'Highway', size: 'regular', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3,
@@ -184,6 +204,15 @@ export const PATH_PRESETS = {
   },
   wall: {
     label: 'Wall', size: 'small', font: 'heading', case: 'upper', letterSpacing: 3,
+  },
+  // Terrain — same typography as the matching TEXT_PRESETS entries so a
+  // ridge or valley reads consistently whether labelled in-place or
+  // along a curve.
+  range: {
+    label: 'Mountain Range', size: 'large', font: 'heading', weight: 'bold', case: 'upper', letterSpacing: 3,
+  },
+  hills: {
+    label: 'Hills, Valley', size: 'regular', font: 'heading', case: 'title', letterSpacing: 1,
   },
   river: {
     label: 'River', size: 'small', font: 'heading', italic: true, case: 'title', letterSpacing: 2,
