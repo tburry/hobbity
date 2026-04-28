@@ -10,9 +10,9 @@
       "class": "map-title",
       "name": "Orlane",
       "x": 3708,
-      "y": 4725,
+      "y": 5088,
       "width": 7416,
-      "height": 726,
+      "height": 653,
       "valign": "bottom"
     },
     {
@@ -225,9 +225,10 @@
       "class": "residence",
       "number": "24",
       "name": "House",
-      "x": 1277,
-      "y": 645,
-      "anchor": "s"
+      "x": 1275,
+      "y": 819,
+      "anchor": "n",
+      "labelPos": "s"
     },
     {
       "kind": "pin",
@@ -284,24 +285,23 @@
       "class": "road",
       "name": "To Farms",
       "a": [
-        1501,
-        679
+        1361,
+        569
       ],
       "b": [
-        1462,
-        29
+        1306,
+        12
       ],
       "mode": "bezier",
       "cpA": [
-        1546,
-        471
+        1364,
+        473
       ],
       "cpB": [
-        1485,
-        105
+        1331,
+        112
       ],
-      "textAlign": "right",
-      "flip": true
+      "textAlign": "right"
     },
     {
       "kind": "path",

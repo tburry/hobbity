@@ -9,10 +9,10 @@
       "kind": "text",
       "class": "map-title",
       "name": "Gomwick",
-      "x": 4382,
-      "y": 5020,
+      "x": 4334,
+      "y": 5376,
       "width": 2807,
-      "height": 713,
+      "height": 593,
       "valign": "bottom",
       "minZoom": 0
     },
@@ -225,8 +225,8 @@
       "kind": "text",
       "class": "forest",
       "name": "Gomwick Woods",
-      "x": 778,
-      "y": 2497,
+      "x": 714,
+      "y": 2423,
       "width": 1251,
       "height": 1866
     },
@@ -288,9 +288,9 @@
       "kind": "text",
       "class": "civic-space",
       "name": "The South Common",
-      "x": 4194,
-      "y": 4579,
-      "width": 1600,
+      "x": 4288,
+      "y": 4523,
+      "width": 1286,
       "height": 700
     },
     {
