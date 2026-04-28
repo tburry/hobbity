@@ -30,6 +30,8 @@ const title = mapDoc.meta?.title ?? slug;
 const description = mapDoc.meta?.description;
 const halo = mapDoc.meta?.halo;
 const grid = mapDoc.meta?.grid;
+const labelScale = mapDoc.meta?.labelScale;
+const markerLabelScale = mapDoc.meta?.markerLabelScale;
 
 // Honour Astro's configured `base` (e.g. `/hobbity/`) so tile requests
 // resolve correctly when the site isn't served from the root.
@@ -57,6 +59,8 @@ const pins = mapDoc.pins.map((p, i) => ({ ...p, id: p.id ?? `${slug}-${i}` }));
   pins={pins}
   halo={halo}
   grid={grid}
+  labelScale={labelScale}
+  markerLabelScale={markerLabelScale}
   tileBasePath={tileBasePath}
   tileMaxZoom={tileMeta.maxZoom}
   tileSize={tileMeta.tileSize}

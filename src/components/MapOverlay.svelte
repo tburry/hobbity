@@ -12,6 +12,8 @@
     pins = [],
     halo = null,
     grid = null,
+    labelScale = 1,
+    markerLabelScale = 1,
     tileBasePath,
     tileMaxZoom,
     tileSize,
@@ -176,6 +178,8 @@
         {halo}
         {grid}
         {gridVisible}
+        {labelScale}
+        {markerLabelScale}
         ongridtoggle={() => setGridVisible(!gridVisible)}
         editable={false}
       />
