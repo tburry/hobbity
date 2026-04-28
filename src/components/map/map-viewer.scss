@@ -17,6 +17,16 @@
 .font-heading { font-family: var(--heading-font, 'Crimson Pro', serif); }
 .font-title   { font-family: var(--title-font, 'Uncial Antiqua', serif); }
 
+// Normalize optical size across the three families so a "16 px" heading
+// reads at the same visual height as a "16 px" body label. Anchored to
+// Lora's x-height ratio (~0.50); Crimson Pro and Uncial Antiqua scale
+// up to match, since their natural x-heights are smaller.
+.map-pin-label,
+.map-label,
+:where(text).text-black,
+:where(text).text-heading,
+:where(text).text-title { font-size-adjust: 0.50; }
+
 // --- Font weight ---
 .font-normal   { font-weight: 400; }
 .font-medium   { font-weight: 500; }
@@ -113,51 +123,53 @@
   }
 
   // --- Marker body (numbered circle or overworld glyph) ----------
+  // The 28×28 .map-pin is the hit-box. Inside, .map-pin-frame is the
+  // exact rectangle of the rendered icon (sized inline by MapViewer)
+  // and serves as the positioning context for the label. Anchor
+  // classes on .map-pin pin the frame to the matching compass point
+  // of the hit-box, so the (x, y) image coordinate sits where Leaflet
+  // says it does.
   .map-pin {
     width: 28px;
     height: 28px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     pointer-events: auto !important;
     position: relative;
+    --label-gap: 0px;
+    // Per-edge label offsets. Default to the shared --label-gap so
+    // existing town pins keep their flush spacing; overworld pins
+    // override these for asymmetric breathing room.
+    --label-gap-n: var(--label-gap);
+    --label-gap-s: var(--label-gap);
+    --label-gap-e: var(--label-gap);
+    --label-gap-w: var(--label-gap);
 
-    // Pin anchor: align the visible number/glyph to the same corner of
-    // the 28×28 hit-box as `iconAnchor` (computed in MapViewer.svelte).
-    // Otherwise a shrunk dot stays centered inside the box and drifts
-    // off the anchor point. flex-direction is column, so `justify-
-    // content` is vertical and `align-items` is horizontal.
-    &.anchor-nw     { align-items: flex-start; justify-content: flex-start; }
-    &.anchor-n      { align-items: center;     justify-content: flex-start; }
-    &.anchor-ne     { align-items: flex-end;   justify-content: flex-start; }
-    &.anchor-w      { align-items: flex-start; justify-content: center; }
-    &.anchor-center { align-items: center;     justify-content: center; }
-    &.anchor-e      { align-items: flex-end;   justify-content: center; }
-    &.anchor-sw     { align-items: flex-start; justify-content: flex-end; }
-    &.anchor-s      { align-items: center;     justify-content: flex-end; }
-    &.anchor-se     { align-items: flex-end;   justify-content: flex-end; }
+    // Overworld glyphs are smaller silhouettes that benefit from a
+    // touch of empty space between the icon and its label. Bottom
+    // stays tight so the label hugs the ground; top/sides get more
+    // room.
+    &.overworld {
+      --label-gap-n: 4px;
+      --label-gap-s: 1px;
+      --label-gap-e: 4px;
+      --label-gap-w: 4px;
+    }
 
-    // Distance from each outer-box edge to the visible inner marker.
-    // Labels use these insets to hug the marker instead of the (larger)
-    // 28×28 hit-box — so shrinking the marker (zoom-low) or anchoring
-    // to a corner automatically pulls the label in.
-    // --gap is the per-side free space when the marker is centered;
-    // anchor overrides below shift it asymmetrically.
-    --gap: 2px;
-    --inset-top: var(--gap);
-    --inset-right: var(--gap);
-    --inset-bottom: var(--gap);
-    --inset-left: var(--gap);
-
-    &.anchor-nw { --inset-top: 0; --inset-left: 0; --inset-right: calc(var(--gap) * 2); --inset-bottom: calc(var(--gap) * 2); }
-    &.anchor-n  { --inset-top: 0; --inset-bottom: calc(var(--gap) * 2); }
-    &.anchor-ne { --inset-top: 0; --inset-right: 0; --inset-left: calc(var(--gap) * 2); --inset-bottom: calc(var(--gap) * 2); }
-    &.anchor-w  { --inset-left: 0; --inset-right: calc(var(--gap) * 2); }
-    &.anchor-e  { --inset-right: 0; --inset-left: calc(var(--gap) * 2); }
-    &.anchor-sw { --inset-top: calc(var(--gap) * 2); --inset-bottom: 0; --inset-left: 0; --inset-right: calc(var(--gap) * 2); }
-    &.anchor-s  { --inset-top: calc(var(--gap) * 2); --inset-bottom: 0; }
-    &.anchor-se { --inset-top: calc(var(--gap) * 2); --inset-bottom: 0; --inset-right: 0; --inset-left: calc(var(--gap) * 2); }
+    .map-pin-frame {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    &.anchor-nw     .map-pin-frame { top: 0;    left: 0;    transform: none; }
+    &.anchor-n      .map-pin-frame { top: 0;    left: 50%;  transform: translateX(-50%); }
+    &.anchor-ne     .map-pin-frame { top: 0;    left: auto; right: 0; transform: none; }
+    &.anchor-w      .map-pin-frame { top: 50%;  left: 0;    transform: translateY(-50%); }
+    &.anchor-center .map-pin-frame { top: 50%;  left: 50%;  transform: translate(-50%, -50%); }
+    &.anchor-e      .map-pin-frame { top: 50%;  left: auto; right: 0; transform: translateY(-50%); }
+    &.anchor-sw     .map-pin-frame { top: auto; bottom: 0;  left: 0;    transform: none; }
+    &.anchor-s      .map-pin-frame { top: auto; bottom: 0;  left: 50%;  transform: translateX(-50%); }
+    &.anchor-se     .map-pin-frame { top: auto; bottom: 0;  left: auto; right: 0; transform: none; }
+    .map-pin-frame > .map-pin-glyph,
+    .map-pin-frame > .map-pin-number { width: 100%; height: 100%; }
 
     // Selected: flip the circle's bg/text and give the glyph a
     // matching dark-circle backdrop so the pin reads as "active".
@@ -237,110 +249,62 @@
   }
 
   // --- Labels (pin + freeform map labels) ----------------------
-  // Default label position is N (above the pin). .label-pos-*
-  // classes on the enclosing .map-pin flip the anchor point.
-  .map-pin-label {
+  // Labels live inside .map-pin-frame, which is sized to the actual
+  // icon. With the frame as positioning context, label placement
+  // collapses to plain percentages — `bottom: 100%` is the icon's top
+  // edge, `left: 100%` is the right edge, `50%` is the midpoint.
+  // `--label-gap` (declared on .map-pin) pushes the label away from
+  // the icon by that many extra pixels.
+  .map-pin-frame > .map-pin-label {
     position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: -2px;
     line-height: 1.2;
     white-space: nowrap;
-    // Safari treats absolute children of a flex container as cross-
-    // axis-sized, which shrinks this label to the pin's 28px width
-    // and forces the text to wrap despite `white-space: nowrap`.
-    // `max-content` pins the box to the natural text width.
     width: max-content;
     pointer-events: none;
+    // Default (label-pos-n): above the icon, horizontally centred.
+    bottom: calc(100% + var(--label-gap-n));
+    left: 50%;
+    transform: translateX(-50%);
   }
-  .map-pin.label-pos-n  > .map-pin-label { bottom: 100%; top: auto; left: 50%;  right: auto; transform: translateX(-50%);     margin: 0 0 calc(-1 * var(--inset-top)) 0; }
-  .map-pin.label-pos-s  > .map-pin-label { top: 100%;    bottom: auto; left: 50%;  right: auto; transform: translateX(-50%);  margin: calc(-1 * var(--inset-bottom)) 0 0 0; }
-  .map-pin.label-pos-e  > .map-pin-label { top: 50%;     bottom: auto; left: 100%; right: auto; transform: translateY(-50%);  margin: 0 0 0 calc(-1 * var(--inset-right)); }
-  .map-pin.label-pos-w  > .map-pin-label { top: 50%;     bottom: auto; right: 100%; left: auto; transform: translateY(-50%);  margin: 0 calc(-1 * var(--inset-left)) 0 0; }
-  .map-pin.label-pos-ne > .map-pin-label { bottom: 100%; top: auto; left: 100%; right: auto; transform: none; margin: -4px 0 0 -6px; }
-  .map-pin.label-pos-nw > .map-pin-label { bottom: 100%; top: auto; right: 100%; left: auto; transform: none; margin: -4px -6px 0 0; }
-  .map-pin.label-pos-se > .map-pin-label { top: 100%;    bottom: auto; left: 100%; right: auto; transform: none; margin: -4px 0 0 -6px; }
-  .map-pin.label-pos-sw > .map-pin-label { top: 100%;    bottom: auto; right: 100%; left: auto; transform: none; margin: -4px -6px 0 0; }
-
-  // Overworld pins ride at their authored size and respect the pin's
-  // anchor (flex layout pushes the icon to a corner of the 28×28 hit
-  // box). MapViewer emits four CSS vars per pin: `--icon-top`,
-  // `--icon-left`, `--icon-w`, `--icon-h` — together they describe the
-  // exact rectangle the visible icon occupies inside the box. Labels
-  // ride that rectangle's edge plus `--label-gap`, so the distance
-  // stays consistent across icon sizes and anchor choices.
-  .map-pin.overworld {
-    --label-gap: 0px;
-    --icon-w: 24px;
-    --icon-h: 24px;
-    --icon-top: 2px;
-    --icon-left: 2px;
-
-    &.label-pos-n  > .map-pin-label {
-      bottom: calc(100% - var(--icon-top) + var(--label-gap));
-      top: auto;
-      left: calc(var(--icon-left) + var(--icon-w) / 2);
-      right: auto;
-      transform: translateX(-50%);
-      margin: 0;
-    }
-    &.label-pos-s  > .map-pin-label {
-      top: calc(var(--icon-top) + var(--icon-h) + var(--label-gap));
-      bottom: auto;
-      left: calc(var(--icon-left) + var(--icon-w) / 2);
-      right: auto;
-      transform: translateX(-50%);
-      margin: 0;
-    }
-    &.label-pos-e  > .map-pin-label {
-      left: calc(var(--icon-left) + var(--icon-w) + var(--label-gap));
-      right: auto;
-      top: calc(var(--icon-top) + var(--icon-h) / 2);
-      bottom: auto;
-      transform: translateY(-50%);
-      margin: 0;
-    }
-    &.label-pos-w  > .map-pin-label {
-      right: calc(100% - var(--icon-left) + var(--label-gap));
-      left: auto;
-      top: calc(var(--icon-top) + var(--icon-h) / 2);
-      bottom: auto;
-      transform: translateY(-50%);
-      margin: 0;
-    }
-    &.label-pos-ne > .map-pin-label {
-      bottom: calc(100% - var(--icon-top) + var(--label-gap));
-      top: auto;
-      left: calc(var(--icon-left) + var(--icon-w) + var(--label-gap));
-      right: auto;
-      transform: none;
-      margin: 0;
-    }
-    &.label-pos-nw > .map-pin-label {
-      bottom: calc(100% - var(--icon-top) + var(--label-gap));
-      top: auto;
-      right: calc(100% - var(--icon-left) + var(--label-gap));
-      left: auto;
-      transform: none;
-      margin: 0;
-    }
-    &.label-pos-se > .map-pin-label {
-      top: calc(var(--icon-top) + var(--icon-h) + var(--label-gap));
-      bottom: auto;
-      left: calc(var(--icon-left) + var(--icon-w) + var(--label-gap));
-      right: auto;
-      transform: none;
-      margin: 0;
-    }
-    &.label-pos-sw > .map-pin-label {
-      top: calc(var(--icon-top) + var(--icon-h) + var(--label-gap));
-      bottom: auto;
-      right: calc(100% - var(--icon-left) + var(--label-gap));
-      left: auto;
-      transform: none;
-      margin: 0;
-    }
+  .map-pin.label-pos-n  .map-pin-frame > .map-pin-label {
+    bottom: calc(100% + var(--label-gap-n)); top: auto;
+    left: 50%; right: auto;
+    transform: translateX(-50%);
+  }
+  .map-pin.label-pos-s  .map-pin-frame > .map-pin-label {
+    top: calc(100% + var(--label-gap-s)); bottom: auto;
+    left: 50%; right: auto;
+    transform: translateX(-50%);
+  }
+  .map-pin.label-pos-e  .map-pin-frame > .map-pin-label {
+    left: calc(100% + var(--label-gap-e)); right: auto;
+    top: 50%; bottom: auto;
+    transform: translateY(-50%);
+  }
+  .map-pin.label-pos-w  .map-pin-frame > .map-pin-label {
+    right: calc(100% + var(--label-gap-w)); left: auto;
+    top: 50%; bottom: auto;
+    transform: translateY(-50%);
+  }
+  .map-pin.label-pos-ne .map-pin-frame > .map-pin-label {
+    bottom: calc(100% + var(--label-gap-n)); top: auto;
+    left: calc(100% + var(--label-gap-e)); right: auto;
+    transform: none;
+  }
+  .map-pin.label-pos-nw .map-pin-frame > .map-pin-label {
+    bottom: calc(100% + var(--label-gap-n)); top: auto;
+    right: calc(100% + var(--label-gap-w)); left: auto;
+    transform: none;
+  }
+  .map-pin.label-pos-se .map-pin-frame > .map-pin-label {
+    top: calc(100% + var(--label-gap-s)); bottom: auto;
+    left: calc(100% + var(--label-gap-e)); right: auto;
+    transform: none;
+  }
+  .map-pin.label-pos-sw .map-pin-frame > .map-pin-label {
+    top: calc(100% + var(--label-gap-s)); bottom: auto;
+    right: calc(100% + var(--label-gap-w)); left: auto;
+    transform: none;
   }
 
   .map-label {
@@ -375,6 +339,34 @@
       outline: 1.5px dashed var(--accent, #6b3a2a);
       outline-offset: 0;
     }
+
+    // Selected-state anchor crosshair — mirrors `.map-pin.selected::after`.
+    // Marks the (x, y) image coordinate the box is pegged to. Position
+    // tracks the same compass grid that `pin.align`/`pin.valign` choose
+    // (set on .map-text-box via the `anchor-*` class in MapViewer).
+    &.selected::after {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      pointer-events: none;
+      z-index: 11;
+      background:
+        linear-gradient(red, red) center / 100% 1.5px no-repeat,
+        linear-gradient(red, red) center / 1.5px 100% no-repeat;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    &.selected.anchor-nw::after     { top: 0;    left: 0; }
+    &.selected.anchor-n::after      { top: 0;    left: 50%; }
+    &.selected.anchor-ne::after     { top: 0;    left: 100%; }
+    &.selected.anchor-w::after      { top: 50%;  left: 0; }
+    &.selected.anchor-center::after { top: 50%;  left: 50%; }
+    &.selected.anchor-e::after      { top: 50%;  left: 100%; }
+    &.selected.anchor-sw::after     { top: 100%; left: 0; }
+    &.selected.anchor-s::after      { top: 100%; left: 50%; }
+    &.selected.anchor-se::after     { top: 100%; left: 100%; }
   }
   .leaflet-marker-icon:has(.map-text-box) { pointer-events: none !important; }
   .leaflet-marker-icon:has(.map-text-box.selected) { pointer-events: auto !important; }

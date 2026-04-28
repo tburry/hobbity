@@ -41,13 +41,9 @@
 
 
   const pinEntries = Object.entries(PIN_PRESETS).map(([id, p]) => ({ id, ...p }));
-  // POI goes first and spans full width; the rest follow in order.
-  const townPresets = (() => {
-    const list = pinEntries.filter(p => p.category === 'town');
-    const poi = list.find(p => p.id === 'poi');
-    const rest = list.filter(p => p.id !== 'poi');
-    return poi ? [poi, ...rest] : list;
-  })();
+  // Picker order follows PIN_PRESETS' insertion order — reorder the
+  // keys in tools.js to reorder the picker.
+  const townPresets = pinEntries.filter(p => p.category === 'town');
   const overworldPresets = pinEntries.filter(p => p.category === 'overworld');
 
   // Largest authored viewBox dimension across the overworld set —

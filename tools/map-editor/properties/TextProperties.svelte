@@ -14,26 +14,9 @@
 
 
 
-  // Display order for the style grid. Presets not listed fall to the end
-  // in their original TEXT_PRESETS order.
-  const STYLE_ORDER = [
-    'map-title',
-    'continent', 'region',
-    'district', 'civic-space',
-    'forest', 'range',
-    'hills', 'desert',
-    'ocean', 'island',
-    'lake', 'pond-marsh',
-  ];
-  const textEntries = Object.entries(TEXT_PRESETS).map(([id, p]) => ({ id, ...p }));
-  const orderedPresets = (() => {
-    const rank = new Map(STYLE_ORDER.map((id, i) => [id, i]));
-    return [...textEntries].sort((a, b) => {
-      const ai = rank.has(a.id) ? rank.get(a.id) : STYLE_ORDER.length;
-      const bi = rank.has(b.id) ? rank.get(b.id) : STYLE_ORDER.length;
-      return ai - bi;
-    });
-  })();
+  // Picker order follows TEXT_PRESETS' insertion order (single source of
+  // truth — reorder the keys in tools.js to reorder the picker).
+  const orderedPresets = Object.entries(TEXT_PRESETS).map(([id, p]) => ({ id, ...p }));
 
   function styleFor(p) {
     const d = p || {};
@@ -63,7 +46,6 @@
       role="radio"
       aria-checked={preset === p.id}
       class={classFor(p)}
-      class:full={p.id === 'map-title'}
       class:active={preset === p.id}
       onclick={() => onApplyPreset?.(p.id)}
       style={styleFor(p)}
@@ -169,7 +151,6 @@
   /* Lighter tan than the default accent so the parchment halo on the
      preset-colored text reads without the swatch going too dark. */
   .style-grid button.active { background: #d4b87a; border-color: #d4b87a; }
-  .style-grid button.full { grid-column: 1 / -1; }
 
   .style-row {
     display: flex;

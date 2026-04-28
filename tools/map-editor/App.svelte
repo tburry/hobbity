@@ -40,6 +40,23 @@
 
   const listMarkers = $derived([...pins].sort(compareFeatures));
 
+  // Sidebar marker rows reuse the SVG sprite. Each glyph is sized so
+  // its largest viewBox dimension hits the row's icon-box size — that
+  // way Capital reads visibly bigger than Village in the list, matching
+  // the on-map ranking. The outer .pin-glyph stays at a uniform 20×20
+  // box so labels still line up across rows.
+  const SIDEBAR_GLYPH_PX = 20;
+  const SIDEBAR_MAX_VB = Math.max(
+    1,
+    ...Object.values(MARKER_SIZES).map(([w, h]) => Math.max(w, h)),
+  );
+  function sidebarGlyphStyle(cls) {
+    const dims = MARKER_SIZES[cls];
+    if (!dims) return '';
+    const scale = SIDEBAR_GLYPH_PX / SIDEBAR_MAX_VB;
+    return `width: ${(dims[0] * scale).toFixed(1)}px; height: ${(dims[1] * scale).toFixed(1)}px;`;
+  }
+
   /** Derive Tailwind-style utility classes from a marker's preset so the
    * sidebar row visually matches how the label renders on the map.
    * (Typography only — layout/spacing stays the sidebar's own.) */
@@ -764,6 +781,8 @@
           grid={mapMeta.grid}
           {gridVisible}
           ongridtoggle={() => setGridVisible(!gridVisible)}
+          labelScale={mapMeta.labelScale ?? 1}
+          markerLabelScale={mapMeta.markerLabelScale ?? 1}
           editable={mode === 'edit'}
           tool={mode === 'edit' ? TOOLS[toolMode] : null}
           ctx={editorCtx}
@@ -793,6 +812,8 @@
           bind:title={mapMeta.title}
           bind:description={mapMeta.description}
           bind:halo={mapMeta.halo}
+          bind:labelScale={mapMeta.labelScale}
+          bind:markerLabelScale={mapMeta.markerLabelScale}
         />
       </div>
     {:else if activeTab === 'editor' && editingId}
@@ -849,7 +870,7 @@
               <button class="pin-list-btn" onclick={() => clickPin(pin)}>
                 {#if preset?.category === 'overworld'}
                   <span class="pin-glyph">
-                    <svg viewBox="0 0 {MARKER_SIZES[pin.class]?.[0] ?? 1} {MARKER_SIZES[pin.class]?.[1] ?? 1}"><use href="#marker-{pin.class}"/></svg>
+                    <svg viewBox="0 0 {MARKER_SIZES[pin.class]?.[0] ?? 1} {MARKER_SIZES[pin.class]?.[1] ?? 1}" style={sidebarGlyphStyle(pin.class)}><use href="#marker-{pin.class}"/></svg>
                   </span>
                 {:else if pin.class === 'map-title'}
                   <span class="pin-glyph">✵</span>

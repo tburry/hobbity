@@ -1,10 +1,10 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
-  import { TEXT_PRESETS, PIN_PRESETS, PATH_PRESETS, DEFAULT_MARKER_MIN_ZOOM, KIND_DEFAULTS, sizeSpec, sizeClass as getSizeClass } from './tools.js';
+  import { TEXT_PRESETS, PIN_PRESETS, PATH_PRESETS, DEFAULT_MARKER_MIN_ZOOM, KIND_DEFAULTS, MIN_FONT_PX, MAX_FONT_PX, sizeSpec, sizeClass as getSizeClass } from './tools.js';
   import { MARKER_SPRITE, MARKER_SIZES } from './markers.generated.js';
   import './map-viewer.scss';
 
-  let { width, height, imageUrl, tiles, initialZoom, fit = 'bounds', minZoom = 0, maxZoom = 5, pins = [], halo = null, grid = null, gridVisible = true, editable = false, tool = null, ctx = null, selectedId: selectedIdProp = null, onviewchange, onwheel: onwheelcb, ongridtoggle = null } = $props();
+  let { width, height, imageUrl, tiles, initialZoom, fit = 'bounds', minZoom = 0, maxZoom = 5, pins = [], halo = null, grid = null, gridVisible = true, labelScale = 1, markerLabelScale = 1, editable = false, tool = null, ctx = null, selectedId: selectedIdProp = null, onviewchange, onwheel: onwheelcb, ongridtoggle = null } = $props();
 
   // Override --halo (and re-derive --halo-light) on the container when
   // the map's meta supplies a custom halo color. `var(--halo)` in the
@@ -160,13 +160,21 @@
   const MARKER_REF_ZOOM = 3;
   const MOBILE_MIN_PX = 16;
   // Fallback size for features without a style (e.g. numbered pin labels).
-  const PIN_LABEL_SIZE = { base: 14, min: 11, max: 22 };
+  // Fallback spec for pin labels with no preset. Bounds come from the
+  // global MIN_FONT_PX / MAX_FONT_PX so it stays in sync with every
+  // other label.
+  const PIN_LABEL_SIZE = { base: 14 };
   // Visibility thresholds expressed as zoom levels. All comparisons
   // go through the CRS scale function (CSS-px per image-px) so the
   // same threshold behaves consistently regardless of image size,
   // tile pyramid, or device pixel ratio.
   const MARKER_HIDE_ZOOM = 0.25;   // markers vanish entirely below this
   const PIN_SHRINK_ZOOM  = 1.5;    // numbered pins → empty 12px dots
+  // Pixels per viewBox unit for overworld marker SVGs. Authored sizes
+  // (8–15 units) come through proportionally — capital reads bigger
+  // than village by design — and never get pulled around by font/label
+  // size or per-map labelScale.
+  const MARKER_PX_PER_UNIT = 2;
   // Convert a zoom level to CSS-px-per-image-px using the active CRS.
   function scaleAt(z) {
     if (map?.options?.crs?.scale) return map.options.crs.scale(z);
@@ -221,14 +229,20 @@
     const preset = resolvePreset(pin);
     const spec = preset ? sizeSpec(preset.size) : PIN_LABEL_SIZE;
 
-    // Shrink mode: pin the size to `min` at the feature's min-zoom and
-    // scale up from there (doubling per zoom level), clamped to max.
-    // Default mode: scale from `base` at REF_ZOOM, clamped to [min, max].
+    // Shrink mode: pin the size to `MIN_FONT_PX` at the feature's
+    // min-zoom and scale up from there (doubling per zoom level),
+    // clamped to max. Default mode: scale from `base` at REF_ZOOM,
+    // clamped to [MIN_FONT_PX, max] (mobile uses its own taller floor
+    // for touch readability).
     const pivot = pin.shrink ? (pin.minZoom ?? REF_ZOOM) : REF_ZOOM;
     const scale = Math.pow(2, z - pivot);
-    const raw = (pin.shrink ? (spec.min ?? spec.base) : spec.base) * scale;
-    const min = isMobileView ? Math.max(MOBILE_MIN_PX, spec.min ?? 0) : (spec.min ?? 0);
-    const max = spec.max ?? Infinity;
+    const raw = (pin.shrink ? MIN_FONT_PX : spec.base) * scale;
+    // Map title is sized relative to the image and grows freely with
+    // zoom — bypass the global floor and ceiling so it always reads
+    // proportionally regardless of how far in or out the user zooms.
+    if (pin.class === 'map-title') return raw;
+    const min = isMobileView ? Math.max(MOBILE_MIN_PX, MIN_FONT_PX) : MIN_FONT_PX;
+    const max = spec.max ?? MAX_FONT_PX;
     return Math.max(min, Math.min(max, raw));
   }
 
@@ -254,7 +268,7 @@
       : (preset ? sizeSpec(preset.size) : PIN_LABEL_SIZE);
     const raw = spec.base * Math.pow(2, (z - MARKER_REF_ZOOM) * MARKER_LABEL_SCALE);
     const floor = spec.base;
-    const max = spec.max ?? Infinity;
+    const max = spec.max ?? MAX_FONT_PX;
     return Math.max(floor, Math.min(max, raw));
   }
 
@@ -277,7 +291,12 @@
 
     const s = resolvePreset(pin) || {};
     const font = FONTS[s.font] || FONTS.body;
-    const fontSize = computeFontSize(pin, currentZoom);
+    // `rawFontSize` is the preset-driven, clamped size used for path
+    // bbox padding (so the icon's hit-area doesn't change with the
+    // user-tunable label scale). `fontSize` is what the text actually
+    // renders at — labelScale-multiplied, but never below MIN_FONT_PX.
+    const rawFontSize = computeFontSize(pin, currentZoom);
+    const fontSize = Math.min(MAX_FONT_PX, Math.max(MIN_FONT_PX, rawFontSize * (labelScale ?? 1)));
     const weightClass = `font-${s.weight || 'normal'}`;
     const style = s.italic ? 'italic' : 'normal';
     const extra = extraStyles(s);
@@ -301,7 +320,7 @@
       if (p[1] < minY) minY = p[1];
       if (p[1] > maxY) maxY = p[1];
     }
-    const padImg = (fontSize * 1.5) / zoomScale;
+    const padImg = (rawFontSize * 1.5) / zoomScale;
     minX -= padImg; maxX += padImg;
     minY -= padImg; maxY += padImg;
 
@@ -394,17 +413,29 @@
       if (currentScale(curZ) < scaleAt(minZ)) {
         return L.divIcon({ className: '', html: '', iconSize: [0, 0], iconAnchor: [0, 0] });
       }
-      // Style comes from the preset for text features.
+      // Style comes from the preset for text features. `rawSize` is the
+      // preset-driven, clamped font size in image px; `displaySize`
+      // applies the user-tunable per-map labelScale. Box-fit math uses
+      // rawSize so changing labelScale only resizes the *text*, not the
+      // surrounding bounding box. The map title is sized relative to
+      // the image as a whole, so it ignores labelScale entirely. Every
+      // displayed size is floored at MIN_FONT_PX so labels stay
+      // readable no matter how aggressive the scale.
       const s = resolvePreset(pin) || {};
       const font = FONTS[s.font] || FONTS.body;
-      const size = computeFontSize(pin, currentZoom);
+      const rawSize = computeFontSize(pin, currentZoom);
+      const isMapTitle = pin.class === 'map-title';
+      const scaled = isMapTitle ? rawSize : rawSize * (labelScale ?? 1);
+      // Map title is exempt from both clamps — it scales with zoom
+      // proportionally to the image and shouldn't be capped or floored.
+      const displaySize = isMapTitle ? scaled : Math.min(MAX_FONT_PX, Math.max(MIN_FONT_PX, scaled));
       const weightClass = `font-${s.weight || 'normal'}`;
       const style = s.italic ? 'italic' : 'normal';
       const transforms = [];
       if (pin.rotate) transforms.push(`rotate(${pin.rotate}deg)`);
       const transformStyle = transforms.length ? `transform: ${transforms.join(' ')};` : '';
       const extra = extraStyles(s);
-      const textStyle = `font-family: ${font}; font-size: ${size.toFixed(1)}px; font-style: ${style}; ${extra}`;
+      const textStyle = `font-family: ${font}; font-size: ${displaySize.toFixed(1)}px; font-style: ${style}; ${extra}`;
       const sizeClass = getSizeClass(s.size);
       const colorClass = s.colorClass || 'text-black';
 
@@ -421,7 +452,7 @@
         const specForScale = rp ? sizeSpec(rp.size) : PIN_LABEL_SIZE;
         const startSize = pin.shrink ? (specForScale.min ?? specForScale.base) : specForScale.base;
         const unclamped = startSize * Math.pow(2, z - pivot);
-        const clampRatio = unclamped > 0 ? size / unclamped : 1;
+        const clampRatio = unclamped > 0 ? rawSize / unclamped : 1;
         const zoomScale = rawZoomScale * clampRatio;
         const cssW = pin.width * zoomScale;
         const cssH = pin.height * zoomScale;
@@ -430,17 +461,26 @@
         const justify = align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : 'center';
         const alignItems = valign === 'top' ? 'flex-start' : valign === 'bottom' ? 'flex-end' : 'center';
         const boxStyle = `width: ${cssW.toFixed(1)}px; height: ${cssH.toFixed(1)}px; display: flex; justify-content: ${justify}; align-items: ${alignItems}; text-align: ${align}; ${transformStyle}`;
+        // Alignment drives the anchor — same 9-point compass grid as
+        // markers. The (x, y) image coord lands at the corner/edge the
+        // text aligns toward, so authoring is "type here and the text
+        // grows away from this point".
+        const anchorY = valign === 'top' ? 'n' : valign === 'bottom' ? 's' : '';
+        const anchorX = align === 'left' ? 'w' : align === 'right' ? 'e' : '';
+        const anchorKey = (anchorY + anchorX) || 'center';
+        const iconAnchorX = align === 'left' ? 0 : align === 'right' ? cssW : cssW / 2;
+        const iconAnchorY = valign === 'top' ? 0 : valign === 'bottom' ? cssH : cssH / 2;
         const isSelected = pin.id === selectedId;
         const isEditing = editable && isSelected;
         const selClass = isEditing ? ' selected' : '';
         const handles = isEditing ? HANDLE_POSITIONS.map(h =>
           `<div class="resize-handle handle-${h}" data-handle="${h}" data-pin-id="${pin.id}"></div>`).join('') : '';
-        const html = `<div class="map-text-box${selClass}" style="${boxStyle}" data-pin-id="${pin.id}"><div class="map-label map-label-boxed ${sizeClass} ${colorClass} ${weightClass}" style="${textStyle}"><span class="map-label-text">${esc(pin.name)}</span></div>${handles}</div>`;
+        const html = `<div class="map-text-box anchor-${anchorKey}${selClass}" style="${boxStyle}" data-pin-id="${pin.id}"><div class="map-label map-label-boxed ${sizeClass} ${colorClass} ${weightClass}" style="${textStyle}"><span class="map-label-text">${esc(pin.name)}</span></div>${handles}</div>`;
         return L.divIcon({
           className: '',
           html,
           iconSize: [cssW, cssH],
-          iconAnchor: [cssW / 2, cssH / 2], // center-anchored
+          iconAnchor: [iconAnchorX, iconAnchorY],
         });
       }
 
@@ -466,9 +506,12 @@
     const font = FONTS[s.font] || FONTS.body;
     // Glyph and label both follow the slower marker-label curve so a
     // 'large'-sized preset (capital, city) doesn't blow the glyph up
-    // to label-typography proportions.
+    // to label-typography proportions. The label scales by
+    // `markerLabelScale` (per-map dial); the icon body stays viewBox-
+    // driven so the marker keeps its authored visual hierarchy. Floor
+    // the scaled label at MIN_FONT_PX so it never reads too small.
     const size = computeMarkerLabelSize(pin, currentZoom);
-    const labelSize = size;
+    const labelSize = Math.min(MAX_FONT_PX, Math.max(MIN_FONT_PX, size * (markerLabelScale ?? 1)));
     const pinWeightClass = `font-${s.weight || 'normal'}`;
     const style = s.italic ? 'italic' : 'normal';
     const extra = extraStyles(s);
@@ -486,39 +529,37 @@
     // can see what they're editing and can drag it.
     const isSelected = pin.id === selectedId;
     const showMark = !pin.labelOnly || (editable && isSelected);
-    let markBaseStyle = '';
     let markContent;
     let iconW = 24, iconH = 24;
     if (isOverworld) {
       const [vbW, vbH] = MARKER_SIZES[pin.class] ?? [1, 1];
-      // Scale uniformly: viewBox units × pxPerUnit. The reference is
-      // chosen so a "12 unit" marker renders at the preset's size in px,
-      // letting authored size variation come through (capital 15 reads
-      // larger than village 8, in proportion to the source files).
-      const pxPerUnit = size / 12;
+      // SVG markers are authored at intentional viewBox sizes (capital
+      // 15, town 8, etc.). Render them at a fixed px-per-unit so the
+      // authored hierarchy comes through and font/label size changes
+      // never resize the icon body. Halve the scale at zoom ≤ 2 so
+      // the world view stays close to authored size. Frame matches
+      // the icon exactly so the anchor crosshair lands on the icon —
+      // label breathing room is added per-edge via CSS gap vars, not
+      // by inflating the frame.
+      const z = currentZoom ?? map?.getZoom() ?? REF_ZOOM;
+      const pxPerUnit = z <= 2 ? MARKER_PX_PER_UNIT / 2 : MARKER_PX_PER_UNIT;
       iconW = vbW * pxPerUnit;
       iconH = vbH * pxPerUnit;
-      markBaseStyle = `width: ${iconW.toFixed(1)}px; height: ${iconH.toFixed(1)}px;`;
       markContent = `<svg viewBox="0 0 ${vbW} ${vbH}" width="100%" height="100%"><use href="#marker-${pin.class}"/></svg>`;
     } else {
       markContent = pin.number;
     }
-    const markStyle = pin.labelOnly && showMark ? `${markBaseStyle} opacity: 0.5;` : markBaseStyle;
+    const markStyle = pin.labelOnly && showMark ? `opacity: 0.5;` : '';
     const markHtml = showMark ? `<span class="${markClass}" style="${markStyle}">${markContent}</span>` : '';
-    // Per-marker sizing for label-pos rules in map-viewer.scss. The
-    // icon's top/left within the 28×28 hit-box depends on `pin.anchor`
-    // because flex layout pushes the visible icon to a corner; labels
-    // need the actual icon-edge coordinates, not the box edges.
-    const BOX = 28;
-    const anchor = pin.anchor || 'center';
-    const xAxis = anchor.includes('w') ? 'start' : anchor.includes('e') ? 'end' : 'center';
-    const yAxis = anchor.includes('n') ? 'start' : anchor.includes('s') ? 'end' : 'center';
-    const iconLeft = xAxis === 'start' ? 0 : xAxis === 'end' ? BOX - iconW : (BOX - iconW) / 2;
-    const iconTop  = yAxis === 'start' ? 0 : yAxis === 'end' ? BOX - iconH : (BOX - iconH) / 2;
-    const pinVarStyle = `--icon-w: ${iconW.toFixed(1)}px; --icon-h: ${iconH.toFixed(1)}px; --icon-left: ${iconLeft.toFixed(1)}px; --icon-top: ${iconTop.toFixed(1)}px;`;
+    // The visible marker (and its label) live inside a relative-positioned
+    // frame sized to the actual icon. Label positions then become plain
+    // 100%/50% percentages off the frame, regardless of marker size or
+    // anchor — anchor is handled purely by where the frame sits inside
+    // the 28×28 hit-box (see .map-pin-frame.anchor-* rules in scss).
+    const frameStyle = `width: ${iconW.toFixed(1)}px; height: ${iconH.toFixed(1)}px;`;
     return L.divIcon({
       className: '',
-      html: `<div class="map-pin label-pos-${pin.labelPos || 'n'} anchor-${pin.anchor || 'center'}${isSelected ? ' selected' : ''}${isOverworld ? ' overworld' : ''}${labelHidden ? ' label-hidden' : ''}${pin.labelOnly ? ' label-only' : ''}" style="${pinVarStyle}"><span class="map-pin-label ${pinSizeClass} ${pinColorClass} ${pinWeightClass}" style="${labelStyle}">${label}</span>${markHtml}</div>`,
+      html: `<div class="map-pin label-pos-${pin.labelPos || 'n'} anchor-${pin.anchor || 'center'}${isSelected ? ' selected' : ''}${isOverworld ? ' overworld' : ''}${labelHidden ? ' label-hidden' : ''}${pin.labelOnly ? ' label-only' : ''}"><div class="map-pin-frame" style="${frameStyle}"><span class="map-pin-label ${pinSizeClass} ${pinColorClass} ${pinWeightClass}" style="${labelStyle}">${label}</span>${markHtml}</div></div>`,
       iconSize: [28, 28],
       iconAnchor: pinIconAnchor(pin.anchor),
     });
@@ -725,6 +766,19 @@
     prevSelectedId = id;
   });
 
+  // labelScale / markerLabelScale are global per-map dials; when they
+  // change every marker icon needs a re-render. (Without this, only
+  // newly-added or interacted-with pins pick up the new size.)
+  $effect(() => {
+    void labelScale;
+    void markerLabelScale;
+    if (!map) return;
+    for (const [id, marker] of markerMap) {
+      const pin = pins.find(p => p.id === id);
+      if (pin) marker.setIcon(makeIcon(pin, map.getZoom()));
+    }
+  });
+
   function showRectPreview(a, b) {
     if (!map) return;
     const bounds = L.latLngBounds(a, b);
@@ -800,19 +854,41 @@
     const scale = map.options.crs.scale(map.getZoom());
     const dx = (e.clientX - resizing.startX) / scale;
     const dy = (e.clientY - resizing.startY) / scale;
-    // x/y are the CENTER of the box. Each handle grows/shrinks the box from
-    // the opposite edge, so the center shifts by half the size delta.
-    let x = resizing.origX, y = resizing.origY;
-    let w = resizing.origW, h = resizing.origH;
     const handle = resizing.handle;
-    if (handle.includes('n')) { y += dy / 2; h -= dy; }
-    if (handle.includes('s')) { y += dy / 2; h += dy; }
-    if (handle.includes('w')) { x += dx / 2; w -= dx; }
-    if (handle.includes('e')) { x += dx / 2; w += dx; }
-    // Clamp to minimum size (keep center stable at min)
+    const { origX, origY, origW, origH, align, valign } = resizing;
+    // (x, y) is the anchor: top-left for align/valign 'left'/'top',
+    // bottom-right for 'right'/'bottom', etc. Reconstruct the original
+    // bounding box from the anchor + alignment, slide only the moving
+    // edges by the cursor delta, then re-derive (x, y, w, h) from the
+    // new bounds. Edges that aren't part of the dragged handle stay
+    // fixed in image coords, so the opposite corner / side never moves.
+    const ax = align === 'left' ? 0 : align === 'right' ? origW : origW / 2;
+    const ay = valign === 'top' ? 0 : valign === 'bottom' ? origH : origH / 2;
+    let left = origX - ax;
+    let top = origY - ay;
+    let right = left + origW;
+    let bottom = top + origH;
+    if (handle.includes('w')) left += dx;
+    if (handle.includes('e')) right += dx;
+    if (handle.includes('n')) top += dy;
+    if (handle.includes('s')) bottom += dy;
+    // Min-size clamp: collapse the moving edge into the fixed one
+    // rather than letting it pass through.
     const MIN = 20;
-    if (w < MIN) w = MIN;
-    if (h < MIN) h = MIN;
+    if (right - left < MIN) {
+      if (handle.includes('w')) left = right - MIN;
+      else right = left + MIN;
+    }
+    if (bottom - top < MIN) {
+      if (handle.includes('n')) top = bottom - MIN;
+      else bottom = top + MIN;
+    }
+    const w = right - left;
+    const h = bottom - top;
+    const newAx = align === 'left' ? 0 : align === 'right' ? w : w / 2;
+    const newAy = valign === 'top' ? 0 : valign === 'bottom' ? h : h / 2;
+    const x = left + newAx;
+    const y = top + newAy;
     ctx?.resize?.(pin, Math.round(x), Math.round(y), Math.round(w), Math.round(h));
   }
 
@@ -882,6 +958,10 @@
             origY: pin.y,
             origW: pin.width || 0,
             origH: pin.height || 0,
+            // Alignment defines where (x, y) sits within the box;
+            // applyResize uses it to keep the unmoved edges fixed.
+            align: pin.align || 'center',
+            valign: pin.valign || 'middle',
           };
           return;
         }
