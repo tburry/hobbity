@@ -451,15 +451,23 @@
   const MIN_BOX_SIZE = 20; // minimum width/height for a text box (image px)
 
   /** Clamp a text box's center+size so its bounds stay within the map. */
-  function clampBox(x, y, w, h) {
+  function alignToFrac(a) { return a === 'left' ? 0 : a === 'right' ? 1 : 0.5; }
+  function valignToFrac(a) { return a === 'top' ? 0 : a === 'bottom' ? 1 : 0.5; }
+
+  function clampBox(x, y, w, h, align = 'center', valign = 'middle') {
     if (!currentMap) return { x, y, w, h };
     const mw = currentMap.width, mh = currentMap.height;
     // Cap box dims to map size and enforce minimum
     w = Math.max(MIN_BOX_SIZE, Math.min(mw, w || 0));
     h = Math.max(MIN_BOX_SIZE, Math.min(mh, h || 0));
-    // Clamp center so box edges stay within [0, mw]/[0, mh]
-    x = Math.max(w / 2, Math.min(mw - w / 2, x));
-    y = Math.max(h / 2, Math.min(mh - h / 2, y));
+    // Anchor lives at axFrac/ayFrac of the box; clamp so box edges
+    // stay within [0, mw]/[0, mh]. For non-centre anchors (e.g. a
+    // map title with valign='bottom') this is essential — the
+    // centred-only formula would push the box back to the middle.
+    const ax = alignToFrac(align);
+    const ay = valignToFrac(valign);
+    x = Math.max(ax * w, Math.min(mw - (1 - ax) * w, x));
+    y = Math.max(ay * h, Math.min(mh - (1 - ay) * h, y));
     return { x: Math.round(x), y: Math.round(y), w: Math.round(w), h: Math.round(h) };
   }
 
@@ -505,7 +513,7 @@
         return;
       }
       if (pin.width && pin.height) {
-        ({ x, y } = clampBox(x, y, pin.width, pin.height));
+        ({ x, y } = clampBox(x, y, pin.width, pin.height, pin.align, pin.valign));
       } else {
         ({ x, y } = clampPoint(x, y));
       }
@@ -516,7 +524,7 @@
       savePins();
     },
     resize: (pin, x, y, w, h) => {
-      ({ x, y, w, h } = clampBox(x, y, w, h));
+      ({ x, y, w, h } = clampBox(x, y, w, h, pin.align, pin.valign));
       pin.x = x;
       pin.y = y;
       pin.width = w;
@@ -615,7 +623,7 @@
     let w = pinWidth, h = pinHeight;
     let x = pin.x, y = pin.y;
     if (kind === 'text' && w && h) {
-      const c = clampBox(pin.x, pin.y, w, h);
+      const c = clampBox(pin.x, pin.y, w, h, align, valign);
       x = c.x; y = c.y; w = c.w; h = c.h;
       if (pinWidth !== w) pinWidth = w;
       if (pinHeight !== h) pinHeight = h;
