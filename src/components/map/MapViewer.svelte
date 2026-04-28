@@ -382,6 +382,12 @@
         handles += `<div class="path-handle path-control" data-path-handle="cpA" data-pin-id="${pin.id}" style="left:${cax.toFixed(1)}px;top:${cay.toFixed(1)}px"></div>`;
         handles += `<div class="path-handle path-control" data-path-handle="cpB" data-pin-id="${pin.id}" style="left:${cbx.toFixed(1)}px;top:${cby.toFixed(1)}px"></div>`;
       }
+      // Dedicated move handle — the only way to translate the whole
+      // curve. Sits at the midpoint of A↔B so it's clearly distinct
+      // from the endpoint and control-point handles.
+      const Mx = (Ax + Bx) / 2;
+      const My = (Ay + By) / 2;
+      handles += `<div class="path-handle path-move" data-path-handle="move" data-pin-id="${pin.id}" style="left:${Mx.toFixed(1)}px;top:${My.toFixed(1)}px" title="Drag to move curve"></div>`;
     }
 
     const selClass = isSelected ? ' selected' : '';
@@ -556,7 +562,11 @@
     // 100%/50% percentages off the frame, regardless of marker size or
     // anchor — anchor is handled purely by where the frame sits inside
     // the 28×28 hit-box (see .map-pin-frame.anchor-* rules in scss).
-    const frameStyle = `width: ${iconW.toFixed(1)}px; height: ${iconH.toFixed(1)}px;`;
+    // Numbered pins skip the inline size so the .zoom-low CSS rule can
+    // shrink them to 12×12 dots without an !important override.
+    const frameStyle = isOverworld
+      ? `width: ${iconW.toFixed(1)}px; height: ${iconH.toFixed(1)}px;`
+      : '';
     return L.divIcon({
       className: '',
       html: `<div class="map-pin label-pos-${pin.labelPos || 'n'} anchor-${pin.anchor || 'center'}${isSelected ? ' selected' : ''}${isOverworld ? ' overworld' : ''}${labelHidden ? ' label-hidden' : ''}${pin.labelOnly ? ' label-only' : ''}"><div class="map-pin-frame" style="${frameStyle}"><span class="map-pin-label ${pinSizeClass} ${pinColorClass} ${pinWeightClass}" style="${labelStyle}">${label}</span>${markHtml}</div></div>`,
@@ -592,13 +602,12 @@
     const [lng, lat] = isPath && Array.isArray(pin.a) ? pin.a : [pin.x, pin.y];
     const marker = L.marker([lat, lng], {
       icon: makeIcon(pin, map?.getZoom()),
-      // Paths are draggable as a whole; mousedown on an endpoint/control-
-      // point handle is intercepted (with stopPropagation) by our capture
-      // handler before Leaflet sees it, so the two gestures don't conflict.
-      // We always create the dragging handler in edit mode and toggle it
-      // on/off via the effect below — the selected marker stays draggable
-      // even when the active tool isn't `selectable` (e.g. marker tool).
-      draggable: editable,
+      // Paths use a dedicated `.path-move` handle (not Leaflet's body
+      // drag) so endpoint and bezier control handles always win the
+      // mousedown — body drag would otherwise grab first and start
+      // translating the curve before the handle ever sees the event.
+      // Markers and text features still use Leaflet drag.
+      draggable: editable && !isPath,
       interactive: true,
     }).addTo(map);
 
@@ -917,7 +926,13 @@
     const dy = (e.clientY - pathDragging.startY) / scale;
     const x = Math.round(pathDragging.origX + dx);
     const y = Math.round(pathDragging.origY + dy);
-    ctx?.updatePathPoint?.(pin, pathDragging.which, x, y);
+    if (pathDragging.which === 'move') {
+      // Whole-curve translation reuses updatePos's path branch, which
+      // shifts every point (a, b, cpA, cpB) by the delta from A.
+      ctx?.updatePos?.(pin, x, y);
+    } else {
+      ctx?.updatePathPoint?.(pin, pathDragging.which, x, y);
+    }
   }
 
   /** Right-click pan — works in both edit and view modes. */
@@ -980,14 +995,18 @@
           return;
         }
       }
-      // Path endpoint / bezier control-point drag
+      // Path endpoint / bezier control-point / whole-curve move drag
       const pathHandle = e.target.closest('.path-handle');
       if (pathHandle && e.button === 0) {
         const pinId = pathHandle.dataset.pinId;
         const pin = pins.find(p => p.id === pinId);
         const which = pathHandle.dataset.pathHandle;
         if (pin && which) {
-          const orig = pin[which] || [pin.x, pin.y];
+          // 'move' is anchored to A so the existing whole-path
+          // translate logic in updatePos works unchanged.
+          const orig = which === 'move'
+            ? (pin.a || [pin.x, pin.y])
+            : (pin[which] || [pin.x, pin.y]);
           e.preventDefault();
           e.stopPropagation();
           pathDragging = {
@@ -1091,15 +1110,26 @@
   // Toggle marker drag/interact when `selectable` or selection changes.
   // Non-selectable tools (e.g. marker tool) still let the user nudge the
   // currently-selected marker — handy right after dropping a pin.
+  // Path markers are never body-draggable: Leaflet creates `dragging`
+  // regardless of the construction flag, so we keep it explicitly
+  // disabled here. Translation happens through the dedicated
+  // `.path-move` handle.
   $effect(() => {
     const canSelect = selectable && editable;
     const sel = selectedId;
     for (const [id, marker] of markerMap) {
+      const pin = pins.find(p => p.id === id);
+      const isPath = pin?.kind === 'path';
       const live = canSelect || (editable && id === sel);
-      if (live) marker.dragging?.enable();
-      else marker.dragging?.disable();
+      if (isPath) {
+        marker.dragging?.disable();
+      } else if (live) {
+        marker.dragging?.enable();
+      } else {
+        marker.dragging?.disable();
+      }
       const el = marker.getElement();
-      if (el) el.style.pointerEvents = live ? '' : 'none';
+      if (el) el.style.pointerEvents = (live || (editable && isPath)) ? '' : 'none';
     }
   });
 

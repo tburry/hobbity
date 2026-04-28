@@ -159,6 +159,10 @@
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
     }
+    // Numbered pins get a default 24×24 frame from CSS (overworld
+    // pins set their frame size inline). The .zoom-low override below
+    // shrinks this to a 12×12 dot at low zoom.
+    &:not(.overworld) .map-pin-frame { width: 24px; height: 24px; }
     &.anchor-nw     .map-pin-frame { top: 0;    left: 0;    transform: none; }
     &.anchor-n      .map-pin-frame { top: 0;    left: 50%;  transform: translateX(-50%); }
     &.anchor-ne     .map-pin-frame { top: 0;    left: auto; right: 0; transform: none; }
@@ -408,9 +412,15 @@
     inset: 0;
     overflow: visible;
     pointer-events: none;
+    // Anchor the text at the bottom of the stacking context so the
+    // guide line (z: 50) and handles (z: 100) always paint above it.
+    z-index: 0;
   }
-  .map-path .path-text text { cursor: pointer; pointer-events: auto; }
-  .map-path.selected .path-text text { cursor: move; }
+  // Text catches clicks for selection. Unselected paths show a pointer
+  // (clickable to select); selected paths drop the cursor since
+  // translation and bezier editing happen through the dedicated handles.
+  .map-path .path-text text { pointer-events: auto; cursor: pointer; }
+  .map-path.selected .path-text text { cursor: default; }
   .map-path .path-text .path-stroke {
     stroke: var(--accent, #6b3a2a);
     stroke-width: 1;
@@ -422,10 +432,13 @@
     inset: 0;
     pointer-events: none;
     overflow: visible;
-    z-index: 1;
+    // Above the text (.path-text is at z=auto inside the same isolate
+    // stacking context); below the handles (z: 100) so a handle still
+    // covers the line where they meet.
+    z-index: 50;
   }
   .map-path .path-guides line {
-    stroke: var(--accent, #6b3a2a);
+    stroke: #2d6cdf;
     stroke-dasharray: 3 3;
     stroke-width: 1;
   }
@@ -445,8 +458,23 @@
   .path-handle.path-endpoint { border-radius: 2px; }
   .path-handle.path-control {
     border-radius: 50%;
-    background: var(--panel-accent, #c9a96e);
+    background: #2d6cdf;
+    border-color: #2d6cdf;
   }
+  // Move handle: bigger, dark fill so it reads as a distinct grab
+  // target — and the only way to translate the curve once a path is
+  // selected.
+  .path-handle.path-move {
+    width: 16px;
+    height: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+    border-radius: 50%;
+    background: #fff;
+    border-color: #2d6cdf;
+    cursor: grab;
+  }
+  .path-handle.path-move:active { cursor: grabbing; }
 
   // --- Tile rendering --------------------------------------------
   .leaflet-tile-container { will-change: transform; }
@@ -521,15 +549,10 @@
 
   // Low-zoom adjustments. `.zoom-low` sits on .map-container itself.
   &.zoom-low {
+    .map-pin:not(.overworld) .map-pin-frame { width: 12px; height: 12px; }
     .map-pin-number {
-      width: 12px;
-      height: 12px;
       border-width: 1.5px;
       font-size: 0;
     }
-    // Marker shrinks to 12×12 inside the 28×28 hit-box, so the
-    // per-side gap grows to 8px. Labels read this via --inset-* and
-    // hug the smaller marker automatically for every anchor.
-    .map-pin { --gap: 8px; }
   }
 }
