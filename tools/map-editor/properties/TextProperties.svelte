@@ -8,7 +8,6 @@
     width = $bindable(0),
     height = $bindable(0),
     minZoom = $bindable(1),
-    shrink = $bindable(false),
     onApplyPreset,
   } = $props();
 
@@ -102,14 +101,6 @@
         >{z}</button>
       {/each}
     </div>
-    <button
-      type="button"
-      class="shrink-toggle"
-      class:active={shrink}
-      aria-pressed={shrink}
-      title="Start at min size at min zoom and grow proportionally"
-      onclick={() => shrink = !shrink}
-    >Shrink</button>
   </div>
 </label>
 
@@ -164,19 +155,6 @@
   .min-zoom-label { display: block; margin-bottom: 0.6rem; font-size: 0.85rem; }
   .zoom-row { display: flex; gap: 6px; margin-top: 0.25rem; align-items: stretch; }
   .zoom-group { display: flex; gap: 2px; flex: 1; }
-  .shrink-toggle {
-    padding: 0 0.75rem;
-    height: 30px;
-    font: 700 11px/1 'Crimson Pro', serif;
-    white-space: nowrap;
-    border: 1px solid var(--panel-border, #5c4a32);
-    background: transparent;
-    color: inherit;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  .shrink-toggle:hover { background: var(--panel-hover, rgba(0,0,0,0.06)); }
-  .shrink-toggle.active { background: var(--panel-accent, #c9a96e); color: #fff; border-color: var(--panel-accent, #c9a96e); }
   .zoom-group button {
     flex: 1;
     height: 30px;

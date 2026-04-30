@@ -122,7 +122,6 @@
   let pinMinZoom = $state(1);
   let pinLabelPos = $state('n'); // marker label position: n/ne/e/se/s/sw/w/nw
   let pinAnchor = $state('center'); // which point of the pin box sits on (x,y)
-  let pinShrink = $state(false);
   let pinLabelOnly = $state(false);
   // Last-used Pin tab (Town vs Overworld). Lives in App so it survives
   // PinProperties remounts and so a new marker opens on whichever tab
@@ -286,9 +285,9 @@
   // the listed ones. Identifying fields come first (kind, class,
   // number/name), then geometry, then style toggles, then metadata.
   const FEATURE_KEY_ORDER = {
-    pin:  ['kind', 'class', 'number', 'name', 'shortName', 'x', 'y', 'anchor', 'labelPos', 'labelOnly', 'minZoom', 'shrink', 'description', 'link'],
-    text: ['kind', 'class', 'name', 'shortName', 'x', 'y', 'width', 'height', 'align', 'valign', 'minZoom', 'shrink', 'description', 'link'],
-    path: ['kind', 'class', 'name', 'shortName', 'mode', 'nodes', 'textAlign', 'textBaseline', 'flip', 'minZoom', 'shrink', 'description', 'link'],
+    pin:  ['kind', 'class', 'number', 'name', 'shortName', 'x', 'y', 'anchor', 'labelPos', 'labelOnly', 'minZoom', 'description', 'link'],
+    text: ['kind', 'class', 'name', 'shortName', 'x', 'y', 'width', 'height', 'align', 'valign', 'minZoom', 'description', 'link'],
+    path: ['kind', 'class', 'name', 'shortName', 'mode', 'nodes', 'textAlign', 'textBaseline', 'flip', 'minZoom', 'description', 'link'],
   };
 
   /** Reorder an object's keys per FEATURE_KEY_ORDER; unlisted keys
@@ -345,7 +344,6 @@
           if (rest.flip && rest.flip !== kd.flip) out.flip = true;
           if (rest.minZoom != null && rest.minZoom !== kd.minZoom) out.minZoom = rest.minZoom;
         }
-        if (rest.shrink) out.shrink = true;
         if (rest.description) out.description = rest.description;
         if (rest.link) out.link = rest.link;
         return orderFeatureKeys(kind, out);
@@ -422,7 +420,6 @@
     pinValign = kd.valign || 'middle';
     pinWidth = data.width || 0;
     pinHeight = data.height || 0;
-    pinShrink = false;
     pinLabelOnly = false;
     pinLabelPos = kd.labelPos || 'n';
     pinAnchor = kd.anchor || 'center';
@@ -468,7 +465,6 @@
       width: pinWidth,
       height: pinHeight,
       minZoom: pinMinZoom,
-      shrink: pinShrink,
       labelOnly: kind === 'pin' ? pinLabelOnly : undefined,
       labelPos: kind === 'pin' ? pinLabelPos : undefined,
       anchor: kind === 'pin' ? pinAnchor : undefined,
@@ -666,7 +662,6 @@
     pinWidth = pin.width || 0;
     pinHeight = pin.height || 0;
     pinMinZoom = pin.minZoom ?? kd.minZoom ?? 0;
-    pinShrink = !!pin.shrink;
     pinLabelOnly = !!pin.labelOnly;
     pinLabelPos = pin.labelPos || kd.labelPos || 'n';
     pinAnchor = pin.anchor || kd.anchor || 'center';
@@ -707,7 +702,6 @@
       if (pinHeight !== h) pinHeight = h;
     }
     const mz = pinMinZoom;
-    const sh = pinShrink;
     const lo = kind === 'pin' ? pinLabelOnly : undefined;
     const lp = kind === 'pin' ? pinLabelPos : undefined;
     const an = kind === 'pin' ? pinAnchor : undefined;
@@ -717,7 +711,7 @@
     const pflip = kind === 'path' ? pathFlip : undefined;
     const desc = pinDesc.trim() || undefined;
     const link = pinLink.trim() || undefined;
-    if (pin.name !== name || pin.shortName !== shortName || pin.number !== num || pin.kind !== kind || pin.class !== cls || pin.align !== align || pin.valign !== valign || pin.width !== w || pin.height !== h || pin.x !== x || pin.y !== y || pin.minZoom !== mz || pin.shrink !== sh || pin.labelOnly !== lo || pin.labelPos !== lp || pin.anchor !== an || pin.mode !== pmode || pin.textAlign !== pta || pin.textBaseline !== ptb || pin.flip !== pflip || pin.description !== desc || pin.link !== link) {
+    if (pin.name !== name || pin.shortName !== shortName || pin.number !== num || pin.kind !== kind || pin.class !== cls || pin.align !== align || pin.valign !== valign || pin.width !== w || pin.height !== h || pin.x !== x || pin.y !== y || pin.minZoom !== mz || pin.labelOnly !== lo || pin.labelPos !== lp || pin.anchor !== an || pin.mode !== pmode || pin.textAlign !== pta || pin.textBaseline !== ptb || pin.flip !== pflip || pin.description !== desc || pin.link !== link) {
       pin.name = name;
       pin.shortName = shortName;
       pin.number = num;
@@ -730,7 +724,6 @@
       pin.x = x;
       pin.y = y;
       pin.minZoom = mz;
-      pin.shrink = sh;
       pin.labelOnly = lo;
       pin.labelPos = lp;
       pin.anchor = an;
@@ -911,7 +904,6 @@
               bind:number={pinNumber}
               bind:cls={pinClass}
               bind:minZoom={pinMinZoom}
-              bind:shrink={pinShrink}
               bind:labelOnly={pinLabelOnly}
               bind:labelPos={pinLabelPos}
               bind:anchor={pinAnchor}
@@ -925,7 +917,6 @@
               bind:width={pinWidth}
               bind:height={pinHeight}
               bind:minZoom={pinMinZoom}
-              bind:shrink={pinShrink}
               onApplyPreset={applyPreset}
             />
           {:else if pinKind === 'path'}
@@ -936,7 +927,6 @@
               bind:textBaseline={pathTextBaseline}
               bind:flip={pathFlip}
               bind:minZoom={pinMinZoom}
-              bind:shrink={pinShrink}
               onModeChange={onPathModeChange}
             />
           {/if}

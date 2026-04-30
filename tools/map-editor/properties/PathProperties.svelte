@@ -8,7 +8,6 @@
     textBaseline = $bindable('baseline'),
     flip = $bindable(false),
     minZoom = $bindable(0),
-    shrink = $bindable(false),
     onModeChange,
   } = $props();
 
@@ -75,7 +74,7 @@
   </div>
   <button
     type="button"
-    class="shrink-toggle"
+    class="flip-toggle"
     class:active={flip}
     aria-pressed={flip}
     title="Flip text to the other side of the path"
@@ -111,14 +110,6 @@
         >{z}</button>
       {/each}
     </div>
-    <button
-      type="button"
-      class="shrink-toggle"
-      class:active={shrink}
-      aria-pressed={shrink}
-      title="Start at min size at min zoom and grow proportionally"
-      onclick={() => shrink = !shrink}
-    >Shrink</button>
   </div>
 </label>
 
@@ -173,7 +164,7 @@
   .align-group button.active { background: var(--panel-accent, #c9a96e); color: #fff; border-color: var(--panel-accent, #c9a96e); }
   .align-group button svg { width: 16px; height: 16px; }
 
-  .shrink-toggle {
+  .flip-toggle {
     padding: 0 0.75rem;
     height: 30px;
     font: 700 11px/1 'Crimson Pro', serif;
@@ -184,8 +175,8 @@
     border-radius: 3px;
     cursor: pointer;
   }
-  .shrink-toggle:hover { background: var(--panel-hover, rgba(0,0,0,0.06)); }
-  .shrink-toggle.active { background: var(--panel-accent, #c9a96e); color: #fff; border-color: var(--panel-accent, #c9a96e); }
+  .flip-toggle:hover { background: var(--panel-hover, rgba(0,0,0,0.06)); }
+  .flip-toggle.active { background: var(--panel-accent, #c9a96e); color: #fff; border-color: var(--panel-accent, #c9a96e); }
 
   .min-zoom-label { display: block; margin-bottom: 0.6rem; font-size: 0.85rem; }
   .zoom-row { display: flex; gap: 6px; margin-top: 0.25rem; align-items: stretch; }

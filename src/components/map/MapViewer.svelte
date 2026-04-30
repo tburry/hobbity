@@ -237,14 +237,11 @@
     const preset = resolvePreset(pin);
     const spec = preset ? sizeSpec(preset.size) : PIN_LABEL_SIZE;
 
-    // Shrink mode: pin the size to `MIN_FONT_PX` at the feature's
-    // min-zoom and scale up from there (doubling per zoom level),
-    // clamped to max. Default mode: scale from `base` at REF_ZOOM,
-    // clamped to [MIN_FONT_PX, max] (mobile uses its own taller floor
-    // for touch readability).
-    const pivot = pin.shrink ? (pin.minZoom ?? REF_ZOOM) : REF_ZOOM;
-    const scale = Math.pow(2, z - pivot);
-    const raw = (pin.shrink ? MIN_FONT_PX : spec.base) * scale;
+    // Scale from `base` at REF_ZOOM, doubling per zoom level, then
+    // clamp to [MIN_FONT_PX, max]. Mobile uses its own taller floor
+    // for touch readability.
+    const scale = Math.pow(2, z - REF_ZOOM);
+    const raw = spec.base * scale;
     // Map title is sized relative to the image and grows freely with
     // zoom — bypass the global floor and ceiling so it always reads
     // proportionally regardless of how far in or out the user zooms.
@@ -518,11 +515,9 @@
         // font-size ratio rather than raw CRS zoom.
         const z = currentZoom ?? map?.getZoom() ?? REF_ZOOM;
         const rawZoomScale = map?.options?.crs?.scale ? map.options.crs.scale(z) : Math.pow(2, z);
-        const pivot = pin.shrink ? (pin.minZoom ?? REF_ZOOM) : REF_ZOOM;
         const rp = resolvePreset(pin);
         const specForScale = rp ? sizeSpec(rp.size) : PIN_LABEL_SIZE;
-        const startSize = pin.shrink ? (specForScale.min ?? specForScale.base) : specForScale.base;
-        const unclamped = startSize * Math.pow(2, z - pivot);
+        const unclamped = specForScale.base * Math.pow(2, z - REF_ZOOM);
         const clampRatio = unclamped > 0 ? rawSize / unclamped : 1;
         const zoomScale = rawZoomScale * clampRatio;
         const cssW = pin.width * zoomScale;

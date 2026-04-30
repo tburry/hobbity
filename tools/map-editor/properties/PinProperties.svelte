@@ -6,7 +6,6 @@
     number = $bindable(''),
     cls = $bindable('shop'),
     minZoom = $bindable(0),
-    shrink = $bindable(false),
     labelOnly = $bindable(false),
     labelPos = $bindable('n'),
     anchor = $bindable('center'),
@@ -250,14 +249,6 @@
         >{z}</button>
       {/each}
     </div>
-    <button
-      type="button"
-      class="shrink-toggle"
-      class:active={shrink}
-      aria-pressed={shrink}
-      title="Start at min size at min zoom and grow proportionally"
-      onclick={() => shrink = !shrink}
-    >Shrink</button>
   </div>
 </label>
 
@@ -495,12 +486,6 @@
   .min-zoom-label { display: block; margin-bottom: 0.6rem; font-size: 0.85rem; }
   .zoom-row { display: flex; gap: 6px; margin-top: 0.25rem; align-items: stretch; }
   .zoom-group { display: flex; gap: 2px; flex: 1; }
-  .shrink-toggle {
-    padding: 0 0.75rem !important;
-    height: 30px;
-    font: 700 11px/1 'Crimson Pro', serif;
-    white-space: nowrap;
-  }
   .zoom-group button {
     flex: 1;
     height: 30px;
