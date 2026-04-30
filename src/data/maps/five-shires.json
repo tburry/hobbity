@@ -53,9 +53,20 @@
       "kind": "pin",
       "class": "battle",
       "number": "34",
-      "name": "Blackflame",
+      "name": "Battle of Blackflame",
+      "shortName": "Blackflame",
       "x": 4723,
       "y": 396
+    },
+    {
+      "kind": "pin",
+      "class": "battle",
+      "number": "35",
+      "name": "Battle of Fire Rock",
+      "shortName": "Fire Rock",
+      "x": 5233,
+      "y": 1042,
+      "anchor": "sw"
     },
     {
       "kind": "pin",
@@ -122,15 +133,6 @@
       "anchor": "n",
       "labelPos": "s",
       "labelOnly": true
-    },
-    {
-      "kind": "pin",
-      "class": "battle",
-      "number": "35",
-      "name": "Fire Rock",
-      "x": 5233,
-      "y": 1042,
-      "anchor": "sw"
     },
     {
       "kind": "pin",
