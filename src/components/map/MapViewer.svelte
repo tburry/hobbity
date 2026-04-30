@@ -281,6 +281,23 @@
   }
 
 
+  /** Decide which label text to render and whether the label is hidden
+   * at the current zoom. Three bands per feature:
+   *   • z < minZoom            → hidden
+   *   • minZoom ≤ z < minZoom+1 → `shortName` if set, else `name`
+   *   • z ≥ minZoom+1          → `name`
+   * Without a `shortName`, the bottom band still hides as before. */
+  function labelFor(pin, zoom, defaultMinZoom = 0) {
+    const z = zoom ?? map?.getZoom() ?? REF_ZOOM;
+    const minZ = pin.minZoom ?? defaultMinZoom;
+    const cs = currentScale(z);
+    if (cs < scaleAt(minZ)) return { text: pin.name, hidden: true };
+    if (pin.shortName && cs < scaleAt(minZ + 1)) {
+      return { text: pin.shortName, hidden: false };
+    }
+    return { text: pin.name, hidden: false };
+  }
+
   function extraStyles(s) {
     const parts = [];
     if (s.case && s.case !== 'none') {
@@ -391,8 +408,11 @@
 
     const isSelected = pin.id === selectedId;
     // Selected paths always render (so the user can see what they're
-    // editing); non-selected ones hide below their minZoom threshold.
-    const labelHidden = !isSelected && currentScale(z) < scaleAt(pin.minZoom ?? KIND_DEFAULTS.path?.minZoom ?? 0);
+    // editing); non-selected ones drop to `shortName` below their
+    // min-zoom and hide entirely if no short label is provided.
+    const lbl = labelFor(pin, z, KIND_DEFAULTS.path?.minZoom ?? 0);
+    const labelHidden = !isSelected && lbl.hidden;
+    const labelText = isSelected ? pin.name : lbl.text;
     const textStyle = `font-family: ${font}; font-size: ${fontSize.toFixed(1)}px; font-style: ${style}; ${extra}`;
 
     let handles = '';
@@ -436,7 +456,7 @@
     const editStrokes = isEditing
       ? `<path class="path-stroke" d="${d}" fill="none"/><path class="path-hit" d="${d}" fill="none" data-pin-id="${pin.id}"/>`
       : '';
-    const html = `<div class="map-path${selClass}${hiddenClass}" data-pin-id="${pin.id}"><svg class="path-text" width="${cssW}" height="${cssH}" viewBox="0 0 ${cssW} ${cssH}"><defs><path id="${pathId}" d="${d}" fill="none"/></defs>${editStrokes}<text class="${sizeClass} ${colorClass} ${weightClass}" text-anchor="${textAnchor}" dominant-baseline="${dominantBaseline}" style="${textStyle}"><textPath href="#${pathId}" startOffset="${startOffset}">${esc(pin.name)}</textPath></text></svg>${handles}</div>`;
+    const html = `<div class="map-path${selClass}${hiddenClass}" data-pin-id="${pin.id}"><svg class="path-text" width="${cssW}" height="${cssH}" viewBox="0 0 ${cssW} ${cssH}"><defs><path id="${pathId}" d="${d}" fill="none"/></defs>${editStrokes}<text class="${sizeClass} ${colorClass} ${weightClass}" text-anchor="${textAnchor}" dominant-baseline="${dominantBaseline}" style="${textStyle}"><textPath href="#${pathId}" startOffset="${startOffset}">${esc(labelText)}</textPath></text></svg>${handles}</div>`;
 
     // Marker sits at nodes[0]; iconAnchor positions it within the
     // CSS-pixel bbox.
@@ -455,12 +475,15 @@
     const isLabel = !pin.number;
 
     if (isLabel) {
-      // Hide text feature when map zoom is below its min-zoom threshold.
+      // Hide text feature when map zoom is below its min-zoom threshold
+      // — unless the user supplied a `shortName`, in which case show
+      // that instead of disappearing.
       const curZ = currentZoom ?? map?.getZoom() ?? REF_ZOOM;
-      const minZ = pin.minZoom ?? 1;
-      if (currentScale(curZ) < scaleAt(minZ)) {
+      const lbl = labelFor(pin, curZ, pin.minZoom ?? 1);
+      if (lbl.hidden) {
         return L.divIcon({ className: '', html: '', iconSize: [0, 0], iconAnchor: [0, 0] });
       }
+      const labelText = lbl.text;
       // Style comes from the preset for text features. `rawSize` is the
       // preset-driven, clamped font size in image px; `displaySize`
       // applies the user-tunable per-map labelScale. Box-fit math uses
@@ -523,7 +546,7 @@
         const selClass = isEditing ? ' selected' : '';
         const handles = isEditing ? HANDLE_POSITIONS.map(h =>
           `<div class="resize-handle handle-${h}" data-handle="${h}" data-pin-id="${pin.id}"></div>`).join('') : '';
-        const html = `<div class="map-text-box anchor-${anchorKey}${selClass}" style="${boxStyle}" data-pin-id="${pin.id}"><div class="map-label map-label-boxed ${sizeClass} ${colorClass} ${weightClass}" style="${textStyle}"><span class="map-label-text">${esc(pin.name)}</span></div>${handles}</div>`;
+        const html = `<div class="map-text-box anchor-${anchorKey}${selClass}" style="${boxStyle}" data-pin-id="${pin.id}"><div class="map-label map-label-boxed ${sizeClass} ${colorClass} ${weightClass}" style="${textStyle}"><span class="map-label-text">${esc(labelText)}</span></div>${handles}</div>`;
         return L.divIcon({
           className: '',
           html,
@@ -532,7 +555,7 @@
         });
       }
 
-      const html = `<div class="map-label ${sizeClass} ${colorClass} ${weightClass}" style="${textStyle} ${transformStyle}">${esc(pin.name)}</div>`;
+      const html = `<div class="map-label ${sizeClass} ${colorClass} ${weightClass}" style="${textStyle} ${transformStyle}">${esc(labelText)}</div>`;
       return L.divIcon({
         className: '',
         html,
@@ -547,8 +570,9 @@
     if (currentScale(curZ) <= scaleAt(MARKER_HIDE_ZOOM)) {
       return L.divIcon({ className: '', html: '', iconSize: [0, 0], iconAnchor: [0, 0] });
     }
-    const labelHidden = currentScale(curZ) < scaleAt(pin.minZoom ?? DEFAULT_MARKER_MIN_ZOOM);
-    const label = esc(pin.name);
+    const lbl = labelFor(pin, curZ, DEFAULT_MARKER_MIN_ZOOM);
+    const labelHidden = lbl.hidden;
+    const label = esc(lbl.text);
     // Pin label styling comes from the preset (class).
     const s = resolvePreset(pin) || {};
     const font = FONTS[s.font] || FONTS.body;

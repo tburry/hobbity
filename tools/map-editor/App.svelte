@@ -108,6 +108,9 @@
   let dialogTitle = $state('New Marker');
   let pinNumber = $state('1');
   let pinName = $state('');
+  // Optional abbreviated label shown below `minZoom` instead of hiding
+  // the feature entirely. Empty = behave as before (hide at low zoom).
+  let pinShortName = $state('');
   let pinDesc = $state('');
   let pinLink = $state('');
   let pinKind = $state('pin');      // 'pin' | 'text' | 'path'
@@ -283,9 +286,9 @@
   // the listed ones. Identifying fields come first (kind, class,
   // number/name), then geometry, then style toggles, then metadata.
   const FEATURE_KEY_ORDER = {
-    pin:  ['kind', 'class', 'number', 'name', 'x', 'y', 'anchor', 'labelPos', 'labelOnly', 'minZoom', 'shrink', 'description', 'link'],
-    text: ['kind', 'class', 'name', 'x', 'y', 'width', 'height', 'align', 'valign', 'minZoom', 'shrink', 'description', 'link'],
-    path: ['kind', 'class', 'name', 'mode', 'nodes', 'textAlign', 'textBaseline', 'flip', 'minZoom', 'shrink', 'description', 'link'],
+    pin:  ['kind', 'class', 'number', 'name', 'shortName', 'x', 'y', 'anchor', 'labelPos', 'labelOnly', 'minZoom', 'shrink', 'description', 'link'],
+    text: ['kind', 'class', 'name', 'shortName', 'x', 'y', 'width', 'height', 'align', 'valign', 'minZoom', 'shrink', 'description', 'link'],
+    path: ['kind', 'class', 'name', 'shortName', 'mode', 'nodes', 'textAlign', 'textBaseline', 'flip', 'minZoom', 'shrink', 'description', 'link'],
   };
 
   /** Reorder an object's keys per FEATURE_KEY_ORDER; unlisted keys
@@ -308,6 +311,7 @@
         const kd = KIND_DEFAULTS[kind] || {};
         const out = { kind, name: rest.name };
         if (rest.class) out.class = rest.class;
+        if (rest.shortName) out.shortName = rest.shortName;
         if (kind === 'pin') {
           if (rest.number) out.number = rest.number;
           out.x = rest.x;
@@ -409,6 +413,7 @@
     editingId = id;
     pinKind = kind;
     pinName = '';
+    pinShortName = '';
     pinDesc = '';
     pinLink = '';
     // KIND_DEFAULTS is the single source of truth for per-kind defaults.
@@ -651,6 +656,7 @@
     dialogTitle = pinKind === 'pin' ? 'Edit Marker' : pinKind === 'path' ? 'Edit Path' : 'Edit Text';
     pinNumber = pin.number != null ? String(pin.number) : '';
     pinName = pin.name;
+    pinShortName = pin.shortName || '';
     pinDesc = pin.description || '';
     pinLink = pin.link || '';
     const kd = KIND_DEFAULTS[pinKind] || {};
@@ -683,6 +689,7 @@
     const pin = pins.find(p => p.id === editingId);
     if (!pin) return;
     const name = pinName.trim() || '(new)';
+    const shortName = pinShortName.trim() || undefined;
     const num = pinNumber;
     const kind = pinKind;
     const cls = pinClass;
@@ -710,8 +717,9 @@
     const pflip = kind === 'path' ? pathFlip : undefined;
     const desc = pinDesc.trim() || undefined;
     const link = pinLink.trim() || undefined;
-    if (pin.name !== name || pin.number !== num || pin.kind !== kind || pin.class !== cls || pin.align !== align || pin.valign !== valign || pin.width !== w || pin.height !== h || pin.x !== x || pin.y !== y || pin.minZoom !== mz || pin.shrink !== sh || pin.labelOnly !== lo || pin.labelPos !== lp || pin.anchor !== an || pin.mode !== pmode || pin.textAlign !== pta || pin.textBaseline !== ptb || pin.flip !== pflip || pin.description !== desc || pin.link !== link) {
+    if (pin.name !== name || pin.shortName !== shortName || pin.number !== num || pin.kind !== kind || pin.class !== cls || pin.align !== align || pin.valign !== valign || pin.width !== w || pin.height !== h || pin.x !== x || pin.y !== y || pin.minZoom !== mz || pin.shrink !== sh || pin.labelOnly !== lo || pin.labelPos !== lp || pin.anchor !== an || pin.mode !== pmode || pin.textAlign !== pta || pin.textBaseline !== ptb || pin.flip !== pflip || pin.description !== desc || pin.link !== link) {
       pin.name = name;
+      pin.shortName = shortName;
       pin.number = num;
       pin.kind = kind;
       pin.class = cls;
@@ -933,6 +941,7 @@
             />
           {/if}
           <label>Label <input type="text" bind:value={pinName} required autocomplete="off" /></label>
+          <label>Short label <input type="text" bind:value={pinShortName} placeholder="Shown below min zoom (optional)" autocomplete="off" /></label>
           <label>Description <textarea bind:value={pinDesc} rows="8"></textarea></label>
           <label>Link <input type="text" bind:value={pinLink} placeholder="/world/places/#anchor" autocomplete="off" /></label>
           <div class="dialog-buttons">
