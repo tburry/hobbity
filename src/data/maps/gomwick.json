@@ -275,8 +275,7 @@
       "y": 249,
       "width": 836,
       "height": 181,
-      "minZoom": 3,
-      "shrink": true
+      "minZoom": 3
     },
     {
       "kind": "text",
@@ -313,8 +312,7 @@
       "y": 4029,
       "width": 370,
       "height": 493,
-      "minZoom": 2,
-      "shrink": true
+      "minZoom": 2
     }
   ]
 }

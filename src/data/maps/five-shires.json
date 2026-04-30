@@ -17,10 +17,10 @@
       "kind": "text",
       "class": "map-title",
       "name": "The Five Shires",
-      "x": 2602,
-      "y": 4773,
+      "x": 2601,
+      "y": 5124,
       "width": 5201,
-      "height": 702,
+      "height": 546,
       "valign": "bottom"
     },
     {
@@ -505,26 +505,83 @@
       "kind": "path",
       "class": "river",
       "name": "Cruth River",
+      "shortName": "Cruth",
       "mode": "bezier",
       "nodes": [
         {
           "p": [
-            5200,
+            5201,
             347
           ],
           "cpOut": [
-            5280,
-            525
+            5206,
+            358
           ]
         },
         {
           "p": [
-            5486,
+            5245,
+            423
+          ],
+          "cpIn": [
+            5223,
+            398
+          ],
+          "cpOut": [
+            5261,
+            442
+          ]
+        },
+        {
+          "p": [
+            5295,
+            454
+          ],
+          "cpIn": [
+            5282,
+            447
+          ],
+          "cpOut": [
+            5327,
+            471
+          ]
+        },
+        {
+          "p": [
+            5346,
+            486
+          ],
+          "cpIn": [
+            5314,
+            471
+          ],
+          "cpOut": [
+            5373,
+            499
+          ]
+        },
+        {
+          "p": [
+            5422,
+            521
+          ],
+          "cpIn": [
+            5400,
+            502
+          ],
+          "cpOut": [
+            5444,
+            540
+          ]
+        },
+        {
+          "p": [
+            5487,
             633
           ],
           "cpIn": [
-            5449,
-            445
+            5466,
+            585
           ]
         }
       ]
@@ -553,6 +610,7 @@
       "kind": "path",
       "class": "river",
       "name": "Flur River",
+      "shortName": "Flur",
       "mode": "bezier",
       "nodes": [
         {
@@ -633,6 +691,7 @@
       "kind": "path",
       "class": "river",
       "name": "Ithypool River",
+      "shortName": "Ithypool",
       "mode": "bezier",
       "nodes": [
         {
@@ -710,10 +769,11 @@
       "kind": "text",
       "class": "lake",
       "name": "Muimzir",
-      "x": 2634,
-      "y": 2379,
-      "width": 653,
-      "height": 261,
+      "x": 2626,
+      "y": 2399,
+      "width": 705,
+      "height": 82,
+      "valign": "bottom",
       "minZoom": 3
     },
     {
@@ -793,6 +853,7 @@
       "kind": "path",
       "class": "river",
       "name": "Streel River",
+      "shortName": "Streel",
       "mode": "bezier",
       "nodes": [
         {
@@ -832,16 +893,59 @@
       "kind": "path",
       "class": "river",
       "name": "Wardle River",
+      "shortName": "Wardle",
       "mode": "bezier",
       "nodes": [
         {
           "p": [
-            4542,
-            1666
+            4536,
+            1672
           ],
           "cpOut": [
-            4784,
-            1737
+            4590,
+            1689
+          ]
+        },
+        {
+          "p": [
+            4689,
+            1758
+          ],
+          "cpIn": [
+            4662,
+            1738
+          ],
+          "cpOut": [
+            4712,
+            1775
+          ]
+        },
+        {
+          "p": [
+            4767,
+            1803
+          ],
+          "cpIn": [
+            4753,
+            1789
+          ],
+          "cpOut": [
+            4782,
+            1818
+          ]
+        },
+        {
+          "p": [
+            4856,
+            1897
+          ],
+          "cpIn": [
+            4810,
+            1874
+          ],
+          "cpOut": [
+            4872,
+            1905
           ]
         },
         {
@@ -850,8 +954,8 @@
             1885
           ],
           "cpIn": [
-            4789,
-            1921
+            4926,
+            1894
           ]
         }
       ]
