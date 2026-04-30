@@ -19,6 +19,14 @@
   let viewSelectedId = $state(null);
   const selectedId = $derived(editable ? selectedIdProp : viewSelectedId);
 
+  // Per-path node selection — used to drive Delete-key removal and the
+  // selected-node highlight. Cleared whenever the active path changes.
+  let selectedNodeIndex = $state(null);
+  $effect(() => {
+    void selectedId;
+    selectedNodeIndex = null;
+  });
+
   // `tool` is the active tool module from tools.js. `ctx` is supplied by the
   // editor and exposes methods the tool can call to effect change (create,
   // edit, showRect, etc.). The MapViewer itself is a thin dispatcher.
@@ -283,8 +291,10 @@
     return parts.join('; ');
   }
 
-  /** Path feature: text flowing along an invisible curve from A to B.
-   * `mode: 'bezier'` adds a cubic curve via two tangent control points. */
+  /** Path feature: text flowing along a multi-node curve. Each node
+   * carries optional `cpIn`/`cpOut` tangents; in `mode: 'bezier'` the
+   * segment between two nodes is a cubic Bézier (using prev.cpOut and
+   * cur.cpIn), otherwise a straight line. */
   function makePathIcon(pin, currentZoom) {
     const z = currentZoom ?? map?.getZoom() ?? REF_ZOOM;
     const zoomScale = map?.options?.crs?.scale ? map.options.crs.scale(z) : Math.pow(2, z);
@@ -303,22 +313,27 @@
     const sizeClass = getSizeClass(s.size);
     const colorClass = s.colorClass || 'text-black';
 
-    const a = pin.a || [pin.x, pin.y];
-    const b = pin.b || [pin.x, pin.y];
+    const nodes = Array.isArray(pin.nodes) && pin.nodes.length >= 2
+      ? pin.nodes
+      : [{ p: [pin.x, pin.y] }, { p: [pin.x, pin.y] }];
     const useBezier = pin.mode === 'bezier';
-    const cpA = pin.cpA || a;
-    const cpB = pin.cpB || b;
 
-    // Image-pixel bbox covering endpoints + (when bezier) tangent points.
-    // Pad by ~1.5 × font cap-height in image px so descenders/ascenders
-    // don't clip when text sits above/below the curve.
-    const pts = useBezier ? [a, b, cpA, cpB] : [a, b];
+    // Image-pixel bbox covering every anchor + (when bezier) tangent
+    // point. Pad by ~1.5 × font cap-height in image px so descenders/
+    // ascenders don't clip when text sits above/below the curve.
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-    for (const p of pts) {
+    const consider = (p) => {
       if (p[0] < minX) minX = p[0];
       if (p[0] > maxX) maxX = p[0];
       if (p[1] < minY) minY = p[1];
       if (p[1] > maxY) maxY = p[1];
+    };
+    for (const n of nodes) {
+      consider(n.p);
+      if (useBezier) {
+        if (n.cpIn)  consider(n.cpIn);
+        if (n.cpOut) consider(n.cpOut);
+      }
     }
     const padImg = (rawFontSize * 1.5) / zoomScale;
     minX -= padImg; maxX += padImg;
@@ -327,25 +342,35 @@
     const cssW = (maxX - minX) * zoomScale;
     const cssH = (maxY - minY) * zoomScale;
     const px = (p) => [(p[0] - minX) * zoomScale, (p[1] - minY) * zoomScale];
-    const [Ax, Ay] = px(a);
-    const [Bx, By] = px(b);
-    // Build the path d. When `flip` is true we reverse the curve's
-    // direction so the text renders on the opposite side (SVG 2's
-    // `textPath side="right"` would be simpler but has patchy browser
-    // support — reversing the path works everywhere).
-    const flip = !!pin.flip;
     const fmt = (n) => n.toFixed(1);
-    const d = useBezier
-      ? (() => {
-          const [cax, cay] = px(cpA);
-          const [cbx, cby] = px(cpB);
-          return flip
-            ? `M ${fmt(Bx)} ${fmt(By)} C ${fmt(cbx)} ${fmt(cby)} ${fmt(cax)} ${fmt(cay)} ${fmt(Ax)} ${fmt(Ay)}`
-            : `M ${fmt(Ax)} ${fmt(Ay)} C ${fmt(cax)} ${fmt(cay)} ${fmt(cbx)} ${fmt(cby)} ${fmt(Bx)} ${fmt(By)}`;
-        })()
-      : flip
-        ? `M ${fmt(Bx)} ${fmt(By)} L ${fmt(Ax)} ${fmt(Ay)}`
-        : `M ${fmt(Ax)} ${fmt(Ay)} L ${fmt(Bx)} ${fmt(By)}`;
+    // Build the path d, optionally reversed when `flip` is true so
+    // text renders on the opposite side. SVG 2's `textPath
+    // side="right"` would be simpler but has patchy browser support;
+    // reversing the path works everywhere.
+    const flip = !!pin.flip;
+    const ordered = flip ? [...nodes].reverse() : nodes;
+    // When flipping, swap each node's cpIn/cpOut so the reversed
+    // segments still pick up the correct handles in build order.
+    const segNodes = flip
+      ? ordered.map(n => ({ p: n.p, cpIn: n.cpOut, cpOut: n.cpIn }))
+      : ordered;
+    const dParts = [];
+    {
+      const [x0, y0] = px(segNodes[0].p);
+      dParts.push(`M ${fmt(x0)} ${fmt(y0)}`);
+    }
+    for (let i = 1; i < segNodes.length; i++) {
+      const prev = segNodes[i - 1], cur = segNodes[i];
+      const [px2, py2] = px(cur.p);
+      if (useBezier) {
+        const [c1x, c1y] = px(prev.cpOut ?? prev.p);
+        const [c2x, c2y] = px(cur.cpIn ?? cur.p);
+        dParts.push(`C ${fmt(c1x)} ${fmt(c1y)} ${fmt(c2x)} ${fmt(c2y)} ${fmt(px2)} ${fmt(py2)}`);
+      } else {
+        dParts.push(`L ${fmt(px2)} ${fmt(py2)}`);
+      }
+    }
+    const d = dParts.join(' ');
 
     // Text alignment stays visually consistent across flip by swapping
     // left/right when the path direction is reversed.
@@ -372,34 +397,51 @@
 
     let handles = '';
     const isEditing = editable && isSelected;
+    const selNode = pin.id === selectedId ? selectedNodeIndex : null;
     if (isEditing) {
-      handles += `<div class="path-handle path-endpoint" data-path-handle="a" data-pin-id="${pin.id}" style="left:${Ax.toFixed(1)}px;top:${Ay.toFixed(1)}px"></div>`;
-      handles += `<div class="path-handle path-endpoint" data-path-handle="b" data-pin-id="${pin.id}" style="left:${Bx.toFixed(1)}px;top:${By.toFixed(1)}px"></div>`;
-      if (useBezier) {
-        const [cax, cay] = px(cpA);
-        const [cbx, cby] = px(cpB);
-        handles += `<svg class="path-guides" width="${cssW}" height="${cssH}" viewBox="0 0 ${cssW} ${cssH}"><line x1="${Ax.toFixed(1)}" y1="${Ay.toFixed(1)}" x2="${cax.toFixed(1)}" y2="${cay.toFixed(1)}"/><line x1="${Bx.toFixed(1)}" y1="${By.toFixed(1)}" x2="${cbx.toFixed(1)}" y2="${cby.toFixed(1)}"/></svg>`;
-        handles += `<div class="path-handle path-control" data-path-handle="cpA" data-pin-id="${pin.id}" style="left:${cax.toFixed(1)}px;top:${cay.toFixed(1)}px"></div>`;
-        handles += `<div class="path-handle path-control" data-path-handle="cpB" data-pin-id="${pin.id}" style="left:${cbx.toFixed(1)}px;top:${cby.toFixed(1)}px"></div>`;
+      // Iterate forward through the unflipped node list so handle
+      // indices match the underlying data regardless of `flip`.
+      const guideLines = [];
+      for (let i = 0; i < nodes.length; i++) {
+        const n = nodes[i];
+        const [nx, ny] = px(n.p);
+        const selectedAttr = selNode === i ? ' node-selected' : '';
+        handles += `<div class="path-handle path-endpoint${selectedAttr}" data-path-handle="p:${i}" data-pin-id="${pin.id}" style="left:${nx.toFixed(1)}px;top:${ny.toFixed(1)}px"></div>`;
+        if (useBezier) {
+          if (i > 0 && n.cpIn) {
+            const [cx, cy] = px(n.cpIn);
+            guideLines.push(`<line x1="${nx.toFixed(1)}" y1="${ny.toFixed(1)}" x2="${cx.toFixed(1)}" y2="${cy.toFixed(1)}"/>`);
+            handles += `<div class="path-handle path-control" data-path-handle="cpIn:${i}" data-pin-id="${pin.id}" style="left:${cx.toFixed(1)}px;top:${cy.toFixed(1)}px"></div>`;
+          }
+          if (i < nodes.length - 1 && n.cpOut) {
+            const [cx, cy] = px(n.cpOut);
+            guideLines.push(`<line x1="${nx.toFixed(1)}" y1="${ny.toFixed(1)}" x2="${cx.toFixed(1)}" y2="${cy.toFixed(1)}"/>`);
+            handles += `<div class="path-handle path-control" data-path-handle="cpOut:${i}" data-pin-id="${pin.id}" style="left:${cx.toFixed(1)}px;top:${cy.toFixed(1)}px"></div>`;
+          }
+        }
+      }
+      if (guideLines.length) {
+        handles += `<svg class="path-guides" width="${cssW}" height="${cssH}" viewBox="0 0 ${cssW} ${cssH}">${guideLines.join('')}</svg>`;
       }
       // Dedicated move handle — the only way to translate the whole
-      // curve. Sits at the midpoint of A↔B so it's clearly distinct
+      // curve. Sits at the bbox midpoint so it's clearly distinct
       // from the endpoint and control-point handles.
-      const Mx = (Ax + Bx) / 2;
-      const My = (Ay + By) / 2;
+      const Mx = cssW / 2;
+      const My = cssH / 2;
       handles += `<div class="path-handle path-move" data-path-handle="move" data-pin-id="${pin.id}" style="left:${Mx.toFixed(1)}px;top:${My.toFixed(1)}px" title="Drag to move curve"></div>`;
     }
 
     const selClass = isSelected ? ' selected' : '';
     const hiddenClass = labelHidden ? ' label-hidden' : '';
-    const visibleStroke = isEditing
-      ? `<path class="path-stroke" d="${d}" fill="none"/>`
+    const editStrokes = isEditing
+      ? `<path class="path-stroke" d="${d}" fill="none"/><path class="path-hit" d="${d}" fill="none" data-pin-id="${pin.id}"/>`
       : '';
-    const html = `<div class="map-path${selClass}${hiddenClass}" data-pin-id="${pin.id}"><svg class="path-text" width="${cssW}" height="${cssH}" viewBox="0 0 ${cssW} ${cssH}"><defs><path id="${pathId}" d="${d}" fill="none"/></defs>${visibleStroke}<text class="${sizeClass} ${colorClass} ${weightClass}" text-anchor="${textAnchor}" dominant-baseline="${dominantBaseline}" style="${textStyle}"><textPath href="#${pathId}" startOffset="${startOffset}">${esc(pin.name)}</textPath></text></svg>${handles}</div>`;
+    const html = `<div class="map-path${selClass}${hiddenClass}" data-pin-id="${pin.id}"><svg class="path-text" width="${cssW}" height="${cssH}" viewBox="0 0 ${cssW} ${cssH}"><defs><path id="${pathId}" d="${d}" fill="none"/></defs>${editStrokes}<text class="${sizeClass} ${colorClass} ${weightClass}" text-anchor="${textAnchor}" dominant-baseline="${dominantBaseline}" style="${textStyle}"><textPath href="#${pathId}" startOffset="${startOffset}">${esc(pin.name)}</textPath></text></svg>${handles}</div>`;
 
-    // Marker sits at A; iconAnchor positions A within the CSS-pixel bbox.
-    const anchorX = (a[0] - minX) * zoomScale;
-    const anchorY = (a[1] - minY) * zoomScale;
+    // Marker sits at nodes[0]; iconAnchor positions it within the
+    // CSS-pixel bbox.
+    const anchorX = (nodes[0].p[0] - minX) * zoomScale;
+    const anchorY = (nodes[0].p[1] - minY) * zoomScale;
     return L.divIcon({
       className: '',
       html,
@@ -599,7 +641,7 @@
     // Paths anchor at endpoint A. The editor mirrors a→x,y on load for
     // its own bookkeeping, but the Astro site passes raw JSON, so
     // derive the latlng here so both callers work.
-    const [lng, lat] = isPath && Array.isArray(pin.a) ? pin.a : [pin.x, pin.y];
+    const [lng, lat] = isPath && Array.isArray(pin.nodes) && pin.nodes[0]?.p ? pin.nodes[0].p : [pin.x, pin.y];
     const marker = L.marker([lat, lng], {
       icon: makeIcon(pin, map?.getZoom()),
       // Paths use a dedicated `.path-move` handle (not Leaflet's body
@@ -646,7 +688,7 @@
     const marker = markerMap.get(pin.id);
     if (!marker) return;
     marker.setIcon(makeIcon(pin, map?.getZoom()));
-    const [lng, lat] = pin.kind === 'path' && Array.isArray(pin.a) ? pin.a : [pin.x, pin.y];
+    const [lng, lat] = pin.kind === 'path' && Array.isArray(pin.nodes) && pin.nodes[0]?.p ? pin.nodes[0].p : [pin.x, pin.y];
     marker.setLatLng([lat, lng]);
   }
 
@@ -657,7 +699,7 @@
     // arrive without a literal minZoom field).
     const minZ = pin.minZoom ?? KIND_DEFAULTS[pin.kind]?.minZoom ?? 0;
     const cur = map.getZoom();
-    const [lng, lat] = pin.kind === 'path' && Array.isArray(pin.a) ? pin.a : [pin.x, pin.y];
+    const [lng, lat] = pin.kind === 'path' && Array.isArray(pin.nodes) && pin.nodes[0]?.p ? pin.nodes[0].p : [pin.x, pin.y];
     map.setView([lat, lng], Math.max(cur, minZ));
   }
 
@@ -788,6 +830,17 @@
     }
   });
 
+  // Re-render the active path when its selected node index changes so
+  // the highlight tracks the user's click without waiting for a data
+  // edit.
+  $effect(() => {
+    void selectedNodeIndex;
+    if (!map || !selectedId) return;
+    const marker = markerMap.get(selectedId);
+    const pin = pins.find(p => p.id === selectedId);
+    if (marker && pin?.kind === 'path') marker.setIcon(makeIcon(pin, map.getZoom()));
+  });
+
   function showRectPreview(a, b) {
     if (!map) return;
     const bounds = L.latLngBounds(a, b);
@@ -915,23 +968,110 @@
     ctx?.resize?.(pin, Math.round(x), Math.round(y), Math.round(w), Math.round(h));
   }
 
+  /** Cmd-click handler for inserting a new node along a path. Finds
+   * the closest segment + parameter t to the cursor; for bezier mode
+   * splits the cubic via de Casteljau (curve shape preserved exactly);
+   * for straight mode just splices the click point in. */
+  function insertNodeAtClick(pin, e) {
+    const latlng = map.mouseEventToLatLng(e);
+    const cx = latlng.lng, cy = latlng.lat;
+    const nodes = pin.nodes;
+    if (!Array.isArray(nodes) || nodes.length < 2) return;
+    const useBezier = pin.mode === 'bezier';
+    const lerp = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+
+    // Find closest segment + t (32-sample search, then 4 bisection
+    // refinements). Coarse but plenty accurate for a click.
+    let bestSeg = 0, bestT = 0, bestD2 = Infinity;
+    for (let i = 0; i < nodes.length - 1; i++) {
+      const A = nodes[i].p, B = nodes[i + 1].p;
+      const C1 = useBezier ? (nodes[i].cpOut ?? A) : A;
+      const C2 = useBezier ? (nodes[i + 1].cpIn ?? B) : B;
+      const sample = (t) => {
+        if (!useBezier) return lerp(A, B, t);
+        const Q0 = lerp(A, C1, t), Q1 = lerp(C1, C2, t), Q2 = lerp(C2, B, t);
+        const R0 = lerp(Q0, Q1, t), R1 = lerp(Q1, Q2, t);
+        return lerp(R0, R1, t);
+      };
+      for (let s = 0; s <= 32; s++) {
+        const t = s / 32;
+        const [x, y] = sample(t);
+        const d2 = (x - cx) * (x - cx) + (y - cy) * (y - cy);
+        if (d2 < bestD2) { bestD2 = d2; bestSeg = i; bestT = t; }
+      }
+    }
+    // Refine via bisection around bestT.
+    {
+      const i = bestSeg;
+      const A = nodes[i].p, B = nodes[i + 1].p;
+      const C1 = useBezier ? (nodes[i].cpOut ?? A) : A;
+      const C2 = useBezier ? (nodes[i + 1].cpIn ?? B) : B;
+      const sample = (t) => {
+        if (!useBezier) return lerp(A, B, t);
+        const Q0 = lerp(A, C1, t), Q1 = lerp(C1, C2, t), Q2 = lerp(C2, B, t);
+        const R0 = lerp(Q0, Q1, t), R1 = lerp(Q1, Q2, t);
+        return lerp(R0, R1, t);
+      };
+      let lo = Math.max(0, bestT - 1 / 32);
+      let hi = Math.min(1, bestT + 1 / 32);
+      for (let k = 0; k < 12; k++) {
+        const m1 = lo + (hi - lo) / 3;
+        const m2 = hi - (hi - lo) / 3;
+        const [x1, y1] = sample(m1), [x2, y2] = sample(m2);
+        const d1 = (x1 - cx) ** 2 + (y1 - cy) ** 2;
+        const d2 = (x2 - cx) ** 2 + (y2 - cy) ** 2;
+        if (d1 < d2) hi = m2; else lo = m1;
+      }
+      bestT = (lo + hi) / 2;
+    }
+
+    const i = bestSeg, t = bestT;
+    const A = nodes[i].p, B = nodes[i + 1].p;
+    let newNode;
+    let beforeUpdate = null, afterUpdate = null;
+    if (useBezier) {
+      const C1 = nodes[i].cpOut ?? A;
+      const C2 = nodes[i + 1].cpIn ?? B;
+      const Q0 = lerp(A, C1, t);
+      const Q1 = lerp(C1, C2, t);
+      const Q2 = lerp(C2, B, t);
+      const R0 = lerp(Q0, Q1, t);
+      const R1 = lerp(Q1, Q2, t);
+      const S  = lerp(R0, R1, t);
+      const round2 = (p) => [Math.round(p[0]), Math.round(p[1])];
+      newNode = { p: round2(S), cpIn: round2(R0), cpOut: round2(R1) };
+      beforeUpdate = { cpOut: round2(Q0) };
+      afterUpdate  = { cpIn:  round2(Q2) };
+    } else {
+      newNode = { p: [Math.round(cx), Math.round(cy)] };
+    }
+    ctx?.addPathNode?.(pin, i + 1, newNode, { before: beforeUpdate, after: afterUpdate });
+    selectedNodeIndex = i + 1;
+  }
+
   /** Translate mouse delta into image pixels and push the new position
-   * of a path endpoint or bezier control point to the editor. */
+   * of a path node anchor / control point to the editor. */
   function applyPathDrag(e) {
     if (!pathDragging || !map) return;
     const pin = pins.find(p => p.id === pathDragging.pinId);
     if (!pin) return;
     const scale = map.options.crs.scale(map.getZoom());
-    const dx = (e.clientX - pathDragging.startX) / scale;
-    const dy = (e.clientY - pathDragging.startY) / scale;
+    const dxRaw = (e.clientX - pathDragging.startX);
+    const dyRaw = (e.clientY - pathDragging.startY);
+    // Treat tiny mouse jitter as a click, not a drag — that's how
+    // mouseup distinguishes select-node from move-node.
+    if (!pathDragging.moved && Math.hypot(dxRaw, dyRaw) > 2) {
+      pathDragging.moved = true;
+    }
+    if (!pathDragging.moved) return;
+    const dx = dxRaw / scale;
+    const dy = dyRaw / scale;
     const x = Math.round(pathDragging.origX + dx);
     const y = Math.round(pathDragging.origY + dy);
     if (pathDragging.which === 'move') {
-      // Whole-curve translation reuses updatePos's path branch, which
-      // shifts every point (a, b, cpA, cpB) by the delta from A.
       ctx?.updatePos?.(pin, x, y);
     } else {
-      ctx?.updatePathPoint?.(pin, pathDragging.which, x, y);
+      ctx?.updatePathPoint?.(pin, pathDragging.role, pathDragging.idx, x, y);
     }
   }
 
@@ -1002,25 +1142,56 @@
         const pin = pins.find(p => p.id === pinId);
         const which = pathHandle.dataset.pathHandle;
         if (pin && which) {
-          // 'move' is anchored to A so the existing whole-path
-          // translate logic in updatePos works unchanged.
-          const orig = which === 'move'
-            ? (pin.a || [pin.x, pin.y])
-            : (pin[which] || [pin.x, pin.y]);
+          // `which` is one of: 'move', 'p:<i>', 'cpIn:<i>', 'cpOut:<i>'.
+          // Capture the original image-space position so applyPathDrag
+          // can compute cumulative deltas without drift.
+          let role = which, idx = -1;
+          if (which !== 'move') {
+            const colon = which.indexOf(':');
+            role = which.slice(0, colon);
+            idx = Number(which.slice(colon + 1));
+          }
+          let orig;
+          if (which === 'move') {
+            orig = pin.nodes?.[0]?.p ?? [pin.x, pin.y];
+          } else {
+            const node = pin.nodes?.[idx];
+            orig = (node && node[role]) || node?.p || [pin.x, pin.y];
+          }
           e.preventDefault();
           e.stopPropagation();
           pathDragging = {
             pinId,
             which,
+            role,
+            idx,
             startX: e.clientX,
             startY: e.clientY,
             origX: orig[0],
             origY: orig[1],
+            moved: false,
           };
           // Hide the cursor while the drag is in flight — the handle is
           // pinned to the mouse so the cursor glyph just adds clutter.
           container.classList.add('path-dragging');
           return;
+        }
+      }
+      // Cmd/Ctrl-click anywhere on a selected path's body adds a node
+      // at the click position. We accept hits on the invisible
+      // `.path-hit` thick stroke OR on the rendered text glyphs (since
+      // the text overlays the curve along its full length).
+      if (e.button === 0 && (e.metaKey || e.ctrlKey)) {
+        const pathContainer = e.target.closest('.map-path.selected');
+        if (pathContainer) {
+          const pinId = pathContainer.dataset.pinId;
+          const pin = pins.find(p => p.id === pinId);
+          if (pin?.kind === 'path') {
+            e.preventDefault();
+            e.stopPropagation();
+            insertNodeAtClick(pin, e);
+            return;
+          }
         }
       }
       if (!tool?.onMapDown) return;
@@ -1063,7 +1234,14 @@
       if (pathDragging) {
         e.preventDefault();
         e.stopPropagation();
-        ctx?.commit?.();
+        // No movement → treat as a click. Clicking an endpoint handle
+        // selects that node (Delete then removes it). Other roles fall
+        // through with no extra action.
+        if (!pathDragging.moved && pathDragging.role === 'p') {
+          selectedNodeIndex = pathDragging.idx;
+        } else {
+          ctx?.commit?.();
+        }
         pathDragging = null;
         container.classList.remove('path-dragging');
         suppressNextClick = true;
@@ -1350,9 +1528,36 @@
       map.fitBounds(bounds);
     }
     for (const pin of pins) addMarker(pin);
+
+    // Delete-key removes the selected intermediate node from the
+    // active path. Endpoints are protected by the editor's
+    // removePathNode guard.
+    if (editable) {
+      window.addEventListener('keydown', onDeleteKey);
+    }
   });
 
+  function onDeleteKey(e) {
+    if (e.key !== 'Delete' && e.key !== 'Backspace') return;
+    if (selectedNodeIndex == null || !selectedId) return;
+    const target = e.target;
+    if (target && target.matches?.('input, textarea, [contenteditable="true"]')) return;
+    const pin = pins.find(p => p.id === selectedId);
+    if (!pin || pin.kind !== 'path') return;
+    e.preventDefault();
+    ctx?.removePathNode?.(pin, selectedNodeIndex);
+    selectedNodeIndex = null;
+    // Leaflet marker icons get tabindex=0 for keyboard accessibility,
+    // so after a keyboard delete the icon retains focus and the
+    // browser draws its default outline around the whole marker.
+    // Drop focus so the outline disappears.
+    if (document.activeElement && document.activeElement.blur) {
+      document.activeElement.blur();
+    }
+  }
+
   onDestroy(() => {
+    window.removeEventListener('keydown', onDeleteKey);
     if (map) { map.remove(); map = null; }
   });
 </script>

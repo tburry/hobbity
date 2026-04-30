@@ -200,20 +200,30 @@
     return () => window.removeEventListener('keydown', onKeydown);
   });
 
-  /** Seed / clear bezier control points when the user flips between
-   * straight and bezier modes. On first entry to bezier, cpA and cpB
-   * are placed one-third of the way along A→B so the curve starts
-   * visually coincident with the straight line. */
+  /** Seed bezier control points on each node when the user flips to
+   * bezier mode for the first time. Each segment's tangents land
+   * one-third of the way along the straight chord so the curve starts
+   * visually coincident with the polyline. Going back to straight
+   * leaves the cps in place — they're cheap to keep and re-flipping
+   * to bezier restores the previous shape. */
   function onPathModeChange(_prev, next) {
     if (!editingId) return;
     const pin = pins.find(p => p.id === editingId);
     if (!pin || pin.kind !== 'path') return;
-    if (next === 'bezier' && (!pin.cpA || !pin.cpB)) {
-      const [ax, ay] = pin.a;
-      const [bx, by] = pin.b;
-      const dx = bx - ax, dy = by - ay;
-      pin.cpA = [Math.round(ax + dx / 3), Math.round(ay + dy / 3)];
-      pin.cpB = [Math.round(ax + 2 * dx / 3), Math.round(ay + 2 * dy / 3)];
+    if (next === 'bezier' && Array.isArray(pin.nodes)) {
+      for (let i = 0; i < pin.nodes.length; i++) {
+        const node = pin.nodes[i];
+        const prev = pin.nodes[i - 1];
+        const nxt  = pin.nodes[i + 1];
+        if (nxt && !node.cpOut) {
+          const dx = nxt.p[0] - node.p[0], dy = nxt.p[1] - node.p[1];
+          node.cpOut = [Math.round(node.p[0] + dx / 3), Math.round(node.p[1] + dy / 3)];
+        }
+        if (prev && !node.cpIn) {
+          const dx = prev.p[0] - node.p[0], dy = prev.p[1] - node.p[1];
+          node.cpIn = [Math.round(node.p[0] + dx / 3), Math.round(node.p[1] + dy / 3)];
+        }
+      }
     }
     // The $effect below will sync `pin.mode` from pathMode; we just
     // nudge pins so the viewer re-renders now.
@@ -234,17 +244,32 @@
     const meta = doc.meta || {};
     const rawPins = Array.isArray(doc.pins) ? doc.pins : [];
     // Assign runtime IDs (stripped on save for clean JSON). Paths
-    // serialize with a/b only; mirror endpoint A back onto x/y so the
-    // shared marker infra (addMarker/updateMarker) can place them.
+    // anchor at nodes[0]; mirror onto x/y so the shared marker infra
+    // (addMarker/updateMarker) can place the SVG correctly. Legacy
+    // a/b/cpA/cpB shapes are auto-converted in case a stale file or
+    // branch slipped past the migration script.
     const pinsOut = rawPins.map(p => {
       const out = {
         ...p,
         id: p.id || crypto.randomUUID(),
         number: p.number ? String(p.number) : '',
       };
-      if (out.kind === 'path' && Array.isArray(out.a)) {
-        out.x = out.a[0];
-        out.y = out.a[1];
+      if (out.kind === 'path') {
+        if (!Array.isArray(out.nodes) && Array.isArray(out.a) && Array.isArray(out.b)) {
+          const mode = out.mode ?? 'straight';
+          const first = { p: out.a };
+          const last  = { p: out.b };
+          if (mode === 'bezier') {
+            if (Array.isArray(out.cpA)) first.cpOut = out.cpA;
+            if (Array.isArray(out.cpB)) last.cpIn  = out.cpB;
+          }
+          out.nodes = [first, last];
+          delete out.a; delete out.b; delete out.cpA; delete out.cpB;
+        }
+        if (Array.isArray(out.nodes) && out.nodes.length > 0) {
+          out.x = out.nodes[0].p[0];
+          out.y = out.nodes[0].p[1];
+        }
       }
       return out;
     });
@@ -260,7 +285,7 @@
   const FEATURE_KEY_ORDER = {
     pin:  ['kind', 'class', 'number', 'name', 'x', 'y', 'anchor', 'labelPos', 'labelOnly', 'minZoom', 'shrink', 'description', 'link'],
     text: ['kind', 'class', 'name', 'x', 'y', 'width', 'height', 'align', 'valign', 'minZoom', 'shrink', 'description', 'link'],
-    path: ['kind', 'class', 'name', 'a', 'b', 'mode', 'cpA', 'cpB', 'textAlign', 'textBaseline', 'flip', 'minZoom', 'shrink', 'description', 'link'],
+    path: ['kind', 'class', 'name', 'mode', 'nodes', 'textAlign', 'textBaseline', 'flip', 'minZoom', 'shrink', 'description', 'link'],
   };
 
   /** Reorder an object's keys per FEATURE_KEY_ORDER; unlisted keys
@@ -300,15 +325,17 @@
           if (rest.valign && rest.valign !== kd.valign) out.valign = rest.valign;
           if (rest.minZoom != null && rest.minZoom !== kd.minZoom) out.minZoom = rest.minZoom;
         } else if (kind === 'path') {
-          // Paths use `a`/`b` (and `cpA`/`cpB` in bezier mode) for geometry;
-          // the top-level x/y mirror `a` and would be redundant.
-          out.a = rest.a;
-          out.b = rest.b;
+          // Paths anchor at nodes[0]; the top-level x/y are runtime
+          // mirrors and don't need to be persisted. Strip any cp on
+          // the first/last node since they're geometrically meaningless
+          // (no neighbour on that side).
           if (rest.mode && rest.mode !== kd.mode) out.mode = rest.mode;
-          if (rest.mode === 'bezier') {
-            if (rest.cpA) out.cpA = rest.cpA;
-            if (rest.cpB) out.cpB = rest.cpB;
-          }
+          out.nodes = (rest.nodes || []).map((n, i, arr) => {
+            const o = { p: n.p };
+            if (i > 0 && Array.isArray(n.cpIn)) o.cpIn = n.cpIn;
+            if (i < arr.length - 1 && Array.isArray(n.cpOut)) o.cpOut = n.cpOut;
+            return o;
+          });
           if (rest.textAlign && rest.textAlign !== kd.textAlign) out.textAlign = rest.textAlign;
           if (rest.textBaseline && rest.textBaseline !== kd.textBaseline) out.textBaseline = rest.textBaseline;
           if (rest.flip && rest.flip !== kd.flip) out.flip = true;
@@ -418,13 +445,12 @@
       dialogTitle = 'New';
     }
 
-    // Paths are anchored at endpoint A; mirror onto x/y so the shared
-    // marker infra (addMarker/updateMarker) can place the SVG correctly.
+    // Paths anchor at nodes[0]; mirror onto x/y so the shared marker
+    // infra (addMarker/updateMarker) can place the SVG correctly.
     const isPath = kind === 'path';
-    const a = isPath ? data.a : null;
-    const b = isPath ? data.b : null;
-    const x = isPath ? a[0] : data.x;
-    const y = isPath ? a[1] : data.y;
+    const nodes = isPath ? (data.nodes ?? []) : null;
+    const x = isPath ? nodes[0].p[0] : data.x;
+    const y = isPath ? nodes[0].p[1] : data.y;
 
     pins = [...pins, {
       id,
@@ -443,7 +469,7 @@
       anchor: kind === 'pin' ? pinAnchor : undefined,
       x,
       y,
-      ...(isPath ? { a, b, mode: pathMode, textAlign: pathTextAlign, textBaseline: pathTextBaseline, flip: pathFlip } : {}),
+      ...(isPath ? { nodes, mode: pathMode, textAlign: pathTextAlign, textBaseline: pathTextBaseline, flip: pathFlip } : {}),
     }];
     activeTab = 'editor';
   }
@@ -493,20 +519,22 @@
     },
     updatePos: (pin, x, y) => {
       if (pin.kind === 'path') {
-        // Whole-path drag: translate endpoints + control points by the
-        // delta between the old and new anchor (endpoint A). Clamped
+        // Whole-path drag: shift every node anchor + control point by
+        // the delta between the old and new nodes[0] anchor. Clamped
         // so the drag can't push any point off-map.
-        const dx = x - pin.a[0];
-        const dy = y - pin.a[1];
+        const a = pin.nodes?.[0]?.p;
+        if (!a) return;
+        const dx = x - a[0];
+        const dy = y - a[1];
         const shift = (p) => clampPoint(p[0] + dx, p[1] + dy);
-        const na = shift(pin.a);
-        const nb = shift(pin.b);
-        pin.a = [na.x, na.y];
-        pin.b = [nb.x, nb.y];
-        if (pin.cpA) { const n = shift(pin.cpA); pin.cpA = [n.x, n.y]; }
-        if (pin.cpB) { const n = shift(pin.cpB); pin.cpB = [n.x, n.y]; }
-        pin.x = pin.a[0];
-        pin.y = pin.a[1];
+        for (const n of pin.nodes) {
+          const np = shift(n.p);
+          n.p = [np.x, np.y];
+          if (n.cpIn)  { const c = shift(n.cpIn);  n.cpIn  = [c.x, c.y]; }
+          if (n.cpOut) { const c = shift(n.cpOut); n.cpOut = [c.x, c.y]; }
+        }
+        pin.x = pin.nodes[0].p[0];
+        pin.y = pin.nodes[0].p[1];
         pins = pins;
         viewer?.updateMarker(pin);
         savePins();
@@ -538,27 +566,70 @@
       viewer?.updateMarker(pin);
     },
     commit: () => savePins(),
-    /** Move a path endpoint (a/b) or bezier control point (cpA/cpB) to
-     * a new image-pixel position. Called from MapViewer while the user
-     * drags a path handle. Endpoint moves also drag the matching
-     * control point along with them so the local curve keeps its shape. */
-    updatePathPoint: (pin, which, x, y) => {
+    /** Move one slot on a path's node — anchor (`p`), in-tangent
+     * (`cpIn`), or out-tangent (`cpOut`) — to a new image-pixel
+     * position. Anchor moves also drag the node's control points along
+     * by the same delta so the local tangent stays put. */
+    updatePathPoint: (pin, role, i, x, y) => {
       if (pin.kind !== 'path') return;
+      const node = pin.nodes?.[i];
+      if (!node) return;
       const { x: cx, y: cy } = clampPoint(x, y);
-      if (which === 'a' || which === 'b') {
-        const prev = pin[which] || [pin.x, pin.y];
-        const dx = cx - prev[0];
-        const dy = cy - prev[1];
-        pin[which] = [cx, cy];
+      if (role === 'p') {
+        const [px, py] = node.p;
+        const dx = cx - px, dy = cy - py;
+        node.p = [cx, cy];
         if (pin.mode === 'bezier') {
-          const cpKey = which === 'a' ? 'cpA' : 'cpB';
-          const cp = pin[cpKey] || prev;
-          pin[cpKey] = [cp[0] + dx, cp[1] + dy];
+          if (node.cpIn)  node.cpIn  = [node.cpIn[0]  + dx, node.cpIn[1]  + dy];
+          if (node.cpOut) node.cpOut = [node.cpOut[0] + dx, node.cpOut[1] + dy];
         }
-        if (which === 'a') { pin.x = cx; pin.y = cy; }
-      } else if (which === 'cpA' || which === 'cpB') {
-        pin[which] = [cx, cy];
+        if (i === 0) { pin.x = cx; pin.y = cy; }
+      } else if (role === 'cpIn' || role === 'cpOut') {
+        node[role] = [cx, cy];
+        // Internal nodes keep the in/out tangents collinear through
+        // the anchor so the curve stays C1-smooth at the join. The
+        // opposite handle's length is preserved — only its angle is
+        // mirrored. Endpoint nodes (no opposite segment) have nothing
+        // to constrain.
+        const isInternal = i > 0 && i < pin.nodes.length - 1;
+        const oppositeRole = role === 'cpIn' ? 'cpOut' : 'cpIn';
+        if (isInternal && Array.isArray(node[oppositeRole])) {
+          const dirX = node.p[0] - cx;
+          const dirY = node.p[1] - cy;
+          const dirLen = Math.hypot(dirX, dirY);
+          if (dirLen > 0) {
+            const opp = node[oppositeRole];
+            const oppLen = Math.hypot(opp[0] - node.p[0], opp[1] - node.p[1]);
+            node[oppositeRole] = [
+              Math.round(node.p[0] + (dirX / dirLen) * oppLen),
+              Math.round(node.p[1] + (dirY / dirLen) * oppLen),
+            ];
+          }
+        }
       }
+      pins = pins;
+      viewer?.updateMarker(pin);
+      scheduleSave();
+    },
+    /** Insert a new node into a path at index `i` (between
+     * nodes[i-1] and nodes[i]). The new-node fields (cpIn/cpOut) and
+     * any updates to the neighbours' tangents are pre-computed by the
+     * caller (de Casteljau split for bezier, plain insert for straight). */
+    addPathNode: (pin, i, node, neighborUpdates = {}) => {
+      if (pin.kind !== 'path' || !Array.isArray(pin.nodes)) return;
+      if (neighborUpdates.before) Object.assign(pin.nodes[i - 1], neighborUpdates.before);
+      if (neighborUpdates.after)  Object.assign(pin.nodes[i],     neighborUpdates.after);
+      pin.nodes.splice(i, 0, node);
+      pins = pins;
+      viewer?.updateMarker(pin);
+      scheduleSave();
+    },
+    /** Remove an intermediate node from a path. Endpoints (i = 0 or
+     * last) are protected — they define the path. */
+    removePathNode: (pin, i) => {
+      if (pin.kind !== 'path' || !Array.isArray(pin.nodes)) return;
+      if (i <= 0 || i >= pin.nodes.length - 1) return;
+      pin.nodes.splice(i, 1);
       pins = pins;
       viewer?.updateMarker(pin);
       scheduleSave();

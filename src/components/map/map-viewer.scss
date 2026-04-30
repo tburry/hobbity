@@ -427,6 +427,16 @@
     stroke-dasharray: 4 3;
     pointer-events: none;
   }
+  // Invisible thicker hit target for Cmd+click "add node". Sits on
+  // top of the visible stroke so the user gets a forgiving 20px
+  // grab area without seeing the hit shape.
+  .map-path .path-text .path-hit {
+    stroke: transparent;
+    stroke-width: 20;
+    fill: none;
+    pointer-events: stroke;
+    cursor: copy;
+  }
   .map-path .path-guides {
     position: absolute;
     inset: 0;
@@ -454,8 +464,21 @@
     z-index: 100;
     pointer-events: auto;
     cursor: pointer;
+    outline: none;
   }
+  .map-path,
+  .map-path * { outline: none; }
   .path-handle.path-endpoint { border-radius: 2px; }
+  // Click-selected node — Delete key removes it. Highlighted in red
+  // so it's obvious which node will go.
+  .path-handle.path-endpoint.node-selected {
+    width: 14px;
+    height: 14px;
+    margin-left: -7px;
+    margin-top: -7px;
+    border-color: #c0382b;
+    background: #fff;
+  }
   .path-handle.path-control {
     border-radius: 50%;
     background: #2d6cdf;
