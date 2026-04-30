@@ -320,10 +320,11 @@ const pathTool = {
     const dy = latlng.lat - start.lat;
     // Require a meaningful drag — click-without-drag does nothing.
     if (Math.hypot(dx, dy) < 10) return;
+    const a = [Math.round(start.lng), Math.round(start.lat)];
+    const b = [Math.round(latlng.lng), Math.round(latlng.lat)];
     ctx.create({
       kind: 'path',
-      a: [Math.round(start.lng), Math.round(start.lat)],
-      b: [Math.round(latlng.lng), Math.round(latlng.lat)],
+      nodes: [{ p: a }, { p: b }],
     });
   },
   onPinDrag(pin, x, y, ctx) {
