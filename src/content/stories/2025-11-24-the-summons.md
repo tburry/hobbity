@@ -132,7 +132,7 @@ Sufficient food and drink for three days' travel was loaded up, and the three ho
 
 ## A Pony Named Opal
 
-Before leaving Gomwick, the hobbits stopped at the stables to find a pony stout enough to carry their packs and provisions on the road. After some looking and a fair bit of haggling, they settled on a sturdy little fellow with a kind eye and a patient temperament. They named him [Opal](/hobbity/world/npcs/#opal), and Opal is a good boy.
+Before leaving Gomwick, the hobbits stopped at the stables to find a pony stout enough to carry their packs and provisions on the road. After some looking and a fair bit of haggling, they settled on a sturdy little lass with a kind eye and a patient temperament. They named her [Opal](/hobbity/world/npcs/#opal), and Opal is a good girl.
 
 ![Opal, the Toad Stompers' pony](../../assets/images/npcs/opal.webp)
 
