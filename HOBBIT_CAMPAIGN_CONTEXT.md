@@ -209,7 +209,7 @@ The party arrived in Orlane, a hobbit village on a flat agricultural plain (mode
 
 - **Misha:** The priestess of the Temple of Merikka. Not hobbit-proportioned — appears human or aquatic/mermaid-like. Healed Boffo with divine magic (a novel experience for the hobbits). A body found in a crawlspace may be the real priestess she replaced. However, Ramne suspects she may actually be a genuine follower of Merikka who was charmed by the cult. Put to sleep by Turnip's blowgun and locked in the temple.
 
-- **Ramne:** Very old hobbit druid living in the half-buried stone cottage (#27) west of the Slumbering Serpent (the Elm Grove cottage where the party saw the weasel). Independently investigating the cult. Carries a book, a wooden spoon, and a walking stick. His weasel companion Twitch rides on his head. Can cast Cure Light Wounds and Dispel Magic, but his other spells are nature-focused (animal friendship, speak with animals, locate plant). Healed all three party members. Suspects Zacharias. Now sheltering Cirilli Finla.
+- **Ramne:** Very old hobbit druid living in the half-buried stone cottage (#27) west of the Slumbering Serpent (the Elm Grove cottage where the party saw the weasel). Independently investigating the cult. Carries a book, a wooden spoon, and a walking stick. His weasel companion Whiskers rides on his head. Can cast Cure Light Wounds and Dispel Magic, but his other spells are nature-focused (animal friendship, speak with animals, locate plant). Healed all three party members. Suspects Zacharias. Now sheltering Cirilli Finla.
 
 - **Abramo (dead):** The serpent cult's priest, found in the lower temple. Wore enchanted scale mail (+1), carried a cobra-headed mace, worshipped a snake goddess called Explictica. Completely insane — covered every surface of his lair in reptilian scrawlings. Killed by Boffo.
 
@@ -227,7 +227,7 @@ The party arrived in Orlane, a hobbit village on a flat agricultural plain (mode
 - **The Foaming Mug Inn (ruined):** Supposedly abandoned due to economic downturn. Actually shows signs of violent struggle. Troglodytes nesting in the basement (3 pallets, 2 troglodytes present — party killed both).
 - **Matty Snowvale's Smithy:** The blacksmith attacked unprovoked, nearly killed Wedge. Turnip put him down with a sleep dart. His wife filed a complaint with Grover.
 - **The Temple of Merikka:** On a hill behind 3m walls. The goddess is of farming, fertility, hearth, knowledge, and light (similar to Chauntea + Amaunator). Two priests from the coast, plus followers/acolytes. Used to come into village, now rarely do. The party was rebuffed when they tried to enter.
-- **Ramne's Cottage (#27) / The Elm Grove:** Half-buried stone cottage west of the Slumbering Serpent. Home of Ramne and his weasel Twitch. Previously visited by the party (saw the weasel, Wedge befriended a raven).
+- **Ramne's Cottage (#27) / The Elm Grove:** Half-buried stone cottage west of the Slumbering Serpent. Home of Ramne and his weasel Whiskers. Previously visited by the party (saw the weasel, Wedge befriended a raven).
 - **Zacharias's House:** Animated stone statue security system (non-differentiating between friend and foe). The statues killed Deputy Donovan. Back and front doors smashed. Zacharias's secret chest is gone. House abandoned.
 
 **Zacharias's equipment (original provision — largely expended):**
@@ -330,7 +330,7 @@ The party is still underground in the troglodyte lair. No XP awarded yet (not in
 - Bell-trap alarm on locked door
 - Corridor covered in insane reptilian writings about Explictica, the serpent goddess
 
-**The serpent cult's inner sanctum:** The party fought and killed Abramo, the cult's priest, along with a goblin and a snake (killed by Twitch the weasel). Subdued Kaylin Snowvale (non-lethal) and put Misha to sleep with a blowgun dart.
+**The serpent cult's inner sanctum:** The party fought and killed Abramo, the cult's priest, along with a goblin and a snake (killed by Whiskers the weasel). Subdued Kaylin Snowvale (non-lethal) and put Misha to sleep with a blowgun dart.
 
 **Cirilli Finla freed:** Found caged in Abramo's lair. Her account confirmed the charming process. The cult's goddess is named **Explictica** — her jade statue depicts a snake with a female human head, four-armed. Abramo was completely insane.
 
@@ -345,7 +345,7 @@ The party is still underground in the troglodyte lair. No XP awarded yet (not in
 
 **Prisoners secured:** Misha, Kaylin Snowvale, Griff and Timba Snowvale — locked in temple rooms. All four murmured serpent mantras in eerie unison.
 
-**Ramne departed** with Cirilli and Twitch to hide at his cottage.
+**Ramne departed** with Cirilli and Whiskers to hide at his cottage.
 
 **Outside the temple:** The Golden Grain was on fire. At Zacharias's house, Deputy Donovan was dead (statue), doors smashed, secret chest gone. The party crossed the lake in Vilma's rowboat.
 

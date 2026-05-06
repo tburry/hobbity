@@ -41,13 +41,13 @@ The party was about to flee the dungeon—beat half to death, out of potions, ru
 
 ## Ramne
 
-He carried a book in one hand and a wooden spoon in the other, and a weasel sat on his head like a furry hat. His name was [Ramne](/hobbity/world/npcs/#ramne), and he'd been looking for them. The weasel's name was Twitch. "Well now we know why she didn't come to the whistle," Boffo said. Wedge nodded. "She's already got a friend."
+He carried a book in one hand and a wooden spoon in the other, and a weasel sat on his head like a furry hat. His name was [Ramne](/hobbity/world/npcs/#ramne), and he'd been looking for them. The weasel's name was Whiskers. "Well now we know why she didn't come to the whistle," Boffo said. Wedge nodded. "She's already got a friend."
 
 ![Ramne](../../assets/images/npcs/ramne.webp)
 
 He healed all three of them with a touch, which was the second time in one evening that divine magic had been worked on hobbits who, until very recently, hadn't known such things existed. The old hobbit moved at the speed of an arthritic tortoise and had the combat utility of a wooden spoon, which he also carried. But he knew things. He'd been living in that half-buried stone cottage west of the Slumbering Serpent, watching the village come apart at the seams. People taken to the Golden Grain, emerging weeks later with empty eyes and rehearsed smiles. Ramne didn't trust [Zacharias](/hobbity/world/npcs/#zacharias). He didn't trust anyone, really, possibly including himself—"There's not a single person in this village who's telling the truth," he said. "Maybe not even myself."
 
-He was a druid of sorts, though he'd deny the word. The only religion he followed, he said, was his pipe and a bit of pipeweed. His spells were useless underground—animal friendship, speak with animals, locate plant. But he had three castings of Cure Light Wounds, and he spent all of them on the party. Twitch, for her part, would prove considerably more useful than her master.
+He was a druid of sorts, though he'd deny the word. The only religion he followed, he said, was his pipe and a bit of pipeweed. His spells were useless underground—animal friendship, speak with animals, locate plant. But he had three castings of Cure Light Wounds, and he spent all of them on the party. Whiskers, for her part, would prove considerably more useful than her master.
 
 Reinforced and unwilling to leave the job half done, the Toad Stompers pressed deeper into the temple.
 
@@ -103,7 +103,7 @@ A goblin crouched at the junction, club raised. Behind it, [Kaylin Snowvale](/ho
 
 Wedge scrambled onto the hay bales. Boffo squared up against the goblin and whiffed. Turnip fired his blowgun at Abramo and the dart pinged off stone. Fortune, it seemed, had abandoned them.
 
-Abramo released the snake from its cage. Twitch the weasel streaked across the floor and tore it apart in a spray of blood and thrashing coils, "Weasel beats snake!" Wedge called from the hay bales, vindicated at last.
+Abramo released the snake from its cage. Whiskers the weasel streaked across the floor and tore it apart in a spray of blood and thrashing coils, "Weasel beats snake!" Wedge called from the hay bales, vindicated at last.
 
 Abramo hissed something in a language that wasn't meant for hobbit ears, and a wave of cold terror washed over Boffo. Boffo, who had died and come back not even an hour ago, shrugged it off. The goblin's club found the gap in Boffo's guard and cracked against his ribs hard enough to nearly put him back on the floor. Ramne, still shuffling through the corridor at glacial speed, arrived just in time to press a healing potion into Boffo's hands.
 
@@ -147,7 +147,7 @@ They also found _A Guide to the Herpetology of the Shires_, which mostly concern
 
 The party secured their prisoners—Misha, Kaylin Snowvale, and the Griff and [Timba Snowvale](/hobbity/world/npcs/#timba-snowvale) still manacled upstairs—locking them in the temple's own rooms. All four murmured in eerie unison, reciting mantras about the great serpent's venom being the milk from which her followers would drink and rise again. It echoed through the worship hall and followed the hobbits up the stairs and out into the night air.
 
-Ramne took Cirilli and Twitch and scuttled off into the darkness toward his cottage. "Good luck to you," he said, shaking their hands. "You know where to find me, and hopefully I know where to find you this time."
+Ramne took Cirilli and Whiskers and scuttled off into the darkness toward his cottage. "Good luck to you," he said, shaking their hands. "You know where to find me, and hopefully I know where to find you this time."
 
 ## Orlane Burns
 
