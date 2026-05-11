@@ -630,7 +630,7 @@
       : '';
     return L.divIcon({
       className: '',
-      html: `<div class="map-pin label-pos-${pin.labelPos || 'n'} anchor-${pin.anchor || 'center'}${isSelected ? ' selected' : ''}${isOverworld ? ' overworld' : ''}${labelHidden ? ' label-hidden' : ''}${pin.labelOnly ? ' label-only' : ''}"><div class="map-pin-frame" style="${frameStyle}"><span class="map-pin-label ${pinSizeClass} ${pinColorClass} ${pinWeightClass}" style="${labelStyle}">${label}</span>${markHtml}</div></div>`,
+      html: `<div class="map-pin label-pos-${pin.labelPos || 'n'} anchor-${pin.anchor || 'center'}${isSelected ? ' selected' : ''}${editable && isSelected ? ' editing' : ''}${isOverworld ? ' overworld' : ''}${labelHidden ? ' label-hidden' : ''}${pin.labelOnly ? ' label-only' : ''}"><div class="map-pin-frame" style="${frameStyle}"><span class="map-pin-label ${pinSizeClass} ${pinColorClass} ${pinWeightClass}" style="${labelStyle}">${label}</span>${markHtml}</div></div>`,
       iconSize: [28, 28],
       iconAnchor: pinIconAnchor(pin.anchor),
     });

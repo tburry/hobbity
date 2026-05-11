@@ -191,11 +191,11 @@
       }
     }
 
-    // Selected-state anchor crosshair (edit mode only). Marks the exact
-    // (x, y) image coordinate the pin is pegged to — handy when tuning
-    // anchor or label-pos. Two thin red lines in an 8×8 box, centred on
-    // the same compass point as the pin's iconAnchor.
-    &.selected::after {
+    // Anchor crosshair — only in edit mode (gated by the `editing`
+    // class). Marks the exact (x, y) image coordinate the pin is
+    // pegged to. Two thin red lines in an 8×8 box, centred on the
+    // same compass point as the pin's iconAnchor.
+    &.editing::after {
       content: '';
       position: absolute;
       width: 8px;
@@ -209,14 +209,14 @@
       left: 50%;
       transform: translate(-50%, -50%);
     }
-    &.selected.anchor-nw::after { top: 0;    left: 0; }
-    &.selected.anchor-n::after  { top: 0;    left: 50%; }
-    &.selected.anchor-ne::after { top: 0;    left: 100%; }
-    &.selected.anchor-w::after  { top: 50%;  left: 0; }
-    &.selected.anchor-e::after  { top: 50%;  left: 100%; }
-    &.selected.anchor-sw::after { top: 100%; left: 0; }
-    &.selected.anchor-s::after  { top: 100%; left: 50%; }
-    &.selected.anchor-se::after { top: 100%; left: 100%; }
+    &.editing.anchor-nw::after { top: 0;    left: 0; }
+    &.editing.anchor-n::after  { top: 0;    left: 50%; }
+    &.editing.anchor-ne::after { top: 0;    left: 100%; }
+    &.editing.anchor-w::after  { top: 50%;  left: 0; }
+    &.editing.anchor-e::after  { top: 50%;  left: 100%; }
+    &.editing.anchor-sw::after { top: 100%; left: 0; }
+    &.editing.anchor-s::after  { top: 100%; left: 50%; }
+    &.editing.anchor-se::after { top: 100%; left: 100%; }
 
     // Per-marker label gate: below the marker's minZoom the label
     // hides. Hovering or selecting reveals it.
@@ -344,7 +344,9 @@
       outline-offset: 0;
     }
 
-    // Selected-state anchor crosshair — mirrors `.map-pin.selected::after`.
+    // Selected-state anchor crosshair — mirrors `.map-pin.editing::after`.
+    // `.map-text-box.selected` is itself only emitted in edit mode, so
+    // it doesn't need the extra `editing` gate that `.map-pin` does.
     // Marks the (x, y) image coordinate the box is pegged to. Position
     // tracks the same compass grid that `pin.align`/`pin.valign` choose
     // (set on .map-text-box via the `anchor-*` class in MapViewer).
