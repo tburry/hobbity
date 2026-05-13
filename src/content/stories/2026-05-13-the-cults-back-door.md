@@ -15,7 +15,7 @@ pcs:
     level: 2
 
 enemiesDefeated:
-  - "1 Snake"
+  - "1 Mud Viper"
   - "1 Giant Constrictor"
   - "2 Ghouls"
 ---
@@ -38,11 +38,9 @@ The hand-dug tunnels were tight in a way that made even hobbits crab-walk. [Turn
 
 Somewhere off down a side passage, Turnip caught a scratching sound, too faint for the others to hear. He couldn't place it. They pressed on west, the lantern bobbing on [Wedge](/hobbity/world/pcs/wedge/)'s belt, [Whiskers](/hobbity/world/npcs/#whiskers) flat on his head and not moving at all.
 
-In the next slow stretch of tunnel, [Boffo](/hobbity/world/pcs/boffo/) noticed she had not moved in some time. Wedge reached up and touched her side. Warm. Breathing. Sound asleep. Boffo's eye went to Wedge's belt and there it was: the little ceramic jar from [Bertram](/hobbity/world/npcs/#bertram)'s kitchen, the lid not quite seated, a smear of musty paste on the rim. Whiskers had got into the [Slumbering Serpent](/hobbity/world/places/#orlane)'s namesake the long way round.
+In the next slow stretch of tunnel, [Turnip](/hobbity/world/pcs/turnip/) noticed she had not moved in some time. Wedge reached up and touched her side. Warm. Breathing. Sound asleep. Wedge's eye went to his belt and there it was: the little ceramic jar from [Bertram](/hobbity/world/npcs/#bertram)'s kitchen, the lid not quite seated, a smear of musty paste on the rim.
 
 "She'll sleep it off," said [Wedge](/hobbity/world/pcs/wedge/), tucking the jar deeper into his pack and seating the lid this time. The weasel snored, very faintly, with the dignified satisfaction of a creature who had chosen her own fate.
-
-The heat thickened. So did the smell.
 
 ## The Constrictor Above
 
