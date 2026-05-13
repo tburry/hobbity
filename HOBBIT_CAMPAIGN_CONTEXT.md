@@ -419,6 +419,49 @@ The party is resting at the Slumbering Serpent, dawn. All three leveled up to Le
 
 **Cliffhanger:** Initiative rolled, but no contact yet. The party is in the tunnel, Whiskers on Wedge's head, something hissing in the dark.
 
+### Session: The Cult's Back Door
+
+**Combat in the tunnels:**
+
+- **Small giant snake** in the collapsed first chamber. Bit at Wedge, missed. Killed by Boffo with the cobra-headed mace.
+- **Giant constrictor (~20 ft)** coiled on a ceiling support in a wider chamber. Dropped on Boffo (chainmail held); killed by Wedge's bow.
+- **Two troglodyte ghouls.** Came up out of a sap they had clawed through from below. First ghoul paralysed Boffo with its bite and started dragging him into the dark before Wedge put an arrow through the back of its skull at point-blank range (the arrow came out of its mouth and into Boffo's shoulder). Second ghoul appeared at the edge of the light; Wedge cast Light on its eyes (blinded it), then ran it down with the bow.
+
+**Boffo paralysed:** Wedge used his once-per-day hobbit healing to grant another save against paralysis—worked. Boffo then cast Cure Light Wounds on himself (first time used). No grievous injury.
+
+**The hidden cabinet:** Wedge spotted a section of tunnel wall that didn't look right. Mud over canvas over a slap-built pair of double doors. Inside: a low closet with three chests. All unlocked. All empty. The cult cleared out their stores before fleeing.
+
+**Heavy footprints west.** Turnip noticed laden hobbit footprints leading out of the chest room, away from Orlane. Likely Derek and/or Zacharias.
+
+**Buried idol of Explictica:** Following the footprints, found a freshly sapped passage. Boffo dug into what he thought was dirt and put his shovel through the head of a great ivory statue of Explictica Defilus—a snake with a woman's head, four arms, on a stone dais, carved from a single mammoth-sized tusk. The cult had hidden it under the cave-in. Worth a fortune intact, worthless smashed.
+
+**Block and tackle through the sap:** Using Turnip's block-and-tackle, the party pulled the statue out, bringing down enough of the rubble with it that they could dig a hobbit-sized hole through to the tunnel beyond. They piled rubble over the dead ghoul as a small burial.
+
+**A mile of tunnel west.** Over an hour of cramped, three-foot tunnel. Lantern oil burning down. Emerged at night.
+
+**The ruined courtyard:** Tunnel ended in a half-collapsed stone basement. Stone stair up to the open sky. Stonework older than hobbits—same architectural family as the Fortfield Tower at Huddle Farm. They came up into a ruined courtyard, low walls, trees beyond, in the Dimwood.
+
+**Gammy Boffin chained:** In the middle of the courtyard, an iron stake in the ground with a five-foot chain leading to the ankle of Gammy Boffin—the Gomwick pie-eating contest judge, Daisy's father. Standing alone, head down, breathing hard. The cult has reached Gomwick.
+
+**The enemy nearby:** To the southwest beyond a broken wall, torchlight, voices in the troglodyte tongue, a troglodyte scout on the wall, goblins past him. Too many for a fight. The torchlight then began to move off, leaving only the scout.
+
+**Cliffhanger:** Wedge produced his thieves' tools and started across the grass alone to pick Gammy's lock. Boffo and Turnip waiting by the stairs with bows ready. Agreed signal: a crow's caw if Wedge needs them.
+
+**New locations:**
+
+- **The Stake Courtyard:** Ruined stone courtyard in the Dimwood, one mile of tunnel west of the Golden Grain. Open to the sky. Older than hobbits. Used by the cult as a holding site for prisoners destined for the charming ceremony.
+
+**Loot:** None. Three empty chests, smashed idol, no consumables found.
+
+**Resources:** Oil flask scratched off (one used during the long dig). Boffo's Cure Light Wounds used once. Wedge's Magic Missile used once. Wedge's Light used (cast on second ghoul's eyes, ongoing). Whiskers got into the sleeping paste in Wedge's pack and slept through the entire dungeon on Wedge's head.
+
+**New unresolved questions:**
+
+- Why is Gammy Boffin here, not in the Golden Grain–Orlane pipeline? Has Gomwick already begun feeding the cult?
+- Was the second ghoul scratching at the walls (which Turnip heard earlier) trying to break through into the tunnel system from somewhere else? Where do troglodyte ghouls come from?
+- How many of these old pre-hobbit stone ruins exist across the Shires, and what's their original purpose? Fortfield, the temple beneath the Temple of Merikka, and now this courtyard all share the same architectural family.
+- The cult left the idol of Explictica buried, not carried. Travelling light, or hiding the goddess for later retrieval?
+
 **New Items / Inventory Updates:**
 
 - 3 vials of Get-a-Fix (Ramne's healing brew, 6 hp/sip-able, expires; Boffo's was drained and refilled at the cottage)
@@ -483,3 +526,6 @@ The same group of players also runs a separate Daggerdale campaign (DM'd by Les 
 18. Cirilli's brother Milo — charmed and never returned home with their parents. Whereabouts unknown. Not in the temple.
 19. The "Orlane Special" wine has been drugged with a sleeping paste at every inn in town that serves it. How many establishments are compromised, beyond the Golden Grain and the Slumbering Serpent?
 20. Wil (Haskelly's son) — long missing, presumed charmed.
+21. Gammy Boffin has been abducted from Gomwick all the way to a Dimwood ruin. The cult has reached Gomwick. How long ago, and how widely?
+22. Troglodyte ghouls — origin and method unknown. Are they failed converts of Explictica, or something the cult is breeding deliberately?
+23. The old pre-hobbit stone ruins — Fortfield Tower, the temple beneath Merikka, the Stake Courtyard — all share an architectural family. Same builders. Same network?
