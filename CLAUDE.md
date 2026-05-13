@@ -282,8 +282,8 @@ Format each injury as a narrative description of the wound and its lasting physi
 - **System:** OSE / D&D Basic/Expert. "Adventurer" class (Fighter/Mage/Thief generalist).
 - **Setting:** Five Shires, Mystara (loosely). Hobbit-only party.
 - **DM:** Uses classic TSR modules adapted for hobbit play.
-- **Current arc:** Orlane — cult of the serpent goddess Explictica, led by the now-dead priest Abramo. Cult expanding toward Gomwick.
-- **Current state:** Party resting at Slumbering Serpent, dawn. Level 2. Temple cleared, prisoners secured, Golden Grain burned. Zacharias and Derek at large. Ramne sheltering Cirilli Finla.
+- **Current arc:** Trail of the Serpent — pursuing the cult through the troglodyte tunnels under the burnt Golden Grain, headed northwest through the Dimwood toward the Rushmoors swamp.
+- **Current state:** Party in the troglodyte tunnel beneath the burnt Golden Grain, with a hissing snake somewhere west. Level 2. Temple cleared, prisoners secured, Golden Grain burned, Bertram murdered. Whiskers the weasel on loan from Ramne. Zacharias and Derek at large. Ramne still sheltering Cirilli Finla.
 - **Full details:** See `HOBBIT_CAMPAIGN_CONTEXT.md`
 
 ## Lessons Learned

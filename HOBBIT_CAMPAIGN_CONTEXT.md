@@ -24,6 +24,7 @@ The campaign draws on classic TSR modules adapted for hobbit play.
 
 **Spells Known:**
 
+- Floating Disc (1st level, gained at Level 2)
 - Protection from Evil (1st level)
 - Remove Fear (1st level, bonus from INT 14)
 
@@ -48,6 +49,7 @@ The campaign draws on classic TSR modules adapted for hobbit play.
 **Spells Known:**
 
 - Light (1st level)
+- Magic Missile (1st level, gained at Level 2)
 
 **Cantrip (at-will):** Can conjure 1d4 fireflies that fly around his hand for 3 blinks before fading.
 
@@ -67,6 +69,7 @@ The campaign draws on classic TSR modules adapted for hobbit play.
 
 **Spells Known:**
 
+- Cure Light Wounds (1st level, gained at Level 2)
 - Purify Food and Drink (1st level). Reversal to "Spoil Food and Drink" debated but deemed anathema for a hobbit.
 
 **Cantrip (at-will):** Can perfectly portion food (cutting a pie into 4 produces four identical slices).
@@ -359,6 +362,85 @@ The party is resting at the Slumbering Serpent, dawn. All three leveled up to Le
 
 **Still at large:** Derek Desleigh and Zacharias — fled through Golden Grain tunnels. One goblin chained in temple basement. Myron Tweed missing.
 
+### Session: Errands in the Aftermath (start of Chapter 3 — Trail of the Serpent)
+
+**Level-up record (Level 1 → Level 2):**
+
+- Boffo: +6 HP. Learned Cure Light Wounds.
+- Turnip: +2 HP. Learned Floating Disc.
+- Wedge: +4 HP. Learned Magic Missile.
+
+**Resting and resupply at the Slumbering Serpent:**
+
+- Brooch of Shielding crumbled to dust — fully expended.
+- Boffo borrowed a working dress from Belba for Cirilli (who's still recovering at Ramne's cottage).
+- Bought 3 flasks of oil and 6 torches from Belba for 5gp.
+
+**Visit to Ramne's cottage:**
+
+- Cirilli still asleep on a cot, recovering.
+- Ramne pointed the party northwest on his hex map: past Orlane, through the Dimwood, to a swamp called the **Rushmoors** — his guess for the cult's base of operations. The wilderness charming chapel itself is somewhere in the Dimwood.
+- Ramne couldn't find the chapel — the woods kept turning him around. Boffo connected this to the Old Wood near Gomwick where the trees seemed to be "watching" them, and to the Hermit's words about old magic come back. Ramne took the connection seriously.
+- Ramne gave each PC a ceramic bottle of homeopathic alchemical brew ("Get-a-Fix" per Stephen) — 6 hp worth per bottle, sippable, but with an expiry. Boffo immediately drained his; Ramne refilled it.
+- Ramne sent his weasel Whiskers with the party — she rides on Wedge's head now, and is reputed to be very good at killing snakes.
+- Ramne speaks Druidic to his animals.
+
+**Around the village:**
+
+- Constable Grover overwhelmed at the constabulary by families demanding the release of relatives held in the warehouse jail. Haskelly the money-changer was loudest, demanding his missing son Wil — who isn't actually in the warehouse and never has been.
+- General store closed (Wilbur Oldbuck not visible).
+
+**At Killian Gade's stable:**
+
+- Met Killian, his wife Iris, and their three small children. Honest folk; rundown property but well-kept animals. Opal the pony is glossy and adored.
+- Killian and Iris confirmed the missing roster: Maddie Snowvale's family (only Mattie back, changed), Kaylin (supposedly visiting grandmother), Quinn and Elena Finla returned without their two children, Haskelly's son Wil long gone.
+- Wedge entrusted the gold potato (in a sack) to Killian for safekeeping, with a finder's fee promised.
+- Turnip tried and failed to bury his gold carrot in the manure pile — three Gade kids successively took the shovel from him to show him how to do it properly. He eventually hid the carrot under a rock by the lake.
+- Boffo "hid" his gold potato in Opal's saddlebags, draping a saddle blanket loosely over it (visible from any angle).
+
+**Investigating the Golden Grain Inn:**
+
+- Met Atticus and his son Rolo at the wreckage, who handed off shovels gladly and went to dinner.
+- Found an unopened bottle of "Orlane Special" wine in the common room (the same drugged wine they'd been served on arrival in town — the "Bill Cosby Special" per Wedge). Pocketed.
+- Found Bertram, the inn's owner, in his bed in one of the private back rooms with his throat slit. The fire was a cover; he was murdered first.
+- Smashed-open chest under a false floor panel — empty except for 9 copper coins, fresh aprons, clothing, and a serviceable short sword. Wedge took the sword.
+- In the kitchen, found a small ceramic jar of musty paste — the sleep drug used in the wine. Wedge tasted a dab and felt it taking him but powered through. Pocketed the jar as evidence.
+
+**Below the inn:**
+
+- Stairs from kitchen impassable; descended via the outside cellar hatch on the west wall.
+- First room: kegs and casks. Second room: main cellar with stacked tables and chairs.
+- Side door to a dry-goods storeroom (rotted flour, beans, etc.).
+- South wall: a secret door, already open, into a small room with a carpet, table, empty bookcase. Plot half-hatched — never finished. Rats. Hot, humid air spilling in.
+- South door from that room opens onto a fresh, hastily-dug, low (under 4 feet) troglodyte tunnel — mud floor, water trickle, rough timbers shoring it up. Hobbit and troglodyte tracks both ways, heavy traffic. **This is the cult's road out of Orlane.**
+- Tunnel is too narrow for two hobbits to pass each other. Boffo led with mace and shield; Wedge with lantern; Turnip behind.
+- Multiple side passages branch south.
+- The party reached a wider chamber and heard a long, hissing roar from somewhere west — Turnip recognised it as an angry snake.
+
+**Cliffhanger:** Initiative rolled, but no contact yet. The party is in the tunnel, Whiskers on Wedge's head, something hissing in the dark.
+
+**New Items / Inventory Updates:**
+
+- 3 vials of Get-a-Fix (Ramne's healing brew, 6 hp/sip-able, expires; Boffo's was drained and refilled at the cottage)
+- Short sword (Wedge — from Bertram's chest)
+- Jar of sleeping paste (Wedge — kitchen evidence; this is what's in the local "Orlane Special" wine)
+- Bottle of Orlane Special wine (kept as evidence)
+- 9 copper coins (party)
+- Brooch of Shielding fully expended
+
+**Borrowed companion:** Whiskers the weasel, on loan from Ramne.
+
+**New NPCs / introductions:**
+
+- Iris Gade (Killian's wife) — friendly, helpful, knows who's missing.
+- Atticus and Rolo formally met — found hauling rubble at the burnt Golden Grain. Rolo previously hostile at house #19 (cult-aligned); now seemingly cooperative.
+- Haskelly — money-changer in town, missing son Wil.
+
+**New locations:**
+
+- The Dimwood — dense forest northwest of Orlane. Magically misleading.
+- The Rushmoors — swamp beyond the Dimwood. Suspected cult base.
+
 ---
 
 ## The Broader World
@@ -396,3 +478,8 @@ The same group of players also runs a separate Daggerdale campaign (DM'd by Les 
 13. Can Ramne's Dispel Magic break the charm on converted townsfolk? Not yet tested.
 14. Myron Tweed (the tailor) is missing — trail led to the Golden Grain before it burned.
 15. One goblin remains chained in the temple basement.
+16. The Dimwood "turns travellers around" — old wood-like magic of the kind the Hermit warned about. Same kind of magic that nearly took the party in the Old Wood near Gomwick? If so, Explictica's network may be tangled with whatever's at work in the Old Wood.
+17. Bertram was murdered before the Golden Grain was set on fire — by whom, and why? Derek and Zacharias were inside; one of them slit his throat to silence him, but which?
+18. Cirilli's brother Milo — charmed and never returned home with their parents. Whereabouts unknown. Not in the temple.
+19. The "Orlane Special" wine has been drugged with a sleeping paste at every inn in town that serves it. How many establishments are compromised, beyond the Golden Grain and the Slumbering Serpent?
+20. Wil (Haskelly's son) — long missing, presumed charmed.

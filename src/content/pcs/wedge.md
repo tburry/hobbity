@@ -13,7 +13,7 @@ Wedge Wedgerton is the self-appointed leader of the Toad Stompers. Third-generat
 ## Spells
 
 - **Cantrip:** Fireflies—conjure 1d4 fireflies that fly around your hand for 3 blinks before fading
-- **Level 1:** Light
+- **Level 1:** Light, Magic Missile
 
 ## Notable Items
 

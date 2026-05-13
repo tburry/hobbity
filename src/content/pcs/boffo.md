@@ -13,7 +13,7 @@ Boffo Lunderbunk is the quiet heart of the Toad Stompers. Not bright—the last 
 ## Spells
 
 - **Cantrip:** Perfect Portioning—can portion food with perfect accuracy (e.g. cut a pie into identical slices)
-- **Level 1:** Purify Food & Water
+- **Level 1:** Cure Light Wounds, Purify Food & Water
 
 ## Notable Items
 

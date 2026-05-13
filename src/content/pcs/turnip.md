@@ -13,7 +13,7 @@ Turnip Bramblebrook is the prepper and investigator. A rubbish collector and sor
 ## Spells
 
 - **Cantrip:** Untangle—can untangle any string, rope, net, etc. with a simple pull
-- **Level 1:** Protection from Evil, Remove Fear
+- **Level 1:** Floating Disc, Protection from Evil, Remove Fear
 
 ## Notable Items
 
