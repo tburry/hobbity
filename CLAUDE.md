@@ -111,25 +111,26 @@ Anything specifically relevant to the user's character — items, decisions, rel
 
 ### Unresolved Threads
 
-New questions raised this session. Cross-reference against existing threads in context doc.
+New questions raised this session. Cross-reference against existing threads in context doc. **Working notes only**—delete this section from the story file once you've merged it into `HOBBIT_CAMPAIGN_CONTEXT.md`. It does not appear in the published recap.
 
 ### Context Doc Updates
 
-Suggested edits/additions to `HOBBIT_CAMPAIGN_CONTEXT.md` based on this session.
+Suggested edits/additions to `HOBBIT_CAMPAIGN_CONTEXT.md` based on this session. **Working notes only**—delete this section from the story file once you've applied the updates. It does not appear in the published recap. The published story ends at the Conclusion.
 
 ## Post-Recap Checklist
 
 After writing the story file, process these updates before committing:
 
-1. Update PC levels in `src/content/pcs/` if the party leveled up. Use `Level N → Level N+1` notation in the story header.
-2. Check the story group's TOC/summary to see if it needs updating with the new chapter in mind.
-3. Add new NPCs to `src/content/world/npcs.mdx`. Update existing NPC entries with new information from the session.
-4. Add or update locations in `src/content/appendix/locations.md` with new places or events.
-5. Record any grievous injuries in `src/content/pcs/` (confirm with user first).
-6. Add new notable items to `src/content/pcs/` (permanent/magical only, no consumables).
-7. Update `HOBBIT_CAMPAIGN_CONTEXT.md` with the Context Doc Updates from the session notes.
-8. Review each PC file in `src/content/pcs/` against the session. Refine every section—trim bloat, add new detail, tighten prose. See Content Maintenance below.
-9. Update the Ledger (`src/pages/ledger.astro`). See Ledger Maintenance below.
+1. Trim the story file. Apply the Trim Rules end-to-end before doing anything else—cut filler, defer setup, sharpen h2s, fix dashes and italics. Pretend the file has been handed to you for trimming and the prior draft was someone else's. Don't skip this step on the assumption your own first draft is already clean. Trim first because the rest of the checklist (PC reviews, NPC updates, ledger) consults the story file; trimming after would mean redoing any prose you'd just propagated.
+2. Update PC levels in `src/content/pcs/` if the party leveled up. Use `Level N → Level N+1` notation in the story header.
+3. Check the story group's TOC/summary to see if it needs updating with the new chapter in mind.
+4. Add new NPCs to `src/content/world/npcs.mdx`. Update existing NPC entries with new information from the session.
+5. Add or update locations in `src/content/appendix/locations.md` with new places or events.
+6. Record any grievous injuries in `src/content/pcs/` (confirm with user first).
+7. Add new notable items to `src/content/pcs/` (permanent/magical only, no consumables).
+8. Update `HOBBIT_CAMPAIGN_CONTEXT.md` with the Context Doc Updates from the session notes.
+9. Review each PC file in `src/content/pcs/` against the session. Refine every section—trim bloat, add new detail, tighten prose. See Content Maintenance below.
+10. Update the Ledger (`src/pages/ledger.astro`). See Ledger Maintenance below.
 
 ## Content Maintenance
 
@@ -232,7 +233,8 @@ When the user says "trim" (no further instructions), edit the currently open doc
 3. Look for blockquote notes (lines starting with `>`) inline in the file. Treat each as a directive scoped to the nearest section unless it says "file-wide". Action them, then **always remove the `>` directive lines** before finishing. Never leave them in the file.
 4. Apply the inferred pattern to the rest of the document. Match voice and density to the user-edited sections.
 5. Re-review dashes per the Dash Rules.
-6. If the inferred pattern reveals a durable editing rule worth keeping (something that would apply to future trims, not just this document), add it under **Trim Rules** below. Keep entries short.
+6. Sweep the whole document for grammar and flow. The user's manual edits may have left stray artefacts: dangling commas after a deleted clause, mismatched verb tense across a sentence that was reshuffled, duplicated words at a join, broken subject-verb agreement, references to something that was cut earlier, abrupt scene transitions, or a sentence that reads cleanly in isolation but no longer fits its paragraph. Fix these without rewriting the user's voice—the goal is to make their edits land, not to overwrite them. If a sentence is awkward but you can't tell what they intended, leave it and flag it in the response rather than guessing.
+7. If the inferred pattern reveals a durable editing rule worth keeping (something that would apply to future trims, not just this document), add it under **Trim Rules** below. Keep entries short.
 
 ### Trim Rules
 
@@ -310,7 +312,7 @@ Format each injury as a narrative description of the wound and its lasting physi
 - **Setting:** Five Shires, Mystara (loosely). Hobbit-only party.
 - **DM:** Uses classic TSR modules adapted for hobbit play.
 - **Current arc:** Trail of the Serpent — pursuing the cult through the troglodyte tunnels under the burnt Golden Grain, headed northwest through the Dimwood toward the Rushmoors swamp.
-- **Current state:** Party in the troglodyte tunnel beneath the burnt Golden Grain, with a hissing snake somewhere west. Level 2. Temple cleared, prisoners secured, Golden Grain burned, Bertram murdered. Whiskers the weasel on loan from Ramne. Zacharias and Derek at large. Ramne still sheltering Cirilli Finla.
+- **Current state:** Party emerged from the cult's tunnel a mile west of Orlane into a ruined stone courtyard in the Dimwood. Gammy Boffin from Gomwick found chained to an iron stake there. Troglodyte patrol just out of sight; Wedge crossing the grass to pick the lock while Boffo and Turnip cover from the stair. Cult's underground stores were cleaned out before they fled (three empty chests, smashed Explictica idol). Level 2. Whiskers the weasel on loan from Ramne. Zacharias and Derek at large. Ramne still sheltering Cirilli Finla.
 - **Full details:** See `HOBBIT_CAMPAIGN_CONTEXT.md`
 
 ## Lessons Learned

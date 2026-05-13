@@ -6,6 +6,10 @@ going forward without being told twice.
 All prior lessons have been consolidated into [CLAUDE.md](../CLAUDE.md). Add new
 lessons here as they come up, then periodically promote them into CLAUDE.md.
 
+## Hobbit Anatomy and Dress
+
+- **Hobbits do not wear boots.** They go barefoot, on their tough hairy feet. Never write "by the boots", "kicked off his boots", "muddy boots", etc. Use bare feet, hairy ankles, toes—whatever fits the action.
+
 ## Standalone Text
 
 - When fixing "the" + noun, sometimes replacing "the" with "a" is better than naming the specific instance—it avoids forcing the reader to think about a particular event. E.g. "after a confrontation" rather than "after the confrontation."
