@@ -223,6 +223,31 @@ Insert new rules in a logical location within `global.scss` (near related styles
 
 Always write debug files (debug images, test output, etc.) to `_debug/` in the project root, never to `/tmp/`. This directory is gitignored. The user needs to view debug files in their IDE.
 
+## Trim Command
+
+When the user says "trim" (no further instructions), edit the currently open document as follows:
+
+1. Run `git diff` on the file to see what the user changed in this session. Their edits are the pattern.
+2. Analyze the diff to infer the editing rules: what was cut (filler, redundant beats, weak adjectives, scene-setting that didn't carry plot), what was rewritten (voice, rhythm, word choice), what was preserved.
+3. Look for blockquote notes (lines starting with `>`) inline in the file. Treat each as a directive scoped to the nearest section unless it says "file-wide". Action them, then **always remove the `>` directive lines** before finishing. Never leave them in the file.
+4. Apply the inferred pattern to the rest of the document. Match voice and density to the user-edited sections.
+5. Re-review dashes per the Dash Rules.
+6. If the inferred pattern reveals a durable editing rule worth keeping (something that would apply to future trims, not just this document), add it under **Trim Rules** below. Keep entries short.
+
+### Trim Rules
+
+Accumulated from analyzing the user's trim edits. Apply these on every trim pass.
+
+- **Cut inventory/gear recaps.** Sentences that re-list what a PC is carrying, what crumbled overnight, or what they left behind last session don't belong in setup paragraphs. Trust the reader to know what the party has.
+- **Cut "previously on..." callbacks** unless they're load-bearing to the current scene (e.g. Wedge recognising the sleeping paste is load-bearing; Boffo's brooch crumbling is not).
+- **Defer tidbits to the moment they pay off.** If a detail is foreshadowing or setup for a later beat (e.g. someone's ragged state, an item's purpose), introduce it where it actually matters, not in the section that precedes it.
+- **Italics use underscores, not asterisks.** `_word_`, not `*word*`. Applies file-wide on every trim pass.
+- **Reconcile attribution conflicts.** If the same beat is attributed to two different PCs across a section (e.g. Wedge asks a question but later "Turnip's prying" answers it), pick one PC and apply consistently. Match the question to whichever PC fits it best in personality.
+- **Honor placement, not just content, in `>` directives.** If the user says "add X when Y happens" or "at the end of the scene", insert at that beat — don't front-load it into setup.
+- **Smooth abrupt scene transitions.** If a paragraph ends on one topic and the next jumps to another (e.g. "the Dimwood politely declined" → "He took three bottles down"), add a one-clause bridge that links them logically.
+- **Punchy h2s.** Avoid locative "At the X" and vague "A Y" patterns. Prefer active/evocative headings that name a place, character, or beat: "Visiting Opal" beats "At the Stables"; "What Bertram Brewed" beats "A Taste"; "Sifting the Golden Grain" beats "At the Wreckage". When in doubt, include the location or a concrete hook.
+- **Cut hedging qualifiers.** Phrases like "of all hobbits", "rather", "somewhat", "perhaps" that don't earn their keep should go.
+
 ## Writing Style
 
 Write recaps in the style of Tolkien's _The Hobbit_ mixed with a bit of Pratchett—warm, wry narration with an omniscient voice that finds hobbits endearing and slightly absurd. Combat should be gory and visceral in the OSR tradition: bones break, blood pools, maces connect with wet crunches. The contrast between cozy hobbit sensibilities and brutal violence is the point.
