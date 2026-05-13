@@ -1,207 +1,165 @@
 #!/usr/bin/env python3
 """
-Fix Whisper misrecognitions in a D&D session transcript using Claude.
+Fix common Whisper misrecognitions in a hobbit-campaign session transcript.
 
-Reads the campaign context doc and sends transcript chunks to Claude
-to identify and correct proper noun misrecognitions.
+Deterministic, regex-based. No API key required. Apply targeted substitutions
+for the proper nouns Whisper keeps mangling.
 
 Usage:
-    fix-transcript.py <transcript> [-o OUTPUT]
+    fix-transcript.py <transcript> [-o OUTPUT] [--dry-run] [--diff]
 
-Requires ANTHROPIC_API_KEY environment variable.
+When run without -o, the input file is overwritten in place. Use --dry-run
+to see how many lines would change without writing. Use --diff to also print
+a per-rule count.
+
+Add new mishearings to CORRECTIONS below as they show up.
 """
 
 import argparse
-import json
 import os
+import re
 import sys
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-CONTEXT_PATH = os.path.join(SCRIPT_DIR, "..", "HOBBIT_CAMPAIGN_CONTEXT.md")
-MAX_CHUNK_CHARS = 80_000  # ~20k tokens per chunk, well under context limit
+# Each entry: (pattern, replacement). Patterns are case-sensitive regexes
+# applied in order. Use \b to anchor whole-word matches.
+#
+# Convention: list the *misrecognition* on the left, the correct campaign
+# spelling on the right. Group variants with alternation to keep the table
+# scannable. Comments explain non-obvious cases.
+CORRECTIONS = [
+    # --- PCs ---
+    # Boffo: Whisper produces a zoo of B-words. Anchor with \b so we don't
+    # touch "Boffo" itself or compound words.
+    (r"\b(Bofo|Bofor|Bofol|Bofos|Bofko|Bofko's"
+     r"|Baffle|Baffles|Baffo|Baffel|Bafel|Bafho|Bafko"
+     r"|Bapho|Bopho|Boffel|Buffle|Buffles|Buffalo)\b", "Boffo"),
+    # Possessives that the above won't catch.
+    (r"\bBoffo s\b", "Boffo's"),
+
+    # Turnip: "Turnup", "Turtup", "Turd up", "Turn up" (when clearly the name)
+    (r"\b(Turnup|Turtup)\b", "Turnip"),
+    (r"\bTurd up\b", "Turnip"),
+    # "Turn up" is ambiguous (could be "show up"). Skip — let the human judge.
+
+    # Wedge: usually right, but sometimes lowercased.
+    (r"(?<![\w-])wedge(?![\w-])", "Wedge"),
+
+    # --- NPCs ---
+    (r"\bExplicitica\b", "Explictica"),
+    (r"\bGammie\b", "Gammy"),
+    (r"\bgammy\b", "Gammy"),  # mid-sentence lowercase
+    (r"\bGametes\b", "Gammy"),  # whisper sometimes hears "gammy" as "gametes"
+    (r"\bgametes\b", "Gammy"),
+    (r"\bGammy Boccin\b", "Gammy Boffin"),
+    (r"\bGammy Bochan\b", "Gammy Boffin"),
+    (r"\bMattie\b", "Mattie"),  # canonical (vs. "Maddie" in some context docs)
+    (r"\bMisha's\b", "Misha's"),
+    (r"\bRamney\b", "Ramne"),
+    (r"\bRomney\b", "Ramne"),
+    (r"\bRamna\b", "Ramne"),
+    (r"\bCirelli\b", "Cirilli"),
+    (r"\bSerelli\b", "Cirilli"),
+    (r"\bAbromo\b", "Abramo"),
+    (r"\bZachariah\b", "Zacharias"),
+    (r"\bZachariahs\b", "Zacharias's"),
+    (r"\bDerrick\b", "Derek"),
+    (r"\bDerek Deslay\b", "Derek Desleigh"),
+    (r"\bDerek Daslay\b", "Derek Desleigh"),
+    (r"\bBuford Nis\b", "Buford Niss"),
+    (r"\bBuford Nyss\b", "Buford Niss"),
+    (r"\bBilbo\b", "Belba"),  # she gets mistaken for Bilbo a lot
+    (r"\bBelva\b", "Belba"),
+    (r"\bOlin\b", "Olwyn"),
+    (r"\bAlwyn\b", "Olwyn"),
+    (r"\bKillian Gade\b", "Killian Gade"),
+    (r"\bKilly and Gade\b", "Killian Gade"),
+    (r"\bIrish Gade\b", "Iris Gade"),
+    (r"\bHaskelley\b", "Haskelly"),
+    (r"\bHascalee\b", "Haskelly"),
+    (r"\bConstable Glover\b", "Constable Grover"),
+
+    # --- Places ---
+    (r"\bOrlene\b", "Orlane"),
+    (r"\bOrleans\b", "Orlane"),
+    (r"\bMerica\b", "Merikka"),
+    (r"\bMaricka\b", "Merikka"),
+    (r"\bMerica's\b", "Merikka's"),
+    (r"\bSlumber Inn Serpent\b", "Slumbering Serpent"),
+    (r"\bGoldengrain\b", "Golden Grain"),
+    (r"\bFortifield\b", "Fortfield"),
+    (r"\bHuddle Farm\b", "Huddle Farm"),  # canonical (idempotent)
+    (r"\bDim Wood\b", "Dimwood"),
+    (r"\bRush Moors\b", "Rushmoors"),
+    (r"\bGom Wick\b", "Gomwick"),
+
+    # --- Misc campaign terms ---
+    (r"\bToadstompers\b", "Toad Stompers"),
+    (r"\bToad-Stompers\b", "Toad Stompers"),
+    (r"\bWhisker\b(?! the)", "Whiskers"),  # only when standalone
+    (r"\btroglodite\b", "troglodyte"),
+    (r"\btroglodites\b", "troglodytes"),
+    (r"\bcobra headed\b", "cobra-headed"),
+    (r"\bsnake headed\b", "snake-headed"),
+]
 
 
-def read_file(path):
-    with open(path) as f:
-        return f.read()
+def compile_rules(rules):
+    return [(re.compile(pat), repl) for pat, repl in rules]
 
 
-def chunk_transcript(lines, max_chars=MAX_CHUNK_CHARS):
-    """Split transcript lines into chunks that fit within the char budget."""
-    chunks = []
-    current = []
-    current_len = 0
-
-    for line in lines:
-        line_len = len(line) + 1
-        if current and current_len + line_len > max_chars:
-            chunks.append(current)
-            current = []
-            current_len = 0
-        current.append(line)
-        current_len += line_len
-
-    if current:
-        chunks.append(current)
-
-    return chunks
-
-
-SYSTEM_PROMPT = """\
-You are a transcript correction tool for a D&D campaign. You fix Whisper \
-speech-to-text misrecognitions of proper nouns (character names, place names, \
-NPC names, item names, game terms).
-
-You will receive:
-1. Campaign context with correct spellings of all proper nouns
-2. A chunk of transcript to correct
-
-Return ONLY a JSON array of corrections. Each correction is an object:
-{"line": <1-indexed line number within the chunk>, "old": "<exact text to replace>", "new": "<corrected text>"}
-
-Rules:
-- Only fix clear misrecognitions of proper nouns from the campaign context.
-- Do not fix grammar, punctuation, filler words, or rephrase anything.
-- Do not "improve" the transcript — only correct names/terms that Whisper got wrong.
-- If there are no corrections needed, return an empty array: []
-- Return raw JSON only, no markdown fences."""
-
-
-def get_corrections(client, context, chunk_lines, chunk_index, total_chunks):
-    """Send a chunk to Claude and get back corrections."""
-    chunk_text = "\n".join(
-        f"{i+1}: {line}" for i, line in enumerate(chunk_lines)
-    )
-
-    user_msg = f"""## Campaign Context
-
-{context}
-
-## Transcript Chunk ({chunk_index + 1}/{total_chunks})
-
-{chunk_text}"""
-
-    response = client.messages.create(
-        model="claude-sonnet-4-20250514",
-        max_tokens=4096,
-        system=SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": user_msg}],
-    )
-
-    text = response.content[0].text.strip()
-    try:
-        return json.loads(text)
-    except json.JSONDecodeError:
-        print(f"  [warning] Failed to parse response for chunk {chunk_index + 1}:",
-              file=sys.stderr)
-        print(f"  {text[:200]}", file=sys.stderr)
-        return []
-
-
-def apply_corrections(lines, all_corrections):
-    """Apply corrections to transcript lines. Returns corrected lines and stats."""
-    fixed = list(lines)
-    total = 0
-    changes = {}
-
-    for offset, corrections in all_corrections:
-        for c in corrections:
-            line_idx = offset + c["line"] - 1
-            if line_idx < len(fixed) and c["old"] in fixed[line_idx]:
-                fixed[line_idx] = fixed[line_idx].replace(c["old"], c["new"], 1)
-                key = f"{c['old']} -> {c['new']}"
-                changes[key] = changes.get(key, 0) + 1
-                total += 1
-
-    return fixed, changes, total
+def apply(text, compiled):
+    """Apply each rule once across the whole text. Returns (new_text, counts)."""
+    counts = {}
+    for pattern, repl in compiled:
+        new_text, n = pattern.subn(repl, text)
+        if n:
+            counts[f"{pattern.pattern} -> {repl}"] = n
+            text = new_text
+    return text, counts
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Fix Whisper misrecognitions in a transcript using Claude.",
-    )
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("transcript", help="Path to the transcript markdown file.")
     parser.add_argument(
         "-o", "--out", default=None, metavar="FILE",
-        help="Output path for the fixed transcript (default: overwrite input).",
-    )
-    parser.add_argument(
-        "-c", "--context", default=CONTEXT_PATH, metavar="FILE",
-        help=f"Path to campaign context file (default: {CONTEXT_PATH}).",
+        help="Output path (default: overwrite input).",
     )
     parser.add_argument(
         "--dry-run", action="store_true",
-        help="Show corrections without writing the file.",
+        help="Show counts without writing the file.",
     )
     opts = parser.parse_args()
 
     if not os.path.exists(opts.transcript):
-        print(f"[error] File not found: {opts.transcript}")
-        raise SystemExit(1)
+        print(f"[error] File not found: {opts.transcript}", file=sys.stderr)
+        return 1
 
-    if not os.path.exists(opts.context):
-        print(f"[error] Campaign context not found: {opts.context}")
-        raise SystemExit(1)
+    with open(opts.transcript) as f:
+        original = f.read()
 
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
-    if not api_key:
-        print("[error] ANTHROPIC_API_KEY environment variable not set.")
-        raise SystemExit(1)
+    compiled = compile_rules(CORRECTIONS)
+    fixed, counts = apply(original, compiled)
 
-    import anthropic
-    client = anthropic.Anthropic(api_key=api_key)
+    total = sum(counts.values())
+    if total == 0:
+        print("[fix] No corrections matched.")
+        return 0
 
-    context = read_file(opts.context)
-    transcript = read_file(opts.transcript)
-    lines = transcript.splitlines()
-
-    # Split header from body so we don't chunk the header
-    body_start = 0
-    for i, line in enumerate(lines):
-        if line.startswith("**["):
-            body_start = i
-            break
-
-    header = lines[:body_start]
-    body = lines[body_start:]
-
-    chunks = chunk_transcript(body)
-    print(f"[fix] {len(lines)} lines, {len(chunks)} chunk(s)")
-
-    all_corrections = []
-    for i, chunk in enumerate(chunks):
-        print(f"[fix] Processing chunk {i + 1}/{len(chunks)} ({len(chunk)} lines)...")
-        corrections = get_corrections(client, context, chunk, i, len(chunks))
-        if corrections:
-            print(f"  Found {len(corrections)} correction(s)")
-            all_corrections.append((body_start, corrections))
-        else:
-            print(f"  No corrections")
-        # Offset for next chunk accounts for lines already processed
-        body_start += len(chunk)
-
-    if not all_corrections:
-        print("[fix] No corrections needed.")
-        return
-
-    fixed, changes, total = apply_corrections(lines, all_corrections)
-
-    print(f"\n[fix] {total} correction(s):")
-    for change, count in sorted(changes.items(), key=lambda x: -x[1]):
-        print(f"  {change} ({count}x)")
+    print(f"[fix] {total} substitution(s) across {len(counts)} rule(s):")
+    for rule, n in sorted(counts.items(), key=lambda x: -x[1]):
+        print(f"  {n:4d}  {rule}")
 
     if opts.dry_run:
         print("\n[dry-run] No file written.")
-        return
+        return 0
 
     out_path = opts.out or opts.transcript
     with open(out_path, "w") as f:
-        f.write("\n".join(fixed))
-        if fixed and not fixed[-1].endswith("\n"):
-            f.write("\n")
-
+        f.write(fixed)
     print(f"\n[fix] Written to {out_path}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
