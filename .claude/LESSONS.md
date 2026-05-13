@@ -12,10 +12,15 @@ lessons here as they come up, then periodically promote them into CLAUDE.md.
 - "The party" is fine to use sometimes. Mix it up with "the Toad Stompers," "the hobbits," and "the party" for variety. Don't mechanically replace every instance.
 - Only use "the hobbits" if "the party" or "the Toad Stompers" was used previously in the same section or paragraph—it needs an antecedent.
 - Pub/inn names that sound like pubs (the Golden Grain, the Slumbering Serpent, the Foaming Mug) don't need "Inn" appended—the name is self-evident. Add "Inn" occasionally for variety, not as a rule.
+- Whenever Opal the pony appears in prose, mention that she's a good girl. It's an established running note about her character.
 
 ## CSS/SCSS
 
 - Never use raw rem/px values for padding and spacing. Use `var(--space)` (16px) or `var(--space-sm)` (8px) or multiples thereof to maintain the 8px grid.
+
+## PC Files
+
+- Spell lists are kept alphabetical, both in `src/content/pcs/*.md` and in the character profiles in `HOBBIT_CAMPAIGN_CONTEXT.md`. When adding a new spell, insertion-sort it into the existing list rather than appending.
 
 ## NPC Relations
 

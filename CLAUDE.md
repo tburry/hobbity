@@ -263,6 +263,8 @@ Never use these in story prose (Conclusion, Enemies Defeated, and Treasure secti
 - level up, XP, experience points
 - DM, GM, player, character sheet
 - non-lethal, lethal damage
+- hex map (just "map" is fine)
+- numbered rooms ("room 5," "room four"), house numbers, or any module map key. Describe rooms by what's in them, what they were for, or which one came first.
 
 Describe what happened in the world, not at the table. "Boffo's mace caved in the goblin's skull" not "Boffo dealt 6 damage." "Luck abandoned them" not "they rolled badly."
 
