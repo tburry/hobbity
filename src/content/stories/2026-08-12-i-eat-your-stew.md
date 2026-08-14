@@ -1,5 +1,5 @@
 ---
-title: "Feed It a Corpse"
+title: "I Eat Your Stew"
 story: Trail of the Serpent
 date: 2026-08-12
 location: "Farmland north of [Orlane](/hobbity/world/places/#orlane), then northwest through the [Dimwood](/hobbity/world/places/#the-five-shires) into the [Rushmoors](/hobbity/world/places/#the-five-shires)"
@@ -57,7 +57,7 @@ Wedge and Turnip went into the underbrush and ceased, for practical purposes, to
 
 The troglodytes killed Barry in front of him. Three spears went in and the bear turned and took one of them off his feet, and the thing came up under it with no spear at all and tore the bear's throat out with its hands. Then it looked around the clearing for something else to do that to.
 
-## I Eat Your Stew
+## A Hobbit in a Net
 
 What happened next was quick and went badly in almost every particular before it went well.
 

@@ -514,7 +514,7 @@ The party is resting at the Slumbering Serpent, dawn. All three leveled up to Le
 - What is animating the dead in the Dimwood? Cult work, or something the wood does on its own?
 - Is the Dimwood's turning-around magic passive, or is something steering the party away from a specific place?
 
-### Session: Feed It a Corpse
+### Session: I Eat Your Stew
 
 **Out of the wood:** On the third morning the Dimwood simply released them, into wheat country a mile north of Orlane — which is not where they were aiming, and which means they had twice walked to Orlane by tunnel without ever knowing where it sat. They turned north into rougher ground to pick the troglodyte trail back up.
 
