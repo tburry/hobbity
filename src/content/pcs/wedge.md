@@ -30,7 +30,7 @@ Wedge is Chaotic not as disorder but as appetite. He spent the winter practicing
 
 ## Personality
 
-The self-appointed leader, whether anyone asked for one or not. Wedge talks the most and the fastest. He's affectionately impatient with his companions, always ten feet ahead and annoyed about it. His confidence bumps into reality regularly—sneaking with a lit lantern, casting spells that bounce off the enemy—but he pushes forward anyway. Handles encounters through sheer persistence and volume; folk tend to do what he says just to get a moment's peace. In a crisis he leads with spirit, not caution. Names things, claims things, drives decisions. He coined "the Toad Stompers" and will not let anyone forget it.
+The self-appointed leader, whether anyone asked for one or not. Wedge talks the most and the fastest. He's affectionately impatient with his companions, always ten feet ahead and annoyed about it. His confidence bumps into reality regularly—sneaking with a lit lantern, casting spells that bounce off the enemy—but he pushes forward anyway, and when the job genuinely needs doing quietly and alone, he is the one who goes and does it. Handles encounters through sheer persistence and volume; folk tend to do what he says just to get a moment's peace. In a crisis he leads with spirit, not caution. Names things, claims things, drives decisions. He coined "the Toad Stompers" and will not let anyone forget it, and he christened a bear Barry in the half-second before it ran through the camp.
 
 ### Sample Lines
 
@@ -38,4 +38,5 @@ The self-appointed leader, whether anyone asked for one or not. Wedge talks the 
 - "Their plan will not survive first contact with the Toad Stompers."
 - "Come on, Turnip. Toad Stompers!"
 - "I was going to do that, but I'm lazy and impatient."
-- "This big dumb crazy house. We're going to be a month of Sundays sorting this out."
+- "You mess with the Toad Stompers, you get stomped."
+- "That's really handy for cleaning up your goblins, eh?"
