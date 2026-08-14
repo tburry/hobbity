@@ -311,8 +311,8 @@ Format each injury as a narrative description of the wound and its lasting physi
 - **System:** OSE / D&D Basic/Expert. "Adventurer" class (Fighter/Mage/Thief generalist).
 - **Setting:** Five Shires, Mystara (loosely). Hobbit-only party.
 - **DM:** Uses classic TSR modules adapted for hobbit play.
-- **Current arc:** Trail of the Serpent — pursuing the cult through the troglodyte tunnels under the burnt Golden Grain, headed northwest through the Dimwood toward the Rushmoors swamp.
-- **Current state:** Party emerged from the cult's tunnel a mile west of Orlane into a ruined stone courtyard in the Dimwood. Gammy Boffin from Gomwick found chained to an iron stake there. Troglodyte patrol just out of sight; Wedge crossing the grass to pick the lock while Boffo and Turnip cover from the stair. Cult's underground stores were cleaned out before they fled (three empty chests, smashed Explictica idol). Level 2. Whiskers the weasel on loan from Ramne. Zacharias and Derek at large. Ramne still sheltering Cirilli Finla.
+- **Current arc:** Trail of the Serpent — pursuing the cult northwest out of Orlane, through the Dimwood and into the Rushmoors swamp.
+- **Current state:** The Dimwood released the party into wheat country north of Orlane; troglodytes drove a bear through their camp and were cut down for it. They crossed the Rushmoors, bought off a giant snapping turtle with boar meat, and followed hobbit, goblin and troglodyte prints northwest to a diked island where the cult has excavated three levels down onto an older temple of Explictica. Six-goblin garrison killed on the rampart, undiscovered; the torchlit pit below untouched, a half-roped marble Explictica standing in it, a crocodile in the water along the dike. Level 2. Whiskers the weasel on loan from Ramne. Zacharias and Derek at large. Ramne still sheltering Cirilli Finla.
 - **Full details:** See `HOBBIT_CAMPAIGN_CONTEXT.md`
 
 ## Lessons Learned

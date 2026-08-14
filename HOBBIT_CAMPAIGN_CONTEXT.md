@@ -484,6 +484,74 @@ The party is resting at the Slumbering Serpent, dawn. All three leveled up to Le
 - The Dimwood — dense forest northwest of Orlane. Magically misleading.
 - The Rushmoors — swamp beyond the Dimwood. Suspected cult base.
 
+### Session: Lost in the Dimwood
+
+**No recording.** Reconstructed from Gus's verbal summary after the audio was lost. Detail is thinner than other sessions; treat specifics as approximate.
+
+**The lizard at the stake:** Before Wedge could get the lock open, the troglodytes came back into the courtyard with a lizard on a rope and baited it at Gammy Boffin for sport, hauling it back each time it nearly reached him. Gammy gave them nothing. They lost interest, wandered off, and left the lizard tethered at the far wall.
+
+**The rescue:** Wedge drank half a Potion of Invisibility, crossed the grass unseen, picked the ankle-chain lock, and gave Gammy the other half. Two invisible hobbits walked out past the lizard and the wall scout without a fight. No combat with the troglodytes or the lizard.
+
+**Gammy's account:** Taken from his own home in Gomwick in the small hours, door shut behind him, then walked for days on foot under a hood. Had not seen Daisy since. Delivered to Belba at the Slumbering Serpent; word sent east to Daisy that he lives.
+
+**Back to town and out again:** A mile of tunnel back to the Golden Grain cellar, a day in Orlane to regroup and resupply (oil, torches, arrows, rope; Boffo checked on Opal at Killian Gade's stable), then the same mile back west. The courtyard was abandoned when they returned—stake, broken chain, no troglodytes, no lizard, trail cold.
+
+**Two days lost in the Dimwood:** Hex-crawling northwest toward the Rushmoors. The wood's turning-around magic is real and persistent: chalk marks appearing ahead of them rather than behind, moss on the wrong side of trunks, sun bearings that disagreed hour to hour, a stream crossed twice running the wrong way. Ground covered, no progress made.
+
+**Zombies on the night watch:** Three zombies walked out of the trees in the small hours of the second night. Whiskers gave no warning. Arrows and a magic missile failed to stop them; put down by main force, Boffo's mace doing the heavy work. None of the faces were recognised. Bodies burned.
+
+**Session ends:** Waking on the morning of the third day in the Dimwood, still headed northwest.
+
+**Enemies defeated:** 3 zombies.
+
+**Loot:** None.
+
+**Resources:** Potion of Invisibility fully spent (split between Wedge and Gammy). Wedge's Magic Missile used. Resupply in Orlane restocked oil, torches, arrows, rope.
+
+**New unresolved questions:**
+
+- Where did the troglodytes and the lizard go after the courtyard was abandoned? Did the rescue spook them into moving, or were they always leaving?
+- What is animating the dead in the Dimwood? Cult work, or something the wood does on its own?
+- Is the Dimwood's turning-around magic passive, or is something steering the party away from a specific place?
+
+### Session: Feed It a Corpse
+
+**Out of the wood:** On the third morning the Dimwood simply released them, into wheat country a mile north of Orlane — which is not where they were aiming, and which means they had twice walked to Orlane by tunnel without ever knowing where it sat. They turned north into rougher ground to pick the troglodyte trail back up.
+
+**The boar at the dry river:** A wide stony riverbed with the water gone out of it and one green pond left. A wild boar in the pond; a branch cracked under Turnip sixty feet above and it charged. Wedge's Light burst on its shoulder, Turnip's sling stone went into its neck, Boffo braced a borrowed spear and it ran itself onto the point. A hundred pounds of meat and the tusks came off it. They lashed a litter and Boffo hauled it northwest by rope.
+
+**Barry and the troglodytes:** A black bear ran through their camp at dusk with three troglodytes behind it — Wedge named it Barry in the half-second he had. Wedge and Turnip hid; Boffo could not, being roped into a meat sledge in the open. The troglodytes killed the bear in front of him, one tearing its throat out barehanded.
+
+**The fight:** Wedge took a spear through the shoulder. Turnip threw his net from a tree and caught Boffo instead of a troglodyte, then dropped down and dropped one with a blowgun dart. Boffo held his breath against the stench and caved in the bear-killer's skull. The third got past his scale mail twice and Boffo spent a hobbit point to stay upright; Turnip ended it with a sling stone at thirty feet. No one went down. The troglodyte spears were worthless and went in the fire; they took Barry's pelt to sell. Boffo has now smelled troglodyte at close range and can track the scent.
+
+**Into the Rushmoors:** The wood went low and wet and became swamp — warm water to the waist, rushes over head height, no dry ground worth the name, half speed all day. The meat litter became a raft. They camped on a hump of dry ground the size of a kitchen with the fire in a hole.
+
+**The turtle:** A giant snapping turtle came out of the black at Turnip on watch, ten feet of neck and a beak that could halve a hobbit. Turnip's net held it for a heartbeat; Wedge threw it a whole boar leg and it took the meat and lost interest entirely. Lesson learned and repeated since: anything large in a swamp can be bought off with food.
+
+**Three kinds of footprints:** A trodden, rutted path through the mud, with hobbit prints, goblin prints, and webbed troglodyte prints in it, all going northwest together.
+
+**The dig:** At the end of the day, an island someone had built — a dike of cut stone, timber and packed mud holding the marsh out, the ground inside excavated three levels below the waterline, torchlight burning down in the pit. A broken crane over a ramp, smashed crates under it, three good skiffs moored and two sunk. Signs of a lot of traffic, lately in a hurry.
+
+**The green lady:** A six-foot marble Explictica standing tilted and half-roped in the pit where the hauling ropes gave out — freshly painted green, better work than the jade one under Orlane, and holding a real whip, a real sword, and two more objects no chisel made. Boffo put it together on the spot: the cult is not building a temple out here, it is digging an older one up. That explains the goblins, the skiffs and the wreckage; it does not explain why a cult just driven out of a village is hauling a goddess out of a swamp in the dark.
+
+**Taking the rampart:** Wedge swam the channel, climbed the dike and cut a sleeping goblin's throat. Turnip spotted a crocodile working the water; they lowered the body down and fed it, which kept the dike clear. Five goblins left. Wedge's arrow took the south sentry through the eye (the crocodile got that one too), Turnip dropped onto the north rampart and slung one through the eye socket before it could shout, and the pair with the jug died charging. The last had spine and came at Wedge with a club; they killed it between them. Six goblins, not a scratch on the party. Boffo spent the entire fight unable to reach anybody — no bow, no sling — and complained about it throughout.
+
+**Session ends:** On the rampart of the dike at night, the garrison dead, the pit below still lit and undisturbed.
+
+**Enemies defeated:** 1 wild boar, 3 troglodytes, 6 goblins. The giant snapping turtle was bought off with boar meat, not killed. Barry the bear was killed by the troglodytes.
+
+**Loot:** Black bear pelt (to sell), wild boar tusks (trophy), roughly 60 lb of boar meat remaining.
+
+**Resources:** Wedge's Light and Magic Missile used; Turnip's net used twice and recovered; one blowgun dart spent; Boffo spent a hobbit point to stay on his feet. Boffo still has no missile weapon — bow given away, sling left in the Orlane temple.
+
+**New unresolved questions:**
+
+- Why is the cult excavating an older temple of Explictica out in the Rushmoors, and why the urgency now, immediately after being driven out of Orlane?
+- What are the two unidentified objects in the statue's other two hands? The whip and sword are real weapons; the rest is unknown.
+- Where are the hobbits whose footprints are on the swamp path? Abducted Orlane and Gomwick families walking in under their own feet, or converts?
+- How old is the buried temple, and does it share its builders with Fortfield Tower, the ruins under Merikka's temple and the Stake Courtyard?
+- Who is down in the pit? The garrison on the rampart was goblins; the diggers, the troglodytes and whoever commands them are all still below.
+
 ---
 
 ## The Broader World
@@ -526,6 +594,12 @@ The same group of players also runs a separate Daggerdale campaign (DM'd by Les 
 18. Cirilli's brother Milo — charmed and never returned home with their parents. Whereabouts unknown. Not in the temple.
 19. The "Orlane Special" wine has been drugged with a sleeping paste at every inn in town that serves it. How many establishments are compromised, beyond the Golden Grain and the Slumbering Serpent?
 20. Wil (Haskelly's son) — long missing, presumed charmed.
-21. Gammy Boffin has been abducted from Gomwick all the way to a Dimwood ruin. The cult has reached Gomwick. How long ago, and how widely?
+21. Gammy Boffin was abducted from Gomwick all the way to a Dimwood ruin and rescued. The cult has reached Gomwick. How long ago, and how widely? Who else from Gomwick is already gone?
 22. Troglodyte ghouls — origin and method unknown. Are they failed converts of Explictica, or something the cult is breeding deliberately?
 23. The old pre-hobbit stone ruins — Fortfield Tower, the temple beneath Merikka, the Stake Courtyard — all share an architectural family. Same builders. Same network?
+24. The walking dead in the Dimwood — three came out of the trees at night with no warning from Whiskers. Cult-raised, or something the wood does on its own?
+25. The troglodyte band and their lizard abandoned the Stake Courtyard between the rescue and the party's return. Where did they go, and did the rescue tip the cult off?
+26. The cult is excavating an older temple of Explictica out of the Rushmoors rather than building one. Why, and why the urgency immediately after being driven out of Orlane?
+27. The marble Explictica in the dig holds a real whip and a real sword in two hands, and two unidentified objects in the other two.
+28. Hobbit footprints walk the swamp path northwest alongside goblin and troglodyte prints. Abducted families, or converts walking in willingly?
+29. Who commands the dig? The rampart garrison was goblins; the diggers, the troglodytes, and whoever gives the orders are all three levels down in the pit.
