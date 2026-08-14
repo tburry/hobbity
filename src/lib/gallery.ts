@@ -24,6 +24,15 @@ function img(name: string): ImageMetadata {
 // Sorted reverse chronologically by story date, then reverse story order
 // within each story (latest scene first).
 export const images: GalleryImage[] = [
+  // 2026-08-12 — I Eat Your Stew
+  {
+    src: img('rushmoors-crocodiles.webp'),
+    alt: 'Crocodiles lying in a channel of the Rushmoors',
+    caption:
+      'The Rushmoors, the swamp northwest of Orlane: warm water to the waist, rushes over head height, and no dry ground in it worth the name. The crocodiles lie in the channels at a wading hobbit\'s eye level.',
+    storyLink: '/hobbity/stories/2026-08-12-i-eat-your-stew/#into-the-rushmoors',
+    storyTitle: 'I Eat Your Stew',
+  },
   {
     src: img('cirilli-finla.webp'),
     alt: 'Cirilli Finla',

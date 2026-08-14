@@ -91,6 +91,8 @@ The ground gave first—soft, then soft in a way that took a foot up to the ankl
 
 Ahead of them the marsh opened out: rushes in thick stands, patches of scummy water between, one to two feet of warm water and slime underfoot and no dry line anywhere in it. The Toad Stompers went in at half speed with their toes finding every root. The litter, which had been a sledge, became a raft, which was an improvement nobody had planned for.
 
+![Crocodiles lying in a channel of the Rushmoors](../../assets/images/rushmoors-crocodiles.webp)
+
 They made an island at dusk—a hump of dry ground the size of a kitchen—and built a small fire in a hole where the marsh couldn't see it.
 
 ## The Turtle on Turnip's Watch
