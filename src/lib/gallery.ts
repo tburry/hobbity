@@ -26,6 +26,23 @@ function img(name: string): ImageMetadata {
 export const images: GalleryImage[] = [
   // 2026-08-12 — I Eat Your Stew
   {
+    src: img('green-lady-excavation.webp'),
+    alt: 'The Toad Stompers look down into the excavated pit at the statue of Explictica',
+    caption:
+      'The cult\'s fortification in the Rushmoors: a diked island dug out three levels deep, a broken crane over the ramp, and in the pit a green-painted marble statue of Explictica, tilted and half-roped, holding a real whip and a real sword in her carved hands.',
+    storyLink: '/hobbity/stories/2026-08-12-i-eat-your-stew/#the-green-lady',
+    storyTitle: 'I Eat Your Stew',
+  },
+  {
+    src: img('turnip-nets-the-turtle.webp'),
+    alt: 'Turnip\'s net over the giant snapping turtle',
+    caption:
+      'The giant snapping turtle that rose out of the black water on Turnip\'s watch, tangled for one glorious moment in his net. It tore free a moment later—and settled for a whole boar leg instead of a hobbit.',
+    storyLink:
+      '/hobbity/stories/2026-08-12-i-eat-your-stew/#the-turtle-on-turnips-watch',
+    storyTitle: 'I Eat Your Stew',
+  },
+  {
     src: img('rushmoors-crocodiles.webp'),
     alt: 'Crocodiles lying in a channel of the Rushmoors',
     caption:

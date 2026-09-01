@@ -103,6 +103,8 @@ It came on ten feet of neck out of the black, a beak on it that could take a hob
 
 It caught. For one glorious moment the largest thing any of them had ever seen was tangled in the same net that had lately caught Boffo. It tore free the next moment, but that moment was enough for Wedge to get to the litter, drag out a whole boar leg, and throw it.
 
+![Turnip's net over the giant snapping turtle](../../assets/images/turnip-nets-the-turtle.webp)
+
 The turtle looked at three small shouting hobbits. Then it looked at forty pounds of pork lying in the shallows. Then it took the pork and settled down in the mud to eat, and paid them no further attention whatsoever.
 
 They watched it chew for a while from the far side of a very small island.
@@ -136,6 +138,8 @@ It was late afternoon, and in the Rushmoors that is night. The hobbits lay in th
 The first thing that made sense of the place was standing in the pit, out of position, tilted, half-roped and abandoned where the ropes had failed.
 
 A statue of [Explictica](/hobbity/world/npcs/#explictica): a woman's body, a serpent's coil, snakes about her head, cut from a single block of marble six feet high. Someone had painted her green, and recently, and better than anyone had painted the jade horror under [Orlane](/hobbity/world/places/#orlane).
+
+![The Toad Stompers look down into the excavated pit at the statue of Explictica](../../assets/images/green-lady-excavation.webp)
 
 "Honey lady," said Wedge, and then, after a moment, "that's a nicer statue than we've seen before."
 
