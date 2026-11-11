@@ -18,7 +18,9 @@ Boffo Lunderbunk is the quiet heart of the Toad Stompers. Not bright—the last 
 ## Notable Items
 
 - **Three-feathered hat:** From [Farmer Fallow](/hobbity/world/npcs/#farmer-fallow)'s stall. Gives a boost of speed when worn.
-- **Cobra-headed mace:** Taken from [Abramo](/hobbity/world/npcs/#abramo). The mace head is shaped like a cobra's head.
+- **Necklace of Water Breathing:** Taken from a harpy's roost beneath the [Dig in the Rushmoors](/hobbity/world/places/#the-five-shires). Lets the wearer breathe underwater.
+- **Short sword +1:** Taken from [Ben Griff](/hobbity/world/npcs/#ben-griff). Replaced the shovel he had carried until then.
+- **The statue's sword:** Taken from the hand of the marble [Explictica](/hobbity/world/npcs/#explictica) in the Dig in the Rushmoors, in exchange for [Abramo](/hobbity/world/npcs/#abramo)'s cobra-headed mace. Forged for someone twice his size; he wears it slung across his back.
 - **Shield of Merikka:** Taken from [Misha](/hobbity/world/npcs/#misha)'s quarters. Painted with the crest of Merikka. Non-magical.
 
 ## Grievous Injuries
@@ -31,13 +33,13 @@ Boffo is Neutral not as indifference but as simplicity. He doesn't carry princip
 
 ## Personality
 
-Understated and sincere. Boffo doesn't overthink things—not because he's decided the simple way is best, but because complexity doesn't occur to him. He sees the world through food, labor, and what's right in front of him, and that narrow focus makes his observations land harder than anyone expects. Self-aware about his limitations ("I may not be very bright") but perceptive where it counts. Generous with his companions, never mocking. The worst fate he can imagine is eating only one meal a day. In combat he's the party's anchor: tough, steady, and willing to put himself between danger and his friends—and lately he shouts "I eat your stew!" when the mace lands, which he has explained to nobody. Being unable to reach the fight offends him more than being hit in it.
+Understated and sincere. Boffo doesn't overthink things—not because he's decided the simple way is best, but because complexity doesn't occur to him. He sees the world through food, labor, and what's right in front of him, and that narrow focus makes his observations land harder than anyone expects. Self-aware about his limitations ("I may not be very bright") but perceptive where it counts. Generous with his companions, never mocking. The worst fate he can imagine is eating only one meal a day. In combat he's the party's anchor: tough, steady, and willing to put himself between danger and his friends—and lately he shouts "I eat your stew!" when a blow lands, which he has explained to nobody. Being unable to reach the fight offends him more than being hit in it. He has appointed himself the party's man for traps on no evidence whatsoever, and when a harpy's song took hold of him he walked into the mud after her up to his chin, complaining all the way that his friends would not let him be happy.
 
 ### Sample Lines
 
 - "I may not be very bright, but I know something's not right. Right here."
 - "Pie's not pie without flour."
 - "Well, sir, might I suggest, Mr. Goblin Four, sir—if you keep putting out all the torches, of course you're going to get lost."
-- "Anyone that's taller than a hobbit must have a really bad, terrible, uncomfortable life."
+- "Guys, I'm going home with her. Just let me be happy for once in my life."
 - "I eat your stew!"
 - "How am I going to learn if you won't even let me try?"

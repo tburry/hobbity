@@ -18,6 +18,7 @@ Wedge Wedgerton is the self-appointed leader of the Toad Stompers. Third-generat
 ## Notable Items
 
 - **Animal whistle:** From [Farmer Fallow](/hobbity/world/npcs/#farmer-fallow)'s stall. Calls an animal when blown.
+- **Leather armour +1:** Taken from [Derek Desleigh](/hobbity/world/npcs/#derek-desleigh). Rinsed in wine to take the smell of Derek out of it.
 - **Ring of Protection +1:** Taken from [Misha](/hobbity/world/npcs/#misha). Bonus to armor and saves.
 
 ## Grievous Injuries
@@ -36,7 +37,7 @@ The self-appointed leader, whether anyone asked for one or not. Wedge talks the 
 
 - "Might have to put a rope around these fellas, with all this lollygagging."
 - "Their plan will not survive first contact with the Toad Stompers."
-- "Come on, Turnip. Toad Stompers!"
+- "Shoo! Go away! Boffo doesn't need pies, he's just had lunch!"
 - "I was going to do that, but I'm lazy and impatient."
 - "You mess with the Toad Stompers, you get stomped."
 - "That's really handy for cleaning up your goblins, eh?"

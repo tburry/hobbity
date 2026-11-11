@@ -19,6 +19,7 @@ Turnip Bramblebrook is the prepper and investigator. A rubbish collector and sor
 
 - **Mysterious stockings:** From [Farmer Fallow](/hobbity/world/npcs/#farmer-fallow)'s stall. Later tailored into legwarmers by Orlane's paranoid tailor, [Myron Tweed](/hobbity/world/npcs/#myron-tweed). Grant extra stamina in exploration mode.
 - **Scale mail +1:** Taken from [Abramo](/hobbity/world/npcs/#abramo). Snake-skin pattern rendered in steel. Counts as light armor for encumbrance.
+- **Whip of lightning:** Taken from the hand of the marble [Explictica](/hobbity/world/npcs/#explictica) in the [Dig in the Rushmoors](/hobbity/world/places/#the-five-shires). Cracks with lightning on every stroke. Every so often it bursts in a great bolt and is destroyed.
 
 ## Grievous Injuries
 
@@ -31,7 +32,7 @@ Turnip is Lawful not as obedience but as conviction. He'll argue with a constabl
 
 ## Personality
 
-A rubbish collector's mind in an adventurer's body. Turnip examines every room like a crime scene—asks about graffiti in troglodyte lairs, debates the philosophy of detached fingers, inventories everything. He never questions hobbit values; he just applies them rigorously to situations hobbits were never meant to face. Misses the forest for the trees every time—stuck behind giant Boffo in a tunnel with danger ahead, Turnip just wants to know why they stopped walking. Perpetually independent, slightly aggrieved, and prepared for the wrong emergency—he threw his net at a troglodyte and caught Boffo, then threw the same net at a snapping turtle the size of a cart and held it long enough to save the camp. For all the fussing, it is usually his sling that ends the fight, and he is faintly embarrassed about that.
+A rubbish collector's mind in an adventurer's body. Turnip examines every room like a crime scene—asks about graffiti in troglodyte lairs, debates the philosophy of detached fingers, inventories everything. He never questions hobbit values; he just applies them rigorously to situations hobbits were never meant to face. Misses the forest for the trees every time—stuck behind giant Boffo in a tunnel with danger ahead, Turnip just wants to know why they stopped walking. Perpetually independent, slightly aggrieved, and prepared for the wrong emergency—he threw his net at a troglodyte and caught Boffo, then threw the same net at a snapping turtle the size of a cart and held it long enough to save the camp, and later caught Boffo with it again, on purpose, as a harpy's song walked him into the mud. For all the fussing, it is usually his sling that ends the fight, and he is faintly embarrassed about that.
 
 ### Sample Lines
 
@@ -40,4 +41,4 @@ A rubbish collector's mind in an adventurer's body. Turnip examines every room l
 - "It's a flat pack torture chamber."
 - "Any properly socialized hobbit would just sit there and remain voluntarily arrested."
 - "Well, it's three in the morning. It's the first breakfast."
-- "Let's make our way along this rampart and chuck all the goblins we find into the drink."
+- "You have to make things your business. Otherwise you wouldn't be taken prisoner."
