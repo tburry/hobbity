@@ -312,7 +312,7 @@ Format each injury as a narrative description of the wound and its lasting physi
 - **Setting:** Five Shires, Mystara (loosely). Hobbit-only party.
 - **DM:** Uses classic TSR modules adapted for hobbit play.
 - **Current arc:** Trail of the Serpent — pursuing the cult northwest out of Orlane, through the Dimwood and into the Rushmoors swamp.
-- **Current state:** The Dimwood released the party into wheat country north of Orlane; troglodytes drove a bear through their camp and were cut down for it. They crossed the Rushmoors, bought off a giant snapping turtle with boar meat, and followed hobbit, goblin and troglodyte prints northwest to a diked island where the cult has excavated three levels down onto an older temple of Explictica. Six-goblin garrison killed on the rampart, undiscovered; the torchlit pit below untouched, a half-roped marble Explictica standing in it, a crocodile in the water along the dike. Level 2. Whiskers the weasel on loan from Ramne. Zacharias and Derek at large. Ramne still sheltering Cirilli Finla.
+- **Current state:** Inside the first level beneath the cult's Rushmoors dig, near daybreak, after a night underground. Derek Desleigh and one hired blade killed in Derek's quarters (an unrecorded session); Ben Griff released. Zacharias's jade chest (cult robe, ceremonial mace, healing scrolls) found in Derek's bedroom; Zacharias goes below the first level. Harpy killed and her hoard taken. Wedge out of spells and Boffo and Turnip hurt; the cult will soon notice. Pending decision: rest barricaded in Derek's quarters, or leave the swamp to resupply. Level 2. Whiskers the weasel on loan from Ramne. Ramne still sheltering Cirilli Finla.
 - **Full details:** See `HOBBIT_CAMPAIGN_CONTEXT.md`
 
 ## Lessons Learned

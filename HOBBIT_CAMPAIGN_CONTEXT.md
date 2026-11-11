@@ -34,7 +34,7 @@ The campaign draws on classic TSR modules adapted for hobbit play.
 
 **Equipment of note:** Blowgun with sleep darts, rope, shortbow, various prepper supplies. Carries a notebook/diary in his vest.
 
-**Concept:** A prepper among hobbits. Chose his own nickname "Stockwell" but everyone still calls him Turnip. Perennially carries almost-but-not-quite-the-right-thing-for-the-job. High intelligence, low wisdom — asks the best investigative questions at the worst social moments. Constitutionally incapable of reading a room but genuinely good-hearted. His watchword is "Always be prepared."
+**Concept:** A prepper among hobbits. A rubbish collector and sorter by trade — "Reused but useful, which is what I say about the rummage the village pays me to remove and sort or dispose of." Chose his own nickname "Stockwell" but everyone still calls him Turnip. Perennially carries almost-but-not-quite-the-right-thing-for-the-job. High intelligence, low wisdom — asks the best investigative questions at the worst social moments. Constitutionally incapable of reading a room but genuinely good-hearted. His watchword is "Always be prepared."
 
 **Winter activity:** Became hypervigilant after the Hermit encounter. Catalogued oddities around Thistledown in a notebook (quieter foxes, owls flying wider circles, a baby that never cries, a scarecrow that changed hats). Salted his threshold weekly. Checked windows three times before sleep. Kept the lantern lit all night. Wrote a paranoid but beautifully hobbity diary. Composed the ballad "The Pies of Gomwick Fair" for a storytelling competition he missed.
 
@@ -55,7 +55,7 @@ The campaign draws on classic TSR modules adapted for hobbit play.
 
 **Magic Item from Farmer Fallow's Stall:** A whistle that calls animals.
 
-**Concept:** A rubbish collector and sorter — "Reused but useful, which is what I say about the rummage the village pays me to remove and sort or dispose of." Third-generation nickname. The strategic driver of the party. Pushes decisions, handles diplomatic heavy lifting with NPCs, frames the key tactical questions. Slightly too confident in his own read on every situation, but self-aware enough to acknowledge when he's been wrong. Has an ESP scroll he's been keeping secret from the others.
+**Concept:** Third-generation nickname. The strategic driver of the party. Pushes decisions, handles diplomatic heavy lifting with NPCs, frames the key tactical questions. Slightly too confident in his own read on every situation, but self-aware enough to acknowledge when he's been wrong. Has an ESP scroll he's been keeping secret from the others.
 
 **Winter activity:** Read forbidden lore and adventure books. Practiced petty thefts (always returning items). Philosophized about the nature of adventure, comparing it to midwifing his sister's child — "we put aside our manners and do a sticky job that others don't want to, or can't do." Aspires to own a house like Toppo Hill.
 
@@ -552,6 +552,53 @@ The party is resting at the Slumbering Serpent, dawn. All three leveled up to Le
 - How old is the buried temple, and does it share its builders with Fortfield Tower, the ruins under Merikka's temple and the Stake Courtyard?
 - Who is down in the pit? The garrison on the rampart was goblins; the diggers, the troglodytes and whoever commands them are all still below.
 
+### Unrecorded session (between August 12, 2026 and November 4, 2026)
+
+**No recording and no summary.** What is known comes from references in the November 4, 2026 recording, and is folded into the opening of "Just Let Me Be Happy."
+
+- Went down into the pit around midnight, straight after the rampart fight.
+- At the green marble Explictica: Turnip took the **whip of lightning** (Gus's homemade item: about d4+1 lightning damage, 5 at max; on a d6 roll of 6 it explodes as a 20-point lightning bolt, save vs spells for half, and is destroyed). Boffo took the oversized **sword** ("made for someone twice your size", treat as a bastard sword) and left Abramo's cobra-headed mace in the statue's hand. The statue's other objects are still unaccounted for.
+- Killed some goblins in the first-level tunnels; their bodies were left in a passage.
+- Found Derek Desleigh's quarters behind a barred door (Wedge's open locks). Derek and two level-2 hobbit hired blades ("assassins" per Gus). Derek and one other killed; **Ben Griff** captured and tied to a chair. About an hour of interrogation followed.
+- Loot: Derek's **leather armour +1** (to Wedge, AC 4 with the ring), Ben's **short sword +1** (to Boffo, who dropped his shovel), the warded **jade chest** in Derek's bedroom.
+
+### Session: Just Let Me Be Happy (November 4, 2026)
+
+**Derek's quarters:** Dry and well kept, unlike the mud warren around it: hearth, beds, crockery, good food, a barrel of very good wine, a privy. Three tables, all set with backs to the wall. One door in, barred. Boffo slung the big sword across his back.
+
+**The jade chest:** Boffo found the magical ward, failed to remove it, and took paralysing gas to the face (no save by the book; Gus allowed one, Boffo spent a hobbit point). Wedge and Turnip both failed open locks. Ben Griff says the chest is **Zacharias's**: Zacharias brought it, doesn't sleep in the quarters, and goes **downstairs**, where Ben was never allowed. Ben thinks Zacharias has the key. Turnip chiselled it open (the lid still latches). Contents: a dagger-sized ceremonial snake-headed mace (non-magical), a folded black robe with a crimson symbol the party half-recognises but can't place, and a two-headed snake scroll case holding **two scrolls of Cure Light Wounds**. Chest left by the fire.
+
+**Ben Griff:** Hobbit, CHA 6, worked for Derek, whose job was keeping the goblins in line. Not a believer. No count of the goblins ("more than one, less than a thousand; they multiply faster than you can kill them"). Dreams of a seaside town. Interviewed mock-seriously as a retainer, then released at the foot of the stairs, wrists tied, with a boot up the backside. Warned them off the right-hand passage: "her pets," the hobbits "touched by the goddess," who go down and come back up or are brought in from the villages, and who do nothing but pray. "Terrible things down there."
+
+**First level, south passage:** A row of plain doors. Behind one, a single voice chanting the same thing over and over. Behind another, four hobbits asleep (one in a red bed, snoring). Left undisturbed.
+
+**Pit viper:** On a rafter; spotted by Boffo. Fangs failed on his chainmail; Wedge's arrow killed it. Two arrows lost.
+
+**The harpy:** Behind a door daubed with a tar X (hobbit prints and unfamiliar prints in front of it), a vaulted hall with tree-trunk pillars, a mud floor, and a mere of sucking mud and water. Boffo failed his save and was charmed by her song. He shoved Wedge off, held out his arms to her, and was lifted. Wedge and Turnip each grabbed a leg and yanked him back (an opposed pull roll). Turnip cast Protection from Evil; his **last sleep dart** missed. Turnip's whip of lightning was used for the first time (no explosion). She fled wounded but Boffo kept walking into the mud up to his chin; Turnip **netted** him on the second throw and they hauled him out. Boffo sawed free (net damaged, still usable). Wedge located her by ear and cast Light in front of her face on the far beach; she dove on Turnip (clawed him twice), then Wedge's Magic Missile and Turnip's whip killed her together. The charm broke.
+
+**The roost:** Boffo climbed the walls on a rope (fell once, fished out) and fixed it to a pillar. A second hall with perches, heaped bones (lizard, troglodyte, half-eaten goblins, one or two half-eaten hobbits), and a 60-foot shaft open to the sky. Jewellery hung as decoration: necklace 250 gp, two bracelets 100 each, pieces at 90 and 75, four at 50, **ruby medallion on a gold chain 800 gp** (1,615 gp total). A **necklace of water breathing**, given to Boffo (Gus's wording was ambiguous on who holds it). One Cure Light Wounds scroll read by Wedge on Turnip.
+
+**Elsewhere on the level:** A locked, swollen door with a real lock, which Wedge, Turnip and Boffo all failed to pick. A strong troglodyte smell that came and went. A filthy mess hall: dirty crockery everywhere, a smouldering oven with a stovepipe, crates of cheap crockery, dried beans, rancid lard, barrels of terrible wine, and a false door onto unexcavated mud. The lower half of a hobbit lying under brackish water in a flooded passage, upper half gone. Party suspects a slime or ooze. There is a door beyond that water, untried. Deep blue water elsewhere, and a boat seen earlier. They heaved the goblin bodies into the water.
+
+**Giant rats:** Four, drawn by the corpses. Boffo bitten (no disease). All killed.
+
+**Session ends:** Close to daybreak, more than five hours underground. The lantern needed refuelling (one oil flask used). Wedge has no spells left, his healing is used, and he has 9 arrows. Boffo and Turnip are hurt. Gus warns that the sleeping cultists will soon wake to find dead goblins and Derek's crew missing, and an alarm may sound. **Decision deferred to email or next session:** barricade into Derek's quarters and rest, or leave the swamp (about a day out of the Rushmoors, then half a day to a day to Orlane) and resupply. XP is accumulating but nowhere near the 8,000 needed for level 3.
+
+**Enemies defeated:** Derek Desleigh (killed, unrecorded session), 1 hobbit hired blade (killed, unrecorded session), Ben Griff (subdued, released), 1 pit viper, 1 harpy, 4 giant rats.
+
+**Loot:** Whip of lightning (Turnip), statue's sword (Boffo), leather armour +1 (Wedge), short sword +1 (Boffo), necklace of water breathing (Boffo), 2 scrolls of Cure Light Wounds (1 used), 1,615 gp of harpy jewellery.
+
+**Resources:** Turnip's sleep darts all spent. Turnip's net damaged but usable. One oil flask burned. Wedge out of spells and arrows running low. Boffo's shovel abandoned. Cobra-headed mace left in the statue's hand.
+
+**New unresolved questions:**
+
+- What is Zacharias doing below the dig, and what does the cult regalia in his chest (robe, ceremonial mace, healing scrolls) say about his rank?
+- What is the crimson symbol on the black robe, and where have the hobbits seen it before?
+- What is behind the chanting door, and who are the sleepers in the dormitories? Abducted Orlane and Gomwick folk?
+- What took the top half of the hobbit in the flooded passage?
+- What is behind the locked door with the real lock, and the door past the flooded passage?
+- What else did the green statue hold besides the whip and the sword?
+
 ---
 
 ## The Broader World
@@ -578,8 +625,8 @@ The same group of players also runs a separate Daggerdale campaign (DM'd by Les 
 2. The bronze coins from the Hermit — what are they?
 3. Who or what is Explictica? The jade naga statue suggests something more than a metaphor. Gomwick is confirmed as the next target.
 4. Who is Misha really? Ramne suspects she may be a genuine follower of Merikka who was charmed. The body in the crawlspace remains unexplained.
-5. Derek Desleigh — fled with Zacharias through the Golden Grain tunnels. At large.
-6. What is Zacharias's role? He summoned the party and equipped them — why help them if he's compromised? Charmed, coerced, or playing a deeper game?
+5. ~~Derek Desleigh — fled with Zacharias through the Golden Grain tunnels. At large.~~ Killed in his quarters beneath the Rushmoors dig.
+6. What is Zacharias's role? He summoned the party and equipped them — why help them if he's compromised? Charmed, coerced, or playing a deeper game? He keeps a jade chest of cult regalia in the Rushmoors dig and goes below its first level, where even Derek's hirelings were forbidden.
 7. Where does the Golden Grain tunnel network lead? The wilderness ceremony location is unknown.
 8. The third troglodyte pallet in the Foaming Mug (only two troglodytes present)
 9. The serpent motifs on stones at Huddle Farm's excavation — not native to the farm's own history; possibly connected to a larger pattern (snakes/serpents have recurred throughout the campaign)
@@ -602,4 +649,8 @@ The same group of players also runs a separate Daggerdale campaign (DM'd by Les 
 26. The cult is excavating an older temple of Explictica out of the Rushmoors rather than building one. Why, and why the urgency immediately after being driven out of Orlane?
 27. The marble Explictica in the dig holds a real whip and a real sword in two hands, and two unidentified objects in the other two.
 28. Hobbit footprints walk the swamp path northwest alongside goblin and troglodyte prints. Abducted families, or converts walking in willingly?
-29. Who commands the dig? The rampart garrison was goblins; the diggers, the troglodytes, and whoever gives the orders are all three levels down in the pit.
+29. Who commands the dig? The rampart garrison was goblins; the diggers, the troglodytes, and whoever gives the orders are all three levels down in the pit. Zacharias goes below the first level; Derek's hirelings were never allowed down.
+30. The black robe with a crimson symbol in Zacharias's chest. The party half-recognises the symbol but can't place it.
+31. The charmed hobbits in the dig's dormitories ("her pets"), and the voice chanting behind one door. Abducted villagers?
+32. Half a hobbit under the water in a flooded passage on the dig's first level. Slime, ooze, or something else?
+33. The green Explictica held two more objects besides the whip and the sword. What were they, and are they still in her hands?
