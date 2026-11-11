@@ -34,7 +34,7 @@ CORRECTIONS = [
     # Boffo: Whisper produces a zoo of B-words. Anchor with \b so we don't
     # touch "Boffo" itself or compound words.
     # Case-insensitive: Whisper lowercases the name mid-sentence as often as not.
-    (r"(?i)\b(Bofo|Bofor|Bofol|Bofos|Bofko|Bofko's"
+    (r"(?i)\b(Bofo|Bofor|Bofol|Bofos|Bofko|Bofko's|Bofill|Mbafo|Baffa"
      r"|Baffle|Baffles|Baffo|Baffel|Bafel|Bafho|Bafko|Bafo"
      r"|Bapho|Bopho|Boffel|Bofu|Boppo|Buffo"
      r"|Buffle|Buffles|Buffalo|Waffle)\b", "Boffo"),
@@ -75,6 +75,8 @@ CORRECTIONS = [
     (r"\bDerrick\b", "Derek"),
     (r"\bDerek Deslay\b", "Derek Desleigh"),
     (r"\bDerek Daslay\b", "Derek Desleigh"),
+    (r"\bDerek to slay\b", "Derek Desleigh"),
+    (r"\bdislay\b", "Desleigh"),
     (r"\bBuford Nis\b", "Buford Niss"),
     (r"\bBuford Nyss\b", "Buford Niss"),
     (r"\bBilbo\b", "Belba"),  # she gets mistaken for Bilbo a lot
@@ -93,6 +95,7 @@ CORRECTIONS = [
     (r"\bMerica\b", "Merikka"),
     (r"\bMaricka\b", "Merikka"),
     (r"\bMerica's\b", "Merikka's"),
+    (r"\bMarika\b", "Merikka"),
     (r"\bSlumber Inn Serpent\b", "Slumbering Serpent"),
     (r"\bGoldengrain\b", "Golden Grain"),
     (r"\bFortifield\b", "Fortfield"),
@@ -129,6 +132,15 @@ CORRECTIONS = [
     # The campaign's luck mechanic.
     (r"(?i)\b(hobbit die|bit point|bit points|bit die|high points)\b",
      "hobbit point"),
+    # The harpy's charm rules, read aloud: "move toward the heartbeat".
+    # Replacements are literal (no backreferences), so one rule per article.
+    (r"\bthe heartbeat\b", "the harpy"),
+    (r"\bthat heartbeat\b", "that harpy"),
+    (r"\bmassagic\b", "magic"),
+    (r"\bStroll case\b", "scroll case"),
+    (r"\bstroll case\b", "scroll case"),
+    (r"\bBastard's Bird\b", "bastard sword"),
+    (r"\bClimb Shire Surfaces\b", "Climb Sheer Surfaces"),
     (r"\bcobra headed\b", "cobra-headed"),
     (r"\bsnake headed\b", "snake-headed"),
 ]
