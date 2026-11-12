@@ -18,8 +18,8 @@ Boffo Lunderbunk is the quiet heart of the Toad Stompers. Not bright—the last 
 ## Notable Items
 
 - **Three-feathered hat:** From [Farmer Fallow](/hobbity/world/npcs/#farmer-fallow)'s stall. Gives a boost of speed when worn.
-- **Necklace of Water Breathing:** Taken from a harpy's roost beneath the [Dig in the Rushmoors](/hobbity/world/places/#the-five-shires). Lets the wearer breathe underwater.
 - **Short sword +1:** Taken from [Ben Griff](/hobbity/world/npcs/#ben-griff). Replaced the shovel he had carried until then.
+- **Periapt of Proof against Poison:** A ruby medallion on a gold chain, taken from a harpy's roost beneath the [Dig in the Rushmoors](/hobbity/world/places/#the-five-shires). Wards the wearer against poison.
 - **The statue's sword:** Taken from the hand of the marble [Explictica](/hobbity/world/npcs/#explictica) in the Dig in the Rushmoors, in exchange for [Abramo](/hobbity/world/npcs/#abramo)'s cobra-headed mace. Forged for someone twice his size; he wears it slung across his back.
 - **Shield of Merikka:** Taken from [Misha](/hobbity/world/npcs/#misha)'s quarters. Painted with the crest of Merikka. Non-magical.
 

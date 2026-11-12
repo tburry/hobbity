@@ -19,6 +19,7 @@ Wedge Wedgerton is the self-appointed leader of the Toad Stompers. Third-generat
 
 - **Animal whistle:** From [Farmer Fallow](/hobbity/world/npcs/#farmer-fallow)'s stall. Calls an animal when blown.
 - **Leather armour +1:** Taken from [Derek Desleigh](/hobbity/world/npcs/#derek-desleigh). Rinsed in wine to take the smell of Derek out of it.
+- **Necklace of Water Breathing:** Taken from a harpy's roost beneath the [Dig in the Rushmoors](/hobbity/world/places/#the-five-shires). Lets the wearer breathe underwater.
 - **Ring of Protection +1:** Taken from [Misha](/hobbity/world/npcs/#misha). Bonus to armor and saves.
 
 ## Grievous Injuries

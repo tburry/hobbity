@@ -26,9 +26,9 @@ treasure:
   - "Whip of Lightning (Turnip)"
   - "Leather Armour +1 (Wedge)"
   - "Short Sword +1 (Boffo)"
-  - "Necklace of Water Breathing (Boffo)"
+  - "Necklace of Water Breathing (Wedge)"
   - "2 Scrolls of Cure Light Wounds (1 used)"
-  - "Ruby Medallion on a Gold Chain (800 GP)"
+  - "Periapt of Proof against Poison (Boffo)"
   - "Necklaces and Bracelets (815 GP)"
 ---
 
@@ -162,7 +162,7 @@ The mud would swallow anyone who walked across it, so Boffo, who climbed best of
 
 Her roost was a second hall, built like the first, with beams across it for perching. The floor was the worst thing any of them had seen: bones heaped everywhere, lizard and troglodyte, goblins half eaten, and at least one hobbit and possibly two. A shaft ran straight up sixty feet to a square of moonlit sky, which was how she had come and gone.
 
-From the perches she had hung everything that glittered, the way a magpie decorates a nest. There was a necklace worth two hundred and fifty gold pieces, a scatter of bracelets and chains, and a great ruby medallion on a gold chain worth more than all the rest put together. One necklace was not like the others. Wedge turned it over in the lamplight and decided that whoever wore it could breathe underwater. He thought it ought to go to Boffo, in case they met another singer, and Boffo took it.
+From the perches she had hung everything that glittered, the way a magpie decorates a nest. There was a necklace worth two hundred and fifty gold pieces, a scatter of bracelets and chains, and a great ruby medallion on a gold chain. Two pieces were not like the others. Wedge turned the first, a necklace, over in the lamplight and decided that whoever wore it could breathe underwater, and hung it round his own neck. The medallion, he judged, would turn aside any poison, and Boffo put it on.
 
 They spent some time picking through the bones in case she had dropped anything she didn't fancy. She hadn't.
 
