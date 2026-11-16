@@ -46,11 +46,19 @@ CORRECTIONS = [
     # Possessives that the above won't catch.
     (r"\bBoffo s\b", "Boffo's"),
 
-    # Turnip: "Turnup", "Turtup", "Turd up", "Turn up" (when clearly the name)
+    # Turnip: "Turnup", "Turtup", "Turd up", "Turn up"
     (r"\b(Turnup|Turtup|Ternate)\b", "Turnip"),
     (r"\bTurd up\b", "Turnip"),
-    # "Turn up" is ambiguous (could be "show up"). Skip — let the human judge.
-    # Likewise "Turner" and "Tati" — too many false positives to automate.
+    # "Turn up" could in principle mean "show up", but across every session
+    # so far it has been the name, so normalise it. Possessive falls out of
+    # the \b ("turn up's" -> "Turnip's").
+    (r"(?i)\bturn up\b", "Turnip"),
+    # Lowercased mid-sentence. Plural "turnips" (the vegetable) is untouched.
+    (r"(?<![\w-])turnip(?![\w-])", "Turnip"),
+    # "Turner" and "Tati" — too many false positives to automate.
+    (r"\bBoffo Lungerbunk\b", "Boffo Lunderbunk"),
+    # Every "baffled" in the transcripts so far has been Boffo.
+    (r"\bbaffled\b", "Boffo"),
 
     # Wedge: usually right, but sometimes lowercased.
     (r"(?<![\w-])wedge(?![\w-])", "Wedge"),
@@ -72,6 +80,9 @@ CORRECTIONS = [
     (r"\bAbromo\b", "Abramo"),
     (r"\bZachariah\b", "Zacharias"),
     (r"\bZachariahs\b", "Zacharias's"),
+    # The DM's own pronunciation, which Whisper hears as a Japanese name.
+    (r"\bSakurai\b", "Zacharias"),
+    (r"\bDesolée\b", "Desleigh"),
     (r"\bDerrick\b", "Derek"),
     (r"\bDerek Deslay\b", "Derek Desleigh"),
     (r"\bDerek Daslay\b", "Derek Desleigh"),
@@ -92,6 +103,9 @@ CORRECTIONS = [
     # --- Places ---
     (r"\bOrlene\b", "Orlane"),
     (r"\bOrleans\b", "Orlane"),
+    (r"\b(Orlean|Erlane)\b", "Orlane"),
+    (r"\bour lane\b", "Orlane"),
+    (r"\bGormwix\b", "Gomwick"),
     (r"\bMerica\b", "Merikka"),
     (r"\bMaricka\b", "Merikka"),
     (r"\bMerica's\b", "Merikka's"),
@@ -109,6 +123,7 @@ CORRECTIONS = [
     (r"\bWhisker\b(?! the)", "Whiskers"),  # only when standalone
     (r"(?i)\btroglodite\b", "troglodyte"),
     (r"(?i)\btroglodites\b", "troglodytes"),
+    (r"(?i)\btrogladi(te)?\b", "troglodyte"),
     # Whisper has no idea what a troglodyte is and guesses wildly. Plurals
     # first so the singular rules don't strand a trailing "s".
     (r"(?i)\b(trug the dites|trug with 8s|troweldytes|trollglydes"
@@ -126,6 +141,9 @@ CORRECTIONS = [
     (r"\bgolins\b", "goblins"),
     (r"\bPiston Goblin\b", "pissing goblin"),
     (r"\bI glazed you golin\b", "lazy goblin"),
+    # The rules system.
+    (r"\bOSC\b", "OSE"),
+    (r"(?i)\bcure ?lite\b", "Cure Light"),
     # Combat terms Whisper mangles.
     (r"\bsave versus process\b", "save versus paralysis"),
     (r"\bDirt\. Toxic\b", "Dart, toxic"),
