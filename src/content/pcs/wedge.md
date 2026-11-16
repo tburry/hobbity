@@ -32,7 +32,7 @@ Wedge is Chaotic not as disorder but as appetite. He spent the winter practicing
 
 ## Personality
 
-The self-appointed leader, whether anyone asked for one or not. Wedge talks the most and the fastest. He's affectionately impatient with his companions, always ten feet ahead and annoyed about it. His confidence bumps into reality regularly—sneaking with a lit lantern, casting spells that bounce off the enemy—but he pushes forward anyway, and when the job genuinely needs doing quietly and alone, he is the one who goes and does it. Handles encounters through sheer persistence and volume; folk tend to do what he says just to get a moment's peace. In a crisis he leads with spirit, not caution. Names things, claims things, drives decisions. He coined "the Toad Stompers" and will not let anyone forget it, and he christened a bear Barry in the half-second before it ran through the camp.
+The self-appointed leader, whether anyone asked for one or not. Wedge talks the most and the fastest. He's affectionately impatient with his companions, always ten feet ahead and annoyed about it. His confidence bumps into reality regularly—sneaking with a lit lantern, casting spells that bounce off the enemy—but he pushes forward anyway, and when the job genuinely needs doing quietly and alone, he is the one who goes and does it. Handles encounters through sheer persistence and volume; folk tend to do what he says just to get a moment's peace. In a crisis he leads with spirit, not caution. Names things, claims things, drives decisions. He coined "the Toad Stompers" and will not let anyone forget it, and he christened a bear Barry in the half-second before it ran through the camp. He is also the first to say when they are in over their heads: down to three arrows under the Rushmoors, he announced that he had come to find Zacharias but also to live, and argued for going home for help rather than cutting through charmed hobbits who were somebody's family.
 
 ### Sample Lines
 
@@ -40,5 +40,6 @@ The self-appointed leader, whether anyone asked for one or not. Wedge talks the 
 - "Their plan will not survive first contact with the Toad Stompers."
 - "Shoo! Go away! Boffo doesn't need pies, he's just had lunch!"
 - "I was going to do that, but I'm lazy and impatient."
+- "I can't do it with three arrows. That's a hundred percent true."
 - "You mess with the Toad Stompers, you get stomped."
 - "That's really handy for cleaning up your goblins, eh?"
