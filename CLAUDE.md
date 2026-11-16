@@ -312,7 +312,7 @@ Format each injury as a narrative description of the wound and its lasting physi
 - **Setting:** Five Shires, Mystara (loosely). Hobbit-only party.
 - **DM:** Uses classic TSR modules adapted for hobbit play.
 - **Current arc:** Trail of the Serpent — pursuing the cult northwest out of Orlane, through the Dimwood and into the Rushmoors swamp.
-- **Current state:** Inside the first level beneath the cult's Rushmoors dig, near daybreak, after a night underground. Derek Desleigh and one hired blade killed in Derek's quarters (an unrecorded session); Ben Griff released. Zacharias's jade chest (cult robe, ceremonial mace, healing scrolls) found in Derek's bedroom; Zacharias goes below the first level. Harpy killed and her hoard taken. Wedge out of spells and Boffo and Turnip hurt; the cult will soon notice. Pending decision: rest barricaded in Derek's quarters, or leave the swamp to resupply. Level 2. Whiskers the weasel on loan from Ramne. Ramne still sheltering Cirilli Finla.
+- **Current state:** Leaving the cult's Rushmoors dig for Orlane (a day out of the swamp, half a day more), travel encounters to be rolled next session. Beaten up and out of healing after a giant weasel and a troglodyte ambush on the dig's first level; never found the way down to Zacharias. Carrying Zacharias's jade chest as proof; left him a note. Plans in Orlane: revisit Zacharias's house, question Grover about his hired deputies, recruit help. Level 2. Whiskers the weasel on loan from Ramne. Ramne still sheltering Cirilli Finla.
 - **Full details:** See `HOBBIT_CAMPAIGN_CONTEXT.md`
 
 ## Lessons Learned

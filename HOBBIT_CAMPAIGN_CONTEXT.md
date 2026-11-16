@@ -599,6 +599,49 @@ The party is resting at the Slumbering Serpent, dawn. All three leveled up to Le
 - What is behind the locked door with the real lock, and the door past the flooded passage?
 - What else did the green statue hold besides the whip and the sword?
 
+### Session: Be a Dear (November 12, 2026)
+
+**Recording note:** Todd and Stephen shared Todd's mic. Stephen's own track is near-empty; Turnip's lines were attributed from context and are thin.
+
+**Rest:** Barricaded in Derek's quarters around 6 a.m., bodies laid on two beds, watches Boffo–Turnip–Wedge. On Wedge's watch, a large animal sniffed and scratched at the door, then left. Up mid-afternoon at full health and spells. Prints outside were mammalian (Boffo). One more oil flask burned; two left.
+
+**Wine cellar:** Boffo shouldered a stuck door south and the ceiling came down on Turnip (2 damage, Wedge's hobbit healing). Fifteen branded casks and kegs, ten junk; four good ones worth ~600 gp (two kegs of strong dark beer ~100 each, two casks of wine ~200 each). One wine is the Orlane Special, one from a town Gus called **Volune** (spelling as heard), the beer unplaced. Left behind.
+
+**Storeroom:** West door with a padlock; Wedge failed, Turnip picked it and kept the padlock. Food (beets, beans, wheat, cornmeal, potatoes, turnips, oil, lard, salt), spikes, hammers, timber, four shovels, barrels of torches, spears, daggers, short swords, leather armour. Enough for a small military force. Arrows too (Gus, later).
+
+**Fellow cultists:** Two charmed hobbits in grey robes came for food. Boffo shut the door on them, then answered their knock in a lady's voice ("Come in"). Boffo's chainmail is Misha's and he carries the Merikka shield, so he looked the part (two potatoes for the figure). Reaction roll 10: "Be a dear and help us find the extra cult robes, fellow cultists." The first relaxed ("Just here for the food"); the second was on autopilot. The party left and Turnip padlocked them in. Blank-eyed, like the charmed acolytes in the Temple of Merikka. More robed hobbits sat in the mess hall and ignored the party and the goblin corpses.
+
+**The punt:** Followed two robed hobbits with a torch south and lost them. Took the boat behind the secret door: a punt, poled, holds ten. Boffo poled, Wedge in the bow. A massive cave-in along the whole west wall of the cavern. Splashes in the water throughout.
+
+**Charnel room:** Swollen door off a southwest beach (Turnip failed, Boffo forced it). Dozens of corpses in and out of the water: troglodytes, hobbits, goblins, and things they couldn't identify.
+
+**Crocodiles:** Turnip spotted one. Boffo hacked a leg off a troglodyte corpse and threw it; the first croc took it. A second crawled up the beach; Wedge's arrow hit its jaw and it failed morale and backed off with the arrow in its head.
+
+**Giant weasel:** At a landing where the boat had been tied before (hobbit, troglodyte and big mammal prints), Turnip sensed being hunted. A nine-foot giant weasel, the thing that scratched at the door; it had their scent. Turnip's sling hit between the eyes. It leaped, bit Boffo's shoulder and latched on, draining blood each round. Wedge cast Magic Missile twice, Turnip's whip missed then hit, and Boffo spent a hobbit point to kill it. Boffo cast Cure Light Wounds on himself; Turnip used his hobbit healing on Boffo. The crocodiles tore the weasel apart afterwards.
+
+**Troglodyte chapel:** Lantern out; Wedge used his last oil. A door hanging open onto a room with three battered benches ("Pews. P-U."). A camouflaged troglodyte bit Boffo's other shoulder from behind; a second clawed Wedge. Boffo held the doorway in a fighting withdrawal. Everyone rolled badly. Boffo tried to close the door (failed), cleaved one troglodyte in half ("That's some bad stew"), and a second fled and banged on a door, bringing more. Turnip's whip sent lightning "all the way through" a line of them (whether it exploded and was destroyed is unconfirmed). Wedge read the last Cure Light Wounds scroll on Boffo (5 hp). Boffo one-shot another (8 damage) and wounded a third, which Wedge's arrow dropped. Boffo shut the door and held it; the survivor stopped pulling and began eating its dead. Door rigged with Turnip's chisel and Boffo's rope. Boffo used his hobbit healing on himself.
+
+**The decision:** Back in Derek's quarters over wine. Wedge was discouraged and wanted out ("I came here to live"; three arrows left). Boffo wanted to find Zacharias. Gus restated the motivation (Buford's errand, Orlane, Gomwick next). Wedge proposed bringing proof back to Grover and Ramne and returning with help; he doesn't want to hurt the charmed hobbits. Boffo floated taking a cultist to Ramne for a cure; Turnip's manacles are on the pony (not done). Boffo dictated a note left on Derek's table for Zacharias ("We've dealt with your captors, and look forward to rendezvousing with you in Orlane"), posed the two dead hired blades as if they'd stabbed each other, and carried the jade chest out in a sack. Derek was a fixture in Orlane; his gear is recognisable.
+
+**Wooden toy snake:** Boffo's "wooden toy worm" from Zacharias's study (taken during the statue fight) is a snake: a magical toy that coils round an open bottle as a stopper.
+
+**Session ends:** The party leaves the dig without trouble. About a day to get out of the swamp, then half a day to Orlane at a push. Gus rolls travel encounters at the start of next session. Plans for Orlane, to be sent by email: revisit Zacharias's house (three living statues, including a big stone cat upstairs; his study), ask Grover about his two hired deputies from the coast (Donovan dead, Bulbar), recruit Grover, or hire retainers with the dig's coin.
+
+**Enemies defeated:** 1 giant weasel, 3 troglodytes, 1 crocodile (fled). Two charmed cultists locked in the storeroom.
+
+**Loot:** Padlock (Turnip). Jade chest (Boffo). Wooden toy snake identified.
+
+**Resources:** Both Cure Light Wounds scrolls spent. Wedge's Magic Missile used twice, three arrows left, last oil burned. Boffo's Cure Light Wounds and hobbit healing used; Turnip's hobbit healing used. Turnip's chisel left in a door frame; Boffo's rope used.
+
+**New unresolved questions:**
+
+- Where is Volune, and how many Shire villages has the cult been taking wine from?
+- Where were the two robed hobbits with the torch going?
+- What were the unidentified things in the charnel room?
+- Who or what kept a giant weasel in the dig?
+- Where are the stairs down? The troglodyte chapel may guard them.
+- Constable Grover's two hired deputies came from the coast. Whose men are they?
+
 ---
 
 ## The Broader World
@@ -654,3 +697,7 @@ The same group of players also runs a separate Daggerdale campaign (DM'd by Les 
 31. The charmed hobbits in the dig's dormitories ("her pets"), and the voice chanting behind one door. Abducted villagers?
 32. Half a hobbit under the water in a flooded passage on the dig's first level. Slime, ooze, or something else?
 33. The green Explictica held two more objects besides the whip and the sword. What were they, and are they still in her hands?
+34. The dig's wine cellar holds casks branded from villages across the Shire, including one from a town called Volune. How far has the cult's reach spread?
+35. The charnel room under the dig holds things none of the party could identify alongside the troglodyte, hobbit and goblin dead.
+36. The troglodytes in the battered chapel. Do they guard the way down?
+37. Constable Grover went to the coast and came back with two hired deputies. Whose men are they, and whose side is Grover on?
